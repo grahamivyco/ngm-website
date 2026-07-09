@@ -1,0 +1,12 @@
+NATIVE WA GADGET — "Events Calendar" (month grid)
+==================================================
+Not pasteable HTML. Add the native WA month-grid Calendar gadget in the
+WA editor, BETWEEN 01-top.html and 03-bottom.html, in the SAME layout row.
+
+Setup:
+1. Add gadget → "Events calendar" (the month grid).
+2. Select it → gadget settings → "CSS class" → enter:  ngm-cal
+
+IMPORTANT: 01-top.html OPENS two wrapper <div>s (.ngm-cal-body >
+.ngm-cal-body-inner) and does NOT close them. 03-bottom.html CLOSES them.
+So the paste order must be exactly: 01-top → WA calendar gadget → 03-bottom.

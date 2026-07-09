@@ -1,0 +1,20 @@
+NATIVE WA GADGET — "Upcoming events"
+=====================================
+This is NOT pasteable HTML. It is a native Wild Apricot gadget that
+must be added in the WA editor, sitting BETWEEN 01-top.html and
+03-bottom.html, in the SAME full-width layout row.
+
+Setup in WA:
+1. Add gadget → "Upcoming events".
+2. Select it → gadget settings → "CSS class" field → enter:
+       ngm-wa-events
+   (This connects it to the styling in section 12 of 01-top.html.)
+3. Set the layout ROW background to transparent or linen (#F0EAE0)
+   so the linen band runs continuously through all three gadgets.
+
+The tag chips (Zoom / Online / Hybrid / In person) and the
+whole-row click behavior are injected by the [EVENT-TAGS] script
+at the bottom of 01-top.html — no extra setup needed.
+
+Style class name to re-verify after the theme cutover:
+  upcomingEventsStyle001  (may change when casefile_guardian is swapped)

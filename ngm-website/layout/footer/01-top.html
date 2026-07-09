@@ -1,0 +1,161 @@
+<!--
+╔══════════════════════════════════════════════════════════════╗
+║  NGM FOOTER — login-state aware (PRODUCTION)               ║
+║                                                              ║
+║  Paste this ENTIRE block into a Custom HTML gadget at the   ║
+║  BOTTOM of your Wild Apricot page template (site-wide).     ║
+║                                                              ║
+║  HOW LOGIN STATE WORKS (no macros, no JS, no API):          ║
+║  WA adds a body class on every page:                        ║
+║    body.publicContentView  → LOGGED OUT                     ║
+║    body.memberContentView  → LOGGED IN                      ║
+║  The CSS keys off those to swap the "Get Involved" column.  ║
+║  Both lists live in the HTML; only one is visible.          ║
+║  Columns 1, 2, 4 and the bottom legal bar are shared.       ║
+╚══════════════════════════════════════════════════════════════╝
+-->
+<style>
+#ngmf,#ngmf *,#ngmf *::before,#ngmf *::after{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans','Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased}
+#ngmf{background:#242424;color:#E9E4DA;position:relative;overflow:hidden}
+#ngmf::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 55% at 88% -8%,rgba(184,114,96,.16),transparent 62%);pointer-events:none}
+#ngmf .ngmf-inner{position:relative;max-width:1140px;margin:0 auto;padding:64px 40px 0}
+#ngmf .ngmf-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:44px;padding-bottom:48px}
+/* Column 1 — brand */
+#ngmf .ngmf-brand .ngmf-mark{display:flex;align-items:center;gap:11px;margin-bottom:18px;text-decoration:none}
+#ngmf .ngmf-mark svg{height:36px;width:auto;flex-shrink:0}
+#ngmf .ngmf-mark .wm{display:flex;flex-direction:column;line-height:1.05}
+#ngmf .ngmf-mark .wm .l1{font-family:'Cormorant Garamond','Georgia',serif;font-weight:500;font-size:1.2rem;color:#fff;letter-spacing:.01em}
+#ngmf .ngmf-mark .wm .l2{font-family:'DM Sans',sans-serif;font-weight:500;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:#B87260;margin-top:3px}
+#ngmf .ngmf-brand p{font-size:.9rem;line-height:1.65;color:#B9B2A6;max-width:300px;margin-bottom:22px}
+#ngmf .ngmf-social{display:flex;gap:10px}
+#ngmf .ngmf-social a{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;color:#D8D2C7;transition:background .18s,border-color .18s,color .18s,transform .18s}
+#ngmf .ngmf-social a:hover{background:#B87260;border-color:transparent;color:#fff;transform:translateY(-2px)}
+#ngmf .ngmf-social svg{width:17px;height:17px}
+/* Link columns */
+#ngmf .ngmf-col h4{font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9a9388;margin-bottom:18px}
+#ngmf .ngmf-col ul{list-style:none}
+#ngmf .ngmf-col li{margin-bottom:12px}
+#ngmf .ngmf-col a{font-size:.9rem;color:#D8D2C7;text-decoration:none;transition:color .18s,padding-left .18s;display:inline-flex;align-items:center;gap:8px}
+#ngmf .ngmf-col a:hover{color:#fff;padding-left:3px}
+#ngmf .ngmf-col a .dot{width:4px;height:4px;border-radius:50%;background:#B87260;opacity:0;transition:opacity .18s;flex-shrink:0}
+#ngmf .ngmf-col a:hover .dot{opacity:1}
+/* Connect column */
+#ngmf .ngmf-connect .blk{margin-bottom:16px}
+#ngmf .ngmf-connect .blk .lab{font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#7e776c;margin-bottom:5px}
+#ngmf .ngmf-connect .blk a,#ngmf .ngmf-connect .blk address{font-size:.875rem;line-height:1.5;color:#D8D2C7;text-decoration:none;font-style:normal;display:block;transition:color .18s}
+#ngmf .ngmf-connect .blk a:hover{color:#fff}
+/* Bottom bar */
+#ngmf .ngmf-bottom{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:24px 0;border-top:1px solid rgba(255,255,255,.12)}
+#ngmf .ngmf-bottom .copy{font-size:.8rem;color:#8a8378}
+#ngmf .ngmf-bottom .legal{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+#ngmf .ngmf-bottom .legal a{font-size:.8rem;color:#9a9388;text-decoration:none;transition:color .18s}
+#ngmf .ngmf-bottom .legal a:hover{color:#fff}
+/* Responsive */
+@media(max-width:860px){
+  #ngmf .ngmf-top{grid-template-columns:1fr 1fr;gap:36px}
+  #ngmf .ngmf-brand{grid-column:1/-1}
+}
+@media(max-width:520px){
+  #ngmf .ngmf-inner{padding:48px 24px 0}
+  #ngmf .ngmf-top{grid-template-columns:1fr;gap:32px}
+  #ngmf .ngmf-bottom{flex-direction:column;align-items:flex-start}
+}
+/* ── LOGIN-STATE VISIBILITY (production — keep this) ──
+   WA sets body.memberContentView ONLY when a member is logged in. */
+#ngmf .gi-guest{display:block}
+#ngmf .gi-member{display:none}
+body.memberContentView #ngmf .gi-guest{display:none}
+body.memberContentView #ngmf .gi-member{display:block}
+</style>
+<footer id="ngmf">
+  <div class="ngmf-inner">
+    <div class="ngmf-top">
+      <!-- ══ COLUMN 1 — BRAND + SOCIAL (shown to everyone) ══ -->
+      <div class="ngmf-brand">
+        <a href="/" class="ngmf-mark" aria-label="Needlework Guild of Minnesota home">
+          <svg width="30" height="33" viewBox="0 0 30 33" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M28.5547 7.44547C26.2681 9.13737 25.721 5.92628 22.5099 6.92791C19.2989 7.92953 17.5135 3.98848 15.3588 4.91173C8.69503 7.76718 8.3302 -0.592457 10.5295 0.689564C12.7288 1.97158 9.43716 5.04174 3.59451 2.8711C-2.24814 0.700455 1.98638 9.17239 2.77963 12.1143C3.57287 15.0563 4.59607 17.9819 3.34335 18.7705C2.09063 19.5592 1.98055 21.0184 3.59389 21.9567C5.20724 22.8949 3.06149 29.717 3.75048 31.2627C4.43948 32.8085 22.5099 32.8715 23.2929 31.2627C25.0116 27.7311 18.3781 28.5168 17.9688 25.4583C17.7861 24.0923 18.5862 23.3231 18.4073 21.9567C18.292 21.0757 17.6044 20.6564 17.7496 19.78C17.9432 18.6113 19.5185 18.7835 19.9106 17.6664C20.262 16.6651 19.3568 15.9495 19.7226 14.9535C20.198 13.6594 21.7581 14.3958 22.5099 12.8083C23.2618 11.2209 23.9468 10.4799 26.2681 9.77992" stroke="#B87260" stroke-width="1.10903" stroke-linecap="round"/>
+            <path d="M20.9651 5.25056L4.17261 31.89L18.68 3.92169C18.9674 3.36764 19.7428 3.22016 20.3898 3.59646C21.0369 3.97276 21.2977 4.72284 20.9651 5.25056ZM19.3148 4.29165L18.1796 6.2722C18.0453 6.50659 18.1635 6.82871 18.4437 6.99168C18.724 7.15465 19.0601 7.09675 19.1944 6.86236L20.3296 4.88181C20.464 4.64742 20.3457 4.3253 20.0655 4.16233C19.7852 3.99936 19.4492 4.05726 19.3148 4.29165Z" fill="#fff"/>
+          </svg>
+          <span class="wm"><span class="l1">Needlework Guild</span><span class="l2">of Minnesota</span></span>
+        </a>
+        <p>Connecting needleworkers across Minnesota since 1972. A 501(c)(3) nonprofit educational organization.</p>
+        <div class="ngmf-social">
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987H7.898v-2.89h2.54V9.797c0-2.507 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          <a href="mailto:inquiry@needleworkguildmn.org" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></a>
+        </div>
+      </div>
+      <!-- ══ COLUMN 2 — EXPLORE (shown to everyone) ══ -->
+      <div class="ngmf-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="/about-us"><span class="dot"></span>About</a></li>
+          <li><a href="/calendar"><span class="dot"></span>Calendar</a></li>
+          <li><a href="/monthly-meetings"><span class="dot"></span>Meetings</a></li>
+          <li><a href="/events"><span class="dot"></span>Events</a></li>
+          <li><a href="/retreat"><span class="dot"></span>Retreat</a></li>
+        </ul>
+      </div>
+      <!-- ══ COLUMN 3 — GET INVOLVED (differs by login state) ══
+           Both lists sit in the HTML; CSS shows the right one based on
+           WA's body.publicContentView / body.memberContentView class. -->
+      <div class="ngmf-col">
+        <h4>Get Involved</h4>
+        <ul class="gi-guest">
+          <li><a href="/join"><span class="dot"></span>Join</a></li>
+          <li><a href="/donate"><span class="dot"></span>Donate</a></li>
+          <li><a href="/contact"><span class="dot"></span>Contact</a></li>
+          <li><a href="/sys/login"><span class="dot"></span>Log In</a></li>
+        </ul>
+        <ul class="gi-member">
+          <li><a href="/members"><span class="dot"></span>Member Resources</a></li>
+          <li><a href="/sys/profile/membership"><span class="dot"></span>Manage Membership</a></li>
+          <li><a href="/sys/profile"><span class="dot"></span>My Profile</a></li>
+          <li><a href="/sys/profile/payments"><span class="dot"></span>Invoices &amp; Payments</a></li>
+          <li><a href="/members/documents"><span class="dot"></span>Library</a></li>
+          <li><a href="/member-directory"><span class="dot"></span>Directory</a></li>
+        </ul>
+      </div>
+      <!-- ══ COLUMN 4 — CONNECT (shown to everyone) ══ -->
+      <div class="ngmf-col ngmf-connect">
+        <h4>Connect</h4>
+        <div class="blk">
+          <div class="lab">Email</div>
+          <a href="mailto:inquiry@needleworkguildmn.org">inquiry@needleworkguildmn.org</a>
+        </div>
+        <div class="blk">
+          <div class="lab">Meetings</div>
+          <address>10715 Zenith Avenue South<br>Bloomington, MN 55431</address>
+        </div>
+        <div class="blk">
+          <div class="lab">Mail</div>
+          <address>PO Box 16506<br>St. Louis Park, MN 55416</address>
+        </div>
+      </div>
+    </div>
+    <!-- ══ BOTTOM BAR (shown to everyone) ══ -->
+    <div class="ngmf-bottom">
+      <div class="copy">© 2026 Needlework Guild of Minnesota</div>
+      <div class="legal">
+        <a href="/terms-of-service">Terms of Service</a>
+        <a href="/privacy-policy">Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+/* ── LOGIN STATE (JS enforcement) ──
+   CSS handles this via body.memberContentView / .publicContentView, but we
+   also enforce in JS so it works regardless of CSS load order or theme
+   overrides. Swaps the "Get Involved" column lists based on membership. */
+(function(){
+  function ngmfApplyState(){
+    var foot=document.getElementById('ngmf'); if(!foot)return;
+    var isMember = document.body.classList.contains('memberContentView');
+    foot.querySelectorAll('.gi-guest').forEach(function(el){el.style.display=isMember?'none':'block';});
+    foot.querySelectorAll('.gi-member').forEach(function(el){el.style.display=isMember?'block':'none';});
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',ngmfApplyState);}else{ngmfApplyState();}
+}());
+</script>

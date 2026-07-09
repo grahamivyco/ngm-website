@@ -1,0 +1,274 @@
+<!--
+╔══════════════════════════════════════════════════════════════╗
+║  NGM HEADER v7 — login-state aware (PRODUCTION)             ║
+║                                                              ║
+║  Paste this ENTIRE block into a Custom HTML gadget in your  ║
+║  Wild Apricot page template (so it appears site-wide).      ║
+║                                                              ║
+║  HOW LOGIN STATE WORKS (no macros, no JS, no API):          ║
+║  Wild Apricot adds a class to the <body> on every page:     ║
+║    body.publicContentView  → visitor is LOGGED OUT          ║
+║    body.memberContentView  → visitor is LOGGED IN           ║
+║  The CSS keys off those classes to show the correct CTAs.   ║
+║  Both button sets live in the HTML; only one is visible.    ║
+╚══════════════════════════════════════════════════════════════╝
+-->
+<style>
+#ngm,#ngm *,#ngm *::before,#ngm *::after{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans','Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1}
+/* ── Bar ── */
+#ngm{position:fixed;top:0;left:0;right:0;width:100vw;z-index:99999;background:rgba(250,247,242,0.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #DDD5C8;box-shadow:0 2px 16px rgba(0,0,0,0.07);transition:box-shadow .25s ease}
+#ngm.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.12)}
+#ngm .ngm-bar{max-width:1140px;margin:0 auto;padding:0 40px;height:72px;display:flex;align-items:center}
+/* ── Logo: icon + wordmark text ── */
+#ngm .ngm-logo{display:flex;align-items:center;gap:11px;flex-shrink:0;text-decoration:none;transition:opacity .2s}
+#ngm .ngm-logo:hover{opacity:.78}
+#ngm .ngm-logo svg{display:block;height:34px;width:auto;flex-shrink:0}
+#ngm .ngm-logo .ngm-wm{display:flex;flex-direction:column;line-height:1.05}
+#ngm .ngm-logo .ngm-wm .l1{font-family:'Cormorant Garamond','Georgia',serif;font-weight:500;font-size:1.16rem;color:#242424;letter-spacing:.01em;white-space:nowrap}
+#ngm .ngm-logo .ngm-wm .l2{font-family:'DM Sans',sans-serif;font-weight:500;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:#B87260;margin-top:3px;white-space:nowrap}
+/* ── Desktop nav links ── */
+#ngm .ngm-links{display:flex;align-items:center;gap:2px;list-style:none;flex:1;justify-content:center;padding:0 16px}
+#ngm .ngm-links>li{position:relative;list-style:none}
+#ngm .ngm-links>li>a{display:flex;align-items:center;gap:5px;padding:8px 14px;font-size:.85rem;font-weight:400;color:#656565;text-decoration:none;letter-spacing:.03em;border-radius:8px;white-space:nowrap;cursor:pointer;user-select:none;transition:color .2s,background .2s}
+#ngm .ngm-links>li>a:hover,#ngm .ngm-links>li.ngm-hover>a{color:#242424;background:rgba(0,0,0,.04)}
+#ngm .ngm-links>li>a.ngm-active{color:#3E5538;font-weight:500}
+#ngm .ngm-chev{width:14px;height:14px;flex-shrink:0;color:#BABABA;transition:transform .22s ease,color .2s}
+#ngm .ngm-links>li.ngm-hover>a .ngm-chev{transform:rotate(180deg);color:#3E5538}
+/* ── Dropdown ──
+   HOVER PERSISTENCE: the dropdown is a child of <li>, and the <li>
+   keeps :hover while the cursor is anywhere inside it (trigger OR menu).
+   The ::after "bridge" fills the 10px gap so moving the mouse from the
+   trigger down into the menu never crosses an un-hovered area. */
+#ngm .ngm-links>li::after{content:'';position:absolute;top:100%;left:0;right:0;height:14px;display:none}
+#ngm .ngm-links>li.ngm-has-drop:hover::after,#ngm .ngm-links>li.ngm-hover::after{display:block}
+#ngm .ngm-drop{visibility:hidden;opacity:0;pointer-events:none;position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%) translateY(-4px);background:#fff;border:1px solid #DDD5C8;border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,.11);min-width:248px;padding:8px;list-style:none;z-index:10;transition:opacity .17s ease,transform .17s ease,visibility 0s linear .17s}
+#ngm .ngm-drop::before{content:'';position:absolute;top:-5px;left:50%;width:9px;height:9px;background:#fff;border-left:1px solid #DDD5C8;border-top:1px solid #DDD5C8;transform:translateX(-50%) rotate(45deg)}
+/* open on hover of the whole li, OR keyboard-toggled .ngm-hover */
+#ngm .ngm-links>li.ngm-has-drop:hover .ngm-drop,#ngm .ngm-links>li.ngm-hover .ngm-drop{visibility:visible;opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);transition-delay:0s}
+#ngm .ngm-drop li{list-style:none}
+#ngm .ngm-drop a{display:block;padding:10px 14px;font-size:.845rem;color:#444;text-decoration:none;border-radius:9px;white-space:nowrap;line-height:1.3;transition:background .14s,color .14s}
+#ngm .ngm-drop a:hover{background:#EEF3EC;color:#3E5538}
+/* ── Action buttons (desktop) ── */
+#ngm .ngm-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
+#ngm .ngm-ghost{display:inline-flex;align-items:center;justify-content:center;font-size:.875rem;font-weight:500;color:#3E5538;background:transparent;border:1.5px solid #3E5538;border-radius:100px;padding:10px 22px;text-decoration:none;white-space:nowrap;cursor:pointer;line-height:1;transition:background .2s}
+#ngm .ngm-ghost:hover{background:rgba(62,85,56,0.08)}
+#ngm .ngm-solid{display:inline-flex;align-items:center;justify-content:center;font-size:.875rem;font-weight:500;color:#fff;background:#3E5538;border:none;border-radius:100px;padding:11px 22px;text-decoration:none;white-space:nowrap;cursor:pointer;line-height:1;transition:opacity .18s,transform .18s,box-shadow .18s}
+#ngm .ngm-solid:hover{opacity:.88;transform:translateY(-1px);box-shadow:0 4px 14px rgba(62,85,56,.28)}
+/* ── Hamburger ── */
+#ngm .ngm-hbg{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:42px;height:42px;background:none;border:none;border-radius:9px;cursor:pointer;padding:0;flex-shrink:0;margin-left:auto;transition:background .18s;outline:none}
+#ngm .ngm-hbg:hover{background:rgba(0,0,0,.06)}
+#ngm .ngm-hbg:focus-visible{outline:2px solid #5C7A52;outline-offset:2px}
+#ngm .ngm-hbg span{display:block;width:22px;height:2px;background:#242424;border-radius:2px;flex-shrink:0;transform-origin:center;transition:transform .28s ease,opacity .2s ease,width .2s ease}
+#ngm.ngm-mob-open .ngm-hbg span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+#ngm.ngm-mob-open .ngm-hbg span:nth-child(2){opacity:0;width:0}
+#ngm.ngm-mob-open .ngm-hbg span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+/* ── Mobile panel ── */
+#ngm .ngm-mob{display:none;flex-direction:column;background:#FAF7F2;border-top:1px solid #DDD5C8;max-height:0;overflow:hidden;transition:max-height .32s ease}
+#ngm.ngm-mob-open .ngm-mob{display:flex;max-height:calc(100dvh - 72px);max-height:calc(100vh - 72px)}
+#ngm .ngm-mob-inner{padding:6px 20px 24px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+#ngm .ngm-mob-link{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:left;padding:14px 4px;font-size:1rem;color:#242424;text-decoration:none;border:none;border-bottom:1px solid #E8E0D4;min-height:52px;background:none;font-family:'DM Sans',sans-serif;letter-spacing:.01em;line-height:1.3;cursor:pointer;transition:color .18s}
+#ngm .ngm-mob-link:hover{color:#3E5538}
+#ngm .ngm-mob-link .ngm-chev{color:#BABABA;flex-shrink:0}
+#ngm .ngm-mob-link[aria-expanded="true"]{color:#3E5538;border-bottom-color:transparent}
+#ngm .ngm-mob-link[aria-expanded="true"] .ngm-chev{transform:rotate(180deg);color:#3E5538}
+#ngm .ngm-mob-divider{border:none;border-top:1px solid #DDD5C8;margin:8px 4px 4px}
+#ngm .ngm-mob-sub{display:none;flex-direction:column;background:#fff;border:1px solid #DDD5C8;border-radius:14px;box-shadow:0 6px 20px rgba(0,0,0,.06);margin:4px 0 10px;padding:8px;overflow:hidden}
+#ngm .ngm-mob-sub.open{display:flex}
+#ngm .ngm-mob-sub a{display:flex;align-items:center;padding:11px 14px;min-height:46px;font-size:.9rem;color:#444;text-decoration:none;line-height:1.35;border:none;border-radius:9px;transition:color .14s,background .14s}
+#ngm .ngm-mob-sub a:hover{background:#EEF3EC;color:#3E5538}
+#ngm .ngm-mob-acts{display:flex;flex-direction:column;gap:10px;padding-top:18px;align-items:stretch;max-width:420px;margin:0 auto;width:100%}
+#ngm .ngm-mob-acts .ngm-ghost,#ngm .ngm-mob-acts .ngm-solid{width:100%;font-size:.9375rem;padding:14px 20px;border-radius:100px}
+#ngm .ngm-mob-acts .ngm-ghost{border-style:solid;border-width:1.5px;border-color:#3E5538}
+/* ── Responsive ── */
+@media(max-width:980px){
+  #ngm .ngm-bar{padding:0 20px}
+  #ngm .ngm-links,#ngm .ngm-actions{display:none}
+  #ngm .ngm-hbg{display:flex}
+}
+@media(min-width:561px) and (max-width:980px){
+  #ngm .ngm-mob-acts{flex-direction:row;gap:12px}
+  #ngm .ngm-mob-acts .ngm-ghost,#ngm .ngm-mob-acts .ngm-solid{flex:1}
+}
+@media(max-width:560px){
+  #ngm .ngm-bar{padding:0 16px;height:64px}
+  #ngm .ngm-logo svg{height:30px}
+  #ngm .ngm-logo .ngm-wm .l1{font-size:1.02rem}
+  #ngm .ngm-logo .ngm-wm .l2{font-size:.54rem;letter-spacing:.18em}
+  #ngm.ngm-mob-open .ngm-mob{max-height:calc(100dvh - 64px);max-height:calc(100vh - 64px)}
+  #ngm .ngm-mob-acts{flex-direction:column}
+}
+@media(max-width:380px){
+  #ngm .ngm-logo .ngm-wm .l1{font-size:.92rem}
+}
+/* ── Hide WA default nav + push body down ── */
+.navigation-menu,.waHeaderContainer .navigation-container,.menu-navigation,[class*="header-nav"],#idSystemPageNavigation{display:none!important}
+body.ngm-ready{padding-top:72px!important}
+@media(max-width:560px){body.ngm-ready{padding-top:64px!important}}
+/* ── LOGIN-STATE VISIBILITY (production — keep this) ──
+   WA sets body.memberContentView ONLY when a member is logged in.
+   Show member buttons in that case; show guest buttons in every other case.
+   The JS at the bottom also enforces this, so they always agree. */
+#ngm .ngm-guest{display:inline-flex}
+#ngm .ngm-member{display:none}
+body.memberContentView #ngm .ngm-guest{display:none}
+body.memberContentView #ngm .ngm-member{display:inline-flex}
+</style>
+<nav id="ngm" role="navigation" aria-label="Main navigation">
+  <div class="ngm-bar">
+    <!-- ══ LOGO (needle icon + wordmark) ══ -->
+    <a href="/" class="ngm-logo" aria-label="Needlework Guild of Minnesota home">
+      <svg width="30" height="33" viewBox="0 0 30 33" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M28.5547 7.44547C26.2681 9.13737 25.721 5.92628 22.5099 6.92791C19.2989 7.92953 17.5135 3.98848 15.3588 4.91173C8.69503 7.76718 8.3302 -0.592457 10.5295 0.689564C12.7288 1.97158 9.43716 5.04174 3.59451 2.8711C-2.24814 0.700455 1.98638 9.17239 2.77963 12.1143C3.57287 15.0563 4.59607 17.9819 3.34335 18.7705C2.09063 19.5592 1.98055 21.0184 3.59389 21.9567C5.20724 22.8949 3.06149 29.717 3.75048 31.2627C4.43948 32.8085 22.5099 32.8715 23.2929 31.2627C25.0116 27.7311 18.3781 28.5168 17.9688 25.4583C17.7861 24.0923 18.5862 23.3231 18.4073 21.9567C18.292 21.0757 17.6044 20.6564 17.7496 19.78C17.9432 18.6113 19.5185 18.7835 19.9106 17.6664C20.262 16.6651 19.3568 15.9495 19.7226 14.9535C20.198 13.6594 21.7581 14.3958 22.5099 12.8083C23.2618 11.2209 23.9468 10.4799 26.2681 9.77992" stroke="#C17163" stroke-width="1.10903" stroke-linecap="round"/>
+        <path d="M20.9651 5.25056L4.17261 31.89L18.68 3.92169C18.9674 3.36764 19.7428 3.22016 20.3898 3.59646C21.0369 3.97276 21.2977 4.72284 20.9651 5.25056ZM19.3148 4.29165L18.1796 6.2722C18.0453 6.50659 18.1635 6.82871 18.4437 6.99168C18.724 7.15465 19.0601 7.09675 19.1944 6.86236L20.3296 4.88181C20.464 4.64742 20.3457 4.3253 20.0655 4.16233C19.7852 3.99936 19.4492 4.05726 19.3148 4.29165Z" fill="#3C543A"/>
+      </svg>
+      <span class="ngm-wm">
+        <span class="l1">Needlework Guild</span>
+        <span class="l2">of Minnesota</span>
+      </span>
+    </a>
+    <!-- ══ DESKTOP LINKS ══ -->
+    <ul class="ngm-links" role="list">
+      <li><a href="/about-us">About</a></li>
+      <li><a href="/calendar">Calendar</a></li>
+      <li id="ngm-d-m" class="ngm-has-drop">
+        <a href="/monthly-meetings" aria-haspopup="true" aria-expanded="false">Meetings
+          <svg class="ngm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+        <ul class="ngm-drop" role="menu" aria-label="Meetings">
+          <li><a href="/daytime-counted-thread" role="menuitem">Daytime Counted Thread &amp; Needlepoint</a></li>
+          <li><a href="/potpourri-stitchers" role="menuitem">Potpourri Stitchers</a></li>
+          <li><a href="/beading" role="menuitem">Beading</a></li>
+          <li><a href="/evening-needlepointers" role="menuitem">Evening Needlepointers</a></li>
+          <li><a href="/daytime-stitch-in" role="menuitem">Daytime Stitch-In</a></li>
+          <li><a href="/evening-stitch-in" role="menuitem">Evening Stitch-In</a></li>
+        </ul>
+      </li>
+      <li id="ngm-d-e" class="ngm-has-drop">
+        <a href="/events" aria-haspopup="true" aria-expanded="false">Events
+          <svg class="ngm-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+        <ul class="ngm-drop" role="menu" aria-label="Events">
+          <li><a href="/retreat" role="menuitem">Annual Retreat 2026</a></li>
+          <li><a href="/japanese-embroidery" role="menuitem">Traditional Japanese Embroidery</a></li>
+          <li><a href="/events" role="menuitem">Workshops</a></li>
+          <li><a href="/fifth-tuesday" role="menuitem">5th Tuesday Open Stitching</a></li>
+        </ul>
+      </li>
+    </ul>
+    <!-- ══ DESKTOP ACTIONS ══
+         WA adds body.publicContentView (guest) or body.memberContentView
+         (logged-in) to every page. The CSS at the top shows the right pair.
+         Both pairs sit in the HTML; only one is ever visible. -->
+    <div class="ngm-actions">
+      <a href="/sys/login" class="ngm-ghost ngm-guest">Log In</a>
+      <a href="/join" class="ngm-solid ngm-guest">Join Now</a>
+      <a href="/sys/logout" class="ngm-ghost ngm-member">Log Out</a>
+      <a href="/members" class="ngm-solid ngm-member">Member Hub</a>
+    </div>
+    <!-- ══ HAMBURGER ══ -->
+    <button class="ngm-hbg" id="ngm-hbg" aria-label="Open navigation menu" aria-expanded="false" aria-controls="ngm-mob">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <!-- ══ MOBILE PANEL ══ -->
+  <div class="ngm-mob" id="ngm-mob" role="dialog" aria-label="Navigation menu" aria-hidden="true">
+    <div class="ngm-mob-inner">
+      <a href="/about-us" class="ngm-mob-link">About</a>
+      <a href="/calendar" class="ngm-mob-link">Calendar</a>
+      <button class="ngm-mob-link" id="ngm-mb-m" aria-expanded="false" aria-controls="ngm-mb-ms">Meetings
+        <svg class="ngm-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="ngm-mob-sub" id="ngm-mb-ms" aria-hidden="true">
+        <a href="/daytime-counted-thread">Daytime Counted Thread &amp; Needlepoint</a>
+        <a href="/potpourri-stitchers">Potpourri Stitchers</a>
+        <a href="/beading">Beading</a>
+        <a href="/evening-needlepointers">Evening Needlepointers</a>
+        <a href="/daytime-stitch-in">Daytime Stitch-In</a>
+        <a href="/evening-stitch-in">Evening Stitch-In</a>
+      </div>
+      <button class="ngm-mob-link" id="ngm-mb-e" aria-expanded="false" aria-controls="ngm-mb-es">Events
+        <svg class="ngm-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="ngm-mob-sub" id="ngm-mb-es" aria-hidden="true">
+        <a href="/retreat">Annual Retreat 2026</a>
+        <a href="/japanese-embroidery">Traditional Japanese Embroidery</a>
+        <a href="/events">Workshops</a>
+        <a href="/fifth-tuesday">5th Tuesday Open Stitching</a>
+      </div>
+      <div class="ngm-mob-acts">
+        <a href="/sys/login" class="ngm-ghost ngm-guest">Log In</a>
+        <a href="/join" class="ngm-solid ngm-guest">Join Now</a>
+        <a href="/sys/logout" class="ngm-ghost ngm-member">Log Out</a>
+        <a href="/members" class="ngm-solid ngm-member">Member Hub</a>
+      </div>
+    </div>
+  </div>
+</nav>
+<script>
+/* NGM Header v7 — dropdowns (hover-persistent), hamburger, scroll shadow */
+(function(){
+  'use strict';
+  if(window._ngmV7)return; window._ngmV7=true;
+  var nav=document.getElementById('ngm');
+  var hbg=document.getElementById('ngm-hbg');
+  var panel=document.getElementById('ngm-mob');
+  if(!nav)return;
+  document.body.classList.add('ngm-ready');
+  /* scroll shadow */
+  var _t=false;
+  window.addEventListener('scroll',function(){
+    if(!_t){requestAnimationFrame(function(){nav.classList.toggle('scrolled',window.scrollY>8);_t=false;});_t=true;}
+  },{passive:true});
+  /* mobile open/close */
+  function openMob(){nav.classList.add('ngm-mob-open');if(hbg){hbg.setAttribute('aria-expanded','true');hbg.setAttribute('aria-label','Close navigation menu');}if(panel)panel.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+  function closeMob(){nav.classList.remove('ngm-mob-open');if(hbg){hbg.setAttribute('aria-expanded','false');hbg.setAttribute('aria-label','Open navigation menu');}if(panel)panel.setAttribute('aria-hidden','true');document.body.style.overflow='';closeAllSubs();}
+  if(hbg){hbg.addEventListener('click',function(e){e.stopPropagation();nav.classList.contains('ngm-mob-open')?closeMob():openMob();});}
+  document.addEventListener('click',function(e){if(nav.classList.contains('ngm-mob-open')&&!nav.contains(e.target))closeMob();});
+  /* mobile sub-menus */
+  function closeAllSubs(){
+    document.querySelectorAll('.ngm-mob-sub.open').forEach(function(s){s.classList.remove('open');s.setAttribute('aria-hidden','true');});
+    document.querySelectorAll('.ngm-mob-link[aria-expanded="true"]').forEach(function(b){b.setAttribute('aria-expanded','false');});
+  }
+  ['ngm-mb-m','ngm-mb-e'].forEach(function(id){
+    var btn=document.getElementById(id);if(!btn)return;
+    var sub=document.getElementById(btn.getAttribute('aria-controls'));if(!sub)return;
+    btn.addEventListener('click',function(){
+      var open=sub.classList.contains('open');closeAllSubs();
+      if(!open){sub.classList.add('open');sub.setAttribute('aria-hidden','false');btn.setAttribute('aria-expanded','true');}
+    });
+  });
+  /* desktop dropdowns: hover handled in CSS (li:hover keeps menu open across
+     trigger + menu + bridge). JS only mirrors aria + adds keyboard toggle and
+     a small close-delay so brief gaps don't flicker. */
+  ['ngm-d-m','ngm-d-e'].forEach(function(id){
+    var li=document.getElementById(id);if(!li)return;
+    var link=li.querySelector('a');if(!link)return;
+    var closeTimer;
+    li.addEventListener('mouseenter',function(){clearTimeout(closeTimer);link.setAttribute('aria-expanded','true');});
+    li.addEventListener('mouseleave',function(){
+      clearTimeout(closeTimer);
+      closeTimer=setTimeout(function(){link.setAttribute('aria-expanded','false');},120);
+    });
+    /* keyboard: Enter/Space toggles, Esc closes */
+    link.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();li.classList.toggle('ngm-hover');link.setAttribute('aria-expanded',li.classList.contains('ngm-hover')?'true':'false');}
+      if(e.key==='Escape'){li.classList.remove('ngm-hover');link.setAttribute('aria-expanded','false');}
+    });
+    /* clicking outside closes any keyboard-opened menu */
+    document.addEventListener('click',function(e){if(!li.contains(e.target))li.classList.remove('ngm-hover');});
+  });
+  /* Escape closes mobile */
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('ngm-mob-open'))closeMob();});
+  /* mark active link */
+  var path=window.location.pathname;
+  nav.querySelectorAll('a[href]').forEach(function(a){try{if(new URL(a.href).pathname===path)a.classList.add('ngm-active');}catch(e){}});
+  /* ── LOGIN STATE (JS enforcement) ──
+     CSS already handles this via body.memberContentView / .publicContentView,
+     but we also enforce it in JS so it works regardless of CSS load order,
+     iframe scoping, or theme overrides. WA sets body.memberContentView only
+     when a member is logged in, so we key off that single authoritative
+     signal and set inline display on the button pairs directly. */
+  function ngmApplyState(){
+    var isMember = document.body.classList.contains('memberContentView');
+    nav.querySelectorAll('.ngm-guest').forEach(function(el){el.style.display=isMember?'none':'inline-flex';});
+    nav.querySelectorAll('.ngm-member').forEach(function(el){el.style.display=isMember?'inline-flex':'none';});
+  }
+  ngmApplyState();
+}());
+</script>

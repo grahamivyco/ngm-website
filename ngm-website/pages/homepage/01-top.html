@@ -1,0 +1,1412 @@
+<!-- ╔══ NGM HOMEPAGE · BLOCK 1 of 2 ══╗
+     PASTE INTO: Custom HTML gadget #1 (the FIRST/TOP block)
+     Contains: Google Fonts + ALL CSS + Hero → Marquee → About
+     → Meetings → "Mark your calendar" heading + intro copy
+     + the event-tag injection script (bottom).
+     The WA Upcoming-events gadget goes in its OWN gadget
+     directly BELOW this block. Block 2 goes below that.
+═════════════════════════════════ -->
+<!-- ── Google Fonts ── -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+/* ── 1. DESIGN TOKENS ───────────────────────────────────── */
+:root {
+  --ngm-sage:      #5C7A52;
+  --ngm-sage-dk:   #3E5538;
+  --ngm-sage-lt:   #EEF3EC;
+  --ngm-rose:      #B87260;
+  --ngm-rose-lt:   #F5EBE7;
+  --ngm-rose-dk:   #9A5C4A;
+  --ngm-cream:     #FAF7F2;
+  --ngm-linen:     #F0EAE0;
+  --ngm-linen-dk:  #E5DDD0;
+  --ngm-charcoal:  #242424;
+  --ngm-gray:      #656565;
+  --ngm-gray-lt:   #9A9A9A;
+  --ngm-border:    #DDD5C8;
+  --ngm-serif: "Cormorant Garamond", Georgia, serif;
+  --ngm-sans:  "DM Sans", system-ui, sans-serif;
+  --ngm-radius:    14px;
+  --ngm-radius-lg: 20px;
+  --ngm-sh:   0 2px 12px rgba(0,0,0,.06);
+  --ngm-shm:  0 8px 32px rgba(0,0,0,.10);
+  --ngm-shx:  0 20px 60px rgba(0,0,0,.14);
+}
+/* ── 2. SCOPE RESET ─────────────────────────────────────── */
+.ngm *,
+.ngm *::before,
+.ngm *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* ── 3. TYPOGRAPHY SYSTEM ───────────────────────────────── */
+.ngm-eyebrow {
+  display: block;
+  font-family: var(--ngm-sans);
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ngm-sage);
+  margin-bottom: 10px;
+}
+.ngm-h1 {
+  font-family: var(--ngm-serif) !important;
+  font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+  font-weight: 400;
+  line-height: 1.08;
+  color: var(--ngm-charcoal);
+  text-transform: none !important;
+  margin-bottom: 20px;
+}
+.ngm-h2 {
+  font-family: var(--ngm-serif) !important;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.12;
+  color: var(--ngm-charcoal);
+  text-transform: none !important;
+  margin-bottom: 14px;
+}
+.ngm-h2-dark {
+  font-family: var(--ngm-serif) !important;
+  font-size: clamp(2.2rem, 3.2vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: #fff;
+  text-transform: none !important;
+  margin-bottom: 16px;
+}
+.ngm-h1 em,
+.ngm-h2 em,
+.ngm-h2-dark em {
+  font-family: var(--ngm-serif) !important;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  font-style: italic;
+  color: var(--ngm-rose) !important;
+}
+.ngm-lead {
+  font-family: var(--ngm-sans);
+  font-size: 1.0625rem;
+  color: var(--ngm-gray);
+  line-height: 1.8;
+  max-width: 560px;
+  margin-bottom: 36px;
+}
+/* ── 4. LAYOUT HELPERS ──────────────────────────────────── */
+.ngm-sec {
+  padding: 88px 48px;
+}
+.ngm-sec-linen { background: var(--ngm-linen); }
+.ngm-sec-cream { background: var(--ngm-cream); }
+.ngm-sec-white { background: #fff; }
+.ngm-con {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+/* ── 5. BUTTONS ─────────────────────────────────────────────
+   FONT FIX: WA's theme applies its own font to every anchor via
+   high-specificity rules like  body A:not(.stylizedButton) {…}.
+   A plain `.ngm-btn { font-family }` loses to that, so the pill
+   buttons (Join, Get directions, etc.) rendered in the theme's
+   font instead of DM Sans. We mirror WA's specificity by also
+   declaring the rule with a `body` prefix + !important on the
+   font properties, so our font wins. (Same high-specificity
+   override pattern used for the WA events gadget in section 12.)
+   The arrow links already won this fight; this brings the pills
+   in line with the page's type system.
+────────────────────────────────────────────────────────── */
+.ngm-btn,
+body a.ngm-btn,
+body a.ngm-btn:link,
+body a.ngm-btn:visited {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--ngm-sans) !important;
+  font-size: .9rem !important;
+  font-weight: 500 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  border-radius: 100px;
+  padding: 12px 26px;
+  cursor: pointer;
+  text-decoration: none !important;
+  border: 1.5px solid transparent;
+  transition: background .2s, transform .18s, box-shadow .18s, color .2s;
+  line-height: 1;
+}
+.ngm-btn-sm,
+body a.ngm-btn-sm { padding: 9px 20px; font-size: .82rem !important; }
+.ngm-btn-green  { background: var(--ngm-sage-dk); color: #fff !important; border-color: var(--ngm-sage-dk); }
+.ngm-btn-green:hover  { background: var(--ngm-sage); border-color: var(--ngm-sage); transform: translateY(-1px); box-shadow: 0 5px 16px rgba(62,85,56,.25); }
+.ngm-btn-rose   { background: var(--ngm-rose);    color: #fff !important; border-color: var(--ngm-rose); }
+.ngm-btn-rose:hover   { background: var(--ngm-rose-dk); border-color: var(--ngm-rose-dk); }
+.ngm-btn-outline,
+body a.ngm-btn-outline { background: transparent; color: var(--ngm-sage-dk) !important; border: 1.5px solid var(--ngm-sage-dk) !important; }
+.ngm-btn-outline:hover,
+body a.ngm-btn-outline:hover { background: var(--ngm-sage-dk) !important; color: #fff !important; }
+.ngm-btn-outline-rose,
+body a.ngm-btn-outline-rose { background: transparent; color: var(--ngm-rose) !important; border: 1.5px solid var(--ngm-rose) !important; }
+.ngm-btn-outline-rose:hover,
+body a.ngm-btn-outline-rose:hover { background: var(--ngm-rose) !important; color: #fff !important; }
+.ngm-btn-white  { background: #fff; color: var(--ngm-charcoal) !important; border-color: #fff; }
+.ngm-btn-white:hover  { background: var(--ngm-cream); }
+/* Stops a button stretching to fill a flex/grid column on desktop.
+   Used on the Retreat button, which sits in a flex-column. */
+.ngm-btn-fit { align-self: flex-start; }
+/* ── 6. ARROW LINK ──────────────────────────────────────── */
+.ngm-arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--ngm-sans);
+  font-size: .9rem;
+  color: var(--ngm-sage-dk) !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(62,85,56,.3);
+  padding-bottom: 2px;
+  transition: gap .18s, border-color .18s;
+}
+.ngm-arrow-link:hover {
+  gap: 10px;
+  border-color: var(--ngm-sage-dk);
+}
+.ngm-arrow-link-sm { font-size: .8rem; }
+/* ── 7. FORMAT BADGES ───────────────────────────────────── */
+.ngm-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--ngm-sans);
+  font-size: .68rem;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 100px;
+  letter-spacing: .04em;
+}
+.ngm-badge-hybrid  { background: #E3EFEF; color: #2A5A5A; }
+.ngm-badge-person  { background: var(--ngm-rose-lt); color: #7A3E2E; }
+.ngm-badge-zoom    { background: #EEEEFF; color: #3A46AF; }
+.ngm-badge-virtual { background: #F2EEF8; color: #5A3A8A; }
+/* ── 8. HERO ────────────────────────────────────────────── */
+.ngm-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: min(88vh, 700px);
+  background: var(--ngm-cream);
+  overflow: hidden;
+}
+.ngm-hero-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 72px 56px 72px 72px;
+}
+.ngm-hero-body {
+  font-family: var(--ngm-sans);
+  font-size: 1.0625rem;
+  color: var(--ngm-gray);
+  line-height: 1.8;
+  max-width: 400px;
+  margin-bottom: 32px;
+}
+.ngm-hero-btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.ngm-hero-photo {
+  overflow: hidden;
+  position: relative;
+}
+.ngm-hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* ── 9. MARQUEE (stats bar) ─────────────────────────────────
+   EDIT: divider lines and dots REMOVED. Edges now fade to the
+   same green as the bar background (--ngm-sage-dk), not white,
+   using gradient overlays on each side.
+────────────────────────────────────────────────────────── */
+.ngm-marquee-wrap {
+  background: var(--ngm-sage-dk);
+  overflow: hidden;
+  position: relative;
+}
+/* Left + right fade overlays — same green as background */
+.ngm-marquee-wrap::before,
+.ngm-marquee-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 12%;
+  z-index: 2;
+  pointer-events: none;
+}
+.ngm-marquee-wrap::before {
+  left: 0;
+  background: linear-gradient(to right, var(--ngm-sage-dk) 0%, rgba(62,85,56,0) 100%);
+}
+.ngm-marquee-wrap::after {
+  right: 0;
+  background: linear-gradient(to left, var(--ngm-sage-dk) 0%, rgba(62,85,56,0) 100%);
+}
+.ngm-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: ngm-scroll 44s linear infinite;
+}
+/* Each set is a non-shrinking flex group; two of them make the
+   track exactly 2× one set, so -50% lands on a pixel-identical
+   frame and the loop is seamless. */
+.ngm-marquee-set {
+  display: flex;
+  flex: 0 0 auto;
+}
+.ngm-marquee-wrap:hover .ngm-marquee-track {
+  animation-play-state: paused;
+}
+@keyframes ngm-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.ngm-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 48px;
+  white-space: nowrap;
+  /* divider border-right REMOVED per edit */
+}
+.ngm-stat-num {
+  font-family: var(--ngm-serif);
+  font-size: 1.6rem;
+  color: #fff;
+  line-height: 1;
+}
+.ngm-stat-label {
+  font-family: var(--ngm-sans);
+  font-size: .8rem;
+  color: rgba(255,255,255,.65);
+  line-height: 1.35;
+}
+/* ── 10. ABOUT STRIP ────────────────────────────────────────
+   EDIT: photo now has an icon overlay badge in the corner.
+────────────────────────────────────────────────────────── */
+.ngm-about-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.ngm-about-photo {
+  border-radius: var(--ngm-radius-lg);
+  overflow: hidden;
+  height: 480px;
+  box-shadow: var(--ngm-shx);
+  position: relative;   /* anchor for the icon overlay */
+}
+.ngm-about-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Circular icon badge floating over the photo */
+.ngm-photo-icon {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--ngm-cream);
+  box-shadow: var(--ngm-shm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.ngm-photo-icon img,
+.ngm-photo-icon svg {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+.ngm-pullquote {
+  font-family: var(--ngm-serif);
+  font-size: 1.4rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--ngm-charcoal);
+  border-left: 3px solid var(--ngm-rose);
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+.ngm-about-body p {
+  font-family: var(--ngm-sans);
+  font-size: 1rem;
+  color: var(--ngm-gray);
+  line-height: 1.85;
+  margin-bottom: 12px;
+}
+/* ── 11. MEETING CARDS ──────────────────────────────────── */
+.ngm-mcard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 18px;
+  margin-bottom: 36px;
+}
+.ngm-mcard {
+  background: #fff;
+  border: 1px solid var(--ngm-border);
+  border-radius: var(--ngm-radius-lg);
+  padding: 24px;
+  /* EDIT: green top bar removed */
+  transition: background-color .25s ease, border-color .25s ease;
+}
+.ngm-mcard:hover {
+  /* EDIT: no lift, no shadow — just a pale-green fill */
+  background: var(--ngm-sage-lt);
+  border-color: var(--ngm-sage-lt);
+}
+.ngm-mcard-tag {
+  display: inline-block;
+  font-family: var(--ngm-sans);
+  font-size: .67rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ngm-sage-dk);
+  background: var(--ngm-sage-lt);
+  border-radius: 100px;
+  padding: 3px 11px;
+  margin-bottom: 11px;
+}
+.ngm-mcard-name {
+  font-family: var(--ngm-serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--ngm-charcoal);
+  margin-bottom: 8px;
+  line-height: 1.25;
+  text-transform: none !important;
+}
+.ngm-mcard-desc {
+  font-family: var(--ngm-sans);
+  font-size: .875rem;
+  color: var(--ngm-gray);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+.ngm-mcard-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;   /* EDIT: more breathing room between date / badge / link rows */
+  padding-top: 14px;
+  border-top: 1px solid var(--ngm-linen-dk);
+}
+.ngm-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--ngm-sans);
+  font-size: .8rem;
+  color: var(--ngm-gray);
+}
+/* ── 12. UPCOMING GATHERINGS ──────────────────────────────────
+   v6 CHANGE: the section is now STACKED, not a two-column grid.
+   Heading row → WA gadget slot → CTA row. This is what lets the
+   native WA Upcoming-events gadget sit where it actually lands
+   instead of being orphaned beneath an empty grid cell.
+────────────────────────────────────────────────────────── */
+.ngm-upcoming-head { margin-bottom: 0; }
+/* Intro copy under the calendar heading */
+.ngm-upcoming-intro {
+  font-family: var(--ngm-sans);
+  font-size: 1.0625rem;
+  color: var(--ngm-gray);
+  line-height: 1.8;
+  max-width: 620px;
+  margin-top: 8px;
+}
+/* Centered "View the full calendar →" link (replaces the green box) */
+.ngm-cal-link-wrap {
+  text-align: center;
+  margin-top: 8px;
+}
+.ngm-cal-link {
+  font-size: 1rem;
+}
+.ngm-cal-note {
+  font-family: var(--ngm-sans);
+  font-size: .82rem;
+  color: var(--ngm-gray-lt);
+  line-height: 1.65;
+  margin-top: 18px;
+  padding: 0 2px;
+}
+/* ───── WA Upcoming-events gadget styling ─────
+   CONFIRMED against the live markup (June 2026). The gadget div is:
+     <div class="WaGadget WaGadgetUpcomingEvents ngm-wa-events upcomingEventsStyle001">
+       <div class="gadgetStyleBody">
+         <ul>
+           <li>
+             <span class="event-time-zone" style="display:none">…</span>
+             <div class="title"><a href="…">Event name</a></div>
+             <div class="date"><span …>Sat, June 20 …</span></div>
+             <div class="location"><span>…</span></div>
+           </li> …
+   TWO things make these selectors work where the old ones failed:
+   1. ngm-wa-events sits on the SAME element as upcomingEventsStyle001
+      (not a parent), so they're chained with NO space:
+        .ngm-wa-events.upcomingEventsStyle001
+   2. The theme's orange/Lato rules are prefixed with `body`, which
+      outranks a plain class. So every rule below is also prefixed
+      with `body` to win on specificity (per the project's high-
+      specificity override pattern). Keep the `body` prefix.
+────────────────────────────────────────────────────────── */
+/* Strip WA's default chrome, then make the gadget a WHITE CARD
+   that sits on the linen band — so the event list reads as an
+   intentional, embedded part of the calendar block instead of
+   floating in a bare strip. The card matches the meeting cards
+   above (white, rounded, soft shadow).
+   The gadget also carries the LINEN band color itself + side
+   padding, so even though it's a separate WA gadget between the
+   heading and CTA blocks, the linen runs continuously through all
+   three and the white card floats on it. No WA layout-row color
+   change needed. */
+body .ngm-wa-events.WaGadgetUpcomingEvents {
+  background: var(--ngm-linen) !important;  /* continuous band */
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  /* EDIT: equal padding on all four sides so the white card has
+     matching margins top/bottom and left/right within the band. */
+  padding: 28px 48px !important;
+  font-family: var(--ngm-sans) !important;
+}
+body .ngm-wa-events .gadgetStyleBody {
+  background: #fff !important;
+  border: 1px solid var(--ngm-border) !important;
+  border-radius: var(--ngm-radius-lg) !important;
+  box-shadow: var(--ngm-sh) !important;
+  /* EDIT: equal inner padding all around */
+  padding: 12px 28px !important;
+  margin: 0 auto !important;
+  max-width: 1080px !important;    /* align with .ngm-con */
+}
+/* The list + rows */
+body .ngm-wa-events.upcomingEventsStyle001 ul {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+body .ngm-wa-events.upcomingEventsStyle001 ul li {
+  list-style: none !important;
+  border-bottom: 1px solid var(--ngm-linen-dk) !important;
+  padding: 18px 8px !important;
+  margin: 0 !important;
+  font-family: var(--ngm-sans) !important;
+  /* EDIT: plain rows — no rounded corners, just divider lines */
+  border-radius: 0 !important;
+  transition: background-color .2s ease !important;
+}
+/* Whole row is clickable (click handler in the script). Hover
+   EDIT: the full row turns pale green — no lift, no shadow. */
+body .ngm-wa-events.upcomingEventsStyle001 ul li:hover {
+  background-color: var(--ngm-sage-lt) !important;
+}
+body .ngm-wa-events.upcomingEventsStyle001 ul li.last,
+body .ngm-wa-events.upcomingEventsStyle001 ul li:last-child {
+  border-bottom: none !important;   /* no rule under the final row */
+}
+/* Event title — serif charcoal, sage on hover, no underline.
+   Mirrors the theme's own selector exactly so we beat #f48d1d.
+   On row hover the title also goes sage (whole card is the link). */
+body .ngm-wa-events.upcomingEventsStyle001 ul li .title {
+  margin: 0 0 8px !important;
+  font-weight: 400 !important;
+}
+body .ngm-wa-events.upcomingEventsStyle001 ul li .title a {
+  font-family: var(--ngm-serif) !important;
+  font-size: 1.2rem !important;
+  font-weight: 400 !important;
+  color: var(--ngm-charcoal) !important;
+  font-style: normal !important;
+  text-transform: none !important;
+  text-decoration: none !important;
+}
+body .ngm-wa-events.upcomingEventsStyle001 ul li:hover .title a,
+body .ngm-wa-events.upcomingEventsStyle001 ul li .title a:hover {
+  color: var(--ngm-sage-dk) !important;
+  text-decoration: none !important;
+}
+/* Date — now matches the MEETING CARD date line: small muted gray
+   sans, with a calendar icon to its left (via ::before SVG). */
+body .ngm-wa-events.upcomingEventsStyle001 ul li .date {
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  margin-bottom: 0 !important;   /* no location below it anymore */
+}
+body .ngm-wa-events.upcomingEventsStyle001 ul li .date::before {
+  content: "" !important;
+  flex-shrink: 0 !important;
+  width: 12px !important;
+  height: 12px !important;
+  background-color: var(--ngm-sage) !important;
+  /* calendar glyph, masked so it takes the sage color above */
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E") center / contain no-repeat !important;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E") center / contain no-repeat !important;
+}
+body .ngm-wa-events.upcomingEventsStyle001 ul li .date,
+body .ngm-wa-events.upcomingEventsStyle001 ul li .date span {
+  font-family: var(--ngm-sans) !important;
+  font-size: .8rem !important;          /* match .ngm-meta-row */
+  font-weight: 400 !important;
+  font-style: normal !important;        /* EDIT: not italicized */
+  color: var(--ngm-gray) !important;    /* match .ngm-meta-row */
+}
+/* EDIT: remove ALL location lines — that info lives on the event
+   page. Hidden for every event regardless of format. */
+body .ngm-wa-events.upcomingEventsStyle001 ul li .location {
+  display: none !important;
+}
+/* ── Derived location tags (injected by the script at the bottom
+   of this block). The script reads each event's .location text
+   and adds a data-tag attribute on the <li>; CSS styles the chip. */
+body .ngm-wa-events.upcomingEventsStyle001 ul li .ngm-evt-tag {
+  display: inline-flex !important;
+  align-items: center !important;
+  font-family: var(--ngm-sans) !important;
+  font-size: .65rem !important;
+  font-weight: 500 !important;
+  letter-spacing: .06em !important;
+  text-transform: uppercase !important;
+  padding: 3px 10px !important;
+  border-radius: 100px !important;
+  margin-bottom: 8px !important;
+  line-height: 1.4 !important;
+}
+body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="zoom"]    .ngm-evt-tag { background:#EEEEFF !important; color:#3A46AF !important; }
+body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="hybrid"]  .ngm-evt-tag { background:#E3EFEF !important; color:#2A5A5A !important; }
+body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="virtual"] .ngm-evt-tag { background:#F2EEF8 !important; color:#5A3A8A !important; }
+body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-tag { background:var(--ngm-rose-lt) !important; color:#7A3E2E !important; }
+/* ── 13. RETREAT SECTION ────────────────────────────────── */
+.ngm-retreat {
+  background: var(--ngm-charcoal);
+  overflow: hidden;
+}
+.ngm-retreat-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 460px;
+}
+.ngm-retreat-photo {
+  overflow: hidden;
+  position: relative;
+}
+.ngm-retreat-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.ngm-retreat-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, transparent 40%, var(--ngm-charcoal) 92%);
+  pointer-events: none;
+}
+.ngm-retreat-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;  /* keep children at natural width */
+  padding: 64px 64px 64px 48px;
+  color: #fff;
+}
+.ngm-retreat-eyebrow {
+  display: block;
+  font-family: var(--ngm-sans);
+  font-size: .68rem;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.4);
+  margin-bottom: 12px;
+}
+.ngm-retreat-meta {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.ngm-retreat-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--ngm-sans);
+  font-size: .82rem;
+  color: rgba(255,255,255,.5);
+}
+.ngm-retreat-body {
+  font-family: var(--ngm-sans);
+  font-size: 1rem;
+  color: rgba(255,255,255,.65);
+  line-height: 1.85;
+  max-width: 380px;
+  margin-bottom: 28px;
+}
+/* ── 14. JOIN / MEMBERSHIP CTA ──────────────────────────────
+   v6 CHANGE: the serif-rose "$30 per year" pill (.ngm-join-price)
+   is gone — the price now lives inside the body paragraph as
+   plain sans body text. One font, one color in this block.
+────────────────────────────────────────────────────────── */
+.ngm-join {
+  background: var(--ngm-rose-lt);
+  padding: 88px 48px;
+  text-align: center;
+}
+.ngm-join-inner {
+  max-width: 640px;   /* wider band so copy can breathe */
+  margin: 0 auto;
+}
+.ngm-join-body {
+  font-family: var(--ngm-sans);
+  font-size: 1.0625rem;
+  color: var(--ngm-gray);
+  line-height: 1.75;
+  /* v6: copy now goes WIDER than the title, full band width,
+     instead of being pinched to 420px under it */
+  max-width: 560px;
+  margin: 0 auto 28px;
+}
+.ngm-join-btns {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+/* ── 15. LOCATION / MAP ─────────────────────────────────── */
+.ngm-loc-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.ngm-loc-map {
+  border-radius: var(--ngm-radius-lg);
+  overflow: hidden;
+  height: 320px;
+  border: 1px solid var(--ngm-border);
+  box-shadow: var(--ngm-shm);
+}
+.ngm-loc-map iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+.ngm-addr-label {
+  display: block;
+  font-family: var(--ngm-sans);
+  font-size: .68rem;
+  font-weight: 500;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--ngm-gray-lt);
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+.ngm-addr-label:first-of-type { margin-top: 0; }
+.ngm-address {
+  font-style: normal;
+  font-family: var(--ngm-sans);
+  font-size: 1rem;
+  color: var(--ngm-charcoal);
+  line-height: 1.85;
+}
+/* ── 16. FAQ ACCORDION ──────────────────────────────────────
+   Accordion cards using <details>/<summary>. The answer is wrapped
+   in .ngm-faq-wrap which animates open via a grid-template-rows
+   transition (0fr → 1fr) — a smooth, fluid height reveal with no
+   JavaScript. The inner .ngm-faq-a must have overflow:hidden for
+   the collapse to clip cleanly.
+────────────────────────────────────────────────────────── */
+.ngm-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  /* v6: wider cards on desktop — fill the container instead of
+     being capped at 760px. Falls back to 100% within .ngm-con. */
+  max-width: 960px;
+  margin-top: 44px;
+}
+.ngm-faq-card {
+  background: #fff;
+  border: 1px solid var(--ngm-border);
+  border-radius: var(--ngm-radius);
+  overflow: hidden;
+  transition: box-shadow .25s ease, border-color .25s ease;
+}
+.ngm-faq-card[open] {
+  box-shadow: var(--ngm-sh);
+  border-color: var(--ngm-sage-lt);
+}
+.ngm-faq-card summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 24px;
+  font-family: var(--ngm-serif);
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--ngm-charcoal);
+  line-height: 1.3;
+  transition: color .2s ease;
+}
+.ngm-faq-card summary:hover { color: var(--ngm-sage-dk); }
+.ngm-faq-card summary::-webkit-details-marker { display: none; }
+/* Plus / minus indicator */
+.ngm-faq-icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  position: relative;
+  transition: transform .3s ease;
+}
+.ngm-faq-icon::before,
+.ngm-faq-icon::after {
+  content: "";
+  position: absolute;
+  background: var(--ngm-sage-dk);
+  border-radius: 2px;
+}
+.ngm-faq-icon::before { top: 10px; left: 2px; width: 18px; height: 2px; }
+.ngm-faq-icon::after  { left: 10px; top: 2px; width: 2px; height: 18px; transition: opacity .3s ease; }
+.ngm-faq-card[open] .ngm-faq-icon { transform: rotate(180deg); }
+.ngm-faq-card[open] .ngm-faq-icon::after { opacity: 0; }
+/* Fluid open: the wrapper animates its row height from 0fr to 1fr */
+.ngm-faq-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .32s ease;
+}
+.ngm-faq-card[open] .ngm-faq-wrap {
+  grid-template-rows: 1fr;
+}
+/* While closing (set by the FAQ script), force the row back to 0fr
+   even though [open] is still present — this animates the collapse,
+   then the script removes [open] when the transition ends. */
+.ngm-faq-card.ngm-faq-closing .ngm-faq-wrap {
+  grid-template-rows: 0fr;
+}
+.ngm-faq-a {
+  overflow: hidden;          /* clip during the collapse/expand */
+  min-height: 0;             /* FIX: grid items default to min-height:auto,
+                                which blocks shrinking back to 0fr after the
+                                first open — so the animation only ran once.
+                                min-height:0 lets it collapse every time. */
+  font-family: var(--ngm-sans);
+  font-size: .9375rem;
+  color: var(--ngm-gray);
+  line-height: 1.8;
+  padding: 0 24px;           /* vertical padding added by inner div */
+}
+/* inner padding wrapper so the text doesn't get clipped at the seam */
+.ngm-faq-a > div { padding-bottom: 24px; }
+.ngm-faq-a a {
+  color: var(--ngm-sage-dk) !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(62,85,56,.3);
+  transition: border-color .15s;
+}
+.ngm-faq-a a:hover { border-color: var(--ngm-sage-dk); }
+/* ── 17. RESPONSIVE ─────────────────────────────────────── */
+@media (max-width: 900px) {
+  .ngm-sec { padding: 64px 28px; }
+  .ngm-hero              { grid-template-columns: 1fr; min-height: auto; }
+  .ngm-hero-copy         { padding: 52px 28px 44px; }
+  .ngm-hero-photo        { height: 300px; }
+  .ngm-about-inner       { grid-template-columns: 1fr; gap: 44px; }
+  .ngm-about-photo       { height: 280px; }
+  body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 28px !important; padding-right: 28px !important; }
+  .ngm-retreat-inner     { grid-template-columns: 1fr; }
+  .ngm-retreat-photo     { height: 220px; }
+  .ngm-retreat-photo::after {
+    background: linear-gradient(to top, var(--ngm-charcoal) 30%, transparent);
+  }
+  .ngm-retreat-copy      { padding: 44px 28px; }
+  .ngm-loc-inner         { grid-template-columns: 1fr; gap: 36px; }
+  .ngm-loc-map           { height: 250px; }
+  /* EDIT: on tablet/mobile, let the constrained body copy stretch
+     to the full column width — same behaviour as the "Ready to
+     stitch with us?" join copy — instead of staying pinched at
+     their desktop max-widths. */
+  .ngm-hero-body,
+  .ngm-lead,
+  .ngm-upcoming-intro,
+  .ngm-about-body p,
+  .ngm-retreat-body { max-width: 100% !important; }
+}
+@media (max-width: 560px) {
+  .ngm-sec { padding: 52px 18px; }
+  .ngm-hero-copy         { padding: 40px 18px 36px; }
+  .ngm-hero-photo        { height: 220px; }
+  .ngm-h1                { font-size: 2.5rem; }
+  .ngm-marquee-track     { animation-duration: 30s; }
+  .ngm-stat-item         { padding: 14px 28px; }
+  .ngm-mcard-grid        { grid-template-columns: 1fr; }
+  .ngm-join              { padding: 64px 18px; }
+  body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 18px !important; padding-right: 18px !important; }
+}
+/* ── 18. REDUCED MOTION ─────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .ngm-marquee-track { animation: none !important; }
+  .ngm-mcard         { transition: none; }
+  .ngm-btn           { transition: none; }
+  .ngm-faq-icon      { transition: none; }
+}
+/* ── 19. KILL WA WRAPPER GAPS (top of hero / bottom of footer) ──
+   The gap above the hero is padding/margin on WA's structural
+   wrappers around the page content + the custom-HTML gadget.
+   casefile_guardian wraps gadgets in .gadgetStyleBody, gadgets in
+   .WaGadget, and the content column in the page layout cells.
+   These zero the top space on the FIRST content gadget and the
+   bottom space on the LAST, so the hero meets the header and the
+   last section meets the footer.
+   ⚠ STILL A GAP AFTER PUBLISH? It's almost certainly one specific
+   wrapper this doesn't name. To find it: right-click the gap →
+   Inspect → walk UP the tree until the highlight box covers the
+   empty strip → that element has the padding-top/margin-top in its
+   Styles panel → copy its class → add it to the list below.
+   NOTE: check in PREVIEW / logged-out, not the editor — the admin
+   toolbar adds its own space that is NOT on the live page.
+────────────────────────────────────────────────────────── */
+/* Remove the box padding/margin WA puts around each custom-HTML
+   gadget body, so our full-bleed sections truly reach the edges. */
+body .WaGadgetCustomHtml,
+body .WaGadgetCustomHtml .gadgetStyleBody {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+/* Collapse top spacing on the very first content gadget (hero)
+   and bottom spacing on the very last (location). */
+body .WaGadget:first-child,
+body .WaGadget:first-child .gadgetStyleBody {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+body .WaGadget:last-child,
+body .WaGadget:last-child .gadgetStyleBody {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+/* Common casefile_guardian content-column wrappers — zero their
+   vertical padding so nothing pads the band above the hero. */
+body #idContentContainer,
+body .WaLayoutBody #idContentArea,
+body .contentMainColumn,
+body .pageBodyClass,
+body .mainColumnWidth {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+/* The seam ABOVE the header is usually the page's content area or
+   main wrapper carrying top padding/margin between the very top of
+   the page and the header bar. These zero the most common ones in
+   casefile_guardian. If a seam remains, Inspect it (see note above)
+   and add the offending class here. */
+body .WaLayoutBody,
+body #idMainContainer,
+body #idWrapper,
+body .pageContentWrapper,
+body .WaGridLayout:first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  border-top: none !important;
+}
+/* Some themes draw a faint top border/texture on the header's outer
+   wrapper — neutralize a stray top border that reads as a seam. */
+body .WaGadgetMenuHorizontal,
+body .menuInnerWrapper {
+  border-top: none !important;
+}
+/* EDIT: kill the spacer specifically BETWEEN the header/menu and the
+   hero. The menu gadget often carries bottom margin/padding, and the
+   first content layout row carries top margin — both create the strip
+   above the hero. Zero them. (If a textured strip still remains after
+   publishing, it's a background image on a wrapper row — Inspect that
+   strip and send me its class; I'll target its background directly.) */
+body .WaGadgetMenuHorizontal,
+body .WaGadgetMenuHorizontal .gadgetStyleBody,
+body .menuInnerWrapper,
+body .menuOuterWrapper {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+body .WaGridLayout:first-of-type,
+body .WaGridLayout:first-of-type .gadgetContentEditableInner,
+body #idContentRowGroup > div:first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+/* ── 20. KILL THE REAL WA GAPS (confirmed via Inspect, casefile_guardian) ──
+   The Inspect on the live page revealed the exact theme rules that
+   create the spaces. They are NOT in your HTML — they're WA theme
+   defaults on placeholder/gadget wrappers. These override them:
+   • [class^="WaGadget"]      → margin: 0 0 20px 0  AND  margin-bottom:24px
+       = the 20–24px under every gadget. This is the space between
+         your stacked custom-HTML gadgets and the WA events gadget,
+         and between the header gadget and the hero.
+   • [class*="WaCustomLayoutContainer"] → margin-bottom: 20px
+       = extra space under each layout container.
+   • .WaPlaceHolderContent>div → padding: 40px 15px
+       = the 40px top/bottom padding on the content area. This is the
+         bulk of the header→hero gap.
+   We zero the VERTICAL spacing while KEEPING the 15px horizontal
+   padding on the placeholder (so content isn't flush to the screen
+   edge on mobile). If you want edge-to-edge horizontally too, change
+   the placeholder rule's padding to 0.
+──────────────────────────────────────────────────────────────── */
+/* 1. Remove the bottom margin WA puts under every gadget. This closes
+      BOTH the header→hero gap and the "Mark your calendar"→events gap. */
+body [class^="WaGadget"],
+body .WaGadgetFirst {
+  margin: 0 !important;
+}
+/* 2. Remove the layout-container bottom margin. */
+body [class*="WaCustomLayoutContainer"] {
+  margin-bottom: 0 !important;
+}
+/* 3. Kill the 40px vertical padding on the content placeholder (the
+      header→hero gap), keep the 15px sides. Covers the numbered
+      placeholder variants the theme uses. */
+body .WaPlaceHolderContent > div,
+body .WaPlaceHolderContent1 > div,
+body .WaPlaceHolderContent2 > div,
+body .WaPlaceHolderContent3 > div,
+body .WaPlaceHolderContent4 > div {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+/* 4. The placeholder wrapper itself + wide variant — zero vertical. */
+body .WaPlaceHolder > div,
+body .WaPlaceHolderWide > div {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+</style>
+<!-- ══════════════════════════════════════════════════════════
+  [HERO] — Custom HTML gadget 1
+  EDIT SAFELY:
+  · Eyebrow text  · H1 text (keep em on accent word)
+  · Intro paragraph  · Button text/links
+  · Image src — see PHOTO NOTE below
+══════════════════════════════════════════════════════════ -->
+<section class="ngm ngm-hero">
+  <div class="ngm-hero-copy">
+    <!-- EDIT: Eyebrow now reads EST. 1972 only -->
+    <span class="ngm-eyebrow">EST. 1972</span>
+    <h1 class="ngm-h1">A place for people<br>who love to <em>stitch</em></h1>
+    <!-- EDIT: Copy is now about community, no library/book count -->
+    <p class="ngm-hero-body">Monthly meetings, hands-on workshops, and a beloved annual retreat — a warm, welcoming community of stitchers who learn from and look out for each other.</p>
+    <div class="ngm-hero-btns">
+      <a class="ngm-btn ngm-btn-green" href="/join">Join the Guild</a>
+      <a class="ngm-btn ngm-btn-outline" href="/monthly">See our meetings</a>
+    </div>
+  </div>
+  <!-- ════════════ PHOTO NOTE — ACTION NEEDED ════════════
+       Use a real group photo from the NGM site.
+       HOW: open  https://needleworkguildmn.org/gallery
+       → click a photo showing members together
+       → right-click the large image → "Copy image address"
+       → paste that URL into src="" below (replacing the
+         placeholder). It will look like:
+         https://needleworkguildmn.org/resources/Pictures/....jpg
+       Until then this placeholder shows so the layout holds.
+  ═══════════════════════════════════════════════════════ -->
+  <div class="ngm-hero-photo">
+    <img
+      src="REPLACE_WITH_GROUP_PHOTO_URL_FROM_GALLERY"
+      alt="Guild members stitching together at a monthly meeting"
+      loading="eager"
+      onerror="this.src='https://needleworkguildmn.org/resources/Pictures/Website%20Update%20Photos/Needlework%20Guild%20Hero%20Image.png'"
+    >
+  </div>
+</section>
+<!-- ══════════════════════════════════════════════════════════
+  [MARQUEE] — Custom HTML gadget 2
+  EDIT: divider lines + dots removed; edges fade to green (in CSS).
+  Both item sets still required for the seamless loop.
+══════════════════════════════════════════════════════════ -->
+<div class="ngm">
+  <div class="ngm-marquee-wrap" aria-hidden="true">
+    <div class="ngm-marquee-track">
+      <!-- Each set is wrapped so the track is exactly TWO equal-width
+           groups. The animation translates by -50% = exactly one
+           group's width, so the loop point is pixel-identical to the
+           start and there is no visible jump. Both groups MUST stay
+           identical. -->
+      <div class="ngm-marquee-set">
+        <!-- Set A -->
+        <div class="ngm-stat-item">
+          <span class="ngm-stat-num">200+</span>
+          <span class="ngm-stat-label">Active members<br>across Minnesota</span>
+        </div>
+        <div class="ngm-stat-item">
+          <span class="ngm-stat-num">50+</span>
+          <span class="ngm-stat-label">Years of community<br>since 1972</span>
+        </div>
+        <div class="ngm-stat-item">
+          <span class="ngm-stat-num">400+</span>
+          <span class="ngm-stat-label">Books in our<br>lending library</span>
+        </div>
+        <div class="ngm-stat-item">
+          <span class="ngm-stat-num">7</span>
+          <span class="ngm-stat-label">Monthly meeting<br>groups</span>
+        </div>
+        <div class="ngm-stat-item">
+          <span class="ngm-stat-num">$30</span>
+          <span class="ngm-stat-label">Per year<br>full membership</span>
+        </div>
+      </div>
+      <div class="ngm-marquee-set" aria-hidden="true">
+        <!-- Set B — exact duplicate, required for the seamless loop -->
+        <div class="ngm-stat-item">
+          <span class="ngm-stat-num">200+</span>
+          <span class="ngm-stat-label">Active members<br>across Minnesota</span>
+        </div>
+        <div class="ngm-stat-item">
+          <span class="ngm-stat-num">50+</span>
+          <span class="ngm-stat-label">Years of community<br>since 1972</span>
+        </div>
+        <div class="ngm-stat-item">
+          <span class="ngm-stat-num">400+</span>
+          <span class="ngm-stat-label">Books in our<br>lending library</span>
+        </div>
+        <div class="ngm-stat-item">
+          <span class="ngm-stat-num">7</span>
+          <span class="ngm-stat-label">Monthly meeting<br>groups</span>
+        </div>
+        <div class="ngm-stat-item">
+          <span class="ngm-stat-num">$30</span>
+          <span class="ngm-stat-label">Per year<br>full membership</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap">
+    200+ active members · 50+ years of community · 400+ library books · 7 monthly groups · $30 per year
+  </p>
+</div>
+<!-- ══════════════════════════════════════════════════════════
+  [ABOUT] — Custom HTML gadget 3
+  EDIT: eyebrow now "ABOUT"; photo from site + icon overlay badge.
+══════════════════════════════════════════════════════════ -->
+<section class="ngm ngm-sec ngm-sec-linen">
+  <div class="ngm-con">
+    <div class="ngm-about-inner">
+      <!-- Photo column with floating icon badge -->
+      <!-- PHOTO NOTE: same steps as hero — copy a real group photo
+           URL from /gallery into src below. -->
+      <div class="ngm-about-photo">
+        <img
+          src="REPLACE_WITH_GROUP_PHOTO_URL_FROM_GALLERY"
+          alt="Guild members stitching together"
+          loading="lazy"
+          onerror="this.src='https://needleworkguildmn.org/resources/Pictures/Gallery%20Photos/IMG_0504.jpg'"
+        >
+      </div>
+      <!-- Copy column -->
+      <div>
+        <span class="ngm-eyebrow">About</span>
+        <h2 class="ngm-h2">Stitchers who show up<br>for <em>each other</em></h2>
+        <blockquote class="ngm-pullquote">
+          "I joined not knowing anyone. Within a month I had a table full of friends."
+        </blockquote>
+        <div class="ngm-about-body">
+          <p>Since 1972, the Needlework Guild of Minnesota has been a home for hand stitchers across the Twin Cities and beyond. We gather to learn, share, and enjoy needlework together — all skill levels welcome.</p>
+          <p>Whether you embroider, do counted thread, beading, needlepoint, or you're simply curious about handwork, there's a group here for you.</p>
+        </div>
+        <p style="margin-top:4px;font-family:var(--ngm-sans);font-size:.95rem;color:var(--ngm-gray-lt)">
+          Curious about us?
+          <a class="ngm-arrow-link" style="font-size:.95rem" href="/about">
+            Learn about the guild
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ══════════════════════════════════════════════════════════
+  [MEETINGS] — Custom HTML gadget 4  (unchanged)
+══════════════════════════════════════════════════════════ -->
+<section class="ngm ngm-sec ngm-sec-white">
+  <div class="ngm-con">
+    <span class="ngm-eyebrow">Monthly Meetings</span>
+    <h2 class="ngm-h2">Find <em>your</em> group</h2>
+    <p class="ngm-lead">Seven specialty groups plus open Stitch-Ins every month. Members are welcome at any and all meetings.</p>
+    <div class="ngm-mcard-grid">
+      <article class="ngm-mcard">
+        <h3 class="ngm-mcard-name">Daytime Stitch-In</h3>
+        <p class="ngm-mcard-desc">Drop in and stitch on any project — or join the featured program. No pressure, great company. All skill levels welcome.</p>
+        <div class="ngm-mcard-meta">
+          <div class="ngm-meta-row">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage)" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            4th Tuesday · 10:00 am – 2:00 pm
+          </div>
+          <div class="ngm-meta-row"><span class="ngm-badge ngm-badge-hybrid">Hybrid</span></div>
+        </div>
+      </article>
+      <article class="ngm-mcard">
+        <h3 class="ngm-mcard-name">Evening Stitch-In</h3>
+        <p class="ngm-mcard-desc">The evening version of our popular Stitch-In. Bring any project and enjoy a night of stitching and conversation.</p>
+        <div class="ngm-mcard-meta">
+          <div class="ngm-meta-row">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage)" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            4th Tuesday · 7:00 pm – 9:00 pm
+          </div>
+          <div class="ngm-meta-row"><span class="ngm-badge ngm-badge-virtual">Virtual</span></div>
+        </div>
+      </article>
+      <article class="ngm-mcard">
+        <h3 class="ngm-mcard-name">Beading</h3>
+        <p class="ngm-mcard-desc">Beadwork in all its forms — from simple stringing to intricate bead embroidery. Programs vary monthly; all levels welcome.</p>
+        <div class="ngm-mcard-meta">
+          <div class="ngm-meta-row">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage)" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            2nd Friday · 10:00 am – 12:00 pm
+          </div>
+          <div class="ngm-meta-row"><span class="ngm-badge ngm-badge-hybrid">Hybrid</span></div>
+        </div>
+      </article>
+      <article class="ngm-mcard">
+        <h3 class="ngm-mcard-name">Daytime Counted Thread &amp; Needlepoint</h3>
+        <p class="ngm-mcard-desc">Counted thread and canvas work in the morning. Rich monthly programs and a welcoming group for focused stitchers.</p>
+        <div class="ngm-mcard-meta">
+          <div class="ngm-meta-row">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage)" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            3rd Friday · 10:00 am – 12:00 pm
+          </div>
+          <div class="ngm-meta-row"><span class="ngm-badge ngm-badge-hybrid">Hybrid</span></div>
+        </div>
+      </article>
+      <article class="ngm-mcard">
+        <h3 class="ngm-mcard-name">Evening Needlepointers</h3>
+        <p class="ngm-mcard-desc">Canvas work and needlepoint in a relaxed evening format. Projects, programs, and warm company every month.</p>
+        <div class="ngm-mcard-meta">
+          <div class="ngm-meta-row">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage)" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            3rd Tuesday · 7:00 pm – 9:00 pm
+          </div>
+          <div class="ngm-meta-row"><span class="ngm-badge ngm-badge-hybrid">Hybrid</span></div>
+        </div>
+      </article>
+      <article class="ngm-mcard">
+        <!-- FLAG: Confirm exact day/time for Potpourri Stitchers -->
+        <h3 class="ngm-mcard-name">Potpourri Stitchers</h3>
+        <p class="ngm-mcard-desc">A truly eclectic group — any needlework technique goes. Perfect if your interests span many fiber arts.</p>
+        <div class="ngm-mcard-meta">
+          <div class="ngm-meta-row">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage)" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            2nd Thursday · 10:00 am
+          </div>
+          <div class="ngm-meta-row"><span class="ngm-badge ngm-badge-hybrid">Hybrid</span></div>
+        </div>
+      </article>
+      <article class="ngm-mcard">
+        <!-- FLAG: Confirm frequency for Sunday Tea & Stitch -->
+        <h3 class="ngm-mcard-name">Sunday Tea &amp; Stitch</h3>
+        <p class="ngm-mcard-desc">A relaxed Sunday gathering open to everyone. Bring your current project, enjoy tea, and meet your fellow stitchers.</p>
+        <div class="ngm-mcard-meta">
+          <div class="ngm-meta-row">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage)" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            1st Sunday · 1:00 pm – 3:00 pm
+          </div>
+          <div class="ngm-meta-row"><span class="ngm-badge ngm-badge-person">In Person</span></div>
+        </div>
+      </article>
+    </div>
+    <p style="font-family:var(--ngm-sans);font-size:.95rem;color:var(--ngm-gray-lt)">
+      Want to learn more?
+      <a class="ngm-arrow-link" style="font-size:.95rem" href="/monthly">
+        View all meetings
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </p>
+  </div>
+</section>
+<!-- ══════════════════════════════════════════════════════════
+  [UPCOMING-TOP] — Custom HTML gadget 5a  (heading only)
+  v6 RESTRUCTURE — read this carefully, it fixes BOTH problems:
+  the unstyled list AND the "sitting underneath" layout.
+  WHY IT BROKE BEFORE:
+   • A WA "Upcoming events" gadget is a NATIVE gadget — it CANNOT
+     be pasted inside a Custom HTML block. WA drops it into the
+     next LAYOUT CELL. The old two-column grid had no real cell
+     for it, so it landed below, outside the grid, unstyled.
+  HOW TO LAY IT OUT IN WA (this is the important part):
+   1. This [UPCOMING-TOP] gadget = the heading. It opens a linen
+      section background and a centered container.
+   2. Put THREE gadgets stacked in ONE full-width layout row,
+      in this order, top to bottom:
+         (a) this [UPCOMING-TOP] Custom HTML gadget
+         (b) the native WA "Upcoming events" gadget
+         (c) the [UPCOMING-CTA] Custom HTML gadget below (Block 2)
+   3. To kill the seam: set the LAYOUT ROW's background to
+      TRANSPARENT (or to linen #F0EAE0) in the WA editor, so the
+      gadget's own linen runs continuously through all three.
+   4. STYLING THE WA GADGET: its CSS lives in section 12 of the
+      [CSS] block above. IN WA: select the Upcoming events gadget
+      → gadget settings → "CSS class" field → enter:  ngm-wa-events
+      That connects the styling to the gadget. The tag chips are
+      injected by the [EVENT-TAGS] script at the very bottom of
+      this block — no extra setup needed.
+══════════════════════════════════════════════════════════ -->
+<section class="ngm ngm-sec ngm-sec-linen" style="padding-bottom:0">
+  <div class="ngm-con">
+    <div class="ngm-upcoming-head">
+      <span class="ngm-eyebrow">What's coming up</span>
+      <!-- v6 CASING FIX: sentence case to match other section titles -->
+      <h2 class="ngm-h2">Mark your <em>calendar</em></h2>
+      <!-- EDIT: intro copy under the heading. Edit freely. -->
+      <p class="ngm-upcoming-intro">A look at what's next on the Guild calendar — meetings, workshops, and gatherings open in the coming weeks. Click any event for details and to register.</p>
+    </div>
+  </div>
+</section>
+<!-- ══════════════════════════════════════════════════════════
+  [EVENT-TAGS] — location-derived tag chips for the WA gadget.
+  CSS can't read text, so this small script reads each event's
+  .location text and stamps a data-tag on the <li>, then injects
+  a .ngm-evt-tag chip above the title. Runs on the live page.
+  Mapping (case-insensitive):
+    "zoom"                          → ZOOM      (zoom)
+    "videoconference"/"online"      → ONLINE    (virtual)
+    "hybrid"                        → HYBRID    (hybrid)
+    anything else (an address)      → IN PERSON (person)
+  Re-runs if WA re-renders the list (MutationObserver).
+  TO CHANGE A LABEL: edit the strings in label() below.
+══════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  function label(t) {
+    if (t === "zoom")    return "Zoom";
+    if (t === "virtual") return "Online";
+    if (t === "hybrid")  return "Hybrid";
+    return "In person";
+  }
+  function classify(text) {
+    var s = (text || "").toLowerCase();
+    if (s.indexOf("zoom") > -1)             return "zoom";
+    if (s.indexOf("videoconference") > -1
+        || s.indexOf("video conference") > -1
+        || s.indexOf("online") > -1)        return "virtual";
+    if (s.indexOf("hybrid") > -1)           return "hybrid";
+    return "person";
+  }
+  function tagEvents() {
+    var items = document.querySelectorAll(
+      ".ngm-wa-events.upcomingEventsStyle001 ul li"
+    );
+    items.forEach(function (li) {
+      if (li.getAttribute("data-tag-done") === "1") return;
+      var locEl = li.querySelector(".location");
+      var loc = locEl ? locEl.textContent : "";
+      var tag = classify(loc);
+      li.setAttribute("data-tag", tag);
+      var chip = document.createElement("span");
+      chip.className = "ngm-evt-tag";
+      chip.textContent = label(tag);
+      var titleEl = li.querySelector(".title");
+      if (titleEl) li.insertBefore(chip, titleEl);
+      else li.insertBefore(chip, li.firstChild);
+      /* Make the WHOLE row clickable — navigate to the title's
+         link when any part of the row is clicked (not just the
+         title text). Pointer cursor signals it's clickable.
+         Clicks on the title's own <a> are left alone so the
+         native link still works. */
+      var titleLink = li.querySelector(".title a");
+      if (titleLink && titleLink.href) {
+        li.style.cursor = "pointer";
+        li.addEventListener("click", function (e) {
+          if (e.target.closest("a")) return;   /* let real links work */
+          window.location.href = titleLink.href;
+        });
+      }
+      li.setAttribute("data-tag-done", "1");
+    });
+  }
+  function init() {
+    tagEvents();
+    var gadget = document.querySelector(".ngm-wa-events");
+    if (gadget && window.MutationObserver) {
+      var obs = new MutationObserver(function () { tagEvents(); });
+      obs.observe(gadget, { childList: true, subtree: true });
+    }
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+</script>
+<!-- ══════════════════════════════════════════════════════════
+  [FAQ-ANIM] — smooth open AND close for the FAQ accordion.
+  Native <details> removes the [open] attribute synchronously,
+  so the CLOSE can't animate and repeated toggles can look janky.
+  This intercepts the toggle: on close it keeps [open] until the
+  grid-rows transition finishes, then removes it — so both
+  directions animate fluidly, every time. CSS still does the
+  actual animation (the min-height:0 fix makes it repeatable);
+  this just fixes the close direction. Progressive enhancement:
+  if JS is off, the accordion still works (just snaps on close).
+══════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  function wire(card) {
+    var summary = card.querySelector("summary");
+    var wrap = card.querySelector(".ngm-faq-wrap");
+    if (!summary || !wrap) return;
+    summary.addEventListener("click", function (e) {
+      if (!card.open) return;            /* opening: let native handle it */
+      e.preventDefault();                /* closing: animate first */
+      card.classList.add("ngm-faq-closing");   /* forces 0fr via CSS */
+      var done = function () {
+        wrap.removeEventListener("transitionend", done);
+        card.removeAttribute("open");
+        card.classList.remove("ngm-faq-closing");
+      };
+      wrap.addEventListener("transitionend", done);
+      setTimeout(done, 400);   /* fallback if transitionend misses */
+    });
+  }
+  function init() {
+    document.querySelectorAll(".ngm-faq-card").forEach(wire);
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+</script>

@@ -1,0 +1,802 @@
+<!-- ╔══════════════════════════════════════════════════════════╗
+     NGM ABOUT PAGE
+     ────────────────────────────────────────────────────────────
+     HOW TO EDIT THIS PAGE
+     This whole page lives in ONE Custom HTML gadget on the About
+     page. To make a change: open the About page in the website
+     editor, click this gadget, choose Edit, and find the section
+     you want below.
+     Everything you'll normally need to update — names, email
+     addresses, headings, and paragraph text — is plain English
+     between the > and < marks. Type your change there and save.
+     The block at the top (between <style> and </style>) controls
+     colors, fonts, and spacing. You don't need to touch it for
+     routine updates; leave it as-is unless you're changing the
+     look of the page on purpose.
+     The colors and fonts on this page are kept here so the page
+     always looks right on its own. If the site-wide colors or
+     fonts are ever changed, update them here to match.
+╚══════════════════════════════════════════════════════════╝ -->
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════
+   SHARED BASE SYSTEM (copied from the homepage gadget so this
+   page is self-contained). Tokens, typography, layout, buttons,
+   arrow links, badges — including the button font + pill-outline
+   fixes that beat the WA theme.
+══════════════════════════════════════════════════════════ */
+/* ── 1. DESIGN TOKENS ───────────────────────────────────── */
+:root {
+  --ngm-sage:      #5C7A52;
+  --ngm-sage-dk:   #3E5538;
+  --ngm-sage-lt:   #EEF3EC;
+  --ngm-rose:      #B87260;
+  --ngm-rose-lt:   #F5EBE7;
+  --ngm-rose-dk:   #9A5C4A;
+  --ngm-cream:     #FAF7F2;
+  --ngm-linen:     #F0EAE0;
+  --ngm-linen-dk:  #E5DDD0;
+  --ngm-charcoal:  #242424;
+  --ngm-gray:      #656565;
+  --ngm-gray-lt:   #9A9A9A;
+  --ngm-border:    #DDD5C8;
+  --ngm-serif: "Cormorant Garamond", Georgia, serif;
+  --ngm-sans:  "DM Sans", system-ui, sans-serif;
+  --ngm-radius:    14px;
+  --ngm-radius-lg: 20px;
+  --ngm-sh:   0 2px 12px rgba(0,0,0,.06);
+  --ngm-shm:  0 8px 32px rgba(0,0,0,.10);
+  --ngm-shx:  0 20px 60px rgba(0,0,0,.14);
+}
+/* ── 2. SCOPE RESET ─────────────────────────────────────── */
+.ngm *,
+.ngm *::before,
+.ngm *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* ── 3. TYPOGRAPHY SYSTEM ───────────────────────────────── */
+.ngm-eyebrow {
+  display: block;
+  font-family: var(--ngm-sans);
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ngm-sage);
+  margin-bottom: 10px;
+}
+.ngm-h1 {
+  font-family: var(--ngm-serif) !important;
+  font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+  font-weight: 400;
+  line-height: 1.08;
+  color: var(--ngm-charcoal);
+  text-transform: none !important;
+  margin-bottom: 20px;
+}
+.ngm-h2 {
+  font-family: var(--ngm-serif) !important;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.12;
+  color: var(--ngm-charcoal);
+  text-transform: none !important;
+  margin-bottom: 14px;
+}
+.ngm-h2-dark {
+  font-family: var(--ngm-serif) !important;
+  font-size: clamp(2.2rem, 3.2vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: #fff;
+  text-transform: none !important;
+  margin-bottom: 16px;
+}
+.ngm-h1 em,
+.ngm-h2 em,
+.ngm-h2-dark em {
+  font-family: var(--ngm-serif) !important;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  font-style: italic;
+  color: var(--ngm-rose) !important;
+}
+.ngm-lead {
+  font-family: var(--ngm-sans);
+  font-size: 1.0625rem;
+  color: var(--ngm-gray);
+  line-height: 1.8;
+  max-width: 560px;
+  margin-bottom: 36px;
+}
+/* ── 4. LAYOUT HELPERS ──────────────────────────────────── */
+.ngm-sec {
+  padding: 88px 48px;
+}
+.ngm-sec-linen { background: var(--ngm-linen); }
+.ngm-sec-cream { background: var(--ngm-cream); }
+.ngm-sec-white { background: #fff; }
+.ngm-con {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+/* ── 5. BUTTONS ─────────────────────────────────────────────
+   FONT FIX: WA's theme applies its own font to every anchor via
+   high-specificity rules like  body A:not(.stylizedButton) {…}.
+   A plain `.ngm-btn { font-family }` loses to that, so the pill
+   buttons (Join, Get directions, etc.) rendered in the theme's
+   font instead of DM Sans. We mirror WA's specificity by also
+   declaring the rule with a `body` prefix + !important on the
+   font properties, so our font wins. (Same high-specificity
+   override pattern used for the WA events gadget in section 12.)
+   The arrow links already won this fight; this brings the pills
+   in line with the page's type system.
+────────────────────────────────────────────────────────── */
+.ngm-btn,
+body a.ngm-btn,
+body a.ngm-btn:link,
+body a.ngm-btn:visited {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--ngm-sans) !important;
+  font-size: .9rem !important;
+  font-weight: 500 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  border-radius: 100px;
+  padding: 12px 26px;
+  cursor: pointer;
+  text-decoration: none !important;
+  border: 1.5px solid transparent;
+  transition: background .2s, transform .18s, box-shadow .18s, color .2s;
+  line-height: 1;
+}
+.ngm-btn-sm,
+body a.ngm-btn-sm { padding: 9px 20px; font-size: .82rem !important; }
+.ngm-btn-green  { background: var(--ngm-sage-dk); color: #fff !important; border-color: var(--ngm-sage-dk); }
+.ngm-btn-green:hover  { background: var(--ngm-sage); border-color: var(--ngm-sage); transform: translateY(-1px); box-shadow: 0 5px 16px rgba(62,85,56,.25); }
+.ngm-btn-rose   { background: var(--ngm-rose);    color: #fff !important; border-color: var(--ngm-rose); }
+.ngm-btn-rose:hover   { background: var(--ngm-rose-dk); border-color: var(--ngm-rose-dk); }
+.ngm-btn-outline,
+body a.ngm-btn-outline { background: transparent; color: var(--ngm-sage-dk) !important; border: 1.5px solid var(--ngm-sage-dk) !important; }
+.ngm-btn-outline:hover,
+body a.ngm-btn-outline:hover { background: var(--ngm-sage-dk) !important; color: #fff !important; }
+.ngm-btn-outline-rose,
+body a.ngm-btn-outline-rose { background: transparent; color: var(--ngm-rose) !important; border: 1.5px solid var(--ngm-rose) !important; }
+.ngm-btn-outline-rose:hover,
+body a.ngm-btn-outline-rose:hover { background: var(--ngm-rose) !important; color: #fff !important; }
+.ngm-btn-white  { background: #fff; color: var(--ngm-charcoal) !important; border-color: #fff; }
+.ngm-btn-white:hover  { background: var(--ngm-cream); }
+/* Stops a button stretching to fill a flex/grid column on desktop.
+   Used on the Retreat button, which sits in a flex-column. */
+.ngm-btn-fit { align-self: flex-start; }
+/* ── 6. ARROW LINK ──────────────────────────────────────── */
+.ngm-arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--ngm-sans);
+  font-size: .9rem;
+  color: var(--ngm-sage-dk) !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(62,85,56,.3);
+  padding-bottom: 2px;
+  transition: gap .18s, border-color .18s;
+}
+.ngm-arrow-link:hover {
+  gap: 10px;
+  border-color: var(--ngm-sage-dk);
+}
+.ngm-arrow-link-sm { font-size: .8rem; }
+/* ── 7. FORMAT BADGES ───────────────────────────────────── */
+.ngm-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--ngm-sans);
+  font-size: .68rem;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 100px;
+  letter-spacing: .04em;
+}
+.ngm-badge-hybrid  { background: #E3EFEF; color: #2A5A5A; }
+.ngm-badge-person  { background: var(--ngm-rose-lt); color: #7A3E2E; }
+.ngm-badge-zoom    { background: #EEEEFF; color: #3A46AF; }
+.ngm-badge-virtual { background: #F2EEF8; color: #5A3A8A; }
+/* ══════════════════════════════════════════════════════════
+   ABOUT-PAGE-SPECIFIC STYLES
+══════════════════════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════════════
+   ABOUT-PAGE LAYOUT
+════════════════════════════════════════════════════════════ */
+/* ── About Hero ── */
+.ngm-about-hero {
+  background: var(--ngm-cream);
+  padding: 80px 48px 72px;
+  border-bottom: 1px solid var(--ngm-border);
+}
+.ngm-about-hero-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.ngm-about-hero-photo {
+  border-radius: var(--ngm-radius-lg);
+  overflow: hidden;
+  height: 440px;
+  box-shadow: var(--ngm-shx);
+}
+.ngm-about-hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.ngm-about-hero p {
+  font-family: var(--ngm-sans);
+  font-size: 1.0625rem;
+  color: var(--ngm-gray);
+  line-height: 1.8;
+  max-width: 480px;
+  margin-bottom: 28px;
+}
+.ngm-hero-btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+/* ── History (simplified — pure copy) ── */
+.ngm-history-simple p {
+  font-family: var(--ngm-sans);
+  font-size: 1rem;
+  color: var(--ngm-gray);
+  line-height: 1.85;
+  max-width: 680px;
+  margin-bottom: 14px;
+}
+.ngm-history-simple p:last-child { margin-bottom: 0; }
+/* ── Mission / Values ── */
+.ngm-values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 48px;
+}
+.ngm-value-item {
+  padding: 28px;
+  background: #fff;
+  border-radius: var(--ngm-radius-lg);
+  border: 1px solid var(--ngm-border);
+  /* card has no colored top bar */
+  transition: background-color .25s ease, border-color .25s ease;
+}
+/* EDIT: hover = pale-green fill, no lift, no shadow */
+.ngm-value-item:hover {
+  background: var(--ngm-sage-lt);
+  border-color: var(--ngm-sage-lt);
+}
+.ngm-value-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--ngm-sage-lt);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+.ngm-value-title {
+  font-family: var(--ngm-serif);
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--ngm-charcoal);
+  text-transform: none !important;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.ngm-value-desc {
+  font-family: var(--ngm-sans);
+  font-size: .875rem;
+  color: var(--ngm-gray);
+  line-height: 1.7;
+}
+/* ── What We Do cards ── */
+.ngm-do-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 44px;
+}
+.ngm-do-card {
+  display: flex;
+  gap: 18px;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid var(--ngm-border);
+  border-radius: var(--ngm-radius-lg);
+  /* EDIT: green top bar removed */
+  transition: background-color .22s ease, border-color .22s ease;
+}
+/* EDIT: hover = pale-green fill, no lift, no shadow */
+.ngm-do-card:hover {
+  background: var(--ngm-sage-lt);
+  border-color: var(--ngm-sage-lt);
+}
+.ngm-do-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--ngm-sage-lt);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ngm-do-body h3 {
+  font-family: var(--ngm-serif) !important;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--ngm-charcoal);
+  text-transform: none !important;
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+.ngm-do-body p {
+  font-family: var(--ngm-sans);
+  font-size: .875rem;
+  color: var(--ngm-gray);
+  line-height: 1.7;
+}
+/* ── Leadership ── */
+.ngm-leadership-intro {
+  font-family: var(--ngm-sans);
+  font-size: 1rem;
+  color: var(--ngm-gray);
+  line-height: 1.8;
+  max-width: 560px;
+  margin-bottom: 40px;
+}
+.ngm-lcard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 32px;
+}
+.ngm-lcard {
+  background: #fff;
+  border: 1px solid var(--ngm-border);
+  /* EDIT: green top bar removed */
+  border-radius: var(--ngm-radius-lg);
+  padding: 22px 20px 20px;
+  transition: background-color .22s ease, border-color .22s ease;
+}
+/* EDIT: hover = pale-green fill, no lift */
+.ngm-lcard:hover {
+  background: var(--ngm-sage-lt);
+  border-color: var(--ngm-sage-lt);
+}
+.ngm-lcard-role {
+  display: block;
+  font-family: var(--ngm-sans);
+  font-size: .67rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase !important;
+  color: var(--ngm-sage-dk);
+  margin-bottom: 6px;
+}
+.ngm-lcard-name {
+  display: block;
+  font-family: var(--ngm-serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--ngm-charcoal);
+  text-transform: none !important;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+/* Emails are now plain text (not clickable). Force one consistent
+   size + font with body-prefix so the WA theme can't make some
+   render larger than others. */
+.ngm-lcard-email,
+body .ngm-lcard-email {
+  display: block;
+  font-family: var(--ngm-sans) !important;
+  font-size: .8rem !important;
+  font-weight: 400 !important;
+  color: var(--ngm-gray) !important;
+  word-break: break-all;
+}
+.ngm-lcard-note {
+  margin-top: 24px;
+  font-family: var(--ngm-sans);
+  font-size: .85rem;
+  color: var(--ngm-gray-lt);
+  line-height: 1.65;
+}
+.ngm-lcard-note a {
+  color: var(--ngm-sage-dk) !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(62,85,56,.3);
+}
+.ngm-lcard-note a:hover {
+  border-color: var(--ngm-sage-dk);
+}
+/* ── Join CTA (about page — rose-lt) ── */
+.ngm-about-cta {
+  background: var(--ngm-rose-lt);
+  padding: 88px 48px;
+  text-align: center;
+}
+.ngm-about-cta-inner {
+  max-width: 560px;
+  margin: 0 auto;
+}
+.ngm-about-cta p {
+  font-family: var(--ngm-sans);
+  font-size: 1.0625rem;
+  color: var(--ngm-gray);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+.ngm-about-cta-btns {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+/* ════════════════════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .ngm-about-hero { padding: 56px 28px 52px; }
+  .ngm-about-hero-inner { grid-template-columns: 1fr; gap: 44px; }
+  .ngm-about-hero-photo { height: 260px; }
+  .ngm-about-hero p { max-width: 100%; }
+  .ngm-sec { padding: 64px 28px; }
+  .ngm-values-grid { grid-template-columns: 1fr; gap: 16px; }
+  .ngm-do-grid { grid-template-columns: 1fr; }
+  .ngm-lcard-grid { grid-template-columns: 1fr; }
+  .ngm-about-cta { padding: 64px 28px; }
+  /* EDIT: let constrained copy stretch full-width on tablet/mobile */
+  .ngm-history-simple p,
+  .ngm-leadership-intro,
+  .ngm-lead { max-width: 100% !important; }
+}
+@media (max-width: 560px) {
+  .ngm-about-hero { padding: 44px 18px 40px; }
+  .ngm-about-hero-photo { height: 220px; }
+  .ngm-sec { padding: 52px 18px; }
+  .ngm-lcard-grid { grid-template-columns: 1fr; }
+  .ngm-about-cta { padding: 52px 18px; }
+}
+/* ════════════════════════════════════════════════════════════
+   WA GAP-KILLING (sections 19 + 20 from homepage) — confirmed
+   classes from Inspect. Safe to include again; identical rules
+   in the global CSS just no-op. Closes the header→hero gap and
+   the gaps between stacked gadgets on this page too.
+════════════════════════════════════════════════════════════ */
+body .WaGadgetCustomHtml,
+body .WaGadgetCustomHtml .gadgetStyleBody {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+body [class^="WaGadget"],
+body .WaGadgetFirst {
+  margin: 0 !important;
+}
+body [class*="WaCustomLayoutContainer"] {
+  margin-bottom: 0 !important;
+}
+body .WaPlaceHolderContent > div,
+body .WaPlaceHolderContent1 > div,
+body .WaPlaceHolderContent2 > div,
+body .WaPlaceHolderContent3 > div,
+body .WaPlaceHolderContent4 > div {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+body .WaPlaceHolder > div,
+body .WaPlaceHolderWide > div {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+</style>
+<!-- ╔══════════════════════════════════════════════════════════╗
+     THE PAGE CONTENT
+     Below are the six sections of the page, top to bottom. Each
+     section is clearly labeled. Scroll to the one you want and
+     edit the text inside it.
+       1. HERO        — top banner: headline, intro, photo
+       2. HISTORY     — the Guild's story
+       3. MISSION     — "What the Guild is for" (three cards)
+       4. WHAT WE DO  — activity cards
+       5. LEADERSHIP  — names, roles, and emails (update yearly)
+       6. JOIN CTA    — closing "join us" banner
+╚══════════════════════════════════════════════════════════╝ -->
+<!-- ══════════════════════════════════════════════════════════
+  SECTION 1 — HERO (the top banner)
+  You can edit: the headline, the two intro paragraphs, the
+  button labels, and where the buttons link to.
+  - In the headline, one word is wrapped in <em>...</em>, which
+    makes it show in the rose accent color. Keep one word wrapped
+    that way if you change the headline.
+  - To change the photo, upload your image to the website's Files
+    area, then paste its address between the quote marks after
+    src=  in the line below.
+══════════════════════════════════════════════════════════ -->
+<div class="ngm ngm-about-hero">
+  <div class="ngm-about-hero-inner">
+    <div>
+      <span class="ngm-eyebrow">Our community</span>
+      <h1 class="ngm-h1">A community built on<br>shared <em>passion</em></h1>
+      <p>The Needlework Guild of Minnesota has been connecting hand stitchers across the Twin Cities since 1972. We are a welcoming, member-led nonprofit where people of every skill level come to learn, stitch, and belong.</p>
+      <p>Whether you've been stitching for decades or just picked up a needle for the first time, you'll find your people here.</p>
+      <div class="ngm-hero-btns">
+        <a class="ngm-btn ngm-btn-green" href="/join">Join the Guild</a>
+        <a class="ngm-btn ngm-btn-outline" href="/monthly-meetings">See our meetings</a>
+      </div>
+    </div>
+    <!-- The photo. To swap it, change the address after src= below. -->
+    <div class="ngm-about-hero-photo">
+      <img
+        src="https://needleworkguildmn.org/resources/Pictures/Gallery%20Photos/IMG_0524.jpg"
+        alt="Guild members stitching together at a monthly meeting"
+        loading="eager"
+      >
+    </div>
+  </div>
+</div>
+<!-- ══════════════════════════════════════════════════════════
+  SECTION 2 — HISTORY (the Guild's story)
+  Edit the paragraph text below. Names wrapped in <strong>...</strong>
+  appear in bold; keep those tags around any name you want bold.
+══════════════════════════════════════════════════════════ -->
+<section class="ngm ngm-sec ngm-sec-linen">
+  <div class="ngm-con">
+    <span class="ngm-eyebrow">Est. 1972</span>
+    <h2 class="ngm-h2">Our <em>beginning</em></h2>
+    <div class="ngm-history-simple">
+      <p>Needlework experienced a renaissance in the early 1970s, and Minnesota was no exception. In fall 1971, <strong>Marnie Hensel</strong> and <strong>Mary Dayton</strong> organized a statewide needlework exhibition to raise funds for the Minnetonka Center for Arts and Education. More than 400 individuals entered their work — far more than anyone expected.</p>
+      <p>Motivated by that response, the organizers collected names and addresses of everyone interested in forming a permanent group. <strong>Georgiana Kane</strong> led a provisional cabinet through the formative period, and in <strong>May 1972</strong> the group held its first annual meeting. With the adoption of bylaws in 1973, it became the <strong>Needlework Guild of Minnesota</strong> — with approximately 50 charter members.</p>
+      <p>More than 50 years later, the Guild has grown to roughly 200 members. That original spirit remains: a genuine love of handwork, and the belief that making things together is better than making things alone.</p>
+    </div>
+  </div>
+</section>
+<!-- ══════════════════════════════════════════════════════════
+  SECTION 3 — MISSION ("What the Guild is for")
+  Three cards. In each card you can edit the title and the
+  description text.
+  - To add a card: copy one whole card block (from one
+    <div class="ngm-value-item"> down to its matching </div>)
+    and paste it in, then edit the copy.
+  - To remove a card: delete one whole card block.
+══════════════════════════════════════════════════════════ -->
+<section class="ngm ngm-sec ngm-sec-white">
+  <div class="ngm-con">
+    <span class="ngm-eyebrow">Our purpose</span>
+    <h2 class="ngm-h2">What the Guild is <em>for</em></h2>
+    <div class="ngm-values-grid">
+      <div class="ngm-value-item">
+        <div class="ngm-value-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage-dk)" stroke-width="1.7"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 class="ngm-value-title">Belonging</h3>
+        <p class="ngm-value-desc">A place to show up as you are. Members form real friendships through shared work and shared tables. Beginners and experienced stitchers are equally welcome.</p>
+      </div>
+      <div class="ngm-value-item">
+        <div class="ngm-value-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage-dk)" stroke-width="1.7"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <h3 class="ngm-value-title">Learning</h3>
+        <p class="ngm-value-desc">Every meeting is a chance to pick up something new — from fellow members, from visiting teachers, or from our 400+ book lending library. Curiosity is always encouraged.</p>
+      </div>
+      <div class="ngm-value-item">
+        <div class="ngm-value-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage-dk)" stroke-width="1.7"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h3 class="ngm-value-title">Craft</h3>
+        <p class="ngm-value-desc">We take needlework seriously without taking ourselves too seriously. The Guild is committed to keeping traditional skills alive — and to the simple joy of making beautiful things by hand.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ══════════════════════════════════════════════════════════
+  SECTION 4 — WHAT WE DO (activity cards)
+  Each card has a title and a description you can edit.
+  - To add a card: copy one whole card block (from one
+    <div class="ngm-do-card"> down to its matching </div>) and
+    paste it in, then edit the copy.
+  - To remove a card: delete one whole card block.
+══════════════════════════════════════════════════════════ -->
+<section class="ngm ngm-sec ngm-sec-linen">
+  <div class="ngm-con">
+    <span class="ngm-eyebrow">Guild activities</span>
+    <h2 class="ngm-h2">What <em>members</em> do together</h2>
+    <p class="ngm-lead">From weekly Zoom calls to annual retreats, Guild life offers something at every level of involvement.</p>
+    <div class="ngm-do-grid">
+      <div class="ngm-do-card">
+        <div class="ngm-do-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage-dk)" stroke-width="1.7"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div class="ngm-do-body">
+          <h3>Monthly Meetings</h3>
+          <p>Seven recurring groups meet monthly — from open Stitch-Ins to specialty groups focused on beading, needlepoint, counted thread, and more. Members attend as many as they like.</p>
+        </div>
+      </div>
+      <div class="ngm-do-card">
+        <div class="ngm-do-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage-dk)" stroke-width="1.7"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div class="ngm-do-body">
+          <h3>Lending Library</h3>
+          <p>Members can borrow from a collection of 400+ needlework books — technique guides, pattern books, stitch dictionaries, and design references spanning every discipline.</p>
+        </div>
+      </div>
+      <div class="ngm-do-card">
+        <div class="ngm-do-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage-dk)" stroke-width="1.7"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="ngm-do-body">
+          <h3>Annual Retreat</h3>
+          <p>Three days of focused stitching with nationally recognized instructors. One of the most anticipated events of the guild year — registration opens to members first.</p>
+        </div>
+      </div>
+      <div class="ngm-do-card">
+        <div class="ngm-do-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage-dk)" stroke-width="1.7"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <div class="ngm-do-body">
+          <h3>Workshops &amp; Programs</h3>
+          <p>Special programs through the year bring visiting teachers and new techniques. Most are free for members; some have small materials fees for kits.</p>
+        </div>
+      </div>
+      <div class="ngm-do-card">
+        <div class="ngm-do-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage-dk)" stroke-width="1.7"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="ngm-do-body">
+          <h3>Sunday Blast</h3>
+          <p>The Guild's weekly Sunday Blast keeps members informed about upcoming meetings, program highlights, member news, and Guild announcements — delivered by email every week.</p>
+        </div>
+      </div>
+      <div class="ngm-do-card">
+        <div class="ngm-do-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage-dk)" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        </div>
+        <div class="ngm-do-body">
+          <h3>Member Connection</h3>
+          <p>A private member directory, an active email list, and regular in-person gatherings keep members connected between meetings. Many members say the friendships are the best part.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ══════════════════════════════════════════════════════════
+  SECTION 5 — LEADERSHIP (please update each year)
+  Each person is one card with three lines: their role, their
+  name, and their email address. To update someone, just change
+  the text on the right line.
+  - To add a person: copy one whole card block (from one
+    <div class="ngm-lcard"> down to its matching </div>) and
+    paste it in, then change the role, name, and email.
+  - To remove a person: delete one whole card block.
+  - Note: Kym Duea appears in two cards on purpose — two roles.
+══════════════════════════════════════════════════════════ -->
+<section class="ngm ngm-sec ngm-sec-cream">
+  <div class="ngm-con">
+    <span class="ngm-eyebrow">Our people</span>
+    <h2 class="ngm-h2">Meet our <em>leadership</em></h2>
+    <p class="ngm-leadership-intro">The Guild is led by volunteer members who help organize meetings, events, communications, and programs throughout the year.</p>
+    <div class="ngm-lcard-grid">
+      <div class="ngm-lcard">
+        <span class="ngm-lcard-role">President</span>
+        <span class="ngm-lcard-name">Vivien Smith</span>
+        <span class="ngm-lcard-email">president@needleworkguildmn.org</span>
+      </div>
+      <div class="ngm-lcard">
+        <span class="ngm-lcard-role">Vice President</span>
+        <span class="ngm-lcard-name">Carrie Hancock</span>
+        <span class="ngm-lcard-email">vicepresident@needleworkguildmn.org</span>
+      </div>
+      <div class="ngm-lcard">
+        <span class="ngm-lcard-role">Treasurer</span>
+        <span class="ngm-lcard-name">Linda Lundstrom</span>
+        <span class="ngm-lcard-email">ngmtreasurer@needleworkguildmn.org</span>
+      </div>
+      <div class="ngm-lcard">
+        <span class="ngm-lcard-role">Secretary</span>
+        <span class="ngm-lcard-name">Karen Hesse</span>
+        <span class="ngm-lcard-email">secretary@needleworkguildmn.org</span>
+      </div>
+      <div class="ngm-lcard">
+        <span class="ngm-lcard-role">Events</span>
+        <span class="ngm-lcard-name">Linda Tischer &amp; Kym Duea</span>
+        <span class="ngm-lcard-email">ngmprograms@needleworkguildmn.org</span>
+      </div>
+      <div class="ngm-lcard">
+        <span class="ngm-lcard-role">Sunday Blast</span>
+        <span class="ngm-lcard-name">Michelle Ingram</span>
+        <span class="ngm-lcard-email">newseditor@needleworkguildmn.org</span>
+      </div>
+      <div class="ngm-lcard">
+        <span class="ngm-lcard-role">Advertising</span>
+        <span class="ngm-lcard-name">Kym Duea</span>
+        <span class="ngm-lcard-email">ngmadvertising@needleworkguildmn.org</span>
+      </div>
+      <div class="ngm-lcard">
+        <span class="ngm-lcard-role">Website Manager</span>
+        <span class="ngm-lcard-name"></span>
+        <span class="ngm-lcard-email">website@needleworkguildmn.org</span>
+      </div>
+      <div class="ngm-lcard">
+        <span class="ngm-lcard-role">Website Communications</span>
+        <span class="ngm-lcard-name"></span>
+        <span class="ngm-lcard-email">communications@needleworkguildmn.org</span>
+      </div>
+      <div class="ngm-lcard">
+        <span class="ngm-lcard-role">Librarian</span>
+        <span class="ngm-lcard-name">Janet Rock &amp; Jeanne Cur</span>
+        <span class="ngm-lcard-email">librarian@needleworkguildmn.org</span>
+      </div>
+      <div class="ngm-lcard">
+        <span class="ngm-lcard-role">Shop Manager</span>
+        <span class="ngm-lcard-name">Theresa Pietenpol</span>
+        <span class="ngm-lcard-email">shopmanager@needleworkguildmn.org</span>
+      </div>
+      <div class="ngm-lcard">
+        <span class="ngm-lcard-role">Retreat Chair</span>
+        <span class="ngm-lcard-name">Jane Tracy</span>
+        <span class="ngm-lcard-email">retreatchairs@needleworkguildmn.org</span>
+      </div>
+      <div class="ngm-lcard">
+        <span class="ngm-lcard-role">Daytime Stitch-In</span>
+        <span class="ngm-lcard-name">Laura Ericksen</span>
+        <span class="ngm-lcard-email">daytimestitchin@needleworkguildmn.org</span>
+      </div>
+      <div class="ngm-lcard">
+        <span class="ngm-lcard-role">Evening Stitch-In</span>
+        <span class="ngm-lcard-name">Julie Mafi</span>
+        <span class="ngm-lcard-email">eveningstitchin@needleworkguildmn.org</span>
+      </div>
+    </div><!-- /ngm-lcard-grid -->
+    <!-- Closing "general questions" line with an email link. -->
+    <p class="ngm-lcard-note">
+      General questions?
+      <a class="ngm-arrow-link" style="font-size:.9rem" href="mailto:inquiry@needleworkguildmn.org">
+        Email the Guild
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </p>
+  </div>
+</section>
+<!-- ══════════════════════════════════════════════════════════
+  SECTION 6 — JOIN (the closing banner)
+  Edit the headline, the paragraph, and the button labels/links.
+  As in the hero, one word in the headline is wrapped in
+  <em>...</em> to show in the rose accent color.
+══════════════════════════════════════════════════════════ -->
+<div class="ngm ngm-about-cta">
+  <div class="ngm-about-cta-inner">
+    <span class="ngm-eyebrow">Join now</span>
+    <h2 class="ngm-h2">Your first visit is<br>always <em>welcome</em></h2>
+    <p>Curious? Come to a meeting. Your first visit is free, and we'd love to meet you. Membership is $30 a year — and it's one of the best things you can do for your stitching life.</p>
+    <div class="ngm-about-cta-btns">
+      <a class="ngm-btn ngm-btn-rose" href="/join">Join the Guild</a>
+      <a class="ngm-btn ngm-btn-outline-rose" href="/monthly-meetings">See our meetings</a>
+    </div>
+  </div>
+</div>
