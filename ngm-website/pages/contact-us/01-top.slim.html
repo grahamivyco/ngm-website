@@ -1,0 +1,90 @@
+<!-- SLIM - styling comes from the Global CSS (global.css). Paste this only AFTER global.css is live in WA. Full self-contained version: 01-top.html -->
+<div class="ngm">
+  <section class="ngm-sec ngm-sec-cream">
+    <div class="ngm-con">
+      <div class="ngm-mt-hero-grid">
+        <div>
+          <span class="ngm-eyebrow">Get in touch</span>
+          <h1 class="ngm-h1">We&rsquo;d love to <em>hear from you</em></h1>
+          <div class="ngm-mt-meta"><span class="ngm-mt-when">Members and visitors always welcome</span></div>
+          <p class="ngm-lead">Whether you have a question about membership, want to visit a meeting, or just want to say hello &mdash; we'd love to hear from you.</p>
+          <div class="ngm-mt-hero-btns"><a class="ngm-btn ngm-btn-green" href="mailto:inquiry@needleworkguildmn.org">Email us</a><a class="ngm-btn ngm-btn-outline" href="/monthly-meetings">Visit a meeting</a></div>
+        </div>
+        <div class="ngm-mt-photo" style="min-height:380px"><span>A welcoming photo of the group</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ngm-sec ngm-sec-white">
+    <div class="ngm-con">
+      <span class="ngm-eyebrow">Reach us</span>
+      <h2 class="ngm-h2">How to <em>get in touch</em></h2>
+      <div class="ngm-mt-details"><div class="ngm-mt-detail"><h3>Email</h3><p><a href="mailto:inquiry@needleworkguildmn.org">inquiry@needleworkguildmn.org</a></p></div><div class="ngm-mt-detail"><h3>Mailing address</h3><p>Needlework Guild of Minnesota<br>PO Box 16506<br>St. Louis Park, MN 55416</p></div><div class="ngm-mt-detail"><h3>Visit a meeting</h3><p>New visitors are always welcome &mdash; your first visit is free. <a href="/monthly-meetings">See the meetings</a>.</p></div><div class="ngm-mt-detail"><h3>Follow along</h3><p>Find us on Facebook and Instagram for photos, news, and events.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ngm-sec ngm-sec-cream">
+    <div class="ngm-con">
+      <div class="ngm-mt-loc">
+        <div>
+          <span class="ngm-eyebrow">Find us</span>
+          <h2 class="ngm-h2">Where we <em>meet</em></h2>
+          <address class="ngm-mt-addr">Minnesota Valley Unitarian Universalist Fellowship<br>10715 Zenith Avenue South<br>Bloomington, MN 55431</address>
+          <p><a class="ngm-arrow-link" href="https://www.google.com/maps/search/?api=1&query=10715+Zenith+Ave+S+Bloomington+MN+55431" target="_blank" rel="noopener noreferrer">Get directions →</a></p>
+        </div>
+        <div class="ngm-mt-map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2829.9!2d-93.336!3d44.841!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87f61ef0e6e7e3c1%3A0x7c9daaf2eddcd!2s10715+Zenith+Ave+S%2C+Bloomington%2C+MN+55431!5e0!3m2!1sen!2sus" allowfullscreen loading="lazy" title="Meeting location: 10715 Zenith Avenue South, Bloomington MN" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ngm ngm-si-cta">
+    <div class="ngm-si-cta-inner">
+      <span class="ngm-eyebrow">Come see us</span>
+      <h2 class="ngm-h2">Pull up a chair and <em>stitch</em></h2>
+      <p>The best way to get to know the Guild is to visit. Your first visit to any meeting is always free &mdash; no signup needed.</p>
+      <div class="ngm-si-cta-btns"><a class="ngm-btn ngm-btn-rose" href="/monthly-meetings">Find a group to try</a><a class="ngm-btn ngm-btn-outline-rose" href="/join">Join the Guild</a></div>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  function label(t){ if(t==="zoom")return "Zoom"; if(t==="virtual")return "Online"; if(t==="hybrid")return "Hybrid"; return "In person"; }
+  function classify(text){ var s=(text||"").toLowerCase();
+    if(s.indexOf("zoom")>-1) return "zoom";
+    if(s.indexOf("videoconference")>-1||s.indexOf("video conference")>-1||s.indexOf("online")>-1) return "virtual";
+    if(s.indexOf("hybrid")>-1) return "hybrid"; return "person"; }
+  function tagEvents(){
+    var items=document.querySelectorAll(".ngm-wa-events.upcomingEventsStyle001 ul li");
+    items.forEach(function(li){
+      if(li.getAttribute("data-tag-done")==="1") return;
+      var locEl=li.querySelector(".location");
+      var tag=classify(locEl?locEl.textContent:""); li.setAttribute("data-tag",tag);
+      var chip=document.createElement("span"); chip.className="ngm-evt-tag"; chip.textContent=label(tag);
+      var titleEl=li.querySelector(".title");
+      if(titleEl) li.insertBefore(chip,titleEl); else li.insertBefore(chip,li.firstChild);
+      var titleLink=li.querySelector(".title a");
+      if(titleLink&&titleLink.href){ li.style.cursor="pointer";
+        li.addEventListener("click",function(e){ if(e.target.closest("a"))return; window.location.href=titleLink.href; }); }
+      li.setAttribute("data-tag-done","1");
+    });
+  }
+  function init(){ tagEvents(); var g=document.querySelector(".ngm-wa-events");
+    if(g&&window.MutationObserver){ new MutationObserver(function(){tagEvents();}).observe(g,{childList:true,subtree:true}); } }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
+})();
+</script>
+<script>
+(function () {
+  function wire(item){
+    var summary=item.querySelector("summary"); var wrap=item.querySelector(".ngm-faq-wrap");
+    if(!summary||!wrap) return;
+    summary.addEventListener("click",function(e){
+      if(!item.open) return; e.preventDefault(); item.classList.add("ngm-faq-closing");
+      var done=function(){ wrap.removeEventListener("transitionend",done); item.removeAttribute("open"); item.classList.remove("ngm-faq-closing"); };
+      wrap.addEventListener("transitionend",done); setTimeout(done,400);
+    });
+  }
+  function init(){ document.querySelectorAll(".ngm-faq-card").forEach(wire); }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
+})();
+</script>

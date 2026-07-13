@@ -1,0 +1,107 @@
+<!-- SLIM - styling comes from the Global CSS (global.css). Paste this only AFTER global.css is live in WA. Full self-contained version: 01-top.html -->
+<div class="ngm">
+  <section class="ngm-sec ngm-sec-cream">
+    <div class="ngm-con">
+      <div class="ngm-mt-hero-grid">
+        <div>
+          <span class="ngm-eyebrow">Support the Guild</span>
+          <h1 class="ngm-h1">Help keep needlework <em>thriving</em></h1>
+          <div class="ngm-mt-meta"><span class="ngm-mt-when">The Guild is a 501(c)(3) nonprofit</span><span class="ngm-badge ngm-badge-person">Tax-deductible</span></div>
+          <p class="ngm-lead">Your gift helps the Needlework Guild of Minnesota teach, preserve, and celebrate the needle arts &mdash; and keeps membership affordable for everyone.</p>
+          <div class="ngm-mt-hero-btns"><a class="ngm-btn ngm-btn-green" href="/donation">Donate now</a><a class="ngm-btn ngm-btn-outline" href="/join">Become a member</a></div>
+        </div>
+        <div class="ngm-mt-photo" style="min-height:380px"><span>A photo of members or their work</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ngm-sec ngm-sec-white">
+    <div class="ngm-con ngm-mt-about">
+      <span class="ngm-eyebrow">Why give</span>
+      <h2 class="ngm-h2">Your gift keeps us <em>stitching</em></h2>
+      <p>As a registered 501(c)(3) educational nonprofit, the Guild runs on member dues and the generosity of donors. Gifts fund programs and guest instructors, sustain our members' library, support community outreach, and keep dues low so anyone can join.</p>
+      <ul class="ngm-mt-tags"><li>Programs & classes</li><li>Guest instructors</li><li>The members' library</li><li>Community outreach</li></ul>
+      <div class="ngm-mt-gallery">
+        <div class="ngm-mt-photo"><span>Members at work</span></div>
+        <div class="ngm-mt-photo"><span>A workshop in progress</span></div>
+        <div class="ngm-mt-photo"><span>A finished piece</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ngm-sec ngm-sec-cream">
+    <div class="ngm-con">
+      <span class="ngm-eyebrow">Ways to give</span>
+      <h2 class="ngm-h2">How to <em>give</em></h2>
+      <div class="ngm-mt-details"><div class="ngm-mt-detail"><h3>Online</h3><p>Give securely online with a card &mdash; a one-time gift or a recurring monthly donation.</p></div><div class="ngm-mt-detail"><h3>By mail</h3><p>Send a check to Needlework Guild of Minnesota, PO Box 16506, St. Louis Park, MN 55416.</p></div><div class="ngm-mt-detail"><h3>In honor or memory</h3><p>Dedicate a gift to a stitcher you love &mdash; just note the dedication with your donation.</p></div><div class="ngm-mt-detail"><h3>Tax-deductible</h3><p>The Guild is a registered 501(c)(3); gifts are tax-deductible as allowed by law.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ngm ngm-sec ngm-sec-linen">
+    <div class="ngm-con">
+      <span class="ngm-eyebrow">Good to know</span>
+      <h2 class="ngm-h2">Common <em>questions</em></h2>
+      <div class="ngm-faq-list">
+      <details class="ngm-faq-card"><summary>Is my donation tax-deductible?<span class="ngm-faq-icon" aria-hidden="true"></span></summary>
+        <div class="ngm-faq-wrap"><div class="ngm-faq-a"><div>Yes &mdash; the Guild is a registered 501(c)(3) nonprofit, so gifts are tax-deductible as allowed by law.</div></div></div></details>
+      <details class="ngm-faq-card"><summary>Can I give monthly?<span class="ngm-faq-icon" aria-hidden="true"></span></summary>
+        <div class="ngm-faq-wrap"><div class="ngm-faq-a"><div>Yes. Online donations can be set up as a one-time gift or a recurring monthly donation.</div></div></div></details>
+      <details class="ngm-faq-card"><summary>Where does my gift go?<span class="ngm-faq-icon" aria-hidden="true"></span></summary>
+        <div class="ngm-faq-wrap"><div class="ngm-faq-a"><div>To programs and guest instructors, the members' library, community outreach, and keeping dues affordable.</div></div></div></details>
+      <details class="ngm-faq-card"><summary>Can I give in someone's honor?<span class="ngm-faq-icon" aria-hidden="true"></span></summary>
+        <div class="ngm-faq-wrap"><div class="ngm-faq-a"><div>Absolutely &mdash; note the honoree with your gift and we'll record the dedication.</div></div></div></details>
+      </div>
+    </div>
+  </section>
+
+  <div class="ngm ngm-si-cta">
+    <div class="ngm-si-cta-inner">
+      <span class="ngm-eyebrow">Thank you</span>
+      <h2 class="ngm-h2">Every gift <em>counts</em></h2>
+      <p>However you give, your support keeps the needle arts alive in Minnesota. Thank you for being part of it.</p>
+      <div class="ngm-si-cta-btns"><a class="ngm-btn ngm-btn-rose" href="/donation">Donate now</a><a class="ngm-btn ngm-btn-outline-rose" href="/join">Become a member</a></div>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  function label(t){ if(t==="zoom")return "Zoom"; if(t==="virtual")return "Online"; if(t==="hybrid")return "Hybrid"; return "In person"; }
+  function classify(text){ var s=(text||"").toLowerCase();
+    if(s.indexOf("zoom")>-1) return "zoom";
+    if(s.indexOf("videoconference")>-1||s.indexOf("video conference")>-1||s.indexOf("online")>-1) return "virtual";
+    if(s.indexOf("hybrid")>-1) return "hybrid"; return "person"; }
+  function tagEvents(){
+    var items=document.querySelectorAll(".ngm-wa-events.upcomingEventsStyle001 ul li");
+    items.forEach(function(li){
+      if(li.getAttribute("data-tag-done")==="1") return;
+      var locEl=li.querySelector(".location");
+      var tag=classify(locEl?locEl.textContent:""); li.setAttribute("data-tag",tag);
+      var chip=document.createElement("span"); chip.className="ngm-evt-tag"; chip.textContent=label(tag);
+      var titleEl=li.querySelector(".title");
+      if(titleEl) li.insertBefore(chip,titleEl); else li.insertBefore(chip,li.firstChild);
+      var titleLink=li.querySelector(".title a");
+      if(titleLink&&titleLink.href){ li.style.cursor="pointer";
+        li.addEventListener("click",function(e){ if(e.target.closest("a"))return; window.location.href=titleLink.href; }); }
+      li.setAttribute("data-tag-done","1");
+    });
+  }
+  function init(){ tagEvents(); var g=document.querySelector(".ngm-wa-events");
+    if(g&&window.MutationObserver){ new MutationObserver(function(){tagEvents();}).observe(g,{childList:true,subtree:true}); } }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
+})();
+</script>
+<script>
+(function () {
+  function wire(item){
+    var summary=item.querySelector("summary"); var wrap=item.querySelector(".ngm-faq-wrap");
+    if(!summary||!wrap) return;
+    summary.addEventListener("click",function(e){
+      if(!item.open) return; e.preventDefault(); item.classList.add("ngm-faq-closing");
+      var done=function(){ wrap.removeEventListener("transitionend",done); item.removeAttribute("open"); item.classList.remove("ngm-faq-closing"); };
+      wrap.addEventListener("transitionend",done); setTimeout(done,400);
+    });
+  }
+  function init(){ document.querySelectorAll(".ngm-faq-card").forEach(wire); }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
+})();
+</script>
