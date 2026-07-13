@@ -1,0 +1,261 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+/* ── 1. DESIGN TOKENS ───────────────────────────────────── */
+:root {
+  --ngm-sage:      #5C7A52;
+  --ngm-sage-dk:   #3E5538;
+  --ngm-sage-lt:   #EEF3EC;
+  --ngm-rose:      #B87260;
+  --ngm-rose-lt:   #F5EBE7;
+  --ngm-rose-dk:   #9A5C4A;
+  --ngm-cream:     #FAF7F2;
+  --ngm-linen:     #F0EAE0;
+  --ngm-linen-dk:  #E5DDD0;
+  --ngm-charcoal:  #242424;
+  --ngm-gray:      #656565;
+  --ngm-gray-lt:   #9A9A9A;
+  --ngm-border:    #DDD5C8;
+  --ngm-serif: "Cormorant Garamond", Georgia, serif;
+  --ngm-sans:  "DM Sans", system-ui, sans-serif;
+  --ngm-radius:    14px;
+  --ngm-radius-lg: 20px;
+  --ngm-sh:   0 2px 12px rgba(0,0,0,.06);
+  --ngm-shm:  0 8px 32px rgba(0,0,0,.10);
+  --ngm-shx:  0 20px 60px rgba(0,0,0,.14);
+}
+/* ── 2. SCOPE RESET ─────────────────────────────────────── */
+.ngm *,
+.ngm *::before,
+.ngm *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* ── 3. TYPOGRAPHY SYSTEM ───────────────────────────────── */
+.ngm-eyebrow {
+  display: block;
+  font-family: var(--ngm-sans);
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ngm-sage);
+  margin-bottom: 10px;
+}
+.ngm-h1 {
+  font-family: var(--ngm-serif) !important;
+  font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+  font-weight: 400;
+  line-height: 1.08;
+  color: var(--ngm-charcoal);
+  text-transform: none !important;
+  margin-bottom: 20px;
+}
+.ngm-h2 {
+  font-family: var(--ngm-serif) !important;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.12;
+  color: var(--ngm-charcoal);
+  text-transform: none !important;
+  margin-bottom: 14px;
+}
+.ngm-h2-dark {
+  font-family: var(--ngm-serif) !important;
+  font-size: clamp(2.2rem, 3.2vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: #fff;
+  text-transform: none !important;
+  margin-bottom: 16px;
+}
+.ngm-h1 em,
+.ngm-h2 em,
+.ngm-h2-dark em {
+  font-family: var(--ngm-serif) !important;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  font-style: italic;
+  color: var(--ngm-rose) !important;
+}
+.ngm-lead {
+  font-family: var(--ngm-sans);
+  font-size: 1.0625rem;
+  color: var(--ngm-gray);
+  line-height: 1.8;
+  max-width: 560px;
+  margin-bottom: 36px;
+}
+/* ── 4. LAYOUT HELPERS ──────────────────────────────────── */
+.ngm-sec {
+  padding: 88px 48px;
+}
+.ngm-sec-linen { background: var(--ngm-linen); }
+.ngm-sec-cream { background: var(--ngm-cream); }
+.ngm-sec-white { background: #fff; }
+.ngm-con {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+/* ── 5. BUTTONS ─────────────────────────────────────────────
+   FONT FIX: WA's theme applies its own font to every anchor via
+   high-specificity rules like  body A:not(.stylizedButton) {…}.
+   A plain `.ngm-btn { font-family }` loses to that, so the pill
+   buttons (Join, Get directions, etc.) rendered in the theme's
+   font instead of DM Sans. We mirror WA's specificity by also
+   declaring the rule with a `body` prefix + !important on the
+   font properties, so our font wins. (Same high-specificity
+   override pattern used for the WA events gadget in section 12.)
+   The arrow links already won this fight; this brings the pills
+   in line with the page's type system.
+────────────────────────────────────────────────────────── */
+.ngm-btn,
+body a.ngm-btn,
+body a.ngm-btn:link,
+body a.ngm-btn:visited {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--ngm-sans) !important;
+  font-size: .9rem !important;
+  font-weight: 500 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  border-radius: 100px;
+  padding: 12px 26px;
+  cursor: pointer;
+  text-decoration: none !important;
+  border: 1.5px solid transparent;
+  transition: background .2s, transform .18s, box-shadow .18s, color .2s;
+  line-height: 1;
+}
+.ngm-btn-sm,
+body a.ngm-btn-sm { padding: 9px 20px; font-size: .82rem !important; }
+.ngm-btn-green  { background: var(--ngm-sage-dk); color: #fff !important; border-color: var(--ngm-sage-dk); }
+.ngm-btn-green:hover  { background: var(--ngm-sage); border-color: var(--ngm-sage); transform: translateY(-1px); box-shadow: 0 5px 16px rgba(62,85,56,.25); }
+.ngm-btn-rose   { background: var(--ngm-rose);    color: #fff !important; border-color: var(--ngm-rose); }
+.ngm-btn-rose:hover   { background: var(--ngm-rose-dk); border-color: var(--ngm-rose-dk); }
+.ngm-btn-outline,
+body a.ngm-btn-outline { background: transparent; color: var(--ngm-sage-dk) !important; border: 1.5px solid var(--ngm-sage-dk) !important; }
+.ngm-btn-outline:hover,
+body a.ngm-btn-outline:hover { background: var(--ngm-sage-dk) !important; color: #fff !important; }
+.ngm-btn-outline-rose,
+body a.ngm-btn-outline-rose { background: transparent; color: var(--ngm-rose) !important; border: 1.5px solid var(--ngm-rose) !important; }
+.ngm-btn-outline-rose:hover,
+body a.ngm-btn-outline-rose:hover { background: var(--ngm-rose) !important; color: #fff !important; }
+.ngm-btn-white  { background: #fff; color: var(--ngm-charcoal) !important; border-color: #fff; }
+.ngm-btn-white:hover  { background: var(--ngm-cream); }
+/* Stops a button stretching to fill a flex/grid column on desktop.
+   Used on the Retreat button, which sits in a flex-column. */
+.ngm-btn-fit { align-self: flex-start; }
+/* ── 6. ARROW LINK ──────────────────────────────────────── */
+.ngm-arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--ngm-sans);
+  font-size: .9rem;
+  color: var(--ngm-sage-dk) !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(62,85,56,.3);
+  padding-bottom: 2px;
+  transition: gap .18s, border-color .18s;
+}
+.ngm-arrow-link:hover {
+  gap: 10px;
+  border-color: var(--ngm-sage-dk);
+}
+.ngm-arrow-link-sm { font-size: .8rem; }
+/* ── 7. FORMAT BADGES ───────────────────────────────────── */
+.ngm-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--ngm-sans);
+  font-size: .68rem;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 100px;
+  letter-spacing: .04em;
+}
+.ngm-badge-hybrid  { background: #E3EFEF; color: #2A5A5A; }
+.ngm-badge-person  { background: var(--ngm-rose-lt); color: #7A3E2E; }
+.ngm-badge-zoom    { background: #EEEEFF; color: #3A46AF; }
+.ngm-badge-virtual { background: #F2EEF8; color: #5A3A8A; }
+
+/* ── Meeting-type detail pages (ngm-mt-*) ──────────────────── */
+.ngm-mt-meta { display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin:2px 0 20px; }
+.ngm-mt-when { font-family:var(--ngm-sans); font-size:.95rem; font-weight:500; color:var(--ngm-sage-dk); }
+.ngm-mt-hero-btns, .ngm-mt-cta-btns { display:flex; gap:12px; flex-wrap:wrap; margin-top:28px; }
+.ngm-mt-about p { font-family:var(--ngm-sans); font-size:1.0625rem; color:var(--ngm-gray); line-height:1.8; max-width:680px; margin:0 0 22px; }
+.ngm-mt-tags { list-style:none; display:flex; flex-wrap:wrap; gap:10px; margin:6px 0 0; padding:0; }
+.ngm-mt-tags li { font-family:var(--ngm-sans); font-size:.85rem; color:var(--ngm-sage-dk); background:var(--ngm-sage-lt); border-radius:100px; padding:7px 16px; }
+.ngm-mt-details { display:grid; grid-template-columns:repeat(2,1fr); gap:22px; margin-top:40px; }
+.ngm-mt-detail { background:#fff; border:1px solid var(--ngm-border); border-radius:var(--ngm-radius-lg); padding:26px 28px; }
+.ngm-mt-detail h3 { font-family:var(--ngm-sans); font-size:.7rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--ngm-sage); margin:0 0 10px; }
+.ngm-mt-detail p { font-family:var(--ngm-sans); font-size:1rem; color:var(--ngm-gray); line-height:1.7; margin:0; }
+.ngm-mt-detail a { color:var(--ngm-sage-dk) !important; }
+.ngm-mt-cta { text-align:center; }
+.ngm-mt-cta-inner { max-width:560px; margin:0 auto; }
+.ngm-mt-cta p { font-family:var(--ngm-sans); font-size:1.0625rem; color:var(--ngm-gray); line-height:1.8; }
+.ngm-mt-cta-btns { justify-content:center; }
+@media (max-width:640px){ .ngm-mt-details { grid-template-columns:1fr; } }
+</style>
+
+<div class="ngm">
+  <section class="ngm-sec ngm-sec-cream">
+    <div class="ngm-con">
+      <span class="ngm-eyebrow">Special Interest Group</span>
+      <h1 class="ngm-h1">Evening <em>Needlepointers</em></h1>
+      <div class="ngm-mt-meta">
+        <span class="ngm-mt-when">3rd Thursday &middot; 7 &ndash; 9 pm</span>
+        <span class="ngm-badge ngm-badge-hybrid">Hybrid</span>
+      </div>
+      <p class="ngm-lead">Explores specialty threads and stitches on canvas, including counted needlepoint and finishing techniques. All stitchers welcome regardless of experience level.</p>
+      <div class="ngm-mt-hero-btns">
+        <a class="ngm-btn ngm-btn-green" href="/calendar">See upcoming meetings</a>
+        <a class="ngm-btn ngm-btn-outline" href="/monthly-meetings">All meetings</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ngm-sec ngm-sec-white">
+    <div class="ngm-con ngm-mt-about">
+      <span class="ngm-eyebrow">What we explore</span>
+      <h2 class="ngm-h2">Canvas work, <em>after hours</em></h2>
+      <p>An evening group for members who'd rather stitch after the workday. We dig into decorative stitches, specialty threads, and the finishing techniques that turn a canvas into a finished piece.</p>
+      <ul class="ngm-mt-tags">
+        <li>Specialty threads</li>
+        <li>Decorative stitches</li>
+        <li>Counted needlepoint</li>
+        <li>Finishing techniques</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="ngm-sec ngm-sec-linen">
+    <div class="ngm-con">
+      <span class="ngm-eyebrow">The details</span>
+      <h2 class="ngm-h2">When &amp; <em>where</em></h2>
+      <div class="ngm-mt-details">
+        <div class="ngm-mt-detail"><h3>When</h3><p>3rd Thursday &middot; 7 &ndash; 9 pm</p></div>
+        <div class="ngm-mt-detail"><h3>Where</h3><p>Minnesota Valley Unitarian Universalist Fellowship<br>10715 Zenith Avenue South, Bloomington, MN 55431<br><a href="https://www.google.com/maps/search/?api=1&query=10715+Zenith+Ave+S+Bloomington+MN+55431">Get directions →</a></p></div>
+        <div class="ngm-mt-detail"><h3>Format</h3><p>Join in person or by video. Conference links live on the Member Resources page (log in to access). Trouble connecting? Email <a href="mailto:admin@needleworkguildmn.org">admin@needleworkguildmn.org</a>.</p></div>
+        <div class="ngm-mt-detail"><h3>Good to know</h3><p>All experience levels are welcome. Bring a canvas project you're working on, or start something new with the group.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ngm-sec ngm-sec-cream ngm-mt-cta">
+    <div class="ngm-con ngm-mt-cta-inner">
+      <h2 class="ngm-h2">Come <em>stitch with us</em></h2>
+      <p>All members are welcome at any group, any month &mdash; no sign-up needed. New to the Guild?</p>
+      <div class="ngm-mt-cta-btns">
+        <a class="ngm-btn ngm-btn-green" href="/join">Join the guild</a>
+        <a class="ngm-btn ngm-btn-outline" href="/monthly-meetings">See all meetings</a>
+      </div>
+    </div>
+  </section>
+</div>
