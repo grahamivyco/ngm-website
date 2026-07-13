@@ -1,0 +1,89 @@
+<!-- SLIM - styling comes from the Global CSS (global.css). Paste this only AFTER global.css is live in WA. Full self-contained version: 01-top.html -->
+<div class="ngm">
+  <section class="ngm-sec ngm-sec-cream">
+    <div class="ngm-con">
+      <div class="ngm-mt-hero-grid">
+        <div>
+          <span class="ngm-eyebrow">Workshop series</span>
+          <h1 class="ngm-h1">Traditional Japanese <em>Embroidery</em></h1>
+          <div class="ngm-mt-meta"><span class="ngm-mt-when">Two workshops a year &middot; open to all</span><span class="ngm-badge ngm-badge-person">In person</span></div>
+          <p class="ngm-lead">A workshop series in traditional Japanese embroidery (nihon shishu) with Kay Stanis, certified by Kurenai Kai. Up to six phases are taught at once &mdash; each taken in order &mdash; and it's open to anyone interested.</p>
+          <div class="ngm-mt-hero-btns"><a class="ngm-btn ngm-btn-green" href="/calendar">See upcoming workshops</a><a class="ngm-btn ngm-btn-outline" href="/events">All events</a></div>
+        </div>
+        <div class="ngm-mt-photo" style="min-height:380px"><span>A photo from this event</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ngm-sec ngm-sec-white">
+    <div class="ngm-con ngm-mt-about">
+      <span class="ngm-eyebrow">The tradition</span>
+      <h2 class="ngm-h2">An age-old <em>art</em></h2>
+      <p>Traditional Japanese embroidery is a centuries-old practice of silk and metallic threads worked on silk. Guild member and Kurenai&nbsp;Kai&ndash;certified teacher Kay Stanis leads two workshops a year, guiding students through the phases of the curriculum at their own pace.</p>
+      <ul class="ngm-mt-tags"><li>Silk & metallic threads</li><li>Six phases</li><li>Taken in order</li><li>Open to all</li></ul>
+      <div class="ngm-mt-gallery">
+        <div class="ngm-mt-photo"><span>Work in progress</span></div>
+        <div class="ngm-mt-photo"><span>Silk & gold threads</span></div>
+        <div class="ngm-mt-photo"><span>A completed phase</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ngm-sec ngm-sec-cream">
+    <div class="ngm-con">
+      <span class="ngm-eyebrow">The details</span>
+      <h2 class="ngm-h2">About the <em>workshops</em></h2>
+      <div class="ngm-mt-details"><div class="ngm-mt-detail"><h3>When</h3><p>Two workshops a year &mdash; watch the calendar for dates.</p></div><div class="ngm-mt-detail"><h3>Where</h3><p>In person; the venue is announced with each workshop.</p></div><div class="ngm-mt-detail"><h3>Instructor</h3><p>Kay Stanis, certified by Kurenai Kai.</p></div><div class="ngm-mt-detail"><h3>Good to know</h3><p>Up to six phases are taught at once, but each phase must be completed in order.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ngm ngm-sec ngm-sec-linen" style="padding-bottom:0">
+    <div class="ngm-con"><div class="ngm-upcoming-head">
+      <span class="ngm-eyebrow">Coming up</span>
+      <h2 class="ngm-h2">Upcoming <em>workshops</em></h2>
+      <p class="ngm-upcoming-intro">The next Traditional Japanese Embroidery workshops. Click any event for details and to register.</p>
+    </div></div>
+  </section>
+</div>
+<script>
+(function () {
+  function label(t){ if(t==="zoom")return "Zoom"; if(t==="virtual")return "Online"; if(t==="hybrid")return "Hybrid"; return "In person"; }
+  function classify(text){ var s=(text||"").toLowerCase();
+    if(s.indexOf("zoom")>-1) return "zoom";
+    if(s.indexOf("videoconference")>-1||s.indexOf("video conference")>-1||s.indexOf("online")>-1) return "virtual";
+    if(s.indexOf("hybrid")>-1) return "hybrid"; return "person"; }
+  function tagEvents(){
+    var items=document.querySelectorAll(".ngm-wa-events.upcomingEventsStyle001 ul li");
+    items.forEach(function(li){
+      if(li.getAttribute("data-tag-done")==="1") return;
+      var locEl=li.querySelector(".location");
+      var tag=classify(locEl?locEl.textContent:""); li.setAttribute("data-tag",tag);
+      var chip=document.createElement("span"); chip.className="ngm-evt-tag"; chip.textContent=label(tag);
+      var titleEl=li.querySelector(".title");
+      if(titleEl) li.insertBefore(chip,titleEl); else li.insertBefore(chip,li.firstChild);
+      var titleLink=li.querySelector(".title a");
+      if(titleLink&&titleLink.href){ li.style.cursor="pointer";
+        li.addEventListener("click",function(e){ if(e.target.closest("a"))return; window.location.href=titleLink.href; }); }
+      li.setAttribute("data-tag-done","1");
+    });
+  }
+  function init(){ tagEvents(); var g=document.querySelector(".ngm-wa-events");
+    if(g&&window.MutationObserver){ new MutationObserver(function(){tagEvents();}).observe(g,{childList:true,subtree:true}); } }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
+})();
+</script>
+<script>
+(function () {
+  function wire(item){
+    var summary=item.querySelector("summary"); var wrap=item.querySelector(".ngm-faq-wrap");
+    if(!summary||!wrap) return;
+    summary.addEventListener("click",function(e){
+      if(!item.open) return; e.preventDefault(); item.classList.add("ngm-faq-closing");
+      var done=function(){ wrap.removeEventListener("transitionend",done); item.removeAttribute("open"); item.classList.remove("ngm-faq-closing"); };
+      wrap.addEventListener("transitionend",done); setTimeout(done,400);
+    });
+  }
+  function init(){ document.querySelectorAll(".ngm-faq-card").forEach(wire); }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
+})();
+</script>

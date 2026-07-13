@@ -1,0 +1,89 @@
+<!-- SLIM - styling comes from the Global CSS (global.css). Paste this only AFTER global.css is live in WA. Full self-contained version: 01-top.html -->
+<div class="ngm">
+  <section class="ngm-sec ngm-sec-cream">
+    <div class="ngm-con">
+      <div class="ngm-mt-hero-grid">
+        <div>
+          <span class="ngm-eyebrow">Bonus session</span>
+          <h1 class="ngm-h1">5th Tuesday <em>Open Stitching</em></h1>
+          <div class="ngm-mt-meta"><span class="ngm-mt-when">Only on months with a 5th Tuesday &middot; all welcome</span><span class="ngm-badge ngm-badge-person">Open to all</span></div>
+          <p class="ngm-lead">A bonus open-stitching session held on the months that have a fifth Tuesday. Bring any project and stitch alongside fellow members &mdash; no program, just company.</p>
+          <div class="ngm-mt-hero-btns"><a class="ngm-btn ngm-btn-green" href="/calendar">See upcoming dates</a><a class="ngm-btn ngm-btn-outline" href="/events">All events</a></div>
+        </div>
+        <div class="ngm-mt-photo" style="min-height:380px"><span>A photo from this event</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ngm-sec ngm-sec-white">
+    <div class="ngm-con ngm-mt-about">
+      <span class="ngm-eyebrow">What it is</span>
+      <h2 class="ngm-h2">A little <em>bonus</em> stitching</h2>
+      <p>Some months have a fifth Tuesday &mdash; and when they do, the Guild adds an extra open-stitching session. There's no program and no agenda: bring whatever you're working on and enjoy an afternoon of stitching and conversation.</p>
+      <ul class="ngm-mt-tags"><li>Any project</li><li>No program</li><li>All levels</li><li>Just company</li></ul>
+      <div class="ngm-mt-gallery">
+        <div class="ngm-mt-photo"><span>Open stitching</span></div>
+        <div class="ngm-mt-photo"><span>Around the table</span></div>
+        <div class="ngm-mt-photo"><span>Works in progress</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ngm-sec ngm-sec-cream">
+    <div class="ngm-con">
+      <span class="ngm-eyebrow">The details</span>
+      <h2 class="ngm-h2">The <em>details</em></h2>
+      <div class="ngm-mt-details"><div class="ngm-mt-detail"><h3>When</h3><p>Only on months with a fifth Tuesday &mdash; watch the calendar.</p></div><div class="ngm-mt-detail"><h3>Where</h3><p>Announced with each session.</p></div><div class="ngm-mt-detail"><h3>Format</h3><p>Open stitching &mdash; bring any project you like.</p></div><div class="ngm-mt-detail"><h3>Good to know</h3><p>No program and no signup &mdash; just drop in.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ngm ngm-sec ngm-sec-linen" style="padding-bottom:0">
+    <div class="ngm-con"><div class="ngm-upcoming-head">
+      <span class="ngm-eyebrow">Coming up</span>
+      <h2 class="ngm-h2">Upcoming <em>5th Tuesdays</em></h2>
+      <p class="ngm-upcoming-intro">The next 5th Tuesday sessions. Click any event for details.</p>
+    </div></div>
+  </section>
+</div>
+<script>
+(function () {
+  function label(t){ if(t==="zoom")return "Zoom"; if(t==="virtual")return "Online"; if(t==="hybrid")return "Hybrid"; return "In person"; }
+  function classify(text){ var s=(text||"").toLowerCase();
+    if(s.indexOf("zoom")>-1) return "zoom";
+    if(s.indexOf("videoconference")>-1||s.indexOf("video conference")>-1||s.indexOf("online")>-1) return "virtual";
+    if(s.indexOf("hybrid")>-1) return "hybrid"; return "person"; }
+  function tagEvents(){
+    var items=document.querySelectorAll(".ngm-wa-events.upcomingEventsStyle001 ul li");
+    items.forEach(function(li){
+      if(li.getAttribute("data-tag-done")==="1") return;
+      var locEl=li.querySelector(".location");
+      var tag=classify(locEl?locEl.textContent:""); li.setAttribute("data-tag",tag);
+      var chip=document.createElement("span"); chip.className="ngm-evt-tag"; chip.textContent=label(tag);
+      var titleEl=li.querySelector(".title");
+      if(titleEl) li.insertBefore(chip,titleEl); else li.insertBefore(chip,li.firstChild);
+      var titleLink=li.querySelector(".title a");
+      if(titleLink&&titleLink.href){ li.style.cursor="pointer";
+        li.addEventListener("click",function(e){ if(e.target.closest("a"))return; window.location.href=titleLink.href; }); }
+      li.setAttribute("data-tag-done","1");
+    });
+  }
+  function init(){ tagEvents(); var g=document.querySelector(".ngm-wa-events");
+    if(g&&window.MutationObserver){ new MutationObserver(function(){tagEvents();}).observe(g,{childList:true,subtree:true}); } }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
+})();
+</script>
+<script>
+(function () {
+  function wire(item){
+    var summary=item.querySelector("summary"); var wrap=item.querySelector(".ngm-faq-wrap");
+    if(!summary||!wrap) return;
+    summary.addEventListener("click",function(e){
+      if(!item.open) return; e.preventDefault(); item.classList.add("ngm-faq-closing");
+      var done=function(){ wrap.removeEventListener("transitionend",done); item.removeAttribute("open"); item.classList.remove("ngm-faq-closing"); };
+      wrap.addEventListener("transitionend",done); setTimeout(done,400);
+    });
+  }
+  function init(){ document.querySelectorAll(".ngm-faq-card").forEach(wire); }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
+})();
+</script>

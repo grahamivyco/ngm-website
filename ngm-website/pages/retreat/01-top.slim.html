@@ -1,0 +1,107 @@
+<!-- SLIM - styling comes from the Global CSS (global.css). Paste this only AFTER global.css is live in WA. Full self-contained version: 01-top.html -->
+<div class="ngm">
+  <section class="ngm-sec ngm-sec-cream">
+    <div class="ngm-con">
+      <div class="ngm-mt-hero-grid">
+        <div>
+          <span class="ngm-eyebrow">Annual event</span>
+          <h1 class="ngm-h1">The Annual <em>Retreat</em></h1>
+          <div class="ngm-mt-meta"><span class="ngm-mt-when">Each year &middot; watch the calendar for 2026 dates</span><span class="ngm-badge ngm-badge-person">Members & guests</span></div>
+          <p class="ngm-lead">The Guild's beloved annual getaway &mdash; a few days of stitching, learning, and community away from the everyday, with nationally known instructors and plenty of time to focus on your needlework.</p>
+          <div class="ngm-mt-hero-btns"><a class="ngm-btn ngm-btn-green" href="/calendar">See the calendar</a><a class="ngm-btn ngm-btn-outline" href="/join">Join the Guild</a></div>
+        </div>
+        <div class="ngm-mt-photo" style="min-height:380px;padding:0;overflow:hidden;border:none"><img src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20Photos/Retreat%20Photo.png" alt="Guild members stitching together at the annual retreat" style="width:100%;height:100%;object-fit:cover;border-radius:var(--ngm-radius-lg)"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ngm-sec ngm-sec-white">
+    <div class="ngm-con ngm-mt-about">
+      <span class="ngm-eyebrow">About the retreat</span>
+      <h2 class="ngm-h2">More than a <em>meeting</em></h2>
+      <p>Once a year the Guild gathers for a retreat &mdash; a relaxed few days to dig into a project, learn from a visiting teacher, and enjoy the company of fellow stitchers. It's one of the most anticipated events on the calendar.</p>
+      <ul class="ngm-mt-tags"><li>Guided classes</li><li>Open stitching</li><li>Meals included</li><li>Good company</li></ul>
+      <div class="ngm-mt-gallery">
+        <div class="ngm-mt-photo"><span>A past retreat</span></div>
+        <div class="ngm-mt-photo"><span>Stitching together</span></div>
+        <div class="ngm-mt-photo"><span>A finished project</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ngm-sec ngm-sec-cream">
+    <div class="ngm-con">
+      <span class="ngm-eyebrow">The details</span>
+      <h2 class="ngm-h2">What to <em>expect</em></h2>
+      <div class="ngm-mt-details"><div class="ngm-mt-detail"><h3>When</h3><p>The 2026 dates will be announced &mdash; watch the calendar and newsletter.</p></div><div class="ngm-mt-detail"><h3>Where</h3><p>Venue announced with each year's retreat.</p></div><div class="ngm-mt-detail"><h3>What's included</h3><p>Instruction, meals, and unhurried time to stitch. Full details come with each year's announcement.</p></div><div class="ngm-mt-detail"><h3>Cost</h3><p>Set each year; watch the calendar and newsletter for registration.</p></div></div>
+    </div>
+  </section>
+
+  <section class="ngm ngm-sec ngm-sec-white">
+    <div class="ngm-con">
+      <span class="ngm-eyebrow">Good to know</span>
+      <h2 class="ngm-h2">Common <em>questions</em></h2>
+      <div class="ngm-faq-list">
+      <details class="ngm-faq-card"><summary>Who can attend?<span class="ngm-faq-icon" aria-hidden="true"></span></summary>
+        <div class="ngm-faq-wrap"><div class="ngm-faq-a"><div>Members and their guests are warmly welcome.</div></div></div></details>
+      <details class="ngm-faq-card"><summary>Do I need to be experienced?<span class="ngm-faq-icon" aria-hidden="true"></span></summary>
+        <div class="ngm-faq-wrap"><div class="ngm-faq-a"><div>Not at all &mdash; stitchers of every level enjoy the retreat.</div></div></div></details>
+      <details class="ngm-faq-card"><summary>How do I register?<span class="ngm-faq-icon" aria-hidden="true"></span></summary>
+        <div class="ngm-faq-wrap"><div class="ngm-faq-a"><div>Registration opens each year &mdash; watch the calendar and the newsletter, or contact the Guild.</div></div></div></details>
+      <details class="ngm-faq-card"><summary>What should I bring?<span class="ngm-faq-icon" aria-hidden="true"></span></summary>
+        <div class="ngm-faq-wrap"><div class="ngm-faq-a"><div>Your current project and supplies. A packing list comes with your registration.</div></div></div></details>
+      </div>
+    </div>
+  </section>
+
+  <div class="ngm ngm-si-cta">
+    <div class="ngm-si-cta-inner">
+      <span class="ngm-eyebrow">Save the date</span>
+      <h2 class="ngm-h2">Come away and <em>stitch</em></h2>
+      <p>The retreat is a Guild favourite and space is limited &mdash; watch the calendar for the 2026 dates and registration. New to the Guild? Join and be first to hear.</p>
+      <div class="ngm-si-cta-btns"><a class="ngm-btn ngm-btn-rose" href="/calendar">See the calendar</a><a class="ngm-btn ngm-btn-outline-rose" href="/join">Join the Guild</a></div>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  function label(t){ if(t==="zoom")return "Zoom"; if(t==="virtual")return "Online"; if(t==="hybrid")return "Hybrid"; return "In person"; }
+  function classify(text){ var s=(text||"").toLowerCase();
+    if(s.indexOf("zoom")>-1) return "zoom";
+    if(s.indexOf("videoconference")>-1||s.indexOf("video conference")>-1||s.indexOf("online")>-1) return "virtual";
+    if(s.indexOf("hybrid")>-1) return "hybrid"; return "person"; }
+  function tagEvents(){
+    var items=document.querySelectorAll(".ngm-wa-events.upcomingEventsStyle001 ul li");
+    items.forEach(function(li){
+      if(li.getAttribute("data-tag-done")==="1") return;
+      var locEl=li.querySelector(".location");
+      var tag=classify(locEl?locEl.textContent:""); li.setAttribute("data-tag",tag);
+      var chip=document.createElement("span"); chip.className="ngm-evt-tag"; chip.textContent=label(tag);
+      var titleEl=li.querySelector(".title");
+      if(titleEl) li.insertBefore(chip,titleEl); else li.insertBefore(chip,li.firstChild);
+      var titleLink=li.querySelector(".title a");
+      if(titleLink&&titleLink.href){ li.style.cursor="pointer";
+        li.addEventListener("click",function(e){ if(e.target.closest("a"))return; window.location.href=titleLink.href; }); }
+      li.setAttribute("data-tag-done","1");
+    });
+  }
+  function init(){ tagEvents(); var g=document.querySelector(".ngm-wa-events");
+    if(g&&window.MutationObserver){ new MutationObserver(function(){tagEvents();}).observe(g,{childList:true,subtree:true}); } }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
+})();
+</script>
+<script>
+(function () {
+  function wire(item){
+    var summary=item.querySelector("summary"); var wrap=item.querySelector(".ngm-faq-wrap");
+    if(!summary||!wrap) return;
+    summary.addEventListener("click",function(e){
+      if(!item.open) return; e.preventDefault(); item.classList.add("ngm-faq-closing");
+      var done=function(){ wrap.removeEventListener("transitionend",done); item.removeAttribute("open"); item.classList.remove("ngm-faq-closing"); };
+      wrap.addEventListener("transitionend",done); setTimeout(done,400);
+    });
+  }
+  function init(){ document.querySelectorAll(".ngm-faq-card").forEach(wire); }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
+})();
+</script>

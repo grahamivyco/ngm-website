@@ -1,0 +1,9 @@
+NATIVE WA GADGET — "Upcoming events"
+=====================================
+Add the native WA "Upcoming events" gadget BETWEEN 01-top.html and 03-bottom.html,
+same layout column.
+
+1. Add gadget -> "Upcoming events".
+2. CSS class:  ngm-wa-events
+3. FILTER it to 5th Tuesday Open Stitching events only.
+4. Row background: linen (#F0EAE0).
