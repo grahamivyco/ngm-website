@@ -1,0 +1,78 @@
+<!-- ╔══════════════════════════════════════════════════════════╗
+     NGM LOGIN PAGE  —  TOP BLOCK (Custom HTML gadget #1)
+     ────────────────────────────────────────────────────────────
+     WHERE THIS LIVES
+     Wild Apricot SYSTEM page: /Sys/Login  (the built-in login page).
+     You don't create this page — WA already has it. You customise it by
+     adding these Custom HTML blocks around the native login form.
+
+     THE "SANDWICH" (paste order on the login page, top to bottom):
+       1. THIS file (01-top.html)  — branded heading ABOVE the form
+       2. Native WA login form gadget  (see 02-wa-gadget.txt) — class ngm-wa-login
+       3. 03-bottom.html           — "not a member? join" line BELOW the form
+
+     HOW TO EDIT
+     The visible words (heading + subtitle) are plain English below.
+     The <style> block only styles THIS heading block.
+
+     THE LOGIN FORM ITSELF is the native WA login gadget, and it's skinned
+     in global-css/global.css (it targets WA's real .WaGadgetLoginForm
+     classes site-wide). You don't style the form here.
+╚══════════════════════════════════════════════════════════╝ -->
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════
+   SHARED BASE (tokens + type + buttons, self-contained)
+══════════════════════════════════════════════════════════ */
+:root {
+  --ngm-sage:#5C7A52; --ngm-sage-dk:#3E5538; --ngm-sage-lt:#EEF3EC;
+  --ngm-rose:#B87260; --ngm-cream:#FAF7F2; --ngm-linen:#F0EAE0;
+  --ngm-charcoal:#242424; --ngm-gray:#656565; --ngm-border:#DDD5C8;
+  --ngm-serif:"Cormorant Garamond",Georgia,serif;
+  --ngm-sans:"DM Sans",system-ui,sans-serif;
+  --ngm-radius-lg:20px; --ngm-sh:0 2px 12px rgba(0,0,0,.06);
+}
+.ngm *,.ngm *::before,.ngm *::after{box-sizing:border-box;margin:0;padding:0;}
+.ngm-eyebrow{display:block;font-family:var(--ngm-sans);font-size:.7rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ngm-sage);margin-bottom:10px;}
+.ngm-login-title{font-family:var(--ngm-serif)!important;font-size:clamp(2rem,3.5vw,2.6rem);font-weight:400;line-height:1.12;color:var(--ngm-charcoal);text-transform:none!important;margin-bottom:10px;}
+.ngm-login-title em{font-style:italic;color:var(--ngm-rose)!important;}
+.ngm-login-sub{font-family:var(--ngm-sans);font-size:1rem;color:var(--ngm-gray);line-height:1.7;}
+/* ══════════════════════════════════════════════════════════
+   LOGIN LAYOUT — a centred column: heading, then the form card
+══════════════════════════════════════════════════════════ */
+.ngm-login{
+  background:var(--ngm-cream);
+  padding:92px 24px 40px;
+  text-align:center;
+}
+.ngm-login-head{max-width:460px;margin:0 auto;}
+/* NOTE: the native login FORM itself (email/password, social buttons, the
+   account dropdown) is skinned in global-css/global.css, which targets WA's
+   real .WaGadgetLoginForm classes site-wide. Nothing to assign here — this
+   file only provides the branded heading that sits above the form. */
+@media(max-width:640px){ .ngm-login{padding:72px 18px 32px;} }
+</style>
+
+<!-- ══════════════════════════════════════════════════════════
+     BRANDED HEADING (sits above the native login form)
+════════════════════════════════════════════════════════════ -->
+<div class="ngm">
+  <section class="ngm-login">
+    <div class="ngm-login-head">
+      <span class="ngm-eyebrow">Member Login</span>
+      <h1 class="ngm-login-title">Welcome, <em>members</em></h1>
+      <p class="ngm-login-sub">Sign in to sign up for meetings and events, browse the member
+        directory, and open members-only resources.</p>
+    </div>
+  </section>
+</div>
+<!-- The native WA login form gadget is added next (02-wa-gadget.txt),
+     then 03-bottom.html follows. -->
+<script>
+  /* Marks this as the login page so the Global CSS shows the login form
+     EXPANDED (as a card) instead of hidden behind a "Log in" dropdown. */
+  document.body.classList.add('ngm-login-page');
+</script>

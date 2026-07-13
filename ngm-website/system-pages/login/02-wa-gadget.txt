@@ -1,0 +1,33 @@
+NATIVE WA GADGET — Login form (WaGadgetLoginForm, built into /Sys/Login)
+========================================================================
+Not pasteable HTML. The Wild Apricot login page (/Sys/Login) already contains
+the native login gadget (class .WaGadgetLoginForm, style "LoginFormStyle001").
+You are customising that system page, not building one.
+
+How this login works (verified against the live page):
+- It's a DROPDOWN-style login: visitors click a "Log in" trigger, which expands
+  a panel containing the email/password form, the social-login buttons
+  (Google / Microsoft / Apple), "Remember me", and "Forgot password".
+- When a member is already logged in, the SAME gadget becomes the account menu
+  (member name → View profile / Change password / Log out).
+
+Setup on the page:
+1. In WA admin, open the system page:  Website → System pages → "Log in".
+2. Add 01-top.html as a Custom HTML gadget ABOVE the login gadget, and
+   03-bottom.html as a Custom HTML gadget BELOW it (the "sandwich").
+3. Set the layout row background to cream (#FAF7F2) so it blends with 01-top.
+
+Styling — nothing to assign here:
+- The form and the account menu are BOTH skinned by global-css/global.css,
+  which targets the real .WaGadgetLoginForm classes site-wide. No CSS class
+  needs to be added to the gadget.
+
+Optional (WA setting, not code):
+- Because it's a dropdown style, the form is hidden until "Log in" is clicked.
+  If you'd prefer the form always expanded on the login page, that's a change
+  to the login gadget's style/settings in WA admin, not something CSS controls.
+
+Related, already handled elsewhere:
+- Header (layout/header/01-top.html) shows Log In / Log Out / Member Hub by
+  login state. The header "Log In" button points here (/sys/login).
+- Log out → native /sys/logout.   View profile → native /sys/profile.

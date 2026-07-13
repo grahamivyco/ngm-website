@@ -24,6 +24,24 @@ Working reference so the next editor (human or AI) doesn't relearn the hard part
   member-vs-guest signal. `{isMember:}` macros work in Custom HTML gadgets, not in
   template/layout contexts.
 
+## Login / account gadget (WaGadgetLoginForm, LoginFormStyle001)
+Verified against the live /Sys/Login page. Skinned in `global-css/global.css` by
+STABLE classes (never the per-instance `id_JOFpmm7`). It's a dropdown: a `.loginLink`
+trigger opens a `.loginPanel`.
+- **Logged out:** `.loginContainer` (no `.authenticated`); panel holds
+  `.oAuthButtonsContainer > a.wa-authenticateLoginLink.{googlePlus|microsoft|apple}`,
+  then `form.generalLoginBox` with `.emailTextBoxControl`, `.passwordTextBoxControl`
+  (+ `.toggle-password` eye), `.rememberMeCheckboxControl`, `.loginButton`, and
+  `.loginPasswordForgot a` → /Sys/ResetPasswordRequest.
+- **Logged in:** `.loginContainer.authenticated`; trigger = member name; panel holds
+  `.loggedName`, `.profileBox a` (View profile → /Sys/Profile, Change password →
+  /Sys/Password/Change), and `.loginBoxLogout` (posts to /Sys/Login/SignOut).
+- Scope form-only rules with `.loginContainer:not(.authenticated)` and menu-only rules
+  with `.authenticated` — the panel is shared. `.loginBoxLogout` is an
+  `input[type=submit]`, so exclude it from form-submit rules with `:not(.loginBoxLogout)`.
+- To show the form expanded (not behind the "Log in" trigger) is a WA gadget-style
+  setting, not CSS.
+
 ## Assets & API
 - Image paths: `needleworkguildmn.org/resources/Pictures/[folder]/[filename]`
   (gallery images render via JS; can't be fetched).

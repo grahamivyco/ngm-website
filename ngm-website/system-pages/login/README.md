@@ -1,16 +1,36 @@
-# Login panel (skin)
+# Login page (skin + sandwich)
 
-**WA page:** /Sys/Login — CSS + Theme Override
-**Live URL:** _add URL_
+**WA page:** `/Sys/Login` — a built-in system page (CSS + Custom HTML around the native form)
+**Live URL:** `/sys/login` — this is the target of the "Log In" button in the header.
 
-## Paste order (top -> bottom)
-1. `01-top.html` — Custom HTML block
-2. _(native WA gadget, if any — describe in `02-wa-gadget.txt`)_
-3. `03-bottom.html` — Custom HTML block (if used)
+## What this is
+Wild Apricot already has a login page with a native login form. You are **customising
+that system page**, not creating a new one. These three files wrap the native form
+with NGM branding.
 
-## Notes
-- Native WA gadget IDs this page depends on: _none / list them_
-- Related CSS lives in: this folder's `styles.css` and/or `global-css/global.css`
+## Paste order (top → bottom, same layout column)
+1. `01-top.html` — Custom HTML gadget: branded "Welcome back" heading ABOVE the form
+2. **Native WA login gadget** (`.WaGadgetLoginForm`, already on the page) — see `02-wa-gadget.txt`
+3. `03-bottom.html` — Custom HTML gadget: "not a member? Join" line BELOW the form
 
-> Paste the code below into this project when you have it, then delete these
-> placeholder lines. Keep the paste order accurate — it matters for the sandwich pattern.
+## The form skin lives in Global CSS (done)
+The login form and the account dropdown are skinned in `global-css/global.css`,
+which targets WA's real `.WaGadgetLoginForm` classes site-wide — verified against
+the live `/Sys/Login` page (both the logged-out form and the logged-in account
+menu). **Nothing to assign to the gadget**; just make sure `global.css` is pasted
+into the WA "Global CSS" tab.
+
+## Good to know: it's a dropdown-style login
+Visitors click "Log in" to expand the form (email/password + Google/Microsoft/Apple
++ remember-me + forgot-password). If you'd rather the form show expanded by default
+on this page, that's a WA gadget-style setting, not a CSS change.
+
+## Already handled elsewhere (no work needed here)
+- **Log In / Log Out / Member Hub buttons:** the header (`layout/header/01-top.html`)
+  already swaps these based on login state (`body.memberContentView`).
+- **Log out:** native `/sys/logout` (linked in the header).
+- **View profile:** native `/sys/profile` (linked from the member hub). Skinning that
+  page is the separate `system-pages/member-profile/` task.
+
+## Before it goes live — set this URL
+- `03-bottom.html` "Join the guild" link → your real Join page (placeholder `/join`, marked `<!-- SET URL -->`).

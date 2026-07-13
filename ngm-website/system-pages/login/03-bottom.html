@@ -1,0 +1,37 @@
+<!-- ╔══════════════════════════════════════════════════════════╗
+     NGM LOGIN PAGE  —  BOTTOM BLOCK (Custom HTML gadget #3)
+     ────────────────────────────────────────────────────────────
+     Sits BELOW the native login form. A quiet line for visitors who
+     aren't members yet. Edit the text/link between > and < below.
+╚══════════════════════════════════════════════════════════╝ -->
+<style>
+:root{
+  --ngm-sage-dk:#3E5538; --ngm-cream:#FAF7F2; --ngm-gray:#656565; --ngm-border:#DDD5C8;
+  --ngm-sans:"DM Sans",system-ui,sans-serif;
+}
+.ngm-login-foot{
+  background:var(--ngm-cream);
+  padding:8px 24px 88px;
+  text-align:center;
+}
+.ngm-login-foot-inner{
+  max-width:460px;margin:0 auto;padding-top:8px;
+}
+.ngm-login-foot p{
+  font-family:var(--ngm-sans);font-size:.95rem;color:var(--ngm-gray);line-height:1.7;margin:0;
+}
+.ngm-login-foot a{
+  font-family:var(--ngm-sans);font-weight:500;color:var(--ngm-sage-dk);text-decoration:none;
+  border-bottom:1px solid rgba(62,85,56,.3);padding-bottom:1px;transition:border-color .18s;
+}
+.ngm-login-foot a:hover{border-color:var(--ngm-sage-dk);}
+@media(max-width:640px){ .ngm-login-foot{padding:8px 18px 64px;} }
+</style>
+
+<div class="ngm">
+  <section class="ngm-login-foot">
+    <div class="ngm-login-foot-inner">
+      <p>Not a member yet? <a href="/join"><!-- SET URL: your Join page --> Join the guild →</a></p>
+    </div>
+  </section>
+</div>

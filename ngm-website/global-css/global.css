@@ -1,0 +1,292 @@
+/* ══════════════════════════════════════════════════════════════════
+   NGM GLOBAL CSS
+   Paste this into the Wild Apricot "Global CSS" tab. Site-wide overrides
+   and skins for native WA gadgets live here.
+
+   Palette (hard-coded so this file stands alone, independent of any
+   per-page :root tokens):
+     sage      #5C7A52    sage-dk  #3E5538    sage-lt #EEF3EC
+     rose      #B87260    rose-dk  #9A5C4A
+     cream     #FAF7F2    linen    #F0EAE0    border  #DDD5C8
+     charcoal  #242424    gray     #656565
+     serif = Cormorant Garamond   ·   sans = DM Sans
+══════════════════════════════════════════════════════════════════ */
+
+/* ══════════════════════════════════════════════════════════════════
+   NATIVE WA LOGIN / ACCOUNT GADGET  —  WaGadgetLoginForm (LoginFormStyle001)
+   ────────────────────────────────────────────────────────────────
+   ONE gadget, TWO states, both a dropdown opened by the .loginLink trigger:
+
+   • Logged OUT  → .loginContainer (no .authenticated)
+       trigger "Log in"  →  panel with the email/password form,
+       social-login buttons, remember-me, and forgot-password.
+   • Logged IN   → .loginContainer.authenticated
+       trigger = member name  →  panel with View profile / Change
+       password / Log out.
+
+   Skinned by STABLE class names only (never the per-instance id_XXXX,
+   which is unstable — see docs/wa-notes.md). WA's theme uses very
+   high-specificity anchor rules, so we prefix selectors with `body`.
+   Markup verified against the live /Sys/Login page.
+══════════════════════════════════════════════════════════════════ */
+
+/* Replace the leftover Lato/purple theme with DM Sans throughout the gadget,
+   and force border-box so width:100% fields don't overflow their container
+   (the native WA inputs default to content-box, which pushed them too wide). */
+body .WaGadgetLoginForm,
+body .WaGadgetLoginForm * {
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  letter-spacing: normal !important;
+  box-sizing: border-box !important;
+}
+
+/* ── The trigger pill (.loginLink) ──────────────────────────────────
+   Logged in (member name): sage OUTLINE pill.
+   Logged out ("Log in"): sage SOLID pill (it's the primary action). */
+body .WaGadgetLoginForm .loginLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .875rem !important;
+  font-weight: 500 !important;
+  border-radius: 100px !important;
+  padding: 9px 22px !important;
+  cursor: pointer;
+  text-decoration: none !important;
+  transition: background .2s, color .2s;
+}
+body .WaGadgetLoginForm .authenticated .loginLink {
+  color: #3E5538 !important;
+  background: transparent !important;
+  border: 1.5px solid #3E5538 !important;
+}
+body .WaGadgetLoginForm .authenticated .loginLink:hover,
+body .WaGadgetLoginForm .authenticated .loginLink.hover {
+  background: #3E5538 !important;
+  color: #fff !important;
+}
+body .WaGadgetLoginForm .loginContainer:not(.authenticated) .loginLink {
+  color: #fff !important;
+  background: #3E5538 !important;
+  border: 1.5px solid #3E5538 !important;
+}
+body .WaGadgetLoginForm .loginContainer:not(.authenticated) .loginLink:hover,
+body .WaGadgetLoginForm .loginContainer:not(.authenticated) .loginLink.hover {
+  background: #5C7A52 !important;
+  border-color: #5C7A52 !important;
+}
+
+/* ── The dropdown panel — shared card look ──────────────────────── */
+body .WaGadgetLoginForm .loginPanel {
+  left: 50% !important;
+  margin-left: 0 !important;
+  transform: translateX(-50%) !important;
+  background: #fff !important;
+  border: 1px solid #DDD5C8 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,.11) !important;
+  text-align: left !important;
+}
+
+/* ════════════════ LOGGED-IN: account menu ════════════════ */
+body .WaGadgetLoginForm .authenticated .loginPanel {
+  width: 244px !important;
+  padding: 10px !important;
+}
+body .WaGadgetLoginForm .loggedName {
+  font-family: "Cormorant Garamond", Georgia, serif !important;
+  font-size: 1.15rem !important;
+  color: #242424 !important;
+  padding: 8px 12px 12px !important;
+  margin-bottom: 4px !important;
+  border-bottom: 1px solid #EDE7DC !important;
+}
+body .WaGadgetLoginForm .profileBox a,
+body .WaGadgetLoginForm .loginBoxLogout {
+  display: block !important;
+  width: 100% !important;
+  text-align: left !important;
+  font-size: .875rem !important;
+  font-weight: 400 !important;
+  color: #444 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 9px !important;
+  padding: 10px 12px !important;
+  margin: 0 !important;
+  cursor: pointer;
+  text-decoration: none !important;
+  transition: background .14s, color .14s;
+}
+body .WaGadgetLoginForm .profileBox a:hover,
+body .WaGadgetLoginForm .loginBoxLogout:hover {
+  background: #EEF3EC !important;
+  color: #3E5538 !important;
+}
+body .WaGadgetLoginForm .loggedAction {
+  border-top: 1px solid #EDE7DC !important;
+  margin-top: 4px !important;
+  padding-top: 4px !important;
+}
+body .WaGadgetLoginForm .loginBoxLogout {
+  color: #9A5C4A !important;   /* rose — reads as the exit action */
+  font-weight: 500 !important;
+}
+
+/* ════════════════ LOGGED-OUT: login form ════════════════ */
+body .WaGadgetLoginForm .loginContainer:not(.authenticated) .loginPanel {
+  width: 320px !important;
+  padding: 22px 22px 20px !important;
+}
+
+/* Email + password fields */
+body .WaGadgetLoginForm .emailTextBoxControl,
+body .WaGadgetLoginForm .passwordTextBoxControl {
+  width: 100% !important;
+  font-size: .95rem !important;
+  padding: 11px 14px !important;
+  border: 1px solid #DDD5C8 !important;
+  border-radius: 10px !important;
+  background: #fff !important;
+  color: #242424 !important;
+}
+body .WaGadgetLoginForm .emailTextBoxControl:focus,
+body .WaGadgetLoginForm .passwordTextBoxControl:focus {
+  outline: none !important;
+  border-color: #5C7A52 !important;
+  box-shadow: 0 0 0 3px rgba(92,122,82,.15) !important;
+}
+body .WaGadgetLoginForm .loginUserName { margin-bottom: 12px !important; }
+/* Keep the show/hide-password eye aligned inside the field */
+body .WaGadgetLoginForm .password-wrapper { position: relative !important; }
+body .WaGadgetLoginForm .password-wrapper .toggle-password {
+  position: absolute !important;
+  right: 12px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: #9A9A9A !important;
+  cursor: pointer;
+}
+body .WaGadgetLoginForm .passwordTextBoxControl { padding-right: 40px !important; }
+
+/* Remember me */
+body .WaGadgetLoginForm .loginActionRememberMe {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin: 14px 0 !important;
+}
+body .WaGadgetLoginForm .rememberMeCheckboxControl { width: auto !important; accent-color: #3E5538; }
+body .WaGadgetLoginForm .loginActionRememberMe label {
+  font-size: .85rem !important;
+  color: #656565 !important;
+  margin: 0 !important;
+}
+
+/* Log in button */
+body .WaGadgetLoginForm .loginButton,
+body .WaGadgetLoginForm .loginButtonControl {
+  display: block !important;
+  width: 100% !important;
+  font-size: .9rem !important;
+  font-weight: 500 !important;
+  color: #fff !important;
+  background: #3E5538 !important;
+  border: 1.5px solid #3E5538 !important;
+  border-radius: 100px !important;
+  padding: 12px 26px !important;
+  cursor: pointer;
+  text-transform: none !important;
+  transition: background .2s;
+}
+body .WaGadgetLoginForm .loginButton:hover,
+body .WaGadgetLoginForm .loginButtonControl:hover {
+  background: #5C7A52 !important;
+  border-color: #5C7A52 !important;
+}
+
+/* Forgot password */
+body .WaGadgetLoginForm .loginPasswordForgot {
+  margin-top: 14px !important;
+  text-align: center !important;
+}
+body .WaGadgetLoginForm .loginPasswordForgot a {
+  font-size: .85rem !important;
+  color: #3E5538 !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(62,85,56,.3);
+  padding-bottom: 1px;
+}
+body .WaGadgetLoginForm .loginPasswordForgot a:hover { border-color: #3E5538; }
+
+/* Social login buttons (Google / Microsoft / Apple) */
+body .WaGadgetLoginForm .oAuthButtonsContainer {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  margin-bottom: 16px !important;
+  padding-bottom: 16px !important;
+  border-bottom: 1px solid #EDE7DC !important;
+}
+body .WaGadgetLoginForm .wa-authenticateLoginLink {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  font-size: .85rem !important;
+  font-weight: 500 !important;
+  color: #242424 !important;
+  background: #fff !important;
+  border: 1.5px solid #DDD5C8 !important;
+  border-radius: 100px !important;
+  padding: 10px 16px !important;
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: border-color .18s, background .18s;
+}
+body .WaGadgetLoginForm .wa-authenticateLoginLink:hover {
+  border-color: #5C7A52 !important;
+  background: #EEF3EC !important;
+}
+/* Brand logos on the social buttons (embedded SVGs — no external files) */
+body .WaGadgetLoginForm .authenticateLoginIcon {
+  display: inline-block !important;
+  width: 18px !important;
+  height: 18px !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+  flex-shrink: 0;
+}
+body .WaGadgetLoginForm .wa-authenticateLoginLink.googlePlus .authenticateLoginIcon {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2048%2048'%3E%3Cpath%20fill='%23FFC107'%20d='M43.6%2020.5H42V20H24v8h11.3C33.7%2032.4%2029.3%2035%2024%2035c-6.6%200-12-5.4-12-12s5.4-12%2012-12c3.1%200%205.9%201.2%208%203.1l5.7-5.7C34.6%206.1%2029.6%204%2024%204%2012.9%204%204%2012.9%204%2024s8.9%2020%2020%2020%2020-8.9%2020-20c0-1.3-.1-2.3-.4-3.5z'/%3E%3Cpath%20fill='%23FF3D00'%20d='M6.3%2014.7l6.6%204.8C14.7%2016%2019%2013%2024%2013c3.1%200%205.9%201.2%208%203.1l5.7-5.7C34.6%206.1%2029.6%204%2024%204%2016.3%204%209.7%208.3%206.3%2014.7z'/%3E%3Cpath%20fill='%234CAF50'%20d='M24%2044c5.2%200%209.9-2%2013.4-5.2l-6.2-5.2C29.2%2035%2026.7%2036%2024%2036c-5.3%200-9.7-2.6-11.3-7l-6.5%205C9.6%2039.6%2016.2%2044%2024%2044z'/%3E%3Cpath%20fill='%231976D2'%20d='M43.6%2020.5H42V20H24v8h11.3c-.8%202.3-2.3%204.3-4.1%205.6l6.2%205.2C39.9%2036.5%2044%2030.9%2044%2024c0-1.3-.1-2.3-.4-3.5z'/%3E%3C/svg%3E") !important;
+}
+body .WaGadgetLoginForm .wa-authenticateLoginLink.microsoft .authenticateLoginIcon {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20fill='%23F25022'%20d='M1%201h10v10H1z'/%3E%3Cpath%20fill='%237FBA00'%20d='M13%201h10v10H13z'/%3E%3Cpath%20fill='%2300A4EF'%20d='M1%2013h10v10H1z'/%3E%3Cpath%20fill='%23FFB900'%20d='M13%2013h10v10H13z'/%3E%3C/svg%3E") !important;
+}
+body .WaGadgetLoginForm .wa-authenticateLoginLink.apple .authenticateLoginIcon {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20fill='%23000'%20d='M16.4%2012.8c0-2.3%201.9-3.4%202-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7%200-1.8-.8-3-.8-1.5%200-3%20.9-3.8%202.3-1.6%202.8-.4%207%201.2%209.3.8%201.1%201.7%202.4%202.9%202.3%201.2-.05%201.6-.75%203-.75s1.8.75%203%20.73c1.2-.02%202-1.1%202.8-2.2.9-1.3%201.2-2.5%201.3-2.6-.03-.01-2.5-1-2.5-3.8zM14.2%206c.6-.8%201.1-1.9.9-3-1%20.04-2.1.7-2.8%201.5-.6.7-1.1%201.8-1%202.8%201.1.1%202.2-.5%202.9-1.3z'/%3E%3C/svg%3E") !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   LOGIN PAGE — force the form EXPANDED (not a dropdown)
+   ────────────────────────────────────────────────────────────────
+   The Custom HTML block on /Sys/Login adds  body.ngm-login-page  (see
+   system-pages/login/01-top.html). On that page only, we open the login
+   panel inline as a centred card and hide the "Log in" trigger. Everywhere
+   else the gadget keeps its normal dropdown behaviour.
+══════════════════════════════════════════════════════════════════ */
+body.ngm-login-page .WaGadgetLoginForm .loginLink { display: none !important; }
+body.ngm-login-page .WaGadgetLoginForm .loginContainer .loginPanel {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: static !important;
+  transform: none !important;
+  left: auto !important;
+  top: auto !important;
+  width: 100% !important;
+  max-width: 420px !important;
+  margin: 0 auto !important;
+  padding: 28px 30px 30px !important;
+}
