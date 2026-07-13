@@ -22,10 +22,10 @@
 /* ── Logo: icon + wordmark text ── */
 #ngm .ngm-logo{display:flex;align-items:center;gap:11px;flex-shrink:0;text-decoration:none;transition:opacity .2s}
 #ngm .ngm-logo:hover{opacity:.78}
-#ngm .ngm-logo svg{display:block;height:34px;width:auto;flex-shrink:0}
+#ngm .ngm-logo svg{display:block;height:42px;width:auto;flex-shrink:0}
 #ngm .ngm-logo .ngm-wm{display:flex;flex-direction:column;line-height:1.05}
-#ngm .ngm-logo .ngm-wm .l1{font-family:'Cormorant Garamond','Georgia',serif;font-weight:500;font-size:1.16rem;color:#242424;letter-spacing:.01em;white-space:nowrap}
-#ngm .ngm-logo .ngm-wm .l2{font-family:'DM Sans',sans-serif;font-weight:500;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:#B87260;margin-top:3px;white-space:nowrap}
+#ngm .ngm-logo .ngm-wm .l1{font-family:'Cormorant Garamond','Georgia',serif;font-weight:500;font-size:1.3rem;color:#242424;letter-spacing:.01em;white-space:nowrap}
+#ngm .ngm-logo .ngm-wm .l2{font-family:'DM Sans',sans-serif;font-weight:500;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#B87260;margin-top:3px;white-space:nowrap}
 /* ── Desktop nav links ── */
 #ngm .ngm-links{display:flex;align-items:center;gap:2px;list-style:none;flex:1;justify-content:center;padding:0 16px}
 #ngm .ngm-links>li{position:relative;list-style:none}
@@ -91,9 +91,9 @@
 }
 @media(max-width:560px){
   #ngm .ngm-bar{padding:0 16px;height:64px}
-  #ngm .ngm-logo svg{height:30px}
-  #ngm .ngm-logo .ngm-wm .l1{font-size:1.02rem}
-  #ngm .ngm-logo .ngm-wm .l2{font-size:.54rem;letter-spacing:.18em}
+  #ngm .ngm-logo svg{height:36px}
+  #ngm .ngm-logo .ngm-wm .l1{font-size:1.14rem}
+  #ngm .ngm-logo .ngm-wm .l2{font-size:.6rem;letter-spacing:.18em}
   #ngm.ngm-mob-open .ngm-mob{max-height:calc(100dvh - 64px);max-height:calc(100vh - 64px)}
   #ngm .ngm-mob-acts{flex-direction:column}
 }
@@ -136,7 +136,6 @@ body.memberContentView #ngm .ngm-member{display:inline-flex}
         <ul class="ngm-drop" role="menu" aria-label="Meetings">
           <li><a href="/daytime-counted-thread" role="menuitem">Daytime Counted Thread &amp; Needlepoint</a></li>
           <li><a href="/potpourri-stitchers" role="menuitem">Potpourri Stitchers</a></li>
-          <li><a href="/beading" role="menuitem">Beading</a></li>
           <li><a href="/evening-needlepointers" role="menuitem">Evening Needlepointers</a></li>
           <li><a href="/daytime-stitch-in" role="menuitem">Daytime Stitch-In</a></li>
           <li><a href="/evening-stitch-in" role="menuitem">Evening Stitch-In</a></li>
@@ -148,10 +147,11 @@ body.memberContentView #ngm .ngm-member{display:inline-flex}
         <ul class="ngm-drop" role="menu" aria-label="Events">
           <li><a href="/retreat" role="menuitem">Annual Retreat 2026</a></li>
           <li><a href="/japanese-embroidery" role="menuitem">Traditional Japanese Embroidery</a></li>
-          <li><a href="/events" role="menuitem">Workshops</a></li>
+          <li><a href="/workshops" role="menuitem">Workshops</a></li>
           <li><a href="/fifth-tuesday" role="menuitem">5th Tuesday Open Stitching</a></li>
         </ul>
       </li>
+      <li><a href="/contact-us">Contact</a></li>
     </ul>
     <!-- ══ DESKTOP ACTIONS ══
          WA adds body.publicContentView (guest) or body.memberContentView
@@ -178,7 +178,6 @@ body.memberContentView #ngm .ngm-member{display:inline-flex}
       <div class="ngm-mob-sub" id="ngm-mb-ms" aria-hidden="true">
         <a href="/daytime-counted-thread">Daytime Counted Thread &amp; Needlepoint</a>
         <a href="/potpourri-stitchers">Potpourri Stitchers</a>
-        <a href="/beading">Beading</a>
         <a href="/evening-needlepointers">Evening Needlepointers</a>
         <a href="/daytime-stitch-in">Daytime Stitch-In</a>
         <a href="/evening-stitch-in">Evening Stitch-In</a>
@@ -188,9 +187,10 @@ body.memberContentView #ngm .ngm-member{display:inline-flex}
       <div class="ngm-mob-sub" id="ngm-mb-es" aria-hidden="true">
         <a href="/retreat">Annual Retreat 2026</a>
         <a href="/japanese-embroidery">Traditional Japanese Embroidery</a>
-        <a href="/events">Workshops</a>
+        <a href="/workshops">Workshops</a>
         <a href="/fifth-tuesday">5th Tuesday Open Stitching</a>
       </div>
+      <a href="/contact-us" class="ngm-mob-link">Contact</a>
       <div class="ngm-mob-acts">
         <a href="/sys/login" class="ngm-ghost ngm-guest">Log In</a>
         <a href="/join" class="ngm-solid ngm-guest">Join Now</a>
