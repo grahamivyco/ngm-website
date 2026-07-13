@@ -1,6 +1,10 @@
 # Evening Needlepointers
 
-**WA page:** Evening Needlepointers  ·  **URL:** `/evening-needlepointers`  (linked from the header Meetings menu)
+**WA page:** Evening Needlepointers  ·  **URL:** `/evening-needlepointers`  (header Meetings menu)
 
-One self-contained Custom HTML gadget (`01-top.html`). After the master `global.css`
-is live, use `01-top.slim.html` instead.
+Sandwich, one layout column:
+1. `01-top.html` — Custom HTML (hero, what-we-explore, details, upcoming heading)
+2. Native WA "Upcoming events" gadget — class `ngm-wa-events`, filtered to this group (see `02-wa-gadget.txt`)
+3. `03-bottom.html` — Custom HTML (calendar CTA, FAQ, join CTA)
+
+After the master `global.css` is live, use the `.slim.html` versions.

@@ -3576,10 +3576,9 @@ body.ngm-login-page .WaGadgetLoginForm .loginContainer .loginPanel {
    PAGE — MEETING-TYPE DETAIL PAGES (Counted Thread, Evening Needlepointers,
    Potpourri Stitchers, Beading)
 ══════════════════════════════════════════════════════════════════ */
-/* ── Meeting-type detail pages (ngm-mt-*) ──────────────────── */
 .ngm-mt-meta { display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin:2px 0 20px; }
 .ngm-mt-when { font-family:var(--ngm-sans); font-size:.95rem; font-weight:500; color:var(--ngm-sage-dk); }
-.ngm-mt-hero-btns, .ngm-mt-cta-btns { display:flex; gap:12px; flex-wrap:wrap; margin-top:28px; }
+.ngm-mt-hero-btns { display:flex; gap:12px; flex-wrap:wrap; margin-top:28px; }
 .ngm-mt-about p { font-family:var(--ngm-sans); font-size:1.0625rem; color:var(--ngm-gray); line-height:1.8; max-width:680px; margin:0 0 22px; }
 .ngm-mt-tags { list-style:none; display:flex; flex-wrap:wrap; gap:10px; margin:6px 0 0; padding:0; }
 .ngm-mt-tags li { font-family:var(--ngm-sans); font-size:.85rem; color:var(--ngm-sage-dk); background:var(--ngm-sage-lt); border-radius:100px; padding:7px 16px; }
@@ -3588,10 +3587,6 @@ body.ngm-login-page .WaGadgetLoginForm .loginContainer .loginPanel {
 .ngm-mt-detail h3 { font-family:var(--ngm-sans); font-size:.7rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--ngm-sage); margin:0 0 10px; }
 .ngm-mt-detail p { font-family:var(--ngm-sans); font-size:1rem; color:var(--ngm-gray); line-height:1.7; margin:0; }
 .ngm-mt-detail a { color:var(--ngm-sage-dk) !important; }
-.ngm-mt-cta { text-align:center; }
-.ngm-mt-cta-inner { max-width:560px; margin:0 auto; }
-.ngm-mt-cta p { font-family:var(--ngm-sans); font-size:1.0625rem; color:var(--ngm-gray); line-height:1.8; }
-.ngm-mt-cta-btns { justify-content:center; }
 @media (max-width:640px){ .ngm-mt-details { grid-template-columns:1fr; } }
 
 /* ══════════════════════════════════════════════════════════════════

@@ -33,27 +33,68 @@
     </div>
   </section>
 
-  <section class="ngm-sec ngm-sec-linen">
+  <section class="ngm-sec ngm-sec-cream">
     <div class="ngm-con">
       <span class="ngm-eyebrow">The details</span>
       <h2 class="ngm-h2">When &amp; <em>where</em></h2>
       <div class="ngm-mt-details">
         <div class="ngm-mt-detail"><h3>When</h3><p>2nd Tuesday &middot; 10 am &ndash; 2 pm</p></div>
         <div class="ngm-mt-detail"><h3>Where</h3><p>Minnesota Valley Unitarian Universalist Fellowship<br>10715 Zenith Avenue South, Bloomington, MN 55431<br><a href="https://www.google.com/maps/search/?api=1&query=10715+Zenith+Ave+S+Bloomington+MN+55431">Get directions →</a></p></div>
-        <div class="ngm-mt-detail"><h3>Format</h3><p>Join in person or by video. Conference links live on the Member Resources page (log in to access). Trouble connecting? Email <a href="mailto:admin@needleworkguildmn.org">admin@needleworkguildmn.org</a>.</p></div>
-        <div class="ngm-mt-detail"><h3>Good to know</h3><p>Programs alternate monthly between counted thread and needlepoint. All skill levels are welcome &mdash; come and stitch.</p></div>
+        <div class="ngm-mt-detail"><h3>Format</h3><p>Join in person or by video. Conference links live on the Member Resources page (log in). Trouble connecting? <a href="mailto:inquiry@needleworkguildmn.org">inquiry@needleworkguildmn.org</a>.</p></div>
+        <div class="ngm-mt-detail"><h3>Good to know</h3><p>Programs alternate monthly between counted thread and needlepoint. All skill levels welcome.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="ngm-sec ngm-sec-cream ngm-mt-cta">
-    <div class="ngm-con ngm-mt-cta-inner">
-      <h2 class="ngm-h2">Come <em>stitch with us</em></h2>
-      <p>All members are welcome at any group, any month &mdash; no sign-up needed. New to the Guild?</p>
-      <div class="ngm-mt-cta-btns">
-        <a class="ngm-btn ngm-btn-green" href="/join">Join the guild</a>
-        <a class="ngm-btn ngm-btn-outline" href="/monthly-meetings">See all meetings</a>
+  <section class="ngm ngm-sec ngm-sec-linen" style="padding-bottom:0">
+    <div class="ngm-con">
+      <div class="ngm-upcoming-head">
+        <span class="ngm-eyebrow">Coming up</span>
+        <h2 class="ngm-h2">Upcoming <em>meetings</em></h2>
+        <p class="ngm-upcoming-intro">The next Counted Thread &amp; Needlepoint meetings. Click any event for the program and to register.</p>
       </div>
     </div>
   </section>
 </div>
+<script>
+(function () {
+  function label(t){ if(t==="zoom")return "Zoom"; if(t==="virtual")return "Online"; if(t==="hybrid")return "Hybrid"; return "In person"; }
+  function classify(text){ var s=(text||"").toLowerCase();
+    if(s.indexOf("zoom")>-1) return "zoom";
+    if(s.indexOf("videoconference")>-1||s.indexOf("video conference")>-1||s.indexOf("online")>-1) return "virtual";
+    if(s.indexOf("hybrid")>-1) return "hybrid"; return "person"; }
+  function tagEvents(){
+    var items=document.querySelectorAll(".ngm-wa-events.upcomingEventsStyle001 ul li");
+    items.forEach(function(li){
+      if(li.getAttribute("data-tag-done")==="1") return;
+      var locEl=li.querySelector(".location");
+      var tag=classify(locEl?locEl.textContent:""); li.setAttribute("data-tag",tag);
+      var chip=document.createElement("span"); chip.className="ngm-evt-tag"; chip.textContent=label(tag);
+      var titleEl=li.querySelector(".title");
+      if(titleEl) li.insertBefore(chip,titleEl); else li.insertBefore(chip,li.firstChild);
+      var titleLink=li.querySelector(".title a");
+      if(titleLink&&titleLink.href){ li.style.cursor="pointer";
+        li.addEventListener("click",function(e){ if(e.target.closest("a"))return; window.location.href=titleLink.href; }); }
+      li.setAttribute("data-tag-done","1");
+    });
+  }
+  function init(){ tagEvents(); var g=document.querySelector(".ngm-wa-events");
+    if(g&&window.MutationObserver){ new MutationObserver(function(){tagEvents();}).observe(g,{childList:true,subtree:true}); } }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
+})();
+</script>
+<script>
+(function () {
+  function wire(item){
+    var summary=item.querySelector("summary"); var wrap=item.querySelector(".ngm-faq-wrap");
+    if(!summary||!wrap) return;
+    summary.addEventListener("click",function(e){
+      if(!item.open) return; e.preventDefault(); item.classList.add("ngm-faq-closing");
+      var done=function(){ wrap.removeEventListener("transitionend",done); item.removeAttribute("open"); item.classList.remove("ngm-faq-closing"); };
+      wrap.addEventListener("transitionend",done); setTimeout(done,400);
+    });
+  }
+  function init(){ document.querySelectorAll(".ngm-faq-card").forEach(wire); }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
+})();
+</script>
