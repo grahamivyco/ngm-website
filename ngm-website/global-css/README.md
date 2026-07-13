@@ -1,11 +1,27 @@
 # Global CSS
 
-The full contents of the WA **Global CSS** tab go in `global.css`.
+This folder holds the site-wide CSS for the WA **Global CSS** tab. There are two files
+with very different jobs:
 
-This is where site-wide overrides live (the `body`-prefixed, high-specificity
-selectors that beat the `casefile_guardian` theme) plus the CSS-only skins for
-system pages, each scoped to its WA gadget class (e.g.
-`body .WaGadgetMembershipApplication`) to prevent selector leakage.
+## `global.css` — the MASTER redesign stylesheet
+The consolidated sage/cream NGM redesign, all in one place. The shared design system
+(tokens, reset, typography, layout, buttons, arrow links, badges) appears **once** at
+the top, followed by each page's own styles and the native WA gadget skins
+(login/account, calendar). Fonts are `@import`ed at the top.
 
-Paste the entire tab into `global.css`. When you update it, replace the whole file
-so history shows a clean diff.
+- **This is the redesign — not yet live.** Do **not** paste it into the WA Global CSS
+  tab until the full-site cutover (see the project's staged-rollout plan). A half-applied
+  redesign looks broken to members.
+- At cutover, each page gadget's own `<style>` block can be deleted, because its styles
+  live here now. (The header/footer gadgets keep their inline CSS — they carry HTML+JS.)
+- Rebuilt from the page files by `scratchpad/build_master.py`; if you change a page's
+  `<style>`, re-run it (or edit `global.css` directly) so this stays the source of truth.
+
+## `current-live-backup.css` — the RESTORE file
+An exact snapshot of what is in the live WA Global CSS tab **right now** (the version
+members are used to — it still has purple relics from a scrapped mid-update alongside the
+sage calendar styles).
+
+- **Use it to revert.** If you paste something experimental into the live Global CSS tab
+  and want to undo it, replace the tab's contents with this file and save.
+- If you ever change the live Global CSS, update this file to match.

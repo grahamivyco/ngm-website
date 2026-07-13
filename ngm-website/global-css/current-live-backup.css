@@ -1,0 +1,438 @@
+/* ══════════════════════════════════════════════════════════════════
+   NGM — CURRENT LIVE GLOBAL CSS  (RESTORE / REVERT FILE)
+   ──────────────────────────────────────────────────────────────────
+   This is an EXACT snapshot of what is in the Wild Apricot "Global CSS"
+   tab right now — the version members are used to. It still contains
+   relics from a scrapped mid-update (the purple #432DD7 button/event/
+   link system) alongside the newer sage NGM calendar styles.
+
+   USE THIS TO REVERT: if you paste something experimental into the WA
+   Global CSS tab and want to undo it, replace the tab's contents with
+   THIS file and save — the live site goes back to exactly how it was.
+
+   Captured: 2026-07-13. If you change the live Global CSS, update this file.
+══════════════════════════════════════════════════════════════════ */
+
+/*******************************
+  TOKENS
+********************************/
+:root{
+  --c-primary: #432DD7;
+  --c-text: #101828;
+  --c-muted: #6C7484;
+  --c-white: #FFFFFF;
+  --c-bg: #F5F5F5;
+
+  --radius-card: 16px;
+  --shadow-card: 0 2px 10px rgba(16, 24, 40, 0.06);
+  --border-card: 1px solid rgba(16, 24, 40, 0.08);
+}
+
+/*******************************
+  GLOBAL LINKS (safe defaults)
+  - makes link text 16px like you want
+********************************/
+a,
+.WaLayoutBody a{
+  color: var(--c-primary);
+  font-size: 16px;
+  text-decoration: none;
+}
+a:hover,
+.WaLayoutBody a:hover{
+  text-decoration: underline;
+}
+
+/* Optional: muted helper */
+.muted,
+.text-muted{ color: var(--c-muted) !important; }
+
+/*******************************
+  UPCOMING EVENTS → CARDS
+  Scoped to: #id_wlZJqBI
+  Your spec:
+  - Card bg: #FFF
+  - Padding: 24px
+  - Title: #432DD7, 16px
+  - Space between title and meta: 16px
+  - Date/Time/Location column: 8px gap, 16px, #6C7484
+********************************/
+
+/* Remove default list styling + make a simple responsive grid */
+#id_wlZJqBI .WaGadgetUpcomingEvents ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* Responsive */
+@media (max-width: 1024px){
+  #id_wlZJqBI .WaGadgetUpcomingEvents ul{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px){
+  #id_wlZJqBI .WaGadgetUpcomingEvents ul{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* The card */
+#id_wlZJqBI .WaGadgetUpcomingEvents ul li{
+  background: var(--c-white);
+  padding: 24px;
+  border-radius: var(--radius-card);
+  border: var(--border-card);
+  box-shadow: var(--shadow-card);
+
+  /* Helps consistent vertical stacking even if WA markup varies */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Title line spacing (gives your 16px gap before date/time/location) */
+#id_wlZJqBI .WaGadgetUpcomingEvents ul li .title{
+  margin: 0 0 16px 0;
+}
+
+/* Title link */
+#id_wlZJqBI .WaGadgetUpcomingEvents ul li .title a{
+  color: var(--c-primary) !important;
+  font-size: 16px !important;
+  font-weight: 700;
+  line-height: 1.35;
+  text-decoration: none;
+}
+#id_wlZJqBI .WaGadgetUpcomingEvents ul li .title a:hover{
+  text-decoration: underline;
+}
+
+/* Meta lines: date/time/location
+   WA commonly uses .date and .location; some skins may also include .time */
+#id_wlZJqBI .WaGadgetUpcomingEvents ul li .date,
+#id_wlZJqBI .WaGadgetUpcomingEvents ul li .time,
+#id_wlZJqBI .WaGadgetUpcomingEvents ul li .location{
+  color: var(--c-muted) !important;
+  font-size: 16px !important;
+  line-height: 1.35;
+  margin: 0; /* reset WA margins */
+}
+
+/* Create the "8px between meta lines" feel */
+#id_wlZJqBI .WaGadgetUpcomingEvents ul li .date + .time,
+#id_wlZJqBI .WaGadgetUpcomingEvents ul li .date + .location,
+#id_wlZJqBI .WaGadgetUpcomingEvents ul li .time + .location{
+  margin-top: 8px;
+}
+
+/* If WA inserts extra wrappers/spans inside those lines */
+#id_wlZJqBI .WaGadgetUpcomingEvents ul li .date *,
+#id_wlZJqBI .WaGadgetUpcomingEvents ul li .time *,
+#id_wlZJqBI .WaGadgetUpcomingEvents ul li .location *{
+  color: var(--c-muted) !important;
+  font-size: 16px !important;
+}
+
+/*******************************
+  BUTTON SYSTEM
+  (use classes on Button gadgets / custom HTML links)
+  - text size 16px (per your latest request)
+********************************/
+:root{
+  --btn-primary-bg: #432DD7;
+  --btn-primary-text: #FFFFFF;
+
+  --btn-secondary-bg: #E0E7FF;
+  --btn-secondary-text: #432DD7;
+
+  --btn-tertiary-border: #E0E7FF;
+  --btn-tertiary-bg: #FFFFFF;
+  --btn-tertiary-text: #432DD7;
+
+  --btn-radius: 12px;
+}
+
+/* Base */
+.btn,
+a.btn,
+button.btn,
+.WaGadgetButton a.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 16px;
+  font-size: 16px !important;
+  font-weight: 700;
+  line-height: 1.2;
+
+  border-radius: var(--btn-radius);
+  text-decoration: none;
+  cursor: pointer;
+
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.btn:focus-visible,
+.WaGadgetButton a.btn:focus-visible{
+  outline: 2px solid #A5B4FC;
+  outline-offset: 2px;
+}
+
+/* Primary */
+.btn-primary{
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text) !important;
+  border: none;
+}
+.btn-primary:hover{ background: #3724B8; }
+.btn-primary:active{ transform: translateY(1px); }
+
+/* Secondary */
+.btn-secondary{
+  background: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text) !important;
+  border: none;
+}
+.btn-secondary:hover{ background: #C7D2FE; }
+.btn-secondary:active{ transform: translateY(1px); }
+
+/* Tertiary (outlined) */
+.btn-tertiary{
+  background: var(--btn-tertiary-bg);
+  color: var(--btn-tertiary-text) !important;
+  border: 2px solid var(--btn-tertiary-border);
+}
+.btn-tertiary:hover{ background: #F5F7FF; }
+.btn-tertiary:active{ transform: translateY(1px); }
+
+.rounded-box {
+  border-radius: 16px;
+  overflow: hidden; /* IMPORTANT */
+}
+
+.WaGadgetPoweredBy {
+
+    display: none !important;
+
+}
+
+/* ═══ NGM CALENDAR PAGE ═══════════════════════════════════ */
+
+/* Hero */
+.ngm-cal-hero {
+  background: #FAF7F2;
+  padding: 64px 48px 56px;
+  border-bottom: 1px solid #DDD5C8;
+}
+.ngm-cal-hero-inner { max-width: 1080px; margin: 0 auto; }
+.ngm-cal-hero p {
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 1.0625rem;
+  color: #656565;
+  line-height: 1.8;
+  max-width: 560px;
+  margin-bottom: 28px;
+}
+.ngm-cal-hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
+
+/* Wrapper that surrounds the WA calendar gadget */
+.ngm-cal-body {
+  background: #fff;
+  padding: 48px;
+  border-top: 1px solid #DDD5C8;
+  border-bottom: 1px solid #DDD5C8;
+}
+.ngm-cal-body-inner { max-width: 1080px; margin: 0 auto; }
+
+/* ── Style the WA calendar gadget itself ─────────────────
+   These target WA's own class names. They only change
+   appearance — registration, navigation, and data are
+   100% handled by WA and are not affected.               */
+
+/* "MONTH: JUNE 2026" label */
+.ngm-cal-body .calHeader,
+.ngm-cal-body table caption,
+.ngm-cal-body .monthHeader {
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.1em !important;
+  color: #656565 !important;
+  text-transform: uppercase !important;
+}
+
+/* Week / Month / Year + Prev / Today / Next links */
+.ngm-cal-body .calViewSwitch a,
+.ngm-cal-body .calNav a,
+.ngm-cal-body a.prevLink,
+.ngm-cal-body a.nextLink,
+.ngm-cal-body a.todayLink {
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: 0.85rem !important;
+  color: #3E5538 !important;
+  text-decoration: none !important;
+}
+.ngm-cal-body .calViewSwitch a:hover,
+.ngm-cal-body .calNav a:hover {
+  color: #5C7A52 !important;
+  text-decoration: underline !important;
+}
+
+/* "Switch to List View" link */
+.ngm-cal-body a[href*="list"],
+.ngm-cal-body .switchToList {
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  color: #3E5538 !important;
+  font-size: 0.85rem !important;
+}
+
+/* Day-of-week headers (Sun Mon Tue…) */
+.ngm-cal-body .calendarView th,
+.ngm-cal-body table th {
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: 0.72rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.08em !important;
+  color: #9A9A9A !important;
+  text-transform: uppercase !important;
+  padding: 8px 4px 12px !important;
+  border-bottom: 1px solid #DDD5C8 !important;
+}
+
+/* Calendar grid cells */
+.ngm-cal-body .calendarView td,
+.ngm-cal-body table td {
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: 0.82rem !important;
+  color: #9A9A9A !important;
+  vertical-align: top !important;
+  padding: 6px 4px !important;
+  border: 1px solid #DDD5C8 !important;
+}
+
+/* Today's date highlight */
+.ngm-cal-body .today,
+.ngm-cal-body td.today {
+  background: #EEF3EC !important;
+}
+
+/* Event links inside calendar cells */
+.ngm-cal-body .eventItem a,
+.ngm-cal-body .event a,
+.ngm-cal-body .calEvent a {
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: 0.75rem !important;
+  color: #fff !important;
+  background: #3E5538 !important;
+  border-radius: 3px !important;
+  padding: 1px 5px !important;
+  display: block !important;
+  text-decoration: none !important;
+  margin-bottom: 2px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+.ngm-cal-body .eventItem a:hover { background: #5C7A52 !important; }
+
+/* List view — event titles */
+.ngm-cal-body .eventTitle a,
+.ngm-cal-body .EventTitle a {
+  font-family: "Cormorant Garamond", Georgia, serif !important;
+  font-size: 1.15rem !important;
+  font-weight: 400 !important;
+  color: #242424 !important;
+  text-decoration: none !important;
+  text-transform: none !important;
+}
+.ngm-cal-body .eventTitle a:hover { color: #3E5538 !important; }
+
+/* List view — date/meta text */
+.ngm-cal-body .eventDate,
+.ngm-cal-body .eventStartDate,
+.ngm-cal-body .eventTime {
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: 0.82rem !important;
+  color: #9A9A9A !important;
+}
+
+/* Register button */
+.ngm-cal-body .registerButton,
+.ngm-cal-body a.registerButton,
+.ngm-cal-body input.registerButton {
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  background: #3E5538 !important;
+  color: #fff !important;
+  border-radius: 100px !important;
+  padding: 6px 18px !important;
+  border: none !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  cursor: pointer !important;
+}
+.ngm-cal-body .registerButton:hover { background: #5C7A52 !important; }
+
+/* CTA section */
+.ngm-cal-cta {
+  background: #F0EAE0;
+  padding: 72px 48px;
+  text-align: center;
+}
+.ngm-cal-cta-inner { max-width: 480px; margin: 0 auto; }
+.ngm-cal-cta p {
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 1.0625rem;
+  color: #656565;
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+.ngm-cal-cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .ngm-cal-hero { padding: 52px 28px 44px; }
+  .ngm-cal-body { padding: 36px 28px; }
+  .ngm-cal-cta  { padding: 56px 28px; }
+}
+@media (max-width: 560px) {
+  .ngm-cal-hero { padding: 40px 18px 36px; }
+  .ngm-cal-body { padding: 28px 18px; }
+  .ngm-cal-cta  { padding: 48px 18px; }
+}
+
+/* Reduce vertical gap between all content gadgets */
+.gadgetContentArea,
+.contentGadget,
+[id^="id_"] > .gadgetStyleBox {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+#ngmUpcoming .REPLACE_event_row {
+  padding: 18px 0 !important;
+  border-bottom: 1px solid var(--ngm-border) !important;
+}
+#ngmUpcoming .REPLACE_title_link {
+  font-family: "Cormorant Garamond", Georgia, serif !important;
+  font-size: 1.05rem !important;
+  font-weight: 400 !important;
+  color: #242424 !important;
+  text-transform: none !important;
+  text-decoration: none !important;
+}
+#ngmUpcoming .REPLACE_title_link:hover { color: #3E5538 !important; }
+#ngmUpcoming .REPLACE_date,
+#ngmUpcoming .REPLACE_location {
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: .8rem !important;
+  color: #9A9A9A !important;
+}
