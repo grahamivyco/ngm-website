@@ -3602,6 +3602,16 @@ body.ngm-login-page .WaGadgetLoginForm .loginContainer .loginPanel {
 @media(max-width:820px){ .ngm-mt-hero-grid { grid-template-columns:1fr; gap:32px; } }
 @media(max-width:760px){ .ngm-mt-gallery { grid-template-columns:1fr; } .ngm-mt-loc { grid-template-columns:1fr; gap:28px; } }
 
+/* ── Retreat teachers grid ─────────────────────────────────── */
+.ngm-mt-teachers { display:grid; grid-template-columns:repeat(2,1fr); gap:22px; margin-top:40px; }
+.ngm-mt-teacher { background:#fff; border:1px solid var(--ngm-border); border-radius:var(--ngm-radius-lg); padding:28px 30px; }
+.ngm-mt-teacher h3 { font-family:var(--ngm-serif); font-size:1.4rem; font-weight:400; color:var(--ngm-charcoal); text-transform:none; margin:0 0 4px; }
+.ngm-mt-teacher-spec { font-family:var(--ngm-sans); font-size:.88rem; color:var(--ngm-sage-dk); margin:0 0 14px; }
+.ngm-mt-teacher ul { list-style:none; margin:0; padding:0; }
+.ngm-mt-teacher li { font-family:var(--ngm-sans); font-size:.9rem; color:var(--ngm-gray); line-height:1.5; padding:9px 0; border-top:1px solid #EDE7DC; display:flex; justify-content:space-between; gap:14px; }
+.ngm-mt-teacher li span { color:var(--ngm-sage-dk); white-space:nowrap; font-weight:500; }
+@media(max-width:760px){ .ngm-mt-teachers { grid-template-columns:1fr; } }
+
 /* ══════════════════════════════════════════════════════════════════
    UTILITIES (carried over from live CSS; purple relics intentionally dropped)
 ══════════════════════════════════════════════════════════════════ */

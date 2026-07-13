@@ -554,16 +554,13 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
 .ngm-mt-photo span { font-family:var(--ngm-sans); font-size:.82rem; letter-spacing:.02em; color:var(--ngm-sage-dk); padding:22px; opacity:.85; }
 .ngm-mt-gallery { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:44px; }
 .ngm-mt-gallery .ngm-mt-photo { min-height:210px; }
-
-/* ── Retreat teachers grid ─────────────────────────────────── */
-.ngm-mt-teachers { display:grid; grid-template-columns:repeat(2,1fr); gap:22px; margin-top:40px; }
-.ngm-mt-teacher { background:#fff; border:1px solid var(--ngm-border); border-radius:var(--ngm-radius-lg); padding:28px 30px; }
-.ngm-mt-teacher h3 { font-family:var(--ngm-serif); font-size:1.4rem; font-weight:400; color:var(--ngm-charcoal); text-transform:none; margin:0 0 4px; }
-.ngm-mt-teacher-spec { font-family:var(--ngm-sans); font-size:.88rem; color:var(--ngm-sage-dk); margin:0 0 14px; }
-.ngm-mt-teacher ul { list-style:none; margin:0; padding:0; }
-.ngm-mt-teacher li { font-family:var(--ngm-sans); font-size:.9rem; color:var(--ngm-gray); line-height:1.5; padding:9px 0; border-top:1px solid #EDE7DC; display:flex; justify-content:space-between; gap:14px; }
-.ngm-mt-teacher li span { color:var(--ngm-sage-dk); white-space:nowrap; font-weight:500; }
-@media(max-width:760px){ .ngm-mt-teachers { grid-template-columns:1fr; } }
+/* Where-we-meet + map */
+.ngm-mt-loc { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
+.ngm-mt-addr { font-family:var(--ngm-sans); font-size:1rem; color:var(--ngm-gray); line-height:1.9; font-style:normal; margin:8px 0 14px; }
+.ngm-mt-map { border-radius:var(--ngm-radius-lg); overflow:hidden; border:1px solid var(--ngm-border); }
+.ngm-mt-map iframe { display:block; width:100%; height:320px; border:none; }
+@media(max-width:820px){ .ngm-mt-hero-grid { grid-template-columns:1fr; gap:32px; } }
+@media(max-width:760px){ .ngm-mt-gallery { grid-template-columns:1fr; } .ngm-mt-loc { grid-template-columns:1fr; gap:28px; } }
 </style>
 
 <div class="ngm">
@@ -571,69 +568,54 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
     <div class="ngm-con">
       <div class="ngm-mt-hero-grid">
         <div>
-          <span class="ngm-eyebrow">Annual event</span>
-          <h1 class="ngm-h1">The Annual <em>Retreat</em></h1>
-          <div class="ngm-mt-meta"><span class="ngm-mt-when">August 12&ndash;15, 2026 &middot; Plymouth, MN</span><span class="ngm-badge ngm-badge-person">Members &amp; guests</span></div>
-          <p class="ngm-lead">The Guild's beloved annual getaway returns August 12&ndash;15, 2026 at the Crowne Plaza in Plymouth &mdash; four days of classes with visiting teachers, open stitching, and the company of fellow stitchers.</p>
-          <div class="ngm-mt-hero-btns"><a class="ngm-btn ngm-btn-green" href="/calendar">Register on the calendar</a><a class="ngm-btn ngm-btn-outline" href="/join">Join the Guild</a></div>
+          <span class="ngm-eyebrow">Special programs</span>
+          <h1 class="ngm-h1">Workshops <em>&amp; Lectures</em></h1>
+          <div class="ngm-mt-meta"><span class="ngm-mt-when">With visiting &amp; nationally known teachers</span><span class="ngm-badge ngm-badge-person">Open to all</span></div>
+          <p class="ngm-lead">Beyond our monthly groups, the Guild brings in workshops and lectures with talented teachers &mdash; a chance to learn a new technique, deepen a skill, or spend a day immersed in needlework.</p>
+          <div class="ngm-mt-hero-btns">
+            <a class="ngm-btn ngm-btn-green" href="/calendar">See upcoming workshops</a>
+            <a class="ngm-btn ngm-btn-outline" href="/events">All events</a>
+          </div>
         </div>
-        <div class="ngm-mt-photo" style="min-height:380px;padding:0;overflow:hidden;border:none"><img src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20Photos/Retreat%20Photo.png" alt="Guild members at the annual retreat" style="width:100%;height:100%;object-fit:cover;border-radius:var(--ngm-radius-lg)"></div>
+        <div class="ngm-mt-photo" style="min-height:380px;padding:0;overflow:hidden;border:none"><img src="https://needleworkguildmn.org/resources/Pictures/Workshop%20-%20Bendig%20-%20cropped.jpg" alt="Members at a Guild workshop" style="width:100%;height:100%;object-fit:cover;border-radius:var(--ngm-radius-lg)"></div>
       </div>
     </div>
   </section>
 
   <section class="ngm-sec ngm-sec-white">
     <div class="ngm-con ngm-mt-about">
-      <span class="ngm-eyebrow">About the retreat</span>
-      <h2 class="ngm-h2">More than a <em>meeting</em></h2>
-      <p>Once a year the Guild gathers for a retreat &mdash; a relaxed few days to take a class from a visiting teacher, dig into a project, and enjoy the company of fellow stitchers. It's one of the most anticipated events on the calendar.</p>
-      <ul class="ngm-mt-tags"><li>Guided classes</li><li>Visiting teachers</li><li>Open stitching</li><li>Good company</li></ul>
-      <div class="ngm-mt-gallery"><div class="ngm-mt-photo"><span>A past retreat</span></div><div class="ngm-mt-photo"><span>Stitching together</span></div><div class="ngm-mt-photo"><span>A finished project</span></div></div>
+      <span class="ngm-eyebrow">What to expect</span>
+      <h2 class="ngm-h2">Learn from the <em>best</em></h2>
+      <p>Workshops range from half-day sessions to multi-day intensives, taught by Guild members and visiting instructors alike. Most are open to members and non-members, and kit fees vary by class. Watch the calendar for what's coming up.</p>
+      <ul class="ngm-mt-tags"><li>Visiting teachers</li><li>Half &amp; full day</li><li>Kit fees vary</li><li>Open to all</li></ul>
+      <div class="ngm-mt-gallery">
+        <div class="ngm-mt-photo"><span>A workshop in progress</span></div>
+        <div class="ngm-mt-photo"><span>A teacher demonstrating</span></div>
+        <div class="ngm-mt-photo"><span>A finished project</span></div>
+      </div>
     </div>
   </section>
 
   <section class="ngm-sec ngm-sec-cream">
     <div class="ngm-con">
-      <span class="ngm-eyebrow">The details</span>
-      <h2 class="ngm-h2">What to <em>expect</em></h2>
-      <div class="ngm-mt-details"><div class="ngm-mt-detail"><h3>When</h3><p>August 12&ndash;15, 2026 (Wednesday&ndash;Saturday).</p></div><div class="ngm-mt-detail"><h3>Where</h3><p>Crowne Plaza, 3131 Campus Drive, Plymouth, MN.</p></div><div class="ngm-mt-detail"><h3>Classes</h3><p>Half- and full-day classes with four visiting teachers, plus a lecture and open stitching. Kit fees vary by class (about $75&ndash;$115).</p></div><div class="ngm-mt-detail"><h3>Register</h3><p>Registration is through Wild Apricot &mdash; see the calendar or the retreat invitation. Some classes fill quickly.</p></div></div>
-    </div>
-  </section>
-
-  <section class="ngm-sec ngm-sec-linen">
-    <div class="ngm-con">
-      <span class="ngm-eyebrow">2026 faculty</span>
-      <h2 class="ngm-h2">Teachers &amp; <em>classes</em></h2>
-      <div class="ngm-mt-teachers"><div class="ngm-mt-teacher"><h3>Cissy Bailey Smith</h3><p class="ngm-mt-teacher-spec">Antique sewing collectibles &amp; self-lined projects</p><ul><li>In My Heart Needle Book &amp; Scissor Sheath<span>$115 kit</span></li><li>Margaret's Holdall &amp; Pin Wheel<span>$113 kit</span></li><li>Updated Red House Patriotic Etui<span>$95 kit</span></li><li>Useful Antique Tools &amp; Treasures<span>lecture</span></li></ul></div><div class="ngm-mt-teacher"><h3>Kim Sanders</h3><p class="ngm-mt-teacher-spec">EGA-certified crewel &amp; surface embroidery</p><ul><li>Silk Ribbon Smalls<span>$75 kit</span></li><li>Crewel Necessities Huswife<span>$90 kit</span></li></ul></div><div class="ngm-mt-teacher"><h3>Stephanie Burnham</h3><p class="ngm-mt-teacher-spec">Beading, taught via Zoom</p><ul><li>Holly and Noel<span>$100 kit</span></li></ul></div><div class="ngm-mt-teacher"><h3>Carmen Nordback</h3><p class="ngm-mt-teacher-spec">Quilting &amp; prepared-edge appliqué</p><ul><li>Prepared Edge Appliqué<span>demonstration</span></li></ul></div></div>
-    </div>
-  </section>
-
-  <section class="ngm ngm-sec ngm-sec-white">
-    <div class="ngm-con"><span class="ngm-eyebrow">Good to know</span><h2 class="ngm-h2">Common <em>questions</em></h2>
-      <div class="ngm-faq-list">
-      <details class="ngm-faq-card"><summary>Who can attend?<span class="ngm-faq-icon" aria-hidden="true"></span></summary>
-        <div class="ngm-faq-wrap"><div class="ngm-faq-a"><div>Members and their guests are warmly welcome.</div></div></div></details>
-      <details class="ngm-faq-card"><summary>Do I need to be experienced?<span class="ngm-faq-icon" aria-hidden="true"></span></summary>
-        <div class="ngm-faq-wrap"><div class="ngm-faq-a"><div>Not at all &mdash; classes span techniques and levels, and there's always open stitching.</div></div></div></details>
-      <details class="ngm-faq-card"><summary>How do I register?<span class="ngm-faq-icon" aria-hidden="true"></span></summary>
-        <div class="ngm-faq-wrap"><div class="ngm-faq-a"><div>Registration is through Wild Apricot &mdash; watch the calendar and the newsletter, or contact the Guild. Some classes fill quickly.</div></div></div></details>
-      <details class="ngm-faq-card"><summary>What are the kit fees?<span class="ngm-faq-icon" aria-hidden="true"></span></summary>
-        <div class="ngm-faq-wrap"><div class="ngm-faq-a"><div>Kit fees are set per class (about $75&ndash;$115) and are paid with registration. A few classes are lectures or demonstrations.</div></div></div></details>
+      <span class="ngm-eyebrow">Good to know</span>
+      <h2 class="ngm-h2">How workshops <em>work</em></h2>
+      <div class="ngm-mt-details">
+        <div class="ngm-mt-detail"><h3>When</h3><p>Throughout the year &mdash; watch the calendar for dates.</p></div>
+        <div class="ngm-mt-detail"><h3>Where</h3><p>Usually in person in Bloomington; some are offered on Zoom.</p></div>
+        <div class="ngm-mt-detail"><h3>Who</h3><p>Open to members and non-members alike.</p></div>
+        <div class="ngm-mt-detail"><h3>Cost</h3><p>Kit fees vary by class and are paid with registration.</p></div>
       </div>
     </div>
   </section>
 
-  <div class="ngm ngm-si-cta">
-    <div class="ngm-si-cta-inner">
-      <span class="ngm-eyebrow">Save the date</span>
-      <h2 class="ngm-h2">Come away and <em>stitch</em></h2>
-      <p>August 12&ndash;15, 2026 at the Crowne Plaza in Plymouth. Space is limited and classes fill quickly &mdash; register on the calendar. New to the Guild? Join and be part of it.</p>
-      <div class="ngm-si-cta-btns">
-        <a class="ngm-btn ngm-btn-rose" href="/calendar">Register on the calendar</a>
-        <a class="ngm-btn ngm-btn-outline-rose" href="/join">Join the Guild</a>
-      </div>
-    </div>
-  </div>
+  <section class="ngm ngm-sec ngm-sec-linen" style="padding-bottom:0">
+    <div class="ngm-con"><div class="ngm-upcoming-head">
+      <span class="ngm-eyebrow">Coming up</span>
+      <h2 class="ngm-h2">Upcoming <em>workshops</em></h2>
+      <p class="ngm-upcoming-intro">The next workshops and lectures. Click any event for details and to register.</p>
+    </div></div>
+  </section>
 </div>
 
 <script>

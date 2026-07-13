@@ -1,0 +1,7 @@
+NATIVE WA GADGET — "Upcoming events"
+=====================================
+Add the native WA "Upcoming events" gadget BETWEEN 01-top.html and 03-bottom.html.
+1. Add gadget -> "Upcoming events".
+2. CSS class:  ngm-wa-events
+3. FILTER it to Workshops (and lectures).
+4. Row background: linen (#F0EAE0).
