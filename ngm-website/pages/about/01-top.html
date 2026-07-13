@@ -265,52 +265,6 @@ body a.ngm-btn-outline-rose:hover { background: var(--ngm-rose) !important; colo
   margin-bottom: 14px;
 }
 .ngm-history-simple p:last-child { margin-bottom: 0; }
-/* ── Mission / Values ── */
-.ngm-values-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  margin-top: 48px;
-}
-.ngm-value-item {
-  padding: 28px;
-  background: #fff;
-  border-radius: var(--ngm-radius-lg);
-  border: 1px solid var(--ngm-border);
-  /* card has no colored top bar */
-  transition: background-color .25s ease, border-color .25s ease;
-}
-/* EDIT: hover = pale-green fill, no lift, no shadow */
-.ngm-value-item:hover {
-  background: var(--ngm-sage-lt);
-  border-color: var(--ngm-sage-lt);
-}
-.ngm-value-icon {
-  width: 40px;
-  height: 40px;
-  background: var(--ngm-sage-lt);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 16px;
-  flex-shrink: 0;
-}
-.ngm-value-title {
-  font-family: var(--ngm-serif);
-  font-size: 1.2rem;
-  font-weight: 400;
-  color: var(--ngm-charcoal);
-  text-transform: none !important;
-  margin-bottom: 8px;
-  line-height: 1.2;
-}
-.ngm-value-desc {
-  font-family: var(--ngm-sans);
-  font-size: .875rem;
-  color: var(--ngm-gray);
-  line-height: 1.7;
-}
 /* ── What We Do cards ── */
 .ngm-do-grid {
   display: grid;
@@ -465,7 +419,6 @@ body .ngm-lcard-email {
   .ngm-about-hero-photo { height: 260px; }
   .ngm-about-hero p { max-width: 100%; }
   .ngm-sec { padding: 64px 28px; }
-  .ngm-values-grid { grid-template-columns: 1fr; gap: 16px; }
   .ngm-do-grid { grid-template-columns: 1fr; }
   .ngm-lcard-grid { grid-template-columns: 1fr; }
   .ngm-about-cta { padding: 64px 28px; }
@@ -522,10 +475,9 @@ body .WaPlaceHolderWide > div {
      edit the text inside it.
        1. HERO        — top banner: headline, intro, photo
        2. HISTORY     — the Guild's story
-       3. MISSION     — "What the Guild is for" (three cards)
-       4. WHAT WE DO  — activity cards
-       5. LEADERSHIP  — names, roles, and emails (update yearly)
-       6. JOIN CTA    — closing "join us" banner
+       3. WHAT WE DO  — activity cards
+       4. LEADERSHIP  — roles + role emails only (no names, public)
+       5. COME VISIT  — closing "come try us" banner
 ╚══════════════════════════════════════════════════════════╝ -->
 <!-- ══════════════════════════════════════════════════════════
   SECTION 1 — HERO (the top banner)
@@ -577,56 +529,21 @@ body .WaPlaceHolderWide > div {
   </div>
 </section>
 <!-- ══════════════════════════════════════════════════════════
-  SECTION 3 — MISSION ("What the Guild is for")
-  Three cards. In each card you can edit the title and the
-  description text.
-  - To add a card: copy one whole card block (from one
-    <div class="ngm-value-item"> down to its matching </div>)
-    and paste it in, then edit the copy.
-  - To remove a card: delete one whole card block.
-══════════════════════════════════════════════════════════ -->
-<section class="ngm ngm-sec ngm-sec-white">
-  <div class="ngm-con">
-    <span class="ngm-eyebrow">Our purpose</span>
-    <h2 class="ngm-h2">What the Guild is <em>for</em></h2>
-    <div class="ngm-values-grid">
-      <div class="ngm-value-item">
-        <div class="ngm-value-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage-dk)" stroke-width="1.7"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <h3 class="ngm-value-title">Belonging</h3>
-        <p class="ngm-value-desc">A place to show up as you are. Members form real friendships through shared work and shared tables. Beginners and experienced stitchers are equally welcome.</p>
-      </div>
-      <div class="ngm-value-item">
-        <div class="ngm-value-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage-dk)" stroke-width="1.7"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-        </div>
-        <h3 class="ngm-value-title">Learning</h3>
-        <p class="ngm-value-desc">Every meeting is a chance to pick up something new — from fellow members, from visiting teachers, or from our 400+ book lending library. Curiosity is always encouraged.</p>
-      </div>
-      <div class="ngm-value-item">
-        <div class="ngm-value-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage-dk)" stroke-width="1.7"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        </div>
-        <h3 class="ngm-value-title">Craft</h3>
-        <p class="ngm-value-desc">We take needlework seriously without taking ourselves too seriously. The Guild is committed to keeping traditional skills alive — and to the simple joy of making beautiful things by hand.</p>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- ══════════════════════════════════════════════════════════
-  SECTION 4 — WHAT WE DO (activity cards)
+  SECTION 3 — WHAT WE DO (what the Guild is + activity cards)
+  This section rolls the Guild's purpose (belonging, learning,
+  craft) into the intro line, then shows the concrete activities
+  as cards below.
   Each card has a title and a description you can edit.
   - To add a card: copy one whole card block (from one
     <div class="ngm-do-card"> down to its matching </div>) and
     paste it in, then edit the copy.
   - To remove a card: delete one whole card block.
 ══════════════════════════════════════════════════════════ -->
-<section class="ngm ngm-sec ngm-sec-linen">
+<section class="ngm ngm-sec ngm-sec-white">
   <div class="ngm-con">
-    <span class="ngm-eyebrow">Guild activities</span>
+    <span class="ngm-eyebrow">What we do</span>
     <h2 class="ngm-h2">What <em>members</em> do together</h2>
-    <p class="ngm-lead">From weekly Zoom calls to annual retreats, Guild life offers something at every level of involvement.</p>
+    <p class="ngm-lead">Everything the Guild does comes back to three simple things: belonging, learning, and a love of craft. Here's how that shows up week to week — from open Stitch-Ins to the annual retreat, there's something at every level of involvement.</p>
     <div class="ngm-do-grid">
       <div class="ngm-do-card">
         <div class="ngm-do-icon" aria-hidden="true">
@@ -686,90 +603,81 @@ body .WaPlaceHolderWide > div {
   </div>
 </section>
 <!-- ══════════════════════════════════════════════════════════
-  SECTION 5 — LEADERSHIP (please update each year)
-  Each person is one card with three lines: their role, their
-  name, and their email address. To update someone, just change
-  the text on the right line.
-  - To add a person: copy one whole card block (from one
+  SECTION 4 — LEADERSHIP / REACH OUT
+
+  *** PUBLIC VERSION — roles + emails only, no personal names. ***
+
+  Each card has two lines: the role, and the role's email address.
+  Because the emails are role-based (president@..., etc.), these
+  cards usually DON'T need updating when officers change — only
+  when a role itself is added or retired.
+  - To add a role: copy one whole card block (from one
     <div class="ngm-lcard"> down to its matching </div>) and
-    paste it in, then change the role, name, and email.
-  - To remove a person: delete one whole card block.
-  - Note: Kym Duea appears in two cards on purpose — two roles.
+    paste it in, then change the role and the email.
+  - To remove a role: delete one whole card block.
+  - If you ever want names shown, use the archived copy:
+    about-page-WITH-NAMES-member-hub.html
 ══════════════════════════════════════════════════════════ -->
 <section class="ngm ngm-sec ngm-sec-cream">
   <div class="ngm-con">
-    <span class="ngm-eyebrow">Our people</span>
-    <h2 class="ngm-h2">Meet our <em>leadership</em></h2>
-    <p class="ngm-leadership-intro">The Guild is led by volunteer members who help organize meetings, events, communications, and programs throughout the year.</p>
+    <span class="ngm-eyebrow">Get in touch</span>
+    <h2 class="ngm-h2">Reach <em>out</em></h2>
+    <p class="ngm-leadership-intro">The Guild is run entirely by volunteer members. Each role below has its own email address — write to the one closest to your question and it will reach the right person.</p>
     <div class="ngm-lcard-grid">
       <div class="ngm-lcard">
         <span class="ngm-lcard-role">President</span>
-        <span class="ngm-lcard-name">Vivien Smith</span>
         <span class="ngm-lcard-email">president@needleworkguildmn.org</span>
       </div>
       <div class="ngm-lcard">
         <span class="ngm-lcard-role">Vice President</span>
-        <span class="ngm-lcard-name">Carrie Hancock</span>
         <span class="ngm-lcard-email">vicepresident@needleworkguildmn.org</span>
       </div>
       <div class="ngm-lcard">
         <span class="ngm-lcard-role">Treasurer</span>
-        <span class="ngm-lcard-name">Linda Lundstrom</span>
         <span class="ngm-lcard-email">ngmtreasurer@needleworkguildmn.org</span>
       </div>
       <div class="ngm-lcard">
         <span class="ngm-lcard-role">Secretary</span>
-        <span class="ngm-lcard-name">Karen Hesse</span>
         <span class="ngm-lcard-email">secretary@needleworkguildmn.org</span>
       </div>
       <div class="ngm-lcard">
         <span class="ngm-lcard-role">Events</span>
-        <span class="ngm-lcard-name">Linda Tischer &amp; Kym Duea</span>
         <span class="ngm-lcard-email">ngmprograms@needleworkguildmn.org</span>
       </div>
       <div class="ngm-lcard">
         <span class="ngm-lcard-role">Sunday Blast</span>
-        <span class="ngm-lcard-name">Michelle Ingram</span>
         <span class="ngm-lcard-email">newseditor@needleworkguildmn.org</span>
       </div>
       <div class="ngm-lcard">
         <span class="ngm-lcard-role">Advertising</span>
-        <span class="ngm-lcard-name">Kym Duea</span>
         <span class="ngm-lcard-email">ngmadvertising@needleworkguildmn.org</span>
       </div>
       <div class="ngm-lcard">
         <span class="ngm-lcard-role">Website Manager</span>
-        <span class="ngm-lcard-name"></span>
         <span class="ngm-lcard-email">website@needleworkguildmn.org</span>
       </div>
       <div class="ngm-lcard">
         <span class="ngm-lcard-role">Website Communications</span>
-        <span class="ngm-lcard-name"></span>
         <span class="ngm-lcard-email">communications@needleworkguildmn.org</span>
       </div>
       <div class="ngm-lcard">
         <span class="ngm-lcard-role">Librarian</span>
-        <span class="ngm-lcard-name">Janet Rock &amp; Jeanne Cur</span>
         <span class="ngm-lcard-email">librarian@needleworkguildmn.org</span>
       </div>
       <div class="ngm-lcard">
         <span class="ngm-lcard-role">Shop Manager</span>
-        <span class="ngm-lcard-name">Theresa Pietenpol</span>
         <span class="ngm-lcard-email">shopmanager@needleworkguildmn.org</span>
       </div>
       <div class="ngm-lcard">
         <span class="ngm-lcard-role">Retreat Chair</span>
-        <span class="ngm-lcard-name">Jane Tracy</span>
         <span class="ngm-lcard-email">retreatchairs@needleworkguildmn.org</span>
       </div>
       <div class="ngm-lcard">
         <span class="ngm-lcard-role">Daytime Stitch-In</span>
-        <span class="ngm-lcard-name">Laura Ericksen</span>
         <span class="ngm-lcard-email">daytimestitchin@needleworkguildmn.org</span>
       </div>
       <div class="ngm-lcard">
         <span class="ngm-lcard-role">Evening Stitch-In</span>
-        <span class="ngm-lcard-name">Julie Mafi</span>
         <span class="ngm-lcard-email">eveningstitchin@needleworkguildmn.org</span>
       </div>
     </div><!-- /ngm-lcard-grid -->
@@ -784,19 +692,22 @@ body .WaPlaceHolderWide > div {
   </div>
 </section>
 <!-- ══════════════════════════════════════════════════════════
-  SECTION 6 — JOIN (the closing banner)
+  SECTION 5 — COME VISIT (the closing banner)
+  The message here is "come try the groups, join when you find
+  your fit" — NOT "you get one free visit." Keep it invitational
+  and don't put a number on it.
   Edit the headline, the paragraph, and the button labels/links.
   As in the hero, one word in the headline is wrapped in
   <em>...</em> to show in the rose accent color.
 ══════════════════════════════════════════════════════════ -->
 <div class="ngm ngm-about-cta">
   <div class="ngm-about-cta-inner">
-    <span class="ngm-eyebrow">Join now</span>
-    <h2 class="ngm-h2">Your first visit is<br>always <em>welcome</em></h2>
-    <p>Curious? Come to a meeting. Your first visit is free, and we'd love to meet you. Membership is $30 a year — and it's one of the best things you can do for your stitching life.</p>
+    <span class="ngm-eyebrow">Come visit</span>
+    <h2 class="ngm-h2">Find your people<br>and your <em>stitching</em></h2>
+    <p>We'd love to have you. Come sit in on a Stitch-In, or any of our other monthly meetings — in person or on Zoom, whichever fits your calendar. Try as many as you're curious about. Once you've found the one (or three) that feel like yours, join us for just $30 a year.</p>
     <div class="ngm-about-cta-btns">
-      <a class="ngm-btn ngm-btn-rose" href="/join">Join the Guild</a>
-      <a class="ngm-btn ngm-btn-outline-rose" href="/monthly-meetings">See our meetings</a>
+      <a class="ngm-btn ngm-btn-rose" href="/monthly-meetings">Find a group to try</a>
+      <a class="ngm-btn ngm-btn-outline-rose" href="/join">Ready to join?</a>
     </div>
   </div>
 </div>
