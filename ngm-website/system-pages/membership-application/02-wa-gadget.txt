@@ -1,0 +1,7 @@
+NATIVE WA GADGET — Membership application (built into /application)
+==================================================================
+The WA "Membership application" form gadget is already on the /application page.
+If the page allows a Custom HTML gadget ABOVE the form, paste 01-top.html there for
+the branded heading. If it does not (some membership screens are CSS-only), skip the
+heading — the FORM itself is still skinned by global.css (.WaGadgetMembershipApplication).
+No CSS class needs to be added to the gadget.

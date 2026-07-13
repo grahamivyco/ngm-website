@@ -3613,6 +3613,72 @@ body.ngm-login-page .WaGadgetLoginForm .loginContainer .loginPanel {
 @media(max-width:760px){ .ngm-mt-teachers { grid-template-columns:1fr; } }
 
 /* ══════════════════════════════════════════════════════════════════
+   WA SYSTEM-PAGE FORMS  —  membership application / profile / renewal
+   ──────────────────────────────────────────────────────────────────
+   PROVISIONAL skin for Wild Apricot's native system-page forms. Verified
+   against the live /application markup; profile & renewal share the same
+   WA field/button classes but should be spot-checked on the live pages.
+   WA uses deeply-nested table markup — we only recolour and re-font (fonts,
+   headings, fields, buttons), never restructure. Stable classes only.
+══════════════════════════════════════════════════════════════════ */
+body .WaGadgetMembershipApplication *,
+body [class*="WaGadgetMembership"] *,
+body .WaGadgetPublicWizard * {
+  font-family: "DM Sans", system-ui, sans-serif !important;
+}
+/* Level / section titles -> Cormorant */
+body .WaGadgetMembershipApplication .infoTitle,
+body .WaGadgetMembershipApplication .fieldSubTitle,
+body [class*="WaGadgetMembership"] .fieldSubTitle {
+  font-family: "Cormorant Garamond", Georgia, serif !important;
+  font-size: 1.25rem !important; font-weight: 400 !important; color: #242424 !important;
+}
+body .WaGadgetMembershipApplication .levelPrice,
+body [class*="WaGadgetMembership"] .levelPrice { color: #3E5538 !important; font-weight: 500; }
+body .WaGadgetMembershipApplication .levelRenewal,
+body .WaGadgetMembershipApplication .levelRecurring,
+body [class*="WaGadgetMembership"] .levelRenewal { color: #656565 !important; }
+/* Field labels */
+body .WaGadgetMembershipApplication .fieldMain,
+body [class*="WaGadgetMembership"] .fieldMain,
+body .WaGadgetMembershipApplication label { font-size: .9rem !important; color: #242424 !important; }
+/* Inputs */
+body .WaGadgetMembershipApplication input[type="text"],
+body .WaGadgetMembershipApplication input[type="email"],
+body .WaGadgetMembershipApplication input[type="password"],
+body .WaGadgetMembershipApplication input[type="tel"],
+body .WaGadgetMembershipApplication select,
+body .WaGadgetMembershipApplication textarea,
+body [class*="WaGadgetMembership"] input[type="text"],
+body [class*="WaGadgetMembership"] select,
+body [class*="WaGadgetMembership"] textarea {
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: .95rem !important; padding: 10px 13px !important;
+  border: 1px solid #DDD5C8 !important; border-radius: 10px !important;
+  background: #fff !important; color: #242424 !important; box-sizing: border-box !important;
+}
+body .WaGadgetMembershipApplication input:focus,
+body .WaGadgetMembershipApplication select:focus,
+body .WaGadgetMembershipApplication textarea:focus {
+  outline: none !important; border-color: #5C7A52 !important;
+  box-shadow: 0 0 0 3px rgba(92,122,82,.15) !important;
+}
+/* WA "stylized" buttons -> sage pill (native form buttons site-wide) */
+body .stylizedButton,
+body a.stylizedButton,
+body input.stylizedButton,
+body button.stylizedButton {
+  font-family: "DM Sans", system-ui, sans-serif !important;
+  font-size: .9rem !important; font-weight: 500 !important;
+  background: #3E5538 !important; color: #fff !important;
+  border: 1.5px solid #3E5538 !important; border-radius: 100px !important;
+  padding: 11px 26px !important; cursor: pointer; text-transform: none !important;
+  transition: background .2s;
+}
+body .stylizedButton:hover { background: #5C7A52 !important; border-color: #5C7A52 !important; }
+
+
+/* ══════════════════════════════════════════════════════════════════
    UTILITIES (carried over from live CSS; purple relics intentionally dropped)
 ══════════════════════════════════════════════════════════════════ */
 /* Hide Wild Apricot 'Powered by' badge */

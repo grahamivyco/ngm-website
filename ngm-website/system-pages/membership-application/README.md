@@ -1,16 +1,8 @@
-# Membership Application (skin)
+# Membership Application
 
-**WA page:** /Sys/... application — CSS-only
-**Live URL:** _add URL_
+**WA page:** `/application` (WA system/join form)
 
-## Paste order (top -> bottom)
-1. `01-top.html` — Custom HTML block
-2. _(native WA gadget, if any — describe in `02-wa-gadget.txt`)_
-3. `03-bottom.html` — Custom HTML block (if used)
-
-## Notes
-- Native WA gadget IDs this page depends on: _none / list them_
-- Related CSS lives in: this folder's `styles.css` and/or `global-css/global.css`
-
-> Paste the code below into this project when you have it, then delete these
-> placeholder lines. Keep the paste order accurate — it matters for the sandwich pattern.
+The form is skinned site-wide by `global-css/global.css` (the WA SYSTEM-PAGE FORMS
+section). `01-top.html` is an optional branded heading to place above the form if the
+page allows a Custom HTML gadget. **Verify the form skin against the live page** — WA's
+form markup is deeply nested and the skin is provisional.
