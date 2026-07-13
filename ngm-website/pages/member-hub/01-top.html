@@ -1,0 +1,264 @@
+<!-- ╔══════════════════════════════════════════════════════════╗
+     NGM MEMBER HUB  —  TOP BLOCK (Custom HTML gadget #1)
+     ────────────────────────────────────────────────────────────
+     WHERE THIS LIVES
+     Wild Apricot page: "Member Hub"   ·   URL: /members
+     This is a members-only page, so everyone who sees it is logged in.
+
+     THE "SANDWICH" (paste order on the page, top to bottom):
+       1. THIS file (01-top.html)  — Custom HTML gadget
+       2. Native WA "Upcoming events" gadget  (see 02-wa-gadget.txt)
+       3. 03-bottom.html           — Custom HTML gadget
+
+     HOW TO EDIT THIS PAGE
+     Everything you'll normally change — the welcome text and the
+     little intro line above the events — is plain English between
+     the > and < marks. Type your change there and save.
+     The block at the top (between <style> and </style>) controls
+     colors, fonts, and spacing. Leave it alone for routine edits.
+
+     THE NAME ("Welcome back, Jane")
+     Wild Apricot fills in the member's first name using the
+     {Contact_First_Name} macro below. If that macro ever stops
+     working (or on a preview where nobody is logged in), a small
+     script at the bottom quietly changes the greeting to just
+     "Welcome back" — so a raw "{Contact_First_Name}" is never
+     shown to a member.
+╚══════════════════════════════════════════════════════════╝ -->
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════
+   SHARED BASE SYSTEM (copied from the homepage gadget so this
+   page is self-contained). Tokens, typography, layout, buttons,
+   arrow links — plus the member-hub styles and the high-specificity
+   skin for the native WA "Upcoming events" gadget.
+══════════════════════════════════════════════════════════ */
+/* ── 1. DESIGN TOKENS ───────────────────────────────────── */
+:root {
+  --ngm-sage:      #5C7A52;
+  --ngm-sage-dk:   #3E5538;
+  --ngm-sage-lt:   #EEF3EC;
+  --ngm-rose:      #B87260;
+  --ngm-rose-lt:   #F5EBE7;
+  --ngm-rose-dk:   #9A5C4A;
+  --ngm-cream:     #FAF7F2;
+  --ngm-linen:     #F0EAE0;
+  --ngm-linen-dk:  #E5DDD0;
+  --ngm-charcoal:  #242424;
+  --ngm-gray:      #656565;
+  --ngm-gray-lt:   #9A9A9A;
+  --ngm-border:    #DDD5C8;
+  --ngm-serif: "Cormorant Garamond", Georgia, serif;
+  --ngm-sans:  "DM Sans", system-ui, sans-serif;
+  --ngm-radius:    14px;
+  --ngm-radius-lg: 20px;
+  --ngm-sh:   0 2px 12px rgba(0,0,0,.06);
+  --ngm-shm:  0 8px 32px rgba(0,0,0,.10);
+  --ngm-shx:  0 20px 60px rgba(0,0,0,.14);
+}
+/* ── 2. SCOPE RESET ─────────────────────────────────────── */
+.ngm *,
+.ngm *::before,
+.ngm *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* ── 3. TYPOGRAPHY SYSTEM ───────────────────────────────── */
+.ngm-eyebrow {
+  display: block;
+  font-family: var(--ngm-sans);
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ngm-sage);
+  margin-bottom: 10px;
+}
+.ngm-h1 {
+  font-family: var(--ngm-serif) !important;
+  font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+  font-weight: 400;
+  line-height: 1.08;
+  color: var(--ngm-charcoal);
+  text-transform: none !important;
+  margin-bottom: 20px;
+}
+.ngm-h2 {
+  font-family: var(--ngm-serif) !important;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.12;
+  color: var(--ngm-charcoal);
+  text-transform: none !important;
+  margin-bottom: 14px;
+}
+.ngm-h1 em,
+.ngm-h2 em {
+  font-family: var(--ngm-serif) !important;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  font-style: italic;
+  color: var(--ngm-rose) !important;
+}
+.ngm-lead {
+  font-family: var(--ngm-sans);
+  font-size: 1.0625rem;
+  color: var(--ngm-gray);
+  line-height: 1.8;
+  max-width: 560px;
+  margin-bottom: 0;
+}
+/* ── 4. LAYOUT HELPERS ──────────────────────────────────── */
+.ngm-sec { padding: 88px 48px; }
+.ngm-sec-linen { background: var(--ngm-linen); }
+.ngm-sec-cream { background: var(--ngm-cream); }
+.ngm-sec-white { background: #fff; }
+.ngm-con { max-width: 1080px; margin: 0 auto; }
+/* ── 5. BUTTONS ─────────────────────────────────────────── */
+.ngm-btn,
+body a.ngm-btn,
+body a.ngm-btn:link,
+body a.ngm-btn:visited {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--ngm-sans) !important;
+  font-size: .9rem !important;
+  font-weight: 500 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  border-radius: 100px;
+  padding: 12px 26px;
+  cursor: pointer;
+  text-decoration: none !important;
+  border: 1.5px solid transparent;
+  transition: background .2s, transform .18s, box-shadow .18s, color .2s;
+  line-height: 1;
+}
+.ngm-btn-green  { background: var(--ngm-sage-dk); color: #fff !important; border-color: var(--ngm-sage-dk); }
+.ngm-btn-green:hover  { background: var(--ngm-sage); border-color: var(--ngm-sage); transform: translateY(-1px); box-shadow: 0 5px 16px rgba(62,85,56,.25); }
+.ngm-btn-outline,
+body a.ngm-btn-outline { background: transparent; color: var(--ngm-sage-dk) !important; border: 1.5px solid var(--ngm-sage-dk) !important; }
+.ngm-btn-outline:hover,
+body a.ngm-btn-outline:hover { background: var(--ngm-sage-dk) !important; color: #fff !important; }
+/* ── 6. ARROW LINK ──────────────────────────────────────── */
+.ngm-arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--ngm-sans);
+  font-size: .9rem;
+  color: var(--ngm-sage-dk) !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(62,85,56,.3);
+  padding-bottom: 2px;
+  transition: gap .18s, border-color .18s;
+}
+.ngm-arrow-link:hover { gap: 10px; border-color: var(--ngm-sage-dk); }
+/* ══════════════════════════════════════════════════════════
+   MEMBER-HUB-SPECIFIC STYLES
+══════════════════════════════════════════════════════════ */
+/* ── Welcome band ── */
+.ngm-hub-hero {
+  background: var(--ngm-cream);
+  padding: 92px 48px 60px;
+  border-bottom: 1px solid var(--ngm-border);
+}
+.ngm-hub-hero-inner { max-width: 1080px; margin: 0 auto; }
+/* ── Upcoming-events intro (sits right above the native gadget) ── */
+.ngm-hub-events {
+  background: var(--ngm-linen);
+  padding: 72px 48px 40px;
+}
+.ngm-hub-events-inner { max-width: 1080px; margin: 0 auto; }
+.ngm-hub-events-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.ngm-hub-events .ngm-lead { margin-top: 6px; }
+/* ── Skin for the native WA "Upcoming events" gadget ──
+   The gadget is given the CSS class  ngm-wa-events  in the WA editor
+   (see 02-wa-gadget.txt). WA's theme uses very high-specificity anchor
+   rules, so we mirror that with a `body` prefix to win. This is light
+   container styling only — it centers the list, sets the font, and adds
+   breathing room. If you want the full event-card look from the Events
+   page, copy that page's `.ngm-wa-events` section over the top of this. */
+body .ngm-wa-events {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 48px 84px;
+  background: var(--ngm-linen);
+}
+body .ngm-wa-events,
+body .ngm-wa-events * {
+  font-family: var(--ngm-sans) !important;
+  color: var(--ngm-charcoal);
+}
+body .ngm-wa-events a { color: var(--ngm-sage-dk) !important; }
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .ngm-hub-hero { padding: 72px 22px 48px; }
+  .ngm-hub-events { padding: 56px 22px 32px; }
+  body .ngm-wa-events { padding: 0 22px 64px; }
+}
+</style>
+
+<!-- ══════════════════════════════════════════════════════════
+     WELCOME BAND
+════════════════════════════════════════════════════════════ -->
+<div class="ngm">
+  <section class="ngm-hub-hero">
+    <div class="ngm-hub-hero-inner">
+      <span class="ngm-eyebrow">Member Hub</span>
+      <!-- The name is filled in by Wild Apricot. If it can't be filled in,
+           the script at the bottom trims this to just "Welcome back". -->
+      <h1 class="ngm-h1">Welcome back<span id="ngm-hub-comma">, </span><em id="ngm-hub-name">{Contact_First_Name}</em></h1>
+      <p class="ngm-lead">This is your members-only home. See what's coming up, browse the
+        member directory, update your profile, and reach the resources reserved for guild members.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       UPCOMING EVENTS — intro (the live list is the WA gadget below)
+  ════════════════════════════════════════════════════════════ -->
+  <section class="ngm-hub-events">
+    <div class="ngm-hub-events-inner">
+      <div class="ngm-hub-events-head">
+        <div>
+          <span class="ngm-eyebrow">What's coming up</span>
+          <h2 class="ngm-h2">Upcoming <em>events</em></h2>
+        </div>
+        <a href="/calendar" class="ngm-arrow-link">See the full calendar →</a>
+      </div>
+      <p class="ngm-lead">Meetings, stitch-ins, and special events on the calendar. Click any
+        event below to see details and register.</p>
+    </div>
+  </section>
+</div>
+<!-- The native WA "Upcoming events" gadget is added next (02-wa-gadget.txt),
+     then 03-bottom.html follows to close out the page. -->
+
+<script>
+/* NAME FALLBACK — if Wild Apricot didn't replace {Contact_First_Name}
+   (e.g. macro disabled, or a logged-out preview), drop the name so the
+   greeting reads "Welcome back" instead of showing raw macro text. */
+(function () {
+  var name = document.getElementById('ngm-hub-name');
+  var comma = document.getElementById('ngm-hub-comma');
+  if (!name) return;
+  var txt = (name.textContent || '').trim();
+  if (txt === '' || /[{}]/.test(txt)) {   // unresolved macro still has { }
+    name.remove();
+    if (comma) comma.remove();
+  }
+}());
+</script>

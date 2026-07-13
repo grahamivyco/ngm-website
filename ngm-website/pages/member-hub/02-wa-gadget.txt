@@ -1,0 +1,23 @@
+NATIVE WA GADGET — "Upcoming events"
+=====================================
+Not pasteable HTML. Add the native Wild Apricot "Upcoming events" gadget in
+the WA editor, BETWEEN 01-top.html and 03-bottom.html, in the SAME layout row
+(the "sandwich" pattern — a native gadget can't live inside a Custom HTML block).
+
+Setup:
+1. Add gadget → "Upcoming events".
+2. Select it → gadget settings → "CSS class" → enter:  ngm-wa-events
+3. Choose how many events to show (5–6 is a good number for a hub) and,
+   if you like, filter to the event types members care about most.
+4. Set the layout ROW background to linen (#F0EAE0) so it blends with the
+   intro block above and the section below.
+
+Why a native gadget (and not a hand-built list):
+- Wild Apricot's event API is blocked from the browser (CORS), so a Custom HTML
+  block can't fetch events live. The native gadget is the only thing that stays
+  automatically up to date — new events appear here with no code change.
+
+Styling:
+- Light container styling for  .ngm-wa-events  lives in 01-top.html's <style>.
+- Want the richer event-card look from the public Events page? Copy that page's
+  `.ngm-wa-events` CSS section into 01-top.html, replacing the light version.
