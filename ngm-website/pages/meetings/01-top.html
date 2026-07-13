@@ -438,7 +438,7 @@ body .ngm-wa-events.WaGadgetUpcomingEvents {
   border: none !important;
   box-shadow: none !important;
   margin: 0 !important;
-
+  
   padding: 28px 48px !important;
   font-family: var(--ngm-sans) !important;
 }
@@ -447,7 +447,7 @@ body .ngm-wa-events .gadgetStyleBody {
   border: 1px solid var(--ngm-border) !important;
   border-radius: var(--ngm-radius-lg) !important;
   box-shadow: var(--ngm-sh) !important;
-
+  
   padding: 12px 28px !important;
   margin: 0 auto !important;
   max-width: 1080px !important;    /* align with .ngm-con */
@@ -464,7 +464,7 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li {
   padding: 18px 8px !important;
   margin: 0 !important;
   font-family: var(--ngm-sans) !important;
-
+  
   border-radius: 0 !important;
   transition: background-color .2s ease !important;
 }
@@ -521,7 +521,7 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li .date span {
   font-family: var(--ngm-sans) !important;
   font-size: .8rem !important;          /* match .ngm-meta-row */
   font-weight: 400 !important;
-  font-style: normal !important;
+  font-style: normal !important;        
   color: var(--ngm-gray) !important;    /* match .ngm-meta-row */
 }
 
@@ -549,10 +549,6 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="hybrid"]  .ngm-evt-ta
 body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="virtual"] .ngm-evt-tag { background:#F2EEF8 !important; color:#5A3A8A !important; }
 body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-tag { background:var(--ngm-rose-lt) !important; color:#7A3E2E !important; }
 </style>
-<!-- ══════════════════════════════════════════════════════════
-  [HERO] — part of Block 1
-  HERO PHOTO: replace src — upload to WA Files, copy URL, paste.
-══════════════════════════════════════════════════════════ -->
 <div class="ngm ngm-mtg-hero">
   <div class="ngm-mtg-hero-inner">
     <div class="ngm-mtg-hero-copy">
@@ -574,11 +570,6 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
     </div>
   </div>
 </div>
-<!-- ══════════════════════════════════════════════════════════
-  [GROUPS] — part of Block 1
-  One card per meeting group. Cards: no top bar; hover = pale green.
-  TO ADD: copy a .ngm-gcard block. TO PAUSE: add class="paused".
-══════════════════════════════════════════════════════════ -->
 <section class="ngm ngm-sec ngm-sec-white" id="ngm-groups">
   <div class="ngm-con">
     <span class="ngm-eyebrow">Our groups</span>
@@ -683,10 +674,6 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
     </p>
   </div>
 </section>
-<!-- ══════════════════════════════════════════════════════════
-  [LOCATION] — part of Block 1
-  Sits on LINEN (distinct from the white groups section above).
-══════════════════════════════════════════════════════════ -->
 <section class="ngm ngm-sec ngm-sec-linen">
   <div class="ngm-con">
     <span class="ngm-eyebrow">Find us</span>
@@ -730,12 +717,6 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
     </div>
   </div>
 </section>
-<!-- ══════════════════════════════════════════════════════════
-  [FAQ] — part of Block 1
-  Sits on WHITE. Card-style accordion (matches homepage), opens
-  and closes fluidly (grid-rows + script). Each answer is wrapped:
-  .ngm-faq-wrap > .ngm-faq-a > div
-══════════════════════════════════════════════════════════ -->
 <section class="ngm ngm-sec ngm-sec-white">
   <div class="ngm-con">
     <span class="ngm-eyebrow">Good to know</span>
@@ -772,12 +753,6 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
     </div>
   </div>
 </section>
-<!-- ══════════════════════════════════════════════════════════
-  [UPCOMING-TOP] — part of Block 1  (events heading)
-  Sits on LINEN. Below this block, add the WA Upcoming events
-  gadget (CSS class: ngm-wa-events, filtered to meetings), then
-  paste Block 2 below the gadget.
-══════════════════════════════════════════════════════════ -->
 <section class="ngm ngm-sec ngm-sec-linen" style="padding-bottom:0">
   <div class="ngm-con">
     <div class="ngm-upcoming-head">
@@ -787,14 +762,6 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
     </div>
   </div>
 </section>
-<!-- ══════════════════════════════════════════════════════════
-  [EVENT-TAGS] — location-derived tag chips + full-row click for
-  the WA upcoming-events gadget. CSS can't read text, so this
-  reads each event's .location, stamps a data-tag on the <li>,
-  injects a chip above the title, and makes the whole row clickable.
-  Mapping: zoom→Zoom, videoconference/online→Online, hybrid→Hybrid,
-  else→In person. (Location lines are hidden via CSS.)
-══════════════════════════════════════════════════════════ -->
 <script>
 (function () {
   function label(t){ if(t==="zoom")return "Zoom"; if(t==="virtual")return "Online"; if(t==="hybrid")return "Hybrid"; return "In person"; }
@@ -832,12 +799,6 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
   if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
 })();
 </script>
-<!-- ══════════════════════════════════════════════════════════
-  [FAQ-ANIM] — smooth open AND close for the accordion.
-  Native <details> removes [open] synchronously, so close can't
-  animate. This keeps [open] until the grid-rows transition ends.
-  CSS does the animation (min-height:0 makes it repeatable).
-══════════════════════════════════════════════════════════ -->
 <script>
 (function () {
   function wire(item){

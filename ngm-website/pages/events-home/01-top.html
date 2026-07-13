@@ -503,7 +503,7 @@ body .ngm-wa-events.WaGadgetUpcomingEvents {
   border: none !important;
   box-shadow: none !important;
   margin: 0 !important;
-
+  
   padding: 28px 48px !important;
   font-family: var(--ngm-sans) !important;
 }
@@ -512,7 +512,7 @@ body .ngm-wa-events .gadgetStyleBody {
   border: 1px solid var(--ngm-border) !important;
   border-radius: var(--ngm-radius-lg) !important;
   box-shadow: var(--ngm-sh) !important;
-
+  
   padding: 12px 28px !important;
   margin: 0 auto !important;
   max-width: 1080px !important;    /* align with .ngm-con */
@@ -529,7 +529,7 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li {
   padding: 18px 8px !important;
   margin: 0 !important;
   font-family: var(--ngm-sans) !important;
-
+  
   border-radius: 0 !important;
   transition: background-color .2s ease !important;
 }
@@ -586,7 +586,7 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li .date span {
   font-family: var(--ngm-sans) !important;
   font-size: .8rem !important;          /* match .ngm-meta-row */
   font-weight: 400 !important;
-  font-style: normal !important;
+  font-style: normal !important;        
   color: var(--ngm-gray) !important;    /* match .ngm-meta-row */
 }
 
@@ -614,10 +614,6 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="hybrid"]  .ngm-evt-ta
 body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="virtual"] .ngm-evt-tag { background:#F2EEF8 !important; color:#5A3A8A !important; }
 body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-tag { background:var(--ngm-rose-lt) !important; color:#7A3E2E !important; }
 </style>
-<!-- ══════════════════════════════════════════════════════════
-  [HERO] — part of Block 1
-  EDIT SAFELY: eyebrow, headline (keep <em>), intro copy.
-══════════════════════════════════════════════════════════ -->
 <div class="ngm ngm-ev-hero">
   <div class="ngm-ev-hero-inner">
     <span class="ngm-eyebrow">Guild events</span>
@@ -625,12 +621,6 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
     <p>Beyond our monthly groups, the Guild year is shaped by special events — chief among them our beloved annual Retreat. Here's what's coming up, and how to be part of it.</p>
   </div>
 </div>
-<!-- ══════════════════════════════════════════════════════════
-  [FEATURED RETREAT] — part of Block 1
-  The centerpiece of the Events page. Dark panel with photo.
-  EDIT SAFELY: dates, copy, the bullet list, button text/links,
-  and the photo src (upload to WA Files first).
-══════════════════════════════════════════════════════════ -->
 <div class="ngm ngm-retreat">
   <div class="ngm-retreat-inner">
     <!-- PHOTO NOTE: replace src with a real retreat photo from WA Files. -->
@@ -672,13 +662,6 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
     </div>
   </div>
 </div>
-<!-- ══════════════════════════════════════════════════════════
-  [EVENT TYPES] — part of Block 1  ("Beyond the Retreat")
-  Card grid of the Guild's recurring special-event types.
-  Sits on WHITE (distinct from the dark Retreat above and the
-  linen events heading below). One short tag per card.
-  TO ADD: copy a .ngm-etype-card block. TO REMOVE: delete it.
-══════════════════════════════════════════════════════════ -->
 <section class="ngm ngm-sec ngm-sec-white">
   <div class="ngm-con">
     <span class="ngm-eyebrow">Beyond the retreat</span>
@@ -752,12 +735,6 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
     </div>
   </div>
 </section>
-<!-- ══════════════════════════════════════════════════════════
-  [UPCOMING-TOP] — part of Block 1  (events heading)
-  Sits on LINEN. Below this block, add the WA Upcoming events
-  gadget (CSS class: ngm-wa-events), FILTERED to special events
-  (exclude the recurring monthly meetings). Then paste Block 2.
-══════════════════════════════════════════════════════════ -->
 <section class="ngm ngm-sec ngm-sec-linen" style="padding-bottom:0">
   <div class="ngm-con">
     <div class="ngm-upcoming-head">
@@ -767,10 +744,6 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
     </div>
   </div>
 </section>
-<!-- ══════════════════════════════════════════════════════════
-  [EVENT-TAGS] — location-derived tag chips + full-row click for
-  the WA upcoming-events gadget (matches the homepage exactly).
-══════════════════════════════════════════════════════════ -->
 <script>
 (function () {
   function label(t){ if(t==="zoom")return "Zoom"; if(t==="virtual")return "Online"; if(t==="hybrid")return "Hybrid"; return "In person"; }
@@ -808,9 +781,6 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
   if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
 })();
 </script>
-<!-- ══════════════════════════════════════════════════════════
-  [FAQ-ANIM] — smooth open AND close for the FAQ cards.
-══════════════════════════════════════════════════════════ -->
 <script>
 (function () {
   function wire(item){

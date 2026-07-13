@@ -1,5 +1,7 @@
 <section class="ngm ngm-sec ngm-sec-linen" style="padding-top:24px">
-
+  <!-- matches the FAQ "More questions? See all FAQs" pattern —
+       a muted text lead-in followed by an inline arrow link.
+       Left-aligned. No heading, no button. -->
   <div class="ngm-con" style="text-align:left">
     <p style="font-family:var(--ngm-sans);font-size:.95rem;color:var(--ngm-gray)">
       Looking for everything at once?
@@ -11,13 +13,6 @@
     <p class="ngm-cal-note" style="text-align:left">Most meetings are free for members. Some workshops have registration fees — see individual events for details.</p>
   </div>
 </section>
-<!-- ══════════════════════════════════════════════════════════
-  [RETREAT] — Custom HTML gadget 6
-  stays MEMBERS ONLY (copy no longer says "members first");
-  copy is more exciting; button no longer stretches on desktop
-  (.ngm-btn-fit + align-items:flex-start on the copy column);
-  photo from the site.
-══════════════════════════════════════════════════════════ -->
 <div class="ngm ngm-retreat">
   <div class="ngm-retreat-inner">
     <!-- PHOTO NOTE: copy a real retreat photo URL from /gallery
@@ -47,9 +42,9 @@
           Members Only
         </div>
       </div>
-
+      <!-- exciting copy; no "members first" wording -->
       <p class="ngm-retreat-body">The highlight of the guild year. Three days away with nationally recognized instructors, your favorite projects, and a whole community of stitchers — all in one place. It's exclusively for members, and it's worth being one.</p>
-
+      <!-- .ngm-btn-fit keeps the button at its natural width -->
       <a class="ngm-btn ngm-btn-white ngm-btn-sm ngm-btn-fit" href="/retreats">
         Learn about the 2026 Retreat
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -57,14 +52,6 @@
     </div>
   </div>
 </div>
-<!-- ══════════════════════════════════════════════════════════
-  [JOIN] — Custom HTML gadget 7
-  v6 the "$30 per year" serif-rose pill is removed. The
-  price is now part of the body paragraph (.ngm-join-body) as
-  plain text — one font, one color in this block.
-  ⚠ TO CONFIRM WITH TASHA / LINDA: Is the first meeting free to
-  try? If yes, restore a line like the commented one below.
-══════════════════════════════════════════════════════════ -->
 <section class="ngm ngm-join">
   <div class="ngm-join-inner">
     <span class="ngm-eyebrow">Membership</span>
@@ -81,17 +68,6 @@
     </div>
   </div>
 </section>
-<!-- ══════════════════════════════════════════════════════════
-  [FAQ] — Custom HTML gadget 7b
-  Accordion cards using <details>/<summary> — no JS.
-  Answers open fluidly via the .ngm-faq-wrap grid-rows transition.
-  Add a card: copy one <details class="ngm-faq-card"> block (keep
-  the .ngm-faq-wrap > .ngm-faq-a > div nesting for the animation).
-  To have the first one open by default, add the word "open"
-  to its <details> tag (e.g. <details class="ngm-faq-card" open>).
-  section now sits on CREAM — so it reads as a DISTINCT band
-  from the LINEN Location section directly below it.
-══════════════════════════════════════════════════════════ -->
 <section class="ngm ngm-sec ngm-sec-white">
   <div class="ngm-con">
     <span class="ngm-eyebrow">Common questions</span>
@@ -128,10 +104,6 @@
     </p>
   </div>
 </section>
-<!-- ══════════════════════════════════════════════════════════
-  [LOCATION] — Custom HTML gadget 8
-  section sits on LINEN — distinct from the CREAM FAQ above.
-══════════════════════════════════════════════════════════ -->
 <section class="ngm ngm-sec ngm-sec-linen">
   <div class="ngm-con">
     <div class="ngm-loc-inner">

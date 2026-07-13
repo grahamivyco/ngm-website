@@ -363,11 +363,11 @@ body a.ngm-btn-outline-rose:hover { background: var(--ngm-rose) !important; colo
   border: 1px solid var(--ngm-border);
   border-radius: var(--ngm-radius-lg);
   padding: 24px;
-
+  
   transition: background-color .25s ease, border-color .25s ease;
 }
 .ngm-mcard:hover {
-
+  
   background: var(--ngm-sage-lt);
   border-color: var(--ngm-sage-lt);
 }
@@ -403,7 +403,7 @@ body a.ngm-btn-outline-rose:hover { background: var(--ngm-rose) !important; colo
 .ngm-mcard-meta {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 12px;   
   padding-top: 14px;
   border-top: 1px solid var(--ngm-linen-dk);
 }
@@ -482,7 +482,7 @@ body .ngm-wa-events.WaGadgetUpcomingEvents {
   border: none !important;
   box-shadow: none !important;
   margin: 0 !important;
-
+  
   padding: 28px 48px !important;
   font-family: var(--ngm-sans) !important;
 }
@@ -491,7 +491,7 @@ body .ngm-wa-events .gadgetStyleBody {
   border: 1px solid var(--ngm-border) !important;
   border-radius: var(--ngm-radius-lg) !important;
   box-shadow: var(--ngm-sh) !important;
-
+  
   padding: 12px 28px !important;
   margin: 0 auto !important;
   max-width: 1080px !important;    /* align with .ngm-con */
@@ -508,7 +508,7 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li {
   padding: 18px 8px !important;
   margin: 0 !important;
   font-family: var(--ngm-sans) !important;
-
+  
   border-radius: 0 !important;
   transition: background-color .2s ease !important;
 }
@@ -565,7 +565,7 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li .date span {
   font-family: var(--ngm-sans) !important;
   font-size: .8rem !important;          /* match .ngm-meta-row */
   font-weight: 400 !important;
-  font-style: normal !important;
+  font-style: normal !important;        
   color: var(--ngm-gray) !important;    /* match .ngm-meta-row */
 }
 
@@ -844,7 +844,7 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
   .ngm-retreat-copy      { padding: 44px 28px; }
   .ngm-loc-inner         { grid-template-columns: 1fr; gap: 36px; }
   .ngm-loc-map           { height: 250px; }
-
+  
   .ngm-hero-body,
   .ngm-lead,
   .ngm-upcoming-intro,
@@ -996,35 +996,18 @@ body .WaPlaceHolderWide > div {
   margin-bottom: 0 !important;
 }
 </style>
-<!-- ══════════════════════════════════════════════════════════
-  [HERO] — Custom HTML gadget 1
-  EDIT SAFELY:
-  · Eyebrow text  · H1 text (keep em on accent word)
-  · Intro paragraph  · Button text/links
-  · Image src — see PHOTO NOTE below
-══════════════════════════════════════════════════════════ -->
 <section class="ngm ngm-hero">
   <div class="ngm-hero-copy">
-
+    <!-- Eyebrow now reads EST. 1972 only -->
     <span class="ngm-eyebrow">EST. 1972</span>
     <h1 class="ngm-h1">A place for people<br>who love to <em>stitch</em></h1>
-
+    <!-- Copy is now about community, no library/book count -->
     <p class="ngm-hero-body">Monthly meetings, hands-on workshops, and a beloved annual retreat — a warm, welcoming community of stitchers who learn from and look out for each other.</p>
     <div class="ngm-hero-btns">
       <a class="ngm-btn ngm-btn-green" href="/join">Join the Guild</a>
       <a class="ngm-btn ngm-btn-outline" href="/monthly">See our meetings</a>
     </div>
   </div>
-  <!-- ════════════ PHOTO NOTE — ACTION NEEDED ════════════
-       Use a real group photo from the NGM site.
-       HOW: open  https://needleworkguildmn.org/gallery
-       → click a photo showing members together
-       → right-click the large image → "Copy image address"
-       → paste that URL into src="" below (replacing the
-         placeholder). It will look like:
-         https://needleworkguildmn.org/resources/Pictures/....jpg
-       Until then this placeholder shows so the layout holds.
-  ═══════════════════════════════════════════════════════ -->
   <div class="ngm-hero-photo">
     <img
       src="REPLACE_WITH_GROUP_PHOTO_URL_FROM_GALLERY"
@@ -1034,11 +1017,6 @@ body .WaPlaceHolderWide > div {
     >
   </div>
 </section>
-<!-- ══════════════════════════════════════════════════════════
-  [MARQUEE] — Custom HTML gadget 2
-  divider lines + dots removed; edges fade to green (in CSS).
-  Both item sets still required for the seamless loop.
-══════════════════════════════════════════════════════════ -->
 <div class="ngm">
   <div class="ngm-marquee-wrap" aria-hidden="true">
     <div class="ngm-marquee-track">
@@ -1099,10 +1077,6 @@ body .WaPlaceHolderWide > div {
     200+ active members · 50+ years of community · 400+ library books · 7 monthly groups · $30 per year
   </p>
 </div>
-<!-- ══════════════════════════════════════════════════════════
-  [ABOUT] — Custom HTML gadget 3
-  eyebrow now "ABOUT"; photo from site + icon overlay badge.
-══════════════════════════════════════════════════════════ -->
 <section class="ngm ngm-sec ngm-sec-linen">
   <div class="ngm-con">
     <div class="ngm-about-inner">
@@ -1139,9 +1113,6 @@ body .WaPlaceHolderWide > div {
     </div>
   </div>
 </section>
-<!-- ══════════════════════════════════════════════════════════
-  [MEETINGS] — Custom HTML gadget 4  (unchanged)
-══════════════════════════════════════════════════════════ -->
 <section class="ngm ngm-sec ngm-sec-white">
   <div class="ngm-con">
     <span class="ngm-eyebrow">Monthly Meetings</span>
@@ -1237,57 +1208,16 @@ body .WaPlaceHolderWide > div {
     </p>
   </div>
 </section>
-<!-- ══════════════════════════════════════════════════════════
-  [UPCOMING-TOP] — Custom HTML gadget 5a  (heading only)
-  v6 RESTRUCTURE — read this carefully, it fixes BOTH problems:
-  the unstyled list AND the "sitting underneath" layout.
-  WHY IT BROKE BEFORE:
-   • A WA "Upcoming events" gadget is a NATIVE gadget — it CANNOT
-     be pasted inside a Custom HTML block. WA drops it into the
-     next LAYOUT CELL. The old two-column grid had no real cell
-     for it, so it landed below, outside the grid, unstyled.
-  HOW TO LAY IT OUT IN WA (this is the important part):
-   1. This [UPCOMING-TOP] gadget = the heading. It opens a linen
-      section background and a centered container.
-   2. Put THREE gadgets stacked in ONE full-width layout row,
-      in this order, top to bottom:
-         (a) this [UPCOMING-TOP] Custom HTML gadget
-         (b) the native WA "Upcoming events" gadget
-         (c) the [UPCOMING-CTA] Custom HTML gadget below (Block 2)
-   3. To kill the seam: set the LAYOUT ROW's background to
-      TRANSPARENT (or to linen #F0EAE0) in the WA editor, so the
-      gadget's own linen runs continuously through all three.
-   4. STYLING THE WA GADGET: its CSS lives in section 12 of the
-      [CSS] block above. IN WA: select the Upcoming events gadget
-      → gadget settings → "CSS class" field → enter:  ngm-wa-events
-      That connects the styling to the gadget. The tag chips are
-      injected by the [EVENT-TAGS] script at the very bottom of
-      this block — no extra setup needed.
-══════════════════════════════════════════════════════════ -->
 <section class="ngm ngm-sec ngm-sec-linen" style="padding-bottom:0">
   <div class="ngm-con">
     <div class="ngm-upcoming-head">
       <span class="ngm-eyebrow">What's coming up</span>
       <!-- v6 CASING FIX: sentence case to match other section titles -->
       <h2 class="ngm-h2">Mark your <em>calendar</em></h2>
-
       <p class="ngm-upcoming-intro">A look at what's next on the Guild calendar — meetings, workshops, and gatherings open in the coming weeks. Click any event for details and to register.</p>
     </div>
   </div>
 </section>
-<!-- ══════════════════════════════════════════════════════════
-  [EVENT-TAGS] — location-derived tag chips for the WA gadget.
-  CSS can't read text, so this small script reads each event's
-  .location text and stamps a data-tag on the <li>, then injects
-  a .ngm-evt-tag chip above the title. Runs on the live page.
-  Mapping (case-insensitive):
-    "zoom"                          → ZOOM      (zoom)
-    "videoconference"/"online"      → ONLINE    (virtual)
-    "hybrid"                        → HYBRID    (hybrid)
-    anything else (an address)      → IN PERSON (person)
-  Re-runs if WA re-renders the list (MutationObserver).
-  TO CHANGE A LABEL: edit the strings in label() below.
-══════════════════════════════════════════════════════════ -->
 <script>
 (function () {
   function label(t) {
@@ -1352,17 +1282,6 @@ body .WaPlaceHolderWide > div {
   }
 })();
 </script>
-<!-- ══════════════════════════════════════════════════════════
-  [FAQ-ANIM] — smooth open AND close for the FAQ accordion.
-  Native <details> removes the [open] attribute synchronously,
-  so the CLOSE can't animate and repeated toggles can look janky.
-  This intercepts the toggle: on close it keeps [open] until the
-  grid-rows transition finishes, then removes it — so both
-  directions animate fluidly, every time. CSS still does the
-  actual animation (the min-height:0 fix makes it repeatable);
-  this just fixes the close direction. Progressive enhancement:
-  if JS is off, the accordion still works (just snaps on close).
-══════════════════════════════════════════════════════════ -->
 <script>
 (function () {
   function wire(card) {

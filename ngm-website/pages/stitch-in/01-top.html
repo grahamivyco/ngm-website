@@ -426,7 +426,7 @@ body .ngm-wa-events.WaGadgetUpcomingEvents {
   border: none !important;
   box-shadow: none !important;
   margin: 0 !important;
-
+  
   padding: 28px 48px !important;
   font-family: var(--ngm-sans) !important;
 }
@@ -435,7 +435,7 @@ body .ngm-wa-events .gadgetStyleBody {
   border: 1px solid var(--ngm-border) !important;
   border-radius: var(--ngm-radius-lg) !important;
   box-shadow: var(--ngm-sh) !important;
-
+  
   padding: 12px 28px !important;
   margin: 0 auto !important;
   max-width: 1080px !important;    /* align with .ngm-con */
@@ -452,7 +452,7 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li {
   padding: 18px 8px !important;
   margin: 0 !important;
   font-family: var(--ngm-sans) !important;
-
+  
   border-radius: 0 !important;
   transition: background-color .2s ease !important;
 }
@@ -509,7 +509,7 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li .date span {
   font-family: var(--ngm-sans) !important;
   font-size: .8rem !important;          /* match .ngm-meta-row */
   font-weight: 400 !important;
-  font-style: normal !important;
+  font-style: normal !important;        
   color: var(--ngm-gray) !important;    /* match .ngm-meta-row */
 }
 
@@ -537,9 +537,6 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="hybrid"]  .ngm-evt-ta
 body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="virtual"] .ngm-evt-tag { background:#F2EEF8 !important; color:#5A3A8A !important; }
 body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-tag { background:var(--ngm-rose-lt) !important; color:#7A3E2E !important; }
 </style>
-<!-- ══════════════════════════════════════════════════════════
-  [HERO]  — photo is the Guild's real Stitch-In image.
-══════════════════════════════════════════════════════════ -->
 <div class="ngm ngm-si-hero">
   <div class="ngm-si-hero-inner">
     <div class="ngm-si-hero-copy">
@@ -560,9 +557,6 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
     </div>
   </div>
 </div>
-<!-- ══════════════════════════════════════════════════════════
-  [TWO GROUP CARDS]  on WHITE
-══════════════════════════════════════════════════════════ -->
 <section class="ngm ngm-sec ngm-sec-white" id="ngm-si-groups">
   <div class="ngm-con">
     <span class="ngm-eyebrow">Two sessions</span>
@@ -599,11 +593,6 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
     </p>
   </div>
 </section>
-<!-- ══════════════════════════════════════════════════════════
-  [UPCOMING — TOP]  events heading on LINEN
-  Add the WA Upcoming events gadget below this (class ngm-wa-events),
-  FILTERED to Stitch-In events. Then paste Block 2.
-══════════════════════════════════════════════════════════ -->
 <section class="ngm ngm-sec ngm-sec-linen" style="padding-bottom:0">
   <div class="ngm-con">
     <div class="ngm-upcoming-head">
@@ -613,9 +602,6 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
     </div>
   </div>
 </section>
-<!-- ══════════════════════════════════════════════════════════
-  [EVENT-TAGS] + [FAQ-ANIM] scripts
-══════════════════════════════════════════════════════════ -->
 <script>
 (function () {
   function label(t){ if(t==="zoom")return "Zoom"; if(t==="virtual")return "Online"; if(t==="hybrid")return "Hybrid"; return "In person"; }
