@@ -1,0 +1,41 @@
+<!-- SLIM — styling comes from the Global CSS (global.css). Paste this only AFTER global.css is live in WA. Full self-contained version: 01-top.html -->
+<div class="ngm">
+  <section class="ngm-hub-hero">
+    <div class="ngm-hub-hero-inner">
+      <span class="ngm-eyebrow">Member Hub</span>
+      <!-- The name is filled in by Wild Apricot. If it can't be filled in,
+           the script at the bottom trims this to just "Welcome back". -->
+      <h1 class="ngm-h1">Welcome back<span id="ngm-hub-comma">, </span><em id="ngm-hub-name">{Contact_First_Name}</em></h1>
+    </div>
+  </section>
+
+  <section class="ngm-hub-events">
+    <div class="ngm-hub-events-inner">
+      <div class="ngm-hub-events-head">
+        <div>
+          <span class="ngm-eyebrow">What's coming up</span>
+          <h2 class="ngm-h2">Upcoming <em>events</em></h2>
+        </div>
+        <a href="/calendar" class="ngm-arrow-link">See the full calendar →</a>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- The native WA "Upcoming events" gadget is added next (02-wa-gadget.txt),
+     then 03-bottom.html follows to close out the page. -->
+
+<script>
+/* NAME FALLBACK — if Wild Apricot didn't replace {Contact_First_Name}
+   (e.g. macro disabled, or a logged-out preview), drop the name so the
+   greeting reads "Welcome back" instead of showing raw macro text. */
+(function () {
+  var name = document.getElementById('ngm-hub-name');
+  var comma = document.getElementById('ngm-hub-comma');
+  if (!name) return;
+  var txt = (name.textContent || '').trim();
+  if (txt === '' || /[{}]/.test(txt)) {   // unresolved macro still has { }
+    name.remove();
+    if (comma) comma.remove();
+  }
+}());
+</script>

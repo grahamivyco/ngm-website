@@ -1,0 +1,108 @@
+<!-- SLIM — styling comes from the Global CSS (global.css). Paste this only AFTER global.css is live in WA. Full self-contained version: 01-top.html -->
+<div class="ngm ngm-si-hero">
+  <div class="ngm-si-hero-inner">
+    <div class="ngm-si-hero-copy">
+      <div class="ngm-crumb"><a href="/monthly-meetings">Monthly Meetings</a> &nbsp;/&nbsp; Stitch-Ins</div>
+      <span class="ngm-eyebrow">Monthly meetings</span>
+      <h1 class="ngm-h1"><em>Stitch-Ins</em></h1>
+      <p>Two open stitching sessions each month, with exposure to a wide range of fiber arts through lectures, presentations, and hands-on projects. Needleworkers of any skill level are welcome.</p>
+      <p>Don't feel like following the program? You're always welcome to join and work on your own project.</p>
+      <div class="ngm-si-hero-btns">
+        <a class="ngm-btn ngm-btn-green" href="#ngm-si-groups">See both sessions</a>
+        <a class="ngm-btn ngm-btn-outline" href="/calendar">View the calendar</a>
+      </div>
+    </div>
+    <div class="ngm-si-hero-photo">
+      <img src="https://needleworkguildmn.org/resources/Pictures/evening%20SI%202.jpg"
+           alt="Guild members at an evening Stitch-In"
+           loading="eager" onerror="this.style.display='none'">
+    </div>
+  </div>
+</div>
+<section class="ngm ngm-sec ngm-sec-white" id="ngm-si-groups">
+  <div class="ngm-con">
+    <span class="ngm-eyebrow">Two sessions</span>
+    <h2 class="ngm-h2">Day or <em>evening</em></h2>
+    <p class="ngm-si-intro">Both Stitch-Ins meet on the 4th Tuesday of the month. Programs may differ between the two, and you're welcome to attend either or both.</p>
+    <div class="ngm-si-grid">
+      <div class="ngm-si-card">
+        <span class="ngm-si-badge">Hybrid</span>
+        <h3>Daytime Stitch-In</h3>
+        <div class="ngm-si-when">4th Tuesday · 10 AM – 2 PM</div>
+        <p>A daytime session with a monthly program — presentations, demos, and projects spanning a wide range of fiber arts. Work along with the program or bring your own project.</p>
+        <ul class="ngm-si-meta">
+          <li>Hybrid: in person or by video</li>
+          <li>In person at MVUUF, Bloomington</li>
+          <li>All skill levels welcome</li>
+        </ul>
+      </div>
+      <div class="ngm-si-card">
+        <span class="ngm-si-badge">Virtual only</span>
+        <h3>Evening Stitch-In</h3>
+        <div class="ngm-si-when">4th Tuesday · 7 – 9 PM</div>
+        <p>The same warm, social spirit in an evening session — great for members who work during the day. Programs may differ from the daytime meeting.</p>
+        <ul class="ngm-si-meta">
+          <li>By videoconference only</li>
+          <li>Link on the Member Resources page</li>
+          <li>All skill levels welcome</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:28px;font-family:var(--ngm-sans);font-size:.9rem;color:var(--ngm-gray-lt)">
+      In-person meetings are at the
+      <a class="ngm-arrow-link" style="font-size:.9rem" href="https://mnvalleyuu.org/" target="_blank" rel="noopener">MN Valley Unitarian Universalist Fellowship</a>
+      in Bloomington. Video links live on the Member Resources page (log in to access).
+    </p>
+  </div>
+</section>
+<section class="ngm ngm-sec ngm-sec-linen" style="padding-bottom:0">
+  <div class="ngm-con">
+    <div class="ngm-upcoming-head">
+      <span class="ngm-eyebrow">Coming up</span>
+      <h2 class="ngm-h2">Upcoming <em>Stitch-Ins</em></h2>
+      <p class="ngm-upcoming-intro">The next daytime and evening sessions. Click any event for the program details and to register.</p>
+    </div>
+  </div>
+</section>
+<script>
+(function () {
+  function label(t){ if(t==="zoom")return "Zoom"; if(t==="virtual")return "Online"; if(t==="hybrid")return "Hybrid"; return "In person"; }
+  function classify(text){ var s=(text||"").toLowerCase();
+    if(s.indexOf("zoom")>-1) return "zoom";
+    if(s.indexOf("videoconference")>-1||s.indexOf("video conference")>-1||s.indexOf("online")>-1) return "virtual";
+    if(s.indexOf("hybrid")>-1) return "hybrid"; return "person"; }
+  function tagEvents(){
+    var items=document.querySelectorAll(".ngm-wa-events.upcomingEventsStyle001 ul li");
+    items.forEach(function(li){
+      if(li.getAttribute("data-tag-done")==="1") return;
+      var locEl=li.querySelector(".location");
+      var tag=classify(locEl?locEl.textContent:""); li.setAttribute("data-tag",tag);
+      var chip=document.createElement("span"); chip.className="ngm-evt-tag"; chip.textContent=label(tag);
+      var titleEl=li.querySelector(".title");
+      if(titleEl) li.insertBefore(chip,titleEl); else li.insertBefore(chip,li.firstChild);
+      var titleLink=li.querySelector(".title a");
+      if(titleLink&&titleLink.href){ li.style.cursor="pointer";
+        li.addEventListener("click",function(e){ if(e.target.closest("a"))return; window.location.href=titleLink.href; }); }
+      li.setAttribute("data-tag-done","1");
+    });
+  }
+  function init(){ tagEvents(); var g=document.querySelector(".ngm-wa-events");
+    if(g&&window.MutationObserver){ new MutationObserver(function(){tagEvents();}).observe(g,{childList:true,subtree:true}); } }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
+})();
+</script>
+<script>
+(function () {
+  function wire(item){
+    var summary=item.querySelector("summary"); var wrap=item.querySelector(".ngm-faq-wrap");
+    if(!summary||!wrap) return;
+    summary.addEventListener("click",function(e){
+      if(!item.open) return; e.preventDefault(); item.classList.add("ngm-faq-closing");
+      var done=function(){ wrap.removeEventListener("transitionend",done); item.removeAttribute("open"); item.classList.remove("ngm-faq-closing"); };
+      wrap.addEventListener("transitionend",done); setTimeout(done,400);
+    });
+  }
+  function init(){ document.querySelectorAll(".ngm-faq-card").forEach(wire); }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
+})();
+</script>

@@ -1,0 +1,18 @@
+<!-- SLIM — styling comes from the Global CSS (global.css). Paste this only AFTER global.css is live in WA. Full self-contained version: 01-top.html -->
+<div class="ngm">
+  <section class="ngm-login">
+    <div class="ngm-login-head">
+      <span class="ngm-eyebrow">Member Login</span>
+      <h1 class="ngm-login-title">Welcome, <em>members</em></h1>
+      <p class="ngm-login-sub">Sign in to sign up for meetings and events, browse the member
+        directory, and open members-only resources.</p>
+    </div>
+  </section>
+</div>
+<!-- The native WA login form gadget is added next (02-wa-gadget.txt),
+     then 03-bottom.html follows. -->
+<script>
+  /* Marks this as the login page so the Global CSS shows the login form
+     EXPANDED (as a card) instead of hidden behind a "Log in" dropdown. */
+  document.body.classList.add('ngm-login-page');
+</script>
