@@ -1,13 +1,11 @@
 NATIVE WA GADGET — "Upcoming events"
 =====================================
-Not pasteable HTML. Add the native Wild Apricot "Upcoming events" gadget in the
-WA editor, BETWEEN 01-top.html and 03-bottom.html, in the SAME layout column.
+Add the native WA "Upcoming events" gadget BETWEEN 01-top.html and 03-bottom.html,
+in the SAME layout column.
 
-Setup:
 1. Add gadget -> "Upcoming events".
-2. Select it -> gadget settings -> "CSS class" -> enter:  ngm-wa-events
-3. FILTER the gadget to Beading events only.
-4. Set the layout ROW background to linen (#F0EAE0) so it blends with the
-   "Upcoming sessions" heading above and the CTA below.
+2. Gadget settings -> "CSS class" -> enter:  ngm-wa-events
+3. FILTER it to Beading events only.
+4. Set the layout ROW background to linen (#F0EAE0).
 
-The event-card styling for .ngm-wa-events is in 01-top.html's <style>.
+Event-card styling for .ngm-wa-events is in 01-top.html.
