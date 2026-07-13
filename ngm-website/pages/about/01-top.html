@@ -265,52 +265,6 @@ body a.ngm-btn-outline-rose:hover { background: var(--ngm-rose) !important; colo
   margin-bottom: 14px;
 }
 .ngm-history-simple p:last-child { margin-bottom: 0; }
-/* ── Mission / Values ── */
-.ngm-values-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  margin-top: 48px;
-}
-.ngm-value-item {
-  padding: 28px;
-  background: #fff;
-  border-radius: var(--ngm-radius-lg);
-  border: 1px solid var(--ngm-border);
-  /* card has no colored top bar */
-  transition: background-color .25s ease, border-color .25s ease;
-}
-/* EDIT: hover = pale-green fill, no lift, no shadow */
-.ngm-value-item:hover {
-  background: var(--ngm-sage-lt);
-  border-color: var(--ngm-sage-lt);
-}
-.ngm-value-icon {
-  width: 40px;
-  height: 40px;
-  background: var(--ngm-sage-lt);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 16px;
-  flex-shrink: 0;
-}
-.ngm-value-title {
-  font-family: var(--ngm-serif);
-  font-size: 1.2rem;
-  font-weight: 400;
-  color: var(--ngm-charcoal);
-  text-transform: none !important;
-  margin-bottom: 8px;
-  line-height: 1.2;
-}
-.ngm-value-desc {
-  font-family: var(--ngm-sans);
-  font-size: .875rem;
-  color: var(--ngm-gray);
-  line-height: 1.7;
-}
 /* ── What We Do cards ── */
 .ngm-do-grid {
   display: grid;
@@ -465,7 +419,6 @@ body .ngm-lcard-email {
   .ngm-about-hero-photo { height: 260px; }
   .ngm-about-hero p { max-width: 100%; }
   .ngm-sec { padding: 64px 28px; }
-  .ngm-values-grid { grid-template-columns: 1fr; gap: 16px; }
   .ngm-do-grid { grid-template-columns: 1fr; }
   .ngm-lcard-grid { grid-template-columns: 1fr; }
   .ngm-about-cta { padding: 64px 28px; }
@@ -522,10 +475,9 @@ body .WaPlaceHolderWide > div {
      edit the text inside it.
        1. HERO        — top banner: headline, intro, photo
        2. HISTORY     — the Guild's story
-       3. MISSION     — "What the Guild is for" (three cards)
-       4. WHAT WE DO  — activity cards
-       5. LEADERSHIP  — names, roles, and emails (update yearly)
-       6. JOIN CTA    — closing "join us" banner
+       3. WHAT WE DO  — activity cards
+       4. LEADERSHIP  — names, roles, and emails (update yearly)
+       5. JOIN CTA    — closing "join us" banner
 ╚══════════════════════════════════════════════════════════╝ -->
 <!-- ══════════════════════════════════════════════════════════
   SECTION 1 — HERO (the top banner)
@@ -577,56 +529,21 @@ body .WaPlaceHolderWide > div {
   </div>
 </section>
 <!-- ══════════════════════════════════════════════════════════
-  SECTION 3 — MISSION ("What the Guild is for")
-  Three cards. In each card you can edit the title and the
-  description text.
-  - To add a card: copy one whole card block (from one
-    <div class="ngm-value-item"> down to its matching </div>)
-    and paste it in, then edit the copy.
-  - To remove a card: delete one whole card block.
-══════════════════════════════════════════════════════════ -->
-<section class="ngm ngm-sec ngm-sec-white">
-  <div class="ngm-con">
-    <span class="ngm-eyebrow">Our purpose</span>
-    <h2 class="ngm-h2">What the Guild is <em>for</em></h2>
-    <div class="ngm-values-grid">
-      <div class="ngm-value-item">
-        <div class="ngm-value-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage-dk)" stroke-width="1.7"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <h3 class="ngm-value-title">Belonging</h3>
-        <p class="ngm-value-desc">A place to show up as you are. Members form real friendships through shared work and shared tables. Beginners and experienced stitchers are equally welcome.</p>
-      </div>
-      <div class="ngm-value-item">
-        <div class="ngm-value-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage-dk)" stroke-width="1.7"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-        </div>
-        <h3 class="ngm-value-title">Learning</h3>
-        <p class="ngm-value-desc">Every meeting is a chance to pick up something new — from fellow members, from visiting teachers, or from our 400+ book lending library. Curiosity is always encouraged.</p>
-      </div>
-      <div class="ngm-value-item">
-        <div class="ngm-value-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage-dk)" stroke-width="1.7"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        </div>
-        <h3 class="ngm-value-title">Craft</h3>
-        <p class="ngm-value-desc">We take needlework seriously without taking ourselves too seriously. The Guild is committed to keeping traditional skills alive — and to the simple joy of making beautiful things by hand.</p>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- ══════════════════════════════════════════════════════════
-  SECTION 4 — WHAT WE DO (activity cards)
+  SECTION 3 — WHAT WE DO (what the Guild is + activity cards)
+  This section rolls the Guild's purpose (belonging, learning,
+  craft) into the intro line, then shows the concrete activities
+  as cards below.
   Each card has a title and a description you can edit.
   - To add a card: copy one whole card block (from one
     <div class="ngm-do-card"> down to its matching </div>) and
     paste it in, then edit the copy.
   - To remove a card: delete one whole card block.
 ══════════════════════════════════════════════════════════ -->
-<section class="ngm ngm-sec ngm-sec-linen">
+<section class="ngm ngm-sec ngm-sec-white">
   <div class="ngm-con">
-    <span class="ngm-eyebrow">Guild activities</span>
+    <span class="ngm-eyebrow">What we do</span>
     <h2 class="ngm-h2">What <em>members</em> do together</h2>
-    <p class="ngm-lead">From weekly Zoom calls to annual retreats, Guild life offers something at every level of involvement.</p>
+    <p class="ngm-lead">Everything the Guild does comes back to three simple things: belonging, learning, and a love of craft. Here's how that shows up week to week — from open Stitch-Ins to the annual retreat, there's something at every level of involvement.</p>
     <div class="ngm-do-grid">
       <div class="ngm-do-card">
         <div class="ngm-do-icon" aria-hidden="true">
@@ -686,7 +603,7 @@ body .WaPlaceHolderWide > div {
   </div>
 </section>
 <!-- ══════════════════════════════════════════════════════════
-  SECTION 5 — LEADERSHIP (please update each year)
+  SECTION 4 — LEADERSHIP (please update each year)
   Each person is one card with three lines: their role, their
   name, and their email address. To update someone, just change
   the text on the right line.
@@ -784,7 +701,7 @@ body .WaPlaceHolderWide > div {
   </div>
 </section>
 <!-- ══════════════════════════════════════════════════════════
-  SECTION 6 — JOIN (the closing banner)
+  SECTION 5 — JOIN (the closing banner)
   Edit the headline, the paragraph, and the button labels/links.
   As in the hero, one word in the headline is wrapped in
   <em>...</em> to show in the rose accent color.
