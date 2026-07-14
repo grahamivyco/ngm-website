@@ -615,7 +615,7 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="virtual"] .ngm-evt-ta
 body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-tag { background:var(--ngm-rose-lt) !important; color:#7A3E2E !important; }
 /* ── 13. RETREAT SECTION ────────────────────────────────── */
 .ngm-retreat {
-  background: var(--ngm-charcoal);
+  background: var(--ngm-sage-dk);
   overflow: hidden;
 }
 .ngm-retreat-inner {
@@ -637,7 +637,7 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, transparent 40%, var(--ngm-charcoal) 92%);
+  background: linear-gradient(to right, transparent 40%, var(--ngm-sage-dk) 92%);
   pointer-events: none;
 }
 .ngm-retreat-copy {
@@ -655,7 +655,7 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
   font-weight: 500;
   letter-spacing: .18em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.4);
+  color: rgba(255,255,255,.62);
   margin-bottom: 12px;
 }
 .ngm-retreat-meta {
@@ -670,13 +670,14 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
   gap: 6px;
   font-family: var(--ngm-sans);
   font-size: .82rem;
-  color: rgba(255,255,255,.5);
+  color: rgba(255,255,255,.72);
 }
 .ngm-retreat-body {
   font-family: var(--ngm-sans);
   font-size: 1rem;
-  color: rgba(255,255,255,.65);
+  color: rgba(255,255,255,.85);
   line-height: 1.85;
+  color: rgba(255,255,255,.85);
   max-width: 380px;
   margin-bottom: 28px;
 }
@@ -860,7 +861,7 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
   .ngm-retreat-inner     { grid-template-columns: 1fr; }
   .ngm-retreat-photo     { height: 220px; }
   .ngm-retreat-photo::after {
-    background: linear-gradient(to top, var(--ngm-charcoal) 30%, transparent);
+    background: linear-gradient(to top, var(--ngm-sage-dk) 30%, transparent);
   }
   .ngm-retreat-copy      { padding: 44px 28px; }
   .ngm-loc-inner         { grid-template-columns: 1fr; gap: 36px; }
@@ -2181,13 +2182,13 @@ body .WaPlaceHolderWide > div { padding-top: 0 !important; padding-bottom: 0 !im
   line-height: 1.8; max-width: 620px; margin-top: 20px;
 }
 /* ── Featured Retreat (dark panel, like the homepage retreat) ── */
-.ngm-retreat { background: var(--ngm-charcoal); overflow: hidden; }
+.ngm-retreat { background: var(--ngm-sage-dk); overflow: hidden; }
 .ngm-retreat-inner { display: grid; grid-template-columns: 1fr 1fr; min-height: 520px; }
 .ngm-retreat-photo { overflow: hidden; position: relative; }
 .ngm-retreat-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .ngm-retreat-photo::after {
   content: ""; position: absolute; inset: 0;
-  background: linear-gradient(to right, transparent 40%, var(--ngm-charcoal) 92%);
+  background: linear-gradient(to right, transparent 40%, var(--ngm-sage-dk) 92%);
   pointer-events: none;
 }
 .ngm-retreat-copy {
@@ -2235,7 +2236,7 @@ body .WaPlaceHolderWide > div { padding-top: 0 !important; padding-bottom: 0 !im
   .ngm-sec { padding: 60px 28px; }
   .ngm-retreat-inner { grid-template-columns: 1fr; min-height: 0; }
   .ngm-retreat-photo { height: 240px; }
-  .ngm-retreat-photo::after { background: linear-gradient(to top, var(--ngm-charcoal) 30%, transparent); }
+  .ngm-retreat-photo::after { background: linear-gradient(to top, var(--ngm-sage-dk) 30%, transparent); }
   .ngm-retreat-copy { padding: 44px 28px; }
   .ngm-retreat-body, .ngm-retreat-list { max-width: 100%; }
   .ngm-ev-cta { padding: 60px 28px; }
