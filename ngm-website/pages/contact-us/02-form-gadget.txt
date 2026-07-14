@@ -1,0 +1,12 @@
+NATIVE WA GADGET — "Contact / Web form"
+=======================================
+Add the native WA contact form gadget BETWEEN 01-top.html and 03-bottom.html,
+in the SAME layout column.
+
+1. Add gadget -> "Contact" (or "Web form" bound to the contact form).
+2. No CSS class is needed — the form is skinned site-wide by the master global.css.
+3. It lands directly under the "Send us a message" heading band that ends 01-top,
+   and directly above the "Reach us / Find us / Volunteer board" block in 03-bottom.
+
+The 01-top heading band uses padding-bottom:0 and the 03-bottom opening band uses
+padding-top:24px so the form nests snugly between the two Custom-HTML blocks.

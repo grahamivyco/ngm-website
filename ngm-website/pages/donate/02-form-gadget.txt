@@ -1,0 +1,12 @@
+NATIVE WA GADGET — "Donation form"
+===================================
+Add the native WA "Donation form" gadget BETWEEN 01-top.html and 03-bottom.html,
+in the SAME layout column.
+
+1. Add gadget -> "Donation form".
+2. Point it at the Guild's donation settings (one-time + recurring).
+3. Set the layout ROW background to linen (#F0EAE0).
+
+No CSS class is needed: the form is skinned site-wide by global.css
+(the "WA SYSTEM-PAGE FORMS" section). The linen band runs continuously from
+the "Give online" heading in 01-top, through the form, into 03-bottom.
