@@ -3724,3 +3724,27 @@ body a.ngm-lcard-email:hover { color:var(--ngm-sage-dk)!important; }
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   SYSTEM-PAGE INTRO BANDS  (.ngm-sys)
+   Centered heading band used atop content-editable WA system pages
+   (404, 403, authorization required, unsubscribe, terms of use) and the
+   membership-application heading. The self-contained *-top.html files carry
+   the same rules inline; these power the .slim versions.
+══════════════════════════════════════════════════════════════════ */
+:root{--ngm-sage:#5C7A52;--ngm-sage-dk:#3E5538;--ngm-rose:#B87260;--ngm-cream:#FAF7F2;--ngm-charcoal:#242424;--ngm-gray:#656565;--ngm-serif:"Cormorant Garamond",Georgia,serif;--ngm-sans:"DM Sans",system-ui,sans-serif;}
+.ngm-sys *{box-sizing:border-box;margin:0;padding:0;}
+.ngm-sys-band{background:var(--ngm-cream);padding:92px 24px 56px;text-align:center;}
+.ngm-sys-inner{max-width:560px;margin:0 auto;}
+.ngm-sys-eyebrow{display:block;font-family:var(--ngm-sans);font-size:.7rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ngm-sage);margin-bottom:10px;}
+.ngm-sys-title{font-family:var(--ngm-serif)!important;font-size:clamp(2rem,3.5vw,2.7rem);font-weight:400;line-height:1.12;color:var(--ngm-charcoal);text-transform:none!important;margin-bottom:12px;}
+.ngm-sys-title em{font-style:italic;color:var(--ngm-rose)!important;}
+.ngm-sys-sub{font-family:var(--ngm-sans);font-size:1rem;color:var(--ngm-gray);line-height:1.7;}
+.ngm-sys-sub a{color:var(--ngm-sage-dk);font-weight:500;}
+.ngm-sys-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px;}
+.ngm-sys-btn{display:inline-flex;align-items:center;font-family:var(--ngm-sans);font-size:.9rem;font-weight:500;border-radius:100px;padding:12px 26px;text-decoration:none!important;border:1.5px solid transparent;cursor:pointer;transition:background .2s,color .2s;}
+.ngm-sys-btn-green{background:var(--ngm-sage-dk);color:#fff!important;border-color:var(--ngm-sage-dk);}
+.ngm-sys-btn-green:hover{background:var(--ngm-sage);border-color:var(--ngm-sage);}
+.ngm-sys-btn-outline{background:transparent;color:var(--ngm-sage-dk)!important;border-color:var(--ngm-sage-dk);}
+.ngm-sys-btn-outline:hover{background:var(--ngm-sage-dk);color:#fff!important;}
+@media(max-width:640px){.ngm-sys-band{padding:72px 18px 44px;}}
