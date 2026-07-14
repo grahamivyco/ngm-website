@@ -18,7 +18,7 @@
 /* ── Bar ── */
 #ngm{position:fixed;top:0;left:0;right:0;width:100vw;z-index:99999;background:rgba(250,247,242,0.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #DDD5C8;box-shadow:0 2px 16px rgba(0,0,0,0.07);transition:box-shadow .25s ease}
 #ngm.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.12)}
-#ngm .ngm-bar{max-width:1140px;margin:0 auto;padding:0 40px;height:72px;display:flex;align-items:center}
+#ngm .ngm-bar{max-width:1260px;margin:0 auto;padding:0 26px;height:86px;display:flex;align-items:center}
 /* ── Logo: icon + wordmark text ── */
 #ngm .ngm-logo{display:flex;align-items:center;gap:11px;flex-shrink:0;text-decoration:none;transition:opacity .2s}
 #ngm .ngm-logo:hover{opacity:.78}
@@ -64,7 +64,7 @@
 #ngm.ngm-mob-open .ngm-hbg span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 /* ── Mobile panel ── */
 #ngm .ngm-mob{display:none;flex-direction:column;background:#FAF7F2;border-top:1px solid #DDD5C8;max-height:0;overflow:hidden;transition:max-height .32s ease}
-#ngm.ngm-mob-open .ngm-mob{display:flex;max-height:calc(100dvh - 72px);max-height:calc(100vh - 72px)}
+#ngm.ngm-mob-open .ngm-mob{display:flex;max-height:calc(100dvh - 86px);max-height:calc(100vh - 86px)}
 #ngm .ngm-mob-inner{padding:6px 20px 24px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 #ngm .ngm-mob-link{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:left;padding:14px 4px;font-size:1rem;color:#242424;text-decoration:none;border:none;border-bottom:1px solid #E8E0D4;min-height:52px;background:none;font-family:'DM Sans',sans-serif;letter-spacing:.01em;line-height:1.3;cursor:pointer;transition:color .18s}
 #ngm .ngm-mob-link:hover{color:#3E5538}
@@ -90,11 +90,11 @@
   #ngm .ngm-mob-acts .ngm-ghost,#ngm .ngm-mob-acts .ngm-solid{flex:1}
 }
 @media(max-width:560px){
-  #ngm .ngm-bar{padding:0 16px;height:64px}
+  #ngm .ngm-bar{padding:0 16px;height:74px}
   #ngm .ngm-logo svg{height:36px}
   #ngm .ngm-logo .ngm-wm .l1{font-size:1.14rem}
   #ngm .ngm-logo .ngm-wm .l2{font-size:.6rem;letter-spacing:.18em}
-  #ngm.ngm-mob-open .ngm-mob{max-height:calc(100dvh - 64px);max-height:calc(100vh - 64px)}
+  #ngm.ngm-mob-open .ngm-mob{max-height:calc(100dvh - 74px);max-height:calc(100vh - 74px)}
   #ngm .ngm-mob-acts{flex-direction:column}
 }
 @media(max-width:380px){
@@ -102,8 +102,8 @@
 }
 /* ── Hide WA default nav + push body down ── */
 .navigation-menu,.waHeaderContainer .navigation-container,.menu-navigation,[class*="header-nav"],#idSystemPageNavigation{display:none!important}
-body.ngm-ready{padding-top:72px!important}
-@media(max-width:560px){body.ngm-ready{padding-top:64px!important}}
+body.ngm-ready{padding-top:86px!important}
+@media(max-width:560px){body.ngm-ready{padding-top:74px!important}}
 /* ── LOGIN-STATE VISIBILITY (production — keep this) ──
    WA sets body.memberContentView ONLY when a member is logged in.
    Show member buttons in that case; show guest buttons in every other case.
