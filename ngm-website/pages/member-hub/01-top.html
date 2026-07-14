@@ -1,227 +1,156 @@
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
 <style>
-/* ══════════════════════════════════════════════════════════
-   SHARED BASE SYSTEM (copied from the homepage gadget so this
-   page is self-contained). Tokens, typography, layout, buttons,
-   arrow links — plus the member-hub styles and the high-specificity
-   skin for the native WA "Upcoming events" gadget.
-══════════════════════════════════════════════════════════ */
-/* ── 1. DESIGN TOKENS ───────────────────────────────────── */
-:root {
-  --ngm-sage:      #5C7A52;
-  --ngm-sage-dk:   #3E5538;
-  --ngm-sage-lt:   #EEF3EC;
-  --ngm-rose:      #B87260;
-  --ngm-rose-lt:   #F5EBE7;
-  --ngm-rose-dk:   #9A5C4A;
-  --ngm-cream:     #FAF7F2;
-  --ngm-linen:     #F0EAE0;
-  --ngm-linen-dk:  #E5DDD0;
-  --ngm-charcoal:  #242424;
-  --ngm-gray:      #656565;
-  --ngm-gray-lt:   #9A9A9A;
-  --ngm-border:    #DDD5C8;
-  --ngm-serif: "Cormorant Garamond", Georgia, serif;
-  --ngm-sans:  "DM Sans", system-ui, sans-serif;
-  --ngm-radius:    14px;
-  --ngm-radius-lg: 20px;
-  --ngm-sh:   0 2px 12px rgba(0,0,0,.06);
-  --ngm-shm:  0 8px 32px rgba(0,0,0,.10);
-  --ngm-shx:  0 20px 60px rgba(0,0,0,.14);
-}
-/* ── 2. SCOPE RESET ─────────────────────────────────────── */
-.ngm *,
-.ngm *::before,
-.ngm *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-/* ── 3. TYPOGRAPHY SYSTEM ───────────────────────────────── */
-.ngm-eyebrow {
-  display: block;
-  font-family: var(--ngm-sans);
-  font-size: .7rem;
-  font-weight: 500;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--ngm-sage);
-  margin-bottom: 10px;
-}
-.ngm-h1 {
-  font-family: var(--ngm-serif) !important;
-  font-size: clamp(2.8rem, 4.5vw, 4.2rem);
-  font-weight: 400;
-  line-height: 1.08;
-  color: var(--ngm-charcoal);
-  text-transform: none !important;
-  margin-bottom: 20px;
-}
-.ngm-h2 {
-  font-family: var(--ngm-serif) !important;
-  font-size: clamp(2rem, 3.5vw, 2.8rem);
-  font-weight: 400;
-  line-height: 1.12;
-  color: var(--ngm-charcoal);
-  text-transform: none !important;
-  margin-bottom: 14px;
-}
-.ngm-h1 em,
-.ngm-h2 em {
-  font-family: var(--ngm-serif) !important;
-  font-size: inherit;
-  font-weight: inherit;
-  line-height: inherit;
-  font-style: italic;
-  color: var(--ngm-rose) !important;
-}
-.ngm-lead {
-  font-family: var(--ngm-sans);
-  font-size: 1.0625rem;
-  color: var(--ngm-gray);
-  line-height: 1.8;
-  max-width: 560px;
-  margin-bottom: 0;
-}
-/* ── 4. LAYOUT HELPERS ──────────────────────────────────── */
-.ngm-sec { padding: 88px 48px; }
-.ngm-sec-linen { background: var(--ngm-linen); }
-.ngm-sec-cream { background: var(--ngm-cream); }
-.ngm-sec-white { background: #fff; }
-.ngm-con { max-width: 1080px; margin: 0 auto; }
-/* ── 5. BUTTONS ─────────────────────────────────────────── */
-.ngm-btn,
-body a.ngm-btn,
-body a.ngm-btn:link,
-body a.ngm-btn:visited {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-family: var(--ngm-sans) !important;
-  font-size: .9rem !important;
-  font-weight: 500 !important;
-  letter-spacing: normal !important;
-  text-transform: none !important;
-  border-radius: 100px;
-  padding: 12px 26px;
-  cursor: pointer;
-  text-decoration: none !important;
-  border: 1.5px solid transparent;
-  transition: background .2s, transform .18s, box-shadow .18s, color .2s;
-  line-height: 1;
-}
-.ngm-btn-green  { background: var(--ngm-sage-dk); color: #fff !important; border-color: var(--ngm-sage-dk); }
-.ngm-btn-green:hover  { background: var(--ngm-sage); border-color: var(--ngm-sage); transform: translateY(-1px); box-shadow: 0 5px 16px rgba(62,85,56,.25); }
-.ngm-btn-outline,
-body a.ngm-btn-outline { background: transparent; color: var(--ngm-sage-dk) !important; border: 1.5px solid var(--ngm-sage-dk) !important; }
-.ngm-btn-outline:hover,
-body a.ngm-btn-outline:hover { background: var(--ngm-sage-dk) !important; color: #fff !important; }
-/* ── 6. ARROW LINK ──────────────────────────────────────── */
-.ngm-arrow-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--ngm-sans);
-  font-size: .9rem;
-  color: var(--ngm-sage-dk) !important;
-  text-decoration: none !important;
-  border-bottom: 1px solid rgba(62,85,56,.3);
-  padding-bottom: 2px;
-  transition: gap .18s, border-color .18s;
-}
-.ngm-arrow-link:hover { gap: 10px; border-color: var(--ngm-sage-dk); }
-/* ══════════════════════════════════════════════════════════
-   MEMBER-HUB-SPECIFIC STYLES
-══════════════════════════════════════════════════════════ */
-/* ── Welcome band ── */
-.ngm-hub-hero {
-  background: var(--ngm-cream);
-  padding: 92px 48px 60px;
-  border-bottom: 1px solid var(--ngm-border);
-}
-.ngm-hub-hero-inner { max-width: 1080px; margin: 0 auto; }
-/* ── Upcoming-events intro (sits right above the native gadget) ── */
-.ngm-hub-events {
-  background: var(--ngm-linen);
-  padding: 72px 48px 40px;
-}
-.ngm-hub-events-inner { max-width: 1080px; margin: 0 auto; }
-.ngm-hub-events-head {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 24px;
-  flex-wrap: wrap;
-  margin-bottom: 8px;
-}
-.ngm-hub-events .ngm-lead { margin-top: 6px; }
-/* ── Skin for the native WA "Upcoming events" gadget ──
-   The gadget is given the CSS class  ngm-wa-events  in the WA editor
-   (see 02-wa-gadget.txt). WA's theme uses very high-specificity anchor
-   rules, so we mirror that with a `body` prefix to win. This is light
-   container styling only — it centers the list, sets the font, and adds
-   breathing room. If you want the full event-card look from the Events
-   page, copy that page's `.ngm-wa-events` section over the top of this. */
-body .ngm-wa-events {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 0 48px 84px;
-  background: var(--ngm-linen);
-}
-body .ngm-wa-events,
-body .ngm-wa-events * {
-  font-family: var(--ngm-sans) !important;
-  color: var(--ngm-charcoal);
-}
-body .ngm-wa-events a { color: var(--ngm-sage-dk) !important; }
-/* ── Responsive ── */
-@media (max-width: 640px) {
-  .ngm-hub-hero { padding: 72px 22px 48px; }
-  .ngm-hub-events { padding: 56px 22px 32px; }
-  body .ngm-wa-events { padding: 0 22px 64px; }
-}
+:root{--ngm-sage:#5C7A52;--ngm-sage-dk:#3E5538;--ngm-sage-lt:#EEF3EC;--ngm-rose:#B87260;--ngm-rose-lt:#F5EBE7;--ngm-rose-dk:#9A5C4A;--ngm-cream:#FAF7F2;--ngm-linen:#F0EAE0;--ngm-linen-dk:#E5DDD0;--ngm-charcoal:#242424;--ngm-gray:#656565;--ngm-gray-lt:#9A9A9A;--ngm-border:#DDD5C8;--ngm-serif:"Cormorant Garamond",Georgia,serif;--ngm-sans:"DM Sans",system-ui,sans-serif;--ngm-radius:14px;--ngm-radius-lg:20px;}
+.ngm *,.ngm *::before,.ngm *::after{box-sizing:border-box;margin:0;padding:0;}
+.ngm-eyebrow{display:block;font-family:var(--ngm-sans);font-size:.7rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ngm-sage);margin-bottom:12px;}
+.ngm-h1{font-family:var(--ngm-serif)!important;font-size:clamp(2.6rem,4.5vw,3.8rem);font-weight:400;line-height:1.08;color:var(--ngm-charcoal);text-transform:none!important;margin-bottom:14px;}
+.ngm-h1 em{font-family:var(--ngm-serif)!important;font-style:italic;color:var(--ngm-rose)!important;}
+.ngm-h2{font-family:var(--ngm-serif)!important;font-size:clamp(1.7rem,2.6vw,2.2rem);font-weight:400;line-height:1.12;color:var(--ngm-charcoal);text-transform:none!important;margin-bottom:8px;}
+.ngm-h2 em{font-style:italic;color:var(--ngm-rose)!important;}
+.ngm-lead{font-family:var(--ngm-sans);font-size:1rem;color:var(--ngm-gray);line-height:1.7;max-width:600px;margin-bottom:30px;}
+/* MEMBER HUB */
+.ngm-hub-band{padding:84px 48px;}
+.ngm-hub-cream{background:var(--ngm-cream);}
+.ngm-hub-white{background:#fff;}
+.ngm-hub-linen{background:var(--ngm-linen);}
+.ngm-hub-inner{max-width:1080px;margin:0 auto;}
+.ngm-hub-hero{background:var(--ngm-cream);padding:70px 48px 60px;border-bottom:1px solid var(--ngm-border);}
+.ngm-hub-hero p{font-family:var(--ngm-sans);font-size:1.0625rem;color:var(--ngm-gray);line-height:1.8;max-width:560px;margin-bottom:28px;}
+.ngm-hub-account{display:flex;gap:14px;flex-wrap:wrap;}
+.ngm-hub-status,.ngm-hub-plink{display:inline-flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--ngm-border);border-radius:var(--ngm-radius);padding:14px 18px;text-decoration:none!important;color:var(--ngm-charcoal);font-family:var(--ngm-sans);transition:border-color .18s;}
+.ngm-hub-status{border-left:4px solid var(--ngm-sage);}
+.ngm-hub-status:hover,.ngm-hub-plink:hover{border-color:var(--ngm-sage);}
+.ngm-hub-status svg,.ngm-hub-plink svg{width:20px;height:20px;color:var(--ngm-sage-dk);flex-shrink:0;}
+.ngm-hub-status-t strong{font-weight:600;font-size:.95rem;}
+.ngm-hub-status-t span{display:block;font-size:.82rem;color:var(--ngm-gray);margin-top:1px;}
+.ngm-hub-status-go{margin-left:6px;font-size:.82rem;font-weight:600;color:var(--ngm-sage-dk);white-space:nowrap;}
+.ngm-hub-plink span{font-size:.95rem;font-weight:500;}
+.ngm-hub-plink .arw{width:13px;height:13px;}
+/* top tasks */
+.ngm-hub-tasks{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:6px;}
+.ngm-hub-task{display:flex;flex-direction:column;background:var(--ngm-sage-lt);border:1px solid #DBE6D5;border-radius:var(--ngm-radius-lg);padding:32px 30px 30px;text-decoration:none!important;color:inherit;transition:transform .18s,box-shadow .18s;}
+.ngm-hub-task:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(62,85,56,.14);}
+.ngm-hub-ticon{width:56px;height:56px;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:14px;margin-bottom:20px;color:var(--ngm-sage-dk);}
+.ngm-hub-ticon svg{width:28px;height:28px;}
+.ngm-hub-task h3{font-family:var(--ngm-serif)!important;font-size:1.6rem;font-weight:400;color:var(--ngm-charcoal);margin-bottom:8px;line-height:1.15;}
+.ngm-hub-task p{font-family:var(--ngm-sans);font-size:.95rem;color:var(--ngm-gray);line-height:1.65;flex:1;margin-bottom:18px;}
+.ngm-hub-tgo{font-family:var(--ngm-sans);font-size:.9rem;font-weight:600;color:var(--ngm-sage-dk);display:inline-flex;align-items:center;gap:7px;transition:gap .18s;}
+.ngm-hub-task:hover .ngm-hub-tgo{gap:11px;}
+/* coming up heading */
+.ngm-hub-uphead{margin-bottom:6px;}
+.ngm-hub-calllink{display:inline-flex;align-items:center;gap:7px;font-family:var(--ngm-sans);font-size:.9rem;font-weight:500;color:var(--ngm-sage-dk);text-decoration:none;margin-top:22px;}
+/* resources */
+.ngm-hub-rgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:6px;}
+.ngm-hub-rtile{display:flex;flex-direction:column;background:var(--ngm-cream);border:1px solid var(--ngm-border);border-radius:var(--ngm-radius);padding:24px 22px;text-decoration:none!important;color:inherit;transition:border-color .18s,box-shadow .18s;}
+.ngm-hub-rtile:hover{border-color:var(--ngm-sage);box-shadow:0 10px 26px rgba(0,0,0,.06);}
+.ngm-hub-rtile svg{width:24px;height:24px;color:var(--ngm-sage-dk);margin-bottom:14px;}
+.ngm-hub-rtile h4{font-family:var(--ngm-serif)!important;font-size:1.22rem;font-weight:400;color:var(--ngm-charcoal);margin-bottom:5px;line-height:1.2;}
+.ngm-hub-rtile p{font-family:var(--ngm-sans);font-size:.85rem;color:var(--ngm-gray);line-height:1.55;}
+/* account row */
+.ngm-hub-acct{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:6px;}
+.ngm-hub-atile{display:flex;align-items:center;gap:13px;background:#fff;border:1px solid var(--ngm-border);border-radius:var(--ngm-radius);padding:16px 18px;text-decoration:none!important;color:var(--ngm-charcoal);transition:border-color .18s;}
+.ngm-hub-atile:hover{border-color:var(--ngm-sage);}
+.ngm-hub-atile svg{width:20px;height:20px;color:var(--ngm-sage-dk);flex-shrink:0;}
+.ngm-hub-atile span{font-family:var(--ngm-sans);font-size:.92rem;font-weight:500;line-height:1.25;}
+/* board */
+.ngm-hub-board{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:6px;}
+.ngm-hub-brow{background:var(--ngm-cream);border:1px solid var(--ngm-border);border-radius:var(--ngm-radius);padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;}
+.ngm-hub-brole{font-family:var(--ngm-sans);font-size:.95rem;font-weight:600;color:var(--ngm-charcoal);}
+.ngm-hub-bemail{font-family:var(--ngm-sans);font-size:.88rem;color:var(--ngm-sage-dk)!important;text-decoration:none;}
+.ngm-hub-bemail:hover{text-decoration:underline;}
+.ngm-hub-help{margin-top:36px;padding:22px 26px;background:var(--ngm-linen);border-radius:var(--ngm-radius);font-family:var(--ngm-sans);font-size:.9375rem;color:var(--ngm-gray);line-height:1.7;}
+.ngm-hub-help a{color:var(--ngm-sage-dk)!important;text-decoration:none;border-bottom:1px solid rgba(62,85,56,.3);}
+@media(max-width:900px){.ngm-hub-band{padding:60px 26px;}.ngm-hub-hero{padding:52px 26px 44px;}.ngm-hub-tasks{grid-template-columns:1fr;}.ngm-hub-rgrid,.ngm-hub-acct{grid-template-columns:1fr 1fr;}.ngm-hub-board{grid-template-columns:1fr;}}
+/* WA Upcoming-events gadget -> clean card list (add class ngm-wa-events to the gadget) */
+.ngm-hub-uphead{margin-bottom:0;}
+body .ngm-wa-events.WaGadgetUpcomingEvents{background:var(--ngm-linen)!important;border:none!important;box-shadow:none!important;margin:0!important;padding:0 48px 8px!important;font-family:var(--ngm-sans)!important;}
+body .ngm-wa-events .gadgetStyleBody{background:#fff!important;border:1px solid var(--ngm-border)!important;border-radius:var(--ngm-radius-lg)!important;box-shadow:0 2px 12px rgba(0,0,0,.06)!important;padding:6px 26px!important;margin:0 auto!important;max-width:1080px!important;}
+body .ngm-wa-events.upcomingEventsStyle001 ul{list-style:none!important;margin:0!important;padding:0!important;}
+body .ngm-wa-events.upcomingEventsStyle001 ul li{list-style:none!important;border-bottom:1px solid var(--ngm-linen)!important;padding:18px 2px!important;margin:0!important;transition:background-color .2s!important;}
+body .ngm-wa-events.upcomingEventsStyle001 ul li:last-child{border-bottom:none!important;}
+body .ngm-wa-events.upcomingEventsStyle001 ul li:hover{background-color:var(--ngm-sage-lt)!important;}
+body .ngm-wa-events.upcomingEventsStyle001 ul li .title{margin:0 0 3px!important;font-weight:400!important;}
+body .ngm-wa-events.upcomingEventsStyle001 ul li .title a{font-family:var(--ngm-serif)!important;font-size:1.2rem!important;font-weight:400!important;color:var(--ngm-charcoal)!important;font-style:normal!important;text-transform:none!important;text-decoration:none!important;}
+body .ngm-wa-events.upcomingEventsStyle001 ul li:hover .title a{color:var(--ngm-sage-dk)!important;}
+body .ngm-wa-events.upcomingEventsStyle001 ul li .date,body .ngm-wa-events.upcomingEventsStyle001 ul li .date span{font-family:var(--ngm-sans)!important;font-size:.82rem!important;font-weight:400!important;font-style:normal!important;color:var(--ngm-gray)!important;}
+body .ngm-wa-events.upcomingEventsStyle001 ul li .location{display:none!important;}
+body .ngm-wa-events.upcomingEventsStyle001 ul li .ngm-evt-tag{display:inline-flex!important;align-items:center!important;font-family:var(--ngm-sans)!important;font-size:.62rem!important;font-weight:500!important;letter-spacing:.06em!important;text-transform:uppercase!important;padding:4px 10px!important;border-radius:100px!important;margin-bottom:8px!important;background:#E3EFEF!important;color:#2A5A5A!important;}
+body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="zoom"] .ngm-evt-tag{background:#EEEEFF!important;color:#3A46AF!important;}
+body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="virtual"] .ngm-evt-tag{background:#F2EEF8!important;color:#5A3A8A!important;}
+body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"] .ngm-evt-tag{background:var(--ngm-rose-lt)!important;color:#7A3E2E!important;}
 </style>
 
-<div class="ngm">
-  <section class="ngm-hub-hero">
-    <div class="ngm-hub-hero-inner">
-      <span class="ngm-eyebrow">Member Hub</span>
-      <!-- The name is filled in by Wild Apricot. If it can't be filled in,
-           the script at the bottom trims this to just "Welcome back". -->
-      <h1 class="ngm-h1">Welcome back<span id="ngm-hub-comma">, </span><em id="ngm-hub-name">{Contact_First_Name}</em></h1>
+<div class="ngm-hub-top">
+<div class="ngm ngm-hub-hero">
+  <div class="ngm-hub-inner">
+    <span class="ngm-eyebrow">Member Home</span>
+    <h1 class="ngm-h1">Welcome <em>back</em>.</h1>
+    <p>Your Guild home &mdash; meeting links, your registrations, resources, and your membership, all in one place.</p>
+    <div class="ngm-hub-account">
+      <a class="ngm-hub-status" href="/Sys/Profile/Membership">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></svg>
+        <span class="ngm-hub-status-t"><strong>Membership &amp; renewal</strong><span>See your status &amp; renewal date</span></span>
+        <span class="ngm-hub-status-go">Manage &rarr;</span>
+      </a>
+      <a class="ngm-hub-plink" href="/Sys/Profile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        <span>My profile</span><svg class="arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
     </div>
-  </section>
-
-  <section class="ngm-hub-events">
-    <div class="ngm-hub-events-inner">
-      <div class="ngm-hub-events-head">
-        <div>
-          <span class="ngm-eyebrow">What's coming up</span>
-          <h2 class="ngm-h2">Upcoming <em>events</em></h2>
-        </div>
-        <a href="/calendar" class="ngm-arrow-link">See the full calendar →</a>
-      </div>
-    </div>
-  </section>
+  </div>
 </div>
-<!-- The native WA "Upcoming events" gadget is added next (02-wa-gadget.txt),
-     then 03-bottom.html follows to close out the page. -->
 
+<section class="ngm ngm-hub-band ngm-hub-white">
+  <div class="ngm-hub-inner">
+    <span class="ngm-eyebrow">Your top tasks</span>
+    <div class="ngm-hub-tasks">
+      <a class="ngm-hub-task" href="/resources">
+        <span class="ngm-hub-ticon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1.5-1.5"/></svg></span>
+        <h3>Meeting Zoom links</h3>
+        <p>The video link for today's meeting lives on the Member Resources page. One click and you're in.</p>
+        <span class="ngm-hub-tgo">Get the link <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a class="ngm-hub-task" href="/Sys/Profile">
+        <span class="ngm-hub-ticon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/><path d="m9 15 2 2 4-4"/></svg></span>
+        <h3>My meetings &amp; registrations</h3>
+        <p>The meetings on your calendar and the events you've signed up for &mdash; in your member profile.</p>
+        <span class="ngm-hub-tgo">View mine <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="ngm ngm-hub-band ngm-hub-linen" style="padding-bottom:0">
+  <div class="ngm-hub-inner">
+    <div class="ngm-hub-uphead">
+      <span class="ngm-eyebrow">Coming up</span>
+      <h2 class="ngm-h2">Upcoming meetings &amp; events</h2>
+      <p class="ngm-lead">The Guild's next gatherings, straight from the calendar. Click any one for details, the Zoom link, or to register.</p>
+    </div>
+  </div>
+</section>
+</div>
 <script>
-/* NAME FALLBACK — if Wild Apricot didn't replace {Contact_First_Name}
-   (e.g. macro disabled, or a logged-out preview), drop the name so the
-   greeting reads "Welcome back" instead of showing raw macro text. */
 (function () {
-  var name = document.getElementById('ngm-hub-name');
-  var comma = document.getElementById('ngm-hub-comma');
-  if (!name) return;
-  var txt = (name.textContent || '').trim();
-  if (txt === '' || /[{}]/.test(txt)) {   // unresolved macro still has { }
-    name.remove();
-    if (comma) comma.remove();
+  function label(t){ if(t==="zoom")return "Zoom"; if(t==="virtual")return "Online"; if(t==="hybrid")return "Hybrid"; return "In person"; }
+  function classify(text){ var s=(text||"").toLowerCase();
+    if(s.indexOf("zoom")>-1) return "zoom";
+    if(s.indexOf("videoconference")>-1||s.indexOf("video conference")>-1||s.indexOf("online")>-1) return "virtual";
+    if(s.indexOf("hybrid")>-1) return "hybrid"; return "person"; }
+  function tag(){
+    document.querySelectorAll(".ngm-wa-events.upcomingEventsStyle001 ul li").forEach(function(li){
+      if(li.getAttribute("data-tag-done")==="1") return;
+      var loc=li.querySelector(".location"); var t=classify(loc?loc.textContent:""); li.setAttribute("data-tag",t);
+      var chip=document.createElement("span"); chip.className="ngm-evt-tag"; chip.textContent=label(t);
+      var title=li.querySelector(".title"); if(title) li.insertBefore(chip,title); else li.insertBefore(chip,li.firstChild);
+      var link=li.querySelector(".title a");
+      if(link&&link.href){ li.style.cursor="pointer"; li.addEventListener("click",function(e){ if(e.target.closest("a"))return; window.location.href=link.href; }); }
+      li.setAttribute("data-tag-done","1");
+    });
   }
-}());
+  function init(){ tag(); var g=document.querySelector(".ngm-wa-events"); if(g&&window.MutationObserver){ new MutationObserver(tag).observe(g,{childList:true,subtree:true}); } }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
+})();
 </script>

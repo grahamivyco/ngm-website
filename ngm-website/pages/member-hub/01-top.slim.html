@@ -1,41 +1,73 @@
-<!-- SLIM — styling comes from the Global CSS (global.css). Paste this only AFTER global.css is live in WA. Full self-contained version: 01-top.html -->
-<div class="ngm">
-  <section class="ngm-hub-hero">
-    <div class="ngm-hub-hero-inner">
-      <span class="ngm-eyebrow">Member Hub</span>
-      <!-- The name is filled in by Wild Apricot. If it can't be filled in,
-           the script at the bottom trims this to just "Welcome back". -->
-      <h1 class="ngm-h1">Welcome back<span id="ngm-hub-comma">, </span><em id="ngm-hub-name">{Contact_First_Name}</em></h1>
+<!-- SLIM - styling comes from the Global CSS (global.css). Paste this only AFTER global.css is live in WA. Full self-contained version: 01-top.html -->
+<div class="ngm-hub-top">
+<div class="ngm ngm-hub-hero">
+  <div class="ngm-hub-inner">
+    <span class="ngm-eyebrow">Member Home</span>
+    <h1 class="ngm-h1">Welcome <em>back</em>.</h1>
+    <p>Your Guild home &mdash; meeting links, your registrations, resources, and your membership, all in one place.</p>
+    <div class="ngm-hub-account">
+      <a class="ngm-hub-status" href="/Sys/Profile/Membership">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></svg>
+        <span class="ngm-hub-status-t"><strong>Membership &amp; renewal</strong><span>See your status &amp; renewal date</span></span>
+        <span class="ngm-hub-status-go">Manage &rarr;</span>
+      </a>
+      <a class="ngm-hub-plink" href="/Sys/Profile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        <span>My profile</span><svg class="arw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
     </div>
-  </section>
-
-  <section class="ngm-hub-events">
-    <div class="ngm-hub-events-inner">
-      <div class="ngm-hub-events-head">
-        <div>
-          <span class="ngm-eyebrow">What's coming up</span>
-          <h2 class="ngm-h2">Upcoming <em>events</em></h2>
-        </div>
-        <a href="/calendar" class="ngm-arrow-link">See the full calendar →</a>
-      </div>
-    </div>
-  </section>
+  </div>
 </div>
-<!-- The native WA "Upcoming events" gadget is added next (02-wa-gadget.txt),
-     then 03-bottom.html follows to close out the page. -->
 
+<section class="ngm ngm-hub-band ngm-hub-white">
+  <div class="ngm-hub-inner">
+    <span class="ngm-eyebrow">Your top tasks</span>
+    <div class="ngm-hub-tasks">
+      <a class="ngm-hub-task" href="/resources">
+        <span class="ngm-hub-ticon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1.5-1.5"/></svg></span>
+        <h3>Meeting Zoom links</h3>
+        <p>The video link for today's meeting lives on the Member Resources page. One click and you're in.</p>
+        <span class="ngm-hub-tgo">Get the link <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a class="ngm-hub-task" href="/Sys/Profile">
+        <span class="ngm-hub-ticon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/><path d="m9 15 2 2 4-4"/></svg></span>
+        <h3>My meetings &amp; registrations</h3>
+        <p>The meetings on your calendar and the events you've signed up for &mdash; in your member profile.</p>
+        <span class="ngm-hub-tgo">View mine <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="ngm ngm-hub-band ngm-hub-linen" style="padding-bottom:0">
+  <div class="ngm-hub-inner">
+    <div class="ngm-hub-uphead">
+      <span class="ngm-eyebrow">Coming up</span>
+      <h2 class="ngm-h2">Upcoming meetings &amp; events</h2>
+      <p class="ngm-lead">The Guild's next gatherings, straight from the calendar. Click any one for details, the Zoom link, or to register.</p>
+    </div>
+  </div>
+</section>
+</div>
 <script>
-/* NAME FALLBACK — if Wild Apricot didn't replace {Contact_First_Name}
-   (e.g. macro disabled, or a logged-out preview), drop the name so the
-   greeting reads "Welcome back" instead of showing raw macro text. */
 (function () {
-  var name = document.getElementById('ngm-hub-name');
-  var comma = document.getElementById('ngm-hub-comma');
-  if (!name) return;
-  var txt = (name.textContent || '').trim();
-  if (txt === '' || /[{}]/.test(txt)) {   // unresolved macro still has { }
-    name.remove();
-    if (comma) comma.remove();
+  function label(t){ if(t==="zoom")return "Zoom"; if(t==="virtual")return "Online"; if(t==="hybrid")return "Hybrid"; return "In person"; }
+  function classify(text){ var s=(text||"").toLowerCase();
+    if(s.indexOf("zoom")>-1) return "zoom";
+    if(s.indexOf("videoconference")>-1||s.indexOf("video conference")>-1||s.indexOf("online")>-1) return "virtual";
+    if(s.indexOf("hybrid")>-1) return "hybrid"; return "person"; }
+  function tag(){
+    document.querySelectorAll(".ngm-wa-events.upcomingEventsStyle001 ul li").forEach(function(li){
+      if(li.getAttribute("data-tag-done")==="1") return;
+      var loc=li.querySelector(".location"); var t=classify(loc?loc.textContent:""); li.setAttribute("data-tag",t);
+      var chip=document.createElement("span"); chip.className="ngm-evt-tag"; chip.textContent=label(t);
+      var title=li.querySelector(".title"); if(title) li.insertBefore(chip,title); else li.insertBefore(chip,li.firstChild);
+      var link=li.querySelector(".title a");
+      if(link&&link.href){ li.style.cursor="pointer"; li.addEventListener("click",function(e){ if(e.target.closest("a"))return; window.location.href=link.href; }); }
+      li.setAttribute("data-tag-done","1");
+    });
   }
-}());
+  function init(){ tag(); var g=document.querySelector(".ngm-wa-events"); if(g&&window.MutationObserver){ new MutationObserver(tag).observe(g,{childList:true,subtree:true}); } }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
+})();
 </script>

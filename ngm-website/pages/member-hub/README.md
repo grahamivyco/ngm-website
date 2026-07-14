@@ -1,35 +1,36 @@
-# Member Hub
+# Member Hub  (members-only landing page)
 
-**WA page:** Member Hub (members-only)
-**Live URL:** `/members`  — this is the target of the "Member Hub" button in the header.
+A custom **Member Home** page that fronts Wild Apricot's built-in member pages.
+It does NOT replace them — every link points at a real WA page that keeps full
+functionality. Built as the usual 3-part sandwich.
 
-## Paste order (top → bottom, all in the SAME layout row)
-1. `01-top.html` — Custom HTML gadget (welcome banner + "Upcoming events" intro)
-2. **Native WA "Upcoming events" gadget** — see `02-wa-gadget.txt`; give it CSS class `ngm-wa-events`
-3. `03-bottom.html` — Custom HTML gadget (member quick-links + resources + help strip)
+## Wild Apricot setup
+1. Create a new page (e.g. **Member Home** at `/member-home`).
+2. **Restrict it to members** — page settings → Access → *Members only*.
+3. Set it as the **landing page after login** — Settings → Member area (or per
+   membership level → starting page).
+4. Add **Custom HTML gadget #1** → paste `01-top.html`.
+5. Add the native **Upcoming events** gadget → see `02-wa-gadget.txt`.
+6. Add **Custom HTML gadget #2** → paste `03-bottom.html`.
 
-This is the "sandwich" pattern (Custom HTML → native gadget → Custom HTML) because a
-native WA gadget can't be nested inside a Custom HTML block.
+`*.slim.html` are the same body without the inline `<style>`/fonts — use those
+once the new Global CSS is live (it carries the `.ngm-hub-*` skin).
 
-## Before it goes live — set these real URLs
-The quick-link cards in `03-bottom.html` have placeholder links marked `<!-- SET URL -->`.
-Point each at the correct Wild Apricot page:
+## What's real vs static
+- **Live:** the "Upcoming events" gadget (step 5) — real events from the calendar.
+- **Static (by WA limitation):** the "Membership & renewal" strip is a link, not a
+  live status. WA can't print a logged-in member's renewal date on a custom page,
+  so the real date + renew flow live one click away on their **Profile**. WA also
+  shows its own renewal reminder within a week of expiry.
+- **Generic welcome:** no member-name macro exists for Custom HTML; the header
+  login gadget already greets members by name.
 
-| Card | Placeholder `href` | Point it at |
-|------|--------------------|-------------|
-| Member Directory | `/directory` | your WA member directory page |
-| My Profile & Renewal | `/sys/profile` | usually correct as-is (WA profile) |
-| Resources & Documents | `/resources` | your member-only resources / document page |
-| Contact the guild | `/contact-us` | your contact page or a `mailto:` link |
-
-## Notes
-- **Page access:** set the WA page to members-only. Everything here assumes the viewer
-  is logged in.
-- **The name greeting** uses the `{Contact_First_Name}` macro. Per `docs/wa-notes.md`
-  this macro is still to be verified — a script in `01-top.html` falls back to plain
-  "Welcome back" if the macro doesn't resolve, so a raw `{Contact_First_Name}` is never
-  shown. Once verified working, you can add `{Membership_Level}` / `{Renewal_Date}` here too.
-- **Why the events list is a native gadget:** the WA event API is CORS-blocked in the
-  browser, so a hand-built list can't auto-update. The native gadget is the only piece
-  that stays current with no code change.
-- Related CSS: all styling lives inside `01-top.html` and `03-bottom.html` (self-contained).
+## URLs to confirm before go-live
+- `/resources` — the real Member Resources page slug (used by the Zoom-links task
+  and all resource tiles).
+- **"My meetings & registrations"** and **"Change password"** point at `/Sys/Profile`
+  — replace with the exact profile-tab URLs (open the tab in the member area and
+  copy the URL; each auto-resolves to the logged-in member).
+- **Board emails** are PLACEHOLDERS following the domain pattern. Replace with the
+  real addresses from the contact-page directory.
+- `/contact`, `/calendar` — confirm slugs.
