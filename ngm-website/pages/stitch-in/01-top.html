@@ -536,6 +536,11 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="zoom"]    .ngm-evt-ta
 body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="hybrid"]  .ngm-evt-tag { background:#E3EFEF !important; color:#2A5A5A !important; }
 body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="virtual"] .ngm-evt-tag { background:#F2EEF8 !important; color:#5A3A8A !important; }
 body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-tag { background:var(--ngm-rose-lt) !important; color:#7A3E2E !important; }
+.ngm-mt-loc { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
+.ngm-mt-addr { font-family:var(--ngm-sans); font-size:1rem; color:var(--ngm-gray); line-height:1.9; font-style:normal; margin:8px 0 14px; }
+.ngm-mt-map { border-radius:var(--ngm-radius-lg); overflow:hidden; border:1px solid var(--ngm-border); }
+.ngm-mt-map iframe { display:block; width:100%; height:320px; border:none; }
+@media(max-width:760px){ .ngm-mt-loc { grid-template-columns:1fr; gap:28px; } }
 </style>
 <div class="ngm ngm-si-hero">
   <div class="ngm-si-hero-inner">
@@ -557,42 +562,6 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
     </div>
   </div>
 </div>
-<section class="ngm ngm-sec ngm-sec-white" id="ngm-si-groups">
-  <div class="ngm-con">
-    <span class="ngm-eyebrow">Two sessions</span>
-    <h2 class="ngm-h2">Day or <em>evening</em></h2>
-    <p class="ngm-si-intro">Both Stitch-Ins meet on the 4th Tuesday of the month. Programs may differ between the two, and you're welcome to attend either or both.</p>
-    <div class="ngm-si-grid">
-      <div class="ngm-si-card">
-        <span class="ngm-si-badge">Hybrid</span>
-        <h3>Daytime Stitch-In</h3>
-        <div class="ngm-si-when">4th Tuesday · 10 AM – 2 PM</div>
-        <p>A daytime session with a monthly program — presentations, demos, and projects spanning a wide range of fiber arts. Work along with the program or bring your own project.</p>
-        <ul class="ngm-si-meta">
-          <li>Hybrid: in person or by video</li>
-          <li>In person at MVUUF, Bloomington</li>
-          <li>All skill levels welcome</li>
-        </ul>
-      </div>
-      <div class="ngm-si-card">
-        <span class="ngm-si-badge">Virtual only</span>
-        <h3>Evening Stitch-In</h3>
-        <div class="ngm-si-when">4th Tuesday · 7 – 9 PM</div>
-        <p>The same warm, social spirit in an evening session — great for members who work during the day. Programs may differ from the daytime meeting.</p>
-        <ul class="ngm-si-meta">
-          <li>By videoconference only</li>
-          <li>Link on the Member Resources page</li>
-          <li>All skill levels welcome</li>
-        </ul>
-      </div>
-    </div>
-    <p style="margin-top:28px;font-family:var(--ngm-sans);font-size:.9rem;color:var(--ngm-gray-lt)">
-      In-person meetings are at the
-      <a class="ngm-arrow-link" style="font-size:.9rem" href="https://mnvalleyuu.org/" target="_blank" rel="noopener">MN Valley Unitarian Universalist Fellowship</a>
-      in Bloomington. Video links live on the Member Resources page (log in to access).
-    </p>
-  </div>
-</section>
 <section class="ngm ngm-sec ngm-sec-linen" style="padding-bottom:0">
   <div class="ngm-con">
     <div class="ngm-upcoming-head">
