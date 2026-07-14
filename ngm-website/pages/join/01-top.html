@@ -521,26 +521,3 @@ body .WaPlaceHolderContent4 > div { padding-top: 0 !important; padding-bottom: 0
     <a class="ngm-btn ngm-btn-rose ngm-btn-lg" href="/application">Join the Guild</a>
   </div>
 </div>
-<script>
-(function () {
-  function wire(item){
-    var summary=item.querySelector("summary");
-    var wrap=item.querySelector(".ngm-faq-wrap");
-    if(!summary||!wrap) return;
-    summary.addEventListener("click",function(e){
-      if(!item.open) return;
-      e.preventDefault();
-      item.classList.add("ngm-faq-closing");
-      var done=function(){
-        wrap.removeEventListener("transitionend",done);
-        item.removeAttribute("open");
-        item.classList.remove("ngm-faq-closing");
-      };
-      wrap.addEventListener("transitionend",done);
-      setTimeout(done,400);
-    });
-  }
-  function init(){ document.querySelectorAll(".ngm-faq-card").forEach(wire); }
-  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
-})();
-</script>

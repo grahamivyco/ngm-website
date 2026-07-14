@@ -781,26 +781,3 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
   if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
 })();
 </script>
-<script>
-(function () {
-  function wire(item){
-    var summary=item.querySelector("summary");
-    var wrap=item.querySelector(".ngm-faq-wrap");
-    if(!summary||!wrap) return;
-    summary.addEventListener("click",function(e){
-      if(!item.open) return;
-      e.preventDefault();
-      item.classList.add("ngm-faq-closing");
-      var done=function(){
-        wrap.removeEventListener("transitionend",done);
-        item.removeAttribute("open");
-        item.classList.remove("ngm-faq-closing");
-      };
-      wrap.addEventListener("transitionend",done);
-      setTimeout(done,400);
-    });
-  }
-  function init(){ document.querySelectorAll(".ngm-faq-card").forEach(wire); }
-  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
-})();
-</script>
