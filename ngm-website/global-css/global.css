@@ -3688,10 +3688,8 @@ body .stylizedButton:hover { background: #5C7A52 !important; border-color: #5C7A
 .ngm-mt-cbox { display:flex; align-items:flex-start; gap:16px; }
 a.ngm-mt-cbox { text-decoration:none; transition:border-color .2s, transform .18s; }
 a.ngm-mt-cbox:hover { border-color:var(--ngm-sage-lt); transform:translateY(-2px); }
-.ngm-mt-cbox-icon { width:46px; height:46px; border-radius:12px; background:var(--ngm-sage-lt); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.ngm-mt-cbox-icon { width:46px; height:46px; border-radius:12px; background:var(--ngm-sage-lt); color:var(--ngm-sage-dk); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 .ngm-mt-cbox-icon svg { width:24px; height:24px; }
-.ngm-cbox-email .ngm-mt-cbox-icon, .ngm-cbox-addr .ngm-mt-cbox-icon { color:var(--ngm-sage-dk); }
-.ngm-cbox-fb .ngm-mt-cbox-icon { color:#1877F2; }
 .ngm-mt-cbox h3 { font-family:var(--ngm-sans)!important; font-size:1rem!important; font-weight:500!important; color:var(--ngm-charcoal)!important; text-transform:none!important; letter-spacing:normal!important; margin:0 0 3px!important; }
 .ngm-mt-cbox p { font-size:.9rem!important; color:var(--ngm-gray)!important; margin:0!important; line-height:1.6; }
 .ngm-mt-cbox p a { color:var(--ngm-sage-dk)!important; }
