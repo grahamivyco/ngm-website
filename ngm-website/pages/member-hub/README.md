@@ -8,12 +8,32 @@ board.
 
 ## Sections (top to bottom)
 1. **Hero** — generic welcome.
-2. **Meeting Zoom links** — a bold band, the first thing members see, linking to
-   the Member Resources page where the monthly links live.
+2. **Meeting Zoom links** — a bold sage band with **one card per meeting**; the
+   Zoom link is *inline* (member clicks the card to join — no click-through to
+   another page). See the monthly-refresh note below.
 3. **Manage your account** — a module per profile tab (see URL table below);
    membership & renewal is folded in here as the first tile.
-4. **Members-only materials** — resource tiles.
-5. **Meet our leadership** — board directory with names + emails.
+4. **Members-only materials** — the full launchpad: 10 tiles covering every member
+   resource (directory, newsletter archive, handouts, library, photos, minutes,
+   bylaws & policies, volunteer opportunities, financial summaries, financial
+   forms). Financial forms live here with everything else — not gated.
+5. **Meet our leadership** — board directory with names + emails (this is the
+   single source of truth for the old "Officers & Group Leaders" roster).
+
+## Meeting Zoom links — monthly refresh (IMPORTANT)
+Each meeting card's link is `href="#"` with a `SET URL` comment. WA publishes the
+Zoom links monthly, shortly before each meeting, so **someone must paste that
+month's five links into these cards each month** (edit the Custom HTML gadget).
+This is the tradeoff for having the links inline instead of on a separate page —
+if monthly editing is too much, revert to a single card linking to the Member
+Resources page.
+
+## Members-only materials — link targets
+All 10 tiles currently point at `/resources` (functional fallback) with a `SET URL`
+note naming the exact document/page to repoint each to (online directory,
+newsletter archive, handouts, library holdings, photo gallery, minutes page,
+bylaws/policies, job descriptions, IRS 990s, check/deposit forms). Icons are one
+consistent outline set (Feather/Lucide, 24 viewBox, ~1.7 stroke, round caps).
 
 ## Profile-tab deep links (the important part)
 Each account tile links to a **bare** `/Sys/Profile/*` path — **no `?memberId=`**.

@@ -89,18 +89,20 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"] .ngm-evt-tag
 .ngm-lcard-name{display:block;font-family:var(--ngm-serif);font-size:1.1rem;font-weight:400;color:var(--ngm-charcoal);text-transform:none!important;line-height:1.2;margin-bottom:10px;}
 .ngm-lcard-email,body .ngm-lcard-email{display:block;font-family:var(--ngm-sans)!important;font-size:.8rem!important;font-weight:400!important;color:var(--ngm-gray)!important;word-break:break-all;}
 @media(max-width:560px){.ngm-lcard-grid{grid-template-columns:1fr;}}
-/* prominent meeting-links band */
-.ngm-hub-zoom{display:flex;align-items:center;gap:26px;background:var(--ngm-sage-dk);border-radius:var(--ngm-radius-lg);padding:34px 36px;text-decoration:none!important;color:#fff;transition:background .2s,transform .18s,box-shadow .18s;}
-.ngm-hub-zoom:hover{background:var(--ngm-sage);transform:translateY(-2px);box-shadow:0 16px 40px rgba(62,85,56,.22);}
-.ngm-hub-zoom-icon{width:60px;height:60px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.15);border-radius:16px;}
-.ngm-hub-zoom-icon svg{width:30px;height:30px;color:#fff;}
-.ngm-hub-zoom-body{flex:1;min-width:0;}
-.ngm-hub-zoom-eyebrow{display:block;font-family:var(--ngm-sans);font-size:.7rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:8px;}
-.ngm-hub-zoom-body h2{font-family:var(--ngm-serif);font-size:1.9rem;font-weight:400;color:#fff;margin:0 0 6px;line-height:1.1;}
-.ngm-hub-zoom-body p{font-family:var(--ngm-sans);font-size:.95rem;color:rgba(255,255,255,.85);line-height:1.55;margin:0;}
-.ngm-hub-zoom-go{font-family:var(--ngm-sans);font-size:.95rem;font-weight:600;color:#fff;white-space:nowrap;display:inline-flex;align-items:center;gap:8px;flex-shrink:0;}
-.ngm-hub-zoom-go svg{width:14px;height:14px;}
-@media(max-width:700px){.ngm-hub-zoom{flex-direction:column;align-items:flex-start;gap:18px;padding:28px 26px;}}
+/* meeting Zoom links band + per-meeting cards */
+.ngm-hub-zoomband{background:var(--ngm-sage-dk);}
+.ngm-hub-zoom-eyebrow{display:block;font-family:var(--ngm-sans);font-size:.7rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:10px;}
+.ngm-hub-zoomband h2{font-family:var(--ngm-serif);font-size:2rem;font-weight:400;color:#fff;margin:0 0 8px;line-height:1.1;}
+.ngm-hub-zoomband>.ngm-hub-inner>p{font-family:var(--ngm-sans);font-size:.95rem;color:rgba(255,255,255,.85);line-height:1.6;max-width:600px;margin:0 0 30px;}
+.ngm-hub-zgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.ngm-hub-zcard{display:flex;flex-direction:column;gap:4px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:var(--ngm-radius);padding:18px 18px 16px;text-decoration:none!important;transition:background .18s,transform .18s;}
+.ngm-hub-zcard:hover{background:rgba(255,255,255,.2);transform:translateY(-2px);}
+.ngm-hub-zcard-name{font-family:var(--ngm-serif);font-size:1.18rem;color:#fff;line-height:1.2;}
+.ngm-hub-zcard-when{font-family:var(--ngm-sans);font-size:.8rem;color:rgba(255,255,255,.72);}
+.ngm-hub-zcard-join{margin-top:12px;font-family:var(--ngm-sans);font-size:.85rem;font-weight:600;color:#fff;display:inline-flex;align-items:center;gap:7px;}
+.ngm-hub-zcard-join svg{width:15px;height:15px;flex-shrink:0;}
+@media(max-width:820px){.ngm-hub-zgrid{grid-template-columns:1fr 1fr;}}
+@media(max-width:520px){.ngm-hub-zgrid{grid-template-columns:1fr;}}
 </style>
 
 <div class="ngm-hub-top">
@@ -112,17 +114,38 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"] .ngm-evt-tag
   </div>
 </div>
 
-<section class="ngm ngm-hub-band ngm-hub-white" style="padding-top:44px;padding-bottom:44px">
+<section class="ngm ngm-hub-band ngm-hub-zoomband">
   <div class="ngm-hub-inner">
-    <a class="ngm-hub-zoom" href="/resources"><!-- SET URL: Member Resources page (Meeting Links) -->
-      <span class="ngm-hub-zoom-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1.5-1.5"/></svg></span>
-      <div class="ngm-hub-zoom-body">
-        <span class="ngm-hub-zoom-eyebrow">Get connected</span>
-        <h2>Meeting Zoom links</h2>
-        <p>The video link for each meeting is posted on the Member Resources page &mdash; updated monthly, just before the meeting.</p>
-      </div>
-      <span class="ngm-hub-zoom-go">Get the links <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
+    <span class="ngm-hub-zoom-eyebrow">Get connected</span>
+    <h2>Meeting Zoom links</h2>
+    <p>Join right from here &mdash; each link is refreshed monthly, shortly before the meeting. Hosts open the room 5 minutes early.</p>
+    <div class="ngm-hub-zgrid">
+      <a class="ngm-hub-zcard" href="#"><!-- SET URL: Evening Come & Stitch Zoom link (refresh monthly) -->
+        <span class="ngm-hub-zcard-name">Evening Come &amp; Stitch</span>
+        <span class="ngm-hub-zcard-when">1st Tuesday &middot; 7:00 PM</span>
+        <span class="ngm-hub-zcard-join"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Join Zoom</span>
+      </a>
+      <a class="ngm-hub-zcard" href="#"><!-- SET URL: Board Meeting Zoom link (refresh monthly) -->
+        <span class="ngm-hub-zcard-name">Board Meeting</span>
+        <span class="ngm-hub-zcard-when">2nd Monday &middot; 6:30 PM</span>
+        <span class="ngm-hub-zcard-join"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Join Zoom</span>
+      </a>
+      <a class="ngm-hub-zcard" href="#"><!-- SET URL: Daytime Counted & NP Zoom link (refresh monthly) -->
+        <span class="ngm-hub-zcard-name">Daytime Counted &amp; NP</span>
+        <span class="ngm-hub-zcard-when">2nd Tuesday &middot; 10:00 AM</span>
+        <span class="ngm-hub-zcard-join"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Join Zoom</span>
+      </a>
+      <a class="ngm-hub-zcard" href="#"><!-- SET URL: Daytime Stitch-In Zoom link (refresh monthly) -->
+        <span class="ngm-hub-zcard-name">Daytime Stitch-In</span>
+        <span class="ngm-hub-zcard-when">4th Tuesday &middot; 10:00 AM</span>
+        <span class="ngm-hub-zcard-join"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Join Zoom</span>
+      </a>
+      <a class="ngm-hub-zcard" href="#"><!-- SET URL: Evening Stitch-In Zoom link (refresh monthly) -->
+        <span class="ngm-hub-zcard-name">Evening Stitch-In</span>
+        <span class="ngm-hub-zcard-when">4th Tuesday &middot; 7:00 PM</span>
+        <span class="ngm-hub-zcard-join"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Join Zoom</span>
+      </a>
+    </div>
   </div>
 </section>
 </div>
