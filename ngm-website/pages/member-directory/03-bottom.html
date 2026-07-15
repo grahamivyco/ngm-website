@@ -1,0 +1,281 @@
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════
+   SHARED BASE SYSTEM (copied from the homepage gadget so this
+   page is self-contained). Tokens, typography, layout, buttons,
+   arrow links, badges — including the button font + pill-outline
+   fixes that beat the WA theme.
+══════════════════════════════════════════════════════════ */
+/* ── 1. DESIGN TOKENS ───────────────────────────────────── */
+:root {
+  --ngm-sage:      #5C7A52;
+  --ngm-sage-dk:   #3E5538;
+  --ngm-sage-lt:   #EEF3EC;
+  --ngm-rose:      #B87260;
+  --ngm-rose-lt:   #F5EBE7;
+  --ngm-rose-dk:   #9A5C4A;
+  --ngm-cream:     #FAF7F2;
+  --ngm-linen:     #F0EAE0;
+  --ngm-linen-dk:  #E5DDD0;
+  --ngm-charcoal:  #242424;
+  --ngm-gray:      #656565;
+  --ngm-gray-lt:   #9A9A9A;
+  --ngm-border:    #DDD5C8;
+  --ngm-serif: "Cormorant Garamond", Georgia, serif;
+  --ngm-sans:  "DM Sans", system-ui, sans-serif;
+  --ngm-radius:    14px;
+  --ngm-radius-lg: 20px;
+  --ngm-sh:   0 2px 12px rgba(0,0,0,.06);
+  --ngm-shm:  0 8px 32px rgba(0,0,0,.10);
+  --ngm-shx:  0 20px 60px rgba(0,0,0,.14);
+}
+/* ── 2. SCOPE RESET ─────────────────────────────────────── */
+.ngm *,
+.ngm *::before,
+.ngm *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* ── 3. TYPOGRAPHY SYSTEM ───────────────────────────────── */
+.ngm-eyebrow {
+  display: block;
+  font-family: var(--ngm-sans);
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ngm-sage);
+  margin-bottom: 10px;
+}
+.ngm-h1 {
+  font-family: var(--ngm-serif) !important;
+  font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+  font-weight: 400;
+  line-height: 1.08;
+  color: var(--ngm-charcoal);
+  text-transform: none !important;
+  margin-bottom: 20px;
+}
+.ngm-h2 {
+  font-family: var(--ngm-serif) !important;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.12;
+  color: var(--ngm-charcoal);
+  text-transform: none !important;
+  margin-bottom: 14px;
+}
+.ngm-h2-dark {
+  font-family: var(--ngm-serif) !important;
+  font-size: clamp(2.2rem, 3.2vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: #fff;
+  text-transform: none !important;
+  margin-bottom: 16px;
+}
+.ngm-h1 em,
+.ngm-h2 em,
+.ngm-h2-dark em {
+  font-family: var(--ngm-serif) !important;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  font-style: italic;
+  color: var(--ngm-rose) !important;
+}
+.ngm-lead {
+  font-family: var(--ngm-sans);
+  font-size: 1.0625rem;
+  color: var(--ngm-gray);
+  line-height: 1.8;
+  max-width: 560px;
+  margin-bottom: 36px;
+}
+/* ── 4. LAYOUT HELPERS ──────────────────────────────────── */
+.ngm-sec {
+  padding: 88px 48px;
+}
+.ngm-sec-linen { background: var(--ngm-linen); }
+.ngm-sec-cream { background: var(--ngm-cream); }
+.ngm-sec-white { background: #fff; }
+.ngm-con {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+/* ── 5. BUTTONS ─────────────────────────────────────────────
+   FONT FIX: WA's theme applies its own font to every anchor via
+   high-specificity rules like  body A:not(.stylizedButton) {…}.
+   A plain `.ngm-btn { font-family }` loses to that, so the pill
+   buttons (Join, Get directions, etc.) rendered in the theme's
+   font instead of DM Sans. We mirror WA's specificity by also
+   declaring the rule with a `body` prefix + !important on the
+   font properties, so our font wins. (Same high-specificity
+   override pattern used for the WA events gadget in section 12.)
+   The arrow links already won this fight; this brings the pills
+   in line with the page's type system.
+────────────────────────────────────────────────────────── */
+.ngm-btn,
+body a.ngm-btn,
+body a.ngm-btn:link,
+body a.ngm-btn:visited {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--ngm-sans) !important;
+  font-size: .9rem !important;
+  font-weight: 500 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  border-radius: 100px;
+  padding: 12px 26px;
+  cursor: pointer;
+  text-decoration: none !important;
+  border: 1.5px solid transparent;
+  transition: background .2s, transform .18s, box-shadow .18s, color .2s;
+  line-height: 1;
+}
+.ngm-btn-sm,
+body a.ngm-btn-sm { padding: 9px 20px; font-size: .82rem !important; }
+.ngm-btn-green  { background: var(--ngm-sage-dk); color: #fff !important; border-color: var(--ngm-sage-dk); }
+.ngm-btn-green:hover  { background: var(--ngm-sage); border-color: var(--ngm-sage); transform: translateY(-1px); box-shadow: 0 5px 16px rgba(62,85,56,.25); }
+.ngm-btn-rose   { background: var(--ngm-rose);    color: #fff !important; border-color: var(--ngm-rose); }
+.ngm-btn-rose:hover   { background: var(--ngm-rose-dk); border-color: var(--ngm-rose-dk); }
+.ngm-btn-outline,
+body a.ngm-btn-outline { background: transparent; color: var(--ngm-sage-dk) !important; border: 1.5px solid var(--ngm-sage-dk) !important; }
+.ngm-btn-outline:hover,
+body a.ngm-btn-outline:hover { background: var(--ngm-sage-dk) !important; color: #fff !important; }
+.ngm-btn-outline-rose,
+body a.ngm-btn-outline-rose { background: transparent; color: var(--ngm-rose) !important; border: 1.5px solid var(--ngm-rose) !important; }
+.ngm-btn-outline-rose:hover,
+body a.ngm-btn-outline-rose:hover { background: var(--ngm-rose) !important; color: #fff !important; }
+.ngm-btn-white  { background: #fff; color: var(--ngm-charcoal) !important; border-color: #fff; }
+.ngm-btn-white:hover  { background: var(--ngm-cream); }
+/* Stops a button stretching to fill a flex/grid column on desktop.
+   Used on the Retreat button, which sits in a flex-column. */
+.ngm-btn-fit { align-self: flex-start; }
+/* ── 6. ARROW LINK ──────────────────────────────────────── */
+.ngm-arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--ngm-sans);
+  font-size: .9rem;
+  color: var(--ngm-sage-dk) !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(62,85,56,.3);
+  padding-bottom: 2px;
+  transition: gap .18s, border-color .18s;
+}
+.ngm-arrow-link:hover {
+  gap: 10px;
+  border-color: var(--ngm-sage-dk);
+}
+.ngm-arrow-link-sm { font-size: .8rem; }
+/* ── 7. FORMAT BADGES ───────────────────────────────────── */
+.ngm-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--ngm-sans);
+  font-size: .68rem;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 100px;
+  letter-spacing: .04em;
+}
+.ngm-badge-hybrid  { background: #E3EFEF; color: #2A5A5A; }
+.ngm-badge-person  { background: var(--ngm-rose-lt); color: #7A3E2E; }
+.ngm-badge-zoom    { background: #EEEEFF; color: #3A46AF; }
+.ngm-badge-virtual { background: #F2EEF8; color: #5A3A8A; }
+/* ══════════════════════════════════════════════════════════
+   MEMBER-DIRECTORY-SPECIFIC STYLES (.ngm-dir-*)
+   Compact band that sits BELOW the native WA Member Directory
+   gadget, nudging members to keep their own listing current.
+══════════════════════════════════════════════════════════ */
+.ngm-dir-foot {
+  background: var(--ngm-sage-lt);
+  padding: 56px 48px;
+  border-top: 1px solid var(--ngm-border);
+}
+.ngm-dir-foot-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.ngm-dir-foot-text { max-width: 560px; }
+.ngm-dir-foot-text h2 { margin-bottom: 8px; }
+.ngm-dir-foot-text p {
+  font-family: var(--ngm-sans);
+  font-size: 1rem;
+  color: var(--ngm-gray);
+  line-height: 1.7;
+}
+.ngm-dir-foot-btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+@media (max-width: 900px) {
+  .ngm-dir-foot { padding: 44px 28px; }
+  .ngm-dir-foot-inner { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .ngm-dir-foot-text { max-width: 100%; }
+}
+@media (max-width: 560px) {
+  .ngm-dir-foot { padding: 38px 18px; }
+}
+/* ══════════════════════════════════════════════════════════
+   WA GAP-KILLING (sections 19 + 20 from homepage) — confirmed
+   classes from Inspect. Safe to include again; identical rules
+   in the global CSS just no-op. Closes the header→hero gap and
+   the gaps between the stacked gadgets in this sandwich too.
+══════════════════════════════════════════════════════════ */
+body .WaGadgetCustomHtml,
+body .WaGadgetCustomHtml .gadgetStyleBody {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+body [class^="WaGadget"],
+body .WaGadgetFirst {
+  margin: 0 !important;
+}
+body [class*="WaCustomLayoutContainer"] {
+  margin-bottom: 0 !important;
+}
+body .WaPlaceHolderContent > div,
+body .WaPlaceHolderContent1 > div,
+body .WaPlaceHolderContent2 > div,
+body .WaPlaceHolderContent3 > div,
+body .WaPlaceHolderContent4 > div {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+body .WaPlaceHolder > div,
+body .WaPlaceHolderWide > div {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+</style>
+<div class="ngm ngm-dir-foot">
+  <div class="ngm-dir-foot-inner">
+    <div class="ngm-dir-foot-text">
+      <span class="ngm-eyebrow">Your listing</span>
+      <h2 class="ngm-h2">Keep your listing <em>current</em></h2>
+      <p>Your directory entry comes from your own profile &mdash; update it any time to change what other members see.</p>
+    </div>
+    <!-- these /Sys/Profile paths resolve to the logged-in member; never add ?memberId -->
+    <div class="ngm-dir-foot-btns">
+      <a class="ngm-btn ngm-btn-green" href="/Sys/Profile">Edit your profile</a>
+      <a class="ngm-btn ngm-btn-outline" href="/Sys/Profile/Privacy">Privacy settings</a>
+    </div>
+  </div>
+</div>

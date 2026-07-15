@@ -11,12 +11,11 @@ board.
 2. **Meeting Zoom links** — a bold sage band with **one card per meeting**; the
    Zoom link is *inline* (member clicks the card to join — no click-through to
    another page). See the monthly-refresh note below.
-3. **Manage your account** — a module per profile tab (see URL table below);
-   membership & renewal is folded in here as the first tile.
-4. **Members-only materials** — the full launchpad: 10 tiles covering every member
-   resource (directory, newsletter archive, handouts, library, photos, minutes,
-   bylaws & policies, volunteer opportunities, financial summaries, financial
-   forms). Financial forms live here with everything else — not gated.
+3. **Manage your account** — **two primary cards** (Membership & renewal, Profile &
+   details) at a larger hierarchy, above **five smaller tab tiles** (event
+   registrations, invoices, email, privacy, donations). See URL table below.
+4. **Members-only materials** — the launchpad: **9 tiles** covering every member
+   resource. Financial forms live here with everything else — not gated.
 5. **Meet our leadership** — board directory with names + emails (this is the
    single source of truth for the old "Officers & Group Leaders" roster).
 
@@ -28,12 +27,18 @@ This is the tradeoff for having the links inline instead of on a separate page �
 if monthly editing is too much, revert to a single card linking to the Member
 Resources page.
 
-## Members-only materials — link targets
-All 10 tiles currently point at `/resources` (functional fallback) with a `SET URL`
-note naming the exact document/page to repoint each to (online directory,
-newsletter archive, handouts, library holdings, photo gallery, minutes page,
-bylaws/policies, job descriptions, IRS 990s, check/deposit forms). Icons are one
-consistent outline set (Feather/Lucide, 24 viewBox, ~1.7 stroke, round caps).
+## Members-only materials — link targets (9 tiles)
+- **Member directory** → `/member-directory` (new page in this repo, wraps WA's
+  native Directory gadget).
+- **Volunteer opportunities** → `/volunteer` (new page in this repo).
+- **Board meeting minutes · Financial summaries · Financial forms** → **Google
+  Drive** links (`href="#"` placeholders with `SET URL` notes — paste the Drive
+  folder/file URLs). These are document collections, so Drive is simpler than
+  building pages.
+- **Newsletter archive · Meeting handouts · Lending library · Bylaws & policies**
+  → `/resources` fallback with `SET URL` notes to repoint at the exact WA doc/page.
+- **Photo gallery tile removed.** Icons are one consistent outline set
+  (Feather/Lucide, 24 viewBox, ~1.7 stroke, round caps).
 
 ## Profile-tab deep links (the important part)
 Each account tile links to a **bare** `/Sys/Profile/*` path — **no `?memberId=`**.

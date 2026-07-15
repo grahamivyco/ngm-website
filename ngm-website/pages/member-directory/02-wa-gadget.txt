@@ -1,0 +1,9 @@
+Wild Apricot native Member Directory gadget goes HERE.
+
+Insert Wild Apricot's built-in Member Directory gadget in its own gadget slot,
+BETWEEN the 01-top Custom HTML gadget (intro band) and the 03-bottom Custom HTML
+gadget (the "keep your listing current" band). This is the "sandwich": custom
+intro on top, native gadget in the middle, custom band on the bottom.
+
+There is no HTML to paste for this middle slot — it is the WA gadget itself.
+It inherits its styling from the site's Global CSS, so leave it unstyled here.
