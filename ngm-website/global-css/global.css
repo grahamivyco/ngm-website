@@ -3850,47 +3850,164 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"] .ngm-evt-tag
 
 /* ══════════════════════════════════════════════════════════════════
    MEMBER PROFILE + TABS  —  /Sys/Profile and its tabs
-   (EventRegistrations · Finances · Donations · Privacy · EmailSubscriptions)
-   These are the "Manage your account" destinations. /Sys/Profile is CSS-only
-   (WA blocks custom HTML there), so this skins WA's native profile markup.
-   PROVISIONAL: the page requires login, so these target WA's standard profile/
-   table classes but were not verified against the live DOM. After the Global
-   CSS is live, open each tab; if a table or label looks off, capture its class
-   and tune — same process used for the login gadget.
+   (Profile · Privacy · Email subscriptions render inline in the same
+    .WaGadgetContactProfile gadget; Event registrations · Invoices · Donations
+    are separate /Sys/Profile/* pages, styled by the generic table rules below.)
+   /Sys/Profile is CSS-only (WA blocks custom HTML there), so this skins WA's
+   native profile markup to match system-pages/member-profile/mockups/
+   profile-buildable. Targets VERIFIED against the live DOM (theme
+   casefile_guardian.v3.0): the real gadget class is .WaGadgetContactProfile,
+   labels are .fieldLabel, values .fieldBody, section headers <h4> inside
+   .captionContainer, the tab bar is ul.memberDetailsTabMenu (li.selected =
+   active), and buttons are input.typeButton.
    ══════════════════════════════════════════════════════════════════ */
-body .WaGadgetMemberProfile, body .WaGadgetMemberProfile *,
-body .WaGadgetMembershipCard, body .WaGadgetMembershipCard *,
-body .memberProfileGadget, body .memberProfileGadget * {
+
+/* ---- fonts: DM Sans everywhere, Cormorant on the page heading ---- */
+body .WaGadgetContactProfile, body .WaGadgetContactProfile *,
+body .WaGadgetBreadcrumbs, body .WaGadgetBreadcrumbs * {
   font-family: var(--ngm-sans) !important;
 }
-body .WaGadgetMemberProfile h1, body .WaGadgetMemberProfile h2,
-body .memberProfileGadget h1, body .memberProfileGadget h2 {
-  font-family: var(--ngm-serif) !important; font-weight: 400 !important; color: var(--ngm-charcoal) !important;
+/* The "Contact Profile" heading is a separate Headline gadget above the profile.
+   Restyle it to the serif look; rename it to "My profile" in WA page settings. */
+body .WaGadgetHeadline h1.header,
+body .WaGadgetHeadline h1.header font {
+  font-family: var(--ngm-serif) !important; font-weight: 400 !important;
+  color: var(--ngm-charcoal) !important; text-transform: none !important;
 }
-body .WaGadgetMemberProfile table, body .memberProfileGadget table,
-body [class*="InvoicesAndPayments"] table, body [class*="EventRegistrations"] table,
-body [class*="Donations"] table {
+/* The "Click EDIT PROFILE to Make Changes" red arrow is a content image in that
+   gadget. Hidden here for the clean look; delete it in WA to remove permanently. */
+body .WaGadgetHeadline .gadgetStyleBody p img { display: none !important; }
+
+/* ---- breadcrumb ---- */
+body .WaGadgetBreadcrumbs { font-size: .82rem !important; }
+body .WaGadgetBreadcrumbs a { color: var(--ngm-sage-dk) !important; text-decoration: none !important; }
+
+/* ---- top action buttons: Edit profile (outline) + My directory profile (link) ---- */
+body .WaGadgetContactProfile input.typeButton {
+  background: var(--ngm-sage-dk) !important; color: #fff !important;
+  border: 1px solid var(--ngm-sage-dk) !important; border-radius: 999px !important;
+  padding: 12px 24px !important; font-size: .88rem !important; font-weight: 600 !important;
+  cursor: pointer !important; box-shadow: none !important; text-transform: none !important;
+  transition: background .18s, color .18s;
+}
+body .WaGadgetContactProfile input.typeButton:hover { background: var(--ngm-sage) !important; }
+/* Edit-profile reads as secondary (outline); Renew stays the filled primary. */
+body .WaGadgetContactProfile input[id$="editButtonTop"].typeButton,
+body .WaGadgetContactProfile input[id$="editButtonBottom"].typeButton {
+  background: transparent !important; color: var(--ngm-sage-dk) !important;
+}
+body .WaGadgetContactProfile input[id$="editButtonTop"].typeButton:hover,
+body .WaGadgetContactProfile input[id$="editButtonBottom"].typeButton:hover {
+  background: var(--ngm-sage-lt) !important;
+}
+body .WaGadgetContactProfile .memberDirectoryDetailsLink {
+  color: var(--ngm-sage-dk) !important; font-weight: 600 !important;
+  font-size: .88rem !important; text-decoration: none !important; margin-left: 6px;
+}
+
+/* ---- tab bar: ul.memberDetailsTabMenu ---- */
+body .WaGadgetContactProfile ul.memberDetailsTabMenu {
+  display: flex !important; flex-wrap: wrap !important; gap: 26px !important;
+  list-style: none !important; margin: 6px 0 30px !important; padding: 0 !important;
+  border-bottom: 1px solid var(--ngm-border) !important;
+}
+body .WaGadgetContactProfile ul.memberDetailsTabMenu li {
+  float: none !important; margin: 0 !important; padding: 0 0 12px !important;
+  background: none !important; border: none !important; list-style: none !important;
+}
+body .WaGadgetContactProfile ul.memberDetailsTabMenu li a,
+body .WaGadgetContactProfile ul.memberDetailsTabMenu li span {
+  color: var(--ngm-gray) !important; font-size: .9rem !important; font-weight: 400 !important;
+  text-decoration: none !important; background: none !important;
+}
+body .WaGadgetContactProfile ul.memberDetailsTabMenu li.selected {
+  box-shadow: inset 0 -2px 0 0 var(--ngm-sage) !important;
+}
+body .WaGadgetContactProfile ul.memberDetailsTabMenu li.selected a,
+body .WaGadgetContactProfile ul.memberDetailsTabMenu li.selected span {
+  color: var(--ngm-sage-dk) !important; font-weight: 600 !important;
+}
+
+/* ---- section headers: <h4> inside .captionContainer (full-width sage eyebrow) ---- */
+body .WaGadgetContactProfile .captionContainer .fieldLabel { display: none !important; }
+body .WaGadgetContactProfile .captionContainer .fieldBody {
+  width: 100% !important; float: none !important;
+  border-bottom: 1px solid var(--ngm-border) !important; padding-bottom: 10px !important;
+}
+body .WaGadgetContactProfile .captionContainer h4 {
+  margin: 0 !important; font-family: var(--ngm-sans) !important; font-size: .72rem !important;
+  font-weight: 600 !important; letter-spacing: .14em !important; text-transform: uppercase !important;
+  color: var(--ngm-sage) !important;
+}
+body .WaGadgetContactProfile .captionContainer h4 .explanation {
+  letter-spacing: 0 !important; text-transform: none !important; font-weight: 400 !important;
+  color: var(--ngm-gray-lt) !important; font-style: italic;
+}
+
+/* ---- data field rows: .fieldLabel (label) / .fieldBody (value) ---- */
+body .WaGadgetContactProfile .fieldContainer.simpleTextContainer,
+body .WaGadgetContactProfile .fieldContainer.textFieldContainer {
+  border-bottom: 1px solid #F0EDE6 !important; padding: 4px 0 !important;
+}
+body .WaGadgetContactProfile .labeledTextContainer .fieldLabel,
+body .WaGadgetContactProfile .singleStringContainer .fieldLabel,
+body .WaGadgetContactProfile .fieldLabel span {
+  color: var(--ngm-sage-dk) !important; font-weight: 600 !important; font-size: .85rem !important;
+}
+body .WaGadgetContactProfile .fieldBody,
+body .WaGadgetContactProfile .fieldBody span,
+body .WaGadgetContactProfile .fieldBody .label {
+  color: var(--ngm-charcoal) !important; font-size: .9rem !important;
+}
+body .WaGadgetContactProfile .fieldBody a { color: var(--ngm-sage-dk) !important; }
+/* membership-level sub-lines */
+body .WaGadgetContactProfile .levelPrice { color: var(--ngm-sage-dk) !important; font-weight: 500 !important; }
+body .WaGadgetContactProfile .levelRenewal,
+body .WaGadgetContactProfile .levelRecurring,
+body .WaGadgetContactProfile .typeInstruction {
+  color: var(--ngm-gray-lt) !important; font-style: italic;
+}
+
+/* ---- Privacy tab: the "Details to show" grid (#memberFieldTable) ---- */
+body .WaGadgetContactProfile #memberFieldTable {
+  width: 100% !important; border-collapse: collapse !important;
+}
+body .WaGadgetContactProfile #memberFieldTable th,
+body .WaGadgetContactProfile #memberFieldTable td {
+  border-bottom: 1px solid var(--ngm-border) !important; padding: 10px 12px !important;
+}
+body .WaGadgetContactProfile .memberFieldHeadingTitle {
+  color: var(--ngm-sage-dk) !important; font-weight: 600 !important;
+}
+body .WaGadgetContactProfile .memberFieldTitle span { color: var(--ngm-charcoal) !important; }
+
+/* ---- social-login rows (chips) ---- */
+body .WaGadgetContactProfile .connectExternalProfileButton,
+body .WaGadgetContactProfile .disconnectExternalProfileButton {
+  color: var(--ngm-sage-dk) !important; text-decoration: none !important;
+}
+
+/* ---- hide the User ID row on the Profile tab (optional; mockup omits it).
+        #idContainer12024901 is NGM's User ID field on this account form —
+        if that field id ever changes, update or remove this line. ---- */
+body .WaGadgetContactProfile #idContainer12024901 { display: none !important; }
+
+/* ---- separate profile sub-pages (Event registrations / Invoices / Donations)
+        still use generic WA table markup; kept provisional until captured live. ---- */
+body [class*="EventRegistrations"] table, body [class*="Finances"] table,
+body [class*="Invoices"] table, body [class*="Donations"] table {
   border-collapse: collapse !important; width: 100% !important; font-size: .95rem !important;
 }
-body .WaGadgetMemberProfile table th, body .memberProfileGadget table th,
-body [class*="InvoicesAndPayments"] table th, body [class*="EventRegistrations"] table th,
-body [class*="Donations"] table th {
+body [class*="EventRegistrations"] table th, body [class*="Finances"] table th,
+body [class*="Invoices"] table th, body [class*="Donations"] table th {
   background: var(--ngm-sage-lt) !important; color: var(--ngm-sage-dk) !important;
   font-weight: 600 !important; text-align: left !important; padding: 12px 14px !important;
   border-bottom: 1px solid var(--ngm-border) !important;
 }
-body .WaGadgetMemberProfile table td, body .memberProfileGadget table td,
-body [class*="InvoicesAndPayments"] table td, body [class*="EventRegistrations"] table td,
-body [class*="Donations"] table td {
-  padding: 12px 14px !important; border-bottom: 1px solid var(--ngm-border) !important; color: var(--ngm-charcoal) !important;
-}
-body .fieldName { color: var(--ngm-sage-dk) !important; font-weight: 600 !important; }
-body .fieldBody { color: var(--ngm-charcoal) !important; }
-body .WaGadgetMemberProfile .tabItem, body .memberProfileGadget .tabItem {
-  font-family: var(--ngm-sans) !important; color: var(--ngm-gray) !important;
-}
-body .WaGadgetMemberProfile .tabItemSelected, body .memberProfileGadget .tabItemSelected {
-  color: var(--ngm-sage-dk) !important; border-bottom: 2px solid var(--ngm-sage) !important;
+body [class*="EventRegistrations"] table td, body [class*="Finances"] table td,
+body [class*="Invoices"] table td, body [class*="Donations"] table td {
+  padding: 12px 14px !important; border-bottom: 1px solid var(--ngm-border) !important;
+  color: var(--ngm-charcoal) !important;
 }
 
 /* account collapsed to a single full-width tile */
