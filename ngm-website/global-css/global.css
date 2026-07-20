@@ -3969,24 +3969,55 @@ body .WaGadgetContactProfile .typeInstruction {
 }
 
 /* ---- Privacy tab: the "Details to show" grid (#memberFieldTable) ---- */
+body .WaGadgetContactProfile .includeMeView {
+  color: var(--ngm-charcoal) !important; font-weight: 600 !important; font-size: .95rem !important;
+}
 body .WaGadgetContactProfile #memberFieldTable {
-  width: 100% !important; border-collapse: collapse !important;
+  width: 100% !important; border-collapse: collapse !important; margin-top: 6px !important;
 }
 body .WaGadgetContactProfile #memberFieldTable th,
 body .WaGadgetContactProfile #memberFieldTable td {
-  border-bottom: 1px solid var(--ngm-border) !important; padding: 10px 12px !important;
+  border-bottom: 1px solid #F0EDE6 !important; padding: 12px 14px !important; vertical-align: middle !important;
 }
+/* three column headers: Anybody / Members / No access — sage eyebrows, centred */
+body .WaGadgetContactProfile .memberFieldHeadingTD { text-align: center !important; }
 body .WaGadgetContactProfile .memberFieldHeadingTitle {
-  color: var(--ngm-sage-dk) !important; font-weight: 600 !important;
+  color: var(--ngm-sage) !important; font-weight: 600 !important;
+  font-size: .72rem !important; letter-spacing: .12em !important; text-transform: uppercase !important;
 }
-body .WaGadgetContactProfile .memberFieldTitle span { color: var(--ngm-charcoal) !important; }
+/* row labels down the left (Send message form, Email, …) */
+body .WaGadgetContactProfile th.memberFieldTitle { text-align: left !important; font-weight: 400 !important; }
+body .WaGadgetContactProfile .memberFieldTitle span { color: var(--ngm-charcoal) !important; font-size: .9rem !important; }
+/* the selected-visibility indicator cells, centred under each column */
+body .WaGadgetContactProfile .memberFieldValueTD { text-align: center !important; }
+body .WaGadgetContactProfile .memberFieldValueTD > div { margin: 0 auto !important; }
 
-/* ---- social-login rows (chips) ---- */
+/* ---- Email subscriptions tab: "Subscribed" status labels ---- */
+body .WaGadgetContactProfile .labeledImage span { color: var(--ngm-sage-dk) !important; font-weight: 600 !important; }
+
+/* ---- Social network login: Connect / Disconnect as design-system chips ---- */
+body .WaGadgetContactProfile .socialLogin {
+  display: flex !important; align-items: center !important; gap: 10px !important; flex-wrap: wrap !important;
+}
+body .WaGadgetContactProfile .socialLoginImg img {
+  width: 30px !important; height: 30px !important; border-radius: 50% !important;
+  display: inline-block !important; vertical-align: middle !important;
+}
+body .WaGadgetContactProfile .socialLoginName { color: var(--ngm-charcoal) !important; font-size: .9rem !important; }
 body .WaGadgetContactProfile .connectExternalProfileButton,
 body .WaGadgetContactProfile .disconnectExternalProfileButton {
-  color: var(--ngm-sage-dk) !important; text-decoration: none !important;
+  display: inline-flex !important; align-items: center !important; gap: 8px !important;
+  border: 1px solid var(--ngm-border) !important; border-radius: 999px !important;
+  padding: 8px 16px !important; font-size: .85rem !important; font-weight: 600 !important;
+  color: var(--ngm-sage-dk) !important; text-decoration: none !important; background: #fff !important;
+  transition: border-color .18s, background .18s !important;
 }
-body .WaGadgetContactProfile .socialLoginName { color: var(--ngm-charcoal) !important; }
+body .WaGadgetContactProfile .connectExternalProfileButton:hover,
+body .WaGadgetContactProfile .disconnectExternalProfileButton:hover {
+  border-color: var(--ngm-sage) !important; background: var(--ngm-sage-lt) !important;
+}
+/* the brand icon inside the Connect chip */
+body .WaGadgetContactProfile .authenticateLoginIcon { flex-shrink: 0 !important; }
 
 /* ---- Edit-profile mode: form fields (inputs / selects / textareas) + the
         Search boxes on the Invoices/Donations/Event tabs. In view mode the only
