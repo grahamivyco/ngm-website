@@ -1,27 +1,42 @@
 # Global CSS
 
-This folder holds the site-wide CSS for the WA **Global CSS** tab. There are two files
-with very different jobs:
+This folder holds the site-wide CSS for the WA **CSS** tab.
 
-## `global.css` — the MASTER redesign stylesheet
-The consolidated sage/cream NGM redesign, all in one place. The shared design system
-(tokens, reset, typography, layout, buttons, arrow links, badges) appears **once** at
-the top, followed by each page's own styles and the native WA gadget skins
-(login/account, calendar). Fonts are `@import`ed at the top.
+## The files
 
-- **This is the redesign — not yet live.** Do **not** paste it into the WA Global CSS
-  tab until the full-site cutover (see the project's staged-rollout plan). A half-applied
-  redesign looks broken to members.
-- At cutover, each page gadget's own `<style>` block can be deleted, because its styles
-  live here now. (The header/footer gadgets keep their inline CSS — they carry HTML+JS.)
-- Rebuilt from the page files by `scratchpad/build_master.py`; if you change a page's
-  `<style>`, re-run it (or edit `global.css` directly) so this stays the source of truth.
+### `global.css` — PASTE THIS into Wild Apricot
+Paste-ready, **minified** (~121 KB). This is the file you copy into WA's CSS box:
+open it on GitHub → **Copy raw file** → paste into the CSS tab → Save.
 
-## `current-live-backup.css` — the RESTORE file
-An exact snapshot of what is in the live WA Global CSS tab **right now** (the version
-members are used to — it still has purple relics from a scrapped mid-update alongside the
-sage calendar styles).
+> **Why minified:** WA's CSS box has a size limit the full readable stylesheet
+> (~196 KB) exceeds — WA silently truncates it, dropping whatever sits at the end
+> (that's what kept the member-profile skin from ever going live). The minified
+> build fits, so it's what actually goes on the site.
 
-- **Use it to revert.** If you paste something experimental into the live Global CSS tab
-  and want to undo it, replace the tab's contents with this file and save.
-- If you ever change the live Global CSS, update this file to match.
+### `global.source.css` — the readable MASTER (edit here)
+The consolidated sage/cream NGM redesign, fully commented (~196 KB): design tokens,
+reset, typography, layout, buttons, badges once at the top, then each page's styles
+and the native WA gadget skins (login/account, calendar, member profile). **Make CSS
+changes here** so it stays understandable, then regenerate `global.css` (below).
+
+### `current-live-backup.css` — the RESTORE file
+A snapshot of the old CSS that was live before the redesign. **Use it to revert:** if a
+paste goes wrong, replace the WA CSS tab with this file and save to get back to a known
+state.
+
+## After editing `global.source.css`, regenerate `global.css`
+
+```bash
+python3 - <<'PY'
+import re
+src=open('global-css/global.source.css').read()
+s=re.sub(r'/\*.*?\*/','',src,flags=re.S)
+t=[]
+s=re.sub(r'"(?:[^"\\]|\\.)*"|\'(?:[^\'\\]|\\.)*\'|url\([^)]*\)',lambda m:(t.append(m.group(0)) or f"\x00{len(t)-1}\x00"),s)
+s=re.sub(r'\s+',' ',s); s=re.sub(r'\s*([{}:;,>~+])\s*',r'\1',s); s=s.replace(';}','}').strip()
+mini=re.sub(r'\x00(\d+)\x00',lambda m:t[int(m.group(1))],s)
+assert mini.count('{')==mini.count('}'), "unbalanced braces"
+open('global-css/global.css','w').write("/* NGM Global CSS - PASTE-READY (minified) - copy this whole file into Wild Apricot's CSS box. Do NOT hand-edit: the readable master is global.source.css; regenerate this from it after changes. */\n"+mini)
+print('regenerated global.css:', len(open('global-css/global.css').read()), 'bytes')
+PY
+```
