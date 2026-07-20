@@ -2,6 +2,10 @@
 
 **WA page:** `/Sys/Profile` — CSS-only (Wild Apricot does not allow custom HTML here).
 
+> **Mockups:** see [`mockups/`](mockups/) — `profile-buildable` is the CSS-only
+> target this skin should produce; `profile-concept` is aspirational and **cannot**
+> be built on a WA system page. Don't confuse the two when sharing.
+
 This page is skinned entirely by `global-css/global.css` (the WA SYSTEM-PAGE FORMS +
 WaGadgetLoginForm sections, plus the **MEMBER PROFILE + TABS** section): DM Sans /
 Cormorant fonts, sage buttons, and NGM field styling. There are no gadgets to paste

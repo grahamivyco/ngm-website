@@ -1,0 +1,108 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root{--sage:#5C7A52;--sage-dk:#3E5538;--sage-lt:#EEF3EC;--rose:#B87260;--cream:#FAF7F2;--linen:#F0EAE0;--charcoal:#242424;--gray:#656565;--gray-lt:#9A9A9A;--border:#DDD5C8;--serif:"Cormorant Garamond",Georgia,serif;--sans:"DM Sans",system-ui,sans-serif;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:#fff;font-family:var(--sans);color:var(--charcoal);}
+.page{max-width:1000px;margin:0 auto;padding:34px 40px 80px;}
+.legend{background:#FFF6E5;border:1px solid #E8D6A8;border-radius:10px;padding:15px 19px;font-size:.83rem;color:#7A5B18;line-height:1.65;margin-bottom:32px;}
+.legend b{color:#5C4410;}
+.crumb{font-size:.82rem;color:var(--gray-lt);margin-bottom:20px;}
+.crumb a{color:var(--sage-dk);text-decoration:none;}
+h1{font-family:var(--serif);font-size:2.6rem;font-weight:400;line-height:1.1;margin-bottom:22px;}
+
+/* buttons — WA renders these; CSS restyles them */
+.acts{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:26px;}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--sage-dk);color:#fff;
+  border-radius:999px;padding:12px 22px;font-size:.88rem;font-weight:600;text-decoration:none;border:none;}
+.btn.sec{background:transparent;color:var(--sage-dk);border:1px solid var(--sage-dk);}
+.tlink{font-size:.88rem;font-weight:600;color:var(--sage-dk);text-decoration:none;}
+
+/* tab bar */
+.tabs{display:flex;gap:26px;flex-wrap:wrap;border-bottom:1px solid var(--border);margin-bottom:34px;}
+.tab{padding:0 0 12px;font-size:.9rem;color:var(--gray);}
+.tab.on{color:var(--sage-dk);font-weight:600;box-shadow:inset 0 -2px 0 0 var(--sage);}
+
+/* WA's section subheaders */
+.sect{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--sage);padding:30px 0 12px;border-bottom:1px solid var(--border);margin-bottom:4px;}
+.sect:first-of-type{padding-top:0;}
+
+/* WA's label/value rows — labels stay right-aligned as WA renders them */
+.row{display:flex;gap:26px;padding:12px 0;border-bottom:1px solid #F0EDE6;}
+.lab{width:38%;flex-shrink:0;text-align:right;font-size:.85rem;font-weight:600;color:var(--sage-dk);line-height:1.5;}
+.val{flex:1;font-size:.9rem;color:var(--charcoal);line-height:1.6;}
+.val a{color:var(--sage-dk);}
+.sub{display:block;font-size:.79rem;color:var(--gray-lt);font-style:italic;margin-top:3px;line-height:1.5;}
+.renewrow{padding:20px 0 4px;display:flex;}
+.renewrow .sp{width:38%;flex-shrink:0;}
+
+.social{display:flex;gap:26px;padding:14px 0;align-items:center;}
+.social .lab{width:38%;text-align:right;}
+.chip{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--border);border-radius:999px;
+  padding:8px 16px;font-size:.85rem;color:var(--charcoal);}
+.avatar{width:30px;height:30px;border-radius:50%;background:var(--sage-lt);display:inline-block;}
+</style>
+
+<div class="page">
+  <div class="legend"><b>Buildable version.</b> This is Wild Apricot&rsquo;s own page &mdash; same
+  structure, same fields, same order as the live one. Everything changed here is
+  <b>CSS only</b>, except two items noted at the bottom. Nothing has been invented or rearranged.</div>
+
+  <div class="crumb"><a href="#">Welcome</a> &rsaquo; My profile</div>
+  <h1>My profile</h1>
+
+  <div class="acts">
+    <a class="btn sec" href="#">Edit profile</a>
+    <a class="tlink" href="#">My directory profile</a>
+  </div>
+
+  <div class="tabs">
+      <span class="tab on">Profile</span>
+      <span class="tab">Privacy</span>
+      <span class="tab">Email subscriptions</span>
+      <span class="tab">My event registrations</span>
+      <span class="tab">Invoices and payments</span>
+      <span class="tab">Donations</span>
+  </div>
+
+  <div class="sect">Membership details</div>
+      <div class="row"><div class="lab">Membership level</div><div class="val">Annual Guild Membership &mdash; $30.00 (USD)<span class="sub">Subscription period: 1 year, on: June 1st<br>No automatically recurring payments</span></div></div>
+      <div class="row"><div class="lab">Membership status</div><div class="val">Active</div></div>
+      <div class="row"><div class="lab">Member since</div><div class="val">Fri, March 07, 2025</div></div>
+      <div class="row"><div class="lab">Renewal due on</div><div class="val">Tue, June 01, 2027</div></div>
+  <div class="renewrow"><div class="sp"></div><a class="btn" href="#">Renew to Thu, June 01, 2028</a></div>
+
+  <div class="sect">Contact details</div>
+      <div class="row"><div class="lab">First name</div><div class="val">Jane</div></div>
+      <div class="row"><div class="lab">Last name</div><div class="val">Member</div></div>
+      <div class="row"><div class="lab">Email</div><div class="val"><a href="#">jane.member@example.org</a></div></div>
+      <div class="row"><div class="lab">Preferred Phone Number</div><div class="val">612&#8209;555&#8209;0142</div></div>
+      <div class="row"><div class="lab">Preferred Phone Type</div><div class="val">Mobile</div></div>
+      <div class="row"><div class="lab">Alternative Phone Number</div><div class="val">&nbsp;</div></div>
+      <div class="row"><div class="lab">Alternative Phone Type</div><div class="val">&nbsp;</div></div>
+      <div class="row"><div class="lab">Street Address 1</div><div class="val">123 Example Ave</div></div>
+      <div class="row"><div class="lab">Street Address 2</div><div class="val">Apt 4</div></div>
+      <div class="row"><div class="lab">City</div><div class="val">Bloomington</div></div>
+      <div class="row"><div class="lab">State</div><div class="val">Minnesota</div></div>
+      <div class="row"><div class="lab">Zip Code</div><div class="val">55431</div></div>
+      <div class="row"><div class="lab">Country</div><div class="val">United States</div></div>
+      <div class="row"><div class="lab">Email Notifications You&rsquo;d Like to Receive</div><div class="val">General Announcements<br>Newsletter<br>Daytime Stitch-In<br>Evening Stitch-In<br>Daytime Counted Thread &amp; Needlepoint<br>Evening Counted Thread<br>Evening Needlepoint<br>Potpourri<br>Beading<br>Traditional Japanese Embroidery</div></div>
+      <div class="row"><div class="lab">What You&rsquo;d Like to Share with Members</div><div class="val">&nbsp;</div></div>
+      <div class="row"><div class="lab">Ways In Which You Could Volunteer</div><div class="val">UX Designer, social media</div></div>
+      <div class="row"><div class="lab">Permission to Use Your Image for the Guild Website, Newsletter, and Facebook Page</div><div class="val">Yes, You May Use My Photo</div></div>
+
+  <div class="sect">Social network login</div>
+  <div class="social"><div class="lab">Facebook</div><div class="val"><span class="chip">Connect</span></div></div>
+  <div class="social"><div class="lab">Google</div><div class="val"><span class="chip"><span class="avatar"></span> Jane Member &middot; <a href="#">Disconnect</a></span></div></div>
+
+  <div class="legend" style="margin-top:38px;margin-bottom:0">
+  <b>Two changes that aren&rsquo;t CSS:</b><br>
+  &bull; The page title reads <b>&ldquo;CONTACT PROFILE&rdquo;</b> on the live site &mdash; that&rsquo;s the WA
+  page name, renameable in page settings (shown here as &ldquo;My profile&rdquo;).<br>
+  &bull; The red arrow graphic saying <i>Click &ldquo;EDIT PROFILE&rdquo; to Make Changes</i> is content added
+  to the page; it can simply be deleted once the button is legible.<br>
+  <b>Also possible:</b> hiding fields members don&rsquo;t need (e.g. <b>User ID</b>) with CSS &mdash;
+  hidden, not removed.</div>
+</div>
