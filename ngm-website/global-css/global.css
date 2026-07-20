@@ -3902,3 +3902,10 @@ body .WaGadgetMemberProfile .tabItemSelected, body .memberProfileGadget .tabItem
 /* account collapsed to a single full-width tile */
 .ngm-hub-acct-solo{display:block;}
 .ngm-hub-acct-solo .ngm-hub-acard{padding:26px 30px;}
+
+/* profile tile sits in the hero; subtext lists the profile page's tabs */
+.ngm-hub-acard-tabs{display:block;font-family:var(--ngm-sans);font-size:.78rem;color:var(--ngm-gray-lt);line-height:1.55;margin-top:7px;}
+.ngm-hub-hero .ngm-hub-acct-solo{max-width:660px;margin-top:4px;}
+.ngm-hub-hero .ngm-hub-acard{align-items:flex-start;}
+.ngm-hub-hero .ngm-hub-acard-icon{margin-top:2px;}
+.ngm-hub-hero .ngm-hub-acard-go{align-self:center;}
