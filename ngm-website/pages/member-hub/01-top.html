@@ -116,6 +116,9 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"] .ngm-evt-tag
 .ngm-hub-acard-go svg{width:20px;height:20px;}
 .ngm-hub-acard:hover .ngm-hub-acard-go{transform:translateX(3px);}
 @media(max-width:760px){.ngm-hub-acct-top{grid-template-columns:1fr;}}
+/* account collapsed to a single full-width tile */
+.ngm-hub-acct-solo{display:block;}
+.ngm-hub-acct-solo .ngm-hub-acard{padding:26px 30px;}
 </style>
 
 <div class="ngm-hub-top">
@@ -126,6 +129,18 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"] .ngm-evt-tag
     <p>Your Guild home &mdash; meeting links, your account, and members-only resources, all in one place.</p>
   </div>
 </div>
+
+<section class="ngm ngm-hub-band ngm-hub-white" style="padding-top:46px;padding-bottom:46px">
+  <div class="ngm-hub-inner">
+    <div class="ngm-hub-acct-solo">
+      <a class="ngm-hub-acard" href="/Sys/Profile">
+        <span class="ngm-hub-acard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+        <div class="ngm-hub-acard-body"><h4>Profile &amp; details</h4><p>Check your status and renew for the year.</p></div>
+        <span class="ngm-hub-acard-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
 
 <section class="ngm ngm-hub-band ngm-hub-zoomband">
   <div class="ngm-hub-inner">

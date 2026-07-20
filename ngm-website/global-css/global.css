@@ -3898,3 +3898,7 @@ body .WaGadgetMemberProfile .tabItem, body .memberProfileGadget .tabItem {
 body .WaGadgetMemberProfile .tabItemSelected, body .memberProfileGadget .tabItemSelected {
   color: var(--ngm-sage-dk) !important; border-bottom: 2px solid var(--ngm-sage) !important;
 }
+
+/* account collapsed to a single full-width tile */
+.ngm-hub-acct-solo{display:block;}
+.ngm-hub-acct-solo .ngm-hub-acard{padding:26px 30px;}
