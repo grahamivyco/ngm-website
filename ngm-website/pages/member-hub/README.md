@@ -48,13 +48,16 @@ info to everyone.
 
 | Tile | Link | Status |
 |------|------|--------|
-| Membership & renewal | `/Sys/Profile` | renewal lives on the Profile page — confirm |
-| Profile & details | `/Sys/Profile` | confirmed base |
+| Membership & renewal | `/Sys/Profile` | **confirmed** — the Profile tab opens with a "Membership details" block (level, status, member since, renewal due) and the **Renew to …** button |
+| Profile & details | `/Sys/Profile` | **confirmed** — same page, all contact fields + Edit profile |
 | My event registrations | `/Sys/Profile/EventRegistrations` | confirmed |
 | Invoices & payments | `/Sys/Profile/Finances` | confirmed |
-| Email preferences | `/Sys/Profile/EmailSubscriptions` | confirm exact tab name |
+| Email preferences | `/Sys/Profile/EmailSubscriptions` | tab is named "Email subscriptions" — path still to verify |
 | Privacy | `/Sys/Profile/Privacy` | confirmed |
 | My donations | `/Sys/Profile/Donations` | confirmed |
+
+The six tabs on the live page read: **Profile · Privacy · Email subscriptions ·
+My event registrations · Invoices and payments · Donations**.
 
 ### Must-test before go-live
 Log in as a **regular member** (not admin) and click each account tile — confirm
