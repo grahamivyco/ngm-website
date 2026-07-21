@@ -4345,3 +4345,127 @@ body .WaGadgetEventsStateDetails .eventInfoBoxValue span {
 body .WaGadgetEventsStateDetails .boxBodyContentContainer .inner {
   font-family: var(--ngm-sans) !important; color: var(--ngm-charcoal) !important; line-height: 1.7 !important;
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   MEMBER DIRECTORY  (.WaGadgetMemberDirectory)
+   Confirmed from page source. Simple-search chrome + advanced-search
+   form. NOTE: the result cards in .memberDirectoryOuterContainer are
+   rendered by WA's JS and are empty in page source, so they can't be
+   skinned blind here — this styles the search UI around them.
+══════════════════════════════════════════════════════════════════ */
+/* simple search: label + input */
+body .WaGadgetMemberDirectory #memberDirectorySearchArea label,
+body .WaGadgetMemberDirectory .memberDirectorySearchArea label {
+  font-family: var(--ngm-sans) !important; font-weight: 600 !important;
+  color: var(--ngm-sage-dk) !important; margin-right: 8px !important;
+}
+body .WaGadgetMemberDirectory .memberDirectorySearchArea input[type="text"] {
+  font-family: var(--ngm-sans) !important; font-size: .95rem !important;
+  color: var(--ngm-charcoal) !important; background: #fff !important;
+  border: 1px solid var(--ngm-border) !important; border-radius: var(--ngm-radius) !important;
+  padding: 9px 14px !important; min-width: 260px !important;
+}
+body .WaGadgetMemberDirectory .memberDirectorySearchArea input[type="text"]:focus {
+  border-color: var(--ngm-sage) !important; outline: none !important;
+  box-shadow: 0 0 0 3px rgba(92,122,82,.14) !important;
+}
+/* "Found: N" readout */
+body .WaGadgetMemberDirectory .searchResult,
+body .WaGadgetMemberDirectory .searchResult #membersFound {
+  font-family: var(--ngm-sans) !important; color: var(--ngm-gray) !important; font-size: .9rem !important;
+}
+body .WaGadgetMemberDirectory .searchResult #membersFound { color: var(--ngm-sage-dk) !important; font-weight: 600 !important; font-style: normal !important; }
+/* "Advanced search..." / "Go to simple search" links */
+body .WaGadgetMemberDirectory .advSearchContainerLink a,
+body .WaGadgetMemberDirectory .exitAdvSearchContainer a,
+body .WaGadgetMemberDirectory .clearValuesContainer a {
+  font-family: var(--ngm-sans) !important; font-weight: 500 !important;
+  color: var(--ngm-sage-dk) !important; text-decoration: none !important;
+}
+body .WaGadgetMemberDirectory .advSearchContainerLink a:hover,
+body .WaGadgetMemberDirectory .exitAdvSearchContainer a:hover,
+body .WaGadgetMemberDirectory .clearValuesContainer a:hover { color: var(--ngm-sage) !important; }
+/* advanced search: each criterion row */
+body .WaGadgetMemberDirectory .criteriaListItem .fieldLabel.labelColumn,
+body .WaGadgetMemberDirectory .criteriaListItem .fieldLabel {
+  font-family: var(--ngm-sans) !important; font-weight: 600 !important; color: var(--ngm-charcoal) !important;
+}
+body .WaGadgetMemberDirectory .criteriaListItem select,
+body .WaGadgetMemberDirectory .criteriaListItem input[type="text"] {
+  font-family: var(--ngm-sans) !important; font-size: .92rem !important; color: var(--ngm-charcoal) !important;
+  background: #fff !important; border: 1px solid var(--ngm-border) !important;
+  border-radius: 10px !important; padding: 7px 11px !important;
+}
+body .WaGadgetMemberDirectory .criteriaListItem select:focus,
+body .WaGadgetMemberDirectory .criteriaListItem input[type="text"]:focus {
+  border-color: var(--ngm-sage) !important; outline: none !important; box-shadow: 0 0 0 3px rgba(92,122,82,.14) !important;
+}
+/* the "or" separator between Search and Go-to-simple */
+body .WaGadgetMemberDirectory .separatorTextContainer {
+  font-family: var(--ngm-sans) !important; color: var(--ngm-gray-lt) !important;
+  font-style: italic !important; text-transform: lowercase !important;
+}
+/* Search submit → filled sage pill */
+body .WaGadgetMemberDirectory input.searchButton {
+  font-family: var(--ngm-sans) !important; font-size: .9rem !important; font-weight: 600 !important;
+  color: #fff !important; background: var(--ngm-sage-dk) !important;
+  border: 1.5px solid var(--ngm-sage-dk) !important; border-radius: 999px !important;
+  padding: 9px 26px !important; cursor: pointer !important; transition: background .15s ease !important;
+}
+body .WaGadgetMemberDirectory input.searchButton:hover { background: var(--ngm-sage) !important; border-color: var(--ngm-sage) !important; }
+
+/* ══════════════════════════════════════════════════════════════════
+   MEMBERSHIP APPLICATION / JOIN WIZARD — remaining pieces
+   (.WaGadgetMembershipApplication / .WaGadgetPublicWizard)
+   The fonts, field rows, level pricing, inputs, and .stylizedButton are
+   handled earlier in this file. These fill the confirmed gaps: the step
+   heading, mandatory markers, field hints, checkbox groups, and the
+   Next / Submit / Cancel step buttons (plain WA submit inputs, not
+   .stylizedButton, so they need their own pill treatment).
+══════════════════════════════════════════════════════════════════ */
+body .WaGadgetMembershipApplication h3.formTitle,
+body .WaGadgetPublicWizard h3.formTitle {
+  font-family: var(--ngm-serif) !important; font-weight: 400 !important;
+  color: var(--ngm-charcoal) !important; font-size: 1.6rem !important; line-height: 1.2 !important;
+}
+/* mandatory field label + asterisk */
+body .WaGadgetMembershipApplication .mandatoryLabel,
+body .WaGadgetPublicWizard .mandatoryLabel {
+  font-family: var(--ngm-sans) !important; font-weight: 600 !important; color: var(--ngm-charcoal) !important;
+}
+body .WaGadgetMembershipApplication .mandatorySymbol,
+body .WaGadgetPublicWizard .mandatorySymbol { color: var(--ngm-rose) !important; font-weight: 700 !important; }
+/* input hint text (e.g. "Enter as XXX-XXX-XXXX") */
+body .WaGadgetMembershipApplication .typeInstruction,
+body .WaGadgetPublicWizard .typeInstruction {
+  font-family: var(--ngm-sans) !important; font-size: .8rem !important; color: var(--ngm-gray-lt) !important; margin-top: 3px !important;
+}
+/* checkbox-group field label stays on-brand */
+body .WaGadgetMembershipApplication .checkboxGroupContainer .fieldLabel,
+body .WaGadgetPublicWizard .checkboxGroupContainer .fieldLabel {
+  font-family: var(--ngm-sans) !important; font-weight: 600 !important; color: var(--ngm-charcoal) !important;
+}
+/* Next / Submit → filled sage pill */
+body .WaGadgetMembershipApplication input.nextButton:not(.hidden),
+body .WaGadgetMembershipApplication input.submitApplicationButton,
+body .WaGadgetPublicWizard input.nextButton:not(.hidden),
+body .WaGadgetPublicWizard input.submitApplicationButton {
+  font-family: var(--ngm-sans) !important; font-size: .9rem !important; font-weight: 600 !important;
+  color: #fff !important; background: var(--ngm-sage-dk) !important;
+  border: 1.5px solid var(--ngm-sage-dk) !important; border-radius: 999px !important;
+  padding: 10px 30px !important; cursor: pointer !important; transition: background .15s ease !important;
+}
+body .WaGadgetMembershipApplication input.nextButton:not(.hidden):hover,
+body .WaGadgetMembershipApplication input.submitApplicationButton:hover,
+body .WaGadgetPublicWizard input.nextButton:not(.hidden):hover,
+body .WaGadgetPublicWizard input.submitApplicationButton:hover { background: var(--ngm-sage) !important; border-color: var(--ngm-sage) !important; }
+/* Cancel (no-script submit) → outline pill */
+body .WaGadgetMembershipApplication input[name$="cancelNoScript"],
+body .WaGadgetPublicWizard input[name$="cancelNoScript"] {
+  font-family: var(--ngm-sans) !important; font-size: .9rem !important; font-weight: 600 !important;
+  color: var(--ngm-sage-dk) !important; background: transparent !important;
+  border: 1.5px solid var(--ngm-sage-dk) !important; border-radius: 999px !important;
+  padding: 10px 26px !important; cursor: pointer !important; transition: all .15s ease !important;
+}
+body .WaGadgetMembershipApplication input[name$="cancelNoScript"]:hover,
+body .WaGadgetPublicWizard input[name$="cancelNoScript"]:hover { background: var(--ngm-sage-dk) !important; color: #fff !important; }
