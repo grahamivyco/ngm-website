@@ -24,10 +24,12 @@ scrolls cleanly and the site footer sits below. On narrow screens (≤640px) WA 
 two columns; the hero then collapses to a slim strip and the form leads.
 
 ## If it needs a nudge on the live site
-`--ngm-head-h` (header height, default `86px`) at the top of the login block in
-`global.css` sets the column min-height (`100vh − header`). The side-by-side / stacked
-switch is the `@media(min-width:641px)` / `@media(max-width:640px)` pair in that section —
-raise/lower `641`/`640` to match where your WA row actually stacks.
+The side-by-side ↔ stacked switch is the `@media(min-width:981px)` /
+`@media(max-width:980px)` pair in the login block of `global.css`. `981/980` matches
+where the WA 2-column row collapses (same as the header's mobile-nav breakpoint). If your
+row actually stacks at a different width, raise/lower both numbers together: above the
+breakpoint you get the full side-by-side hero, at/below it the slim stacked strip (like
+mobile).
 
 ## The form skin lives in Global CSS (done)
 The login form and the account dropdown are skinned in `global-css/global.css`,
