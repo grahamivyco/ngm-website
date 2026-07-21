@@ -1723,6 +1723,14 @@ body #todayButton {
     visibility: visible !important;
   }
 }
+/* Very small phones: shorten the long month-nav labels so the three
+   controls always fit on one line under the title.
+   "< Previous Month" → "‹ Prev", "Next Month >" → "Next ›". */
+@media (max-width: 600px) {
+  body a.DecDateButton, body a.incDateButton { font-size: 0 !important; }
+  body a.DecDateButton::after { font-size: .82rem !important; content: "\2039 Prev" !important; }
+  body a.incDateButton::after { font-size: .82rem !important; content: "Next \203A" !important; }
+}
 /* ───── MONTH GRID (confirmed: .monthViewType .EventListCalendar) ─────
    Soft linen cell borders and a clean white grid. */
 body .ngm-cal .monthViewType .EventListCalendar {
@@ -4346,18 +4354,42 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar a.calendarDate nobr {
   color: var(--ngm-charcoal) !important; font-family: var(--ngm-sans) !important;
   font-weight: 600 !important; font-size: .82rem !important; text-decoration: none !important;
 }
-/* the event chips inside a day */
-body .WaGadgetEventsStateCalendar table.EventListCalendar a[data-tags] {
+/* ── EVENT CHIPS — colour-coded by meeting type ──────────────────────
+   EVERY event styles as a chip (a:not(.calendarDate) — not only tagged
+   ones), so events without a category (e.g. Newsletter submissions) look
+   the same as the rest instead of falling back to a plain serif link.
+   The category in data-tags sets an accent colour via the --cat custom
+   property: a left bar on desktop, the solid fill on mobile. Untagged =
+   sage. Add more mappings here as new meeting types appear. */
+body .WaGadgetEventsStateCalendar table.EventListCalendar a:not(.calendarDate) { --cat: var(--ngm-sage); }
+body .WaGadgetEventsStateCalendar table.EventListCalendar a[data-tags*="board"]            { --cat: #4A5A6A; } /* board / admin — slate */
+body .WaGadgetEventsStateCalendar table.EventListCalendar a[data-tags*="potpourri"]        { --cat: #B87260; } /* Potpourri — rose   */
+body .WaGadgetEventsStateCalendar table.EventListCalendar a[data-tags*="come-and-stitch"]  { --cat: #5C7A52; } /* Come & Stitch — sage */
+body .WaGadgetEventsStateCalendar table.EventListCalendar a[data-tags*="stitch-in"]        { --cat: #5B7DB1; } /* Stitch-Ins — blue  */
+body .WaGadgetEventsStateCalendar table.EventListCalendar a[data-tags*="sunday-afternoon"] { --cat: #A6752E; } /* Sunday Tea — gold  */
+body .WaGadgetEventsStateCalendar table.EventListCalendar a[data-tags*="count-thrd"]       { --cat: #3E8578; } /* Counted Thread/NPT — teal */
+body .WaGadgetEventsStateCalendar table.EventListCalendar a[data-tags*="npt"]              { --cat: #3E8578; }
+body .WaGadgetEventsStateCalendar table.EventListCalendar a[data-tags*="special"]          { --cat: #8A5A7A; } /* Special — plum */
+
+/* desktop chip: light tint + category left bar + dark readable text */
+body .WaGadgetEventsStateCalendar table.EventListCalendar a:not(.calendarDate) {
   display: block !important; font-family: var(--ngm-sans) !important;
   font-size: .78rem !important; line-height: 1.35 !important;
-  color: var(--ngm-sage-dk) !important; text-decoration: none !important;
-  background: var(--ngm-sage-lt) !important; border-left: 3px solid var(--ngm-sage) !important;
+  color: var(--ngm-charcoal) !important; text-decoration: none !important;
+  background: var(--ngm-sage-lt) !important; border-left: 3px solid var(--cat) !important;
   border-radius: 0 6px 6px 0 !important; padding: 4px 8px !important; margin: 2px 3px !important;
 }
-body .WaGadgetEventsStateCalendar table.EventListCalendar a[data-tags]:hover,
+/* where supported, tint the chip background with its own category colour */
+@supports (background: color-mix(in srgb, red, blue)) {
+  body .WaGadgetEventsStateCalendar table.EventListCalendar a:not(.calendarDate) {
+    background: color-mix(in srgb, var(--cat) 14%, #fff) !important;
+  }
+}
+/* hover → fill with the category colour */
+body .WaGadgetEventsStateCalendar table.EventListCalendar a:not(.calendarDate):hover,
 body .WaGadgetEventsStateCalendar table.EventListCalendar .eventHover,
-body .WaGadgetEventsStateCalendar table.EventListCalendar .eventContainerHover a[data-tags] {
-  background: var(--ngm-sage) !important; color: #fff !important;
+body .WaGadgetEventsStateCalendar table.EventListCalendar .eventContainerHover a:not(.calendarDate) {
+  background: var(--cat) !important; color: #fff !important;
 }
 /* the time label JS injects above an event */
 body .WaGadgetEventsStateCalendar table.EventListCalendar .eventTime {
@@ -4401,16 +4433,16 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar .eventTime {
   /* hide the time label */
   body .WaGadgetEventsStateCalendar table.EventListCalendar .eventTime { display: none !important; }
   /* unclip the WA wrapper div around each event so the bar can show */
-  body .WaGadgetEventsStateCalendar table.EventListCalendar td div:has(> a[data-tags]) { height: auto !important; overflow: visible !important; }
-  /* events → solid sage bars with white, truncated titles */
-  body .WaGadgetEventsStateCalendar table.EventListCalendar a[data-tags] {
-    display: block !important; background: var(--ngm-sage) !important; color: #fff !important;
+  body .WaGadgetEventsStateCalendar table.EventListCalendar td div:has(> a:not(.calendarDate)) { height: auto !important; overflow: visible !important; }
+  /* events → solid category-coloured bars with white, truncated titles */
+  body .WaGadgetEventsStateCalendar table.EventListCalendar a:not(.calendarDate) {
+    display: block !important; background: var(--cat) !important; color: #fff !important;
     border-left: 0 !important; border-radius: 3px !important;
     font-family: var(--ngm-sans) !important; font-size: .6rem !important; font-weight: 500 !important;
     line-height: 1.4 !important; padding: 2px 4px !important; margin: 1px 2px !important;
     white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important;
   }
-  body .WaGadgetEventsStateCalendar table.EventListCalendar a[data-tags]:hover { background: var(--ngm-sage-dk) !important; color: #fff !important; }
+  body .WaGadgetEventsStateCalendar table.EventListCalendar a:not(.calendarDate):hover { filter: brightness(0.92) !important; }
 }
 
 /* ══════════════════════════════════════════════════════════════════
