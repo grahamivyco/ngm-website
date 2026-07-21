@@ -1370,23 +1370,30 @@ body .ngm-cal.WaGadgetEvents {
   margin: 0 !important;
   overflow: visible !important;
 }
-/* CALENDAR GADGET — LIVE spacing (the .ngm-cal rules above don't apply to the
-   live gadget). Two things:
-   1. Kill the gap under the hero: the gadget ships an inline margin:20px, and
-      its WA layout wrappers add top space. Zero the top so the calendar sits
-      right below the hero. (!important beats the inline style.)
-   2. Small side margins: cap the width and centre it, with a small responsive
-      side gutter, so the grid isn't edge-to-edge / wider than the hero. */
+/* CALENDAR GADGET — LIVE styling (the .ngm-cal rules above don't apply to the
+   live gadget). Turn the gadget into a CENTERED LINEN CARD:
+   • max-width + margin:auto → centred on the page with margins around it. This
+     ALSO required table-layout:fixed on the grid (below) — otherwise the grid's
+     min-content width (~1490px) overflows the max-width and pins it left.
+   • linen background, rounded corners (all four), padding → a soft card; the
+     white month grid nests inside as a second, rounded card.
+   • margin-top:0 kills the gap under the hero (overrides the inline margin:20px).
+   overflow:hidden clips the whole card to its radius. */
 html body .WaGadgetEventsStateCalendar {
-  margin: 0 auto !important;
   max-width: 1180px !important;
-  padding: 0 clamp(12px, 2.5vw, 28px) !important;
+  margin: 8px auto 40px !important;
+  padding: clamp(14px, 2vw, 24px) !important;
   box-sizing: border-box !important;
+  background: var(--ngm-linen) !important;
+  border: 1px solid var(--ngm-border) !important;
+  border-radius: var(--ngm-radius-lg) !important;
+  box-shadow: var(--ngm-sh) !important;
+  overflow: hidden !important;
 }
 html body .WaGadgetEvents,
 html body div[class*="WaGadgetEventsStateCalendar"],
 html body .WaGadgetEventsStateCalendar {
-  margin-top: 0 !important;
+  margin-top: 8px !important;
 }
 /* Trim the top padding of the calendar-body wrapper (opened in 01-top) so the
    hero-to-calendar gap closes. */
@@ -1406,7 +1413,7 @@ body .WaGadgetEventsStateCalendar [class*="Toolbar"],
 body .ngm-cal .pageTitleOuterContainer,
 body .ngm-cal [class*="Toolbar"],
 body .ngm-cal [class*="oolbar"] {
-  background: #fff !important;
+  background: transparent !important;   /* let the linen card show through */
   background-image: none !important;
 }
 /* The textured band itself is the calendar gadget's outer area —
@@ -1544,10 +1551,11 @@ html body #idViewSwitchersTable a.incDateButton {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: 38px !important;
-  height: 38px !important;
-  min-width: 38px !important;
-  max-width: 38px !important;
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  max-width: 42px !important;
+  min-height: 42px !important;
   padding: 0 !important;
   margin: 0 !important;
   box-sizing: border-box !important;
@@ -1570,7 +1578,7 @@ html body #idViewSwitchersTable a.incDateButton > * { display: none !important; 
 html body #idViewSwitchersTable a.DecDateButton::before,
 html body #idViewSwitchersTable a.incDateButton::before {
   display: block !important;
-  font-size: 1.15rem !important;
+  font-size: 1.4rem !important;
   line-height: 1 !important;
   font-weight: 500 !important;
   background: none !important;
@@ -1616,27 +1624,34 @@ html body #idViewSwitchersTable a.incDateButton:hover {
   color: #fff !important;
   text-decoration: none !important;
 }
-/* Today → sage outline pill, SAME 38px height as the arrow buttons */
+/* Today → sage outline pill, SAME 42px height as the arrow buttons. Explicit
+   font-size + min-width guarantee the "Today" label always renders (WA's mobile
+   CSS was stretching it into an empty bar). */
 html body #idViewSwitchersTable a.todayButton,
 html body #idViewSwitchersTable #todayButton a,
 html body a.todayButton {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  height: 38px !important;
-  padding: 0 16px !important;
+  height: 42px !important;
+  min-height: 42px !important;
+  padding: 0 18px !important;
   margin: 0 !important;
   box-sizing: border-box !important;
   width: auto !important;
+  min-width: 64px !important;
   max-width: 160px !important;
   border: 1.5px solid var(--ngm-sage-dk) !important;
   border-radius: 100px !important;
   background: transparent !important;
   color: var(--ngm-sage-dk) !important;
   font-family: var(--ngm-sans) !important;
-  font-size: .8rem !important;
+  font-size: .82rem !important;
   font-weight: 500 !important;
   line-height: 1 !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-indent: 0 !important;
   text-decoration: none !important;
   transition: background-color .15s ease, color .15s ease !important;
 }
@@ -1771,14 +1786,13 @@ body #incButton {
 }
 
 /* TABLET & MOBILE: the month title on its own line, then the nav set as a
-   left-aligned row beneath it. Breakpoint is 1024px so tablets are covered too
-   — WA starts stretching the controls well before phone width, which is why
-   they blew out on tablet before. WA's own responsive CSS sets #group2 to
-   display:block + width:calc(100%-127px) and the buttons to block — which
-   stretched Today and broke the row. We override all of that: #group2 becomes a
-   flex row, wrappers auto-width. Button SIZES (38px circles + pill) come from
-   the base rules above — we only fix layout here. */
-@media (max-width: 1024px) {
+   left-aligned row beneath it. ONLY at ≤600 (phones) — tablet keeps the desktop
+   layout (title left, nav right, same line). WA's own responsive CSS sets
+   #group2 to display:block + width:calc(100%-127px) and the buttons to block —
+   which stretched Today and broke the row; we override all of that so #group2
+   stays a flex row with auto-width wrappers. Button SIZES (42px circles + pill)
+   come from the base rules above — we only fix layout here. */
+@media (max-width: 600px) {
   /* Make sure nothing clips the toolbar at this width */
   body .ngm-cal.WaGadgetEventsStateCalendar,
   body .ngm-cal .WaGadgetEventsStateCalendar,
@@ -1848,12 +1862,25 @@ body #incButton {
     visibility: visible !important;
     opacity: 1 !important;
   }
-  /* keep the icon buttons + Today pill visible (sizes inherited from base) */
+  /* Re-assert the SAME button sizes as desktop so the arrows don't shrink and
+     Today doesn't stretch into an empty bar on phones (WA's mobile CSS does
+     both). Arrows: 42px circles; Today: 42px pill, auto width, label shown. */
   html body #idViewSwitchersTable a.DecDateButton,
-  html body #idViewSwitchersTable a.incDateButton,
+  html body #idViewSwitchersTable a.incDateButton {
+    width: 42px !important; height: 42px !important;
+    min-width: 42px !important; max-width: 42px !important; min-height: 42px !important;
+    padding: 0 !important; border-radius: 50% !important;
+    font-size: 0 !important; visibility: visible !important;
+  }
+  html body #idViewSwitchersTable a.DecDateButton::before,
+  html body #idViewSwitchersTable a.incDateButton::before { font-size: 1.4rem !important; }
   html body #idViewSwitchersTable a.todayButton,
+  html body #idViewSwitchersTable #todayButton a,
   html body a.todayButton {
-    visibility: visible !important;
+    height: 42px !important; min-height: 42px !important;
+    width: auto !important; min-width: 64px !important; max-width: 160px !important;
+    padding: 0 18px !important; font-size: .82rem !important;
+    white-space: nowrap !important; visibility: visible !important;
   }
 }
 /* ───── MONTH GRID (confirmed: .monthViewType .EventListCalendar) ─────
@@ -4633,12 +4660,22 @@ body .WaGadgetContactProfile .typeTextLabelNoData { color: var(--ngm-gray-lt) !i
 ══════════════════════════════════════════════════════════════════ */
 body .WaGadgetEventsStateCalendar table.EventListCalendar {
   width: 100% !important;
+  /* table-layout:fixed at ALL widths — the 7 columns stay equal and the grid
+     respects the card width instead of expanding to its content (~1490px) and
+     overflowing / pinning the card left. This is what lets the card centre, and
+     it keeps every weekday column the same width so none stretches. */
+  table-layout: fixed !important;
   /* SEPARATE + border-spacing:0 so the OUTER frame can round; overflow
      hidden clips the frame to that radius. Every inner cell is forced
      square just below, so only the frame is rounded — no cell curves. */
   border-collapse: separate !important; border-spacing: 0 !important;
   background: #fff !important; border: 1px solid var(--ngm-linen-dk) !important;
   border-radius: var(--ngm-radius-lg) !important; overflow: hidden !important;
+}
+/* Equal columns everywhere: the date cells ship inline width:14% but the header
+   cells have none — pin all of them to 1/7 so fixed layout distributes evenly. */
+html body .WaGadgetEventsStateCalendar table.EventListCalendar > tbody > tr > td {
+  width: 14.285% !important;
 }
 /* Force EVERY structural grid element square (cells, rows, the nested
    date-number tables, the WA item cells) so no inner curve can show.
