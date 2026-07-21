@@ -1629,19 +1629,23 @@ body #incButton {
    calc()/block width on tablet AND mobile — this keeps it content-sized
    everywhere so it can't blow out into a full-width bar. The deep ID
    chain matches WA's own high-specificity mobile rule so ours wins. */
-body #idViewSwitchersTable #group2 #todayButton a.todayButton,
-body #idViewSwitchersTable #todayButton a.todayButton,
-body #todayButton a.todayButton,
-body a.todayButton {
+html body #idViewSwitchersTable #group2 #todayButton a.todayButton,
+html body #idViewSwitchersTable #group2 #todayButton a[id$="_TodayButton"],
+html body #idViewSwitchersTable #todayButton a.todayButton,
+html body #todayButton a.todayButton,
+html body a.todayButton {
   display: inline-block !important;
-  width: auto !important; min-width: 0 !important; max-width: max-content !important;
+  width: auto !important; width: fit-content !important;
+  min-width: 0 !important; max-width: 160px !important;
   box-sizing: border-box !important; float: none !important; text-align: center !important;
 }
 /* keep the Today wrapper content-sized too, so it can't stretch the pill */
-body #idViewSwitchersTable #todayButton,
-body #todayButton {
-  width: auto !important; min-width: 0 !important; float: none !important;
-  flex: 0 0 auto !important;
+html body #idViewSwitchersTable #group2 #todayButton,
+html body #idViewSwitchersTable #todayButton,
+html body #todayButton {
+  display: inline-block !important;
+  width: auto !important; min-width: 0 !important; max-width: 160px !important;
+  float: none !important; flex: 0 0 auto !important;
 }
 
 /* TABLET & MOBILE: title on its own line, then the three nav buttons
@@ -4280,40 +4284,24 @@ body .WaGadgetContactProfile .typeTextLabelNoData { color: var(--ngm-gray-lt) !i
 ══════════════════════════════════════════════════════════════════ */
 body .WaGadgetEventsStateCalendar table.EventListCalendar {
   width: 100% !important;
-  /* separate (not collapse) so border-radius can round the outer frame */
-  border-collapse: separate !important; border-spacing: 0 !important;
+  /* COLLAPSE (not separate): the CSS spec says border-radius is IGNORED
+     on cells in collapse mode, so WA theme's per-cell corner rounding —
+     which showed up as curves on top of every cell in separate mode —
+     can't render at all, whatever WA sets. Trade-off: no rounded outer
+     frame, in exchange for a guaranteed-clean square grid. */
+  border-collapse: collapse !important;
   background: #fff !important; border: 1px solid var(--ngm-linen-dk) !important;
-  border-radius: var(--ngm-radius-lg) !important; overflow: hidden !important;
 }
-/* rebuild the grid lines that border-collapse used to draw:
-   vertical rules via a right border on every cell (dropped on the last
-   column), horizontal week rules via a top border on the rows that
-   start a week (the ones carrying a date number). */
+/* recolour WA's grey grid lines to soft linen (keep WA's border layout) */
 body .WaGadgetEventsStateCalendar table.EventListCalendar td,
 body .WaGadgetEventsStateCalendar table.EventListCalendar th {
-  border-top: 0 !important; border-left: 0 !important; border-bottom: 0 !important;
-  border-right: 1px solid var(--ngm-linen-dk) !important;
-  /* kill WA theme's per-cell corner rounding — switching to
-     border-collapse:separate revealed it as curves inside each cell.
-     The four outer corners are re-rounded below. */
-  border-radius: 0 !important;
+  border-color: var(--ngm-linen-dk) !important;
 }
-body .WaGadgetEventsStateCalendar table.EventListCalendar td:last-child,
-body .WaGadgetEventsStateCalendar table.EventListCalendar th:last-child { border-right: 0 !important; }
-body .WaGadgetEventsStateCalendar table.EventListCalendar tr:has(a.calendarDate) > td {
-  border-top: 1px solid var(--ngm-linen-dk) !important;
-}
-/* round the four corner cells so the fill follows the frame even if a
-   browser won't clip the table's overflow */
-body .WaGadgetEventsStateCalendar table.EventListCalendar tr:first-child td:first-child { border-top-left-radius: var(--ngm-radius-lg) !important; }
-body .WaGadgetEventsStateCalendar table.EventListCalendar tr:first-child td:last-child { border-top-right-radius: var(--ngm-radius-lg) !important; }
-body .WaGadgetEventsStateCalendar table.EventListCalendar tr:last-child td:first-child { border-bottom-left-radius: var(--ngm-radius-lg) !important; }
-body .WaGadgetEventsStateCalendar table.EventListCalendar tr:last-child td:last-child { border-bottom-right-radius: var(--ngm-radius-lg) !important; }
-/* day-of-week header row → sage eyebrow band.
-   Google-Calendar style: short 3-letter uppercase day names. The WA
-   markup hard-codes the full words ("Sunday"…), which CSS can't rewrite
-   in place — so we zero the cell's own text and inject the abbreviation
-   by column position (US / Sunday-first order, matching WA's usWeekOrder). */
+/* day-of-week header band. WA hard-codes the full words ("Sunday"…),
+   which CSS can't rewrite in place, so we hide the cell's own text and
+   inject an abbreviation with ::after by column position (Sunday-first,
+   matching WA's usWeekOrder): 3 letters on desktop, single letter on
+   mobile (see the mobile block below). */
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader {
   background: var(--ngm-sage-lt) !important; color: var(--ngm-sage-dk) !important;
   font-size: 0 !important;                       /* hide "Sunday"… */
@@ -4321,8 +4309,8 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHe
   border-bottom: 1px solid var(--ngm-border) !important;
 }
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader::after {
-  font-family: var(--ngm-sans) !important; font-size: .68rem !important; font-weight: 600 !important;
-  letter-spacing: .07em !important; color: var(--ngm-sage-dk) !important; text-transform: uppercase !important;
+  font-family: var(--ngm-sans) !important; font-size: .7rem !important; font-weight: 600 !important;
+  letter-spacing: .06em !important; color: var(--ngm-sage-dk) !important; text-transform: uppercase !important;
 }
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader:nth-child(1)::after { content: "Sun" !important; }
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader:nth-child(2)::after { content: "Mon" !important; }
