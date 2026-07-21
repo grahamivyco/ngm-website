@@ -3920,12 +3920,18 @@ body .WaGadgetContactProfile ul.memberDetailsTabMenu li span {
   color: var(--ngm-gray) !important; font-size: .9rem !important; font-weight: 400 !important;
   text-decoration: none !important; background: none !important;
 }
-body .WaGadgetContactProfile ul.memberDetailsTabMenu li.selected {
-  box-shadow: inset 0 -2px 0 0 var(--ngm-sage) !important;
-}
-body .WaGadgetContactProfile ul.memberDetailsTabMenu li.selected a,
-body .WaGadgetContactProfile ul.memberDetailsTabMenu li.selected span {
+/* Active tab: WA shows the current tab's <span> label (and hides its <a>), while
+   inactive tabs show their <a> link. WA does NOT move .selected when you switch
+   tabs, so key the active look off the VISIBLE label span (its inline style is
+   "display: inline"; hidden ones are "display: none"), which follows the current
+   tab across Profile / Privacy / Email subscriptions and the sub-pages. */
+body .WaGadgetContactProfile ul.memberDetailsTabMenu li span:not([style*="none"]) {
   color: var(--ngm-sage-dk) !important; font-weight: 600 !important;
+}
+/* full-width underline under the active tab (modern browsers via :has; the
+   sage-bold label above is the fallback where :has isn't supported) */
+body .WaGadgetContactProfile ul.memberDetailsTabMenu li:has(span:not([style*="none"])) {
+  box-shadow: inset 0 -2px 0 0 var(--ngm-sage) !important;
 }
 
 /* ---- section headers: <h4> inside .captionContainer (full-width sage eyebrow) ---- */
