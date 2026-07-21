@@ -3361,7 +3361,19 @@ body.ngm-login-page .WaGadgetLoginForm{ padding:44px 20px 20px; }
   }
 }
 @media(max-width:860px){
-  .ngm-login-hero{ padding:52px 22px 46px; }
+  /* Mobile: shrink the hero to a slim branded strip so the LOGIN FORM is
+     the first, primary thing on screen and fits in the opening viewport.
+     The benefits list + subcopy (nice-to-have context) are hidden here. */
+  body.ngm-login-page .ngm-login-hero{ padding:20px 22px 22px; text-align:center; }
+  body.ngm-login-page .ngm-login-hero-inner{ max-width:none; }
+  body.ngm-login-page .ngm-lh-glow{ display:none; }
+  body.ngm-login-page .ngm-login-mark{ width:36px; height:40px; margin:0 auto 10px; }
+  body.ngm-login-page .ngm-lh-eyebrow{ margin-bottom:7px; }
+  body.ngm-login-page .ngm-lh-title{ font-size:1.5rem; line-height:1.15; margin-bottom:0; }
+  body.ngm-login-page .ngm-lh-title br{ display:none; }
+  body.ngm-login-page .ngm-lh-sub,
+  body.ngm-login-page .ngm-lh-list{ display:none; }
+  body.ngm-login-page .WaGadgetLoginForm{ padding:22px 16px 10px; }
 }
 
 /* ══════════════════════════════════════════════════════════════════
