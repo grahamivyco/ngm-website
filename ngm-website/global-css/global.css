@@ -4321,9 +4321,9 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar th {
 }
 body .WaGadgetEventsStateCalendar table.EventListCalendar td:last-child,
 body .WaGadgetEventsStateCalendar table.EventListCalendar th:last-child { border-right: 0 !important; }
-body .WaGadgetEventsStateCalendar table.EventListCalendar tr:has(a.calendarDate) > td {
-  border-top: 1px solid var(--ngm-linen-dk) !important;
-}
+/* NO top border on cells — the user doesn't want a line above each date
+   number. (WA also puts an inline border-top on date cells; the border:0
+   above overrides it.) Columns are separated by the right borders only. */
 /* day-of-week header band — REAL weekday text. This theme does not paint
    CSS ::after generated content on table cells, so we style WA's own
    "Sunday/Monday/…" words rather than injecting abbreviations. The
@@ -4392,11 +4392,21 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar .eventHover,
 body .WaGadgetEventsStateCalendar table.EventListCalendar .eventContainerHover a:not(.calendarDate) {
   filter: brightness(0.92) !important;
 }
-/* the time label JS injects above an event */
+/* the time label JS injects above an event — plain rose text, NO box.
+   WA's theme wraps it in a bordered/backed chip (the "blue line" the user
+   saw); strip all of that so it's just the time. */
 body .WaGadgetEventsStateCalendar table.EventListCalendar .eventTime {
   font-family: var(--ngm-sans) !important; font-size: .68rem !important; font-weight: 600 !important;
   text-transform: uppercase !important; letter-spacing: .04em !important;
-  color: var(--ngm-rose) !important; padding: 0 3px !important; margin-top: 2px !important;
+  color: var(--ngm-rose) !important; padding: 0 4px !important; margin: 2px 0 0 !important;
+  background: none !important; background-color: transparent !important;
+  border: 0 !important; box-shadow: none !important; border-radius: 0 !important;
+}
+/* strip any border/shadow WA's theme puts on the event wrapper divs
+   inside a cell (another possible source of the stray "blue line").
+   The chips are <a> and are unaffected. */
+body .WaGadgetEventsStateCalendar table.EventListCalendar td div {
+  border: 0 !important; box-shadow: none !important;
 }
 /* ── MOBILE: match Google Calendar's month view. All seven days fit on
    screen (no sideways scroll); the weekday headers collapse to single
