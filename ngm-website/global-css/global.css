@@ -1728,13 +1728,15 @@ html body #todayButton {
     visibility: visible !important;
   }
 }
-/* Very small phones: shorten the long month-nav labels so the three
-   controls always fit on one line under the title.
-   "< Previous Month" → "‹ Prev", "Next Month >" → "Next ›". */
+/* Very small phones: keep the month-nav labels compact. This theme does
+   NOT paint CSS ::after content, so we can't swap "< Previous Month" for
+   "‹ Prev" in CSS — we just shrink the real text so Prev / Today / Next
+   fit on one line. (The JS snippet can shorten the words if wanted.) */
 @media (max-width: 600px) {
-  body a.DecDateButton, body a.incDateButton { font-size: 0 !important; }
-  body a.DecDateButton::after { font-size: .82rem !important; content: "\2039 Prev" !important; }
-  body a.incDateButton::after { font-size: .82rem !important; content: "Next \203A" !important; }
+  body a.DecDateButton, body a.DecDateButton:link, body a.DecDateButton:visited,
+  body a.incDateButton, body a.incDateButton:link, body a.incDateButton:visited {
+    font-size: .72rem !important; padding: 6px 6px !important;
+  }
 }
 /* ───── MONTH GRID (confirmed: .monthViewType .EventListCalendar) ─────
    Soft linen cell borders and a clean white grid. */
@@ -4288,41 +4290,52 @@ body .WaGadgetContactProfile .typeTextLabelNoData { color: var(--ngm-gray-lt) !i
 ══════════════════════════════════════════════════════════════════ */
 body .WaGadgetEventsStateCalendar table.EventListCalendar {
   width: 100% !important;
-  /* COLLAPSE (not separate): the CSS spec says border-radius is IGNORED
-     on cells in collapse mode, so WA theme's per-cell corner rounding —
-     which showed up as curves on top of every cell in separate mode —
-     can't render at all, whatever WA sets. Trade-off: no rounded outer
-     frame, in exchange for a guaranteed-clean square grid. */
-  border-collapse: collapse !important;
+  /* SEPARATE + border-spacing:0 so the OUTER frame can round; overflow
+     hidden clips the frame to that radius. Every inner cell is forced
+     square just below, so only the frame is rounded — no cell curves. */
+  border-collapse: separate !important; border-spacing: 0 !important;
   background: #fff !important; border: 1px solid var(--ngm-linen-dk) !important;
+  border-radius: var(--ngm-radius-lg) !important; overflow: hidden !important;
 }
-/* recolour WA's grey grid lines to soft linen (keep WA's border layout) */
+/* Force EVERY structural grid element square (cells, rows, the nested
+   date-number tables, the WA item cells) so no inner curve can show.
+   High specificity to beat the theme; event chips are <a> and keep their
+   own rounding. */
+html body .WaGadgetEventsStateCalendar .monthViewType table.EventListCalendar td,
+html body .WaGadgetEventsStateCalendar .monthViewType table.EventListCalendar th,
+html body .WaGadgetEventsStateCalendar .monthViewType table.EventListCalendar tr,
+html body .WaGadgetEventsStateCalendar .monthViewType table.EventListCalendar tbody,
+html body .WaGadgetEventsStateCalendar .monthViewType table.EventListCalendar thead,
+html body .WaGadgetEventsStateCalendar .monthViewType table.EventListCalendar table,
+html body .WaGadgetEventsStateCalendar .monthViewType table.EventListCalendar td.EventListCalendarItemDefault,
+html body .WaGadgetEventsStateCalendar .monthViewType table.EventListCalendar td.EventListCalendarItemInactive,
+html body .WaGadgetEventsStateCalendar .monthViewType table.EventListCalendar td.EventListCalendarItemSelected {
+  border-radius: 0 !important;
+}
+/* separate mode draws no shared borders, so rebuild the grid lines:
+   a right border per cell (dropped on the last column) and a top border
+   on the rows that start a week (the ones carrying a date number). */
 body .WaGadgetEventsStateCalendar table.EventListCalendar td,
 body .WaGadgetEventsStateCalendar table.EventListCalendar th {
-  border-color: var(--ngm-linen-dk) !important;
+  border: 0 !important; border-right: 1px solid var(--ngm-linen-dk) !important;
 }
-/* day-of-week header band. WA hard-codes the full words ("Sunday"…),
-   which CSS can't rewrite in place, so we hide the cell's own text and
-   inject an abbreviation with ::after by column position (Sunday-first,
-   matching WA's usWeekOrder): 3 letters on desktop, single letter on
-   mobile (see the mobile block below). */
+body .WaGadgetEventsStateCalendar table.EventListCalendar td:last-child,
+body .WaGadgetEventsStateCalendar table.EventListCalendar th:last-child { border-right: 0 !important; }
+body .WaGadgetEventsStateCalendar table.EventListCalendar tr:has(a.calendarDate) > td {
+  border-top: 1px solid var(--ngm-linen-dk) !important;
+}
+/* day-of-week header band — REAL weekday text. This theme does not paint
+   CSS ::after generated content on table cells, so we style WA's own
+   "Sunday/Monday/…" words rather than injecting abbreviations. The
+   single-letter mobile version is handled by a small JS snippet in WA's
+   custom-JS box (CSS alone can't shorten the words on this theme). */
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader {
   background: var(--ngm-sage-lt) !important; color: var(--ngm-sage-dk) !important;
-  font-size: 0 !important;                       /* hide "Sunday"… */
-  text-align: center !important; padding: 9px 4px !important;
+  font-family: var(--ngm-sans) !important; font-weight: 600 !important;
+  text-transform: uppercase !important; letter-spacing: .03em !important;
+  font-size: .66rem !important; text-align: center !important; padding: 9px 2px !important;
   border-bottom: 1px solid var(--ngm-border) !important;
 }
-body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader::after {
-  font-family: var(--ngm-sans) !important; font-size: .7rem !important; font-weight: 600 !important;
-  letter-spacing: .06em !important; color: var(--ngm-sage-dk) !important; text-transform: uppercase !important;
-}
-body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader:nth-child(1)::after { content: "Sun" !important; }
-body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader:nth-child(2)::after { content: "Mon" !important; }
-body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader:nth-child(3)::after { content: "Tue" !important; }
-body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader:nth-child(4)::after { content: "Wed" !important; }
-body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader:nth-child(5)::after { content: "Thu" !important; }
-body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader:nth-child(6)::after { content: "Fri" !important; }
-body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader:nth-child(7)::after { content: "Sat" !important; }
 /* day cells */
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarItemDefault,
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarItemInactive,
@@ -4363,25 +4376,21 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar a[data-tags*="count-th
 body .WaGadgetEventsStateCalendar table.EventListCalendar a[data-tags*="npt"]              { --cat: #3E8578; }
 body .WaGadgetEventsStateCalendar table.EventListCalendar a[data-tags*="special"]          { --cat: #8A5A7A; } /* Special — plum */
 
-/* desktop chip: light tint + category left bar + dark readable text */
+/* event chip — SOLID category fill, no left-border line, one-line title
+   truncated with an ellipsis. Same look on desktop and mobile. */
 body .WaGadgetEventsStateCalendar table.EventListCalendar a:not(.calendarDate) {
   display: block !important; font-family: var(--ngm-sans) !important;
-  font-size: .78rem !important; line-height: 1.35 !important;
-  color: var(--ngm-charcoal) !important; text-decoration: none !important;
-  background: var(--ngm-sage-lt) !important; border-left: 3px solid var(--cat) !important;
-  border-radius: 0 6px 6px 0 !important; padding: 4px 8px !important; margin: 2px 3px !important;
+  font-size: .74rem !important; line-height: 1.3 !important;
+  color: #fff !important; text-decoration: none !important;
+  background: var(--cat) !important; border: 0 !important;
+  border-radius: 4px !important; padding: 3px 7px !important; margin: 2px 4px !important;
+  white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important;
 }
-/* where supported, tint the chip background with its own category colour */
-@supports (background: color-mix(in srgb, red, blue)) {
-  body .WaGadgetEventsStateCalendar table.EventListCalendar a:not(.calendarDate) {
-    background: color-mix(in srgb, var(--cat) 14%, #fff) !important;
-  }
-}
-/* hover → fill with the category colour */
+/* hover → slightly darker fill */
 body .WaGadgetEventsStateCalendar table.EventListCalendar a:not(.calendarDate):hover,
 body .WaGadgetEventsStateCalendar table.EventListCalendar .eventHover,
 body .WaGadgetEventsStateCalendar table.EventListCalendar .eventContainerHover a:not(.calendarDate) {
-  background: var(--cat) !important; color: #fff !important;
+  filter: brightness(0.92) !important;
 }
 /* the time label JS injects above an event */
 body .WaGadgetEventsStateCalendar table.EventListCalendar .eventTime {
@@ -4405,16 +4414,11 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar .eventTime {
   body .WaGadgetEventsStateCalendar table.EventListCalendar th {
     box-sizing: border-box !important; width: 14.28% !important; overflow: hidden !important;
   }
-  /* single-letter weekday headers */
-  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader { padding: 6px 0 !important; }
-  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader::after { font-size: .64rem !important; letter-spacing: 0 !important; }
-  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader:nth-child(1)::after { content: "S" !important; }
-  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader:nth-child(2)::after { content: "M" !important; }
-  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader:nth-child(3)::after { content: "T" !important; }
-  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader:nth-child(4)::after { content: "W" !important; }
-  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader:nth-child(5)::after { content: "T" !important; }
-  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader:nth-child(6)::after { content: "F" !important; }
-  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader:nth-child(7)::after { content: "S" !important; }
+  /* weekday header smaller on phones. Real text (JS shortens it to a
+     single letter — see the custom-JS snippet); this just sizes it. */
+  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader {
+    font-size: .58rem !important; letter-spacing: 0 !important; padding: 6px 0 !important;
+  }
   /* small date numbers */
   body .WaGadgetEventsStateCalendar table.EventListCalendar a.calendarDate,
   body .WaGadgetEventsStateCalendar table.EventListCalendar a.calendarDate nobr { font-size: .68rem !important; }
