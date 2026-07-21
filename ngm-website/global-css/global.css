@@ -3419,15 +3419,25 @@ body.ngm-login-page .WaGadgetLoginForm{ display:block; width:100%; box-sizing:bo
     flex:1 1 0 !important;
     min-width:0 !important;
   }
-  /* ── Green hero FILLS its column height (no space underneath) ──
-     Instead of trying to pass height DOWN the WA wrapper chain (which doesn't
-     work reliably — the row may be a table, or not stretch), give the hero its
-     own min-height of one viewport. That makes the hero the tallest thing in
-     the row, so its column grows to fit and the OTHER column stretches to
-     match — no gap under the green, whether WA uses a flex row or a table. The
-     login form fits well within a viewport, so the hero is always the tallest. */
+  /* ── Green hero fills its column to MATCH the form column height ──
+     The columns are equal height already (flex row, align-items:stretch), but
+     the green DIV sits at content height inside its (taller) column, leaving a
+     gap. Flex the hero-side chain (column → WA wrapper → .ngm) so each child
+     grows to fill the column's height. The columns keep their 50% width from
+     the flex:1 1 0 rule above (a column being flex-direction:column changes
+     how it lays out its CHILDREN, not its own width), so no width collapse and
+     no viewport-tall over-stretch — the green is exactly as tall as the form
+     column. Scoped with :not(:has(.WaGadgetLoginForm)) → hero column only. */
+  body.ngm-login-page *:has(.ngm-login-hero):not(:has(.WaGadgetLoginForm)){
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:stretch !important;
+  }
+  body.ngm-login-page *:has(.ngm-login-hero):not(:has(.WaGadgetLoginForm)) > *{
+    flex:1 0 auto !important;
+  }
   body.ngm-login-page .ngm-login-hero{
-    min-height:calc(100vh - var(--ngm-head-h)) !important;
+    flex:1 0 auto !important;
     display:flex !important; flex-direction:column !important; justify-content:center !important;
     padding:clamp(48px,6vw,72px) clamp(36px,4vw,68px) !important;
   }
