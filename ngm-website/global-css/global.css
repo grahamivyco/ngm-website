@@ -1681,26 +1681,32 @@ html body #todayButton {
     float: none !important;
     clear: both !important;
   }
-  /* Nav group: a CENTERED inline row of the three buttons. Max specificity
-     + !important to beat WA's mobile float/calc rules that were scattering
-     Prev/Today/Next instead of keeping them in a row. */
-  html body #group2,
+  /* Nav group: a CENTERED flex ROW of the three buttons. The selector
+     MUST include .WaGadgetEventsStateCalendar #idViewSwitchersTable so it
+     out-ranks WA's own `.WaGadgetEventsStateCalendar #idViewSwitchersTable
+     #group2 { display:block }` rule (which was stacking them). display:flex
+     forces the children into a row even though WA makes them block. */
+  html body .WaGadgetEventsStateCalendar #idViewSwitchersTable #group2,
+  html body #idViewSwitchersTable #group2,
   html body .WaGadgetEventsStateCalendar #group2,
-  html body #idViewSwitchersTable #group2 {
+  html body #group2 {
     float: none !important;
-    display: inline-flex !important;
+    display: flex !important;
+    flex-direction: row !important;
     flex-wrap: wrap !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 10px !important;
-    width: auto !important;
+    width: 100% !important;
     max-width: 100% !important;
     text-align: center !important;
-    vertical-align: top !important;
     visibility: visible !important;
     opacity: 1 !important;
   }
-  /* button wrappers — content-sized flex items, never floated */
+  /* button wrappers — content-sized flex items, never floated or full-width */
+  html body .WaGadgetEventsStateCalendar #idViewSwitchersTable #decButton,
+  html body .WaGadgetEventsStateCalendar #idViewSwitchersTable #todayButton,
+  html body .WaGadgetEventsStateCalendar #idViewSwitchersTable #incButton,
   html body #idViewSwitchersTable #decButton,
   html body #idViewSwitchersTable #todayButton,
   html body #idViewSwitchersTable #incButton,
