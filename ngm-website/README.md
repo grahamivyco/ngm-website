@@ -6,6 +6,10 @@ Canonical source of truth for the custom frontend layered on the NGM Wild Aprico
 > copy, backup, and change history for the code. To publish a change you still paste
 > the code into the matching WA gadget or CSS tab. This repo is where the *correct*
 > version always lives.
+>
+> **Live-loading (optional):** the site-wide **CSS, header, and footer** can be wired to
+> load straight from this repo via a CDN, so editing them here updates the live site with
+> no re-pasting. One-time WA setup + details in [`deploy/`](deploy/README.md).
 
 ## How this repo is organized
 
