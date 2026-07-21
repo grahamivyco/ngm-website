@@ -1672,34 +1672,41 @@ html body #todayButton {
     margin: 0 0 12px 0 !important;
     text-align: left !important;
   }
-  body #idViewSwitchersTable {
-    text-align: left !important;
+  html body #idViewSwitchersTable,
+  html body .WaGadgetEventsStateCalendar #idViewSwitchersTable {
+    display: block !important;
+    text-align: center !important;   /* centers the inline-flex #group2 */
     padding: 0 0 16px !important;
     width: 100% !important;
     float: none !important;
     clear: both !important;
   }
-  /* Nav group: left-aligned flex row that WRAPS if needed, so all three
-     buttons are always visible (never clipped off the edge). Forced
-     visible to beat any WA rule that hides it at mobile widths. */
-  body #group2,
-  body .WaGadgetEventsStateCalendar #group2,
-  body #idViewSwitchersTable #group2 {
+  /* Nav group: a CENTERED inline row of the three buttons. Max specificity
+     + !important to beat WA's mobile float/calc rules that were scattering
+     Prev/Today/Next instead of keeping them in a row. */
+  html body #group2,
+  html body .WaGadgetEventsStateCalendar #group2,
+  html body #idViewSwitchersTable #group2 {
     float: none !important;
-    display: flex !important;
+    display: inline-flex !important;
     flex-wrap: wrap !important;
     align-items: center !important;
-    justify-content: flex-start !important;
-    gap: 8px !important;
-    width: 100% !important;          /* override WA's calc() */
-    text-align: left !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    width: auto !important;
+    max-width: 100% !important;
+    text-align: center !important;
+    vertical-align: top !important;
     visibility: visible !important;
     opacity: 1 !important;
   }
-  /* Each button wrapper sizes to its content, stays visible */
-  body #decButton,
-  body #todayButton,
-  body #incButton {
+  /* button wrappers — content-sized flex items, never floated */
+  html body #idViewSwitchersTable #decButton,
+  html body #idViewSwitchersTable #todayButton,
+  html body #idViewSwitchersTable #incButton,
+  html body #decButton,
+  html body #todayButton,
+  html body #incButton {
     display: inline-flex !important;
     float: none !important;
     width: auto !important;
@@ -1709,22 +1716,21 @@ html body #todayButton {
     visibility: visible !important;
     opacity: 1 !important;
   }
-  /* The links themselves: compact, left-aligned, always visible */
-  body a.DecDateButton,
-  body a.incDateButton {
+  /* Prev / Next links */
+  html body a.DecDateButton,
+  html body a.incDateButton {
     display: inline-block !important;
     width: auto !important;
-    padding: 6px 10px !important;
+    padding: 6px 8px !important;
     margin: 0 !important;
     white-space: nowrap !important;
     visibility: visible !important;
   }
-  body a.todayButton {
+  /* Today pill — identical padding/size at every width */
+  html body a.todayButton {
     display: inline-block !important;
     width: auto !important;
     margin: 0 !important;
-    /* same padding/size as tablet + desktop so the Today pill looks
-       identical at every width */
     padding: 6px 16px !important;
     font-size: .82rem !important;
     white-space: nowrap !important;
@@ -4328,6 +4334,14 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar th:last-child { border
    row (the row carrying the date numbers). Full-width grid line. */
 body .WaGadgetEventsStateCalendar table.EventListCalendar tr:has(a.calendarDate) > td {
   border-top: 1px solid var(--ngm-linen-dk) !important;
+}
+/* …but NOT inside the nested date-number table (its <tr> also contains
+   .calendarDate, so the rule above drew a stray line inside each cell).
+   Strip ALL borders on nested-table cells — no inner horizontal line and
+   no stray vertical line after the date number. */
+body .WaGadgetEventsStateCalendar table.EventListCalendar table td,
+body .WaGadgetEventsStateCalendar table.EventListCalendar table th {
+  border: 0 !important;
 }
 /* day-of-week header band — REAL weekday text. This theme does not paint
    CSS ::after generated content on table cells, so we style WA's own
