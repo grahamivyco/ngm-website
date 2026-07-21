@@ -3393,52 +3393,41 @@ body .ngm-login-hero .ngm-lh-list li{ color:rgba(250,247,242,.92)!important; tex
 /* ── Give the form gadget breathing room in either layout ── */
 body.ngm-login-page .WaGadgetLoginForm{ padding:44px 20px 20px; }
 
-/* ── DESKTOP: hero fixed to the left half, form column on the right ── */
-@media(min-width:861px){
+/* ── TWO-COLUMN SPLIT ──────────────────────────────────────────────────
+   Structure on the WA page: a 2-column layout ROW — Custom HTML block (the
+   hero) in the LEFT column, native login gadget in the RIGHT column. The
+   hero fills the left column as a full-height sage panel; the form card is
+   centred in the right column. Both columns share the same min-height so
+   neither leaves an empty gap. NO fixed positioning — normal flow, so the
+   page scrolls cleanly and the footer sits below. When WA stacks the row on
+   narrow screens, the hero collapses to a slim strip and the form leads. ── */
+@media(min-width:641px){
   body.ngm-login-page .ngm-login-hero{
-    position:fixed; top:var(--ngm-head-h); left:0; bottom:0;
-    width:var(--ngm-hero-w);
+    min-height:calc(100vh - var(--ngm-head-h));
     display:flex; align-items:center;
-    padding:64px clamp(40px,4vw,68px);
-    z-index:1;
+    padding:64px clamp(36px,4vw,68px);
   }
-  /* The site footer (#ngmf) is opaque and position:relative — lift it above
-     the fixed hero (z-index:1) so the hero never bleeds over the footer. */
-  body.ngm-login-page #ngmf{ z-index:5; }
-
-  /* Right column: vertically-centre the form card. The form block is one
-     viewport tall minus the header and a reserve for the join line, so the
-     card sits centred and the "join" line stays just below it, above the
-     fold. */
   body.ngm-login-page .WaGadgetLoginForm{
-    width:var(--ngm-hero-w) !important;      /* occupy exactly the right half… */
-    margin-left:var(--ngm-hero-w) !important;/* …starting at the split — 50vw + 50vw = 100vw, no overflow */
-    box-sizing:border-box !important;
+    min-height:calc(100vh - var(--ngm-head-h));
     display:flex !important;
     align-items:center !important;
     justify-content:center !important;
-    min-height:calc(100vh - var(--ngm-head-h) - 72px);
-    padding:32px clamp(24px,4vw,56px) 0 !important;
-  }
-  body.ngm-login-page .ngm-login-foot{
-    margin-left:var(--ngm-hero-w);
-    padding:18px clamp(24px,4vw,56px) 56px;
+    padding:48px clamp(24px,4vw,56px) !important;
   }
 }
-@media(max-width:860px){
-  /* Mobile: shrink the hero to a slim branded strip so the LOGIN FORM is
-     the first, primary thing on screen and fits in the opening viewport.
-     The benefits list + subcopy (nice-to-have context) are hidden here. */
-  body.ngm-login-page .ngm-login-hero{ padding:20px 22px 22px; text-align:center; }
+@media(max-width:640px){
+  /* Narrow: WA stacks the two columns — slim hero strip on top, form leads.
+     Subcopy + benefits (nice-to-have context) hidden. */
+  body.ngm-login-page .ngm-login-hero{ padding:22px 22px 24px; text-align:center; }
   body.ngm-login-page .ngm-login-hero-inner{ max-width:none; }
   body.ngm-login-page .ngm-lh-glow{ display:none; }
-  body.ngm-login-page .ngm-login-mark{ width:36px; height:40px; margin:0 auto 10px; }
+  body.ngm-login-page .ngm-login-mark{ width:38px; height:42px; margin:0 auto 10px; }
   body.ngm-login-page .ngm-lh-eyebrow{ margin-bottom:7px; }
-  body.ngm-login-page .ngm-lh-title{ font-size:1.5rem; line-height:1.15; margin-bottom:0; }
+  body.ngm-login-page .ngm-lh-title{ font-size:1.55rem; line-height:1.15; margin-bottom:0; }
   body.ngm-login-page .ngm-lh-title br{ display:none; }
   body.ngm-login-page .ngm-lh-sub,
   body.ngm-login-page .ngm-lh-list{ display:none; }
-  body.ngm-login-page .WaGadgetLoginForm{ padding:22px 16px 10px; }
+  body.ngm-login-page .WaGadgetLoginForm{ padding:26px 16px 14px !important; }
 }
 
 /* ══════════════════════════════════════════════════════════════════
@@ -3576,11 +3565,30 @@ body .WaGadgetLoginForm .emailTextBoxControl,
 body .WaGadgetLoginForm .passwordTextBoxControl {
   width: 100% !important;
   font-size: .95rem !important;
-  padding: 11px 14px !important;
+  /* extra left padding so the WA leading icon (person / lock) sits at the
+     middle-left and the typed text / placeholder never overlaps it */
+  padding: 12px 14px 12px 44px !important;
   border: 1px solid #DDD5C8 !important;
   border-radius: 10px !important;
-  background: #fff !important;
+  background-color: #fff !important;
+  background-repeat: no-repeat !important;
+  background-position: 14px center !important;
   color: #242424 !important;
+}
+/* Pin any WA leading icon to the middle-left of the field */
+body .WaGadgetLoginForm .loginUserName,
+body .WaGadgetLoginForm .password-wrapper { position: relative !important; }
+body .WaGadgetLoginForm .emailInputIcon,
+body .WaGadgetLoginForm .passwordInputIcon,
+body .WaGadgetLoginForm .loginUserName > i,
+body .WaGadgetLoginForm .password-wrapper > i {
+  position: absolute !important;
+  left: 14px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  margin: 0 !important;
+  z-index: 2 !important;
+  pointer-events: none !important;
 }
 body .WaGadgetLoginForm .emailTextBoxControl:focus,
 body .WaGadgetLoginForm .passwordTextBoxControl:focus {
@@ -3655,7 +3663,9 @@ body .WaGadgetLoginForm .loginPasswordForgot a:hover { border-color: #3E5538; }
 body .WaGadgetLoginForm .oAuthButtonsContainer {
   display: flex !important;
   flex-direction: column !important;
+  align-items: stretch !important;   /* let the buttons fill the card width */
   gap: 8px !important;
+  width: 100% !important;
   margin-bottom: 16px !important;
   padding-bottom: 16px !important;
   border-bottom: 1px solid #EDE7DC !important;
@@ -3665,13 +3675,15 @@ body .WaGadgetLoginForm .wa-authenticateLoginLink {
   align-items: center !important;
   justify-content: center !important;
   gap: 8px !important;
+  width: 100% !important;               /* fill the form, not shrink to the icon */
+  box-sizing: border-box !important;
   font-size: .85rem !important;
   font-weight: 500 !important;
   color: #242424 !important;
   background: #fff !important;
   border: 1.5px solid #DDD5C8 !important;
   border-radius: 100px !important;
-  padding: 10px 16px !important;
+  padding: 11px 16px !important;
   text-decoration: none !important;
   cursor: pointer;
   transition: border-color .18s, background .18s;
