@@ -9,22 +9,25 @@ that system page**, not creating a new one. These three files wrap the native fo
 with NGM branding, laid out as a **split screen**: a branded sage hero on the left,
 the login form card on the right.
 
-## Paste order (top → bottom, same single layout column)
-1. `01-top.html` — Custom HTML gadget: the branded sage **hero** (needle-mark, "Welcome
-   back, stitchers", benefits list). Also sets `body.ngm-login-page`.
-2. **Native WA login gadget** (`.WaGadgetLoginForm`, already on the page) — see `02-wa-gadget.txt`
-3. `03-bottom.html` — Custom HTML gadget: "not a member? Join" line
+## Page setup — a 2-column layout ROW
+Split the login page content into a **2-column layout row** in the WA editor, then:
+- **Left column:** `01-top.html` as a Custom HTML gadget — the branded sage **hero**
+  (needle-mark, "Welcome back, stitchers", benefits list). Also sets `body.ngm-login-page`.
+- **Right column:** the **native WA login gadget** (`.WaGadgetLoginForm`, already on the
+  page — see `02-wa-gadget.txt`), then `03-bottom.html` (the "not a member? Join" line)
+  beneath it.
 
-**No 2-column WA row needed.** Paste all three stacked in one column — the Global CSS
-(scoped to `body.ngm-login-page`) does the split: it fixes the hero to the left half of
-the viewport and pushes the form + join line into the right half. Under 861px it collapses
-back to a single stacked column automatically.
+The Global CSS (scoped to `body.ngm-login-page`) styles each side: the hero fills the
+left column as a full-height sage panel, and the form is skinned into a centred card in
+the right column. **No fixed positioning** — everything is in normal flow, so the page
+scrolls cleanly and the site footer sits below. On narrow screens (≤640px) WA stacks the
+two columns; the hero then collapses to a slim strip and the form leads.
 
-## If the split needs a nudge on the live site
-Two CSS variables at the top of the login block in `global.css` tune it:
-`--ngm-hero-w` (left-panel width, default `50vw`) and `--ngm-head-h` (header height to
-clear, default `86px`). To revert to a simple centred card, delete the
-`@media(min-width:861px)` block in that section — everything else still works.
+## If it needs a nudge on the live site
+`--ngm-head-h` (header height, default `86px`) at the top of the login block in
+`global.css` sets the column min-height (`100vh − header`). The side-by-side / stacked
+switch is the `@media(min-width:641px)` / `@media(max-width:640px)` pair in that section —
+raise/lower `641`/`640` to match where your WA row actually stacks.
 
 ## The form skin lives in Global CSS (done)
 The login form and the account dropdown are skinned in `global-css/global.css`,
