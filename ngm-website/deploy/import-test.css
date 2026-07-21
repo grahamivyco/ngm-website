@@ -1,0 +1,31 @@
+/* ================================================================
+   TEMPORARY — external-@import test for Wild Apricot.
+
+   Purpose: prove whether WA lets the CSS tab load an external
+   stylesheet from the jsDelivr CDN. This file only draws a bright
+   banner at the bottom of the page — it changes nothing else, so
+   it's safe to load on the live site while testing.
+
+   HOW TO USE:
+   1. In the WA CSS tab, add this as the VERY FIRST line (above your
+      existing/restored CSS — @import must come before other rules):
+        @import url("https://cdn.jsdelivr.net/gh/grahamivyco/ngm-website@main/ngm-website/deploy/import-test.css");
+   2. Save, then open your LIVE site (logged out) and hard-refresh.
+   3. Pink banner at the bottom  → WA ALLOWS external @import.
+      No banner                  → WA is blocking it (see console).
+   4. Remove that @import line from the CSS tab when done.
+   ================================================================ */
+html::after {
+  content: "\2713  External CSS import WORKS \2014 this is the test banner, safe to remove";
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2147483647;
+  background: #E91E63;
+  color: #fff;
+  font: 600 14px/1.5 -apple-system, system-ui, "DM Sans", sans-serif;
+  text-align: center;
+  padding: 10px 14px;
+  letter-spacing: .02em;
+}
