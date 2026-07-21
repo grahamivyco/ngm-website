@@ -13,6 +13,30 @@
 ║  Both button sets live in the HTML; only one is visible.    ║
 ╚══════════════════════════════════════════════════════════════╝
 -->
+<!-- ══ FAVICON ══
+     Swaps Wild Apricot's default favicon for the NGM mark, site-wide.
+     Lives in the header because the CSS tab can't set a favicon and a
+     Custom HTML gadget can only reach <head> via JS. The icons live in
+     /brand and are served from the same jsDelivr CDN as this header, so
+     editing them in the repo updates the live favicon (after a CDN purge).
+     The header loader re-creates injected <script> tags, so this runs. -->
+<script>
+(function(){
+  if(window._ngmFavicon)return; window._ngmFavicon=true;
+  var BASE='https://cdn.jsdelivr.net/gh/grahamivyco/ngm-website@main/ngm-website/brand/';
+  /* Remove WA's own favicon links so ours are the only ones the browser sees. */
+  document.querySelectorAll('link[rel~="icon"],link[rel="apple-touch-icon"],link[rel="shortcut icon"]').forEach(function(l){l.parentNode.removeChild(l);});
+  [{rel:'icon',type:'image/svg+xml',href:BASE+'favicon.svg'},
+   {rel:'icon',type:'image/png',sizes:'32x32',href:BASE+'favicon-32.png'},
+   {rel:'apple-touch-icon',sizes:'180x180',href:BASE+'favicon-180.png'}].forEach(function(c){
+    var l=document.createElement('link');
+    l.rel=c.rel; l.href=c.href;
+    if(c.type)l.type=c.type;
+    if(c.sizes)l.setAttribute('sizes',c.sizes);
+    document.head.appendChild(l);
+  });
+}());
+</script>
 <style>
 #ngm,#ngm *,#ngm *::before,#ngm *::after{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans','Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1}
 /* ── Bar ── */
