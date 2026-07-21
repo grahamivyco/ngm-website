@@ -526,17 +526,18 @@ body .ngm-wa-events.upcomingEventsStyle001 ul {
 body .ngm-wa-events.upcomingEventsStyle001 ul li {
   list-style: none !important;
   border-bottom: 1px solid var(--ngm-linen-dk) !important;
-  padding: 18px 8px !important;
+  padding: 18px 14px !important;
   margin: 0 !important;
   font-family: var(--ngm-sans) !important;
-
-  border-radius: 0 !important;
+  /* rounded so the hover fill has soft corners, not sharp ones */
+  border-radius: var(--ngm-radius) !important;
   transition: background-color .2s ease !important;
 }
 /* Whole row is clickable (click handler in the script). Hover
-   the full row turns pale green — no lift, no shadow. */
+   the full row turns pale green with rounded corners — no lift, no shadow. */
 body .ngm-wa-events.upcomingEventsStyle001 ul li:hover {
   background-color: var(--ngm-sage-lt) !important;
+  border-radius: var(--ngm-radius) !important;
 }
 body .ngm-wa-events.upcomingEventsStyle001 ul li.last,
 body .ngm-wa-events.upcomingEventsStyle001 ul li:last-child {
@@ -2073,17 +2074,18 @@ body .ngm-wa-events.upcomingEventsStyle001 ul {
 body .ngm-wa-events.upcomingEventsStyle001 ul li {
   list-style: none !important;
   border-bottom: 1px solid var(--ngm-linen-dk) !important;
-  padding: 18px 8px !important;
+  padding: 18px 14px !important;
   margin: 0 !important;
   font-family: var(--ngm-sans) !important;
-
-  border-radius: 0 !important;
+  /* rounded so the hover fill has soft corners, not sharp ones */
+  border-radius: var(--ngm-radius) !important;
   transition: background-color .2s ease !important;
 }
 /* Whole row is clickable (click handler in the script). Hover
-   the full row turns pale green — no lift, no shadow. */
+   the full row turns pale green with rounded corners — no lift, no shadow. */
 body .ngm-wa-events.upcomingEventsStyle001 ul li:hover {
   background-color: var(--ngm-sage-lt) !important;
+  border-radius: var(--ngm-radius) !important;
 }
 body .ngm-wa-events.upcomingEventsStyle001 ul li.last,
 body .ngm-wa-events.upcomingEventsStyle001 ul li:last-child {
@@ -2503,17 +2505,18 @@ body .ngm-wa-events.upcomingEventsStyle001 ul {
 body .ngm-wa-events.upcomingEventsStyle001 ul li {
   list-style: none !important;
   border-bottom: 1px solid var(--ngm-linen-dk) !important;
-  padding: 18px 8px !important;
+  padding: 18px 14px !important;
   margin: 0 !important;
   font-family: var(--ngm-sans) !important;
-
-  border-radius: 0 !important;
+  /* rounded so the hover fill has soft corners, not sharp ones */
+  border-radius: var(--ngm-radius) !important;
   transition: background-color .2s ease !important;
 }
 /* Whole row is clickable (click handler in the script). Hover
-   the full row turns pale green — no lift, no shadow. */
+   the full row turns pale green with rounded corners — no lift, no shadow. */
 body .ngm-wa-events.upcomingEventsStyle001 ul li:hover {
   background-color: var(--ngm-sage-lt) !important;
+  border-radius: var(--ngm-radius) !important;
 }
 body .ngm-wa-events.upcomingEventsStyle001 ul li.last,
 body .ngm-wa-events.upcomingEventsStyle001 ul li:last-child {
@@ -3068,17 +3071,18 @@ body .ngm-wa-events.upcomingEventsStyle001 ul {
 body .ngm-wa-events.upcomingEventsStyle001 ul li {
   list-style: none !important;
   border-bottom: 1px solid var(--ngm-linen-dk) !important;
-  padding: 18px 8px !important;
+  padding: 18px 14px !important;
   margin: 0 !important;
   font-family: var(--ngm-sans) !important;
-
-  border-radius: 0 !important;
+  /* rounded so the hover fill has soft corners, not sharp ones */
+  border-radius: var(--ngm-radius) !important;
   transition: background-color .2s ease !important;
 }
 /* Whole row is clickable (click handler in the script). Hover
-   the full row turns pale green — no lift, no shadow. */
+   the full row turns pale green with rounded corners — no lift, no shadow. */
 body .ngm-wa-events.upcomingEventsStyle001 ul li:hover {
   background-color: var(--ngm-sage-lt) !important;
+  border-radius: var(--ngm-radius) !important;
 }
 body .ngm-wa-events.upcomingEventsStyle001 ul li.last,
 body .ngm-wa-events.upcomingEventsStyle001 ul li:last-child {
