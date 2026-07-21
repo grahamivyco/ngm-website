@@ -3370,10 +3370,14 @@ body.ngm-login-page{ --ngm-hero-w:50vw; --ngm-head-h:86px; background:var(--ngm-
 }
 .ngm-login-hero-inner{ position:relative; max-width:440px; }
 .ngm-login-mark{ display:block; width:52px; height:57px; margin-bottom:30px; }
-.ngm-lh-eyebrow{ display:block; font-family:var(--ngm-sans); font-size:.72rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:#D8B7AC; margin-bottom:18px; }
-.ngm-lh-title{ font-family:var(--ngm-serif); font-weight:500; font-size:clamp(2.3rem,3.6vw,3.4rem); line-height:1.08; color:var(--ngm-cream); margin-bottom:20px; }
-.ngm-lh-title em{ font-style:italic; color:#E7C0B4; }
-.ngm-lh-sub{ font-family:var(--ngm-sans); font-size:1.04rem; line-height:1.75; color:rgba(250,247,242,.82); margin-bottom:38px; max-width:400px; }
+/* NOTE: body-prefixed + !important because WA's theme (casefile_guardian)
+   uses very high-specificity heading rules that otherwise recolour this h1
+   purple and force UPPERCASE — see docs/wa-notes.md. */
+body .ngm-login-hero .ngm-lh-eyebrow{ display:block; font-family:var(--ngm-sans)!important; font-size:.72rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase!important; color:#D8B7AC!important; margin-bottom:18px; }
+body .ngm-login-hero .ngm-lh-title{ font-family:var(--ngm-serif)!important; font-weight:500; font-size:clamp(2.3rem,3.6vw,3.4rem); line-height:1.08; color:var(--ngm-cream)!important; text-transform:none!important; letter-spacing:.01em; margin-bottom:20px; }
+body .ngm-login-hero .ngm-lh-title em{ font-style:italic!important; color:#E7C0B4!important; text-transform:none!important; }
+body .ngm-login-hero .ngm-lh-sub{ font-family:var(--ngm-sans)!important; font-size:1.04rem!important; line-height:1.75!important; color:rgba(250,247,242,.82)!important; text-transform:none!important; margin-bottom:38px; max-width:400px; }
+body .ngm-login-hero .ngm-lh-list li{ color:rgba(250,247,242,.92)!important; text-transform:none!important; }
 .ngm-lh-list{ list-style:none; display:flex; flex-direction:column; gap:16px; margin:0; padding:0; }
 .ngm-lh-list li{ display:flex; align-items:center; gap:14px; font-family:var(--ngm-sans); font-size:.98rem; color:rgba(250,247,242,.92); }
 .ngm-lh-tick{ flex-shrink:0; width:26px; height:26px; border-radius:50%; background:rgba(255,255,255,.12); border:1px solid rgba(231,192,180,.5); display:flex; align-items:center; justify-content:center; }
@@ -3398,14 +3402,25 @@ body.ngm-login-page .WaGadgetLoginForm{ padding:44px 20px 20px; }
     padding:64px clamp(40px,4vw,68px);
     z-index:1;
   }
+  /* The site footer (#ngmf) is opaque and position:relative — lift it above
+     the fixed hero (z-index:1) so the hero never bleeds over the footer. */
+  body.ngm-login-page #ngmf{ z-index:5; }
+
+  /* Right column: vertically-centre the form card. The form block is one
+     viewport tall minus the header and a reserve for the join line, so the
+     card sits centred and the "join" line stays just below it, above the
+     fold. */
   body.ngm-login-page .WaGadgetLoginForm{
     margin-left:var(--ngm-hero-w) !important;
-    min-height:calc(100vh - var(--ngm-head-h));
-    padding:9vh clamp(24px,4vw,56px) 32px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    min-height:calc(100vh - var(--ngm-head-h) - 72px);
+    padding:32px clamp(24px,4vw,56px) 0 !important;
   }
   body.ngm-login-page .ngm-login-foot{
     margin-left:var(--ngm-hero-w);
-    padding:0 clamp(24px,4vw,56px) 72px;
+    padding:18px clamp(24px,4vw,56px) 56px;
   }
 }
 @media(max-width:860px){
