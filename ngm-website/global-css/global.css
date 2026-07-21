@@ -3568,36 +3568,26 @@ body .WaGadgetLoginForm .loginContainer:not(.authenticated) .loginPanel {
   padding: 22px 22px 20px !important;
 }
 
-/* Email + password fields */
+/* Email + password fields.
+   WA's LoginFormStyle001 paints a person/lock icon as a background-IMAGE on
+   the field (sitting top-left, overlapping the placeholder). We clear those
+   background images for clean fields — the `background:#fff` shorthand wipes
+   the image, and we also clear it on the field wrappers to be safe. */
 body .WaGadgetLoginForm .emailTextBoxControl,
 body .WaGadgetLoginForm .passwordTextBoxControl {
   width: 100% !important;
+  height: auto !important;
   font-size: .95rem !important;
-  /* extra left padding so the WA leading icon (person / lock) sits at the
-     middle-left and the typed text / placeholder never overlaps it */
-  padding: 12px 14px 12px 44px !important;
+  padding: 12px 14px !important;
   border: 1px solid #DDD5C8 !important;
   border-radius: 10px !important;
-  background-color: #fff !important;
-  background-repeat: no-repeat !important;
-  background-position: 14px center !important;
+  background: #fff !important;
   color: #242424 !important;
 }
-/* Pin any WA leading icon to the middle-left of the field */
+body .WaGadgetLoginForm .loginUserNameTextBox,
+body .WaGadgetLoginForm .loginPasswordTextBox,
 body .WaGadgetLoginForm .loginUserName,
-body .WaGadgetLoginForm .password-wrapper { position: relative !important; }
-body .WaGadgetLoginForm .emailInputIcon,
-body .WaGadgetLoginForm .passwordInputIcon,
-body .WaGadgetLoginForm .loginUserName > i,
-body .WaGadgetLoginForm .password-wrapper > i {
-  position: absolute !important;
-  left: 14px !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  margin: 0 !important;
-  z-index: 2 !important;
-  pointer-events: none !important;
-}
+body .WaGadgetLoginForm .loginPassword { background-image: none !important; }
 body .WaGadgetLoginForm .emailTextBoxControl:focus,
 body .WaGadgetLoginForm .passwordTextBoxControl:focus {
   outline: none !important;
@@ -3605,17 +3595,32 @@ body .WaGadgetLoginForm .passwordTextBoxControl:focus {
   box-shadow: 0 0 0 3px rgba(92,122,82,.15) !important;
 }
 body .WaGadgetLoginForm .loginUserName { margin-bottom: 12px !important; }
-/* Keep the show/hide-password eye aligned inside the field */
+
+/* Show/hide-password toggle. WA outputs <i class="fa fa-eye-slash toggle-password">,
+   but Font Awesome isn't loaded on this theme, so the glyph rendered as a
+   "barcode" tofu box on the left. Kill the broken glyph and draw our own eye
+   SVG, pinned to the middle-RIGHT of the password field. */
 body .WaGadgetLoginForm .password-wrapper { position: relative !important; }
-body .WaGadgetLoginForm .password-wrapper .toggle-password {
+body .WaGadgetLoginForm .passwordTextBoxControl { padding-right: 44px !important; }
+body .WaGadgetLoginForm .toggle-password {
   position: absolute !important;
   right: 12px !important;
   top: 50% !important;
   transform: translateY(-50%) !important;
-  color: #9A9A9A !important;
-  cursor: pointer;
+  width: 22px !important;
+  height: 22px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font: 0/0 a !important;               /* collapse the broken FA glyph */
+  color: transparent !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 20px 20px !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239A9A9A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E") !important;
+  cursor: pointer !important;
 }
-body .WaGadgetLoginForm .passwordTextBoxControl { padding-right: 40px !important; }
+body .WaGadgetLoginForm .toggle-password::before,
+body .WaGadgetLoginForm .toggle-password::after { content: "" !important; }
 
 /* Remember me */
 body .WaGadgetLoginForm .loginActionRememberMe {
@@ -3699,6 +3704,19 @@ body .WaGadgetLoginForm .wa-authenticateLoginLink {
 body .WaGadgetLoginForm .wa-authenticateLoginLink:hover {
   border-color: #5C7A52 !important;
   background: #EEF3EC !important;
+}
+/* Show the button label (WA's icon-only style hides .authenticateLoginText) so
+   the full-width pills read "Log in with Google/Microsoft/Apple". */
+body .WaGadgetLoginForm .authenticateLoginText {
+  display: inline-block !important;
+  visibility: visible !important;
+  width: auto !important;
+  height: auto !important;
+  font-size: .875rem !important;
+  font-weight: 500 !important;
+  color: #242424 !important;
+  text-indent: 0 !important;
+  overflow: visible !important;
 }
 /* Brand logos on the social buttons (embedded SVGs — no external files) */
 body .WaGadgetLoginForm .authenticateLoginIcon {
