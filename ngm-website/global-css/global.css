@@ -4240,3 +4240,108 @@ body .WaGadgetContactProfile .typeTextLabelNoData { color: var(--ngm-gray-lt) !i
 .ngm-hub-hero .ngm-hub-acard{align-items:flex-start;}
 .ngm-hub-hero .ngm-hub-acard-icon{margin-top:2px;}
 .ngm-hub-hero .ngm-hub-acard-go{align-self:center;}
+
+/* ══════════════════════════════════════════════════════════════════
+   CALENDAR — MONTH GRID (live-effective)
+   The rich grid rules earlier in this file are scoped under `.ngm-cal`,
+   a class the live WA gadget never receives, so they never applied.
+   These mirror the intent under the REAL live wrapper
+   `.WaGadgetEventsStateCalendar` (confirmed from page source).
+══════════════════════════════════════════════════════════════════ */
+body .WaGadgetEventsStateCalendar table.EventListCalendar {
+  width: 100% !important; border-collapse: collapse !important;
+  background: #fff !important; border: 1px solid var(--ngm-linen-dk) !important;
+}
+/* day-of-week header row → sage eyebrow band */
+body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader {
+  background: var(--ngm-sage-lt) !important; color: var(--ngm-sage-dk) !important;
+  font-family: var(--ngm-sans) !important; text-transform: uppercase !important;
+  letter-spacing: .07em !important; font-size: .68rem !important; font-weight: 600 !important;
+  text-align: center !important; padding: 9px 4px !important;
+  border-bottom: 1px solid var(--ngm-border) !important;
+}
+/* day cells */
+body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarItemDefault,
+body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarItemInactive,
+body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarItemSelected {
+  border-color: var(--ngm-linen-dk) !important; background: #fff !important;
+}
+/* days outside this month → muted cream */
+body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarItemInactive {
+  background: var(--ngm-cream) !important;
+}
+body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarItemInactive a.calendarDate {
+  color: var(--ngm-gray-lt) !important;
+}
+/* today's column → soft sage wash */
+body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarItemSelected {
+  background: var(--ngm-sage-lt) !important;
+}
+/* the date number in each cell */
+body .WaGadgetEventsStateCalendar table.EventListCalendar a.calendarDate,
+body .WaGadgetEventsStateCalendar table.EventListCalendar a.calendarDate nobr {
+  color: var(--ngm-charcoal) !important; font-family: var(--ngm-sans) !important;
+  font-weight: 600 !important; font-size: .82rem !important; text-decoration: none !important;
+}
+/* the event chips inside a day */
+body .WaGadgetEventsStateCalendar table.EventListCalendar a[data-tags] {
+  display: block !important; font-family: var(--ngm-sans) !important;
+  font-size: .78rem !important; line-height: 1.35 !important;
+  color: var(--ngm-sage-dk) !important; text-decoration: none !important;
+  background: var(--ngm-sage-lt) !important; border-left: 3px solid var(--ngm-sage) !important;
+  border-radius: 0 6px 6px 0 !important; padding: 4px 8px !important; margin: 2px 3px !important;
+}
+body .WaGadgetEventsStateCalendar table.EventListCalendar a[data-tags]:hover,
+body .WaGadgetEventsStateCalendar table.EventListCalendar .eventHover,
+body .WaGadgetEventsStateCalendar table.EventListCalendar .eventContainerHover a[data-tags] {
+  background: var(--ngm-sage) !important; color: #fff !important;
+}
+/* the time label JS injects above an event */
+body .WaGadgetEventsStateCalendar table.EventListCalendar .eventTime {
+  font-family: var(--ngm-sans) !important; font-size: .68rem !important; font-weight: 600 !important;
+  text-transform: uppercase !important; letter-spacing: .04em !important;
+  color: var(--ngm-rose) !important; padding: 0 3px !important; margin-top: 2px !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   EVENT — SINGLE EVENT DETAIL PAGE  (.WaGadgetEventsStateDetails)
+   Confirmed from page source: Back link, page title, When/Location
+   info box, description body. The nested corner-div box wrappers are
+   left structurally alone; we skin the readable parts only.
+══════════════════════════════════════════════════════════════════ */
+/* Back link */
+body .WaGadgetEventsStateDetails .pageBackContainer a,
+body .WaGadgetEventsStateDetails a.eventBackLink {
+  font-family: var(--ngm-sans) !important; font-size: .9rem !important; font-weight: 500 !important;
+  color: var(--ngm-sage-dk) !important; text-decoration: none !important;
+}
+body .WaGadgetEventsStateDetails .pageBackContainer a:hover,
+body .WaGadgetEventsStateDetails a.eventBackLink:hover { color: var(--ngm-sage) !important; }
+/* Event title */
+body .WaGadgetEventsStateDetails h1.pageTitle,
+body .WaGadgetEventsStateDetails h1.SystemPageTitle {
+  font-family: var(--ngm-serif) !important; font-weight: 400 !important;
+  color: var(--ngm-charcoal) !important; line-height: 1.15 !important;
+}
+/* When / Location info box → sage-lt panel */
+body .WaGadgetEventsStateDetails .boxInfoContainer {
+  background: var(--ngm-sage-lt) !important; border: 1px solid var(--ngm-border) !important;
+  border-radius: var(--ngm-radius) !important; padding: 8px 22px !important;
+}
+body .WaGadgetEventsStateDetails ul.boxInfo { list-style: none !important; margin: 0 !important; padding: 0 !important; }
+body .WaGadgetEventsStateDetails ul.boxInfo li { padding: 8px 0 !important; }
+body .WaGadgetEventsStateDetails .eventInfoBoxLabel {
+  display: block !important; font-family: var(--ngm-sans) !important;
+  text-transform: uppercase !important; letter-spacing: .08em !important;
+  font-size: .68rem !important; font-weight: 600 !important; color: var(--ngm-sage-dk) !important;
+  margin-bottom: 2px !important;
+}
+body .WaGadgetEventsStateDetails .eventInfoBoxValue,
+body .WaGadgetEventsStateDetails .eventInfoBoxValue strong,
+body .WaGadgetEventsStateDetails .eventInfoBoxValue span {
+  font-family: var(--ngm-sans) !important; font-size: .95rem !important; color: var(--ngm-charcoal) !important;
+}
+/* description body — set a readable fallback; inline fonts in content still win where present */
+body .WaGadgetEventsStateDetails .boxBodyContentContainer .inner {
+  font-family: var(--ngm-sans) !important; color: var(--ngm-charcoal) !important; line-height: 1.7 !important;
+}
