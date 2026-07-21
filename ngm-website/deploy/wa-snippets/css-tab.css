@@ -1,0 +1,25 @@
+/* ================================================================
+   NGM GLOBAL CSS — live-loaded from GitHub via jsDelivr
+
+   WHERE THIS GOES:
+   Paste this (and nothing else) into the Wild Apricot "CSS" tab.
+   Loading it here — rather than in a Custom HTML gadget — puts the
+   stylesheet in <head>, so there's no flash of unstyled content.
+
+   WHAT IT DOES:
+   Pulls ngm-website/global-css/global.css straight from this repo,
+   so editing that file updates the live site — no re-pasting. A
+   GitHub Action purges the CDN cache on push, so changes go live in
+   ~1 minute.
+
+   @main = always the latest commit. To freeze a version, swap @main
+   for a git tag or commit SHA (e.g. @v1 or @<sha>).
+
+   ROLLBACK: paste global-css/current-live-backup.css back into this
+   tab to instantly revert styling.
+
+   NOTE: @import must be the first rule in the tab (comments are fine
+   above it). If you can't edit the CSS tab, the same URL works as a
+   <link rel="stylesheet"> inside the top Custom HTML gadget instead.
+   ================================================================ */
+@import url("https://cdn.jsdelivr.net/gh/grahamivyco/ngm-website@main/ngm-website/global-css/global.css");
