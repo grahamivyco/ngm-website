@@ -1585,23 +1585,54 @@ body .WaGadgetEventsStateCalendar a[href*="EventListViewMode"] {
   font-weight: 500 !important;
   text-decoration: none !important;
 }
-/* TOOLBAR LAYOUT.
-   Desktop: title (.sectionTitle) floats left, nav (#group2) floats
-   right — both on the same line as "June 2026". The hidden #group1
-   reserves no space. We also zero the empty button wrappers so there
-   are no leftover spacer gaps. */
+/* TOOLBAR LAYOUT — IDENTICAL at every width (desktop = tablet = mobile):
+   the month title on its own line, then a centered row of
+   [‹ circle] [Today pill] [› circle]. */
+html body .WaGadgetEventsStateCalendar #idViewSwitchersTable,
 body #idViewSwitchersTable {
   padding: 0 0 14px !important;
-  clear: none !important;
-  text-align: right !important;
+  clear: both !important;
+  text-align: center !important;
+  width: 100% !important;
+  float: none !important;
+  display: block !important;
   min-height: 0 !important;
   overflow: visible !important;
 }
+html body .WaGadgetEventsStateCalendar #idViewSwitchersTable #group2,
+body #idViewSwitchersTable #group2,
 body #group2 {
-  float: right !important;
-  display: inline-block !important;
-  width: auto !important;
+  float: none !important;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  width: 100% !important;
   margin: 0 !important;
+  text-align: center !important;
+}
+/* Prev / Next month → CIRCULAR arrow buttons, identical at all widths.
+   The gadget JS sets their text to ‹ / › ; the circle centres it (and
+   overflow:hidden clips WA's full label in the editor where JS is off). */
+html body .WaGadgetEventsStateCalendar #idViewSwitchersTable a.DecDateButton,
+html body .WaGadgetEventsStateCalendar #idViewSwitchersTable a.incDateButton,
+html body a.DecDateButton, html body a.DecDateButton:link, html body a.DecDateButton:visited,
+html body a.incDateButton, html body a.incDateButton:link, html body a.incDateButton:visited {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  width: 38px !important; height: 38px !important; min-width: 38px !important; max-width: 38px !important;
+  padding: 0 !important; margin: 0 !important; box-sizing: border-box !important;
+  border-radius: 50% !important; border: 1.5px solid var(--ngm-sage-dk) !important;
+  background: transparent !important; color: var(--ngm-sage-dk) !important;
+  font-size: 1.15rem !important; line-height: 1 !important; font-weight: 400 !important;
+  text-decoration: none !important; white-space: nowrap !important; overflow: hidden !important;
+  transition: background-color .15s ease, color .15s ease !important;
+}
+html body .WaGadgetEventsStateCalendar #idViewSwitchersTable a.DecDateButton:hover,
+html body .WaGadgetEventsStateCalendar #idViewSwitchersTable a.incDateButton:hover,
+html body a.DecDateButton:hover, html body a.incDateButton:hover {
+  background: var(--ngm-sage-dk) !important; color: #fff !important;
 }
 /* Remove leftover spacing from the hidden switcher group and any empty
    button wrappers (the "spacers"). */
