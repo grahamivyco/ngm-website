@@ -388,22 +388,35 @@ body .WaGadgetEventsStateCalendar td.EventListCalendarHeader {
   text-align: center !important;
 }
 /* WEEKDAY ABBREVIATIONS — the page-gadget JS wraps each header as
-   <span class="ngm-wd-f">Sunday</span><span class="ngm-wd-a">Sun</span>
-   (this theme won't paint ::after on table cells, so the abbreviation must be
-   real text). Desktop shows the full name; tablet & mobile show the 3-letter. */
-body .WaGadgetEventsStateCalendar td.EventListCalendarHeader .ngm-wd-a,
-body .ngm-cal .EventListCalendarHeader .ngm-wd-a { display: none !important; }
+   <span class="ngm-wd-f">Sunday</span><span class="ngm-wd-a">Sun</span><span
+   class="ngm-wd-1">S</span> (this theme won't paint ::after on table cells, so
+   the abbreviation must be real text). Desktop = full name, tablet = 3-letter,
+   mobile = single letter. */
 body .WaGadgetEventsStateCalendar td.EventListCalendarHeader .ngm-wd-f,
 body .ngm-cal .EventListCalendarHeader .ngm-wd-f { display: inline !important; }
+body .WaGadgetEventsStateCalendar td.EventListCalendarHeader .ngm-wd-a,
+body .ngm-cal .EventListCalendarHeader .ngm-wd-a,
+body .WaGadgetEventsStateCalendar td.EventListCalendarHeader .ngm-wd-1,
+body .ngm-cal .EventListCalendarHeader .ngm-wd-1 { display: none !important; }
 /* Force the weekday row visible — WA's own mobile CSS hides it (that was the
    "vanishing" on tablet/phone). */
 html body .WaGadgetEventsStateCalendar table.EventListCalendar tr:first-child { display: table-row !important; visibility: visible !important; }
 html body .WaGadgetEventsStateCalendar td.EventListCalendarHeader { display: table-cell !important; visibility: visible !important; }
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   body .WaGadgetEventsStateCalendar td.EventListCalendarHeader .ngm-wd-f,
-  body .ngm-cal .EventListCalendarHeader .ngm-wd-f { display: none !important; }
+  body .ngm-cal .EventListCalendarHeader .ngm-wd-f,
+  body .WaGadgetEventsStateCalendar td.EventListCalendarHeader .ngm-wd-1,
+  body .ngm-cal .EventListCalendarHeader .ngm-wd-1 { display: none !important; }
   body .WaGadgetEventsStateCalendar td.EventListCalendarHeader .ngm-wd-a,
   body .ngm-cal .EventListCalendarHeader .ngm-wd-a { display: inline !important; }
+}
+@media (max-width: 600px) {
+  body .WaGadgetEventsStateCalendar td.EventListCalendarHeader .ngm-wd-f,
+  body .ngm-cal .EventListCalendarHeader .ngm-wd-f,
+  body .WaGadgetEventsStateCalendar td.EventListCalendarHeader .ngm-wd-a,
+  body .ngm-cal .EventListCalendarHeader .ngm-wd-a { display: none !important; }
+  body .WaGadgetEventsStateCalendar td.EventListCalendarHeader .ngm-wd-1,
+  body .ngm-cal .EventListCalendarHeader .ngm-wd-1 { display: inline !important; }
 }
 /* Day cells — soft linen borders */
 body .ngm-cal td {
@@ -775,7 +788,8 @@ body .ngm-cal .monthViewType .EventListCalendar th {
       if (!name) continue;
       td.innerHTML =
         '<span class="ngm-wd-f">' + name + '</span>' +
-        '<span class="ngm-wd-a">' + name.slice(0, 3) + '</span>';
+        '<span class="ngm-wd-a">' + name.slice(0, 3) + '</span>' +
+        '<span class="ngm-wd-1">' + name.slice(0, 1) + '</span>';
     }
   }
   if (document.readyState === 'loading') {
