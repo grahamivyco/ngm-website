@@ -1,4 +1,48 @@
 <!-- SLIM — styling comes from the Global CSS (global.css). Paste this only AFTER global.css is live in WA. Full self-contained version: 01-top.html -->
+<script>
+/* Two small DOM fixups for the WA calendar that CSS alone can't do:
+   1. Strip the "Month:" label from the title (single text node —
+      <h3 class="sectionTitle">Month: July 2026</h3> — nothing to hide in CSS).
+   2. Wrap each weekday header (<td class="EventListCalendarHeader">Sunday</td>)
+      as <span class="ngm-wd-f">Sunday</span><span class="ngm-wd-a">Sun</span>;
+      CSS swaps which shows by width (this theme won't paint ::after on table
+      cells, so the abbreviation must be real text). Guards make both passes
+      idempotent so the observer can't loop. Month nav is a full page reload. */
+(function () {
+  function transform() {
+    var titles = document.querySelectorAll(
+      '.ngm-cal .sectionTitle, #idEventListCalendar .sectionTitle, .WaGadgetEventsStateCalendar .sectionTitle'
+    );
+    for (var i = 0; i < titles.length; i++) {
+      var t = titles[i].textContent;
+      var cleaned = t.replace(/^\s*(Month|Week|Year)\s*:\s*/i, '');
+      if (cleaned !== t) titles[i].textContent = cleaned;
+    }
+    var heads = document.querySelectorAll(
+      '.WaGadgetEventsStateCalendar td.EventListCalendarHeader, .ngm-cal td.EventListCalendarHeader'
+    );
+    for (var j = 0; j < heads.length; j++) {
+      var td = heads[j];
+      if (td.querySelector('.ngm-wd-f')) continue;      // already wrapped
+      var name = (td.textContent || '').trim();
+      if (!name) continue;
+      td.innerHTML =
+        '<span class="ngm-wd-f">' + name + '</span>' +
+        '<span class="ngm-wd-a">' + name.slice(0, 3) + '</span>';
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', transform);
+  } else {
+    transform();
+  }
+  try {
+    var mo = new MutationObserver(transform);
+    mo.observe(document.documentElement, { childList: true, subtree: true, characterData: true });
+    setTimeout(function () { mo.disconnect(); }, 8000);
+  } catch (e) { /* observer unsupported — DOMContentLoaded pass is enough */ }
+})();
+</script>
 <div class="ngm ngm-cal-hero">
   <div class="ngm-cal-hero-inner">
     <span class="ngm-eyebrow">Everything in one place</span>

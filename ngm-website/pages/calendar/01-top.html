@@ -368,20 +368,42 @@ body .WaGadgetEventsStateCalendar .switchToListView,
 body a.listViewModeLink {
   display: none !important;
 }
-/* Weekday header row (Su Mo Tu We Th Fr Sa) — sage-tinted band,
-   uppercase sage labels for a clear, branded header. */
+/* Weekday header row — sage-tinted band, uppercase sage labels. REAL DOM
+   (confirmed): the day-name cells are <td class="EventListCalendarHeader">, NOT
+   <th>. Styled under BOTH the gadget wrapper (.WaGadgetEventsStateCalendar,
+   always present) and .ngm-cal so it holds whether or not the ngm-cal class
+   sticks. */
 body .ngm-cal th,
-body .ngm-cal .monthViewType .EventListCalendar th {
+body .ngm-cal .EventListCalendarHeader,
+body .WaGadgetEventsStateCalendar td.EventListCalendarHeader {
   font-family: var(--ngm-sans) !important;
-  font-size: .72rem !important;
+  font-size: .68rem !important;
   font-weight: 600 !important;
-  letter-spacing: .1em !important;
+  letter-spacing: .06em !important;
   text-transform: uppercase !important;
   color: var(--ngm-sage-dk) !important;
   background: var(--ngm-sage-lt) !important;
   padding: 10px 6px !important;
   border-color: var(--ngm-linen-dk) !important;
   text-align: center !important;
+}
+/* WEEKDAY ABBREVIATIONS — the page-gadget JS wraps each header as
+   <span class="ngm-wd-f">Sunday</span><span class="ngm-wd-a">Sun</span>
+   (this theme won't paint ::after on table cells, so the abbreviation must be
+   real text). Desktop shows the full name; tablet & mobile show the 3-letter. */
+body .WaGadgetEventsStateCalendar td.EventListCalendarHeader .ngm-wd-a,
+body .ngm-cal .EventListCalendarHeader .ngm-wd-a { display: none !important; }
+body .WaGadgetEventsStateCalendar td.EventListCalendarHeader .ngm-wd-f,
+body .ngm-cal .EventListCalendarHeader .ngm-wd-f { display: inline !important; }
+/* Force the weekday row visible — WA's own mobile CSS hides it (that was the
+   "vanishing" on tablet/phone). */
+html body .WaGadgetEventsStateCalendar table.EventListCalendar tr:first-child { display: table-row !important; visibility: visible !important; }
+html body .WaGadgetEventsStateCalendar td.EventListCalendarHeader { display: table-cell !important; visibility: visible !important; }
+@media (max-width: 900px) {
+  body .WaGadgetEventsStateCalendar td.EventListCalendarHeader .ngm-wd-f,
+  body .ngm-cal .EventListCalendarHeader .ngm-wd-f { display: none !important; }
+  body .WaGadgetEventsStateCalendar td.EventListCalendarHeader .ngm-wd-a,
+  body .ngm-cal .EventListCalendarHeader .ngm-wd-a { display: inline !important; }
 }
 /* Day cells — soft linen borders */
 body .ngm-cal td {
@@ -412,52 +434,86 @@ body .ngm-cal td a {
    .ngm-cal wrapper as an ancestor — because WA may render the toolbar
    outside the element that carries the ngm-cal class. The IDs are
    unique on the page, so this is safe and beats WA's magenta links. */
-/* NAV: Previous & Next → plain sage links. Today → sage pill.
-   Prev/Next (DecDateButton, incDateButton) are plain text links. */
-body a.DecDateButton,
-body a.DecDateButton:link,
-body a.DecDateButton:visited,
-body a.incDateButton,
-body a.incDateButton:link,
-body a.incDateButton:visited {
-  display: inline-block !important;
-  color: var(--ngm-sage-dk) !important;
-  background: transparent !important;
-  border: none !important;
-  padding: 6px 10px !important;
+/* NAV BUTTONS — Prev / Next as clean circular icon buttons, Today as a
+   matching-height pill. All three share the SAME height + sage outline so the
+   row reads as one set.
+   WA ships its own contents inside Prev/Next: the words "Previous"/"Next"
+   PLUS its own arrow glyph. That is what was spilling out of the round buttons
+   (the clipped "ous"/"Mor" text) and showing a doubled arrow. We hide WA's
+   contents (font-size:0 kills text; > * display:none kills any icon span) and
+   draw ONE chevron with a pseudo-element. Selectors are scoped under the
+   toolbar's ID so they beat WA's id-level fallback link color on hover. */
+body #idViewSwitchersTable a.DecDateButton,
+body #idViewSwitchersTable a.incDateButton {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 34px !important;
+  height: 34px !important;
+  padding: 0 !important;
   margin: 0 !important;
-  font-family: var(--ngm-sans) !important;
-  font-size: .85rem !important;
-  font-weight: 500 !important;
-  text-decoration: none !important;
-  transition: color .2s ease !important;
-}
-body a.DecDateButton:hover,
-body a.incDateButton:hover {
-  color: var(--ngm-sage) !important;
-  text-decoration: underline !important;
-}
-/* Today → sage outline PILL (kept) */
-body a.todayButton,
-body a.todayButton:link,
-body a.todayButton:visited,
-body #todayButton a {
-  display: inline-block !important;
-  color: var(--ngm-sage-dk) !important;
+  border: 1.5px solid var(--ngm-sage-dk) !important;
+  border-radius: 50% !important;
   background: transparent !important;
+  background-image: none !important;
+  color: var(--ngm-sage-dk) !important;
+  font-size: 0 !important;            /* hide native "Previous"/"Next" + arrow */
+  line-height: 0 !important;
+  text-decoration: none !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  transition: background-color .2s ease, color .2s ease !important;
+}
+/* Kill any child node WA renders inside the button (text span / icon span) */
+body #idViewSwitchersTable a.DecDateButton > *,
+body #idViewSwitchersTable a.incDateButton > * { display: none !important; }
+/* Draw one clean chevron in place of WA's contents */
+body #idViewSwitchersTable a.DecDateButton::before,
+body #idViewSwitchersTable a.incDateButton::before {
+  display: block !important;
+  font-size: 1.15rem !important;
+  line-height: 1 !important;
+  font-weight: 500 !important;
+}
+body #idViewSwitchersTable a.DecDateButton::before,
+body #idViewSwitchersTable a.incDateButton::before { background: none !important; }
+body #idViewSwitchersTable a.DecDateButton::before { content: "\2039" !important; } /* ‹ prev */
+body #idViewSwitchersTable a.incDateButton::before { content: "\203A" !important; } /* › next */
+/* Kill the theme's own arrow glyph (it renders one via ::after — that was the
+   stray second arrow) so only our single chevron shows. */
+body #idViewSwitchersTable a.DecDateButton::after,
+body #idViewSwitchersTable a.incDateButton::after {
+  content: none !important;
+  display: none !important;
+}
+body #idViewSwitchersTable a.DecDateButton:hover,
+body #idViewSwitchersTable a.incDateButton:hover {
+  background: var(--ngm-sage-dk) !important;
+  color: #fff !important;
+  text-decoration: none !important;
+}
+/* Today → sage outline pill, SAME 34px height as the arrow buttons */
+body #idViewSwitchersTable a.todayButton,
+body #idViewSwitchersTable #todayButton a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 34px !important;
+  padding: 0 16px !important;
+  margin: 0 !important;
   border: 1.5px solid var(--ngm-sage-dk) !important;
   border-radius: 100px !important;
-  padding: 6px 16px !important;
-  margin: 0 8px !important;
+  background: transparent !important;
+  color: var(--ngm-sage-dk) !important;
   font-family: var(--ngm-sans) !important;
   font-size: .82rem !important;
   font-weight: 500 !important;
-  line-height: 1.4 !important;
+  line-height: 1 !important;
   text-decoration: none !important;
   transition: background-color .2s ease, color .2s ease !important;
 }
-body a.todayButton:hover,
-body #todayButton a:hover {
+body #idViewSwitchersTable a.todayButton:hover,
+body #idViewSwitchersTable #todayButton a:hover {
   background: var(--ngm-sage-dk) !important;
   color: #fff !important;
   text-decoration: none !important;
@@ -494,26 +550,49 @@ body .WaGadgetEventsStateCalendar a[href*="EventListViewMode"] {
   font-weight: 500 !important;
   text-decoration: none !important;
 }
-/* TOOLBAR LAYOUT.
-   Desktop: title (.sectionTitle) floats left, nav (#group2) floats
-   right — both on the same line as "June 2026". The hidden #group1
-   reserves no space. We also zero the empty button wrappers so there
-   are no leftover spacer gaps. */
+/* TOOLBAR LAYOUT — desktop.
+   REAL DOM (confirmed): inside #idEventListCalendar the children are, in order:
+     <h3 class="sectionTitle">  →  the month title
+     <h1 class="pageTitle">     →  empty
+     <div class="pageTitleOuterContainer">  →  "Switch to List View"
+     <div id="idViewSwitchersTable">        →  the Prev/Today/Next nav
+     <table class="EventListCalendar">      →  the month grid
+   The title and the nav are SIBLINGS, so to sit the nav next to the month name
+   we make both inline-block, hide the two empty/unwanted blocks between them,
+   and let the <table> (block-level) drop to its own line beneath. */
+body #idEventListCalendar {
+  text-align: left !important;
+}
+body #idEventListCalendar > .sectionTitle {
+  display: inline-block !important;
+  vertical-align: middle !important;
+  margin: 0 16px 0 0 !important;
+}
+/* Empty title + the list-view switcher between title and nav — remove so the
+   nav butts right up against the month name. */
+body #idEventListCalendar > .pageTitle,
+body #idEventListCalendar > .pageTitleOuterContainer {
+  display: none !important;
+}
 body #idViewSwitchersTable {
-  padding: 0 0 14px !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  padding: 0 0 0 0 !important;
+  margin: 0 0 18px 0 !important;
   clear: none !important;
-  text-align: right !important;
+  text-align: left !important;
   min-height: 0 !important;
   overflow: visible !important;
 }
 body #group2 {
-  float: right !important;
-  display: inline-block !important;
+  float: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
   width: auto !important;
   margin: 0 !important;
 }
-/* Remove leftover spacing from the hidden switcher group and any empty
-   button wrappers (the "spacers"). */
+/* Hidden view-switcher group (Week/Month/Year) — reserve no space */
 body #group1,
 body .switchersGroup1,
 body #weekButton,
@@ -524,11 +603,12 @@ body #yearButton {
   margin: 0 !important;
   padding: 0 !important;
 }
-/* The individual nav buttons sit inline with no extra wrapper gap */
+/* Each nav button wrapper hugs its button and stays vertically centered */
 body #decButton,
 body #todayButton,
 body #incButton {
-  display: inline-block !important;
+  display: inline-flex !important;
+  align-items: center !important;
   float: none !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -547,24 +627,27 @@ body #incButton {
   body #group2 {
     overflow: visible !important;
   }
-  body .WaGadgetEventsStateCalendar .sectionTitle,
+  /* Title on its own line, nav set left-aligned beneath it. */
+  body #idEventListCalendar > .sectionTitle,
   body .ngm-cal .sectionTitle {
-    float: none !important;
     display: block !important;
     width: 100% !important;
     margin: 0 0 12px 0 !important;
     text-align: left !important;
   }
   body #idViewSwitchersTable {
+    display: block !important;
     text-align: left !important;
-    padding: 0 0 16px !important;
+    margin: 0 0 16px 0 !important;
+    padding: 0 !important;
     width: 100% !important;
     float: none !important;
     clear: both !important;
   }
   /* Nav group: left-aligned flex row that WRAPS if needed, so all three
-     buttons are always visible (never clipped off the edge). Forced
-     visible to beat any WA rule that hides it at mobile widths. */
+     buttons are always visible (never clipped off the edge). Forced visible
+     to beat any WA rule that hides it at mobile widths. Button SIZES come from
+     the base rules (34px circles + pill) — we only fix layout here. */
   body #group2,
   body .WaGadgetEventsStateCalendar #group2,
   body #idViewSwitchersTable #group2 {
@@ -579,11 +662,11 @@ body #incButton {
     visibility: visible !important;
     opacity: 1 !important;
   }
-  /* Each button wrapper sizes to its content, stays visible */
   body #decButton,
   body #todayButton,
   body #incButton {
     display: inline-flex !important;
+    align-items: center !important;
     float: none !important;
     width: auto !important;
     flex: 0 0 auto !important;
@@ -592,22 +675,9 @@ body #incButton {
     visibility: visible !important;
     opacity: 1 !important;
   }
-  /* The links themselves: compact, left-aligned, always visible */
-  body a.DecDateButton,
-  body a.incDateButton {
-    display: inline-block !important;
-    width: auto !important;
-    padding: 6px 10px !important;
-    margin: 0 !important;
-    white-space: nowrap !important;
-    visibility: visible !important;
-  }
-  body a.todayButton {
-    display: inline-block !important;
-    width: auto !important;
-    margin: 0 !important;
-    padding: 6px 14px !important;
-    white-space: nowrap !important;
+  body #idViewSwitchersTable a.DecDateButton,
+  body #idViewSwitchersTable a.incDateButton,
+  body #idViewSwitchersTable a.todayButton {
     visibility: visible !important;
   }
 }
@@ -673,6 +743,53 @@ body .ngm-cal .monthViewType .EventListCalendar th {
   .ngm-btn, .ngm-arrow-link { transition: none; }
 }
 </style>
+<script>
+/* Two small DOM fixups for the WA calendar that CSS alone can't do:
+   1. Strip the "Month:" label from the title. It's a single text node —
+      <h3 class="sectionTitle">Month: July 2026</h3> — so there's no element to
+      hide; we trim the leading "Month:"/"Week:"/"Year:" token, leaving the name.
+   2. Give each weekday header (<td class="EventListCalendarHeader">Sunday</td>)
+      a full + 3-letter label:
+      <span class="ngm-wd-f">Sunday</span><span class="ngm-wd-a">Sun</span>
+      CSS then swaps which shows by width (this theme won't paint ::after on
+      table cells, so the abbreviation has to be real text). Guards keep both
+      passes idempotent, so the MutationObserver can't loop. Month navigation is
+      a full page reload, so this runs fresh each month. */
+(function () {
+  function transform() {
+    var titles = document.querySelectorAll(
+      '.ngm-cal .sectionTitle, #idEventListCalendar .sectionTitle, .WaGadgetEventsStateCalendar .sectionTitle'
+    );
+    for (var i = 0; i < titles.length; i++) {
+      var t = titles[i].textContent;
+      var cleaned = t.replace(/^\s*(Month|Week|Year)\s*:\s*/i, '');
+      if (cleaned !== t) titles[i].textContent = cleaned;
+    }
+    var heads = document.querySelectorAll(
+      '.WaGadgetEventsStateCalendar td.EventListCalendarHeader, .ngm-cal td.EventListCalendarHeader'
+    );
+    for (var j = 0; j < heads.length; j++) {
+      var td = heads[j];
+      if (td.querySelector('.ngm-wd-f')) continue;      // already wrapped
+      var name = (td.textContent || '').trim();
+      if (!name) continue;
+      td.innerHTML =
+        '<span class="ngm-wd-f">' + name + '</span>' +
+        '<span class="ngm-wd-a">' + name.slice(0, 3) + '</span>';
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', transform);
+  } else {
+    transform();
+  }
+  try {
+    var mo = new MutationObserver(transform);
+    mo.observe(document.documentElement, { childList: true, subtree: true, characterData: true });
+    setTimeout(function () { mo.disconnect(); }, 8000);
+  } catch (e) { /* observer unsupported — DOMContentLoaded pass is enough */ }
+})();
+</script>
 <div class="ngm ngm-cal-hero">
   <div class="ngm-cal-hero-inner">
     <span class="ngm-eyebrow">Everything in one place</span>
