@@ -3349,7 +3349,7 @@ a.ngm-hub-card:hover .ngm-hub-card-cta { gap: 10px; }
    To fall back to the old centred card, delete the "@media(min-width:861px)"
    block below — the hero then just stacks above the form.
 ══════════════════════════════════════════════════════════════════ */
-body.ngm-login-page{ --ngm-hero-w:50vw; --ngm-head-h:86px; background:var(--ngm-cream); }
+body.ngm-login-page{ --ngm-hero-w:50vw; --ngm-head-h:86px; background:var(--ngm-cream); overflow-x:hidden; }
 
 /* ── Hero visuals (also render standalone in 01-top.html preview) ── */
 .ngm-login-hero{
@@ -3411,7 +3411,9 @@ body.ngm-login-page .WaGadgetLoginForm{ padding:44px 20px 20px; }
      card sits centred and the "join" line stays just below it, above the
      fold. */
   body.ngm-login-page .WaGadgetLoginForm{
-    margin-left:var(--ngm-hero-w) !important;
+    width:var(--ngm-hero-w) !important;      /* occupy exactly the right half… */
+    margin-left:var(--ngm-hero-w) !important;/* …starting at the split — 50vw + 50vw = 100vw, no overflow */
+    box-sizing:border-box !important;
     display:flex !important;
     align-items:center !important;
     justify-content:center !important;
@@ -3707,21 +3709,41 @@ body .WaGadgetLoginForm .wa-authenticateLoginLink.apple .authenticateLoginIcon {
    else the gadget keeps its normal dropdown behaviour.
 ══════════════════════════════════════════════════════════════════ */
 body.ngm-login-page .WaGadgetLoginForm .loginLink { display: none !important; }
-body.ngm-login-page .WaGadgetLoginForm .loginContainer .loginPanel {
+
+/* The native gadget is a header-style DROPDOWN: its .loginPanel is
+   absolutely positioned and anchored to the (now hidden) trigger, so on this
+   page it renders as a narrow box pinned to the edge and overflows the
+   viewport. Force every level out of dropdown positioning and into an inline,
+   centred card. Selectors are broadened (with AND without .loginContainer,
+   since the logged-out DOM may omit it) and class names are doubled to raise
+   specificity above WA's theme rules. */
+body.ngm-login-page .WaGadgetLoginForm.WaGadgetLoginForm .loginContainer,
+body.ngm-login-page .WaGadgetLoginForm.WaGadgetLoginForm .loginPanel {
+  position: static !important;
+  float: none !important;
+  transform: none !important;
+  top: auto !important; left: auto !important; right: auto !important; bottom: auto !important;
+  inset: auto !important;
+}
+body.ngm-login-page .WaGadgetLoginForm.WaGadgetLoginForm .loginContainer {
+  width: 100% !important; max-width: 400px !important; margin: 0 auto !important;
+}
+body.ngm-login-page .WaGadgetLoginForm.WaGadgetLoginForm .loginPanel {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
-  position: static !important;
-  transform: none !important;
-  left: auto !important;
-  top: auto !important;
   width: 100% !important;
   max-width: 400px !important;
   margin: 0 auto !important;
   padding: 36px 36px 34px !important;
+  background: #fff !important;
+  border: 1px solid var(--ngm-border) !important;
   border-radius: 22px !important;
   box-shadow: 0 12px 40px rgba(62,85,56,.10) !important;
 }
+/* Kill the dropdown pointer/arrow on this page */
+body.ngm-login-page .WaGadgetLoginForm .loginPanel::before,
+body.ngm-login-page .WaGadgetLoginForm .loginPanel::after { display: none !important; }
 
 
 
