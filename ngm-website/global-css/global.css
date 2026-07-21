@@ -4128,6 +4128,74 @@ body .WaGadgetMemberPublicProfile input.typeButton {
 }
 body .WaGadgetMemberPublicProfile input.typeButton:hover { background: var(--ngm-sage) !important; }
 
+/* ══════════════════════════════════════════════════════════════════
+   EMAIL MEMBER  —  /Sys/PublicProfile/SendEmail  ("Send message" form)
+   Reached from the Send-message button on a member's public profile.
+   Gadget: .WaGadgetEmailMember. Verified against the live DOM.
+   ══════════════════════════════════════════════════════════════════ */
+body .WaGadgetEmailMember, body .WaGadgetEmailMember * { font-family: var(--ngm-sans) !important; }
+body .WaGadgetEmailMember .pageBackContainer a {
+  color: var(--ngm-sage-dk) !important; font-weight: 600 !important; font-size: .88rem !important; text-decoration: none !important;
+}
+body .WaGadgetEmailMember .memberDirectoryDetailsHeaderContainer h2,
+body .WaGadgetEmailMember h2 {
+  font-family: var(--ngm-serif) !important; font-weight: 400 !important; color: var(--ngm-charcoal) !important;
+  font-size: clamp(1.9rem, 3vw, 2.4rem) !important; text-transform: none !important;
+}
+/* "Send message" section header */
+body .WaGadgetEmailMember .captionContainer .fieldLabel { display: none !important; }
+body .WaGadgetEmailMember .captionContainer .fieldBody {
+  width: 100% !important; float: none !important; border-bottom: 1px solid var(--ngm-border) !important; padding-bottom: 10px !important;
+}
+body .WaGadgetEmailMember .captionContainer h4 {
+  margin: 0 !important; font-family: var(--ngm-sans) !important; font-size: .72rem !important; font-weight: 600 !important;
+  letter-spacing: .14em !important; text-transform: uppercase !important; color: var(--ngm-sage) !important;
+}
+/* mandatory note + field labels + required asterisks */
+body .WaGadgetEmailMember .mandatoryFieldsTitle { color: var(--ngm-gray) !important; }
+body .WaGadgetEmailMember .mandatoryLabel,
+body .WaGadgetEmailMember .fieldLabel { color: var(--ngm-sage-dk) !important; font-weight: 600 !important; }
+body .WaGadgetEmailMember .mandatorySymbol { color: var(--ngm-rose-dk) !important; }
+/* inputs + textarea */
+body .WaGadgetEmailMember input.typeText,
+body .WaGadgetEmailMember textarea.typeText,
+body .WaGadgetEmailMember textarea {
+  font-family: var(--ngm-sans) !important; font-size: .95rem !important; color: var(--ngm-charcoal) !important; background: #fff !important;
+  border: 1px solid var(--ngm-border) !important; border-radius: var(--ngm-radius) !important; padding: 10px 12px !important;
+  box-shadow: none !important; width: 100% !important; max-width: 540px !important;
+}
+body .WaGadgetEmailMember input.typeText:focus,
+body .WaGadgetEmailMember textarea:focus {
+  border-color: var(--ngm-sage) !important; outline: none !important; box-shadow: 0 0 0 3px rgba(92,122,82,.14) !important;
+}
+/* Send button (filled pill) + Cancel (outline pill) */
+body .WaGadgetEmailMember input.typeButton,
+body .WaGadgetEmailMember .buttonsContainer input[type="button"] {
+  font-family: var(--ngm-sans) !important; background: var(--ngm-sage-dk) !important; color: #fff !important;
+  border: 1px solid var(--ngm-sage-dk) !important; border-radius: 999px !important; padding: 12px 24px !important;
+  font-size: .88rem !important; font-weight: 600 !important; cursor: pointer !important; box-shadow: none !important; text-transform: none !important;
+}
+body .WaGadgetEmailMember input.typeButton:hover,
+body .WaGadgetEmailMember .buttonsContainer input[type="button"]:hover { background: var(--ngm-sage) !important; }
+body .WaGadgetEmailMember .buttonsContainer input[type="submit"] {
+  font-family: var(--ngm-sans) !important; background: transparent !important; color: var(--ngm-sage-dk) !important;
+  border: 1px solid var(--ngm-sage-dk) !important; border-radius: 999px !important; padding: 12px 24px !important;
+  font-size: .88rem !important; font-weight: 600 !important; cursor: pointer !important; margin-left: 10px !important; box-shadow: none !important;
+}
+body .WaGadgetEmailMember .buttonsContainer input[type="submit"]:hover { background: var(--ngm-sage-lt) !important; }
+
+/* ---- transaction grids (Invoices / Donations / Event registrations tabs):
+        column-header titles. These grids use <th> headers; the profile's
+        field-layout tables don't, so scoping to <th> (and excluding the Privacy
+        grid) styles only the transaction column titles. Row styling for these
+        grids is handled once their live markup is captured. ---- */
+body .WaGadgetContactProfile table:not(#memberFieldTable) th {
+  background: var(--ngm-sage-lt) !important; color: var(--ngm-sage-dk) !important;
+  text-transform: uppercase !important; letter-spacing: .08em !important; font-size: .72rem !important;
+  font-weight: 600 !important; text-align: left !important; padding: 12px 14px !important;
+  border-bottom: 1px solid var(--ngm-border) !important;
+}
+
 /* account collapsed to a single full-width tile */
 .ngm-hub-acct-solo{display:block;}
 .ngm-hub-acct-solo .ngm-hub-acard{padding:26px 30px;}
