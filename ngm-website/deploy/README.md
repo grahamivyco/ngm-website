@@ -17,14 +17,17 @@ This covers the three site-wide pieces: **Global CSS**, **header**, and **footer
 
 You paste each snippet **once**. Everything in `wa-snippets/` is a copy-paste block.
 
+You paste each of the three blocks **once**, into three places:
+
 | Snippet | Paste into | Replaces |
 |---------|-----------|----------|
-| `wa-snippets/global-css.html` | A Custom HTML gadget at the **top** of the site template (can share the header gadget) | pasting `global.css` into the WA CSS tab |
+| `wa-snippets/css-tab.css` | The WA **CSS** tab (this is its whole contents) | pasting `global.css` into the CSS tab |
 | `wa-snippets/header-loader.html` | The **top** template Custom HTML gadget (where the header used to live) | the full pasted header |
 | `wa-snippets/footer-loader.html` | The **bottom** template Custom HTML gadget (where the footer used to live) | the full pasted footer |
 
-The CSS link and the header loader can live in the **same** top gadget — paste the
-CSS `<link>` first, then the header loader below it.
+The CSS goes in the **CSS tab** (not a gadget) on purpose: that puts the stylesheet in
+`<head>`, so there's no flash of unstyled content. If you ever can't edit the CSS tab,
+the same jsDelivr URL also works as a `<link rel="stylesheet">` inside the top gadget.
 
 After that, your day-to-day workflow is just: **edit the file in the repo → commit →
 push to `main`.** The live site reflects it within ~1 minute.
