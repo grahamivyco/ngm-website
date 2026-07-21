@@ -1624,12 +1624,21 @@ body #incButton {
   padding: 0 !important;
   width: auto !important;
 }
+/* Universal guard: the Today pill must NEVER stretch to fill its cell,
+   at any viewport width. WA's responsive CSS sets it (and #group2) to a
+   calc()/block width on tablet AND mobile — this keeps it content-sized
+   everywhere so it can't blow out into a full-width bar. */
+body #todayButton a.todayButton,
+body a.todayButton { width: auto !important; max-width: max-content !important; box-sizing: border-box !important; }
+
 /* TABLET & MOBILE: title on its own line, then the three nav buttons
-   in ONE clean inline row beneath it.
-   WA's own mobile CSS sets #group2 to display:block + width:calc(100%-127px)
+   in ONE clean inline row beneath it. Breakpoint is 1024px so tablets
+   are covered too — WA starts stretching the controls well before the
+   phone width, which is why they blew out on tablet before.
+   WA's own responsive CSS sets #group2 to display:block + width:calc(100%-127px)
    and the buttons to block — which stretches Today and breaks the row.
    We override all of that: #group2 becomes a flex row, buttons auto-width. */
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
   /* Make sure nothing clips the toolbar at this width */
   body .ngm-cal.WaGadgetEventsStateCalendar,
   body .ngm-cal .WaGadgetEventsStateCalendar,
@@ -4249,9 +4258,32 @@ body .WaGadgetContactProfile .typeTextLabelNoData { color: var(--ngm-gray-lt) !i
    `.WaGadgetEventsStateCalendar` (confirmed from page source).
 ══════════════════════════════════════════════════════════════════ */
 body .WaGadgetEventsStateCalendar table.EventListCalendar {
-  width: 100% !important; border-collapse: collapse !important;
+  width: 100% !important;
+  /* separate (not collapse) so border-radius can round the outer frame */
+  border-collapse: separate !important; border-spacing: 0 !important;
   background: #fff !important; border: 1px solid var(--ngm-linen-dk) !important;
+  border-radius: var(--ngm-radius-lg) !important; overflow: hidden !important;
 }
+/* rebuild the grid lines that border-collapse used to draw:
+   vertical rules via a right border on every cell (dropped on the last
+   column), horizontal week rules via a top border on the rows that
+   start a week (the ones carrying a date number). */
+body .WaGadgetEventsStateCalendar table.EventListCalendar td,
+body .WaGadgetEventsStateCalendar table.EventListCalendar th {
+  border-top: 0 !important; border-left: 0 !important; border-bottom: 0 !important;
+  border-right: 1px solid var(--ngm-linen-dk) !important;
+}
+body .WaGadgetEventsStateCalendar table.EventListCalendar td:last-child,
+body .WaGadgetEventsStateCalendar table.EventListCalendar th:last-child { border-right: 0 !important; }
+body .WaGadgetEventsStateCalendar table.EventListCalendar tr:has(a.calendarDate) > td {
+  border-top: 1px solid var(--ngm-linen-dk) !important;
+}
+/* round the four corner cells so the fill follows the frame even if a
+   browser won't clip the table's overflow */
+body .WaGadgetEventsStateCalendar table.EventListCalendar tr:first-child td:first-child { border-top-left-radius: var(--ngm-radius-lg) !important; }
+body .WaGadgetEventsStateCalendar table.EventListCalendar tr:first-child td:last-child { border-top-right-radius: var(--ngm-radius-lg) !important; }
+body .WaGadgetEventsStateCalendar table.EventListCalendar tr:last-child td:first-child { border-bottom-left-radius: var(--ngm-radius-lg) !important; }
+body .WaGadgetEventsStateCalendar table.EventListCalendar tr:last-child td:last-child { border-bottom-right-radius: var(--ngm-radius-lg) !important; }
 /* day-of-week header row → sage eyebrow band */
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader {
   background: var(--ngm-sage-lt) !important; color: var(--ngm-sage-dk) !important;
@@ -4413,6 +4445,42 @@ body .WaGadgetMemberDirectory input.searchButton {
   padding: 9px 26px !important; cursor: pointer !important; transition: background .15s ease !important;
 }
 body .WaGadgetMemberDirectory input.searchButton:hover { background: var(--ngm-sage) !important; border-color: var(--ngm-sage) !important; }
+/* ── RESULT ROWS (confirmed from a rendered row) ──
+   The results are a table of clickable rows (tr.normal) with three
+   columns: name (h5>a), location (.memberValue lines), contact
+   (email link + phone). JS toggles a highlight class on hover; we
+   also style :hover so the whole row reads as a clickable card. */
+body .WaGadgetMemberDirectory .memberDirectoryOuterContainer table { width: 100% !important; border-collapse: collapse !important; }
+body .WaGadgetMemberDirectory tr.normal { cursor: pointer !important; transition: background .12s ease !important; }
+body .WaGadgetMemberDirectory tr.normal:hover,
+body .WaGadgetMemberDirectory tr.over { background: var(--ngm-sage-lt) !important; }
+body .WaGadgetMemberDirectory td.memberDirectoryColumn1,
+body .WaGadgetMemberDirectory td.memberDirectoryColumn2,
+body .WaGadgetMemberDirectory td.memberDirectoryColumn3 {
+  padding: 14px 16px !important; vertical-align: top !important;
+  border-bottom: 1px solid var(--ngm-linen-dk) !important;
+}
+/* member name */
+body .WaGadgetMemberDirectory td.memberDirectoryColumn1 h5 { margin: 0 !important; }
+body .WaGadgetMemberDirectory td.memberDirectoryColumn1 h5 a {
+  font-family: var(--ngm-sans) !important; font-size: 1rem !important; font-weight: 600 !important;
+  color: var(--ngm-sage-dk) !important; text-decoration: none !important;
+}
+body .WaGadgetMemberDirectory tr.normal:hover td.memberDirectoryColumn1 h5 a { color: var(--ngm-sage) !important; }
+/* secondary values (city / state / phone) */
+body .WaGadgetMemberDirectory .memberValue {
+  font-family: var(--ngm-sans) !important; font-size: .9rem !important; color: var(--ngm-gray) !important; line-height: 1.5 !important;
+}
+/* email links stay sage */
+body .WaGadgetMemberDirectory .memberValue a { color: var(--ngm-sage-dk) !important; text-decoration: none !important; }
+body .WaGadgetMemberDirectory .memberValue a:hover { text-decoration: underline !important; }
+/* column header row, if present */
+body .WaGadgetMemberDirectory .memberDirectoryOuterContainer th {
+  font-family: var(--ngm-sans) !important; text-transform: uppercase !important; letter-spacing: .07em !important;
+  font-size: .7rem !important; font-weight: 600 !important; color: var(--ngm-sage-dk) !important;
+  background: var(--ngm-sage-lt) !important; text-align: left !important; padding: 10px 16px !important;
+  border-bottom: 1px solid var(--ngm-border) !important;
+}
 
 /* ══════════════════════════════════════════════════════════════════
    MEMBERSHIP APPLICATION / JOIN WIZARD — remaining pieces
