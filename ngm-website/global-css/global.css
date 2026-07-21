@@ -4449,10 +4449,19 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar td div {
   body .WaGadgetEventsStateCalendar table.EventListCalendar th {
     box-sizing: border-box !important; width: 14.28% !important; overflow: hidden !important;
   }
-  /* weekday header smaller on phones. Real text (JS shortens it to a
-     single letter — see the custom-JS snippet); this just sizes it. */
+  /* weekday header on phones: FORCE it visible (WA's own mobile CSS hides
+     the day-of-week row — that's why the days vanished on small screens)
+     and size the single-letter label the JS sets. */
+  html body .WaGadgetEventsStateCalendar table.EventListCalendar tr:first-child,
+  html body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader {
+    display: table-cell !important; visibility: visible !important; opacity: 1 !important;
+  }
+  html body .WaGadgetEventsStateCalendar table.EventListCalendar tr:first-child {
+    display: table-row !important;
+  }
   body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader {
-    font-size: .58rem !important; letter-spacing: 0 !important; padding: 6px 0 !important;
+    font-size: .62rem !important; letter-spacing: 0 !important; padding: 6px 0 !important;
+    color: var(--ngm-sage-dk) !important;
   }
   /* small date numbers */
   body .WaGadgetEventsStateCalendar table.EventListCalendar a.calendarDate,
