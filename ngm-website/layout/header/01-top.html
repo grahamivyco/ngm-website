@@ -16,10 +16,11 @@
 <!-- ══ FAVICON ══
      Swaps Wild Apricot's default favicon for the NGM mark, site-wide.
      Lives in the header because the CSS tab can't set a favicon and a
-     Custom HTML gadget can only reach <head> via JS. The icons live in
-     /brand and are served from the same jsDelivr CDN as this header, so
-     editing them in the repo updates the live favicon (after a CDN purge).
-     The header loader re-creates injected <script> tags, so this runs. -->
+     Custom HTML gadget can only reach the document head via JS. The icons
+     live in /brand and are served from the same jsDelivr CDN as this header,
+     so editing them in the repo updates the live favicon (after a CDN purge).
+     The header loader re-creates injected script tags, so the block below
+     runs on every page. -->
 <script>
 (function(){
   if(window._ngmFavicon)return; window._ngmFavicon=true;
