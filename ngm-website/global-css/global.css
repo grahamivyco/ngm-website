@@ -1379,16 +1379,30 @@ body .ngm-cal.WaGadgetEvents {
      white month grid nests inside as a second, rounded card.
    • margin-top:0 kills the gap under the hero (overrides the inline margin:20px).
    overflow:hidden clips the whole card to its radius. */
+html body div.WaGadgetEventsStateCalendar,
 html body .WaGadgetEventsStateCalendar {
-  max-width: 1180px !important;
-  margin: 8px auto 40px !important;
-  padding: clamp(14px, 2vw, 24px) !important;
+  display: block !important;      /* so margin:auto can centre it */
+  float: none !important;
+  width: auto !important;
+  max-width: 1140px !important;
+  margin: 16px auto 44px !important;
+  padding: clamp(20px, 2.6vw, 34px) !important;
   box-sizing: border-box !important;
   background: var(--ngm-linen) !important;
+  background-image: none !important;
   border: 1px solid var(--ngm-border) !important;
   border-radius: var(--ngm-radius-lg) !important;
   box-shadow: var(--ngm-sh) !important;
   overflow: hidden !important;
+}
+/* WA renders an inner gadget wrapper + the form; keep them transparent so the
+   linen card shows through behind the toolbar (title + nav), not just the
+   padding frame. */
+html body .WaGadgetEventsStateCalendar .gadgetStyleBody,
+html body .WaGadgetEventsStateCalendar form,
+html body .WaGadgetEventsStateCalendar #idEventListCalendar {
+  background: transparent !important;
+  background-image: none !important;
 }
 html body .WaGadgetEvents,
 html body div[class*="WaGadgetEventsStateCalendar"],
@@ -1574,25 +1588,29 @@ html body #idViewSwitchersTable a.incDateButton {
 /* Kill any child node WA renders inside the button (text span / icon span) */
 html body #idViewSwitchersTable a.DecDateButton > *,
 html body #idViewSwitchersTable a.incDateButton > * { display: none !important; }
-/* Draw one clean chevron in place of WA's contents. ❮ / ❯ (angle-quote
-   ORNAMENTS) are bolder and sit vertically centred in their em box, unlike the
-   thin ‹ / › which rode low/off-centre. A full-size flex box perfectly centres
-   the glyph in the circle. */
+/* Draw the arrow as a real ICON, matching the rest of the site's icon set
+   (Lucide stroke icons rendered via CSS mask — same technique as the calendar /
+   check icons elsewhere in this file). chevron-left / chevron-right, centred in
+   the circle, painted in the button's currentColor (sage → white on hover). */
 html body #idViewSwitchersTable a.DecDateButton::before,
 html body #idViewSwitchersTable a.incDateButton::before {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 100% !important;
-  height: 100% !important;
-  font-size: 1.15rem !important;
-  line-height: 1 !important;
-  font-weight: 400 !important;
-  background: none !important;
-  color: inherit !important;
+  content: "" !important;
+  display: block !important;
+  width: 21px !important;
+  height: 21px !important;
+  background: currentColor !important;
+  -webkit-mask-size: 21px 21px !important; mask-size: 21px 21px !important;
+  -webkit-mask-position: center !important; mask-position: center !important;
+  -webkit-mask-repeat: no-repeat !important; mask-repeat: no-repeat !important;
 }
-html body #idViewSwitchersTable a.DecDateButton::before { content: "\276E" !important; } /* ❮ prev */
-html body #idViewSwitchersTable a.incDateButton::before { content: "\276F" !important; } /* ❯ next */
+html body #idViewSwitchersTable a.DecDateButton::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m15 18-6-6 6-6'/%3E%3C/svg%3E") !important;
+          mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m15 18-6-6 6-6'/%3E%3C/svg%3E") !important;
+}
+html body #idViewSwitchersTable a.incDateButton::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E") !important;
+          mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E") !important;
+}
 /* Kill the theme's own arrow glyph (rendered via ::after — the stray 2nd arrow) */
 html body #idViewSwitchersTable a.DecDateButton::after,
 html body #idViewSwitchersTable a.incDateButton::after {
@@ -4667,6 +4685,8 @@ body .WaGadgetContactProfile .typeTextLabelNoData { color: var(--ngm-gray-lt) !i
 ══════════════════════════════════════════════════════════════════ */
 body .WaGadgetEventsStateCalendar table.EventListCalendar {
   width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
   /* table-layout:fixed at ALL widths — the 7 columns stay equal and the grid
      respects the card width instead of expanding to its content (~1490px) and
      overflowing / pinning the card left. This is what lets the card centre, and
@@ -4680,9 +4700,14 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar {
   border-radius: var(--ngm-radius-lg) !important; overflow: hidden !important;
 }
 /* Equal columns everywhere: the date cells ship inline width:14% but the header
-   cells have none — pin all of them to 1/7 so fixed layout distributes evenly. */
+   cells have none — pin all of them to 1/7 so fixed layout distributes evenly.
+   min-width:0 + box-sizing lets them shrink so the 7 columns always fit the
+   viewport (no sideways overflow that pushes the later days off-screen). */
 html body .WaGadgetEventsStateCalendar table.EventListCalendar > tbody > tr > td {
   width: 14.285% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
 }
 /* Force EVERY structural grid element square (cells, rows, the nested
    date-number tables, the WA item cells) so no inner curve can show.
@@ -4817,10 +4842,10 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar a[data-tags*="special"
    truncated with an ellipsis. Same look on desktop and mobile. */
 body .WaGadgetEventsStateCalendar table.EventListCalendar a:not(.calendarDate) {
   display: block !important; font-family: var(--ngm-sans) !important;
-  font-size: .74rem !important; line-height: 1.3 !important;
+  font-size: .84rem !important; line-height: 1.3 !important;
   color: #fff !important; text-decoration: none !important;
   background: var(--cat) !important; border: 0 !important;
-  border-radius: 4px !important; padding: 3px 7px !important; margin: 2px 4px !important;
+  border-radius: 5px !important; padding: 4px 9px !important; margin: 3px 5px !important;
   white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important;
 }
 /* hover → slightly darker fill */
@@ -4833,7 +4858,7 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar .eventContainerHover a
    WA's theme wraps it in a bordered/backed chip (the "blue line" the user
    saw); strip all of that so it's just the time. */
 body .WaGadgetEventsStateCalendar table.EventListCalendar .eventTime {
-  font-family: var(--ngm-sans) !important; font-size: .68rem !important; font-weight: 600 !important;
+  font-family: var(--ngm-sans) !important; font-size: .74rem !important; font-weight: 600 !important;
   text-transform: uppercase !important; letter-spacing: .04em !important;
   color: var(--ngm-rose) !important; padding: 0 !important; margin: 2px 0 0 !important;
   background: none !important; background-color: transparent !important;
