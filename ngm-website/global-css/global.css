@@ -1370,6 +1370,27 @@ body .ngm-cal.WaGadgetEvents {
   margin: 0 !important;
   overflow: visible !important;
 }
+/* CALENDAR GADGET — LIVE spacing (the .ngm-cal rules above don't apply to the
+   live gadget). Two things:
+   1. Kill the gap under the hero: the gadget ships an inline margin:20px, and
+      its WA layout wrappers add top space. Zero the top so the calendar sits
+      right below the hero. (!important beats the inline style.)
+   2. Small side margins: cap the width and centre it, with a small responsive
+      side gutter, so the grid isn't edge-to-edge / wider than the hero. */
+html body .WaGadgetEventsStateCalendar {
+  margin: 0 auto !important;
+  max-width: 1180px !important;
+  padding: 0 clamp(12px, 2.5vw, 28px) !important;
+  box-sizing: border-box !important;
+}
+html body .WaGadgetEvents,
+html body div[class*="WaGadgetEventsStateCalendar"],
+html body .WaGadgetEventsStateCalendar {
+  margin-top: 0 !important;
+}
+/* Trim the top padding of the calendar-body wrapper (opened in 01-top) so the
+   hero-to-calendar gap closes. */
+body .ngm-cal-body-inner { padding-top: 0 !important; }
 /* Inner month grid — square corners (no container look) */
 body .ngm-cal .monthViewType .EventListCalendar {
   border-radius: 0 !important;
@@ -1563,6 +1584,32 @@ html body #idViewSwitchersTable a.incDateButton::after {
   content: none !important;
   display: none !important;
 }
+/* Kill the theme's "|" separators between the nav buttons. There are NO
+   separator elements in the DOM (confirmed) — the theme draws them with
+   pseudo-elements / borders on the button wrappers and the Today anchor. Nuke
+   every nav pseudo-element EXCEPT the ‹ / › chevrons on the Dec/Inc anchors,
+   and strip any wrapper border. */
+html body #idViewSwitchersTable a.todayButton::before,
+html body #idViewSwitchersTable a.todayButton::after,
+html body #idViewSwitchersTable #todayButton a::before,
+html body #idViewSwitchersTable #todayButton a::after,
+html body #idViewSwitchersTable #group2 > div::before,
+html body #idViewSwitchersTable #group2 > div::after,
+html body #idViewSwitchersTable #decButton::before,
+html body #idViewSwitchersTable #decButton::after,
+html body #idViewSwitchersTable #todayButton::before,
+html body #idViewSwitchersTable #todayButton::after,
+html body #idViewSwitchersTable #incButton::before,
+html body #idViewSwitchersTable #incButton::after {
+  content: none !important;
+  display: none !important;
+}
+html body #idViewSwitchersTable #decButton,
+html body #idViewSwitchersTable #todayButton,
+html body #idViewSwitchersTable #incButton {
+  border: 0 !important;
+  background: none !important;
+}
 html body #idViewSwitchersTable a.DecDateButton:hover,
 html body #idViewSwitchersTable a.incDateButton:hover {
   background: var(--ngm-sage-dk) !important;
@@ -1632,24 +1679,29 @@ body .WaGadgetEventsStateCalendar a[href*="EventListViewMode"] {
   font-weight: 500 !important;
   text-decoration: none !important;
 }
-/* TOOLBAR LAYOUT — desktop: put the nav directly AFTER the month name on one
-   line ("July 2026   ‹ Today ›"). REAL DOM (confirmed): inside
+/* TOOLBAR LAYOUT — desktop: month title on the LEFT, nav on the RIGHT, on one
+   line ("July 2026 ............ ‹ Today ›"). REAL DOM (confirmed): inside
    #idEventListCalendar the direct children are, in order:
      <h3 class="sectionTitle">  →  month title
      <h1 class="pageTitle">     →  empty
      <div class="pageTitleOuterContainer">  →  "Switch to List View"
      <div id="idViewSwitchersTable">        →  the Prev/Today/Next nav
      <table class="EventListCalendar">      →  the month grid
-   Title and nav are SIBLINGS, so we make both inline-block, hide the two
-   empty/unwanted blocks between them, and let the <table> drop to its own
-   line beneath. */
+   We flex the PARENT so the title + nav share one line no matter their default
+   block/inline display (inline-block alone let the nav drop below); margin-left
+   :auto on the nav pushes it to the right edge; the <table> takes a full-width
+   row of its own beneath. */
 html body #idEventListCalendar {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  column-gap: 16px !important;
+  row-gap: 6px !important;
   text-align: left !important;
 }
 html body #idEventListCalendar > .sectionTitle {
-  display: inline-block !important;
-  vertical-align: middle !important;
-  margin: 0 16px 0 0 !important;
+  margin: 0 !important;
+  flex: 0 1 auto !important;
 }
 html body #idEventListCalendar > .pageTitle,
 html body #idEventListCalendar > .pageTitleOuterContainer {
@@ -1657,16 +1709,21 @@ html body #idEventListCalendar > .pageTitleOuterContainer {
 }
 html body .WaGadgetEventsStateCalendar #idViewSwitchersTable,
 body #idViewSwitchersTable {
-  display: inline-block !important;
-  vertical-align: middle !important;
+  margin: 0 0 0 auto !important;   /* push nav to the right edge on desktop */
   padding: 0 !important;
-  margin: 0 0 18px 0 !important;
   clear: none !important;
-  text-align: left !important;
+  text-align: right !important;
   width: auto !important;
   float: none !important;
+  flex: 0 0 auto !important;
   min-height: 0 !important;
   overflow: visible !important;
+}
+html body #idEventListCalendar > table.EventListCalendar,
+html body #idEventListCalendar > .EventListCalendar {
+  flex: 1 0 100% !important;
+  width: 100% !important;
+  margin-top: 6px !important;
 }
 html body .WaGadgetEventsStateCalendar #idViewSwitchersTable #group2,
 body #idViewSwitchersTable #group2,
@@ -1676,11 +1733,11 @@ body #group2 {
   flex-direction: row !important;
   flex-wrap: nowrap !important;
   align-items: center !important;
-  justify-content: flex-start !important;
+  justify-content: flex-end !important;
   gap: 10px !important;
   width: auto !important;
   margin: 0 !important;
-  text-align: left !important;
+  text-align: right !important;
 }
 /* Remove leftover spacing from the hidden switcher group and any empty
    button wrappers (the "spacers"). */
@@ -1734,6 +1791,7 @@ body #incButton {
   body .ngm-cal .sectionTitle {
     float: none !important;
     display: block !important;
+    flex: 0 0 100% !important;       /* full-row in the flex parent */
     width: 100% !important;
     margin: 0 0 12px 0 !important;
     text-align: left !important;
@@ -1741,9 +1799,10 @@ body #incButton {
   html body #idViewSwitchersTable,
   html body .WaGadgetEventsStateCalendar #idViewSwitchersTable {
     display: block !important;
+    flex: 0 0 100% !important;        /* full-row below the title */
     text-align: left !important;
     padding: 0 0 16px !important;
-    margin: 0 !important;
+    margin: 0 !important;            /* cancel desktop margin-left:auto */
     width: 100% !important;
     float: none !important;
     clear: both !important;
@@ -4620,10 +4679,12 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar table th {
 }
 /* day-of-week header band — REAL weekday text. This theme does NOT paint CSS
    ::after generated content on table cells, so we can't inject abbreviations in
-   CSS. Instead the page gadget's JS wraps each header in two spans —
-   <span class="ngm-wd-f">Sunday</span><span class="ngm-wd-a">Sun</span> — and
-   we swap which one shows by width (display toggling works without pseudo
-   content). Desktop shows the full name; tablet & mobile show the 3-letter. */
+   CSS. Instead the page gadget's JS wraps each header in three spans —
+   <span class="ngm-wd-f">Sunday</span><span class="ngm-wd-a">Sun</span><span
+   class="ngm-wd-1">S</span> — and we swap which one shows by width (display
+   toggling works without pseudo content):
+     desktop (>1024) = full name,  tablet (601–1024) = 3-letter,
+     mobile (≤600)   = single letter. */
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader {
   background: var(--ngm-sage-lt) !important; color: var(--ngm-sage-dk) !important;
   font-family: var(--ngm-sans) !important; font-weight: 600 !important;
@@ -4631,14 +4692,21 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHe
   font-size: .66rem !important; text-align: center !important; padding: 9px 2px !important;
   border-bottom: 1px solid var(--ngm-border) !important;
 }
-/* full name on desktop; hide the abbreviation until the media query below */
-body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a { display: none !important; }
+/* desktop: full name only */
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-f { display: inline !important; }
-/* Tablet & mobile: show the 3-letter abbreviation instead of the full name.
-   If the JS hasn't run (spans absent), the cell still shows WA's full text. */
-@media (max-width: 900px) {
-  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-f { display: none !important; }
+body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a,
+body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 { display: none !important; }
+/* tablet: 3-letter. (If the JS hasn't run, the cell still shows WA's full text.) */
+@media (max-width: 1024px) {
+  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-f,
+  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 { display: none !important; }
   body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a { display: inline !important; }
+}
+/* mobile: single letter */
+@media (max-width: 600px) {
+  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-f,
+  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a { display: none !important; }
+  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 { display: inline !important; }
 }
 /* ALWAYS keep the weekday row visible, at EVERY width. WA's responsive
    CSS hides it below ~767px (that's the "vanishing" on tablet/phone);
