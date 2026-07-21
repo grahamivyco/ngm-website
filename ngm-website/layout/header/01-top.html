@@ -259,7 +259,7 @@ body.memberContentView #ngm .ngm-member{display:inline-flex}
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('ngm-mob-open'))closeMob();});
   /* mark active link */
   var path=window.location.pathname;
-  nav.querySelectorAll('a[href]').forEach(function(a){try{if(new URL(a.href).pathname===path)a.classList.add('ngm-active');}catch(e){}});
+  nav.querySelectorAll('a[href]').forEach(function(a){try{if(new URL(a.href).pathname===path)a.classList.add('ngm-active');}catch(e){/* ignore malformed href */}});
   /* ── LOGIN STATE (JS enforcement) ──
      CSS already handles this via body.memberContentView / .publicContentView,
      but we also enforce it in JS so it works regardless of CSS load order,

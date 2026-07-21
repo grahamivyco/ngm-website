@@ -1,0 +1,44 @@
+<!--
+  ┌────────────────────────────────────────────────────────────────┐
+  │  NGM HEADER LOADER — live-loaded from GitHub via jsDelivr        │
+  │                                                                  │
+  │  WHERE THIS GOES:                                                │
+  │  Paste into the TOP Custom HTML gadget of your WA site template  │
+  │  (the one that used to hold the full header). Replace whatever   │
+  │  header markup is there now with this loader.                    │
+  │                                                                  │
+  │  WHAT IT DOES:                                                   │
+  │  Fetches ngm-website/layout/header/01-top.html from GitHub and   │
+  │  injects it. Edit the header in the repo and the live site       │
+  │  updates — no re-pasting. (A GitHub Action purges the CDN cache  │
+  │  on push, so changes appear in ~1 minute.)                       │
+  │                                                                  │
+  │  @main = always latest. To freeze a version, swap @main for a    │
+  │  git tag or commit SHA.                                          │
+  └────────────────────────────────────────────────────────────────┘
+-->
+<div id="ngm-header-mount"></div>
+<script>
+(function(){
+  if(window._ngmHeaderLoader)return; window._ngmHeaderLoader=true;
+  var SRC='https://cdn.jsdelivr.net/gh/grahamivyco/ngm-website@main/ngm-website/layout/header/01-top.html';
+  fetch(SRC).then(function(r){
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    return r.text();
+  }).then(function(html){
+    var mount=document.getElementById('ngm-header-mount');
+    if(!mount)return;
+    mount.innerHTML=html;
+    /* Browsers parse injected <style> but will NOT run injected <script>.
+       Re-create each script element so the header's JS actually executes. */
+    mount.querySelectorAll('script').forEach(function(old){
+      var s=document.createElement('script');
+      if(old.src){s.src=old.src;}else{s.textContent=old.textContent;}
+      document.body.appendChild(s);
+      old.parentNode.removeChild(old);
+    });
+  }).catch(function(e){
+    if(window.console&&console.error)console.error('NGM header failed to load:',e);
+  });
+})();
+</script>

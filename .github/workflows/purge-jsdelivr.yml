@@ -1,0 +1,31 @@
+name: Purge jsDelivr cache
+
+# When a CDN-served file changes on main, tell jsDelivr to drop its cached copy
+# so the live Wild Apricot site picks up the new version within ~a minute,
+# instead of waiting out jsDelivr's default @main branch cache (~12 hours).
+#
+# No secrets or tokens needed — purge.jsdelivr.net is a public endpoint.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'ngm-website/global-css/global.css'
+      - 'ngm-website/layout/header/01-top.html'
+      - 'ngm-website/layout/footer/01-top.html'
+  workflow_dispatch: {}
+
+jobs:
+  purge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Purge CDN-served assets from jsDelivr
+        run: |
+          BASE="https://purge.jsdelivr.net/gh/grahamivyco/ngm-website@main"
+          for path in \
+            "ngm-website/global-css/global.css" \
+            "ngm-website/layout/header/01-top.html" \
+            "ngm-website/layout/footer/01-top.html"; do
+            echo "Purging $path"
+            curl -sS -o /dev/null -w "  -> HTTP %{http_code}\n" "$BASE/$path"
+          done
