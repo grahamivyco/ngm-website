@@ -1551,11 +1551,11 @@ html body #idViewSwitchersTable a.incDateButton {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: 42px !important;
-  height: 42px !important;
-  min-width: 42px !important;
-  max-width: 42px !important;
-  min-height: 42px !important;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  max-width: 44px !important;
+  min-height: 44px !important;
   padding: 0 !important;
   margin: 0 !important;
   box-sizing: border-box !important;
@@ -1574,18 +1574,25 @@ html body #idViewSwitchersTable a.incDateButton {
 /* Kill any child node WA renders inside the button (text span / icon span) */
 html body #idViewSwitchersTable a.DecDateButton > *,
 html body #idViewSwitchersTable a.incDateButton > * { display: none !important; }
-/* Draw one clean chevron in place of WA's contents */
+/* Draw one clean chevron in place of WA's contents. ❮ / ❯ (angle-quote
+   ORNAMENTS) are bolder and sit vertically centred in their em box, unlike the
+   thin ‹ / › which rode low/off-centre. A full-size flex box perfectly centres
+   the glyph in the circle. */
 html body #idViewSwitchersTable a.DecDateButton::before,
 html body #idViewSwitchersTable a.incDateButton::before {
-  display: block !important;
-  font-size: 1.4rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  font-size: 1.15rem !important;
   line-height: 1 !important;
-  font-weight: 500 !important;
+  font-weight: 400 !important;
   background: none !important;
   color: inherit !important;
 }
-html body #idViewSwitchersTable a.DecDateButton::before { content: "\2039" !important; } /* ‹ prev */
-html body #idViewSwitchersTable a.incDateButton::before { content: "\203A" !important; } /* › next */
+html body #idViewSwitchersTable a.DecDateButton::before { content: "\276E" !important; } /* ❮ prev */
+html body #idViewSwitchersTable a.incDateButton::before { content: "\276F" !important; } /* ❯ next */
 /* Kill the theme's own arrow glyph (rendered via ::after — the stray 2nd arrow) */
 html body #idViewSwitchersTable a.DecDateButton::after,
 html body #idViewSwitchersTable a.incDateButton::after {
@@ -1633,14 +1640,14 @@ html body a.todayButton {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  height: 42px !important;
-  min-height: 42px !important;
-  padding: 0 18px !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  padding: 0 20px !important;
   margin: 0 !important;
   box-sizing: border-box !important;
   width: auto !important;
-  min-width: 64px !important;
-  max-width: 160px !important;
+  min-width: 68px !important;
+  max-width: 170px !important;
   border: 1.5px solid var(--ngm-sage-dk) !important;
   border-radius: 100px !important;
   background: transparent !important;
@@ -1867,19 +1874,19 @@ body #incButton {
      both). Arrows: 42px circles; Today: 42px pill, auto width, label shown. */
   html body #idViewSwitchersTable a.DecDateButton,
   html body #idViewSwitchersTable a.incDateButton {
-    width: 42px !important; height: 42px !important;
-    min-width: 42px !important; max-width: 42px !important; min-height: 42px !important;
+    width: 44px !important; height: 44px !important;
+    min-width: 44px !important; max-width: 44px !important; min-height: 44px !important;
     padding: 0 !important; border-radius: 50% !important;
     font-size: 0 !important; visibility: visible !important;
   }
   html body #idViewSwitchersTable a.DecDateButton::before,
-  html body #idViewSwitchersTable a.incDateButton::before { font-size: 1.4rem !important; }
+  html body #idViewSwitchersTable a.incDateButton::before { font-size: 1.15rem !important; }
   html body #idViewSwitchersTable a.todayButton,
   html body #idViewSwitchersTable #todayButton a,
   html body a.todayButton {
-    height: 42px !important; min-height: 42px !important;
-    width: auto !important; min-width: 64px !important; max-width: 160px !important;
-    padding: 0 18px !important; font-size: .82rem !important;
+    height: 44px !important; min-height: 44px !important;
+    width: auto !important; min-width: 68px !important; max-width: 170px !important;
+    padding: 0 20px !important; font-size: .82rem !important;
     white-space: nowrap !important; visibility: visible !important;
   }
 }
@@ -4739,11 +4746,23 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHe
   body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 { display: none !important; }
   body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a { display: inline !important; }
 }
-/* mobile: single letter */
+/* mobile: single letter — DERIVED from the 3-letter span so it needs NO page
+   gadget re-paste (the recurring blank-weekday bug). We keep the .ngm-wd-a span
+   visible but blank its text (font-size:0) and reveal only its ::first-letter
+   at full size: "SUN" → "S", "WED" → "W", etc. The dedicated .ngm-wd-1 span (if
+   an updated gadget emitted one) is hidden so it can't double up. */
 @media (max-width: 600px) {
   body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-f,
-  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a { display: none !important; }
-  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 { display: inline !important; }
+  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 { display: none !important; }
+  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a {
+    display: inline-block !important;
+    font-size: 0 !important;
+    line-height: 1 !important;
+    vertical-align: middle !important;
+  }
+  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a::first-letter {
+    font-size: .72rem !important;
+  }
 }
 /* ALWAYS keep the weekday row visible, at EVERY width. WA's responsive
    CSS hides it below ~767px (that's the "vanishing" on tablet/phone);
