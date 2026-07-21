@@ -3969,24 +3969,55 @@ body .WaGadgetContactProfile .typeInstruction {
 }
 
 /* ---- Privacy tab: the "Details to show" grid (#memberFieldTable) ---- */
+body .WaGadgetContactProfile .includeMeView {
+  color: var(--ngm-charcoal) !important; font-weight: 600 !important; font-size: .95rem !important;
+}
 body .WaGadgetContactProfile #memberFieldTable {
-  width: 100% !important; border-collapse: collapse !important;
+  width: 100% !important; border-collapse: collapse !important; margin-top: 6px !important;
 }
 body .WaGadgetContactProfile #memberFieldTable th,
 body .WaGadgetContactProfile #memberFieldTable td {
-  border-bottom: 1px solid var(--ngm-border) !important; padding: 10px 12px !important;
+  border-bottom: 1px solid #F0EDE6 !important; padding: 12px 14px !important; vertical-align: middle !important;
 }
+/* three column headers: Anybody / Members / No access — sage eyebrows, centred */
+body .WaGadgetContactProfile .memberFieldHeadingTD { text-align: center !important; }
 body .WaGadgetContactProfile .memberFieldHeadingTitle {
-  color: var(--ngm-sage-dk) !important; font-weight: 600 !important;
+  color: var(--ngm-sage) !important; font-weight: 600 !important;
+  font-size: .72rem !important; letter-spacing: .12em !important; text-transform: uppercase !important;
 }
-body .WaGadgetContactProfile .memberFieldTitle span { color: var(--ngm-charcoal) !important; }
+/* row labels down the left (Send message form, Email, …) */
+body .WaGadgetContactProfile th.memberFieldTitle { text-align: left !important; font-weight: 400 !important; }
+body .WaGadgetContactProfile .memberFieldTitle span { color: var(--ngm-charcoal) !important; font-size: .9rem !important; }
+/* the selected-visibility indicator cells, centred under each column */
+body .WaGadgetContactProfile .memberFieldValueTD { text-align: center !important; }
+body .WaGadgetContactProfile .memberFieldValueTD > div { margin: 0 auto !important; }
 
-/* ---- social-login rows (chips) ---- */
+/* ---- Email subscriptions tab: "Subscribed" status labels ---- */
+body .WaGadgetContactProfile .labeledImage span { color: var(--ngm-sage-dk) !important; font-weight: 600 !important; }
+
+/* ---- Social network login: Connect / Disconnect as design-system chips ---- */
+body .WaGadgetContactProfile .socialLogin {
+  display: flex !important; align-items: center !important; gap: 10px !important; flex-wrap: wrap !important;
+}
+body .WaGadgetContactProfile .socialLoginImg img {
+  width: 30px !important; height: 30px !important; border-radius: 50% !important;
+  display: inline-block !important; vertical-align: middle !important;
+}
+body .WaGadgetContactProfile .socialLoginName { color: var(--ngm-charcoal) !important; font-size: .9rem !important; }
 body .WaGadgetContactProfile .connectExternalProfileButton,
 body .WaGadgetContactProfile .disconnectExternalProfileButton {
-  color: var(--ngm-sage-dk) !important; text-decoration: none !important;
+  display: inline-flex !important; align-items: center !important; gap: 8px !important;
+  border: 1px solid var(--ngm-border) !important; border-radius: 999px !important;
+  padding: 8px 16px !important; font-size: .85rem !important; font-weight: 600 !important;
+  color: var(--ngm-sage-dk) !important; text-decoration: none !important; background: #fff !important;
+  transition: border-color .18s, background .18s !important;
 }
-body .WaGadgetContactProfile .socialLoginName { color: var(--ngm-charcoal) !important; }
+body .WaGadgetContactProfile .connectExternalProfileButton:hover,
+body .WaGadgetContactProfile .disconnectExternalProfileButton:hover {
+  border-color: var(--ngm-sage) !important; background: var(--ngm-sage-lt) !important;
+}
+/* the brand icon inside the Connect chip */
+body .WaGadgetContactProfile .authenticateLoginIcon { flex-shrink: 0 !important; }
 
 /* ---- Edit-profile mode: form fields (inputs / selects / textareas) + the
         Search boxes on the Invoices/Donations/Event tabs. In view mode the only
@@ -4041,6 +4072,61 @@ body [class*="Invoices"] table td, body [class*="Donations"] table td {
   padding: 12px 14px !important; border-bottom: 1px solid var(--ngm-border) !important;
   color: var(--ngm-charcoal) !important;
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   MEMBER PUBLIC PROFILE  —  /Sys/PublicProfile
+   The "My directory profile" page + what members see of each other in the
+   directory. Different gadget (.WaGadgetMemberPublicProfile) than the contact
+   profile, but the same inner markup (captionContainer h4 / fieldLabel /
+   fieldBody / typeButton), so it gets the same skin. Verified against the live
+   DOM (theme casefile_guardian.v3.0).
+   ══════════════════════════════════════════════════════════════════ */
+body .WaGadgetMemberPublicProfile,
+body .WaGadgetMemberPublicProfile * { font-family: var(--ngm-sans) !important; }
+/* member name heading (holds the name + a Send-message button) */
+body .WaGadgetMemberPublicProfile .memberDirectoryDetailsHeaderContainer h2,
+body .WaGadgetMemberPublicProfile h2 {
+  font-family: var(--ngm-serif) !important; font-weight: 400 !important; color: var(--ngm-charcoal) !important;
+  font-size: clamp(1.9rem, 3vw, 2.4rem) !important;
+  display: flex !important; align-items: center !important; gap: 16px !important; flex-wrap: wrap !important;
+}
+/* Back link above the name */
+body .WaGadgetMemberPublicProfile .pageBackContainer a {
+  color: var(--ngm-sage-dk) !important; font-weight: 600 !important; font-size: .88rem !important;
+  text-decoration: none !important;
+}
+/* section header <h4> (full-width sage eyebrow) */
+body .WaGadgetMemberPublicProfile .captionContainer .fieldLabel { display: none !important; }
+body .WaGadgetMemberPublicProfile .captionContainer .fieldBody {
+  width: 100% !important; float: none !important;
+  border-bottom: 1px solid var(--ngm-border) !important; padding-bottom: 10px !important;
+}
+body .WaGadgetMemberPublicProfile .captionContainer h4 {
+  margin: 0 !important; font-family: var(--ngm-sans) !important; font-size: .72rem !important; font-weight: 600 !important;
+  letter-spacing: .14em !important; text-transform: uppercase !important; color: var(--ngm-sage) !important;
+}
+/* data field rows */
+body .WaGadgetMemberPublicProfile .fieldContainer.simpleTextContainer {
+  border-bottom: 1px solid #F0EDE6 !important; padding: 4px 0 !important;
+}
+body .WaGadgetMemberPublicProfile .labeledTextContainer .fieldLabel,
+body .WaGadgetMemberPublicProfile .fieldLabel span {
+  color: var(--ngm-sage-dk) !important; font-weight: 600 !important; font-size: .85rem !important;
+}
+body .WaGadgetMemberPublicProfile .fieldBody,
+body .WaGadgetMemberPublicProfile .fieldBody span,
+body .WaGadgetMemberPublicProfile .fieldBody .label {
+  color: var(--ngm-charcoal) !important; font-size: .9rem !important;
+}
+body .WaGadgetMemberPublicProfile .fieldBody a { color: var(--ngm-sage-dk) !important; }
+/* Send-message button as a sage pill */
+body .WaGadgetMemberPublicProfile input.typeButton {
+  font-family: var(--ngm-sans) !important; background: var(--ngm-sage-dk) !important; color: #fff !important;
+  border: 1px solid var(--ngm-sage-dk) !important; border-radius: 999px !important;
+  padding: 10px 20px !important; font-size: .82rem !important; font-weight: 600 !important;
+  cursor: pointer !important; box-shadow: none !important; text-transform: none !important;
+}
+body .WaGadgetMemberPublicProfile input.typeButton:hover { background: var(--ngm-sage) !important; }
 
 /* account collapsed to a single full-width tile */
 .ngm-hub-acct-solo{display:block;}
