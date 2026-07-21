@@ -3407,40 +3407,33 @@ body.ngm-login-page .WaGadgetLoginForm{ display:block; width:100%; box-sizing:bo
    side (full hero panel); AT/BELOW it they stack (slim hero strip, like
    mobile) so the form leads. */
 @media(min-width:981px){
-  /* ── EQUAL-WIDTH columns (50/50) ──
-     Force the row's flex children to split evenly. `flex` only affects real
-     flex items — i.e. the two columns of WA's flex row — so the ancestors this
-     selector also matches (content wrapper, body) are unaffected. flex-basis:0
-     + grow:1 makes both columns exactly half regardless of their content. */
-  body.ngm-login-page *:has(.ngm-login-hero):has(.WaGadgetLoginForm){
-    align-items:stretch !important;   /* both columns stretch to equal height */
+  /* ── Equal-height columns — WA renders the 2-column row as a TABLE ──
+     Structure (from the live DOM):
+       table.WaLayoutTable > tr.WaLayoutRow > td.WaLayoutItem[style="width:50%"]
+     Table cells in a row are ALREADY equal height and the inline width:50% makes
+     them 50/50 — so we must NOT set display/flex on the <td> (that pulls it out
+     of the table and collapses its width, which is what broke it before).
+     Instead we paint the sage straight onto the LEFT cell so it fills the full
+     (equal) height, and vertical-align:middle centres the hero content. The
+     dot texture moves onto the cell too (the hero div is now transparent). */
+  body.ngm-login-page td.WaLayoutItem:has(.ngm-login-hero):not(:has(.WaGadgetLoginForm)){
+    vertical-align:middle !important;
+    background-color:#3E5538 !important;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(255,255,255,.10) 1.2px, transparent 0),
+      radial-gradient(120% 90% at 15% 0%, #4a6342 0%, #3E5538 55%, #33472e 100%) !important;
+    background-size:26px 26px, auto !important;
+    background-repeat:repeat, no-repeat !important;
+    background-position:0 0, center !important;
   }
-  body.ngm-login-page *:has(.ngm-login-hero):has(.WaGadgetLoginForm) > *{
-    flex:1 1 0 !important;
-    min-width:0 !important;
-  }
-  /* ── Green hero fills its column to MATCH the form column height ──
-     The columns are equal height already (flex row, align-items:stretch), but
-     the green DIV sits at content height inside its (taller) column, leaving a
-     gap. Flex the hero-side chain (column → WA wrapper → .ngm) so each child
-     grows to fill the column's height. The columns keep their 50% width from
-     the flex:1 1 0 rule above (a column being flex-direction:column changes
-     how it lays out its CHILDREN, not its own width), so no width collapse and
-     no viewport-tall over-stretch — the green is exactly as tall as the form
-     column. Scoped with :not(:has(.WaGadgetLoginForm)) → hero column only. */
-  body.ngm-login-page *:has(.ngm-login-hero):not(:has(.WaGadgetLoginForm)){
-    display:flex !important;
-    flex-direction:column !important;
-    align-items:stretch !important;
-  }
-  body.ngm-login-page *:has(.ngm-login-hero):not(:has(.WaGadgetLoginForm)) > *{
-    flex:1 0 auto !important;
-  }
+  /* the hero div is transparent now (the cell carries the sage + texture) */
   body.ngm-login-page .ngm-login-hero{
-    flex:1 0 auto !important;
-    display:flex !important; flex-direction:column !important; justify-content:center !important;
+    background:transparent !important;
     padding:clamp(48px,6vw,72px) clamp(36px,4vw,68px) !important;
   }
+  body.ngm-login-page .ngm-login-hero::before{ display:none !important; }
+  /* centre the form card vertically in its equal-height cell too */
+  body.ngm-login-page td.WaLayoutItem:has(.WaGadgetLoginForm){ vertical-align:middle !important; }
   body.ngm-login-page .WaGadgetLoginForm{
     display:flex !important;
     align-items:center !important;
