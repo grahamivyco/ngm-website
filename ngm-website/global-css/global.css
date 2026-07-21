@@ -1538,10 +1538,10 @@ body #todayButton a {
   background: transparent !important;
   border: 1.5px solid var(--ngm-sage-dk) !important;
   border-radius: 100px !important;
-  padding: 6px 16px !important;
-  margin: 0 8px !important;
+  padding: 4px 13px !important;
+  margin: 0 !important;
   font-family: var(--ngm-sans) !important;
-  font-size: .82rem !important;
+  font-size: .72rem !important;
   font-weight: 500 !important;
   line-height: 1.4 !important;
   text-decoration: none !important;
@@ -1763,13 +1763,13 @@ html body #todayButton {
     white-space: nowrap !important;
     visibility: visible !important;
   }
-  /* Today pill — identical padding/size at every width */
+  /* Today pill — identical small size at every width */
   html body a.todayButton {
     display: inline-block !important;
     width: auto !important;
     margin: 0 !important;
-    padding: 6px 16px !important;
-    font-size: .82rem !important;
+    padding: 4px 13px !important;
+    font-size: .72rem !important;
     white-space: nowrap !important;
     visibility: visible !important;
   }
@@ -4458,11 +4458,13 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar .eventTime {
   background: none !important; background-color: transparent !important;
   border: 0 !important; box-shadow: none !important; border-radius: 0 !important;
 }
-/* strip any border/shadow WA's theme puts on the event wrapper divs
-   inside a cell (another possible source of the stray "blue line").
+/* strip the tan card WA's theme puts behind each event (background +
+   border + radius + shadow on the wrapper divs), so the time is just
+   plain text over the cell and only the coloured chip has a fill.
    The chips are <a> and are unaffected. */
 body .WaGadgetEventsStateCalendar table.EventListCalendar td div {
-  border: 0 !important; box-shadow: none !important;
+  background: none !important; background-color: transparent !important;
+  border: 0 !important; box-shadow: none !important; border-radius: 0 !important;
 }
 /* ── MOBILE: match Google Calendar's month view. All seven days fit on
    screen (no sideways scroll); the weekday headers collapse to single
