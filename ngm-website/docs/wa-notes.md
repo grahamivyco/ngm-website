@@ -42,6 +42,15 @@ trigger opens a `.loginPanel`.
 - To show the form expanded (not behind the "Log in" trigger) is a WA gadget-style
   setting, not CSS.
 
+## Favicon
+- Set it the **native** way: **Settings → Site → Meta-tags → Raw Headers**, add a
+  `<link rel="icon">` tag. That lands in the server-rendered `<head>`, so the icon
+  is in the initial HTML — shows in the browser tab/bookmarks with no flash.
+- Upload the icon under **Website → Files** (Pictures folder); reference it as
+  `/Resources/Pictures/<filename>`. Use `brand/favicon.ico` (16/32/48/64 px).
+- Do **not** inject it from a Custom HTML gadget — it loads after WA's default
+  icon (visible flash) and never reaches the browser tab.
+
 ## Assets & API
 - Image paths: `needleworkguildmn.org/resources/Pictures/[folder]/[filename]`
   (gallery images render via JS; can't be fetched).
