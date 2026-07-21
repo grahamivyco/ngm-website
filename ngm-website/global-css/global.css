@@ -4392,6 +4392,15 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHe
   font-size: .66rem !important; text-align: center !important; padding: 9px 2px !important;
   border-bottom: 1px solid var(--ngm-border) !important;
 }
+/* ALWAYS keep the weekday row visible, at EVERY width. WA's responsive
+   CSS hides it below ~767px (that's the "vanishing" on tablet/phone);
+   force it back unconditionally so the JS labels always show. */
+html body .WaGadgetEventsStateCalendar table.EventListCalendar tr:first-child {
+  display: table-row !important; visibility: visible !important; opacity: 1 !important;
+}
+html body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader {
+  display: table-cell !important; visibility: visible !important; opacity: 1 !important;
+}
 /* day cells */
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarItemDefault,
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarItemInactive,
