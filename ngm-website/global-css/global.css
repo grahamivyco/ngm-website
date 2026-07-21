@@ -1723,7 +1723,10 @@ html body #todayButton {
     display: inline-block !important;
     width: auto !important;
     margin: 0 !important;
-    padding: 6px 14px !important;
+    /* same padding/size as tablet + desktop so the Today pill looks
+       identical at every width */
+    padding: 6px 16px !important;
+    font-size: .82rem !important;
     white-space: nowrap !important;
     visibility: visible !important;
   }
@@ -4321,9 +4324,11 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar th {
 }
 body .WaGadgetEventsStateCalendar table.EventListCalendar td:last-child,
 body .WaGadgetEventsStateCalendar table.EventListCalendar th:last-child { border-right: 0 !important; }
-/* NO top border on cells — the user doesn't want a line above each date
-   number. (WA also puts an inline border-top on date cells; the border:0
-   above overrides it.) Columns are separated by the right borders only. */
+/* horizontal line between week rows: a top border on each week's date
+   row (the row carrying the date numbers). Full-width grid line. */
+body .WaGadgetEventsStateCalendar table.EventListCalendar tr:has(a.calendarDate) > td {
+  border-top: 1px solid var(--ngm-linen-dk) !important;
+}
 /* day-of-week header band — REAL weekday text. This theme does not paint
    CSS ::after generated content on table cells, so we style WA's own
    "Sunday/Monday/…" words rather than injecting abbreviations. The
@@ -4398,7 +4403,7 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar .eventContainerHover a
 body .WaGadgetEventsStateCalendar table.EventListCalendar .eventTime {
   font-family: var(--ngm-sans) !important; font-size: .68rem !important; font-weight: 600 !important;
   text-transform: uppercase !important; letter-spacing: .04em !important;
-  color: var(--ngm-rose) !important; padding: 0 4px !important; margin: 2px 0 0 !important;
+  color: var(--ngm-rose) !important; padding: 0 !important; margin: 2px 0 0 !important;
   background: none !important; background-color: transparent !important;
   border: 0 !important; box-shadow: none !important; border-radius: 0 !important;
 }
