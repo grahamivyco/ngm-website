@@ -4190,17 +4190,45 @@ body .WaGadgetEmailMember .buttonsContainer input[type="submit"] {
 }
 body .WaGadgetEmailMember .buttonsContainer input[type="submit"]:hover { background: var(--ngm-sage-lt) !important; }
 
-/* ---- transaction grids (Invoices / Donations / Event registrations tabs):
-        column-header titles. These grids use <th> headers; the profile's
-        field-layout tables don't, so scoping to <th> (and excluding the Privacy
-        grid) styles only the transaction column titles. Row styling for these
-        grids is handled once their live markup is captured. ---- */
-body .WaGadgetContactProfile table:not(#memberFieldTable) th {
+/* ══ Transaction grids on the Invoices & Donations tabs ══
+   WA renders these into <table class="genericListTable"> inside
+   .WaGadgetContactProfile (states …Finances / …Donations). Verified live. */
+/* toolbar: Search field + "Records found" */
+body .WaGadgetContactProfile .genericListHeaderContainer .typeTextContainer { color: var(--ngm-gray) !important; }
+body .WaGadgetContactProfile input.typeTextBox {
+  font-family: var(--ngm-sans) !important; background: #fff !important; color: var(--ngm-charcoal) !important;
+  border: 1px solid var(--ngm-border) !important; border-radius: var(--ngm-radius) !important; padding: 8px 12px !important; box-shadow: none !important;
+}
+body .WaGadgetContactProfile input.typeTextBox:focus {
+  border-color: var(--ngm-sage) !important; outline: none !important; box-shadow: 0 0 0 3px rgba(92,122,82,.14) !important;
+}
+body .WaGadgetContactProfile #idRecordsFound,
+body .WaGadgetContactProfile #idRecordsFoundNumber { color: var(--ngm-charcoal) !important; font-style: normal !important; font-weight: 600 !important; }
+/* the balance readout (overrides WA's inline green) */
+body .WaGadgetContactProfile .totalBalance { color: var(--ngm-sage-dk) !important; font-weight: 600 !important; }
+/* the grid itself */
+body .WaGadgetContactProfile table.genericListTable { width: 100% !important; border-collapse: collapse !important; }
+body .WaGadgetContactProfile table.genericListTable thead th {
   background: var(--ngm-sage-lt) !important; color: var(--ngm-sage-dk) !important;
   text-transform: uppercase !important; letter-spacing: .08em !important; font-size: .72rem !important;
   font-weight: 600 !important; text-align: left !important; padding: 12px 14px !important;
   border-bottom: 1px solid var(--ngm-border) !important;
 }
+body .WaGadgetContactProfile table.genericListTable thead th.rightAlign,
+body .WaGadgetContactProfile table.genericListTable td.rightAlign { text-align: right !important; }
+/* data cells — border sits on the group's bottom row so each transaction
+   (a main row + its memo/"Paid:" row) reads as one block */
+body .WaGadgetContactProfile table.genericListTable tbody td {
+  padding: 14px 14px 4px !important; color: var(--ngm-charcoal) !important; vertical-align: top !important; border: none !important;
+}
+body .WaGadgetContactProfile table.genericListTable tbody td a { color: var(--ngm-sage-dk) !important; }
+body .WaGadgetContactProfile table.genericListTable .memberDirectoryBottomRow {
+  padding: 0 14px 14px !important; border-bottom: 1px solid #F0EDE6 !important;
+  color: var(--ngm-gray-lt) !important; font-size: .82rem !important;
+}
+body .WaGadgetContactProfile table.genericListTable .grayedOut { color: var(--ngm-gray) !important; }
+/* empty state */
+body .WaGadgetContactProfile .typeTextLabelNoData { color: var(--ngm-gray-lt) !important; font-style: italic !important; }
 
 /* account collapsed to a single full-width tile */
 .ngm-hub-acct-solo{display:block;}
