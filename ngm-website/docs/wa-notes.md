@@ -2,6 +2,23 @@
 
 Working reference so the next editor (human or AI) doesn't relearn the hard parts.
 
+## Content Security Policy (important — killed jsDelivr live-loading)
+- WA serves a **CSP response header**. `style-src`/`connect-src` fall back to
+  `default-src`, whose allowlist is roughly: `'self'`, WA domains
+  (`*.wildapricot.com`, `sf.wildapricot.org`, `live-sf.wildapricot.org`), and
+  `*.cloudflare.com`, `*.cloudfront.net`, `*.googleapis.com`, `*.gstatic.com`,
+  `*.google.com`, `*.fontawesome.com`, `*.typekit.net`, `*.paypal.com`,
+  `*.vimeo.com`, `*.youtube.com`, etc.
+- **`cdn.jsdelivr.net` is NOT allowed** → the `@import` of `global.css` from jsDelivr
+  is refused; the page renders WA-default. Diagnosed live via console:
+  `getComputedStyle('.WaGadgetMembershipApplication').maxWidth === 'none'` and
+  `fontFamily === 'Lato'` while `user.css` correctly contained the `@import` first.
+- **Can't be widened from WA** — CSP is a server header; a `<meta>` CSP can only tighten.
+- **Workarounds:** paste CSS **inline** in the CSS tab (same-origin), or host it on a
+  CSP-allowlisted domain (`storage.googleapis.com`, `*.cloudfront.net`) and `@import`
+  that. Same reason the header/footer jsDelivr **loaders** don't work — paste those
+  gadgets inline instead.
+
 ## Specificity
 - `casefile_guardian` uses very high-specificity selectors. Custom overrides must be
   `body`-prefixed. Chaining a custom ID directly onto the WA class (no space, same

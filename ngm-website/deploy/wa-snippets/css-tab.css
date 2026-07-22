@@ -1,4 +1,14 @@
 /* ================================================================
+   ⛔ DOES NOT WORK ON THIS SITE. Wild Apricot's Content Security
+   Policy blocks cdn.jsdelivr.net, so this @import never loads
+   (verified 2026-07-22). Instead, paste the FULL contents of
+   global-css/global.css directly into the WA CSS tab (same-origin,
+   CSP-allowed). See deploy/README.md and docs/wa-notes.md → CSP.
+   The @import below is kept only for reference / future use if the
+   CSS is ever moved to a CSP-allowlisted host.
+   ================================================================ */
+
+/* ================================================================
    NGM GLOBAL CSS — live-loaded from GitHub via jsDelivr
 
    WHERE THIS GOES:

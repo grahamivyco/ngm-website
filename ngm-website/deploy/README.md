@@ -1,5 +1,28 @@
 # Live-loading from GitHub → Wild Apricot
 
+> ## ⛔ Does NOT work on this site — Wild Apricot's CSP blocks jsDelivr
+>
+> **Verified 2026-07-22 against the live site.** WA serves a **Content Security Policy**
+> that only allows resources from an allowlist (Cloudflare, CloudFront, Google, PayPal,
+> Vimeo, WA's own domains…). **`cdn.jsdelivr.net` is NOT on it**, so the browser refuses
+> to load `global.css` (and the header/footer loaders' `fetch()`) from jsDelivr. The
+> `@import` is accepted into WA's compiled CSS but the stylesheet never loads — the page
+> renders WA-default. The CSP is an HTTP response header WA controls; it can't be widened
+> from inside WA (a `<meta>` CSP can only tighten it). See `docs/wa-notes.md` → **CSP**.
+>
+> **What we do instead:** paste the full `global-css/global.css` **inline** into the WA
+> **CSS tab** (same-origin → CSP `'self'` allows it). To update the live site: open the
+> jsDelivr URL (kept current by the purge Action), Select All → Copy → paste into the CSS
+> tab → Save. The header/footer are likewise pasted inline as full gadgets.
+>
+> **To restore true auto-update later:** host `global.css` on a CSP-allowlisted host —
+> `storage.googleapis.com` (Google Cloud Storage) or `*.cloudfront.net` (AWS CloudFront) —
+> and add a GitHub Action to sync it on push, then `@import` from there.
+>
+> Everything below describes the (blocked) jsDelivr approach; kept for reference only.
+
+---
+
 Wild Apricot has **no native GitHub deploy** and its REST API does **not** expose
 page HTML or the CSS tab, so there is no true "git push → site updates" pipeline.
 This folder sets up the closest practical thing: instead of pasting full code into
