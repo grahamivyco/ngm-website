@@ -5262,7 +5262,28 @@ body .WaGadgetMembershipApplication .fieldBody textarea,
 body .WaGadgetPublicWizard .fieldBody input[type="text"],
 body .WaGadgetPublicWizard .fieldBody select,
 body .WaGadgetPublicWizard .fieldBody textarea {
-  width: 100% !important; max-width: 560px !important;
+  width: 100% !important; max-width: 100% !important;
+}
+/* ── Center the whole application in a rounded card ──────────────────────
+   WA drops the membership gadget into a full-width cell with content flush
+   left. Constrain + centre it and give it a card treatment. The branded
+   heading band above (.ngm-sys) stays full-width; only the form is carded. */
+body .WaGadgetMembershipApplication {
+  max-width: 780px !important;
+  margin: 28px auto 56px !important;
+  background: #fff !important;
+  border: 1px solid var(--ngm-border) !important;
+  border-radius: var(--ngm-radius-lg) !important;
+  box-shadow: var(--ngm-shm) !important;
+  box-sizing: border-box !important;
+}
+body .WaGadgetMembershipApplication .gadgetStyleBody {
+  padding: 36px 40px !important;
+  box-sizing: border-box !important;
+}
+@media (max-width: 640px) {
+  body .WaGadgetMembershipApplication { margin: 20px 16px 40px !important; }
+  body .WaGadgetMembershipApplication .gadgetStyleBody { padding: 24px 20px !important; }
 }
 /* Read-only review values: links (e.g. the email) on-brand, not WA magenta */
 body .WaGadgetMembershipApplication .fieldBody a,
