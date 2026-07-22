@@ -5170,6 +5170,7 @@ body .WaGadgetPublicWizard .fieldContainer { padding: 4px 0 !important; }
 body .WaGadgetMembershipApplication .prevButton,
 body .WaGadgetMembershipApplication .cancelButton,
 body .WaGadgetMembershipApplication .additionalButton,
+body .WaGadgetMembershipApplication .nextButtonAutoWidth,
 body .WaGadgetMembershipApplication [id$="_prev"],
 body .WaGadgetMembershipApplication [id$="_prevTop"],
 body .WaGadgetMembershipApplication [id$="_cancel"],
@@ -5179,6 +5180,7 @@ body .WaGadgetMembershipApplication [id$="_additionalButtonTop"],
 body .WaGadgetPublicWizard .prevButton,
 body .WaGadgetPublicWizard .cancelButton,
 body .WaGadgetPublicWizard .additionalButton,
+body .WaGadgetPublicWizard .nextButtonAutoWidth,
 body .WaGadgetPublicWizard [id$="_prev"],
 body .WaGadgetPublicWizard [id$="_prevTop"],
 body .WaGadgetPublicWizard [id$="_cancel"],
@@ -5261,4 +5263,33 @@ body .WaGadgetPublicWizard .fieldBody input[type="text"],
 body .WaGadgetPublicWizard .fieldBody select,
 body .WaGadgetPublicWizard .fieldBody textarea {
   width: 100% !important; max-width: 560px !important;
+}
+/* Read-only review values: links (e.g. the email) on-brand, not WA magenta */
+body .WaGadgetMembershipApplication .fieldBody a,
+body .WaGadgetPublicWizard .fieldBody a {
+  color: var(--ngm-sage-dk) !important; text-decoration: underline !important;
+}
+/* ── "Review and confirm" box → linen, not WA's default blue ──
+   The box is .commonMessageBox > .confirmWindowInfo.messageBox with sliced
+   rounded-corner divs (.cww / .cww1–4) that carry the blue. Recolour the box
+   to linen, neutralise the corner slices, and round it with CSS. */
+body .WaGadgetMembershipApplication .commonMessageBox .messageBox,
+body .WaGadgetPublicWizard .commonMessageBox .messageBox {
+  background: var(--ngm-linen) !important;
+  border: 1px solid var(--ngm-border) !important;
+  border-radius: var(--ngm-radius-lg) !important;
+  overflow: hidden !important;
+}
+body .WaGadgetMembershipApplication .commonMessageBox .cww,
+body .WaGadgetMembershipApplication .commonMessageBox .cww > div,
+body .WaGadgetPublicWizard .commonMessageBox .cww,
+body .WaGadgetPublicWizard .commonMessageBox .cww > div {
+  background: transparent !important; border: none !important;
+}
+/* "Review and confirm" heading → on-brand serif */
+body .WaGadgetMembershipApplication .commonMessageBox .header,
+body .WaGadgetPublicWizard .commonMessageBox .header {
+  font-family: var(--ngm-serif) !important; font-weight: 400 !important;
+  font-size: 1.5rem !important; color: var(--ngm-charcoal) !important;
+  text-transform: none !important;
 }
