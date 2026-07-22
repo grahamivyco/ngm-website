@@ -1409,6 +1409,15 @@ html body div[class*="WaGadgetEventsStateCalendar"],
 html body .WaGadgetEventsStateCalendar {
   margin-top: 8px !important;
 }
+/* CENTERING FIX (confirmed from the live DOM): the calendar gadget sits inside
+   an unclassed <div style="padding-left:10px"> — that 10px shoved the card off
+   centre (10px on the left, 0 on the right) and skewed margin:auto too. Zero
+   the wrapper's side padding so the linen card centres symmetrically in its
+   column. :has() targets ONLY the wrapper that holds the calendar. */
+html body .WaLayoutPlaceHolder > div:has(> .WaGadgetEventsStateCalendar) {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
 /* Trim the top padding of the calendar-body wrapper (opened in 01-top) so the
    hero-to-calendar gap closes. */
 body .ngm-cal-body-inner { padding-top: 0 !important; }
