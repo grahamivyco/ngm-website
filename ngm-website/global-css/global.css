@@ -5138,53 +5138,76 @@ body .WaGadgetPublicWizard input[name$="cancelNoScript"] {
 }
 body .WaGadgetMembershipApplication input[name$="cancelNoScript"]:hover,
 body .WaGadgetPublicWizard input[name$="cancelNoScript"]:hover { background: var(--ngm-sage-dk) !important; color: #fff !important; }
-/* ── Extended coverage (PROVISIONAL — confirm each selector on the live
-   /application page; WA's stable class names for these vary by version). ── */
-/* Level-selection: level name reads as a small on-brand heading */
-body .WaGadgetMembershipApplication .membershipLevelName,
-body .WaGadgetMembershipApplication .levelName,
-body .WaGadgetPublicWizard .membershipLevelName,
-body .WaGadgetPublicWizard .levelName {
-  font-family: var(--ngm-sans) !important; font-weight: 600 !important;
-  font-size: 1rem !important; color: var(--ngm-charcoal) !important;
+/* ── Extended coverage — CHECKED against the live /application identify-step
+   markup (WA membership wizard, theme casefile_guardian). The classes below
+   are the ones WA actually renders; the pay/prev/cancel rules use the stable
+   ASP.NET control-id SUFFIXES seen in the page's Wizard.DisableButtons() call
+   (…_payOnline, …_payWithBankAccount, …_prev, …_cancel). Profile & payment
+   steps reuse these same field/button classes. ── */
+/* Selected-level summary: level name ("Annual Guild Membership") on-brand */
+body .WaGadgetMembershipApplication .levelLabel,
+body .WaGadgetPublicWizard .levelLabel {
+  font-weight: 500 !important; color: var(--ngm-charcoal) !important;
 }
-/* Validation / error messaging → rose, on-brand */
-body .WaGadgetMembershipApplication .failedField,
-body .WaGadgetMembershipApplication .errorMessage,
-body .WaGadgetMembershipApplication .validationSummary,
-body .WaGadgetMembershipApplication .fieldError,
-body .WaGadgetPublicWizard .failedField,
-body .WaGadgetPublicWizard .errorMessage,
-body .WaGadgetPublicWizard .validationSummary,
-body .WaGadgetPublicWizard .fieldError {
+/* Field labels (mandatory ones also carry .mandatoryLabel, handled above) */
+body .WaGadgetMembershipApplication .fieldLabel,
+body .WaGadgetPublicWizard .fieldLabel {
+  font-family: var(--ngm-sans) !important; color: var(--ngm-charcoal) !important;
+}
+/* Inline validation messages — WA renders these as .validationError → rose */
+body .WaGadgetMembershipApplication .validationError,
+body .WaGadgetPublicWizard .validationError {
   font-family: var(--ngm-sans) !important; font-size: .82rem !important;
   color: var(--ngm-rose-dk) !important;
 }
-/* Inputs flagged invalid pick up a rose border to match the message */
-body .WaGadgetMembershipApplication .failedField input,
-body .WaGadgetMembershipApplication .failedField select,
-body .WaGadgetMembershipApplication .failedField textarea,
-body .WaGadgetPublicWizard .failedField input,
-body .WaGadgetPublicWizard .failedField select,
-body .WaGadgetPublicWizard .failedField textarea {
-  border-color: var(--ngm-rose) !important;
+/* Breathing room between field rows (WA wraps each field in .fieldContainer) */
+body .WaGadgetMembershipApplication .fieldContainer,
+body .WaGadgetPublicWizard .fieldContainer { padding: 4px 0 !important; }
+/* Prev / Cancel wizard buttons → outline pill (class + stable id suffix) */
+body .WaGadgetMembershipApplication input.prevButton,
+body .WaGadgetMembershipApplication input.cancelButton,
+body .WaGadgetMembershipApplication input[id$="_prev"],
+body .WaGadgetMembershipApplication input[id$="_prevTop"],
+body .WaGadgetMembershipApplication input[id$="_cancel"],
+body .WaGadgetMembershipApplication input[id$="_cancelTop"],
+body .WaGadgetPublicWizard input.prevButton,
+body .WaGadgetPublicWizard input.cancelButton,
+body .WaGadgetPublicWizard input[id$="_prev"],
+body .WaGadgetPublicWizard input[id$="_prevTop"],
+body .WaGadgetPublicWizard input[id$="_cancel"],
+body .WaGadgetPublicWizard input[id$="_cancelTop"] {
+  font-family: var(--ngm-sans) !important; font-size: .9rem !important; font-weight: 600 !important;
+  color: var(--ngm-sage-dk) !important; background: transparent !important;
+  border: 1.5px solid var(--ngm-sage-dk) !important; border-radius: 999px !important;
+  padding: 10px 26px !important; cursor: pointer !important; transition: all .15s ease !important;
 }
-/* Field-row breathing room + fieldset reset (no restructuring) */
-body .WaGadgetMembershipApplication .fieldRow,
-body .WaGadgetPublicWizard .fieldRow { padding: 7px 0 !important; }
-body .WaGadgetMembershipApplication fieldset,
-body .WaGadgetPublicWizard fieldset {
-  border: none !important; margin: 0 !important; padding: 0 !important;
+body .WaGadgetMembershipApplication input.prevButton:hover,
+body .WaGadgetMembershipApplication input.cancelButton:hover,
+body .WaGadgetMembershipApplication input[id$="_prev"]:hover,
+body .WaGadgetMembershipApplication input[id$="_cancel"]:hover,
+body .WaGadgetPublicWizard input.prevButton:hover,
+body .WaGadgetPublicWizard input.cancelButton:hover,
+body .WaGadgetPublicWizard input[id$="_prev"]:hover,
+body .WaGadgetPublicWizard input[id$="_cancel"]:hover {
+  background: var(--ngm-sage-dk) !important; color: #fff !important;
 }
-body .WaGadgetMembershipApplication legend,
-body .WaGadgetPublicWizard legend {
-  font-family: var(--ngm-serif) !important; font-weight: 400 !important;
-  font-size: 1.25rem !important; color: var(--ngm-charcoal) !important;
+/* Pay online / pay by bank → filled sage pill (primary; stable id suffix) */
+body .WaGadgetMembershipApplication input[id$="_payOnline"],
+body .WaGadgetMembershipApplication input[id$="_payOnlineTop"],
+body .WaGadgetMembershipApplication input[id$="_payWithBankAccount"],
+body .WaGadgetMembershipApplication input[id$="_payWithBankAccountTop"],
+body .WaGadgetPublicWizard input[id$="_payOnline"],
+body .WaGadgetPublicWizard input[id$="_payOnlineTop"],
+body .WaGadgetPublicWizard input[id$="_payWithBankAccount"],
+body .WaGadgetPublicWizard input[id$="_payWithBankAccountTop"] {
+  font-family: var(--ngm-sans) !important; font-size: .9rem !important; font-weight: 600 !important;
+  color: #fff !important; background: var(--ngm-sage-dk) !important;
+  border: 1.5px solid var(--ngm-sage-dk) !important; border-radius: 999px !important;
+  padding: 10px 30px !important; cursor: pointer !important; transition: background .15s ease !important;
 }
-/* Recurring / auto-renew payment checkbox label stays on-brand */
-body .WaGadgetMembershipApplication .recurringPaymentContainer label,
-body .WaGadgetMembershipApplication .recurringPaymentContainer .fieldLabel,
-body .WaGadgetPublicWizard .recurringPaymentContainer label,
-body .WaGadgetPublicWizard .recurringPaymentContainer .fieldLabel {
-  font-family: var(--ngm-sans) !important; color: var(--ngm-charcoal) !important;
+body .WaGadgetMembershipApplication input[id$="_payOnline"]:hover,
+body .WaGadgetMembershipApplication input[id$="_payWithBankAccount"]:hover,
+body .WaGadgetPublicWizard input[id$="_payOnline"]:hover,
+body .WaGadgetPublicWizard input[id$="_payWithBankAccount"]:hover {
+  background: var(--ngm-sage) !important; border-color: var(--ngm-sage) !important;
 }

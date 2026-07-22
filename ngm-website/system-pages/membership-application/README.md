@@ -9,9 +9,12 @@ gadget. **Verify the form skin against the live page** — WA's form markup is d
 nested and the skin is provisional.
 
 The heading copy now matches the Join page: the membership year runs **June 1 through
-May 31**. The CSS skin was extended to also cover level-selection labels, validation /
-error messages, field-row spacing, and the recurring-payment checkbox — all still
-provisional and best-effort against WA's documented class names (confirm live).
+May 31**. The CSS skin was verified against the **live `/application` identify-step
+markup** (theme `casefile_guardian`) and corrected to WA's real classes — `.validationError`
+for inline errors, `.levelLabel` for the selected level, `.fieldContainer`/`.fieldLabel`
+for field rows — plus the pay / prev / cancel buttons via WA's stable control-id suffixes
+(`…_payOnline`, `…_payWithBankAccount`, `…_prev`, `…_cancel`). The later **profile and
+payment steps** reuse these same classes but should still be eyeballed on the live flow.
 
 ---
 
