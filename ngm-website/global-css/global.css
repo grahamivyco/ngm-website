@@ -5163,32 +5163,46 @@ body .WaGadgetPublicWizard .validationError {
 /* Breathing room between field rows (WA wraps each field in .fieldContainer) */
 body .WaGadgetMembershipApplication .fieldContainer,
 body .WaGadgetPublicWizard .fieldContainer { padding: 4px 0 !important; }
-/* Prev / Cancel wizard buttons → outline pill (class + stable id suffix) */
-body .WaGadgetMembershipApplication input.prevButton,
-body .WaGadgetMembershipApplication input.cancelButton,
-body .WaGadgetMembershipApplication input[id$="_prev"],
-body .WaGadgetMembershipApplication input[id$="_prevTop"],
-body .WaGadgetMembershipApplication input[id$="_cancel"],
-body .WaGadgetMembershipApplication input[id$="_cancelTop"],
-body .WaGadgetPublicWizard input.prevButton,
-body .WaGadgetPublicWizard input.cancelButton,
-body .WaGadgetPublicWizard input[id$="_prev"],
-body .WaGadgetPublicWizard input[id$="_prevTop"],
-body .WaGadgetPublicWizard input[id$="_cancel"],
-body .WaGadgetPublicWizard input[id$="_cancelTop"] {
+/* Prev / Cancel / Invoice (secondary) wizard buttons → outline pill.
+   ELEMENT-AGNOSTIC on purpose: WA renders Back/Cancel/Invoice as <a>/<button>
+   (not <input>, unlike Next/Pay), so match by class AND the stable control-id
+   suffix with no element name, and neutralise anchor defaults. */
+body .WaGadgetMembershipApplication .prevButton,
+body .WaGadgetMembershipApplication .cancelButton,
+body .WaGadgetMembershipApplication .additionalButton,
+body .WaGadgetMembershipApplication [id$="_prev"],
+body .WaGadgetMembershipApplication [id$="_prevTop"],
+body .WaGadgetMembershipApplication [id$="_cancel"],
+body .WaGadgetMembershipApplication [id$="_cancelTop"],
+body .WaGadgetMembershipApplication [id$="_additionalButton"],
+body .WaGadgetMembershipApplication [id$="_additionalButtonTop"],
+body .WaGadgetPublicWizard .prevButton,
+body .WaGadgetPublicWizard .cancelButton,
+body .WaGadgetPublicWizard .additionalButton,
+body .WaGadgetPublicWizard [id$="_prev"],
+body .WaGadgetPublicWizard [id$="_prevTop"],
+body .WaGadgetPublicWizard [id$="_cancel"],
+body .WaGadgetPublicWizard [id$="_cancelTop"],
+body .WaGadgetPublicWizard [id$="_additionalButton"],
+body .WaGadgetPublicWizard [id$="_additionalButtonTop"] {
   font-family: var(--ngm-sans) !important; font-size: .9rem !important; font-weight: 600 !important;
   color: var(--ngm-sage-dk) !important; background: transparent !important;
   border: 1.5px solid var(--ngm-sage-dk) !important; border-radius: 999px !important;
   padding: 10px 26px !important; cursor: pointer !important; transition: all .15s ease !important;
+  text-decoration: none !important; display: inline-block !important; box-shadow: none !important;
 }
-body .WaGadgetMembershipApplication input.prevButton:hover,
-body .WaGadgetMembershipApplication input.cancelButton:hover,
-body .WaGadgetMembershipApplication input[id$="_prev"]:hover,
-body .WaGadgetMembershipApplication input[id$="_cancel"]:hover,
-body .WaGadgetPublicWizard input.prevButton:hover,
-body .WaGadgetPublicWizard input.cancelButton:hover,
-body .WaGadgetPublicWizard input[id$="_prev"]:hover,
-body .WaGadgetPublicWizard input[id$="_cancel"]:hover {
+body .WaGadgetMembershipApplication .prevButton:hover,
+body .WaGadgetMembershipApplication .cancelButton:hover,
+body .WaGadgetMembershipApplication .additionalButton:hover,
+body .WaGadgetMembershipApplication [id$="_prev"]:hover,
+body .WaGadgetMembershipApplication [id$="_cancel"]:hover,
+body .WaGadgetMembershipApplication [id$="_additionalButton"]:hover,
+body .WaGadgetPublicWizard .prevButton:hover,
+body .WaGadgetPublicWizard .cancelButton:hover,
+body .WaGadgetPublicWizard .additionalButton:hover,
+body .WaGadgetPublicWizard [id$="_prev"]:hover,
+body .WaGadgetPublicWizard [id$="_cancel"]:hover,
+body .WaGadgetPublicWizard [id$="_additionalButton"]:hover {
   background: var(--ngm-sage-dk) !important; color: #fff !important;
 }
 /* Pay online / pay by bank → filled sage pill (primary; stable id suffix) */
@@ -5210,4 +5224,41 @@ body .WaGadgetMembershipApplication input[id$="_payWithBankAccount"]:hover,
 body .WaGadgetPublicWizard input[id$="_payOnline"]:hover,
 body .WaGadgetPublicWizard input[id$="_payWithBankAccount"]:hover {
   background: var(--ngm-sage) !important; border-color: var(--ngm-sage) !important;
+}
+/* ── Stacked field layout: labels ABOVE inputs ──────────────────────────
+   WA lays each field out as a <table> with a label cell (td.left) and an
+   input cell (td.right). Force those table parts to blocks so the label sits
+   on its own line above the input — a modern vertical form. Scoped to
+   .fieldSubContainer so the read-only "Application data" review table (a
+   different container) keeps its label→value alignment. */
+body .WaGadgetMembershipApplication .fieldSubContainer table,
+body .WaGadgetMembershipApplication .fieldSubContainer tbody,
+body .WaGadgetMembershipApplication .fieldSubContainer tr,
+body .WaGadgetMembershipApplication .fieldSubContainer td,
+body .WaGadgetPublicWizard .fieldSubContainer table,
+body .WaGadgetPublicWizard .fieldSubContainer tbody,
+body .WaGadgetPublicWizard .fieldSubContainer tr,
+body .WaGadgetPublicWizard .fieldSubContainer td {
+  display: block !important; width: 100% !important; max-width: 100% !important;
+}
+body .WaGadgetMembershipApplication .fieldSubContainer td.left,
+body .WaGadgetMembershipApplication .fieldSubContainer td.left .fieldLabel,
+body .WaGadgetPublicWizard .fieldSubContainer td.left,
+body .WaGadgetPublicWizard .fieldSubContainer td.left .fieldLabel {
+  text-align: left !important;
+}
+body .WaGadgetMembershipApplication .fieldSubContainer td.left,
+body .WaGadgetPublicWizard .fieldSubContainer td.left { padding: 0 0 6px 0 !important; }
+body .WaGadgetMembershipApplication .fieldSubContainer td.right,
+body .WaGadgetPublicWizard .fieldSubContainer td.right { padding: 0 !important; }
+/* Inputs fill the column up to a comfortable reading width */
+body .WaGadgetMembershipApplication .fieldBody input[type="text"],
+body .WaGadgetMembershipApplication .fieldBody input[type="email"],
+body .WaGadgetMembershipApplication .fieldBody input[type="tel"],
+body .WaGadgetMembershipApplication .fieldBody select,
+body .WaGadgetMembershipApplication .fieldBody textarea,
+body .WaGadgetPublicWizard .fieldBody input[type="text"],
+body .WaGadgetPublicWizard .fieldBody select,
+body .WaGadgetPublicWizard .fieldBody textarea {
+  width: 100% !important; max-width: 560px !important;
 }
