@@ -4055,9 +4055,11 @@ body.ngm-login-page .WaGadgetLoginForm .loginPanel::after { display: none !impor
 /* ══════════════════════════════════════════════════════════════════
    WA SYSTEM-PAGE FORMS  —  membership application / profile / renewal
    ──────────────────────────────────────────────────────────────────
-   PROVISIONAL skin for Wild Apricot's native system-page forms. Verified
-   against the live /application markup; profile & renewal share the same
-   WA field/button classes but should be spot-checked on the live pages.
+   PROVISIONAL skin for Wild Apricot's native system-page forms. Built against
+   WA's documented field/button classes; the membership application, profile,
+   and renewal share these classes but ALL must be spot-checked on the live
+   pages before launch (see the checklist in
+   system-pages/membership-application/README.md).
    WA uses deeply-nested table markup — we only recolour and re-font (fonts,
    headings, fields, buttons), never restructure. Stable classes only.
 ══════════════════════════════════════════════════════════════════ */
@@ -5136,3 +5138,53 @@ body .WaGadgetPublicWizard input[name$="cancelNoScript"] {
 }
 body .WaGadgetMembershipApplication input[name$="cancelNoScript"]:hover,
 body .WaGadgetPublicWizard input[name$="cancelNoScript"]:hover { background: var(--ngm-sage-dk) !important; color: #fff !important; }
+/* ── Extended coverage (PROVISIONAL — confirm each selector on the live
+   /application page; WA's stable class names for these vary by version). ── */
+/* Level-selection: level name reads as a small on-brand heading */
+body .WaGadgetMembershipApplication .membershipLevelName,
+body .WaGadgetMembershipApplication .levelName,
+body .WaGadgetPublicWizard .membershipLevelName,
+body .WaGadgetPublicWizard .levelName {
+  font-family: var(--ngm-sans) !important; font-weight: 600 !important;
+  font-size: 1rem !important; color: var(--ngm-charcoal) !important;
+}
+/* Validation / error messaging → rose, on-brand */
+body .WaGadgetMembershipApplication .failedField,
+body .WaGadgetMembershipApplication .errorMessage,
+body .WaGadgetMembershipApplication .validationSummary,
+body .WaGadgetMembershipApplication .fieldError,
+body .WaGadgetPublicWizard .failedField,
+body .WaGadgetPublicWizard .errorMessage,
+body .WaGadgetPublicWizard .validationSummary,
+body .WaGadgetPublicWizard .fieldError {
+  font-family: var(--ngm-sans) !important; font-size: .82rem !important;
+  color: var(--ngm-rose-dk) !important;
+}
+/* Inputs flagged invalid pick up a rose border to match the message */
+body .WaGadgetMembershipApplication .failedField input,
+body .WaGadgetMembershipApplication .failedField select,
+body .WaGadgetMembershipApplication .failedField textarea,
+body .WaGadgetPublicWizard .failedField input,
+body .WaGadgetPublicWizard .failedField select,
+body .WaGadgetPublicWizard .failedField textarea {
+  border-color: var(--ngm-rose) !important;
+}
+/* Field-row breathing room + fieldset reset (no restructuring) */
+body .WaGadgetMembershipApplication .fieldRow,
+body .WaGadgetPublicWizard .fieldRow { padding: 7px 0 !important; }
+body .WaGadgetMembershipApplication fieldset,
+body .WaGadgetPublicWizard fieldset {
+  border: none !important; margin: 0 !important; padding: 0 !important;
+}
+body .WaGadgetMembershipApplication legend,
+body .WaGadgetPublicWizard legend {
+  font-family: var(--ngm-serif) !important; font-weight: 400 !important;
+  font-size: 1.25rem !important; color: var(--ngm-charcoal) !important;
+}
+/* Recurring / auto-renew payment checkbox label stays on-brand */
+body .WaGadgetMembershipApplication .recurringPaymentContainer label,
+body .WaGadgetMembershipApplication .recurringPaymentContainer .fieldLabel,
+body .WaGadgetPublicWizard .recurringPaymentContainer label,
+body .WaGadgetPublicWizard .recurringPaymentContainer .fieldLabel {
+  font-family: var(--ngm-sans) !important; color: var(--ngm-charcoal) !important;
+}

@@ -3,6 +3,48 @@
 **WA page:** `/application` (WA system/join form)
 
 The form is skinned site-wide by `global-css/global.css` (the WA SYSTEM-PAGE FORMS
-section). `01-top.html` is an optional branded heading to place above the form if the
-page allows a Custom HTML gadget. **Verify the form skin against the live page** — WA's
-form markup is deeply nested and the skin is provisional.
+section, plus the MEMBERSHIP APPLICATION / JOIN WIZARD block). `01-top.html` is an
+optional branded heading to place above the form if the page allows a Custom HTML
+gadget. **Verify the form skin against the live page** — WA's form markup is deeply
+nested and the skin is provisional.
+
+The heading copy now matches the Join page: the membership year runs **June 1 through
+May 31**. The CSS skin was extended to also cover level-selection labels, validation /
+error messages, field-row spacing, and the recurring-payment checkbox — all still
+provisional and best-effort against WA's documented class names (confirm live).
+
+---
+
+## The new-member flow (how the pieces connect)
+
+Entry points (header **Join**, the login-page footer link, page CTAs) →
+**`/join`** marketing page →
+**`/application`** (this native WA form + optional branded heading) →
+WA-native **$30 payment** + confirmation + account creation →
+**`/sys/login`** → **Member Hub**.
+
+Repo pieces: `pages/join/` (marketing), this folder (`/application`),
+`system-pages/login/` (which links back to Join for non-members).
+
+## Live-verification & WA-settings checklist
+
+Things that can only be done on the live Wild Apricot site — run these before launch:
+
+1. **Confirm real slugs:** `/join`, `/application`, `/sys/login`. If any differ, update
+   the login footer link (`system-pages/login/03-bottom.html` + its `.slim`, currently a
+   `/join` placeholder marked `SET URL`) and the three Join CTAs
+   (`pages/join/01-top.html`).
+2. **Branded heading:** on `/application`, check whether WA allows a Custom HTML gadget
+   **above** the form. If yes, paste `01-top.html`; if not, skip — the form is still
+   skinned. (See `02-wa-gadget.txt`.)
+3. **Walk the live form** with the redesign CSS active and spot-check: fonts, field
+   borders + focus ring, level pricing, mandatory asterisks, Next / Submit / Cancel pill
+   buttons, and validation / error messages. Adjust any selector that didn't catch the
+   live markup.
+4. **WA admin config (outside this repo):** membership level = **$30/yr**, term
+   **June 1 – May 31**, online payment enabled, application-approval workflow set,
+   confirmation email content reviewed.
+5. **End-to-end test** with a throwaway email: submit application → pay $30 → receive
+   confirmation → the new account logs in → lands on **Member Hub**. Then refund/delete
+   the test record.
+6. **Header state:** logged-out vs logged-in header swaps correctly after joining.
