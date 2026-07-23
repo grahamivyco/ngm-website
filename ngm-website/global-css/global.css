@@ -6376,8 +6376,6 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
   font-family: var(--ngm-sans); font-size: .95rem; color: var(--ngm-gray);
   line-height: 1.7; margin: 0;
 }
-.ngm-loc-videolink, body a.ngm-loc-videolink {
-  color: var(--ngm-sage-dk) !important; font-weight: 500;
-  text-decoration: none !important; border-bottom: 1px solid rgba(62,85,56,.3);
-}
-.ngm-loc-videolink:hover, body a.ngm-loc-videolink:hover { border-color: var(--ngm-sage-dk); }
+/* Zoom "Join the meeting" tile in the meetings hero (reuses the Member-Hub
+   module); a touch of top spacing so it clears the hero copy. */
+.ngm-mtg-hero-zoom { margin-top: 28px; max-width: 440px; }
