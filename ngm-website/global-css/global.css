@@ -1217,6 +1217,49 @@ body .ngm-lcard-email {
 .ngm-lcard-note a:hover {
   border-color: var(--ngm-sage-dk);
 }
+/* ── Photo bento gallery (about page) ──
+   A masonry-style photo grid that reflows cleanly at every width:
+   4 columns on desktop → 3 on tablet → 2 on phone. Feature tiles
+   span extra rows/columns; grid-auto-flow:dense backfills the gaps
+   so there are never holes. Tiles never drop below a 2-col span, so
+   nothing overflows on narrow screens. */
+.ngm-bento {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
+  grid-auto-flow: dense;
+  gap: 14px;
+  margin-top: 40px;
+}
+.ngm-bento-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--ngm-radius);
+  background: var(--ngm-linen-dk);
+  box-shadow: var(--ngm-sh);
+}
+.ngm-bento-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .5s ease;
+}
+.ngm-bento-item:hover img { transform: scale(1.06); }
+/* Feature-tile size modifiers (default tile is 1×1) */
+.ngm-bento-wide { grid-column: span 2; }
+.ngm-bento-tall { grid-row: span 2; }
+.ngm-bento-big  { grid-column: span 2; grid-row: span 2; }
+@media (max-width: 900px) {
+  .ngm-bento { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 180px; }
+}
+@media (max-width: 600px) {
+  .ngm-bento { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; gap: 10px; }
+  .ngm-bento-big { grid-column: span 2; }
+}
+@media (max-width: 380px) {
+  .ngm-bento { grid-auto-rows: 130px; }
+}
 /* ── Join CTA (about page — rose-lt) ── */
 .ngm-about-cta {
   background: var(--ngm-rose-lt);
