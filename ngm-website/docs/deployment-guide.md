@@ -45,7 +45,6 @@ Doing it in this order means the site is never half-styled:
 | Daytime Counted Thread | `/daytime-counted-thread` | Sandwich | Upcoming events → filter to this group |
 | Evening Needlepointers | `/evening-needlepointers` | Sandwich | " |
 | Potpourri Stitchers | `/potpourri-stitchers` | Sandwich | " |
-| Beading | `/beading` | Sandwich | " |
 | Retreat | `/retreat` | Single | — |
 | Japanese Embroidery | `/japanese-embroidery` | Sandwich | Upcoming events → filter |
 | 5th Tuesday | `/fifth-tuesday` | Sandwich | Upcoming events → filter |

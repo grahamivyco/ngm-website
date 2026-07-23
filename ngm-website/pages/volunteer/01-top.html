@@ -215,14 +215,15 @@ body a.ngm-btn-outline-rose:hover { background: var(--ngm-rose) !important; colo
 /* ── Role cards grid ── */
 .ngm-vol-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
   margin-top: 44px;
 }
 .ngm-vol-card {
   display: flex;
-  gap: 18px;
-  padding: 24px;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px;
   background: #fff;
   border: 1px solid var(--ngm-border);
   border-radius: var(--ngm-radius-lg);
@@ -328,11 +329,14 @@ body a.ngm-btn-outline-rose:hover { background: var(--ngm-rose) !important; colo
 /* ════════════════════════════════════════════════════════════
    RESPONSIVE
 ════════════════════════════════════════════════════════════ */
+@media (max-width: 1080px) {
+  .ngm-vol-grid { grid-template-columns: repeat(3, 1fr); }
+}
 @media (max-width: 900px) {
   .ngm-vol-hero { padding: 56px 28px 52px; }
   .ngm-vol-hero p { max-width: 100%; }
   .ngm-sec { padding: 64px 28px; }
-  .ngm-vol-grid { grid-template-columns: 1fr; }
+  .ngm-vol-grid { grid-template-columns: 1fr 1fr; }
   .ngm-vol-cta { padding: 64px 28px; }
   .ngm-lead { max-width: 100% !important; }
 }
@@ -340,6 +344,7 @@ body a.ngm-btn-outline-rose:hover { background: var(--ngm-rose) !important; colo
   .ngm-vol-hero { padding: 44px 18px 40px; }
   .ngm-sec { padding: 52px 18px; }
   .ngm-vol-cta { padding: 52px 18px; }
+  .ngm-vol-grid { grid-template-columns: 1fr; }
 }
 /* ════════════════════════════════════════════════════════════
    WA GAP-KILLING (sections 19 + 20 from homepage) — confirmed

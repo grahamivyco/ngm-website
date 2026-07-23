@@ -203,6 +203,13 @@ body a.ngm-btn-outline-rose:hover { background: var(--ngm-rose) !important; colo
   padding: 80px 48px 72px;
   border-bottom: 1px solid var(--ngm-border);
 }
+/* Hero title is sized to stay on its intended two lines (the manual
+   <br> split) inside the narrower two-column hero — a hair smaller
+   than the shared .ngm-h1 so "A community built on" never wraps. */
+.ngm-about-hero .ngm-h1 {
+  font-size: clamp(2.5rem, 4vw, 3.4rem);
+  text-wrap: balance;
+}
 .ngm-about-hero-inner {
   max-width: 1080px;
   margin: 0 auto;
@@ -492,7 +499,7 @@ body .WaPlaceHolderWide > div {
         </div>
         <div class="ngm-do-body">
           <h3>Monthly Meetings</h3>
-          <p>Seven recurring groups meet monthly — from open Stitch-Ins to specialty groups focused on beading, needlepoint, counted thread, and more. Members attend as many as they like.</p>
+          <p>Seven recurring groups meet monthly — from open Stitch-Ins to specialty groups focused on needlepoint, counted thread, and more. Members attend as many as they like.</p>
         </div>
       </div>
       <div class="ngm-do-card">
