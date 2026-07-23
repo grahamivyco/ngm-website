@@ -255,6 +255,11 @@ body a.ngm-btn-outline-rose:hover { background: var(--ngm-rose) !important; colo
   display: flex;
   width: max-content;
   animation: ngm-scroll 44s linear infinite;
+  /* GPU-composite the scroll so it stays smooth with no jitter; the
+     track is exactly two identical sets, so translating by -50% lands
+     on a pixel-identical frame — a seamless, gapless loop. */
+  will-change: transform;
+  backface-visibility: hidden;
 }
 /* Each set is a non-shrinking flex group; two of them make the
    track exactly 2× one set, so -50% lands on a pixel-identical
@@ -267,8 +272,8 @@ body a.ngm-btn-outline-rose:hover { background: var(--ngm-rose) !important; colo
   animation-play-state: paused;
 }
 @keyframes ngm-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
 }
 .ngm-stat-item {
   display: flex;
@@ -1083,13 +1088,47 @@ body .WaPlaceHolderWide > div {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
-/* ── 21. v7: full-width events band, softened retreat fade, mobile
-   centering + full-width stacked CTAs ─────────────────────────── */
+/* ── 21. v7: hero load state + copy centering, marquee smoothness,
+   full-width events band, softened retreat fade, mobile centering +
+   full-width stacked CTAs ─────────────────────────────────────── */
+/* Hero copy: keep text left-aligned but center the whole block within
+   its half (uniform left edge via the inner wrapper) so it sits closer
+   to the photo instead of pinned to the far edge. */
+.ngm-hero-copy { align-items: center; }
+.ngm-hero-copy-inner { display: flex; flex-direction: column; }
+/* Hero photo: branded loading state — a shimmer + pulsing sprig badge —
+   then the image fades in smoothly on load instead of snapping in. */
+.ngm-hero-photo { position: relative; background: var(--ngm-sage-lt); }
+.ngm-hero-loader {
+  position: absolute; inset: 0; z-index: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(100deg, var(--ngm-sage-lt) 30%, #E7EFE3 50%, var(--ngm-sage-lt) 70%);
+  background-size: 200% 100%;
+  animation: ngm-hero-shimmer 1.6s linear infinite;
+}
+.ngm-hero-loader-badge {
+  width: 66px; height: 66px; border-radius: 50%;
+  background: var(--ngm-cream); box-shadow: var(--ngm-shm);
+  display: flex; align-items: center; justify-content: center;
+  animation: ngm-hero-pulse 1.5s ease-in-out infinite;
+}
+.ngm-hero-loader-badge svg { width: 34px; height: 34px; color: var(--ngm-sage); }
+.ngm-hero-photo img { position: relative; z-index: 1; opacity: 0; transition: opacity .6s ease; }
+.ngm-hero-photo img.is-loaded { opacity: 1; }
+@keyframes ngm-hero-shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@keyframes ngm-hero-pulse { 0%, 100% { transform: scale(.9); opacity: .7; } 50% { transform: scale(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .ngm-hero-loader, .ngm-hero-loader-badge { animation: none !important; }
+  .ngm-hero-photo img { transition: none !important; }
+}
 body .ngm-wa-events.WaGadgetUpcomingEvents { width: 100% !important; max-width: 100% !important; text-align: center !important; }
 body .ngm-wa-events .gadgetStyleBody { text-align: left !important; }
 /* soften the photo→green fade so the retreat photo reads through */
 .ngm-retreat-photo::after { background: linear-gradient(to right, transparent 55%, var(--ngm-sage-dk) 100%); }
 @media (max-width: 600px) {
+  /* hero copy fills the column on mobile (text centered by rules below) */
+  .ngm-hero-copy { align-items: stretch; }
+  .ngm-hero-copy-inner { width: 100%; }
   /* center eyebrows / titles / copy */
   .ngm-eyebrow, .ngm-retreat-eyebrow,
   .ngm-h1, .ngm-h2, .ngm-h2-dark,
@@ -1107,19 +1146,27 @@ body .ngm-wa-events .gadgetStyleBody { text-align: left !important; }
 </style>
 <section class="ngm ngm-hero">
   <div class="ngm-hero-copy">
-    <span class="ngm-eyebrow">Welcome</span>
-    <h1 class="ngm-h1">A place for people<br>who love to <em>stitch</em></h1>
-    <p class="ngm-hero-body">The Needlework Guild of Minnesota offers monthly meetings, hands-on workshops, and a beloved annual retreat — a warm, welcoming community of stitchers who learn from and look out for each other.</p>
-    <div class="ngm-hero-btns">
-      <a class="ngm-btn ngm-btn-green" href="/join">Join the Guild</a>
-      <a class="ngm-btn ngm-btn-outline" href="/calendar">See our calendar</a>
+    <div class="ngm-hero-copy-inner">
+      <span class="ngm-eyebrow">Welcome</span>
+      <h1 class="ngm-h1">A place for people<br>who love to <em>stitch</em></h1>
+      <p class="ngm-hero-body">The Needlework Guild of Minnesota offers monthly meetings, hands-on workshops, and a beloved annual retreat — a warm, welcoming community of stitchers who learn from and look out for each other.</p>
+      <div class="ngm-hero-btns">
+        <a class="ngm-btn ngm-btn-green" href="/join">Join the Guild</a>
+        <a class="ngm-btn ngm-btn-outline" href="/calendar">See our calendar</a>
+      </div>
     </div>
   </div>
   <div class="ngm-hero-photo">
+    <div class="ngm-hero-loader" aria-hidden="true">
+      <span class="ngm-hero-loader-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V9"/><path d="M12 13c0-3.3 2.2-5.6 6.5-6.5C17.6 10.8 15.3 13 12 13z"/><path d="M12 16c0-2.5-1.8-4.4-5.5-5 .9 3.4 2.7 5 5.5 5z"/></svg>
+      </span>
+    </div>
     <img
       src="REPLACE_WITH_GROUP_PHOTO_URL_FROM_GALLERY"
       alt="Guild members stitching together at a monthly meeting"
       loading="eager"
+      onload="this.classList.add('is-loaded')"
       onerror="this.src='https://needleworkguildmn.org/resources/Pictures/Website%20Update%20Photos/Needlework%20Guild%20Hero%20Image.png'"
     >
   </div>

@@ -5943,3 +5943,44 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li:hover {
   }
   .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-head { margin-bottom:0; }
 }
+
+/* ---------- Hero: centered copy block + branded image load state ---------- */
+/* Center the copy block within its half (uniform left edge via the inner
+   wrapper) so it sits closer to the photo, text still left-aligned. */
+.ngm-hero-copy { align-items: center; }
+.ngm-hero-copy-inner { display: flex; flex-direction: column; }
+/* Photo: shimmer + pulsing sprig badge while loading, image fades in. */
+.ngm-hero-photo { position: relative; background: var(--ngm-sage-lt); }
+.ngm-hero-loader {
+  position: absolute; inset: 0; z-index: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(100deg, var(--ngm-sage-lt) 30%, #E7EFE3 50%, var(--ngm-sage-lt) 70%);
+  background-size: 200% 100%;
+  animation: ngm-hero-shimmer 1.6s linear infinite;
+}
+.ngm-hero-loader-badge {
+  width: 66px; height: 66px; border-radius: 50%;
+  background: var(--ngm-cream); box-shadow: var(--ngm-shm);
+  display: flex; align-items: center; justify-content: center;
+  animation: ngm-hero-pulse 1.5s ease-in-out infinite;
+}
+.ngm-hero-loader-badge svg { width: 34px; height: 34px; color: var(--ngm-sage); }
+.ngm-hero-photo img { position: relative; z-index: 1; opacity: 0; transition: opacity .6s ease; }
+.ngm-hero-photo img.is-loaded { opacity: 1; }
+@keyframes ngm-hero-shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@keyframes ngm-hero-pulse { 0%, 100% { transform: scale(.9); opacity: .7; } 50% { transform: scale(1); opacity: 1; } }
+
+/* ---------- Marquee: GPU-composited, seamless (two identical sets, -50%) ---------- */
+.ngm-marquee-track { will-change: transform; backface-visibility: hidden; }
+@keyframes ngm-scroll { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ngm-hero-loader, .ngm-hero-loader-badge { animation: none !important; }
+  .ngm-hero-photo img { transition: none !important; }
+}
+
+/* Hero copy fills its column on mobile (text centered by the mobile block above) */
+@media (max-width: 600px) {
+  .ngm-hero-copy { align-items: stretch; }
+  .ngm-hero-copy-inner { width: 100%; }
+}

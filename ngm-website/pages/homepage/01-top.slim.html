@@ -1,19 +1,27 @@
 <!-- SLIM — styling comes from the Global CSS (global.css). Paste this only AFTER global.css is live in WA. Full self-contained version: 01-top.html -->
 <section class="ngm ngm-hero">
   <div class="ngm-hero-copy">
-    <span class="ngm-eyebrow">Welcome</span>
-    <h1 class="ngm-h1">A place for people<br>who love to <em>stitch</em></h1>
-    <p class="ngm-hero-body">The Needlework Guild of Minnesota offers monthly meetings, hands-on workshops, and a beloved annual retreat — a warm, welcoming community of stitchers who learn from and look out for each other.</p>
-    <div class="ngm-hero-btns">
-      <a class="ngm-btn ngm-btn-green" href="/join">Join the Guild</a>
-      <a class="ngm-btn ngm-btn-outline" href="/calendar">See our calendar</a>
+    <div class="ngm-hero-copy-inner">
+      <span class="ngm-eyebrow">Welcome</span>
+      <h1 class="ngm-h1">A place for people<br>who love to <em>stitch</em></h1>
+      <p class="ngm-hero-body">The Needlework Guild of Minnesota offers monthly meetings, hands-on workshops, and a beloved annual retreat — a warm, welcoming community of stitchers who learn from and look out for each other.</p>
+      <div class="ngm-hero-btns">
+        <a class="ngm-btn ngm-btn-green" href="/join">Join the Guild</a>
+        <a class="ngm-btn ngm-btn-outline" href="/calendar">See our calendar</a>
+      </div>
     </div>
   </div>
   <div class="ngm-hero-photo">
+    <div class="ngm-hero-loader" aria-hidden="true">
+      <span class="ngm-hero-loader-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V9"/><path d="M12 13c0-3.3 2.2-5.6 6.5-6.5C17.6 10.8 15.3 13 12 13z"/><path d="M12 16c0-2.5-1.8-4.4-5.5-5 .9 3.4 2.7 5 5.5 5z"/></svg>
+      </span>
+    </div>
     <img
       src="REPLACE_WITH_GROUP_PHOTO_URL_FROM_GALLERY"
       alt="Guild members stitching together at a monthly meeting"
       loading="eager"
+      onload="this.classList.add('is-loaded')"
       onerror="this.src='https://needleworkguildmn.org/resources/Pictures/Website%20Update%20Photos/Needlework%20Guild%20Hero%20Image.png'"
     >
   </div>
