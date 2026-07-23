@@ -1,0 +1,35 @@
+<!--
+  NGM — rename the WA membership-application payment buttons.
+
+  WHERE THIS GOES:
+  Paste into a Custom HTML gadget on the /application page (e.g. append it to
+  the branded-heading gadget, or add a small gadget below the form). Runs
+  inline, so WA's CSP ('unsafe-inline' is allowed) permits it.
+
+  WHAT IT DOES:
+  On the Review & confirm step WA renders two forward buttons:
+    "Pay with credit or debit card"  and  "Invoice me".
+  This renames them to match the payment-instructions wording:
+    → "Pay Online"                   and  → "Pay by check (invoice me)".
+  It matches on the exact current label, so it never touches the plain "Next"
+  button on the earlier steps. Each wizard step is a full page reload, so it
+  re-runs on every step automatically.
+-->
+<script>
+(function () {
+  function renameButtons() {
+    var inputs = document.querySelectorAll('input[type="submit"], input[type="button"]');
+    for (var i = 0; i < inputs.length; i++) {
+      var el = inputs[i];
+      var v = (el.value || '').trim();
+      if (v === 'Pay with credit or debit card') { el.value = 'Pay Online'; }
+      else if (v === 'Invoice me') { el.value = 'Pay by check (invoice me)'; }
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renameButtons);
+  } else {
+    renameButtons();
+  }
+}());
+</script>

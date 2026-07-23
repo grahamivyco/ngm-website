@@ -29,6 +29,13 @@ WA-native **$30 payment** + confirmation + account creation →
 Repo pieces: `pages/join/` (marketing), this folder (`/application`),
 `system-pages/login/` (which links back to Join for non-members).
 
+**Payment-button wording:** `button-rename.html` is a small inline `<script>`
+(paste into a Custom HTML gadget on `/application`) that renames the review-step
+buttons "Pay with credit or debit card" → "Pay Online" and "Invoice me" →
+"Pay by check (invoice me)". Button labels are WA input values, so this can't be
+done in CSS. It matches on exact label text, so it never touches the earlier
+steps' "Next" button.
+
 ## Live-verification & WA-settings checklist
 
 Things that can only be done on the live Wild Apricot site — run these before launch:
