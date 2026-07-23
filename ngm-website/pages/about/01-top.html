@@ -285,6 +285,15 @@ body a.ngm-btn-outline-rose:hover { background: var(--ngm-rose) !important; colo
   justify-content: center;
   flex-shrink: 0;
 }
+/* Pin the inline SVG to 22px. Without this the WA theme's own svg rule
+   overrides the width/height HTML attributes and the icon balloons to
+   fill the tile. Body-prefix + !important to beat the theme. */
+.ngm-do-icon svg,
+body .ngm-do-icon svg {
+  width: 22px !important;
+  height: 22px !important;
+  flex-shrink: 0;
+}
 .ngm-do-body h3 {
   font-family: var(--ngm-serif) !important;
   font-size: 1.15rem;
