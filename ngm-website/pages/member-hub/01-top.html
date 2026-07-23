@@ -104,6 +104,11 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"] .ngm-evt-tag
 .ngm-hub-zoom-tile-go{flex-shrink:0;color:var(--ngm-sage-dk);display:inline-flex;transition:transform .18s;}
 .ngm-hub-zoom-tile-go svg{width:20px;height:20px;}
 .ngm-hub-zoom-tile:hover .ngm-hub-zoom-tile-go{transform:translateX(3px);}
+/* zoom module: its own contained tile beneath the hero, a shade deeper */
+.ngm-hub-zoomrow{padding-top:34px;padding-bottom:34px;}
+.ngm-hub-zoom-module{display:flex;align-items:center;gap:16px;max-width:660px;background:#D6E3CC;border:1px solid #C1D3B2;border-radius:var(--ngm-radius-lg);padding:20px 24px;text-decoration:none!important;color:var(--ngm-charcoal);transition:transform .18s,box-shadow .18s;}
+.ngm-hub-zoom-module:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(62,85,56,.18);}
+.ngm-hub-zoom-module:hover .ngm-hub-zoom-tile-go{transform:translateX(3px);}
 /* volunteer positions — compact board written out on the hub */
 .ngm-hub-vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px;}
 .ngm-hub-vrole{background:#fff;border:1px solid var(--ngm-border);border-radius:var(--ngm-radius);padding:16px 18px;}
@@ -150,14 +155,6 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"] .ngm-evt-tag
       <p>Your Guild home &mdash; the meeting Zoom link and your member resources, all in one place.</p>
     </div>
     <div class="ngm-hub-hero-side">
-      <a class="ngm-hub-zoom-tile" href="#"><!-- SET URL: the single guild Zoom meeting link -->
-        <span class="ngm-hub-zoom-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span>
-        <div class="ngm-hub-zoom-tile-body">
-          <h4>Join the meeting</h4>
-          <p>One Zoom link for every Guild meeting &mdash; the host opens the room 5 minutes early.</p>
-        </div>
-        <span class="ngm-hub-zoom-tile-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-      </a>
       <a class="ngm-hub-acard" href="/Sys/Profile">
         <span class="ngm-hub-acard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
         <div class="ngm-hub-acard-body">
@@ -169,4 +166,16 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"] .ngm-evt-tag
     </div>
   </div>
 </div>
+<section class="ngm ngm-hub-band ngm-hub-white ngm-hub-zoomrow">
+  <div class="ngm-hub-inner">
+    <a class="ngm-hub-zoom-module" href="#"><!-- SET URL: the single guild Zoom meeting link -->
+      <span class="ngm-hub-zoom-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span>
+      <div class="ngm-hub-zoom-tile-body">
+        <h4>Join the meeting</h4>
+        <p>One Zoom link for every Guild meeting &mdash; the host opens the room 5 minutes early.</p>
+      </div>
+      <span class="ngm-hub-zoom-tile-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+    </a>
+  </div>
+</section>
 </div>
