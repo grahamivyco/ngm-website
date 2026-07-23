@@ -1648,6 +1648,7 @@ html body #idViewSwitchersTable a.incDateButton {
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
+  position: relative !important;      /* anchor for the absolutely-centred chevron */
   width: 44px !important;
   height: 44px !important;
   min-width: 44px !important;
@@ -1680,9 +1681,13 @@ html body #idViewSwitchersTable a.incDateButton > * { display: none !important; 
 html body #idViewSwitchersTable a.DecDateButton::before,
 html body #idViewSwitchersTable a.incDateButton::before {
   content: "" !important;
-  display: block !important;
-  flex: 0 0 auto !important;
+  /* ABSOLUTE-centre: inset:0 + margin:auto pins a fixed 20px box dead-centre of
+     the 44px circle at EVERY width, immune to WA's baseline/line-height/flex
+     overrides that were nudging the glyph to a corner. */
+  position: absolute !important;
+  top: 0 !important; right: 0 !important; bottom: 0 !important; left: 0 !important;
   margin: auto !important;
+  display: block !important;
   width: 20px !important;
   height: 20px !important;
   background: currentColor !important;
@@ -1818,184 +1823,107 @@ body .WaGadgetEventsStateCalendar a[href*="EventListViewMode"] {
    block/inline display (inline-block alone let the nav drop below); margin-left
    :auto on the nav pushes it to the right edge; the <table> takes a full-width
    row of its own beneath. */
+/* ONE breakpoint at 600px drives the WHOLE toolbar so its layout and the weekday
+   abbreviation tier always switch together. They used to desync because WA's own
+   ~767px breakpoint fired first — dropping the nav below the month AND blanking
+   the weekday row at the same width. Every rule below is bound by an explicit
+   min-width:601 / max-width:600 media query at 2-ID specificity
+   (#idEventListCalendar #idViewSwitchersTable …) so WA's breakpoint can't win.
+     >600  → month title left, nav right, ONE line (title shrinks, never wraps)
+     ≤600  → title centred on its own line, then [‹][ Today …… ][›], Today filling
+             the gap between the arrows. */
 html body #idEventListCalendar {
   display: flex !important;
   flex-wrap: wrap !important;
-  align-items: center !important;      /* month title + nav share one baseline */
+  align-items: center !important;
   column-gap: 16px !important;
   row-gap: 6px !important;
   text-align: left !important;
-  /* Bottom gap so the toolbar clears the grid. NO side padding here — the card's
-     own side padding already insets the month name + nav pill (the "padding" the
-     user wanted), while the grid keeps the full inner width (minimal whitespace). */
   padding: 2px 0 14px !important;
 }
-html body #idEventListCalendar > .sectionTitle {
-  margin: 0 !important;
-  /* grow to push the nav to the right edge, but shrinkable (min-width:0) so the
-     title + nav always share ONE line down to the mobile breakpoint — this is
-     what stops the nav dropping below the month at in-between tablet widths. */
-  flex: 1 1 auto !important;
-  min-width: 0 !important;
-  align-self: center !important;       /* keep the title vertically level with the arrows */
-}
 html body #idEventListCalendar > .pageTitle,
-html body #idEventListCalendar > .pageTitleOuterContainer {
-  display: none !important;
-}
-html body .WaGadgetEventsStateCalendar #idViewSwitchersTable,
-body #idViewSwitchersTable {
-  margin: 0 0 0 auto !important;   /* push nav to the right edge on desktop */
-  padding: 0 !important;
-  clear: none !important;
-  text-align: right !important;
-  width: auto !important;
-  float: none !important;
-  flex: 0 0 auto !important;
-  min-height: 0 !important;
-  overflow: visible !important;
-}
+html body #idEventListCalendar > .pageTitleOuterContainer { display: none !important; }
 html body #idEventListCalendar > table.EventListCalendar,
 html body #idEventListCalendar > .EventListCalendar {
-  flex: 1 0 100% !important;
-  width: 100% !important;
-  margin-top: 6px !important;
+  flex: 1 0 100% !important; width: 100% !important; margin-top: 8px !important;
 }
-html body .WaGadgetEventsStateCalendar #idViewSwitchersTable #group2,
-body #idViewSwitchersTable #group2,
-body #group2 {
-  float: none !important;
-  display: inline-flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
-  align-items: center !important;
-  justify-content: flex-end !important;
-  gap: 10px !important;
-  width: auto !important;
-  margin: 0 !important;
-  text-align: right !important;
-}
-/* Remove leftover spacing from the hidden switcher group and any empty
-   button wrappers (the "spacers"). */
-body #group1,
-body .switchersGroup1,
-body #weekButton,
-body #monthButton,
-body #yearButton {
-  display: none !important;
-  width: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-/* Each nav button wrapper hugs its button and stays vertically centered.
-   The deep ID chain matches WA's own high-specificity mobile rule so ours
-   wins and the wrappers never stretch to a full-width bar. */
-html body #idViewSwitchersTable #group2 #decButton,
-html body #idViewSwitchersTable #group2 #todayButton,
-html body #idViewSwitchersTable #group2 #incButton,
-body #decButton,
-body #todayButton,
-body #incButton {
-  display: inline-flex !important;
-  align-items: center !important;
-  float: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  width: auto !important;
-  min-width: 0 !important;
-  flex: 0 0 auto !important;
+/* hidden Week/Month/Year group — reserve no space */
+body #group1, body .switchersGroup1,
+body #weekButton, body #monthButton, body #yearButton {
+  display: none !important; width: 0 !important; margin: 0 !important; padding: 0 !important;
 }
 
-/* TABLET & MOBILE: the month title on its own line, then the nav set as a
-   left-aligned row beneath it. ONLY at ≤600 (phones) — tablet keeps the desktop
-   layout (title left, nav right, same line). WA's own responsive CSS sets
-   #group2 to display:block + width:calc(100%-127px) and the buttons to block —
-   which stretched Today and broke the row; we override all of that so #group2
-   stays a flex row with auto-width wrappers. Button SIZES (42px circles + pill)
-   come from the base rules above — we only fix layout here. */
-@media (max-width: 600px) {
-  /* Make sure nothing clips the toolbar at this width */
-  body .ngm-cal.WaGadgetEventsStateCalendar,
-  body .ngm-cal .WaGadgetEventsStateCalendar,
-  body #idViewSwitchersTable,
-  body #group2 {
-    overflow: visible !important;
-  }
-  html body #idEventListCalendar > .sectionTitle,
-  body .WaGadgetEventsStateCalendar .sectionTitle,
-  body .ngm-cal .sectionTitle {
-    float: none !important;
-    display: block !important;
-    flex: 0 0 100% !important;       /* full-row in the flex parent */
-    width: 100% !important;
-    margin: 0 0 12px 0 !important;
+/* ── DESKTOP + TABLET (>600): month title left, nav right, ONE line. The toolbar
+   is indented 16px more than the grid on each side (title margin-left, nav
+   margin-right) so the month name + nav sit inset from the grid edges. ── */
+@media (min-width: 601px) {
+  html body #idEventListCalendar > .sectionTitle {
+    flex: 1 1 auto !important; min-width: 0 !important;
+    align-self: center !important;
+    margin: 0 0 0 16px !important;
     text-align: left !important;
   }
-  html body #idViewSwitchersTable,
-  html body .WaGadgetEventsStateCalendar #idViewSwitchersTable {
-    display: block !important;
-    flex: 0 0 100% !important;        /* full-row below the title */
-    text-align: left !important;
-    padding: 0 0 16px !important;
-    margin: 0 !important;            /* cancel desktop margin-left:auto */
-    width: 100% !important;
-    float: none !important;
-    clear: both !important;
+  html body #idEventListCalendar #idViewSwitchersTable {
+    display: inline-flex !important; align-items: center !important;
+    flex: 0 0 auto !important; width: auto !important;
+    margin: 0 16px 0 auto !important;   /* push right, indented 16px from the edge */
+    padding: 0 !important;
+    float: none !important; clear: none !important;
+    text-align: right !important; overflow: visible !important;
   }
-  /* Nav group: ONE full-width row — [‹] [ Today ……… ] [›]. The arrows keep
-     their 44px circles at each end and Today FLEX-GROWS to fill everything in
-     between (per request). nowrap keeps all three on the single row; the
-     selector out-ranks WA's own `#idViewSwitchersTable #group2 { display:block }`
-     rule (which was stacking them). */
-  html body .WaGadgetEventsStateCalendar #idViewSwitchersTable #group2,
-  html body #idViewSwitchersTable #group2,
-  html body .WaGadgetEventsStateCalendar #group2,
-  html body #group2 {
-    float: none !important;
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    gap: 10px !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    text-align: left !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-  /* arrow wrappers stay content-sized at the ends; the Today wrapper GROWS */
-  html body .WaGadgetEventsStateCalendar #idViewSwitchersTable #decButton,
-  html body .WaGadgetEventsStateCalendar #idViewSwitchersTable #incButton,
-  html body #idViewSwitchersTable #decButton,
-  html body #idViewSwitchersTable #incButton,
-  html body #decButton,
-  html body #incButton {
+  html body #idEventListCalendar #idViewSwitchersTable #group2 {
     display: inline-flex !important;
-    align-items: center !important;
-    float: none !important;
-    width: auto !important;
-    flex: 0 0 auto !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+    flex-direction: row !important; flex-wrap: nowrap !important;
+    align-items: center !important; justify-content: flex-end !important;
+    gap: 10px !important; width: auto !important; margin: 0 !important; float: none !important;
   }
-  html body .WaGadgetEventsStateCalendar #idViewSwitchersTable #todayButton,
-  html body #idViewSwitchersTable #todayButton,
-  html body #todayButton {
-    display: flex !important;
-    align-items: center !important;
-    float: none !important;
-    flex: 1 1 auto !important;        /* Today fills the space between the arrows */
-    width: auto !important;
-    min-width: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+  html body #idEventListCalendar #idViewSwitchersTable #decButton,
+  html body #idEventListCalendar #idViewSwitchersTable #todayButton,
+  html body #idEventListCalendar #idViewSwitchersTable #incButton {
+    display: inline-flex !important; align-items: center !important;
+    flex: 0 0 auto !important; width: auto !important; min-width: 0 !important;
+    float: none !important; margin: 0 !important; padding: 0 !important;
   }
-  /* Re-assert the arrow sizes so WA's mobile CSS can't shrink them. */
+}
+
+/* ── MOBILE (≤600): stack. Month centred on its own line; nav a full-width row
+   with Today stretching to fill the space between the two 44px arrows. ── */
+@media (max-width: 600px) {
+  html body #idEventListCalendar { overflow: visible !important; }
+  html body #idEventListCalendar > .sectionTitle {
+    float: none !important; display: block !important;
+    flex: 0 0 100% !important; width: 100% !important;
+    margin: 0 0 12px 0 !important;
+    text-align: center !important;      /* month centred on mobile only */
+    align-self: auto !important;
+  }
+  html body #idEventListCalendar #idViewSwitchersTable {
+    display: block !important;
+    flex: 0 0 100% !important; width: 100% !important;
+    margin: 0 !important; padding: 0 0 16px !important;
+    float: none !important; clear: both !important;
+    text-align: center !important; overflow: visible !important;
+  }
+  html body #idEventListCalendar #idViewSwitchersTable #group2 {
+    float: none !important; display: flex !important;
+    flex-direction: row !important; flex-wrap: nowrap !important;
+    align-items: center !important; justify-content: space-between !important;
+    gap: 10px !important; width: 100% !important; max-width: 100% !important;
+    margin: 0 !important; visibility: visible !important; opacity: 1 !important;
+  }
+  html body #idEventListCalendar #idViewSwitchersTable #decButton,
+  html body #idEventListCalendar #idViewSwitchersTable #incButton {
+    display: inline-flex !important; align-items: center !important;
+    flex: 0 0 auto !important; width: auto !important;
+    float: none !important; margin: 0 !important; padding: 0 !important;
+    visibility: visible !important; opacity: 1 !important;
+  }
+  html body #idEventListCalendar #idViewSwitchersTable #todayButton {
+    display: flex !important; align-items: center !important;
+    flex: 1 1 auto !important; width: auto !important; min-width: 0 !important;
+    float: none !important; margin: 0 !important; padding: 0 !important;
+    visibility: visible !important; opacity: 1 !important;
+  }
   html body #idViewSwitchersTable a.DecDateButton,
   html body #idViewSwitchersTable a.incDateButton {
     width: 44px !important; height: 44px !important;
@@ -2003,7 +1931,6 @@ body #incButton {
     padding: 0 !important; border-radius: 50% !important;
     font-size: 0 !important; visibility: visible !important;
   }
-  /* Today → full-width pill filling the gap; cap removed so it can stretch. */
   html body #idViewSwitchersTable a.todayButton,
   html body #idViewSwitchersTable #todayButton a,
   html body a.todayButton {
@@ -2064,24 +1991,29 @@ body .ngm-cal .monthViewType .EventListCalendar th {
 .ngm-key-text p {
   font-family: var(--ngm-sans); font-size: .8rem; color: var(--ngm-gray); line-height: 1.55; margin: 0;
 }
-/* email tile — a highlighted tile INSIDE the key module for submitting events */
+/* email tile — a highlighted tile INSIDE the key module for submitting events.
+   Plain text (no button); the email is an underlined inline link in the copy. */
 .ngm-key-cta {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 14px 24px; flex-wrap: wrap;
-  margin-top: 26px; padding: 20px 22px;
+  margin-top: 26px; padding: 18px 22px;
   background: var(--ngm-sage-lt); border-radius: var(--ngm-radius);
 }
-.ngm-key-cta-text h3 {
+.ngm-key-cta h3 {
   font-family: var(--ngm-serif) !important; font-size: 1.12rem; font-weight: 400;
-  color: var(--ngm-charcoal); text-transform: none !important; margin: 0 0 3px; line-height: 1.2;
+  color: var(--ngm-charcoal); text-transform: none !important; margin: 0 0 4px; line-height: 1.2;
 }
-.ngm-key-cta-text p {
-  font-family: var(--ngm-sans); font-size: .85rem; color: var(--ngm-gray); line-height: 1.5; margin: 0;
+.ngm-key-cta p {
+  font-family: var(--ngm-sans); font-size: .9rem; color: var(--ngm-gray); line-height: 1.6; margin: 0;
 }
+.ngm-key-cta a,
+body .ngm-key-cta a {
+  color: var(--ngm-sage-dk) !important; font-weight: 500 !important;
+  text-decoration: underline !important; text-underline-offset: 2px !important;
+}
+.ngm-key-cta a:hover,
+body .ngm-key-cta a:hover { color: var(--ngm-sage) !important; }
 @media (max-width: 560px) {
   .ngm-key { padding: 26px 22px; }
   .ngm-key-grid { grid-template-columns: 1fr; }
-  .ngm-key-cta { flex-direction: column; align-items: flex-start; }
 }
 /* ── Final CTA ── */
 .ngm-cal-cta { background: var(--ngm-rose-lt); padding: 72px 48px; text-align: center; }
@@ -5167,13 +5099,17 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar {
      overflowing / pinning the card left. This is what lets the card centre, and
      it keeps every weekday column the same width so none stretches. */
   table-layout: fixed !important;
-  /* SEPARATE + border-spacing:0 lets us draw only the lines we want. No outer
-     frame, no rounding, transparent fill — the grid sits flat on the plain page
-     (per request). Only vertical column dividers + a weekday underline remain;
-     the horizontal week-separator line above the dates is removed below. */
+  /* SEPARATE + border-spacing:0 so we can draw exactly the lines we want and
+     ROUND the outer frame. A 1px frame + radius + overflow:hidden gives the
+     calendar its own rounded border that starts at the green weekday bar (its
+     top corners clip to the radius) and rounds the bottom corners of the last
+     week too. This is the grid's OWN frame — separate from the removed linen
+     card; the month title + nav still sit on the plain page above it. */
   border-collapse: separate !important; border-spacing: 0 !important;
-  background: transparent !important; border: 0 !important;
-  border-radius: 0 !important; overflow: visible !important;
+  background: #fff !important;
+  border: 1px solid var(--ngm-linen-dk) !important;
+  border-radius: var(--ngm-radius-lg) !important;
+  overflow: hidden !important;
 }
 /* Equal columns everywhere: the date cells ship inline width:14% but the header
    cells have none — pin all of them to 1/7 so fixed layout distributes evenly.
@@ -5209,10 +5145,18 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar th {
 }
 body .WaGadgetEventsStateCalendar table.EventListCalendar td:last-child,
 body .WaGadgetEventsStateCalendar table.EventListCalendar th:last-child { border-right: 0 !important; }
-/* NO horizontal week-separator line — the border-top that used to sit directly
-   above each date number is removed (per request). Weeks are separated by cell
-   height alone, for a cleaner, plainer grid. */
-body .WaGadgetEventsStateCalendar table.EventListCalendar tr:has(a.calendarDate) > td {
+/* Thin horizontal line between week rows. The header's own border-bottom draws
+   the line under the green weekday bar (between the day names and the first week);
+   these top borders draw the line between each subsequent week — on every week row
+   EXCEPT the first (`+` = a week row preceded by another week row), so the line
+   under the header never doubles up. Single 1px lines throughout. */
+body .WaGadgetEventsStateCalendar table.EventListCalendar tr:has(a.calendarDate) + tr:has(a.calendarDate) > td {
+  border-top: 1px solid var(--ngm-linen-dk) !important;
+}
+/* make sure the first week row carries NO top border (only the header underline
+   separates it) so there's no double line under the green bar. */
+body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader + tr,
+body .WaGadgetEventsStateCalendar table.EventListCalendar tr:first-child + tr:has(a.calendarDate) > td {
   border-top: 0 !important;
 }
 /* …but NOT inside the nested date-number table (its <tr> also contains
@@ -5236,53 +5180,56 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHe
   font-family: var(--ngm-sans) !important; font-weight: 600 !important;
   text-transform: uppercase !important; letter-spacing: .03em !important;
   font-size: .66rem !important; text-align: center !important; padding: 9px 2px !important;
-  border-bottom: 1px solid var(--ngm-border) !important;
+  border-bottom: 1px solid var(--ngm-linen-dk) !important;   /* header underline, matches grid lines */
 }
-/* THREE clean tiers, one span shown per width — the page gadget's JS emits all
-   three spans (.ngm-wd-f full, .ngm-wd-a 3-letter, .ngm-wd-1 single letter), so
-   we simply toggle which is visible. A letter ALWAYS shows (if the JS somehow
-   didn't run, WA's own full text node remains — never a blank header).
-   desktop (>1024) = full name · tablet (601–1024) = 3-letter · mobile (≤600) = 1-letter */
-/* desktop: full name only */
+/* THREE tiers, each showing ONE JS-emitted span as REAL text at normal size:
+   .ngm-wd-f full · .ngm-wd-a 3-letter · .ngm-wd-1 single letter. No ::first-letter
+   / font-size:0 trick — that was rendering BLANK in the live gadget, which (at the
+   ≤600 mobile width, the same width the toolbar stacks) is exactly why the letters
+   vanished. The single-letter span is real text the JS reliably emits, so it can't
+   go blank. Breakpoints match the toolbar: full >1024 · 3-letter 601–1024 ·
+   1-letter ≤600. If the JS hasn't run, WA's own full text node still shows. */
+/* desktop base: full name */
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-f { display: inline !important; }
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a,
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 { display: none !important; }
-/* tablet: 3-letter (Sun, Mon …). If the JS hasn't run, WA's full text still shows. */
+/* tablet (≤1024): 3-letter */
 @media (max-width: 1024px) {
   body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-f,
   body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 { display: none !important; }
   body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a { display: inline !important; }
 }
-/* mobile: single letter (S, M …). DERIVED from the 3-letter span (.ngm-wd-a) via
-   ::first-letter, so it depends ONLY on the span tablet already uses — if a
-   letter shows on tablet, it shows on mobile too. This avoids the blank-header
-   bug that happens when a stale pasted gadget didn't emit the dedicated .ngm-wd-1
-   span. (.ngm-wd-1 is hidden here so it can never double up.) */
+/* mobile (≤600): single letter — the real .ngm-wd-1 span, full size (never blank) */
 @media (max-width: 600px) {
   body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-f,
-  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 { display: none !important; }
-  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a {
-    display: inline-block !important; font-size: 0 !important; line-height: 1 !important;
-  }
-  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a::first-letter {
-    font-size: .72rem !important;
-  }
+  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a { display: none !important; }
+  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 { display: inline !important; }
 }
-/* ALWAYS keep the weekday row visible, at EVERY width. WA's responsive
-   CSS hides it below ~767px (that's the "vanishing" on tablet/phone);
-   force it back unconditionally so the labels always show. */
+/* ALWAYS keep the weekday row + cells visible, at EVERY width — WA's responsive
+   CSS hides the day-of-week row at its own breakpoint (the OTHER half of the
+   "vanishing" bug). Reset every hiding mechanism WA might use (display /
+   visibility / opacity / collapsed height / off-screen positioning). */
 html body .WaGadgetEventsStateCalendar table.EventListCalendar tr:first-child {
   display: table-row !important; visibility: visible !important; opacity: 1 !important;
+  height: auto !important; max-height: none !important;
 }
 html body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader {
   display: table-cell !important; visibility: visible !important; opacity: 1 !important;
+  height: auto !important; max-height: none !important;
+  position: static !important; clip: auto !important; text-indent: 0 !important;
+}
+/* keep the span text visible too — WA must not zero it out */
+html body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-f,
+html body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a,
+html body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 {
+  visibility: visible !important; opacity: 1 !important;
 }
 /* day cells — tight padding so the coloured tiles use nearly the full cell */
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarItemDefault,
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarItemInactive,
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarItemSelected {
   border-color: var(--ngm-linen-dk) !important; background: transparent !important;
-  padding: 3px 3px 8px !important; vertical-align: top !important;
+  padding: 3px 2px 8px !important; vertical-align: top !important;   /* less L/R padding → tiles get more room */
 }
 /* days outside this month → muted cream */
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarItemInactive {
@@ -5329,7 +5276,7 @@ html body .WaGadgetEventsStateCalendar table.EventListCalendar a:not(.calendarDa
   font-size: .82rem !important; line-height: 1.26 !important;
   color: #fff !important; text-decoration: none !important;
   background: var(--cat) !important; border: 0 !important;
-  border-radius: 5px !important; padding: 3px 6px !important; margin: 2px 1px !important;
+  border-radius: 5px !important; padding: 3px 5px !important; margin: 2px 1px !important;
   max-width: 100% !important; box-sizing: border-box !important;
   white-space: normal !important; overflow: visible !important; text-overflow: clip !important;
   overflow-wrap: anywhere !important; word-break: break-word !important;
@@ -5366,11 +5313,12 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar td div:has(> a:not(.ca
 /* ── MOBILE: match Google Calendar's month view. All seven days fit on
    screen (no sideways scroll); the weekday headers show the 3-letter
    abbreviation (Sun Mon … from the JS span swap above); and every event
-   becomes a compact solid category-coloured bar showing its title, truncated
-   to the cell. The time label is hidden here — exactly as Google's month view
-   does — to leave room for titles. */
-@media (max-width: 720px) {
-  /* fixed layout = equal columns that all fit, and lets titles ellipsis */
+   becomes a compact solid category-coloured bar whose title WRAPS to the full
+   name. The time label is hidden here — exactly as Google's month view does — to
+   leave room for titles. Bound to ≤600 so it matches the single mobile
+   breakpoint (601–1024 keeps the tablet look: times shown, larger chips). */
+@media (max-width: 600px) {
+  /* fixed layout = equal columns that all fit */
   body .WaGadgetEventsStateCalendar table.EventListCalendar {
     width: 100% !important; min-width: 0 !important; table-layout: fixed !important;
   }
