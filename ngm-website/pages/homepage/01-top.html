@@ -1083,6 +1083,27 @@ body .WaPlaceHolderWide > div {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
+/* ── 21. v7: full-width events band, softened retreat fade, mobile
+   centering + full-width stacked CTAs ─────────────────────────── */
+body .ngm-wa-events.WaGadgetUpcomingEvents { width: 100% !important; max-width: 100% !important; text-align: center !important; }
+body .ngm-wa-events .gadgetStyleBody { text-align: left !important; }
+/* soften the photo→green fade so the retreat photo reads through */
+.ngm-retreat-photo::after { background: linear-gradient(to right, transparent 55%, var(--ngm-sage-dk) 100%); }
+@media (max-width: 600px) {
+  /* center eyebrows / titles / copy */
+  .ngm-eyebrow, .ngm-retreat-eyebrow,
+  .ngm-h1, .ngm-h2, .ngm-h2-dark,
+  .ngm-hero-body, .ngm-lead, .ngm-upcoming-intro,
+  .ngm-about-body, .ngm-about-body p, .ngm-pullquote,
+  .ngm-join-body, .ngm-retreat-body, .ngm-address, .ngm-addr-label { text-align: center !important; }
+  .ngm-pullquote { border-left: none !important; padding-left: 0 !important; }
+  /* CTAs: stack, full width, centered */
+  .ngm-hero-btns, .ngm-join-btns { flex-direction: column; align-items: stretch; }
+  .ngm-hero-btns, .ngm-join-btns, .ngm-retreat-meta, .ngm-mini-pills { justify-content: center; }
+  .ngm-btn, body a.ngm-btn { width: 100% !important; justify-content: center !important; }
+  .ngm-btn-fit { align-self: stretch !important; }
+  .ngm-loc-map { width: 100% !important; }
+}
 </style>
 <section class="ngm ngm-hero">
   <div class="ngm-hero-copy">
@@ -1158,7 +1179,7 @@ body .WaPlaceHolderWide > div {
 </div>
 <section class="ngm ngm-sec ngm-sec-linen" style="padding-bottom:28px">
   <div class="ngm-con">
-    <div class="ngm-upcoming-head">
+    <div class="ngm-upcoming-head ngm-upcoming-center">
       <span class="ngm-eyebrow">Calendar</span>
       <h2 class="ngm-h2">Upcoming meetings <em>&amp; events</em></h2>
       <p class="ngm-upcoming-intro">A look at what's next on the Guild calendar — meetings, workshops, and gatherings open in the coming weeks. Most meetings are free for members; some workshops have registration fees. Click any event for details and to register.</p>

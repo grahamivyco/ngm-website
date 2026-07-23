@@ -5832,3 +5832,114 @@ body .WaGadgetPublicWizard .commonMessageBox .levelRenewal,
 body .WaGadgetPublicWizard .commonMessageBox .levelRecurring {
   font-size: .88rem !important; color: var(--ngm-gray) !important;
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   HOMEPAGE + GLOBAL MOBILE — LIVE OVERRIDES  (added last on purpose)
+   These are appended at the end of global.css so they win over the
+   duplicated per-page gadget rules earlier in the file. Homepage-only
+   rules are scoped through classes that exist only on the homepage
+   (.ngm-mini, .ngm-retreat-tile, .ngm-upcoming-center, .ngm-loc-head).
+   The upcoming-events form fix and the mobile block are intentionally
+   site-wide.
+══════════════════════════════════════════════════════════════════ */
+
+/* ---------- Compact meeting tiles (homepage teaser) ---------- */
+.ngm-mini-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(232px,1fr)); gap:14px; margin:8px 0 24px; }
+.ngm-mini { background:#fff; border:1px solid var(--ngm-border); border-radius:var(--ngm-radius); padding:18px 20px; display:flex; flex-direction:column; transition:background-color .25s ease, border-color .25s ease; }
+.ngm-mini:hover { background:var(--ngm-sage-lt); border-color:var(--ngm-sage-lt); }
+.ngm-mini-name { font-family:var(--ngm-serif); font-size:1.15rem; font-weight:400; color:var(--ngm-charcoal); line-height:1.2; margin-bottom:6px; text-transform:none !important; }
+.ngm-mini-when { display:flex; align-items:center; gap:6px; font-family:var(--ngm-sans); font-size:.78rem; font-weight:500; color:var(--ngm-sage-dk); margin-bottom:8px; }
+.ngm-mini-when svg { flex-shrink:0; }
+.ngm-mini-desc { font-family:var(--ngm-sans); font-size:.84rem; color:var(--ngm-gray); line-height:1.55; margin-bottom:12px; flex:1; }
+.ngm-mini-pills { display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; }
+.ngm-badge-public { background:var(--ngm-sage-lt); color:var(--ngm-sage-dk); }
+
+/* ---------- Upcoming events: full-width linen band, centered fixed card ---------- */
+body .ngm-wa-events.WaGadgetUpcomingEvents {
+  width:100% !important;
+  max-width:100% !important;
+  float:none !important;
+  margin-left:0 !important; margin-right:0 !important;
+  background:var(--ngm-linen) !important;
+  padding:4px 24px 12px !important;
+  text-align:center !important;   /* fallback-centers an inline card */
+}
+body .ngm-wa-events .gadgetStyleBody {
+  display:block !important;
+  width:100% !important;
+  max-width:1080px !important;
+  margin:0 auto !important;        /* center the card inside the band */
+  text-align:left !important;      /* reset content alignment */
+  padding:12px !important;
+}
+/* rows: no divider line, rounded pale-green hover tile, even inner padding */
+body .ngm-wa-events.upcomingEventsStyle001 ul li {
+  border:none !important;
+  border-bottom:none !important;
+  border-radius:12px !important;
+  padding:16px 18px !important;
+}
+body .ngm-wa-events.upcomingEventsStyle001 ul li:hover {
+  background-color:var(--ngm-sage-lt) !important;
+  border-radius:12px !important;
+}
+
+/* ---------- Upcoming heading centered (homepage) ---------- */
+.ngm-upcoming-center { text-align:center; }
+.ngm-upcoming-center .ngm-upcoming-intro { margin-left:auto; margin-right:auto; }
+
+/* ---------- Retreat as a rounded tile (homepage only) ---------- */
+.ngm-retreat-tile {
+  max-width:1080px;
+  margin:0 auto;
+  border-radius:var(--ngm-radius-lg);
+  box-shadow:var(--ngm-shm);
+  overflow:hidden;
+}
+/* Soften the photo→green fade so the photo reads through, not all green */
+.ngm-retreat-tile .ngm-retreat-photo::after {
+  background:linear-gradient(to right, transparent 55%, var(--ngm-sage-dk) 100%) !important;
+}
+
+/* ---------- Location: homepage reorder (scoped via .ngm-loc-head) ---------- */
+.ngm-loc-inner:has(.ngm-loc-head) {
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:auto 1fr;
+  grid-template-areas:"head map" "addr map";
+  column-gap:64px;
+  align-items:start;
+}
+.ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-head { grid-area:head; margin-bottom:20px; }
+.ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-addr { grid-area:addr; }
+.ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-map  { grid-area:map; align-self:start; }
+
+/* ══════════════════ GLOBAL MOBILE (≤600px) ══════════════════
+   Center eyebrows / titles / copy and make every CTA stack full-width,
+   centered — across all pages, per request. */
+@media (max-width:600px){
+  .ngm-eyebrow, .ngm-retreat-eyebrow,
+  .ngm-h1, .ngm-h2, .ngm-h2-dark,
+  .ngm-hero-body, .ngm-lead, .ngm-upcoming-intro,
+  .ngm-about-body, .ngm-about-body p, .ngm-pullquote,
+  .ngm-join-body, .ngm-retreat-body, .ngm-groups-intro,
+  .ngm-address, .ngm-addr-label {
+    text-align:center !important;
+  }
+  .ngm-pullquote { border-left:none !important; padding-left:0 !important; }
+
+  /* CTAs: stack, full width, centered */
+  .ngm-hero-btns, .ngm-join-btns { flex-direction:column; align-items:stretch; }
+  .ngm-hero-btns, .ngm-join-btns, .ngm-retreat-meta, .ngm-mini-pills { justify-content:center; }
+  .ngm-btn, body a.ngm-btn { width:100% !important; justify-content:center !important; }
+  .ngm-btn-fit { align-self:stretch !important; }
+
+  /* map full width + location stacked head → map → address */
+  .ngm-loc-map { width:100% !important; }
+  .ngm-loc-inner:has(.ngm-loc-head) {
+    grid-template-columns:1fr;
+    grid-template-rows:none;
+    grid-template-areas:"head" "map" "addr";
+    row-gap:24px;
+  }
+  .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-head { margin-bottom:0; }
+}
