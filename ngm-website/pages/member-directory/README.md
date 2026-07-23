@@ -6,20 +6,20 @@ current" band sits below it — the "sandwich" pattern. The searchable list of
 members is the native WA gadget itself; we don't rebuild it.
 
 ## Sections (top to bottom)
-1. **Intro band** (`01-top.html`) — eyebrow, heading, and one intro paragraph
+1. **Intro band** (`01-top.slim.html`) — eyebrow, heading, and one intro paragraph
    explaining what the directory is and who can see it.
 2. **Native Member Directory gadget** (`02-wa-gadget.txt`) — WA's built-in gadget,
    in its own slot. Inherits styling from the Global CSS; nothing to paste.
-3. **Keep your listing current** (`03-bottom.html`) — reminds members their entry
+3. **Keep your listing current** (`03-bottom.slim.html`) — reminds members their entry
    comes from their own profile, with buttons to edit it or adjust privacy.
 
 ## Wild Apricot setup (the sandwich)
 1. Create a new page (e.g. **Member Directory** at `/member-directory`).
 2. **Restrict it to members** — page settings → Access → *Members only*.
 3. Add three gadgets, top to bottom:
-   - **Custom HTML** gadget → paste `01-top.html`.
+   - **Custom HTML** gadget → paste `01-top.slim.html`.
    - **Member Directory** (native WA gadget) → default settings.
-   - **Custom HTML** gadget → paste `03-bottom.html`.
+   - **Custom HTML** gadget → paste `03-bottom.slim.html`.
 
 ## Profile links (the important part)
 The bottom band's two buttons point at **bare** `/Sys/Profile` and

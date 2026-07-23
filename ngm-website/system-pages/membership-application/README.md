@@ -3,7 +3,7 @@
 **WA page:** `/application` (WA system/join form)
 
 The form is skinned site-wide by `global-css/global.css` (the WA SYSTEM-PAGE FORMS
-section, plus the MEMBERSHIP APPLICATION / JOIN WIZARD block). `01-top.html` is an
+section, plus the MEMBERSHIP APPLICATION / JOIN WIZARD block). `01-top.slim.html` is an
 optional branded heading to place above the form if the page allows a Custom HTML
 gadget. **Verify the form skin against the live page** — WA's form markup is deeply
 nested and the skin is provisional.
@@ -41,11 +41,11 @@ steps' "Next" button.
 Things that can only be done on the live Wild Apricot site — run these before launch:
 
 1. **Confirm real slugs:** `/join`, `/application`, `/sys/login`. If any differ, update
-   the login footer link (`system-pages/login/03-bottom.html` + its `.slim`, currently a
+   the login footer link (`system-pages/login/03-bottom.slim.html` + its `.slim`, currently a
    `/join` placeholder marked `SET URL`) and the three Join CTAs
-   (`pages/join/01-top.html`).
+   (`pages/join/01-top.slim.html`).
 2. **Branded heading:** on `/application`, check whether WA allows a Custom HTML gadget
-   **above** the form. If yes, paste `01-top.html`; if not, skip — the form is still
+   **above** the form. If yes, paste `01-top.slim.html`; if not, skip — the form is still
    skinned. (See `02-wa-gadget.txt`.)
 3. **Walk the live form** with the redesign CSS active and spot-check: fonts, field
    borders + focus ring, level pricing, mandatory asterisks, Next / Submit / Cancel pill
