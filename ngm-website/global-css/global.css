@@ -5161,6 +5161,14 @@ body .WaGadgetPublicWizard .infoOuterContainer {
   padding: 22px 26px !important;
   margin: 0 0 32px !important;
 }
+/* Hide the level summary box on every step EXCEPT step 1 (Identify) — it's
+   redundant on the "Fill in application form" step and beyond, where the level
+   is already chosen. The gadget carries WaGadgetMembershipApplicationStateIdentify
+   only on step 1. */
+body .WaGadgetMembershipApplication:not(.WaGadgetMembershipApplicationStateIdentify) .infoOuterContainer,
+body .WaGadgetPublicWizard:not(.WaGadgetMembershipApplicationStateIdentify) .infoOuterContainer {
+  display: none !important;
+}
 /* neutralise WA's sliced rounded-corner divs (they carried the peach edges) */
 body .WaGadgetMembershipApplication .infoOuterContainer .cornersContainer,
 body .WaGadgetMembershipApplication .infoOuterContainer [class^="c"],
@@ -5282,6 +5290,29 @@ body .WaGadgetMembershipApplication input[id$="_payWithBankAccount"]:hover,
 body .WaGadgetPublicWizard input[id$="_payOnline"]:hover,
 body .WaGadgetPublicWizard input[id$="_payWithBankAccount"]:hover {
   background: var(--ngm-sage) !important; border-color: var(--ngm-sage) !important;
+}
+/* Cancel → plain tertiary text link (just a word, no pill). Overrides the
+   outline-pill rule above (same specificity, later in the file). */
+body .WaGadgetMembershipApplication .cancelButton,
+body .WaGadgetMembershipApplication [id$="_cancel"],
+body .WaGadgetMembershipApplication [id$="_cancelTop"],
+body .WaGadgetPublicWizard .cancelButton,
+body .WaGadgetPublicWizard [id$="_cancel"],
+body .WaGadgetPublicWizard [id$="_cancelTop"] {
+  background: transparent !important; border: none !important; border-radius: 0 !important;
+  box-shadow: none !important; color: var(--ngm-gray) !important;
+  font-family: var(--ngm-sans) !important; font-size: .9rem !important; font-weight: 500 !important;
+  letter-spacing: normal !important; text-transform: none !important;
+  padding: 10px 6px !important; text-decoration: none !important; cursor: pointer !important;
+}
+body .WaGadgetMembershipApplication .cancelButton:hover,
+body .WaGadgetMembershipApplication [id$="_cancel"]:hover,
+body .WaGadgetMembershipApplication [id$="_cancelTop"]:hover,
+body .WaGadgetPublicWizard .cancelButton:hover,
+body .WaGadgetPublicWizard [id$="_cancel"]:hover,
+body .WaGadgetPublicWizard [id$="_cancelTop"]:hover {
+  background: transparent !important; color: var(--ngm-sage-dk) !important;
+  text-decoration: underline !important;
 }
 /* ── Stacked field layout: labels ABOVE inputs ──────────────────────────
    WA lays each field out as a <table> with a label cell (td.left) and an
