@@ -52,17 +52,16 @@ folder holds the gadget files in order plus a short `README.md` recording:
 File-naming convention inside a page folder:
 
 ```
-01-top.slim.html     first Custom HTML block (markup only; styling from global-css/global.css)
+01-top.html     first Custom HTML block (markup only; styling from global-css/global.css)
 02-wa-gadget.txt     note describing the native WA gadget that sits between
-03-bottom.slim.html  second Custom HTML block
+03-bottom.html  second Custom HTML block
 README.md            paste order, page ID, notes
 ```
 
-> The `.slim.html` files are the **canonical, only** page markup — edit these
-> and paste them into the WA gadgets. The old self-contained `01-top.html` /
-> `03-bottom.html` files (with an embedded `<style>` block) were removed; do not
-> recreate them. All styling lives in `global-css/global.css`. See the
-> repo-root `CLAUDE.md`.
+> These `.html` files are the **canonical, only** page markup — edit them and
+> paste them into the WA gadgets. They carry **no embedded `<style>` block**;
+> all styling lives in `global-css/global.css`. Don't add a `<style>` block or
+> make a second self-contained copy of a page. See the repo-root `CLAUDE.md`.
 
 ## Publishing workflow (repo -> live site)
 

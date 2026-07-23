@@ -70,10 +70,10 @@ misbehaves: point that tile at `/Sys/Profile` and let the member tap the tab.
 2. **Restrict it to members** — page settings → Access → *Members only*.
 3. Set it as the **landing page after login** — Settings → Members → **Starting
    page** (default, or per membership level).
-4. Paste `01-top.slim.html` and `03-bottom.slim.html` into Custom HTML gadget(s). There's no
+4. Paste `01-top.html` and `03-bottom.html` into Custom HTML gadget(s). There's no
    native gadget between them, so a single combined gadget works too.
 
-`*.slim.html` are the same body without the inline `<style>`/fonts — use those once
+`*.html` are the same body without the inline `<style>`/fonts — use those once
 the new Global CSS is live (it carries the `.ngm-hub-*`, `.ngm-hub-zoom`, and
 `.ngm-lcard-*` skins).
 

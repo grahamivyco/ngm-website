@@ -7,7 +7,7 @@ the collection lives in three locked cabinets at MVUUF and is browsed and borrow
 ## Wild Apricot setup
 1. Create a page at `/lending-library`.
 2. Restrict it to members (borrowing is a current-member benefit).
-3. Paste `01-top.slim.html` into a Custom HTML gadget. Use `01-top.slim.html` once the
+3. Paste `01-top.html` into a Custom HTML gadget. Use `01-top.html` once the
    new Global CSS is live.
 
 ## Deliberate content decisions

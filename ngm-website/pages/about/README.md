@@ -1,6 +1,6 @@
 # About
 
-**WA page:** About  ·  **Structure:** SINGLE Custom HTML gadget — `01-top.slim.html`.
+**WA page:** About  ·  **Structure:** SINGLE Custom HTML gadget — `01-top.html`.
 Sections: Hero, History, Member perks, Photo bento gallery, Come Visit (closing CTA).
 (The former "Mission" values cards were merged into the belonging/learning/craft
 purpose line above the member-perk tiles.)

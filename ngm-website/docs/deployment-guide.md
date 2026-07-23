@@ -20,9 +20,9 @@ Doing it in this order means the site is never half-styled:
    - Footer: `layout/footer/01-top.html` → the footer gadget.
 3. **Do each page** (below). For each: open the WA page, paste the block(s) in order,
    add any native gadget between them, Save.
-4. **Swap pages to their slim version.** Once the Global CSS is live, each page gadget's
-   own `<style>` is redundant — replace each `01-top.html` with `01-top.slim.html`
-   (and `03-bottom.html` with `03-bottom.slim.html`). Optional but keeps things clean.
+4. **Global CSS must be live first.** The page `.html` files carry no `<style>` of
+   their own — they rely entirely on the Global CSS for styling, so make sure the
+   Global CSS tab (or CDN link) is live before/when you paste the page gadgets.
 5. **Spot-check** each live page (logged out and logged in).
 
 ---
@@ -94,5 +94,5 @@ Join, About, Meetings, Stitch-In, and Events pages already use real photo URLs a
 
 ## After cutover
 - Keep `current-live-backup.css` updated if you ever hand-edit the live Global CSS.
-- The full self-contained page versions stay in the repo as backups even after you swap
-  to slim; both always render correctly.
+- Page markup lives in the `*.html` files (markup only); all styling is in the Global
+  CSS. There is no separate self-contained copy to keep in sync.
