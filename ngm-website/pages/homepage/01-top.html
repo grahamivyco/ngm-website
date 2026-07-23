@@ -1261,6 +1261,33 @@ body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 48px !important; padd
   .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-map { align-self: stretch; height: auto; }
 }
 
+
+/* ══════════════════════════════════════════════════════════════════
+   HOMEPAGE v11 — events card matches the retreat width, meeting tiles
+   are links, retreat trimmed + shorter on mobile.
+══════════════════════════════════════════════════════════════════ */
+/* Events card: cap at 1080 so it's the same width as the retreat tile
+   (v8's max-width:100% had removed the cap and let it run full-width). */
+body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
+
+/* Meeting tiles are links now — kill the anchor underline/colour so they
+   still read as tiles, and keep the pointer cursor. */
+.ngm-mini, body a.ngm-mini, body a.ngm-mini:link, body a.ngm-mini:visited {
+  text-decoration: none !important;
+  color: inherit !important;
+  cursor: pointer;
+}
+
+/* Retreat: shorter on mobile (smaller photo + tighter copy) so the tile
+   isn't taller than the screen. */
+@media (max-width: 900px) {
+  .ngm-retreat-tile .ngm-retreat-photo { height: 150px; }
+  .ngm-retreat-tile .ngm-retreat-copy { padding: 26px 26px 28px; }
+  .ngm-retreat-tile .ngm-h2-dark { margin-bottom: 10px; }
+  .ngm-retreat-tile .ngm-retreat-meta { margin-bottom: 14px; }
+  .ngm-retreat-tile .ngm-retreat-body { line-height: 1.6; margin-bottom: 20px; }
+}
+
 </style>
 <section class="ngm ngm-hero">
   <div class="ngm-hero-copy">
