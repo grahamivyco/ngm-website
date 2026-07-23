@@ -4946,16 +4946,44 @@ body .WaGadgetContactProfile table.genericListTable .grayedOut { color: var(--ng
 /* empty state */
 body .WaGadgetContactProfile .typeTextLabelNoData { color: var(--ngm-gray-lt) !important; font-style: italic !important; }
 
-/* account collapsed to a single full-width tile */
-.ngm-hub-acct-solo{display:block;}
-.ngm-hub-acct-solo .ngm-hub-acard{padding:26px 30px;}
-
-/* profile tile sits in the hero; subtext lists the profile page's tabs */
+/* hero: two columns — welcome copy left, action tiles right */
+.ngm-hub-hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;max-width:1080px;margin:0 auto;}
+.ngm-hub-hero-copy p{max-width:none;}
+.ngm-hub-hero-side{display:flex;flex-direction:column;gap:14px;}
+@media(max-width:900px){.ngm-hub-hero-grid{grid-template-columns:1fr;gap:30px;}}
+/* single meeting Zoom link, as a light tile (not a dark band) */
+.ngm-hub-zoom-tile{display:flex;align-items:center;gap:16px;background:var(--ngm-sage-lt);border:1px solid #DBE6D5;border-radius:var(--ngm-radius-lg);padding:20px 22px;text-decoration:none!important;color:var(--ngm-charcoal);transition:transform .18s,box-shadow .18s;}
+.ngm-hub-zoom-tile:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(62,85,56,.14);}
+.ngm-hub-zoom-tile-icon{width:52px;height:52px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:14px;color:var(--ngm-sage-dk);}
+.ngm-hub-zoom-tile-icon svg{width:26px;height:26px;}
+.ngm-hub-zoom-tile-body{flex:1;min-width:0;}
+.ngm-hub-zoom-tile-body h4{font-family:var(--ngm-serif)!important;font-size:1.3rem;font-weight:400;color:var(--ngm-charcoal);margin:0 0 3px;line-height:1.2;}
+.ngm-hub-zoom-tile-body p{font-family:var(--ngm-sans);font-size:.83rem;color:var(--ngm-gray);line-height:1.5;margin:0;}
+.ngm-hub-zoom-tile-go{flex-shrink:0;color:var(--ngm-sage-dk);display:inline-flex;transition:transform .18s;}
+.ngm-hub-zoom-tile-go svg{width:20px;height:20px;}
+.ngm-hub-zoom-tile:hover .ngm-hub-zoom-tile-go{transform:translateX(3px);}
+/* profile card sits on the right of the hero; subtext lists the profile tabs */
 .ngm-hub-acard-tabs{display:block;font-family:var(--ngm-sans);font-size:.78rem;color:var(--ngm-gray-lt);line-height:1.55;margin-top:7px;}
-.ngm-hub-hero .ngm-hub-acct-solo{max-width:660px;margin-top:4px;}
-.ngm-hub-hero .ngm-hub-acard{align-items:flex-start;}
-.ngm-hub-hero .ngm-hub-acard-icon{margin-top:2px;}
-.ngm-hub-hero .ngm-hub-acard-go{align-self:center;}
+.ngm-hub-hero-side .ngm-hub-acard{align-items:flex-start;}
+.ngm-hub-hero-side .ngm-hub-acard-icon{margin-top:2px;}
+.ngm-hub-hero-side .ngm-hub-acard-go{align-self:center;}
+/* volunteer positions — compact board written out on the hub */
+.ngm-hub-vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px;}
+.ngm-hub-vrole{background:#fff;border:1px solid var(--ngm-border);border-radius:var(--ngm-radius);padding:16px 18px;}
+.ngm-hub-vrole h4{font-family:var(--ngm-serif)!important;font-size:1.08rem;font-weight:400;color:var(--ngm-charcoal);margin:0 0 4px;line-height:1.2;}
+.ngm-hub-vrole p{font-family:var(--ngm-sans);font-size:.8rem;color:var(--ngm-gray);line-height:1.5;margin:0;}
+.ngm-hub-vnote{margin-top:22px;font-family:var(--ngm-sans);font-size:.9375rem;color:var(--ngm-gray);line-height:1.7;}
+.ngm-hub-vnote a{color:var(--ngm-sage-dk)!important;text-decoration:none;border-bottom:1px solid rgba(62,85,56,.3);}
+@media(max-width:900px){.ngm-hub-vgrid{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.ngm-hub-vgrid{grid-template-columns:1fr;}}
+/* leadership — compact rows with the email beside the title */
+.ngm-hub-lead-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;}
+.ngm-hub-lrow{display:flex;align-items:center;justify-content:space-between;gap:16px;background:#fff;border:1px solid var(--ngm-border);border-radius:var(--ngm-radius);padding:14px 18px;}
+.ngm-hub-lrow-main{min-width:0;}
+.ngm-hub-lrole{display:block;font-family:var(--ngm-sans);font-size:.66rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ngm-sage-dk);margin-bottom:2px;}
+.ngm-hub-lname{display:block;font-family:var(--ngm-serif);font-size:1.05rem;color:var(--ngm-charcoal);line-height:1.2;}
+.ngm-hub-lemail{font-family:var(--ngm-sans);font-size:.78rem;color:var(--ngm-gray);text-align:right;flex-shrink:0;overflow-wrap:anywhere;}
+@media(max-width:560px){.ngm-hub-lead-grid{grid-template-columns:1fr;}.ngm-hub-lrow{flex-direction:column;align-items:flex-start;gap:5px;}.ngm-hub-lemail{text-align:left;}}
 
 /* ══════════════════════════════════════════════════════════════════
    CALENDAR — MONTH GRID (live-effective)

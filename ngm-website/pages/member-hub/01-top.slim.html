@@ -1,11 +1,21 @@
 <!-- SLIM - styling comes from the Global CSS (global.css). Paste this only AFTER global.css is live in WA. Full self-contained version: 01-top.html -->
 <div class="ngm-hub-top">
 <div class="ngm ngm-hub-hero">
-  <div class="ngm-hub-inner">
-    <span class="ngm-eyebrow">Member Home</span>
-    <h1 class="ngm-h1">Welcome <em>back</em>.</h1>
-    <p>Your Guild home &mdash; meeting links and members-only resources, all in one place.</p>
-    <div class="ngm-hub-acct-solo">
+  <div class="ngm-hub-hero-grid">
+    <div class="ngm-hub-hero-copy">
+      <span class="ngm-eyebrow">Member Home</span>
+      <h1 class="ngm-h1">Welcome <em>back</em>.</h1>
+      <p>Your Guild home &mdash; the meeting Zoom link and your member resources, all in one place.</p>
+    </div>
+    <div class="ngm-hub-hero-side">
+      <a class="ngm-hub-zoom-tile" href="#"><!-- SET URL: the single guild Zoom meeting link -->
+        <span class="ngm-hub-zoom-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span>
+        <div class="ngm-hub-zoom-tile-body">
+          <h4>Join the meeting</h4>
+          <p>One Zoom link for every Guild meeting &mdash; the host opens the room 5 minutes early.</p>
+        </div>
+        <span class="ngm-hub-zoom-tile-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
       <a class="ngm-hub-acard" href="/Sys/Profile">
         <span class="ngm-hub-acard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
         <div class="ngm-hub-acard-body">
@@ -17,39 +27,4 @@
     </div>
   </div>
 </div>
-
-<section class="ngm ngm-hub-band ngm-hub-zoomband">
-  <div class="ngm-hub-inner">
-    <span class="ngm-hub-zoom-eyebrow">Get connected</span>
-    <h2>Meeting Zoom links</h2>
-    <p>Join right from here &mdash; each link is refreshed monthly, shortly before the meeting. Hosts open the room 5 minutes early.</p>
-    <div class="ngm-hub-zgrid">
-      <a class="ngm-hub-zcard" href="https://us02web.zoom.us/j/88500340991?pwd=9wqtuDuKj80MGgJy2NNhjo7hcM1Wsz.1"><!-- Evening Come & Stitch Zoom link — refresh monthly -->
-        <span class="ngm-hub-zcard-name">Evening Come &amp; Stitch</span>
-        <span class="ngm-hub-zcard-when">2nd Tuesday &middot; 7:00 PM</span>
-        <span class="ngm-hub-zcard-join"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Join Zoom</span>
-      </a>
-      <a class="ngm-hub-zcard" href="https://us02web.zoom.us/j/88500340991?pwd=9wqtuDuKj80MGgJy2NNhjo7hcM1Wsz.1#success"><!-- Board Meeting Zoom link — refresh monthly -->
-        <span class="ngm-hub-zcard-name">Board Meeting</span>
-        <span class="ngm-hub-zcard-when">2nd Monday &middot; 6:30 PM</span>
-        <span class="ngm-hub-zcard-join"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Join Zoom</span>
-      </a>
-      <a class="ngm-hub-zcard" href="https://us02web.zoom.us/j/83057979119?pwd=AyrLJAnqE276h9BTcrvJqYabaQ50id.1"><!-- Daytime Counted & NP Zoom link — refresh monthly -->
-        <span class="ngm-hub-zcard-name">Daytime Counted &amp; NP</span>
-        <span class="ngm-hub-zcard-when">2nd Tuesday &middot; 10:00 AM</span>
-        <span class="ngm-hub-zcard-join"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Join Zoom</span>
-      </a>
-      <a class="ngm-hub-zcard" href="https://us02web.zoom.us/meetings/86550553795/invitations?signature=eIv7D9X20udozYkEmlZwcIcNrL3vCxFWdWD4BBj7awM"><!-- Daytime Stitch-In Zoom link — refresh monthly -->
-        <span class="ngm-hub-zcard-name">Daytime Stitch-In</span>
-        <span class="ngm-hub-zcard-when">4th Tuesday &middot; 10:00 AM</span>
-        <span class="ngm-hub-zcard-join"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Join Zoom</span>
-      </a>
-      <a class="ngm-hub-zcard" href="https://us02web.zoom.us/j/89401645691?pwd=JOE3kskcgfbe8wQ3RkvM7J2B4jNfHQ.1"><!-- Evening Stitch-In Zoom link — refresh monthly -->
-        <span class="ngm-hub-zcard-name">Evening Stitch-In</span>
-        <span class="ngm-hub-zcard-when">4th Tuesday &middot; 7:00 PM</span>
-        <span class="ngm-hub-zcard-join"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>Join Zoom</span>
-      </a>
-    </div>
-  </div>
-</section>
 </div>
