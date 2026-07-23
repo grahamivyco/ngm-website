@@ -42,6 +42,9 @@
   --ngm-sh:   0 2px 12px rgba(0,0,0,.06);
   --ngm-shm:  0 8px 32px rgba(0,0,0,.10);
   --ngm-shx:  0 20px 60px rgba(0,0,0,.14);
+  /* NGM brand mark (Minnesota outline + needle), sage-dk, for photo
+     placeholder load states. Borderless, no circle — just the mark. */
+  --ngm-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-3 -3 37 39'%3E%3Cpath d='M28.5547 7.44547C26.2681 9.13737 25.721 5.92628 22.5099 6.92791C19.2989 7.92953 17.5135 3.98848 15.3588 4.91173C8.69503 7.76718 8.3302 -0.592457 10.5295 0.689564C12.7288 1.97158 9.43716 5.04174 3.59451 2.8711C-2.24814 0.700455 1.98638 9.17239 2.77963 12.1143C3.57287 15.0563 4.59607 17.9819 3.34335 18.7705C2.09063 19.5592 1.98055 21.0184 3.59389 21.9567C5.20724 22.8949 3.06149 29.717 3.75048 31.2627C4.43948 32.8085 22.5099 32.8715 23.2929 31.2627C25.0116 27.7311 18.3781 28.5168 17.9688 25.4583C17.7861 24.0923 18.5862 23.3231 18.4073 21.9567C18.292 21.0757 17.6044 20.6564 17.7496 19.78C17.9432 18.6113 19.5185 18.7835 19.9106 17.6664C20.262 16.6651 19.3568 15.9495 19.7226 14.9535C20.198 13.6594 21.7581 14.3958 22.5099 12.8083C23.2618 11.2209 23.9468 10.4799 26.2681 9.77992' stroke='%233E5538' stroke-width='1.10903' stroke-linecap='round' fill='none'/%3E%3Cpath d='M20.9651 5.25056L4.17261 31.89L18.68 3.92169C18.9674 3.36764 19.7428 3.22016 20.3898 3.59646C21.0369 3.97276 21.2977 4.72284 20.9651 5.25056ZM19.3148 4.29165L18.1796 6.2722C18.0453 6.50659 18.1635 6.82871 18.4437 6.99168C18.724 7.15465 19.0601 7.09675 19.1944 6.86236L20.3296 4.88181C20.464 4.64742 20.3457 4.3253 20.0655 4.16233C19.7852 3.99936 19.4492 4.05726 19.3148 4.29165Z' fill='%233E5538'/%3E%3C/svg%3E");
 }
 /* ── 2. SCOPE RESET ─────────────────────────────────────── */
 .ngm *,
@@ -4422,9 +4425,28 @@ body.ngm-login-page .WaGadgetLoginForm .loginPanel::after { display: none !impor
 .ngm-mt-detail h3 { font-family:var(--ngm-sans); font-size:.7rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--ngm-sage); margin:0 0 10px; }
 .ngm-mt-detail p { font-family:var(--ngm-sans); font-size:1rem; color:var(--ngm-gray); line-height:1.7; margin:0; }
 .ngm-mt-detail a { color:var(--ngm-sage-dk) !important; }
-/* Photo placeholders — swap the whole box for an <img> when you have a picture */
-.ngm-mt-photo { background:var(--ngm-sage-lt); border:1px dashed #C4D0BC; border-radius:var(--ngm-radius-lg); min-height:300px; display:flex; align-items:center; justify-content:center; text-align:center; }
-.ngm-mt-photo span { font-family:var(--ngm-sans); font-size:.82rem; letter-spacing:.02em; color:var(--ngm-sage-dk); padding:22px; opacity:.85; }
+/* Photo placeholders — swap the whole box for an <img> when you have a picture.
+   No border: a soft sage panel with the pulsing NGM brand mark centered (no
+   circle, no card), and any caption sitting quietly beneath it. */
+.ngm-mt-photo { position:relative; overflow:hidden; background:var(--ngm-sage-lt); border:none; border-radius:var(--ngm-radius-lg); min-height:300px; display:flex; align-items:center; justify-content:center; text-align:center; }
+/* Text-label placeholders (no image yet): stacked pulsing mark + caption. */
+.ngm-mt-photo:has(> span) { flex-direction:column; gap:18px; }
+.ngm-mt-photo:has(> span)::before {
+  content:""; flex:none; width:56px; height:60px;
+  background:var(--ngm-mark) center / contain no-repeat;
+  animation:ngm-ph-pulse 1.6s ease-in-out infinite;
+}
+.ngm-mt-photo span { position:relative; z-index:1; font-family:var(--ngm-sans); font-size:.82rem; letter-spacing:.02em; color:var(--ngm-sage-dk); padding:0 22px; opacity:.85; }
+/* Image placeholders: pulsing mark behind, real photo fades over it as it loads. */
+.ngm-mt-photo:has(> img)::before {
+  content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background:var(--ngm-mark) center / 56px auto no-repeat;
+  animation:ngm-ph-pulse 1.6s ease-in-out infinite;
+}
+.ngm-mt-photo > img { position:relative; z-index:1; }
+@media (prefers-reduced-motion: reduce) {
+  .ngm-mt-photo::before { animation:none !important; }
+}
 .ngm-mt-gallery { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:44px; }
 .ngm-mt-gallery .ngm-mt-photo { min-height:210px; }
 /* Where-we-meet + map */
@@ -6084,17 +6106,62 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li:hover {
   background-size: 200% 100%;
   animation: ngm-hero-shimmer 1.6s linear infinite;
 }
+/* Brand mark sits bare in the middle — no circle, no border, no card. */
 .ngm-hero-loader-badge {
-  width: 66px; height: 66px; border-radius: 50%;
-  background: var(--ngm-cream); box-shadow: var(--ngm-shm);
   display: flex; align-items: center; justify-content: center;
   animation: ngm-hero-pulse 1.5s ease-in-out infinite;
 }
-.ngm-hero-loader-badge svg { width: 34px; height: 34px; color: var(--ngm-sage); }
+.ngm-hero-loader-badge svg { width: 48px; height: 52px; color: var(--ngm-sage); }
 .ngm-hero-photo img { position: relative; z-index: 1; opacity: 0; transition: opacity .6s ease; }
 .ngm-hero-photo img.is-loaded { opacity: 1; }
 @keyframes ngm-hero-shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
 @keyframes ngm-hero-pulse { 0%, 100% { transform: scale(.9); opacity: .7; } 50% { transform: scale(1); opacity: 1; } }
+
+/* ══════════════════════════════════════════════════════════════════
+   PHOTO PLACEHOLDER LOAD STATE — pulsing NGM brand mark (reusable)
+   Every photo box below shows a soft sage panel with the NGM brand
+   mark centered — no circle, no border, no card — gently pulsing,
+   until the real image paints on top of it. The image sits above the
+   mark (z-index), so once it loads it simply covers the placeholder;
+   if a src is missing/broken the pulsing mark stays.
+   Give any new photo container the .ngm-photo-ph class to opt in.
+══════════════════════════════════════════════════════════════════ */
+.ngm-photo-ph,
+.ngm-etype-photo,
+.ngm-bento-item {
+  position: relative;
+  background-color: var(--ngm-sage-lt);
+}
+/* Soft shimmer sweep across the panel */
+.ngm-photo-ph::before,
+.ngm-etype-photo::before,
+.ngm-bento-item::before {
+  content: "";
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(100deg, var(--ngm-sage-lt) 30%, #E7EFE3 50%, var(--ngm-sage-lt) 70%);
+  background-size: 200% 100%;
+  animation: ngm-hero-shimmer 1.6s linear infinite;
+}
+/* Centered, bare, pulsing brand mark behind the image */
+.ngm-photo-ph::after,
+.ngm-etype-photo::after,
+.ngm-bento-item::after {
+  content: "";
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: var(--ngm-mark) center / 48px auto no-repeat;
+  animation: ngm-ph-pulse 1.5s ease-in-out infinite;
+}
+/* Real image paints over the mark */
+.ngm-photo-ph > img,
+.ngm-etype-photo > img,
+.ngm-bento-item > img {
+  position: relative; z-index: 1;
+}
+@keyframes ngm-ph-pulse { 0%, 100% { transform: scale(.9); opacity: .55; } 50% { transform: scale(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .ngm-photo-ph::before, .ngm-etype-photo::before, .ngm-bento-item::before,
+  .ngm-photo-ph::after, .ngm-etype-photo::after, .ngm-bento-item::after { animation: none !important; }
+}
 
 /* ---------- Marquee: GPU-composited, seamless (two identical sets, -50%) ---------- */
 .ngm-marquee-track { will-change: transform; backface-visibility: hidden; }
