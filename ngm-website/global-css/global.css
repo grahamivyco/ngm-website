@@ -2154,6 +2154,12 @@ body .WaPlaceHolderWide > div { padding-top: 0 !important; padding-bottom: 0 !im
   font-family: var(--ngm-sans); font-size: .7rem; color: var(--ngm-gray-lt);
   border: 1px solid var(--ngm-border); border-radius: 100px; padding: 2px 9px;
 }
+/* Compact card: both pills share the top row; one-line description. */
+.ngm-gcard-pills { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-bottom: 12px; }
+.ngm-gcard-pills .ngm-gcard-body-badge { margin-bottom: 0; }
+.ngm-gcard-pills .ngm-gcard-tag { line-height: 1.5; }
+.ngm-gcard-pills + h3 { margin-top: 0; }
+.ngm-gcard .ngm-gcard-pills ~ p { flex: 0 0 auto; margin-bottom: 0; }
 /* ── Location ── */
 .ngm-loc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; margin-top: 36px; }
 .ngm-loc-block h3 { font-family: var(--ngm-serif) !important; font-size: 1.2rem; font-weight: 400; color: var(--ngm-charcoal); text-transform: none !important; margin-bottom: 8px; }
