@@ -3482,7 +3482,7 @@ a.ngm-hub-card:hover .ngm-hub-card-cta { gap: 10px; }
    To fall back to the old centred card, delete the "@media(min-width:861px)"
    block below — the hero then just stacks above the form.
 ══════════════════════════════════════════════════════════════════ */
-body.ngm-login-page{ --ngm-hero-w:50vw; --ngm-head-h:86px; background:var(--ngm-cream); overflow-x:hidden; }
+body.ngm-login-page{ --ngm-hero-w:50vw; --ngm-head-h:86px; background:#fff; overflow-x:hidden; }
 
 /* ── Hero visuals (also render standalone in 01-top.html preview) ── */
 .ngm-login-hero{
@@ -3608,8 +3608,8 @@ body.ngm-login-page .WaGadgetLoginForm{ display:block; width:100%; box-sizing:bo
   body.ngm-login-page .ngm-login-hero{ padding:22px 22px 24px; text-align:center; }
   body.ngm-login-page .ngm-login-hero-inner{ max-width:none; }
   body.ngm-login-page .ngm-lh-glow{ display:none; }
-  body.ngm-login-page .ngm-login-mark{ width:38px; height:42px; margin:0 auto 10px; }
-  body.ngm-login-page .ngm-lh-eyebrow{ margin-bottom:7px; }
+  body.ngm-login-page .ngm-login-mark{ display:none; }
+  body.ngm-login-page .ngm-lh-eyebrow{ display:none; }
   body.ngm-login-page .ngm-lh-title{ font-size:1.55rem; line-height:1.15; margin-bottom:0; }
   body.ngm-login-page .ngm-lh-title br{ display:none; }
   body.ngm-login-page .ngm-lh-sub,
@@ -3623,14 +3623,13 @@ body.ngm-login-page .WaGadgetLoginForm{ display:block; width:100%; box-sizing:bo
    The "Authorization required" page reuses the login split: set it up in WA
    exactly like /Sys/Login — the login hero (which adds body.ngm-login-page)
    in the LEFT column, the Authorization-required gadget in the RIGHT column.
-   The hero paints the left cell sage (rules above); these rules paint the
-   RIGHT cell LINEN, and the white .WaGadgetAuthorizationRequired card (styled
-   further below) centres on it — mirroring the login form's card-on-a-panel.
+   The hero paints the left cell sage (rules above); the RIGHT cell inherits
+   the page's white background and the white .WaGadgetAuthorizationRequired
+   card (styled further below) centres on it — matching the login form exactly.
 ══════════════════════════════════════════════════════════════════ */
 @media(min-width:981px){
   body.ngm-login-page td.WaLayoutItem:has(.WaGadgetAuthorizationRequired){
     vertical-align:middle !important;
-    background:var(--ngm-linen) !important;
     padding:48px clamp(24px,4vw,56px) !important;
   }
 }
@@ -3642,7 +3641,7 @@ body.ngm-login-page .WaGadgetLoginForm{ display:block; width:100%; box-sizing:bo
     display:block !important; width:100% !important; max-width:100% !important; float:none !important;
   }
   body.ngm-login-page td.WaLayoutItem:has(.WaGadgetAuthorizationRequired){
-    background:var(--ngm-linen) !important; padding:16px 16px 28px !important;
+    padding:16px 16px 28px !important;
   }
 }
 
