@@ -5147,7 +5147,8 @@ body .WaGadgetPublicWizard input[name$="cancelNoScript"]:hover { background: var
 /* Selected-level summary: level name ("Annual Guild Membership") on-brand */
 body .WaGadgetMembershipApplication .levelLabel,
 body .WaGadgetPublicWizard .levelLabel {
-  font-weight: 500 !important; color: var(--ngm-charcoal) !important;
+  font-family: var(--ngm-serif) !important; font-size: 1.3rem !important;
+  font-weight: 400 !important; color: var(--ngm-charcoal) !important;
 }
 /* Selected-level summary BOX (native .infoOuterContainer, WA-default peach
    #fff8f1) → linen panel, matching the "Review and confirm" box. */
@@ -5169,10 +5170,31 @@ body .WaGadgetPublicWizard .infoOuterContainer [class^="c"],
 body .WaGadgetPublicWizard .infoOuterContainer [class^="r"] {
   background: transparent !important; border: none !important;
 }
-/* "Level" label reads as a small on-brand heading */
+/* "Level" label → small uppercase sage eyebrow */
 body .WaGadgetMembershipApplication .infoOuterContainer .infoTitle,
 body .WaGadgetPublicWizard .infoOuterContainer .infoTitle {
-  color: var(--ngm-sage-dk) !important; font-weight: 600 !important;
+  font-family: var(--ngm-sans) !important; font-size: .72rem !important;
+  font-weight: 600 !important; letter-spacing: .16em !important;
+  text-transform: uppercase !important; color: var(--ngm-sage-dk) !important;
+}
+/* Price emphasised in sage; renewal/recurring quiet; one line per row */
+body .WaGadgetMembershipApplication .infoOuterContainer .levelPrice,
+body .WaGadgetPublicWizard .infoOuterContainer .levelPrice {
+  font-weight: 600 !important; font-size: 1.3rem !important; color: var(--ngm-sage-dk) !important;
+}
+body .WaGadgetMembershipApplication .infoOuterContainer .levelRenewal,
+body .WaGadgetMembershipApplication .infoOuterContainer .levelRecurring,
+body .WaGadgetPublicWizard .infoOuterContainer .levelRenewal,
+body .WaGadgetPublicWizard .infoOuterContainer .levelRecurring {
+  font-size: .88rem !important; color: var(--ngm-gray) !important;
+}
+body .WaGadgetMembershipApplication .infoOuterContainer .textLine,
+body .WaGadgetPublicWizard .infoOuterContainer .textLine {
+  display: block !important; margin-top: 5px !important;
+}
+body .WaGadgetMembershipApplication .infoOuterContainer .infoText .textLine:first-child,
+body .WaGadgetPublicWizard .infoOuterContainer .infoText .textLine:first-child {
+  margin-top: 0 !important;
 }
 /* Field labels (mandatory ones also carry .mandatoryLabel, handled above) */
 body .WaGadgetMembershipApplication .fieldLabel,
