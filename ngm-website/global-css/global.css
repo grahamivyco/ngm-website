@@ -6101,3 +6101,39 @@ body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 48px !important; padd
   .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-head { margin-bottom: 14px; }
   .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-map { align-self: stretch; height: auto; }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   SITE-WIDE v10 — propagate the homepage's mobile alignment to every
+   page. The shared classes (.ngm-eyebrow/.ngm-h1/.ngm-h2/.ngm-lead/
+   .ngm-btn/.ngm-wa-events) already pick up the earlier mobile blocks;
+   this covers the remaining page-specific CTA groups and intro/hero
+   copy so all pages match the homepage treatment on mobile.
+══════════════════════════════════════════════════════════════════ */
+@media (max-width: 600px) {
+  /* Every CTA button group stacks and centers (buttons are already sized
+     by the earlier mobile block: thicker, primary wider than secondary). */
+  .ngm-si-cta-btns, .ngm-mt-hero-btns, .ngm-si-hero-btns, .ngm-hero-btns,
+  .ngm-join-btns, .ngm-vol-cta-btns, .ngm-mtg-hero-btns, .ngm-mtg-cta-btns,
+  .ngm-join-hero-btns, .ngm-ev-cta-btns, .ngm-dir-foot-btns,
+  .ngm-about-cta-btns, .ngm-cal-hero-btns, .ngm-cal-cta-btns {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  /* Center the section intros / sub-heads / hero copy on mobile, matching
+     the homepage. (Section eyebrows, h1/h2 and .ngm-lead are already
+     centered by the earlier site-wide mobile rule.) */
+  .ngm-si-intro, .ngm-si-hero-copy, .ngm-mtg-hero-copy, .ngm-join-hero-copy,
+  .ngm-hub-hero-copy, .ngm-groups-subhead, .ngm-leadership-intro,
+  .ngm-etype-intro, .ngm-hub-lead, .ngm-price-note, .ngm-price-trust {
+    text-align: center !important;
+  }
+  /* Location blocks centered on mobile, matching the homepage
+     (.ngm-address / .ngm-addr-label are already centered by the earlier
+     rule; these cover the meetings + meeting-type page structures). */
+  .ngm-loc-block, .ngm-loc-block h3, .ngm-loc-block address,
+  .ngm-mt-loc, .ngm-mt-addr, .ngm-cbox-addr {
+    text-align: center !important;
+  }
+}
