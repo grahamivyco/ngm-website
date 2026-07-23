@@ -1,18 +1,15 @@
-<!-- Canonical page markup — this is the file to edit and to paste into the WA Custom-HTML gadget. Styling lives in global-css/global.css (served via jsDelivr; must be live in WA first). There is no separate self-contained version. -->
-     Closes the two wrapper divs opened in 01-top.html (.ngm-cal-body >
-     .ngm-cal-body-inner), then the KEY module + the Join CTA. Paste order:
-     01-top.html → WA Calendar gadget (class ngm-cal) → 03-bottom.html -->
-  </div><!-- /.ngm-cal-body-inner -->
-</div><!-- /.ngm-cal-body -->
+<!-- Canonical page markup — paste into the WA Custom-HTML gadget. Styling lives in global-css/global.css (served via jsDelivr; must be live in WA first). Closes .ngm-cal-body-inner + .ngm-cal-body (opened in 01-top.html), then the Key module + Join CTA. Paste order: 01-top.html -> WA Calendar gadget (class ngm-cal) -> 03-bottom.html -->
+  </div>
+</div>
 
 <section class="ngm ngm-sec ngm-sec-cream">
   <div class="ngm-con">
     <!-- KEY: a self-contained module whose swatches match the calendar's
-         event-chip colours, so the legend reflects the calendar itself. -->
+         event-chip colours, so the key reflects the calendar itself. -->
     <div class="ngm-key">
-      <span class="ngm-eyebrow">Legend</span>
-      <h2 class="ngm-h2">What the <em>colors</em> mean</h2>
-      <p class="ngm-key-intro">Every event on the calendar is tinted by the group or type it belongs to. Here's the key to the colors above.</p>
+      <span class="ngm-eyebrow">Key</span>
+      <h2 class="ngm-h2">Find what you <em>want</em></h2>
+      <p class="ngm-key-intro">Every event on the calendar is tinted by the group or type it belongs to. Use the key to spot the ones you're looking for.</p>
       <div class="ngm-key-grid">
         <div class="ngm-key-item">
           <span class="ngm-key-swatch stitch-in"></span>
@@ -42,6 +39,14 @@
           <span class="ngm-key-swatch board"></span>
           <div class="ngm-key-text"><h3>Board &amp; Admin</h3><p>Guild business, deadlines &amp; submissions.</p></div>
         </div>
+      </div>
+      <!-- email tile: submit something for the calendar -->
+      <div class="ngm-key-cta">
+        <div class="ngm-key-cta-text">
+          <h3>Want to add something to the calendar?</h3>
+          <p>Send your event details and we'll get it on the calendar.</p>
+        </div>
+        <a class="ngm-btn ngm-btn-green ngm-btn-sm" href="mailto:admin@mneedlework.org">admin@mneedlework.org</a>
       </div>
     </div>
   </div>
