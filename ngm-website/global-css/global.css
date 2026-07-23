@@ -5348,16 +5348,55 @@ body .WaGadgetPublicWizard .commonMessageBox .messageBox {
   border-radius: var(--ngm-radius-lg) !important;
   overflow: hidden !important;
 }
+/* Kill WA's blue info-box frame entirely — the corner slices AND the inner
+   wrappers (.cww-inner / .cww-co) carry the blue; the linen lives on .messageBox. */
 body .WaGadgetMembershipApplication .commonMessageBox .cww,
-body .WaGadgetMembershipApplication .commonMessageBox .cww > div,
+body .WaGadgetMembershipApplication .commonMessageBox .cww *,
+body .WaGadgetMembershipApplication .commonMessageBox .cww-inner,
+body .WaGadgetMembershipApplication .commonMessageBox .cww-co,
 body .WaGadgetPublicWizard .commonMessageBox .cww,
-body .WaGadgetPublicWizard .commonMessageBox .cww > div {
-  background: transparent !important; border: none !important;
+body .WaGadgetPublicWizard .commonMessageBox .cww *,
+body .WaGadgetPublicWizard .commonMessageBox .cww-inner,
+body .WaGadgetPublicWizard .commonMessageBox .cww-co {
+  background: transparent !important; border: none !important; box-shadow: none !important;
 }
+body .WaGadgetMembershipApplication .commonMessageBox .cww,
+body .WaGadgetPublicWizard .commonMessageBox .cww { display: none !important; }
+body .WaGadgetMembershipApplication .commonMessageBox .cww-co,
+body .WaGadgetPublicWizard .commonMessageBox .cww-co { padding: 22px 26px !important; }
 /* "Review and confirm" heading → on-brand serif */
 body .WaGadgetMembershipApplication .commonMessageBox .header,
 body .WaGadgetPublicWizard .commonMessageBox .header {
   font-family: var(--ngm-serif) !important; font-weight: 400 !important;
   font-size: 1.5rem !important; color: var(--ngm-charcoal) !important;
-  text-transform: none !important;
+  text-transform: none !important; margin-bottom: 6px !important;
+}
+/* Row labels ("Level", "Total amount", "Payment instructions") → sage eyebrow */
+body .WaGadgetMembershipApplication .commonMessageBox .labelInfoColumn,
+body .WaGadgetPublicWizard .commonMessageBox .labelInfoColumn {
+  font-family: var(--ngm-sans) !important; font-size: .72rem !important;
+  font-weight: 600 !important; letter-spacing: .14em !important;
+  text-transform: uppercase !important; color: var(--ngm-sage-dk) !important;
+  vertical-align: top !important; padding: 12px 18px 12px 0 !important; white-space: nowrap !important;
+}
+body .WaGadgetMembershipApplication .commonMessageBox .infoColumn,
+body .WaGadgetPublicWizard .commonMessageBox .infoColumn {
+  vertical-align: top !important; padding: 12px 0 !important; color: var(--ngm-charcoal) !important;
+}
+/* Price + total emphasised in sage */
+body .WaGadgetMembershipApplication .commonMessageBox .levelPrice,
+body .WaGadgetPublicWizard .commonMessageBox .levelPrice {
+  font-weight: 600 !important; color: var(--ngm-sage-dk) !important;
+}
+body .WaGadgetMembershipApplication .commonMessageBox .labelTitle,
+body .WaGadgetPublicWizard .commonMessageBox .labelTitle {
+  font-family: var(--ngm-sans) !important; font-weight: 700 !important;
+  font-size: 1.15rem !important; color: var(--ngm-sage-dk) !important;
+}
+/* Renewal / recurring / payment instructions → quiet gray */
+body .WaGadgetMembershipApplication .commonMessageBox .levelRenewal,
+body .WaGadgetMembershipApplication .commonMessageBox .levelRecurring,
+body .WaGadgetPublicWizard .commonMessageBox .levelRenewal,
+body .WaGadgetPublicWizard .commonMessageBox .levelRecurring {
+  font-size: .88rem !important; color: var(--ngm-gray) !important;
 }
