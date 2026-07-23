@@ -359,6 +359,55 @@ body a.ngm-btn-outline-rose:hover { background: var(--ngm-rose) !important; colo
   background: var(--ngm-sage-lt); border: 1px solid #DBE6D5;
   border-radius: 100px; padding: 9px 18px;
 }
+/* Compact meeting tiles — a teaser row on the homepage: name, when,
+   one line, one format pill. The full detail lives on /monthly-meetings.
+   Tighter than the full .ngm-mcard so the home page stays skimmable. */
+.ngm-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(232px, 1fr));
+  gap: 14px;
+  margin: 8px 0 24px;
+}
+.ngm-mini {
+  background: #fff;
+  border: 1px solid var(--ngm-border);
+  border-radius: var(--ngm-radius);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  transition: background-color .25s ease, border-color .25s ease;
+}
+.ngm-mini:hover { background: var(--ngm-sage-lt); border-color: var(--ngm-sage-lt); }
+.ngm-mini-name {
+  font-family: var(--ngm-serif);
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--ngm-charcoal);
+  line-height: 1.2;
+  margin-bottom: 6px;
+  text-transform: none !important;
+}
+.ngm-mini-when {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--ngm-sans);
+  font-size: .78rem;
+  font-weight: 500;
+  color: var(--ngm-sage-dk);
+  margin-bottom: 8px;
+}
+.ngm-mini-when svg { flex-shrink: 0; }
+.ngm-mini-desc {
+  font-family: var(--ngm-sans);
+  font-size: .84rem;
+  color: var(--ngm-gray);
+  line-height: 1.55;
+  margin-bottom: 12px;
+  flex: 1;
+}
+.ngm-mini-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+.ngm-badge-public { background: var(--ngm-sage-lt); color: var(--ngm-sage-dk); }
 .ngm-mcard-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
@@ -428,7 +477,10 @@ body a.ngm-btn-outline-rose:hover { background: var(--ngm-rose) !important; colo
    native WA Upcoming-events gadget sit where it actually lands
    instead of being orphaned beneath an empty grid cell.
 ────────────────────────────────────────────────────────── */
-.ngm-upcoming-head { margin-bottom: 0; }
+/* Heading block is centered so it balances the centered event card
+   below it (the card is max-width:1080 auto, so a left-aligned intro
+   read lopsided on wide desktops). */
+.ngm-upcoming-head { margin-bottom: 0; text-align: center; }
 /* Intro copy under the calendar heading */
 .ngm-upcoming-intro {
   font-family: var(--ngm-sans);
@@ -436,7 +488,8 @@ body a.ngm-btn-outline-rose:hover { background: var(--ngm-rose) !important; colo
   color: var(--ngm-gray);
   line-height: 1.8;
   max-width: 620px;
-  margin-top: 8px;
+  /* centered + extra breathing room before the events card */
+  margin: 8px auto 0;
 }
 /* Centered "View the full calendar →" link (replaces the green box) */
 .ngm-cal-link-wrap {
@@ -489,8 +542,9 @@ body .ngm-wa-events.WaGadgetUpcomingEvents {
   border: none !important;
   box-shadow: none !important;
   margin: 0 !important;
-  
-  padding: 28px 48px !important;
+  /* tightened vertical so the card sits closer to the heading, even
+     horizontal so the linen inset reads balanced on wide desktops */
+  padding: 0 48px 8px !important;
   font-family: var(--ngm-sans) !important;
 }
 body .ngm-wa-events .gadgetStyleBody {
@@ -498,8 +552,8 @@ body .ngm-wa-events .gadgetStyleBody {
   border: 1px solid var(--ngm-border) !important;
   border-radius: var(--ngm-radius-lg) !important;
   box-shadow: var(--ngm-sh) !important;
-  
-  padding: 12px 28px !important;
+  /* even inner padding on all four sides */
+  padding: 12px !important;
   margin: 0 auto !important;
   max-width: 1080px !important;    /* align with .ngm-con */
 }
@@ -509,24 +563,23 @@ body .ngm-wa-events.upcomingEventsStyle001 ul {
   margin: 0 !important;
   padding: 0 !important;
 }
+/* No divider rules between rows — the pale line is gone entirely.
+   Each row is a rounded tile that only shows on hover, with even
+   inner padding around the event name + date. */
 body .ngm-wa-events.upcomingEventsStyle001 ul li {
   list-style: none !important;
-  border-bottom: 1px solid var(--ngm-linen-dk) !important;
-  padding: 18px 8px !important;
+  border: none !important;
+  padding: 16px 18px !important;
   margin: 0 !important;
   font-family: var(--ngm-sans) !important;
-  
-  border-radius: 0 !important;
+  border-radius: 12px !important;
   transition: background-color .2s ease !important;
 }
 /* Whole row is clickable (click handler in the script). Hover
-   the full row turns pale green — no lift, no shadow. */
+   the full row turns into a pale-green rounded tile — no lift,
+   no shadow, no divider line. */
 body .ngm-wa-events.upcomingEventsStyle001 ul li:hover {
   background-color: var(--ngm-sage-lt) !important;
-}
-body .ngm-wa-events.upcomingEventsStyle001 ul li.last,
-body .ngm-wa-events.upcomingEventsStyle001 ul li:last-child {
-  border-bottom: none !important;   /* no rule under the final row */
 }
 /* Event title — serif charcoal, sage on hover, no underline.
    Mirrors the theme's own selector exactly so we beat #f48d1d.
@@ -599,15 +652,23 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="zoom"]    .ngm-evt-ta
 body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="hybrid"]  .ngm-evt-tag { background:#E3EFEF !important; color:#2A5A5A !important; }
 body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="virtual"] .ngm-evt-tag { background:#F2EEF8 !important; color:#5A3A8A !important; }
 body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-tag { background:var(--ngm-rose-lt) !important; color:#7A3E2E !important; }
-/* ── 13. RETREAT SECTION ────────────────────────────────── */
+/* ── 13. RETREAT SECTION ──────────────────────────────────
+   The retreat is now a CONTAINED tile floating on a band, not a
+   full-bleed strip. Rounded corners + max-width so it reads as a
+   feature card. The surrounding .ngm-sec supplies the band + padding.
+────────────────────────────────────────────────────────── */
 .ngm-retreat {
   background: var(--ngm-sage-dk);
   overflow: hidden;
+  max-width: 1080px;
+  margin: 0 auto;
+  border-radius: var(--ngm-radius-lg);
+  box-shadow: var(--ngm-shm);
 }
 .ngm-retreat-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 460px;
+  min-height: 420px;
 }
 .ngm-retreat-photo {
   overflow: hidden;
@@ -697,14 +758,27 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
   justify-content: center;
   flex-wrap: wrap;
 }
-/* ── 15. LOCATION / MAP ─────────────────────────────────── */
+/* ── 15. LOCATION / MAP ───────────────────────────────────
+   Grid areas so the map can be reordered on small screens: on
+   desktop it's text | map, on mobile the map slides up to sit
+   directly under the "Where we meet" heading and above the
+   address block.
+────────────────────────────────────────────────────────── */
 .ngm-loc-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: center;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "head map"
+    "addr map";
+  column-gap: 64px;
+  align-items: start;
 }
+.ngm-loc-head { grid-area: head; margin-bottom: 20px; }
+.ngm-loc-addr { grid-area: addr; }
 .ngm-loc-map {
+  grid-area: map;
+  align-self: start;
   border-radius: var(--ngm-radius-lg);
   overflow: hidden;
   height: 320px;
@@ -850,7 +924,13 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
     background: linear-gradient(to top, var(--ngm-sage-dk) 30%, transparent);
   }
   .ngm-retreat-copy      { padding: 44px 28px; }
-  .ngm-loc-inner         { grid-template-columns: 1fr; gap: 36px; }
+  .ngm-loc-inner         {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-template-areas: "head" "map" "addr";
+    row-gap: 24px;
+  }
+  .ngm-loc-head          { margin-bottom: 0; }
   .ngm-loc-map           { height: 250px; }
   
   .ngm-hero-body,
@@ -1006,9 +1086,9 @@ body .WaPlaceHolderWide > div {
 </style>
 <section class="ngm ngm-hero">
   <div class="ngm-hero-copy">
-    <span class="ngm-eyebrow">EST. 1972</span>
+    <span class="ngm-eyebrow">Welcome</span>
     <h1 class="ngm-h1">A place for people<br>who love to <em>stitch</em></h1>
-    <p class="ngm-hero-body">Monthly meetings, hands-on workshops, and a beloved annual retreat — a warm, welcoming community of stitchers who learn from and look out for each other.</p>
+    <p class="ngm-hero-body">The Needlework Guild of Minnesota offers monthly meetings, hands-on workshops, and a beloved annual retreat — a warm, welcoming community of stitchers who learn from and look out for each other.</p>
     <div class="ngm-hero-btns">
       <a class="ngm-btn ngm-btn-green" href="/join">Join the Guild</a>
       <a class="ngm-btn ngm-btn-outline" href="/calendar">See our calendar</a>
@@ -1076,12 +1156,12 @@ body .WaPlaceHolderWide > div {
     200+ active members · 50+ years of community · 400+ library books · 7 monthly groups · $30 per year
   </p>
 </div>
-<section class="ngm ngm-sec ngm-sec-linen" style="padding-bottom:0">
+<section class="ngm ngm-sec ngm-sec-linen" style="padding-bottom:28px">
   <div class="ngm-con">
     <div class="ngm-upcoming-head">
-      <span class="ngm-eyebrow">What's coming up</span>
-      <h2 class="ngm-h2">Mark your <em>calendar</em></h2>
-      <p class="ngm-upcoming-intro">A look at what's next on the Guild calendar — meetings, workshops, and gatherings open in the coming weeks. Click any event for details and to register.</p>
+      <span class="ngm-eyebrow">Calendar</span>
+      <h2 class="ngm-h2">Upcoming meetings <em>&amp; events</em></h2>
+      <p class="ngm-upcoming-intro">A look at what's next on the Guild calendar — meetings, workshops, and gatherings open in the coming weeks. Most meetings are free for members; some workshops have registration fees. Click any event for details and to register.</p>
     </div>
   </div>
 </section>
