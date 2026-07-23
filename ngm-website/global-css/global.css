@@ -5314,6 +5314,64 @@ body .WaGadgetPublicWizard [id$="_cancelTop"]:hover {
   background: transparent !important; color: var(--ngm-sage-dk) !important;
   text-decoration: underline !important;
 }
+/* ══ Review-step action buttons — reorder + hierarchy ══════════════════
+   Scoped to the review step (WaGadgetMembershipApplicationStateReview) so the
+   earlier steps keep their normal Next/Back. Target order:
+     PAY (primary) → INVOICE (secondary) → BACK (tertiary word), with
+     CANCEL as a rose "negative" button below, full-width on mobile. */
+body .WaGadgetMembershipApplicationStateReview .navigationContainer .inner {
+  display: flex !important; flex-direction: column !important;
+  align-items: stretch !important; gap: 14px !important;
+}
+body .WaGadgetMembershipApplicationStateReview .navigationContainer .inner .right {
+  order: 1 !important; float: none !important; width: auto !important;
+  display: flex !important; flex-wrap: wrap !important; gap: 12px !important; align-items: center !important;
+}
+body .WaGadgetMembershipApplicationStateReview .navigationContainer .inner .left {
+  order: 2 !important; float: none !important; width: auto !important;
+  display: flex !important; justify-content: center !important; margin-top: 2px !important;
+}
+/* order within the Pay / Invoice / Back row */
+body .WaGadgetMembershipApplicationStateReview .right [id$="_payOnline"],
+body .WaGadgetMembershipApplicationStateReview .right [id$="_payOnlineTop"] { order: 1 !important; }
+body .WaGadgetMembershipApplicationStateReview .right [id$="_next"],
+body .WaGadgetMembershipApplicationStateReview .right [id$="_nextTop"] { order: 2 !important; }
+body .WaGadgetMembershipApplicationStateReview .right [id$="_prev"],
+body .WaGadgetMembershipApplicationStateReview .right [id$="_prevTop"] { order: 3 !important; }
+/* BACK → tertiary text word */
+body .WaGadgetMembershipApplicationStateReview .right [id$="_prev"],
+body .WaGadgetMembershipApplicationStateReview .right [id$="_prevTop"] {
+  background: transparent !important; border: none !important; border-radius: 0 !important; box-shadow: none !important;
+  color: var(--ngm-gray) !important; font-weight: 500 !important; text-transform: none !important;
+  letter-spacing: normal !important; padding: 10px 6px !important; text-decoration: none !important;
+}
+body .WaGadgetMembershipApplicationStateReview .right [id$="_prev"]:hover,
+body .WaGadgetMembershipApplicationStateReview .right [id$="_prevTop"]:hover {
+  color: var(--ngm-sage-dk) !important; text-decoration: underline !important; background: transparent !important;
+}
+/* CANCEL → rose "negative" outline button at the bottom */
+body .WaGadgetMembershipApplicationStateReview .left [id$="_cancel"],
+body .WaGadgetMembershipApplicationStateReview .left [id$="_cancelTop"] {
+  background: transparent !important; color: var(--ngm-rose-dk) !important;
+  border: 1.5px solid var(--ngm-rose-dk) !important; border-radius: 999px !important; box-shadow: none !important;
+  font-family: var(--ngm-sans) !important; font-weight: 600 !important; font-size: .9rem !important;
+  text-transform: none !important; letter-spacing: normal !important; padding: 10px 26px !important;
+  text-decoration: none !important; cursor: pointer !important;
+}
+body .WaGadgetMembershipApplicationStateReview .left [id$="_cancel"]:hover,
+body .WaGadgetMembershipApplicationStateReview .left [id$="_cancelTop"]:hover {
+  background: var(--ngm-rose-dk) !important; color: #fff !important; text-decoration: none !important;
+}
+/* Mobile: stack the Pay/Invoice/Back row full-width with spacing */
+@media (max-width: 600px) {
+  body .WaGadgetMembershipApplicationStateReview .navigationContainer .inner .right {
+    flex-direction: column !important; align-items: stretch !important;
+  }
+  body .WaGadgetMembershipApplicationStateReview .navigationContainer .inner .right > *,
+  body .WaGadgetMembershipApplicationStateReview .navigationContainer .inner .left > * {
+    width: 100% !important;
+  }
+}
 /* ── Stacked field layout: labels ABOVE inputs ──────────────────────────
    WA lays each field out as a <table> with a label cell (td.left) and an
    input cell (td.right). Force those table parts to blocks so the label sits
