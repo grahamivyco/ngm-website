@@ -1034,6 +1034,13 @@ body .WaPlaceHolderWide > div {
   padding: 80px 48px 72px;
   border-bottom: 1px solid var(--ngm-border);
 }
+/* Hero title is sized to stay on its intended two lines (the manual
+   <br> split) inside the narrower two-column hero — a hair smaller
+   than the shared .ngm-h1 so "A community built on" never wraps. */
+.ngm-about-hero .ngm-h1 {
+  font-size: clamp(2.5rem, 4vw, 3.4rem);
+  text-wrap: balance;
+}
 .ngm-about-hero-inner {
   max-width: 1080px;
   margin: 0 auto;
@@ -2042,6 +2049,16 @@ body .WaPlaceHolderWide > div { padding-top: 0 !important; padding-bottom: 0 !im
   line-height: 1.8; max-width: 620px; margin-bottom: 40px;
 }
 .ngm-groups-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.ngm-groups-grid + .ngm-groups-subhead { margin-top: 44px; }
+/* Day-part subhead that labels each block of group cards
+   (Daytime / Evening / Weekend). */
+.ngm-groups-subhead {
+  font-family: var(--ngm-serif) !important;
+  font-size: 1.5rem; font-weight: 400;
+  color: var(--ngm-charcoal); text-transform: none !important;
+  line-height: 1.2; margin: 8px 0 18px;
+  padding-bottom: 10px; border-bottom: 1px solid var(--ngm-border);
+}
 /* Group card — green top bar removed; hover = pale-green fill, no lift */
 .ngm-gcard {
   background: #fff;
@@ -4267,7 +4284,7 @@ body.ngm-login-page .WaGadgetLoginForm .loginPanel::after { display: none !impor
 
 /* ══════════════════════════════════════════════════════════════════
    PAGE — MEETING-TYPE DETAIL PAGES (Counted Thread, Evening Needlepointers,
-   Potpourri Stitchers, Beading)
+   Potpourri Stitchers)
 ══════════════════════════════════════════════════════════════════ */
 /* ── Meeting-type detail pages (ngm-mt-*) ──────────────────── */
 .ngm-mt-hero-grid { display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; }
