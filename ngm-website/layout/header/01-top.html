@@ -54,7 +54,7 @@
 #ngm .ngm-drop a:hover{background:#EEF3EC;color:#3E5538}
 /* ── Action buttons (desktop) ── */
 #ngm .ngm-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
-#ngm .ngm-ghost{display:inline-flex;align-items:center;justify-content:center;font-size:.875rem;font-weight:500;color:#3E5538;background:transparent;border:1.5px solid #3E5538;border-radius:100px;padding:10px 22px;text-decoration:none;white-space:nowrap;cursor:pointer;line-height:1;transition:background .2s}
+#ngm .ngm-ghost{display:inline-flex;align-items:center;justify-content:center;font-family:inherit;font-size:.875rem;font-weight:500;color:#3E5538;background:transparent;border:1.5px solid #3E5538;border-radius:100px;padding:10px 22px;text-decoration:none;white-space:nowrap;cursor:pointer;line-height:1;transition:background .2s}
 #ngm .ngm-ghost:hover{background:rgba(62,85,56,0.08)}
 #ngm .ngm-solid{display:inline-flex;align-items:center;justify-content:center;font-size:.875rem;font-weight:500;color:#fff;background:#3E5538;border:none;border-radius:100px;padding:11px 22px;text-decoration:none;white-space:nowrap;cursor:pointer;line-height:1;transition:opacity .18s,transform .18s,box-shadow .18s}
 #ngm .ngm-solid:hover{opacity:.88;transform:translateY(-1px);box-shadow:0 4px 14px rgba(62,85,56,.28)}
@@ -165,7 +165,7 @@ body.memberContentView #ngm .ngm-member{display:inline-flex}
     <div class="ngm-actions">
       <a href="https://needleworkguildmn.org/log-in" class="ngm-ghost ngm-guest">Log In</a>
       <a href="/join" class="ngm-solid ngm-guest">Join Now</a>
-      <a href="/sys/logout" class="ngm-ghost ngm-member">Log Out</a>
+      <button type="button" class="ngm-ghost ngm-member" data-ngm-logout>Log Out</button>
       <a href="/member/" class="ngm-solid ngm-member">Member Hub</a>
     </div>
     <!-- ══ HAMBURGER ══ -->
@@ -200,7 +200,7 @@ body.memberContentView #ngm .ngm-member{display:inline-flex}
       <div class="ngm-mob-acts">
         <a href="https://needleworkguildmn.org/log-in" class="ngm-ghost ngm-guest">Log In</a>
         <a href="/join" class="ngm-solid ngm-guest">Join Now</a>
-        <a href="/sys/logout" class="ngm-ghost ngm-member">Log Out</a>
+        <button type="button" class="ngm-ghost ngm-member" data-ngm-logout>Log Out</button>
         <a href="/member/" class="ngm-solid ngm-member">Member Hub</a>
       </div>
     </div>
@@ -276,5 +276,17 @@ body.memberContentView #ngm .ngm-member{display:inline-flex}
     nav.querySelectorAll('.ngm-member').forEach(function(el){el.style.display=isMember?'inline-flex':'none';});
   }
   ngmApplyState();
+  /* ── LOG OUT ──
+     WA logout is a form POST to /Sys/Login/SignOut fired by the native
+     account gadget's submit control (.loginBoxLogout). A plain link to
+     /sys/logout does NOT reliably end the session, so our styled header
+     button clicks the real WA control (which carries the proper POST +
+     token). Falls back to /sys/logout if the gadget isn't on the page. */
+  nav.querySelectorAll('[data-ngm-logout]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var wa=document.querySelector('.loginBoxLogout');
+      if(wa){wa.click();}else{window.location.href='/sys/logout';}
+    });
+  });
 }());
 </script>
