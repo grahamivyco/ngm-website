@@ -703,29 +703,48 @@ body .ngm-cal .monthViewType .EventListCalendar td,
 body .ngm-cal .monthViewType .EventListCalendar th {
   border-color: var(--ngm-linen-dk) !important;
 }
-/* ── Legend ── */
-.ngm-legend-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px; margin-top: 32px;
+/* ── KEY / LEGEND MODULE (swatches mirror the calendar's event-chip colours) ──
+   A self-contained card with its own single-word eyebrow. The swatches are the
+   same rounded-rectangle shape and exact colours as the calendar event chips,
+   so the key genuinely reflects the calendar. */
+.ngm-key {
+  max-width: 1080px; margin: 0 auto;
+  background: #fff; border: 1px solid var(--ngm-border);
+  border-radius: var(--ngm-radius-lg); box-shadow: var(--ngm-sh);
+  padding: 34px 36px;
 }
-.ngm-legend-item {
-  display: flex; gap: 12px; align-items: flex-start;
-  padding: 18px 20px; background: #fff;
-  border: 1px solid var(--ngm-border); border-radius: var(--ngm-radius);
+.ngm-key .ngm-eyebrow { margin-bottom: 10px; }
+.ngm-key .ngm-h2 { margin-bottom: 8px; }
+.ngm-key-intro {
+  font-family: var(--ngm-sans); font-size: .95rem; color: var(--ngm-gray);
+  line-height: 1.7; max-width: 560px; margin-bottom: 26px;
 }
-.ngm-legend-dot {
-  width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; margin-top: 4px;
+.ngm-key-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 15px 22px;
 }
-.ngm-legend-dot.meetings { background: var(--ngm-sage); }
-.ngm-legend-dot.events   { background: var(--ngm-rose); }
-.ngm-legend-dot.retreat  { background: var(--ngm-charcoal); }
-.ngm-legend-dot.public   { background: #5B7DB1; }
-.ngm-legend-text h3 {
-  font-family: var(--ngm-serif) !important; font-size: 1.05rem; font-weight: 400;
-  color: var(--ngm-charcoal); text-transform: none !important; margin-bottom: 3px; line-height: 1.2;
+.ngm-key-item { display: flex; gap: 12px; align-items: flex-start; }
+.ngm-key-swatch {
+  width: 28px; height: 18px; border-radius: 5px; flex-shrink: 0; margin-top: 3px;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
 }
-.ngm-legend-text p {
-  font-family: var(--ngm-sans); font-size: .82rem; color: var(--ngm-gray); line-height: 1.6; margin: 0;
+.ngm-key-swatch.stitch-in { background: #5B7DB1; }
+.ngm-key-swatch.npt       { background: #3E8578; }
+.ngm-key-swatch.potpourri { background: #B87260; }
+.ngm-key-swatch.come      { background: #5C7A52; }
+.ngm-key-swatch.sunday    { background: #A6752E; }
+.ngm-key-swatch.special   { background: #8A5A7A; }
+.ngm-key-swatch.board     { background: #4A5A6A; }
+.ngm-key-text h3 {
+  font-family: var(--ngm-serif) !important; font-size: 1.02rem; font-weight: 400;
+  color: var(--ngm-charcoal); text-transform: none !important; margin: 0 0 2px; line-height: 1.2;
+}
+.ngm-key-text p {
+  font-family: var(--ngm-sans); font-size: .8rem; color: var(--ngm-gray); line-height: 1.55; margin: 0;
+}
+@media (max-width: 560px) {
+  .ngm-key { padding: 26px 22px; }
+  .ngm-key-grid { grid-template-columns: 1fr; }
 }
 /* ── Final CTA ── */
 .ngm-cal-cta { background: var(--ngm-rose-lt); padding: 72px 48px; text-align: center; }
