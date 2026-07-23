@@ -5170,12 +5170,21 @@ body .WaGadgetPublicWizard .infoOuterContainer [class^="c"],
 body .WaGadgetPublicWizard .infoOuterContainer [class^="r"] {
   background: transparent !important; border: none !important;
 }
-/* "Level" label → small uppercase sage eyebrow */
+/* Unfloat WA's two-column layout (.infoText is float:left width:69%) so the
+   "LEVEL" eyebrow stacks ABOVE the membership details, full width. */
+body .WaGadgetMembershipApplication .infoOuterContainer .infoSection .infoTitle,
+body .WaGadgetMembershipApplication .infoOuterContainer .infoSection .infoText,
+body .WaGadgetPublicWizard .infoOuterContainer .infoSection .infoTitle,
+body .WaGadgetPublicWizard .infoOuterContainer .infoSection .infoText {
+  float: none !important; width: auto !important;
+}
+/* "Level" label → small uppercase sage eyebrow, sitting above the details */
 body .WaGadgetMembershipApplication .infoOuterContainer .infoTitle,
 body .WaGadgetPublicWizard .infoOuterContainer .infoTitle {
   font-family: var(--ngm-sans) !important; font-size: .72rem !important;
   font-weight: 600 !important; letter-spacing: .16em !important;
   text-transform: uppercase !important; color: var(--ngm-sage-dk) !important;
+  margin-bottom: 6px !important;
 }
 /* Price emphasised in sage; renewal/recurring quiet; one line per row */
 body .WaGadgetMembershipApplication .infoOuterContainer .levelPrice,
