@@ -6294,7 +6294,7 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
    branded placeholder with the venue name shows instead of a broken image. */
 .ngm-loc-photo { position: relative; background: var(--ngm-sage-lt); }
 .ngm-loc-photo img {
-  position: relative; z-index: 1;
+  position: absolute; inset: 0; z-index: 1;
   width: 100%; height: 100%; object-fit: cover; display: block;
 }
 .ngm-loc-photo-ph {
