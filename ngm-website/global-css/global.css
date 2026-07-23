@@ -3976,6 +3976,211 @@ body .WaGadgetLoginForm .wa-authenticateLoginLink.apple .authenticateLoginIcon {
 }
 
 /* ══════════════════════════════════════════════════════════════════
+   AUTHORIZATION-REQUIRED PAGE — login form skin
+   ────────────────────────────────────────────────────────────────
+   The "Authorization required" system page (shown when a logged-out
+   visitor opens a members-only page) uses a DIFFERENT gadget than the
+   login dropdown: .WaGadgetAuthorizationRequired, with its own table-based
+   form (#idLoginBox / #idPasswordBox / .loginButton) instead of the
+   .WaGadgetLoginForm markup above. WA applies that class automatically, so
+   these rules brand the page with no gadget class to set — it just needs
+   Global CSS live. Values mirror the .WaGadgetLoginForm skin above.
+══════════════════════════════════════════════════════════════════ */
+/* Constrain + centre the form as a card */
+body .WaGadgetAuthorizationRequired { max-width: 400px !important; margin: 0 auto !important; }
+body .WaGadgetAuthorizationRequired .openAuthFormContainer,
+body .WaGadgetAuthorizationRequired .authFormContainer,
+body .WaGadgetAuthorizationRequired .oAuthForm,
+body .WaGadgetAuthorizationRequired #idLoginForm,
+body .WaGadgetAuthorizationRequired .loginPageTable,
+body .WaGadgetAuthorizationRequired .loginPageTable tbody,
+body .WaGadgetAuthorizationRequired .loginPageTable tr,
+body .WaGadgetAuthorizationRequired .loginPageTable td {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
+
+/* Field labels ("Email" / "Password") */
+body .WaGadgetAuthorizationRequired .mandatory {
+  display: block !important;
+  font-size: .8rem !important;
+  font-weight: 500 !important;
+  color: #656565 !important;
+  margin-bottom: 6px !important;
+}
+body .WaGadgetAuthorizationRequired .mandatorySymbol { display: none !important; }
+
+/* Email + password inputs */
+body .WaGadgetAuthorizationRequired #idLoginBox input,
+body .WaGadgetAuthorizationRequired #idPasswordBox input {
+  width: 100% !important;
+  font-size: .95rem !important;
+  padding: 12px 14px !important;
+  border: 1px solid #DDD5C8 !important;
+  border-radius: 10px !important;
+  background: #fff !important;
+  color: #242424 !important;
+  box-sizing: border-box !important;
+}
+body .WaGadgetAuthorizationRequired #idLoginBox input:focus,
+body .WaGadgetAuthorizationRequired #idPasswordBox input:focus {
+  outline: none !important;
+  border-color: #5C7A52 !important;
+  box-shadow: 0 0 0 3px rgba(92,122,82,.15) !important;
+}
+body .WaGadgetAuthorizationRequired #idLoginBox { margin-bottom: 14px !important; }
+
+/* Show/hide-password eye (same broken-Font-Awesome fix as the login gadget) */
+body .WaGadgetAuthorizationRequired .password-wrapper { position: relative !important; }
+body .WaGadgetAuthorizationRequired #idPasswordBox input { padding-right: 44px !important; }
+body .WaGadgetAuthorizationRequired .toggle-password {
+  position: absolute !important;
+  right: 12px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 22px !important;
+  height: 22px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font: 0/0 a !important;
+  color: transparent !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 20px 20px !important;
+  cursor: pointer !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239A9A9A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24'/%3E%3Cline x1='1' y1='1' x2='23' y2='23'/%3E%3C/svg%3E") !important;
+}
+body .WaGadgetAuthorizationRequired .toggle-password.fa-eye-slash {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239A9A9A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24'/%3E%3Cline x1='1' y1='1' x2='23' y2='23'/%3E%3C/svg%3E") !important;
+}
+body .WaGadgetAuthorizationRequired .toggle-password.fa-eye {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239A9A9A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E") !important;
+}
+body .WaGadgetAuthorizationRequired .toggle-password::before,
+body .WaGadgetAuthorizationRequired .toggle-password::after { content: "" !important; }
+
+/* Remember me */
+body .WaGadgetAuthorizationRequired #idRememberMe {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin: 14px 0 !important;
+}
+body .WaGadgetAuthorizationRequired #idRememberMe input { width: auto !important; accent-color: #3E5538; }
+body .WaGadgetAuthorizationRequired #idRememberMe label {
+  font-size: .85rem !important;
+  color: #656565 !important;
+  margin: 0 !important;
+}
+
+/* reCAPTCHA spacing */
+body .WaGadgetAuthorizationRequired #idCaptcha { margin: 14px 0 !important; }
+
+/* Log in button + its wrappers */
+body .WaGadgetAuthorizationRequired #idSubmitBox,
+body .WaGadgetAuthorizationRequired #idLoginButtonBox { display: block !important; width: 100% !important; }
+body .WaGadgetAuthorizationRequired .loginButton {
+  display: block !important;
+  width: 100% !important;
+  font-size: .9rem !important;
+  font-weight: 500 !important;
+  color: #fff !important;
+  background: #3E5538 !important;
+  border: 1.5px solid #3E5538 !important;
+  border-radius: 100px !important;
+  padding: 12px 26px !important;
+  cursor: pointer;
+  text-transform: none !important;
+  transition: background .2s;
+}
+body .WaGadgetAuthorizationRequired .loginButton:hover {
+  background: #5C7A52 !important;
+  border-color: #5C7A52 !important;
+}
+
+/* Forgot password */
+body .WaGadgetAuthorizationRequired #idForgotLinkBox {
+  margin-top: 14px !important;
+  text-align: center !important;
+}
+body .WaGadgetAuthorizationRequired #idForgotLinkBox a {
+  font-size: .85rem !important;
+  color: #3E5538 !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(62,85,56,.3);
+  padding-bottom: 1px;
+}
+body .WaGadgetAuthorizationRequired #idForgotLinkBox a:hover { border-color: #3E5538 !important; }
+
+/* Social login buttons (Google / Microsoft / Apple) — shares WA's oAuth classes */
+body .WaGadgetAuthorizationRequired .oAuthButtonsContainer {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 8px !important;
+  width: 100% !important;
+  margin-bottom: 16px !important;
+  padding-bottom: 16px !important;
+  border-bottom: 1px solid #EDE7DC !important;
+}
+body .WaGadgetAuthorizationRequired .wa-authenticateLoginLink {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  font-size: .85rem !important;
+  font-weight: 500 !important;
+  color: #242424 !important;
+  background: #fff !important;
+  border: 1.5px solid #DDD5C8 !important;
+  border-radius: 100px !important;
+  padding: 11px 16px !important;
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: border-color .18s, background .18s;
+}
+body .WaGadgetAuthorizationRequired .wa-authenticateLoginLink:hover {
+  border-color: #5C7A52 !important;
+  background: #EEF3EC !important;
+}
+body .WaGadgetAuthorizationRequired .authenticateLoginText {
+  display: inline-block !important;
+  visibility: visible !important;
+  width: auto !important;
+  height: auto !important;
+  font-size: .875rem !important;
+  font-weight: 500 !important;
+  color: #242424 !important;
+  text-indent: 0 !important;
+  overflow: visible !important;
+}
+body .WaGadgetAuthorizationRequired .authenticateLoginIcon {
+  display: inline-block !important;
+  width: 18px !important;
+  height: 18px !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: contain !important;
+  flex-shrink: 0;
+}
+body .WaGadgetAuthorizationRequired .wa-authenticateLoginLink.googlePlus .authenticateLoginIcon {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2048%2048'%3E%3Cpath%20fill='%23FFC107'%20d='M43.6%2020.5H42V20H24v8h11.3C33.7%2032.4%2029.3%2035%2024%2035c-6.6%200-12-5.4-12-12s5.4-12%2012-12c3.1%200%205.9%201.2%208%203.1l5.7-5.7C34.6%206.1%2029.6%204%2024%204%2012.9%204%204%2012.9%204%2024s8.9%2020%2020%2020%2020-8.9%2020-20c0-1.3-.1-2.3-.4-3.5z'/%3E%3Cpath%20fill='%23FF3D00'%20d='M6.3%2014.7l6.6%204.8C14.7%2016%2019%2013%2024%2013c3.1%200%205.9%201.2%208%203.1l5.7-5.7C34.6%206.1%2029.6%204%2024%204%2016.3%204%209.7%208.3%206.3%2014.7z'/%3E%3Cpath%20fill='%234CAF50'%20d='M24%2044c5.2%200%209.9-2%2013.4-5.2l-6.2-5.2C29.2%2035%2026.7%2036%2024%2036c-5.3%200-9.7-2.6-11.3-7l-6.5%205C9.6%2039.6%2016.2%2044%2024%2044z'/%3E%3Cpath%20fill='%231976D2'%20d='M43.6%2020.5H42V20H24v8h11.3c-.8%202.3-2.3%204.3-4.1%205.6l6.2%205.2C39.9%2036.5%2044%2030.9%2044%2024c0-1.3-.1-2.3-.4-3.5z'/%3E%3C/svg%3E") !important;
+}
+body .WaGadgetAuthorizationRequired .wa-authenticateLoginLink.microsoft .authenticateLoginIcon {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20fill='%23F25022'%20d='M1%201h10v10H1z'/%3E%3Cpath%20fill='%237FBA00'%20d='M13%201h10v10H13z'/%3E%3Cpath%20fill='%2300A4EF'%20d='M1%2013h10v10H1z'/%3E%3Cpath%20fill='%23FFB900'%20d='M13%2013h10v10H13z'/%3E%3C/svg%3E") !important;
+}
+body .WaGadgetAuthorizationRequired .wa-authenticateLoginLink.apple .authenticateLoginIcon {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%3E%3Cpath%20fill='%23000'%20d='M16.4%2012.8c0-2.3%201.9-3.4%202-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7%200-1.8-.8-3-.8-1.5%200-3%20.9-3.8%202.3-1.6%202.8-.4%207%201.2%209.3.8%201.1%201.7%202.4%202.9%202.3%201.2-.05%201.6-.75%203-.75s1.8.75%203%20.73c1.2-.02%202-1.1%202.8-2.2.9-1.3%201.2-2.5%201.3-2.6-.03-.01-2.5-1-2.5-3.8zM14.2%206c.6-.8%201.1-1.9.9-3-1%20.04-2.1.7-2.8%201.5-.6.7-1.1%201.8-1%202.8%201.1.1%202.2-.5%202.9-1.3z'/%3E%3C/svg%3E") !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════
    LOGIN PAGE — force the form EXPANDED (not a dropdown)
    ────────────────────────────────────────────────────────────────
    The Custom HTML block on /Sys/Login adds  body.ngm-login-page  (see
