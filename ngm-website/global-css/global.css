@@ -1407,9 +1407,12 @@ html body .WaGadgetEventsStateCalendar {
   display: block !important;      /* so margin:auto can centre it */
   float: none !important;
   width: auto !important;
-  max-width: 1140px !important;
+  max-width: 1180px !important;
   margin: 16px auto 44px !important;
-  padding: clamp(20px, 2.6vw, 34px) !important;
+  /* Minimal side padding so the month grid uses nearly the full card width
+     (small left/right whitespace, per request) — top/bottom keep breathing
+     room. The card stays centred (margin:auto) and rounded (radius below). */
+  padding: clamp(16px, 1.8vw, 22px) clamp(12px, 1.4vw, 18px) clamp(18px, 2vw, 26px) !important;
   box-sizing: border-box !important;
   background: var(--ngm-linen) !important;
   background-image: none !important;
@@ -1597,6 +1600,7 @@ html body #idViewSwitchersTable a.incDateButton {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
+  text-align: center !important;
   width: 44px !important;
   height: 44px !important;
   min-width: 44px !important;
@@ -1623,16 +1627,20 @@ html body #idViewSwitchersTable a.incDateButton > * { display: none !important; 
 /* Draw the arrow as a real ICON, matching the rest of the site's icon set
    (Lucide stroke icons rendered via CSS mask — same technique as the calendar /
    check icons elsewhere in this file). chevron-left / chevron-right, centred in
-   the circle, painted in the button's currentColor (sage → white on hover). */
+   the circle, painted in the button's currentColor (sage → white on hover).
+   margin:auto + flex:0 0 auto pin it dead-centre so the glyph can never drift to
+   the top-left corner of the circle (WA's baseline/line-height was nudging it). */
 html body #idViewSwitchersTable a.DecDateButton::before,
 html body #idViewSwitchersTable a.incDateButton::before {
   content: "" !important;
   display: block !important;
-  width: 21px !important;
-  height: 21px !important;
+  flex: 0 0 auto !important;
+  margin: auto !important;
+  width: 20px !important;
+  height: 20px !important;
   background: currentColor !important;
-  -webkit-mask-size: 21px 21px !important; mask-size: 21px 21px !important;
-  -webkit-mask-position: center !important; mask-position: center !important;
+  -webkit-mask-size: 20px 20px !important; mask-size: 20px 20px !important;
+  -webkit-mask-position: center center !important; mask-position: center center !important;
   -webkit-mask-repeat: no-repeat !important; mask-repeat: no-repeat !important;
 }
 html body #idViewSwitchersTable a.DecDateButton::before {
@@ -1766,14 +1774,19 @@ body .WaGadgetEventsStateCalendar a[href*="EventListViewMode"] {
 html body #idEventListCalendar {
   display: flex !important;
   flex-wrap: wrap !important;
-  align-items: center !important;
+  align-items: center !important;      /* month title + nav share one baseline */
   column-gap: 16px !important;
   row-gap: 6px !important;
   text-align: left !important;
+  /* Bottom gap so the toolbar clears the grid. NO side padding here — the card's
+     own side padding already insets the month name + nav pill (the "padding" the
+     user wanted), while the grid keeps the full inner width (minimal whitespace). */
+  padding: 2px 0 14px !important;
 }
 html body #idEventListCalendar > .sectionTitle {
   margin: 0 !important;
   flex: 0 1 auto !important;
+  align-self: center !important;       /* keep the title vertically level with the arrows */
 }
 html body #idEventListCalendar > .pageTitle,
 html body #idEventListCalendar > .pageTitleOuterContainer {
@@ -1878,10 +1891,11 @@ body #incButton {
     float: none !important;
     clear: both !important;
   }
-  /* Nav group: a LEFT-aligned flex ROW of the three buttons. The selector
-     MUST include .WaGadgetEventsStateCalendar #idViewSwitchersTable so it
-     out-ranks WA's own `#idViewSwitchersTable #group2 { display:block }` rule
-     (which was stacking them). display:flex forces the children into a row. */
+  /* Nav group: ONE full-width row — [‹] [ Today ……… ] [›]. The arrows keep
+     their 44px circles at each end and Today FLEX-GROWS to fill everything in
+     between (per request). nowrap keeps all three on the single row; the
+     selector out-ranks WA's own `#idViewSwitchersTable #group2 { display:block }`
+     rule (which was stacking them). */
   html body .WaGadgetEventsStateCalendar #idViewSwitchersTable #group2,
   html body #idViewSwitchersTable #group2,
   html body .WaGadgetEventsStateCalendar #group2,
@@ -1889,9 +1903,9 @@ body #incButton {
     float: none !important;
     display: flex !important;
     flex-direction: row !important;
-    flex-wrap: wrap !important;
+    flex-wrap: nowrap !important;
     align-items: center !important;
-    justify-content: flex-start !important;
+    justify-content: space-between !important;
     gap: 10px !important;
     width: 100% !important;
     max-width: 100% !important;
@@ -1899,15 +1913,12 @@ body #incButton {
     visibility: visible !important;
     opacity: 1 !important;
   }
-  /* button wrappers — content-sized flex items, never floated or full-width */
+  /* arrow wrappers stay content-sized at the ends; the Today wrapper GROWS */
   html body .WaGadgetEventsStateCalendar #idViewSwitchersTable #decButton,
-  html body .WaGadgetEventsStateCalendar #idViewSwitchersTable #todayButton,
   html body .WaGadgetEventsStateCalendar #idViewSwitchersTable #incButton,
   html body #idViewSwitchersTable #decButton,
-  html body #idViewSwitchersTable #todayButton,
   html body #idViewSwitchersTable #incButton,
   html body #decButton,
-  html body #todayButton,
   html body #incButton {
     display: inline-flex !important;
     align-items: center !important;
@@ -1919,9 +1930,21 @@ body #incButton {
     visibility: visible !important;
     opacity: 1 !important;
   }
-  /* Re-assert the SAME button sizes as desktop so the arrows don't shrink and
-     Today doesn't stretch into an empty bar on phones (WA's mobile CSS does
-     both). Arrows: 42px circles; Today: 42px pill, auto width, label shown. */
+  html body .WaGadgetEventsStateCalendar #idViewSwitchersTable #todayButton,
+  html body #idViewSwitchersTable #todayButton,
+  html body #todayButton {
+    display: flex !important;
+    align-items: center !important;
+    float: none !important;
+    flex: 1 1 auto !important;        /* Today fills the space between the arrows */
+    width: auto !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  /* Re-assert the arrow sizes so WA's mobile CSS can't shrink them. */
   html body #idViewSwitchersTable a.DecDateButton,
   html body #idViewSwitchersTable a.incDateButton {
     width: 44px !important; height: 44px !important;
@@ -1929,13 +1952,12 @@ body #incButton {
     padding: 0 !important; border-radius: 50% !important;
     font-size: 0 !important; visibility: visible !important;
   }
-  html body #idViewSwitchersTable a.DecDateButton::before,
-  html body #idViewSwitchersTable a.incDateButton::before { font-size: 1.15rem !important; }
+  /* Today → full-width pill filling the gap; cap removed so it can stretch. */
   html body #idViewSwitchersTable a.todayButton,
   html body #idViewSwitchersTable #todayButton a,
   html body a.todayButton {
     height: 44px !important; min-height: 44px !important;
-    width: auto !important; min-width: 68px !important; max-width: 170px !important;
+    width: 100% !important; min-width: 0 !important; max-width: none !important;
     padding: 0 20px !important; font-size: .82rem !important;
     white-space: nowrap !important; visibility: visible !important;
   }
@@ -1949,29 +1971,51 @@ body .ngm-cal .monthViewType .EventListCalendar td,
 body .ngm-cal .monthViewType .EventListCalendar th {
   border-color: var(--ngm-linen-dk) !important;
 }
-/* ── Legend ── */
-.ngm-legend-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px; margin-top: 32px;
+/* ── KEY / LEGEND MODULE ──────────────────────────────────────────────
+   A self-contained card ("module") that sits below the calendar. Its
+   swatches use the EXACT category colours the calendar paints on its event
+   chips (see the `--cat` mapping in the month-grid block), and they're the
+   same rounded-rectangle shape as the chips, so the key genuinely reflects
+   the calendar. Carries its own single-word eyebrow ("Legend"). */
+.ngm-key {
+  max-width: 1080px; margin: 0 auto;
+  background: #fff; border: 1px solid var(--ngm-border);
+  border-radius: var(--ngm-radius-lg); box-shadow: var(--ngm-sh);
+  padding: 34px 36px;
 }
-.ngm-legend-item {
-  display: flex; gap: 12px; align-items: flex-start;
-  padding: 18px 20px; background: #fff;
-  border: 1px solid var(--ngm-border); border-radius: var(--ngm-radius);
+.ngm-key .ngm-eyebrow { margin-bottom: 10px; }
+.ngm-key .ngm-h2 { margin-bottom: 8px; }
+.ngm-key-intro {
+  font-family: var(--ngm-sans); font-size: .95rem; color: var(--ngm-gray);
+  line-height: 1.7; max-width: 560px; margin-bottom: 26px;
 }
-.ngm-legend-dot {
-  width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; margin-top: 4px;
+.ngm-key-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 15px 22px;
 }
-.ngm-legend-dot.meetings { background: var(--ngm-sage); }
-.ngm-legend-dot.events   { background: var(--ngm-rose); }
-.ngm-legend-dot.retreat  { background: var(--ngm-charcoal); }
-.ngm-legend-dot.public   { background: #5B7DB1; }
-.ngm-legend-text h3 {
-  font-family: var(--ngm-serif) !important; font-size: 1.05rem; font-weight: 400;
-  color: var(--ngm-charcoal); text-transform: none !important; margin-bottom: 3px; line-height: 1.2;
+.ngm-key-item { display: flex; gap: 12px; align-items: flex-start; }
+.ngm-key-swatch {
+  width: 28px; height: 18px; border-radius: 5px; flex-shrink: 0; margin-top: 3px;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
 }
-.ngm-legend-text p {
-  font-family: var(--ngm-sans); font-size: .82rem; color: var(--ngm-gray); line-height: 1.6; margin: 0;
+/* mirror the calendar chip --cat colours exactly */
+.ngm-key-swatch.stitch-in { background: #5B7DB1; } /* Stitch-Ins — blue  */
+.ngm-key-swatch.npt       { background: #3E8578; } /* Counted Thread / Needlepointers — teal */
+.ngm-key-swatch.potpourri { background: #B87260; } /* Potpourri — rose   */
+.ngm-key-swatch.come      { background: #5C7A52; } /* Come & Stitch — sage */
+.ngm-key-swatch.sunday    { background: #A6752E; } /* Sunday Tea — gold  */
+.ngm-key-swatch.special   { background: #8A5A7A; } /* Workshops & Special — plum */
+.ngm-key-swatch.board     { background: #4A5A6A; } /* Board & Admin — slate */
+.ngm-key-text h3 {
+  font-family: var(--ngm-serif) !important; font-size: 1.02rem; font-weight: 400;
+  color: var(--ngm-charcoal); text-transform: none !important; margin: 0 0 2px; line-height: 1.2;
+}
+.ngm-key-text p {
+  font-family: var(--ngm-sans); font-size: .8rem; color: var(--ngm-gray); line-height: 1.55; margin: 0;
+}
+@media (max-width: 560px) {
+  .ngm-key { padding: 26px 22px; }
+  .ngm-key-grid { grid-template-columns: 1fr; }
 }
 /* ── Final CTA ── */
 .ngm-cal-cta { background: var(--ngm-rose-lt); padding: 72px 48px; text-align: center; }
@@ -5107,33 +5151,27 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHe
   font-size: .66rem !important; text-align: center !important; padding: 9px 2px !important;
   border-bottom: 1px solid var(--ngm-border) !important;
 }
+/* THREE clean tiers, one span shown per width — the page gadget's JS emits all
+   three spans (.ngm-wd-f full, .ngm-wd-a 3-letter, .ngm-wd-1 single letter), so
+   we simply toggle which is visible. A letter ALWAYS shows (if the JS somehow
+   didn't run, WA's own full text node remains — never a blank header).
+   desktop (>1024) = full name · tablet (601–1024) = 3-letter · mobile (≤600) = 1-letter */
 /* desktop: full name only */
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-f { display: inline !important; }
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a,
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 { display: none !important; }
-/* tablet: 3-letter. (If the JS hasn't run, the cell still shows WA's full text.) */
+/* tablet: 3-letter (Sun, Mon …). If the JS hasn't run, WA's full text still shows. */
 @media (max-width: 1024px) {
   body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-f,
   body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 { display: none !important; }
   body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a { display: inline !important; }
 }
-/* mobile: single letter — DERIVED from the 3-letter span so it needs NO page
-   gadget re-paste (the recurring blank-weekday bug). We keep the .ngm-wd-a span
-   visible but blank its text (font-size:0) and reveal only its ::first-letter
-   at full size: "SUN" → "S", "WED" → "W", etc. The dedicated .ngm-wd-1 span (if
-   an updated gadget emitted one) is hidden so it can't double up. */
+/* mobile: single letter (S, M …) — the dedicated span the JS emits, shown at
+   full size so it can never render blank. */
 @media (max-width: 600px) {
   body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-f,
-  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 { display: none !important; }
-  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a {
-    display: inline-block !important;
-    font-size: 0 !important;
-    line-height: 1 !important;
-    vertical-align: middle !important;
-  }
-  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a::first-letter {
-    font-size: .72rem !important;
-  }
+  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a { display: none !important; }
+  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 { display: inline !important; }
 }
 /* ALWAYS keep the weekday row visible, at EVERY width. WA's responsive
    CSS hides it below ~767px (that's the "vanishing" on tablet/phone);
@@ -5184,15 +5222,19 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar a[data-tags*="count-th
 body .WaGadgetEventsStateCalendar table.EventListCalendar a[data-tags*="npt"]              { --cat: #3E8578; }
 body .WaGadgetEventsStateCalendar table.EventListCalendar a[data-tags*="special"]          { --cat: #8A5A7A; } /* Special — plum */
 
-/* event chip — SOLID category fill, no left-border line, one-line title
-   truncated with an ellipsis. Same look on desktop and mobile. */
+/* event chip — SOLID category fill, no left-border line. Like Google Calendar,
+   but the title WRAPS to as many lines as it needs so the full event name is
+   always readable (no ellipsis truncation). Side margins are trimmed to ~2px so
+   the coloured tiles use nearly the whole cell width (minimal left/right
+   whitespace, per request). */
 body .WaGadgetEventsStateCalendar table.EventListCalendar a:not(.calendarDate) {
   display: block !important; font-family: var(--ngm-sans) !important;
-  font-size: .84rem !important; line-height: 1.3 !important;
+  font-size: .82rem !important; line-height: 1.28 !important;
   color: #fff !important; text-decoration: none !important;
   background: var(--cat) !important; border: 0 !important;
-  border-radius: 5px !important; padding: 4px 9px !important; margin: 3px 5px !important;
-  white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important;
+  border-radius: 5px !important; padding: 4px 7px !important; margin: 3px 2px !important;
+  white-space: normal !important; overflow: visible !important; text-overflow: clip !important;
+  overflow-wrap: anywhere !important; word-break: break-word !important;
 }
 /* hover → slightly darker fill */
 body .WaGadgetEventsStateCalendar table.EventListCalendar a:not(.calendarDate):hover,
@@ -5206,7 +5248,7 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar .eventContainerHover a
 body .WaGadgetEventsStateCalendar table.EventListCalendar .eventTime {
   font-family: var(--ngm-sans) !important; font-size: .74rem !important; font-weight: 600 !important;
   text-transform: uppercase !important; letter-spacing: .04em !important;
-  color: var(--ngm-rose) !important; padding: 0 !important; margin: 2px 0 0 !important;
+  color: var(--ngm-rose) !important; padding: 0 !important; margin: 2px 0 0 2px !important;
   background: none !important; background-color: transparent !important;
   border: 0 !important; box-shadow: none !important; border-radius: 0 !important;
 }
@@ -5217,6 +5259,11 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar .eventTime {
 body .WaGadgetEventsStateCalendar table.EventListCalendar td div {
   background: none !important; background-color: transparent !important;
   border: 0 !important; box-shadow: none !important; border-radius: 0 !important;
+}
+/* Let the wrapper div around each event grow with the now-multi-line chip —
+   WA gives it a fixed height + overflow:hidden that would clip wrapped titles. */
+body .WaGadgetEventsStateCalendar table.EventListCalendar td div:has(> a:not(.calendarDate)) {
+  height: auto !important; max-height: none !important; overflow: visible !important;
 }
 /* ── MOBILE: match Google Calendar's month view. All seven days fit on
    screen (no sideways scroll); the weekday headers show the 3-letter
@@ -5260,13 +5307,16 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar td div {
   body .WaGadgetEventsStateCalendar table.EventListCalendar .eventTime { display: none !important; }
   /* unclip the WA wrapper div around each event so the bar can show */
   body .WaGadgetEventsStateCalendar table.EventListCalendar td div:has(> a:not(.calendarDate)) { height: auto !important; overflow: visible !important; }
-  /* events → solid category-coloured bars with white, truncated titles */
+  /* events → solid category-coloured bars with white titles that WRAP to show
+     the full event name (per request), with margins trimmed to ~1px so the bars
+     use nearly the whole narrow column. */
   body .WaGadgetEventsStateCalendar table.EventListCalendar a:not(.calendarDate) {
     display: block !important; background: var(--cat) !important; color: #fff !important;
     border-left: 0 !important; border-radius: 3px !important;
     font-family: var(--ngm-sans) !important; font-size: .6rem !important; font-weight: 500 !important;
-    line-height: 1.4 !important; padding: 2px 4px !important; margin: 1px 2px !important;
-    white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important;
+    line-height: 1.35 !important; padding: 2px 4px !important; margin: 1px 1px !important;
+    white-space: normal !important; overflow: visible !important; text-overflow: clip !important;
+    overflow-wrap: anywhere !important; word-break: break-word !important;
   }
   body .WaGadgetEventsStateCalendar table.EventListCalendar a:not(.calendarDate):hover { filter: brightness(0.92) !important; }
 }
