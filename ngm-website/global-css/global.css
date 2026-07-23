@@ -6206,3 +6206,63 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
   .ngm-retreat-tile .ngm-retreat-meta { margin-bottom: 14px; }
   .ngm-retreat-tile .ngm-retreat-body { line-height: 1.6; margin-bottom: 20px; }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   v12 — softer button hovers, lighter meeting-tile date, church photo
+   in the location panel, meeting address as an underlined directions link.
+══════════════════════════════════════════════════════════════════ */
+/* Secondary buttons: soft tinted hover instead of filling with the primary
+   colour (site-wide). */
+.ngm-btn-outline:hover, body a.ngm-btn-outline:hover {
+  background: var(--ngm-sage-lt) !important;
+  color: var(--ngm-sage-dk) !important;
+  border-color: var(--ngm-sage-dk) !important;
+}
+.ngm-btn-outline-rose:hover, body a.ngm-btn-outline-rose:hover {
+  background: var(--ngm-rose-lt) !important;
+  color: var(--ngm-rose-dk) !important;
+  border-color: var(--ngm-rose) !important;
+}
+/* Primary buttons: no lift, and don't go pale on hover (green darkens a
+   touch instead of lightening + rising). */
+.ngm-btn-green:hover {
+  background: var(--ngm-sage-dk) !important;
+  border-color: var(--ngm-sage-dk) !important;
+  transform: none !important;
+  box-shadow: none !important;
+  filter: brightness(0.92);
+}
+.ngm-btn-rose:hover, .ngm-btn-white:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Meeting tiles: lighter weight on the date line (was reading heavy). */
+.ngm-mini-when { font-weight: 400 !important; }
+
+/* Location: a church photo fills the panel; until the real URL is set, a
+   branded placeholder with the venue name shows instead of a broken image. */
+.ngm-loc-photo { position: relative; background: var(--ngm-sage-lt); }
+.ngm-loc-photo img {
+  position: relative; z-index: 1;
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.ngm-loc-photo-ph {
+  position: absolute; inset: 0; z-index: 0;
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  padding: 24px;
+  font-family: var(--ngm-serif); font-size: 1.15rem; line-height: 1.35;
+  color: var(--ngm-sage-dk);
+}
+/* Meeting-location address is a directions link — underlined. */
+.ngm-loc-dir, body a.ngm-loc-dir {
+  color: var(--ngm-charcoal) !important;
+  text-decoration: underline !important;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--ngm-sage) !important;
+  transition: text-decoration-color .15s, color .15s;
+}
+.ngm-loc-dir:hover, body a.ngm-loc-dir:hover {
+  color: var(--ngm-sage-dk) !important;
+  text-decoration-color: var(--ngm-sage-dk) !important;
+}
