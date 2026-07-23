@@ -5161,12 +5161,11 @@ body .WaGadgetPublicWizard .infoOuterContainer {
   padding: 22px 26px !important;
   margin: 0 0 32px !important;
 }
-/* Hide the level summary box on every step EXCEPT step 1 (Identify) — it's
-   redundant on the "Fill in application form" step and beyond, where the level
-   is already chosen. The gadget carries WaGadgetMembershipApplicationStateIdentify
-   only on step 1. */
-body .WaGadgetMembershipApplication:not(.WaGadgetMembershipApplicationStateIdentify) .infoOuterContainer,
-body .WaGadgetPublicWizard:not(.WaGadgetMembershipApplicationStateIdentify) .infoOuterContainer {
+/* Hide the level summary box on ALL steps — the level/price is already stated
+   on the Join page + heading, and reappears on the review step. (The styling
+   rules below are kept but inert while it's hidden.) */
+body .WaGadgetMembershipApplication .infoOuterContainer,
+body .WaGadgetPublicWizard .infoOuterContainer {
   display: none !important;
 }
 /* neutralise WA's sliced rounded-corner divs (they carried the peach edges) */
