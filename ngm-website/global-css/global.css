@@ -4578,7 +4578,21 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"] .ngm-evt-tag
    active), and buttons are input.typeButton.
    ══════════════════════════════════════════════════════════════════ */
 
-/* ---- fonts: DM Sans everywhere, Cormorant on the page heading ---- */
+/* ---- CARD: contain the whole profile (buttons + tabs + fields) in one white
+        card, echoing the membership-application form look — hairline border,
+        soft shadow, generous padding, centered with a sensible max-width so the
+        field rows stop stretching edge-to-edge. ---- */
+body .WaGadgetContactProfile {
+  background: #fff !important;
+  border: 1px solid var(--ngm-border) !important;
+  border-radius: var(--ngm-radius-lg) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,.07) !important;
+  padding: 28px clamp(20px, 4vw, 44px) 36px !important;
+  max-width: 940px !important;
+  margin: 4px auto 52px !important;
+  box-sizing: border-box !important;
+}
+/* fonts: DM Sans everywhere, Cormorant on the page heading */
 body .WaGadgetContactProfile, body .WaGadgetContactProfile *,
 body .WaGadgetBreadcrumbs, body .WaGadgetBreadcrumbs * {
   font-family: var(--ngm-sans) !important;
@@ -4962,6 +4976,11 @@ body .WaGadgetContactProfile .typeTextLabelNoData { color: var(--ngm-gray-lt) !i
 .ngm-hub-zoom-tile-go{flex-shrink:0;color:var(--ngm-sage-dk);display:inline-flex;transition:transform .18s;}
 .ngm-hub-zoom-tile-go svg{width:20px;height:20px;}
 .ngm-hub-zoom-tile:hover .ngm-hub-zoom-tile-go{transform:translateX(3px);}
+/* zoom module: its own contained tile beneath the hero, a shade deeper */
+.ngm-hub-zoomrow{padding-top:34px;padding-bottom:34px;}
+.ngm-hub-zoom-module{display:flex;align-items:center;gap:16px;max-width:660px;background:#D6E3CC;border:1px solid #C1D3B2;border-radius:var(--ngm-radius-lg);padding:20px 24px;text-decoration:none!important;color:var(--ngm-charcoal);transition:transform .18s,box-shadow .18s;}
+.ngm-hub-zoom-module:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(62,85,56,.18);}
+.ngm-hub-zoom-module:hover .ngm-hub-zoom-tile-go{transform:translateX(3px);}
 /* profile card sits on the right of the hero; subtext lists the profile tabs */
 .ngm-hub-acard-tabs{display:block;font-family:var(--ngm-sans);font-size:.78rem;color:var(--ngm-gray-lt);line-height:1.55;margin-top:7px;}
 .ngm-hub-hero-side .ngm-hub-acard{align-items:flex-start;}
