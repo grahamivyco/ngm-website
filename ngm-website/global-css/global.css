@@ -5929,7 +5929,7 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li:hover {
 
   /* CTAs: stack, full width, centered */
   .ngm-hero-btns, .ngm-join-btns { flex-direction:column; align-items:stretch; }
-  .ngm-hero-btns, .ngm-join-btns, .ngm-retreat-meta, .ngm-mini-pills { justify-content:center; }
+  .ngm-hero-btns, .ngm-join-btns, .ngm-retreat-meta { justify-content:center; }
   .ngm-btn, body a.ngm-btn { width:100% !important; justify-content:center !important; }
   .ngm-btn-fit { align-self:stretch !important; }
 
@@ -5983,4 +5983,121 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li:hover {
 @media (max-width: 600px) {
   .ngm-hero-copy { align-items: stretch; }
   .ngm-hero-copy-inner { width: 100%; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   HOMEPAGE v8 — mobile CTA sizing, bigger titles, events overflow fix,
+   tile pill placement, retreat fade/centering, centered location links.
+   Appended last; overrides earlier blocks where they overlap.
+══════════════════════════════════════════════════════════════════ */
+
+/* ---- Meeting tiles: pill to the top-left, no bottom white space ---- */
+.ngm-mini-pills { order: -1; margin: 0 0 10px !important; }
+.ngm-mini-desc { margin-bottom: 0; }
+
+/* ---- Upcoming events: stop the horizontal overflow (border-box so the
+   band's width:100% includes its padding; wrap long titles) ---- */
+body .ngm-wa-events.WaGadgetUpcomingEvents,
+body .ngm-wa-events .gadgetStyleBody,
+body .ngm-wa-events.upcomingEventsStyle001 ul,
+body .ngm-wa-events.upcomingEventsStyle001 ul li {
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+}
+body .ngm-wa-events.upcomingEventsStyle001 ul li .title,
+body .ngm-wa-events.upcomingEventsStyle001 ul li .title a,
+body .ngm-wa-events.upcomingEventsStyle001 ul li .date,
+body .ngm-wa-events.upcomingEventsStyle001 ul li .date span {
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  white-space: normal !important;
+}
+
+/* ---- Retreat photo fade follows the layout orientation ---- */
+/* side-by-side (photo left) → fade right into the green copy */
+@media (min-width: 901px) {
+  .ngm-retreat-tile .ngm-retreat-photo::after {
+    background: linear-gradient(to right, transparent 55%, var(--ngm-sage-dk) 100%) !important;
+  }
+}
+/* stacked (photo on top) → fade DOWN into the green below, not sideways */
+@media (max-width: 900px) {
+  .ngm-retreat-tile .ngm-retreat-photo::after {
+    background: linear-gradient(to bottom, transparent 45%, var(--ngm-sage-dk) 100%) !important;
+  }
+}
+
+/* ══════════ MOBILE (≤600px) refinements ══════════ */
+@media (max-width: 600px) {
+  /* titles a little bigger */
+  .ngm-h1 { font-size: 2.75rem !important; }
+  .ngm-h2, .ngm-h2-dark { font-size: 2.2rem !important; }
+
+  /* retreat copy fully centered (eyebrow + title included) */
+  .ngm-retreat-copy { align-items: center !important; text-align: center !important; }
+  .ngm-retreat-meta { justify-content: center !important; }
+
+  /* location: center the "Need to find us? Get directions" line
+     (beats the element's inline text-align:left) */
+  .ngm-loc-addr p { text-align: center !important; }
+
+  /* CTAs: thicker, a little less than full width, centered; primary wider
+     than secondary */
+  .ngm-hero-btns, .ngm-join-btns { flex-direction: column; align-items: center; }
+  .ngm-btn, body a.ngm-btn {
+    display: flex !important;
+    width: 90% !important;
+    max-width: 360px !important;
+    margin-left: auto !important; margin-right: auto !important;
+    padding: 16px 26px !important;          /* thicker than desktop/tablet */
+    font-size: .95rem !important;
+    justify-content: center !important;
+  }
+  /* secondary (outline) buttons: narrower + a touch less tall */
+  .ngm-btn-outline, .ngm-btn-outline-rose,
+  body a.ngm-btn-outline, body a.ngm-btn-outline-rose {
+    width: 74% !important;
+    max-width: 300px !important;
+    padding: 13px 24px !important;
+  }
+  .ngm-btn-fit { align-self: center !important; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   HOMEPAGE v9 — inline tertiary links, brand-mark loader size, desktop
+   upcoming-heading left-alignment to the events card, desktop location
+   map fills its column with the address tight under the heading.
+══════════════════════════════════════════════════════════════════ */
+
+/* Inline tertiary link (folded "see the full calendar" / "view all meetings") */
+.ngm-inline-link {
+  color: var(--ngm-sage-dk);
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(62,85,56,.35);
+  transition: border-color .15s;
+}
+.ngm-inline-link:hover { border-color: var(--ngm-sage-dk); }
+
+/* Hero loader: the brand mark reads a touch larger (keeps its own colors) */
+.ngm-hero-loader-badge svg { width: 38px; height: 38px; }
+
+/* Upcoming heading: left-aligned on desktop and aligned to the events card.
+   Band padding matches .ngm-sec (48px) so both are max-1080 centered inside
+   viewport−96 and share the same left edge. */
+@media (min-width: 601px) {
+  .ngm-upcoming-center { text-align: left; }
+  .ngm-upcoming-center .ngm-upcoming-intro { margin-left: 0; margin-right: 0; }
+}
+body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 48px !important; padding-right: 48px !important; }
+@media (max-width: 900px) { body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 28px !important; padding-right: 28px !important; } }
+@media (max-width: 600px) { body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 16px !important; padding-right: 16px !important; } }
+
+/* Location on desktop: map fills the text column's height; the address sits
+   directly under the heading (rows hug their content, no flexible gap). */
+@media (min-width: 901px) {
+  .ngm-loc-inner:has(.ngm-loc-head) { grid-template-rows: auto auto; align-items: start; }
+  .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-head { margin-bottom: 14px; }
+  .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-map { align-self: stretch; height: auto; }
 }
