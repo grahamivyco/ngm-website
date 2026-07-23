@@ -5149,6 +5149,31 @@ body .WaGadgetMembershipApplication .levelLabel,
 body .WaGadgetPublicWizard .levelLabel {
   font-weight: 500 !important; color: var(--ngm-charcoal) !important;
 }
+/* Selected-level summary BOX (native .infoOuterContainer, WA-default peach
+   #fff8f1) → linen panel, matching the "Review and confirm" box. */
+body .WaGadgetMembershipApplication .infoOuterContainer,
+body .WaGadgetPublicWizard .infoOuterContainer {
+  background-color: var(--ngm-linen) !important;
+  color: var(--ngm-charcoal) !important;
+  border: 1px solid var(--ngm-border) !important;
+  border-radius: var(--ngm-radius-lg) !important;
+  padding: 22px 26px !important;
+  margin: 0 0 32px !important;
+}
+/* neutralise WA's sliced rounded-corner divs (they carried the peach edges) */
+body .WaGadgetMembershipApplication .infoOuterContainer .cornersContainer,
+body .WaGadgetMembershipApplication .infoOuterContainer [class^="c"],
+body .WaGadgetMembershipApplication .infoOuterContainer [class^="r"],
+body .WaGadgetPublicWizard .infoOuterContainer .cornersContainer,
+body .WaGadgetPublicWizard .infoOuterContainer [class^="c"],
+body .WaGadgetPublicWizard .infoOuterContainer [class^="r"] {
+  background: transparent !important; border: none !important;
+}
+/* "Level" label reads as a small on-brand heading */
+body .WaGadgetMembershipApplication .infoOuterContainer .infoTitle,
+body .WaGadgetPublicWizard .infoOuterContainer .infoTitle {
+  color: var(--ngm-sage-dk) !important; font-weight: 600 !important;
+}
 /* Field labels (mandatory ones also carry .mandatoryLabel, handled above) */
 body .WaGadgetMembershipApplication .fieldLabel,
 body .WaGadgetPublicWizard .fieldLabel {
