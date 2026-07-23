@@ -1138,11 +1138,129 @@ body .ngm-wa-events .gadgetStyleBody { text-align: left !important; }
   .ngm-pullquote { border-left: none !important; padding-left: 0 !important; }
   /* CTAs: stack, full width, centered */
   .ngm-hero-btns, .ngm-join-btns { flex-direction: column; align-items: stretch; }
-  .ngm-hero-btns, .ngm-join-btns, .ngm-retreat-meta, .ngm-mini-pills { justify-content: center; }
+  .ngm-hero-btns, .ngm-join-btns, .ngm-retreat-meta { justify-content: center; }
   .ngm-btn, body a.ngm-btn { width: 100% !important; justify-content: center !important; }
   .ngm-btn-fit { align-self: stretch !important; }
   .ngm-loc-map { width: 100% !important; }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   HOMEPAGE v8 — mobile CTA sizing, bigger titles, events overflow fix,
+   tile pill placement, retreat fade/centering, centered location links.
+   Appended last; overrides earlier blocks where they overlap.
+══════════════════════════════════════════════════════════════════ */
+
+/* ---- Meeting tiles: pill to the top-left, no bottom white space ---- */
+.ngm-mini-pills { order: -1; margin: 0 0 10px !important; }
+.ngm-mini-desc { margin-bottom: 0; }
+
+/* ---- Upcoming events: stop the horizontal overflow (border-box so the
+   band's width:100% includes its padding; wrap long titles) ---- */
+body .ngm-wa-events.WaGadgetUpcomingEvents,
+body .ngm-wa-events .gadgetStyleBody,
+body .ngm-wa-events.upcomingEventsStyle001 ul,
+body .ngm-wa-events.upcomingEventsStyle001 ul li {
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+}
+body .ngm-wa-events.upcomingEventsStyle001 ul li .title,
+body .ngm-wa-events.upcomingEventsStyle001 ul li .title a,
+body .ngm-wa-events.upcomingEventsStyle001 ul li .date,
+body .ngm-wa-events.upcomingEventsStyle001 ul li .date span {
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  white-space: normal !important;
+}
+
+/* ---- Retreat photo fade follows the layout orientation ---- */
+/* side-by-side (photo left) → fade right into the green copy */
+@media (min-width: 901px) {
+  .ngm-retreat-tile .ngm-retreat-photo::after {
+    background: linear-gradient(to right, transparent 55%, var(--ngm-sage-dk) 100%) !important;
+  }
+}
+/* stacked (photo on top) → fade DOWN into the green below, not sideways */
+@media (max-width: 900px) {
+  .ngm-retreat-tile .ngm-retreat-photo::after {
+    background: linear-gradient(to bottom, transparent 45%, var(--ngm-sage-dk) 100%) !important;
+  }
+}
+
+/* ══════════ MOBILE (≤600px) refinements ══════════ */
+@media (max-width: 600px) {
+  /* titles a little bigger */
+  .ngm-h1 { font-size: 2.75rem !important; }
+  .ngm-h2, .ngm-h2-dark { font-size: 2.2rem !important; }
+
+  /* retreat copy fully centered (eyebrow + title included) */
+  .ngm-retreat-copy { align-items: center !important; text-align: center !important; }
+  .ngm-retreat-meta { justify-content: center !important; }
+
+  /* location: center the "Need to find us? Get directions" line
+     (beats the element's inline text-align:left) */
+  .ngm-loc-addr p { text-align: center !important; }
+
+  /* CTAs: thicker, a little less than full width, centered; primary wider
+     than secondary */
+  .ngm-hero-btns, .ngm-join-btns { flex-direction: column; align-items: center; }
+  .ngm-btn, body a.ngm-btn {
+    display: flex !important;
+    width: 90% !important;
+    max-width: 360px !important;
+    margin-left: auto !important; margin-right: auto !important;
+    padding: 16px 26px !important;          /* thicker than desktop/tablet */
+    font-size: .95rem !important;
+    justify-content: center !important;
+  }
+  /* secondary (outline) buttons: narrower + a touch less tall */
+  .ngm-btn-outline, .ngm-btn-outline-rose,
+  body a.ngm-btn-outline, body a.ngm-btn-outline-rose {
+    width: 74% !important;
+    max-width: 300px !important;
+    padding: 13px 24px !important;
+  }
+  .ngm-btn-fit { align-self: center !important; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   HOMEPAGE v9 — inline tertiary links, brand-mark loader size, desktop
+   upcoming-heading left-alignment to the events card, desktop location
+   map fills its column with the address tight under the heading.
+══════════════════════════════════════════════════════════════════ */
+
+/* Inline tertiary link (folded "see the full calendar" / "view all meetings") */
+.ngm-inline-link {
+  color: var(--ngm-sage-dk);
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(62,85,56,.35);
+  transition: border-color .15s;
+}
+.ngm-inline-link:hover { border-color: var(--ngm-sage-dk); }
+
+/* Hero loader: the brand mark reads a touch larger (keeps its own colors) */
+.ngm-hero-loader-badge svg { width: 38px; height: 38px; }
+
+/* Upcoming heading: left-aligned on desktop and aligned to the events card.
+   Band padding matches .ngm-sec (48px) so both are max-1080 centered inside
+   viewport−96 and share the same left edge. */
+@media (min-width: 601px) {
+  .ngm-upcoming-center { text-align: left; }
+  .ngm-upcoming-center .ngm-upcoming-intro { margin-left: 0; margin-right: 0; }
+}
+body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 48px !important; padding-right: 48px !important; }
+@media (max-width: 900px) { body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 28px !important; padding-right: 28px !important; } }
+@media (max-width: 600px) { body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 16px !important; padding-right: 16px !important; } }
+
+/* Location on desktop: map fills the text column's height; the address sits
+   directly under the heading (rows hug their content, no flexible gap). */
+@media (min-width: 901px) {
+  .ngm-loc-inner:has(.ngm-loc-head) { grid-template-rows: auto auto; align-items: start; }
+  .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-head { margin-bottom: 14px; }
+  .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-map { align-self: stretch; height: auto; }
+}
+
 </style>
 <section class="ngm ngm-hero">
   <div class="ngm-hero-copy">
@@ -1159,7 +1277,7 @@ body .ngm-wa-events .gadgetStyleBody { text-align: left !important; }
   <div class="ngm-hero-photo">
     <div class="ngm-hero-loader" aria-hidden="true">
       <span class="ngm-hero-loader-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V9"/><path d="M12 13c0-3.3 2.2-5.6 6.5-6.5C17.6 10.8 15.3 13 12 13z"/><path d="M12 16c0-2.5-1.8-4.4-5.5-5 .9 3.4 2.7 5 5.5 5z"/></svg>
+        <svg viewBox="-3 -3 37 39" role="img" aria-label="Needlework Guild of Minnesota"><path d="M28.5547 7.44547C26.2681 9.13737 25.721 5.92628 22.5099 6.92791C19.2989 7.92953 17.5135 3.98848 15.3588 4.91173C8.69503 7.76718 8.3302 -0.592457 10.5295 0.689564C12.7288 1.97158 9.43716 5.04174 3.59451 2.8711C-2.24814 0.700455 1.98638 9.17239 2.77963 12.1143C3.57287 15.0563 4.59607 17.9819 3.34335 18.7705C2.09063 19.5592 1.98055 21.0184 3.59389 21.9567C5.20724 22.8949 3.06149 29.717 3.75048 31.2627C4.43948 32.8085 22.5099 32.8715 23.2929 31.2627C25.0116 27.7311 18.3781 28.5168 17.9688 25.4583C17.7861 24.0923 18.5862 23.3231 18.4073 21.9567C18.292 21.0757 17.6044 20.6564 17.7496 19.78C17.9432 18.6113 19.5185 18.7835 19.9106 17.6664C20.262 16.6651 19.3568 15.9495 19.7226 14.9535C20.198 13.6594 21.7581 14.3958 22.5099 12.8083C23.2618 11.2209 23.9468 10.4799 26.2681 9.77992" stroke="#B87260" stroke-width="1.10903" stroke-linecap="round" fill="none"/><path d="M20.9651 5.25056L4.17261 31.89L18.68 3.92169C18.9674 3.36764 19.7428 3.22016 20.3898 3.59646C21.0369 3.97276 21.2977 4.72284 20.9651 5.25056ZM19.3148 4.29165L18.1796 6.2722C18.0453 6.50659 18.1635 6.82871 18.4437 6.99168C18.724 7.15465 19.0601 7.09675 19.1944 6.86236L20.3296 4.88181C20.464 4.64742 20.3457 4.3253 20.0655 4.16233C19.7852 3.99936 19.4492 4.05726 19.3148 4.29165Z" fill="#3E5538"/></svg>
       </span>
     </div>
     <img
@@ -1229,7 +1347,7 @@ body .ngm-wa-events .gadgetStyleBody { text-align: left !important; }
     <div class="ngm-upcoming-head ngm-upcoming-center">
       <span class="ngm-eyebrow">Calendar</span>
       <h2 class="ngm-h2">Upcoming meetings <em>&amp; events</em></h2>
-      <p class="ngm-upcoming-intro">A look at what's next on the Guild calendar — meetings, workshops, and gatherings open in the coming weeks. Most meetings are free for members; some workshops have registration fees. Click any event for details and to register.</p>
+      <p class="ngm-upcoming-intro">A look at what's next on the Guild calendar — meetings, workshops, and gatherings open in the coming weeks. Most meetings are free for members; some workshops have registration fees. Click any event for details, or <a class="ngm-inline-link" href="/calendar">see the full calendar&nbsp;&rarr;</a></p>
     </div>
   </div>
 </section>
