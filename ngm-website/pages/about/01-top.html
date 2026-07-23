@@ -300,76 +300,6 @@ body a.ngm-btn-outline-rose:hover { background: var(--ngm-rose) !important; colo
   color: var(--ngm-gray);
   line-height: 1.7;
 }
-/* ── Leadership ── */
-.ngm-leadership-intro {
-  font-family: var(--ngm-sans);
-  font-size: 1rem;
-  color: var(--ngm-gray);
-  line-height: 1.8;
-  max-width: 560px;
-  margin-bottom: 40px;
-}
-.ngm-lcard-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-top: 32px;
-}
-.ngm-lcard {
-  background: #fff;
-  border: 1px solid var(--ngm-border);
-  
-  border-radius: var(--ngm-radius-lg);
-  padding: 22px 20px 20px;
-}
-
-.ngm-lcard-role {
-  display: block;
-  font-family: var(--ngm-sans);
-  font-size: .67rem;
-  font-weight: 500;
-  letter-spacing: .1em;
-  text-transform: uppercase !important;
-  color: var(--ngm-sage-dk);
-  margin-bottom: 6px;
-}
-.ngm-lcard-name {
-  display: block;
-  font-family: var(--ngm-serif);
-  font-size: 1.1rem;
-  font-weight: 400;
-  color: var(--ngm-charcoal);
-  text-transform: none !important;
-  line-height: 1.2;
-  margin-bottom: 10px;
-}
-/* Emails are now plain text (not clickable). Force one consistent
-   size + font with body-prefix so the WA theme can't make some
-   render larger than others. */
-.ngm-lcard-email,
-body .ngm-lcard-email {
-  display: block;
-  font-family: var(--ngm-sans) !important;
-  font-size: .8rem !important;
-  font-weight: 400 !important;
-  color: var(--ngm-gray) !important;
-  word-break: break-all;
-}
-.ngm-lcard-note {
-  margin-top: 24px;
-  font-family: var(--ngm-sans);
-  font-size: .85rem;
-  color: var(--ngm-gray-lt);
-  line-height: 1.65;
-}
-.ngm-lcard-note a {
-  color: var(--ngm-sage-dk) !important;
-  text-decoration: none !important;
-  border-bottom: 1px solid rgba(62,85,56,.3);
-}
-.ngm-lcard-note a:hover {
-  border-color: var(--ngm-sage-dk);
-}
 /* ── Join CTA (about page — rose-lt) ── */
 .ngm-about-cta {
   background: var(--ngm-rose-lt);
@@ -403,18 +333,15 @@ body .ngm-lcard-email {
   .ngm-about-hero p { max-width: 100%; }
   .ngm-sec { padding: 64px 28px; }
   .ngm-do-grid { grid-template-columns: 1fr; }
-  .ngm-lcard-grid { grid-template-columns: 1fr; }
   .ngm-about-cta { padding: 64px 28px; }
-  
+
   .ngm-history-simple p,
-  .ngm-leadership-intro,
   .ngm-lead { max-width: 100% !important; }
 }
 @media (max-width: 560px) {
   .ngm-about-hero { padding: 44px 18px 40px; }
   .ngm-about-hero-photo { height: 220px; }
   .ngm-sec { padding: 52px 18px; }
-  .ngm-lcard-grid { grid-template-columns: 1fr; }
   .ngm-about-cta { padding: 52px 18px; }
 }
 /* ════════════════════════════════════════════════════════════
