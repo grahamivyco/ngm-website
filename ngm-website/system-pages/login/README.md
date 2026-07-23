@@ -1,7 +1,17 @@
 # Login page (skin + sandwich)
 
 **WA page:** `/Sys/Login` — a built-in system page (CSS + Custom HTML around the native form)
-**Live URL:** `/sys/login` — this is the target of the "Log In" button in the header.
+**Live URL:** `/sys/login`
+
+## Login architecture (decided — don't undo)
+There are TWO branded entry points, on purpose:
+- **`/log-in`** — a separate custom branded login page. This is what the header
+  and footer **"Log In" buttons point to.** Do NOT repoint them at `/sys/login`.
+- **`/Sys/Login`** — WA's built-in login page, skinned by the files in this folder.
+  WA auto-redirects logged-out visitors here whenever they open a members-only
+  page (`/Sys/Login?ReturnURL=…`), and that target can't be changed in WA
+  settings — so this page is branded with this skin so those redirects look
+  right. WA's native `ReturnURL` flow keeps working (no JS redirect involved).
 
 ## What this is
 Wild Apricot already has a login page with a native login form. You are **customising
@@ -46,9 +56,9 @@ on this page, that's a WA gadget-style setting, not a CSS change.
 ## Already handled elsewhere (no work needed here)
 - **Log In / Log Out / Member Hub buttons:** the header (`layout/header/01-top.html`)
   already swaps these based on login state (`body.memberContentView`).
-- **Log out:** native `/sys/logout` (linked in the header).
+- **Log out:** native `/Sys/Login/SignOut` (linked in the header).
 - **View profile:** native `/sys/profile` (linked from the member hub). Skinning that
   page is the separate `system-pages/member-profile/` task.
 
-## Before it goes live — set this URL
-- `03-bottom.html` "Join the guild" link → your real Join page (placeholder `/join`, marked `<!-- SET URL -->`).
+## URLs (set)
+- `03-bottom.html` / `03-bottom.slim.html` "Join the guild" link → `/Join-Duplicate` (the real Join page slug).
