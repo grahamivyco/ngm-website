@@ -21,10 +21,10 @@ the login form card on the right.
 
 ## Page setup — a 2-column layout ROW
 Split the login page content into a **2-column layout row** in the WA editor, then:
-- **Left column:** `01-top.html` as a Custom HTML gadget — the branded sage **hero**
+- **Left column:** `01-top.slim.html` as a Custom HTML gadget — the branded sage **hero**
   (needle-mark, "Welcome back, stitchers", benefits list). Also sets `body.ngm-login-page`.
 - **Right column:** the **native WA login gadget** (`.WaGadgetLoginForm`, already on the
-  page — see `02-wa-gadget.txt`), then `03-bottom.html` (the "not a member? Join" line)
+  page — see `02-wa-gadget.txt`), then `03-bottom.slim.html` (the "not a member? Join" line)
   beneath it.
 
 The Global CSS (scoped to `body.ngm-login-page`) styles each side: the hero fills the
@@ -54,11 +54,11 @@ Visitors click "Log in" to expand the form (email/password + Google/Microsoft/Ap
 on this page, that's a WA gadget-style setting, not a CSS change.
 
 ## Already handled elsewhere (no work needed here)
-- **Log In / Log Out / Member Hub buttons:** the header (`layout/header/01-top.html`)
+- **Log In / Log Out / Member Hub buttons:** the header (`layout/header/01-top.slim.html`)
   already swaps these based on login state (`body.memberContentView`).
 - **Log out:** native `/Sys/Login/SignOut` (linked in the header).
 - **View profile:** native `/sys/profile` (linked from the member hub). Skinning that
   page is the separate `system-pages/member-profile/` task.
 
 ## URLs (set)
-- `03-bottom.html` / `03-bottom.slim.html` "Join the guild" link → `/Join-Duplicate` (the real Join page slug).
+- `03-bottom.slim.html` / `03-bottom.slim.html` "Join the guild" link → `/Join-Duplicate` (the real Join page slug).
