@@ -3618,6 +3618,16 @@ body.ngm-login-page .WaGadgetLoginForm{ display:block; width:100%; box-sizing:bo
 }
 
 /* ══════════════════════════════════════════════════════════════════
+   WA ADMIN SWITCHER (top-right: "Admin view" + Log out)
+   ────────────────────────────────────────────────────────────────
+   #idWaAdminSwitcher is WA's admin-only floating toolbar. The custom
+   header (#ngm) is position:fixed; z-index:99999, so it paints OVER the
+   switcher and admins can't reach "Admin view" / "Log out". Lift the
+   switcher above the header so it stays clickable.
+══════════════════════════════════════════════════════════════════ */
+#idWaAdminSwitcher { z-index: 2147483647 !important; }
+
+/* ══════════════════════════════════════════════════════════════════
    NATIVE WA LOGIN / ACCOUNT GADGET SKIN
 ══════════════════════════════════════════════════════════════════ */
 /* ══════════════════════════════════════════════════════════════════
