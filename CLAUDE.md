@@ -43,6 +43,33 @@ Photos are hosted on the WA file manager and referenced by full URL, e.g.
 `https://needleworkguildmn.org/resources/Pictures/Website%20Update%20Photos/<file>`.
 Reference images by URL; don't commit large binaries to the repo.
 
+## Design & style preferences (how to match the house style)
+
+Full reference: `ngm-website/design-system/NGM-design-system-prompt.md`. The
+short version of what the maintainer consistently wants:
+
+- **Aesthetic:** warm and editorial — sage `--ngm-sage-dk`/cream/linen with
+  terracotta `--ngm-rose` as a *sparing* accent. Cormorant Garamond (serif
+  display) + DM Sans (body). Soft rounded corners, pill buttons, gentle layered
+  shadows and small hover lifts — never loud or high-contrast.
+- **Signature flourish:** italicize one word in a heading with `<em>` so it
+  renders italic-rose (same size/weight) — e.g. `love to <em>stitch</em>`.
+- **Tokens & namespacing:** every class is `.ngm-…`, every custom property is
+  `--ngm-…`, page styles scoped under `.ngm`. Use `var(--ngm-…)` — don't
+  hard-code hex in new rules.
+- **Reuse the vocabulary:** eyebrows, tiles, pill CTAs + arrow links, hero with
+  brand-mark loader, bento gallery, `.ngm-sec`/`.ngm-con`. Prove a pattern on
+  one page, then propagate it site-wide rather than inventing per-page variants.
+- **Accessibility by default:** semantic sections/headings, `aria-hidden` on
+  decorative bits, visually-hidden copies of animated content, a
+  `prefers-reduced-motion` block, and `onload`/`onerror` image fallbacks.
+- **Editorial instinct is restraint:** tighten, trim, de-dup, consolidate. When
+  unsure, cut rather than add. Copy is warm, plain-spoken, community-first.
+- **Comment the *why*,** especially Wild-Apricot workarounds — mirror WA's
+  specificity (`body a.ngm-btn { … !important }`) instead of escalating blindly.
+- **Ship in small labeled rounds** with terse scoped commits
+  (`Area: what changed (+ why)`), and keep each page's `README.md` current.
+
 ## Summary
 
 Edit the page `*.html` files for markup and `global-css/global.css` for
