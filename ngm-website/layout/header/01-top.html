@@ -232,6 +232,16 @@ body.memberContentView #ngm .ngm-member{display:inline-flex}
   var hbg=document.getElementById('ngm-hbg');
   var panel=document.getElementById('ngm-mob');
   if(!nav)return;
+  /* ── Escape the Wild Apricot stacking-context trap ──
+     WA wraps this gadget in layout containers. If ANY ancestor has a
+     transform / filter / backdrop-filter / will-change / contain, that
+     ancestor becomes the containing block for our position:fixed header
+     AND its own stacking context — so #ngm is confined inside that wrapper
+     and paints BELOW page content (e.g. the hero), no matter how high its
+     z-index. Re-parenting #ngm directly onto <body> removes it from any
+     such ancestor, so position:fixed + z-index apply against the page.
+     The header is fixed, so moving it in the DOM doesn't shift it visually. */
+  if(nav.parentNode!==document.body){document.body.appendChild(nav);}
   document.body.classList.add('ngm-ready');
   /* scroll shadow */
   var _t=false;
