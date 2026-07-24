@@ -68,9 +68,15 @@
 #ngm.ngm-mob-open .ngm-hbg span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 /* ── Mobile panel ── */
 /* Mobile panel: full-screen below the bar, never taller than the viewport.
-   Fixed top/bottom anchors it to the viewport, and the inner scrolls. */
+   NOTE: the panel is NOT position:fixed — #ngm has backdrop-filter, which
+   makes #ngm the containing block for fixed descendants, so a fixed panel
+   would anchor to the 86px bar (and collapse) instead of the viewport.
+   Instead the panel flows below the bar and is given an explicit height of
+   (viewport − bar), so bar + panel exactly fill the screen. #ngm is fixed,
+   so the whole stack overlays the page. The inner scrolls if links overflow.
+   dvh (with vh fallback) accounts for mobile browser chrome. */
 #ngm .ngm-mob{display:none;flex-direction:column;background:#FAF7F2;border-top:1px solid #DDD5C8}
-#ngm.ngm-mob-open .ngm-mob{display:flex;position:fixed;top:86px;left:0;right:0;bottom:0}
+#ngm.ngm-mob-open .ngm-mob{display:flex;height:calc(100vh - 86px);height:calc(100dvh - 86px)}
 #ngm .ngm-mob-inner{flex:1 1 auto;min-height:0;padding:6px 20px 24px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 #ngm .ngm-mob-link{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:left;padding:14px 4px;font-size:1rem;font-weight:400;color:#242424;text-decoration:none;border:none;border-bottom:1px solid #E8E0D4;min-height:52px;background:none;font-family:'DM Sans',sans-serif;letter-spacing:.01em;line-height:1.3;cursor:pointer;transition:color .18s}
 #ngm .ngm-mob-link:hover{color:#3E5538}
@@ -111,7 +117,7 @@
   #ngm .ngm-logo svg{height:36px}
   #ngm .ngm-logo .ngm-wm .l1{font-size:1.14rem}
   #ngm .ngm-logo .ngm-wm .l2{font-size:.6rem;letter-spacing:.18em}
-  #ngm.ngm-mob-open .ngm-mob{top:74px}
+  #ngm.ngm-mob-open .ngm-mob{height:calc(100vh - 74px);height:calc(100dvh - 74px)}
   #ngm .ngm-mob-acts{flex-direction:column}
 }
 @media(max-width:380px){
@@ -241,7 +247,10 @@ body.memberContentView #ngm .ngm-member{display:inline-flex}
      z-index. Re-parenting #ngm directly onto <body> removes it from any
      such ancestor, so position:fixed + z-index apply against the page.
      The header is fixed, so moving it in the DOM doesn't shift it visually. */
-  if(nav.parentNode!==document.body){document.body.appendChild(nav);}
+  function ngmLift(){if(nav.parentNode!==document.body){document.body.appendChild(nav);}}
+  ngmLift();
+  /* Re-assert after load in case a WA/theme script re-wraps the gadget late. */
+  window.addEventListener('load',ngmLift);
   document.body.classList.add('ngm-ready');
   /* scroll shadow */
   var _t=false;
