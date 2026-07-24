@@ -67,18 +67,31 @@
 #ngm.ngm-mob-open .ngm-hbg span:nth-child(2){opacity:0;width:0}
 #ngm.ngm-mob-open .ngm-hbg span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 /* ── Mobile panel ── */
-#ngm .ngm-mob{display:none;flex-direction:column;background:#FAF7F2;border-top:1px solid #DDD5C8;max-height:0;overflow:hidden;transition:max-height .32s ease}
-#ngm.ngm-mob-open .ngm-mob{display:flex;max-height:calc(100dvh - 86px);max-height:calc(100vh - 86px)}
-#ngm .ngm-mob-inner{padding:6px 20px 24px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
-#ngm .ngm-mob-link{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:left;padding:14px 4px;font-size:1rem;color:#242424;text-decoration:none;border:none;border-bottom:1px solid #E8E0D4;min-height:52px;background:none;font-family:'DM Sans',sans-serif;letter-spacing:.01em;line-height:1.3;cursor:pointer;transition:color .18s}
+/* Mobile panel: full-screen below the bar, never taller than the viewport.
+   Fixed top/bottom anchors it to the viewport, and the inner scrolls. */
+#ngm .ngm-mob{display:none;flex-direction:column;background:#FAF7F2;border-top:1px solid #DDD5C8}
+#ngm.ngm-mob-open .ngm-mob{display:flex;position:fixed;top:86px;left:0;right:0;bottom:0}
+#ngm .ngm-mob-inner{flex:1 1 auto;min-height:0;padding:6px 20px 24px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+#ngm .ngm-mob-link{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:left;padding:14px 4px;font-size:1rem;font-weight:400;color:#242424;text-decoration:none;border:none;border-bottom:1px solid #E8E0D4;min-height:52px;background:none;font-family:'DM Sans',sans-serif;letter-spacing:.01em;line-height:1.3;cursor:pointer;transition:color .18s}
 #ngm .ngm-mob-link:hover{color:#3E5538}
 #ngm .ngm-mob-link .ngm-chev{color:#BABABA;flex-shrink:0}
 #ngm .ngm-mob-link[aria-expanded="true"]{color:#3E5538;border-bottom-color:transparent}
 #ngm .ngm-mob-link[aria-expanded="true"] .ngm-chev{transform:rotate(180deg);color:#3E5538}
+/* Row for a section that BOTH links to its own page and toggles a submenu:
+   the label (left) navigates, the chevron button (right) expands the submenu. */
+#ngm .ngm-mob-row{display:flex;align-items:center;border-bottom:1px solid #E8E0D4}
+#ngm .ngm-mob-row .ngm-mob-lbl{flex:1;display:flex;align-items:center;padding:14px 4px;min-height:52px;font-size:1rem;font-weight:400;color:#242424;text-decoration:none;letter-spacing:.01em;line-height:1.3;background:none;transition:color .18s}
+#ngm .ngm-mob-row .ngm-mob-lbl:hover{color:#3E5538}
+#ngm .ngm-mob-tog{display:flex;align-items:center;justify-content:center;width:52px;min-height:52px;padding:0;background:none;border:none;cursor:pointer;color:#242424;transition:color .18s}
+#ngm .ngm-mob-tog:hover{color:#3E5538}
+#ngm .ngm-mob-tog .ngm-chev{color:#BABABA;transition:transform .22s ease,color .2s}
+#ngm .ngm-mob-tog[aria-expanded="true"]{color:#3E5538}
+#ngm .ngm-mob-tog[aria-expanded="true"] .ngm-chev{transform:rotate(180deg);color:#3E5538}
+#ngm .ngm-mob-row:has(.ngm-mob-tog[aria-expanded="true"]){border-bottom-color:transparent}
 #ngm .ngm-mob-divider{border:none;border-top:1px solid #DDD5C8;margin:8px 4px 4px}
 #ngm .ngm-mob-sub{display:none;flex-direction:column;background:#fff;border:1px solid #DDD5C8;border-radius:14px;box-shadow:0 6px 20px rgba(0,0,0,.06);margin:4px 0 10px;padding:8px;overflow:hidden}
 #ngm .ngm-mob-sub.open{display:flex}
-#ngm .ngm-mob-sub a{display:flex;align-items:center;padding:11px 14px;min-height:46px;font-size:.9rem;color:#444;text-decoration:none;line-height:1.35;border:none;border-radius:9px;transition:color .14s,background .14s}
+#ngm .ngm-mob-sub a{display:flex;align-items:center;padding:11px 14px;min-height:46px;font-size:.9rem;font-weight:400;color:#444;text-decoration:none;line-height:1.35;border:none;border-radius:9px;transition:color .14s,background .14s}
 #ngm .ngm-mob-sub a:hover{background:#EEF3EC;color:#3E5538}
 #ngm .ngm-mob-acts{display:flex;flex-direction:column;gap:10px;padding-top:18px;align-items:stretch;max-width:420px;margin:0 auto;width:100%}
 #ngm .ngm-mob-acts .ngm-ghost,#ngm .ngm-mob-acts .ngm-solid{width:100%;font-size:.9375rem;padding:14px 20px;border-radius:100px}
@@ -98,7 +111,7 @@
   #ngm .ngm-logo svg{height:36px}
   #ngm .ngm-logo .ngm-wm .l1{font-size:1.14rem}
   #ngm .ngm-logo .ngm-wm .l2{font-size:.6rem;letter-spacing:.18em}
-  #ngm.ngm-mob-open .ngm-mob{max-height:calc(100dvh - 74px);max-height:calc(100vh - 74px)}
+  #ngm.ngm-mob-open .ngm-mob{top:74px}
   #ngm .ngm-mob-acts{flex-direction:column}
 }
 @media(max-width:380px){
@@ -177,8 +190,11 @@ body.memberContentView #ngm .ngm-member{display:inline-flex}
     <div class="ngm-mob-inner">
       <a href="/about" class="ngm-mob-link">About</a>
       <a href="/Skeleton-Calendar-Page" class="ngm-mob-link">Calendar</a>
-      <button class="ngm-mob-link" id="ngm-mb-m" aria-expanded="false" aria-controls="ngm-mb-ms">Meetings
-        <svg class="ngm-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="ngm-mob-row">
+        <a href="/meetings" class="ngm-mob-lbl">Meetings</a>
+        <button class="ngm-mob-tog" id="ngm-mb-m" aria-expanded="false" aria-controls="ngm-mb-ms" aria-label="Toggle Meetings submenu">
+          <svg class="ngm-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      </div>
       <div class="ngm-mob-sub" id="ngm-mb-ms" aria-hidden="true">
         <a href="/daytime-counted-thread">Daytime Counted Thread &amp; Needlepoint</a>
         <a href="/potpourri-stitchers">Potpourri Stitchers</a>
@@ -186,8 +202,11 @@ body.memberContentView #ngm .ngm-member{display:inline-flex}
         <a href="/stitch-in-duplicate">Daytime Stitch-In</a>
         <a href="/stitch-in-duplicate">Evening Stitch-In</a>
       </div>
-      <button class="ngm-mob-link" id="ngm-mb-e" aria-expanded="false" aria-controls="ngm-mb-es">Events
-        <svg class="ngm-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="ngm-mob-row">
+        <a href="/events" class="ngm-mob-lbl">Events</a>
+        <button class="ngm-mob-tog" id="ngm-mb-e" aria-expanded="false" aria-controls="ngm-mb-es" aria-label="Toggle Events submenu">
+          <svg class="ngm-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      </div>
       <div class="ngm-mob-sub" id="ngm-mb-es" aria-hidden="true">
         <a href="/retreat">Annual Retreat 2026</a>
         <a href="/japanese-embroidery">Traditional Japanese Embroidery</a>
@@ -227,7 +246,7 @@ body.memberContentView #ngm .ngm-member{display:inline-flex}
   /* mobile sub-menus */
   function closeAllSubs(){
     document.querySelectorAll('.ngm-mob-sub.open').forEach(function(s){s.classList.remove('open');s.setAttribute('aria-hidden','true');});
-    document.querySelectorAll('.ngm-mob-link[aria-expanded="true"]').forEach(function(b){b.setAttribute('aria-expanded','false');});
+    document.querySelectorAll('.ngm-mob-link[aria-expanded="true"],.ngm-mob-tog[aria-expanded="true"]').forEach(function(b){b.setAttribute('aria-expanded','false');});
   }
   ['ngm-mb-m','ngm-mb-e'].forEach(function(id){
     var btn=document.getElementById(id);if(!btn)return;
