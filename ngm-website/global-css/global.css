@@ -278,11 +278,16 @@ body a.ngm-btn-outline-rose:hover { background: var(--ngm-rose) !important; colo
 .ngm-marquee-track {
   display: flex;
   width: max-content;
+  /* 44s is the no-JS fallback; the script sets the real duration so the
+     scroll speed stays constant however many item-copies are needed to
+     fill the bar (see buildMarquee in pages/homepage/01-top.html). */
   animation: ngm-scroll 44s linear infinite;
 }
 /* Each set is a non-shrinking flex group; two of them make the
    track exactly 2× one set, so -50% lands on a pixel-identical
-   frame and the loop is seamless. */
+   frame and the loop is seamless. The script clones items so a single
+   set is always at least as wide as the bar — that is what keeps the
+   -50% loop gap-free on wide screens (where 5 items don't fill it). */
 .ngm-marquee-set {
   display: flex;
   flex: 0 0 auto;

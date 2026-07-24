@@ -132,6 +132,60 @@
       li.setAttribute("data-tag-done", "1");
     });
   }
+  /* ---- Marquee: keep it seamless AND gap-free at any width ----
+     The CSS loop scrolls the track from 0 to -50%, which shifts it by
+     exactly one set's width. That is only gap-free when a single set is
+     at least as wide as the visible bar. On wide screens five stat items
+     don't fill the bar, so the loop leaves empty space. Here we clone the
+     items until one set spans the bar, then rebuild the two-set track so
+     the -50% loop always covers the viewport. Duration scales with the
+     content so the scroll speed stays constant no matter how many clones. */
+  var SECONDS_PER_SET = 44; /* time to travel one set's width */
+  function buildMarquee() {
+    var wrap = document.querySelector(".ngm-marquee-wrap");
+    if (!wrap) return;
+    var track = wrap.querySelector(".ngm-marquee-track");
+    if (!track) return;
+    /* Remember the authored items (the 5 stats) once, as the repeat unit. */
+    if (!track.getAttribute("data-unit")) {
+      var first = track.querySelector(".ngm-marquee-set");
+      if (!first) return;
+      track.setAttribute("data-unit", first.innerHTML);
+    }
+    var unit = track.getAttribute("data-unit");
+    var wrapW = wrap.clientWidth;
+    if (!wrapW) return;
+
+    /* Build one set and pad it with whole copies of the unit until it is
+       at least as wide as the bar (plus a small buffer for subpixels). */
+    var setA = document.createElement("div");
+    setA.className = "ngm-marquee-set";
+    setA.innerHTML = unit;
+    track.innerHTML = "";
+    track.appendChild(setA);
+    var copies = 1, guard = 0;
+    while (setA.offsetWidth < wrapW + 4 && guard < 60) {
+      setA.insertAdjacentHTML("beforeend", unit);
+      copies++;
+      guard++;
+    }
+    /* Second, identical set makes the track exactly 2x one set so the
+       -50% loop lands on a pixel-identical frame (seamless). */
+    var setB = setA.cloneNode(true);
+    setB.setAttribute("aria-hidden", "true");
+    track.appendChild(setB);
+
+    track.style.animationDuration = (SECONDS_PER_SET * copies) + "s";
+  }
+
+  function debounce(fn, ms) {
+    var t;
+    return function () {
+      if (t) clearTimeout(t);
+      t = setTimeout(fn, ms);
+    };
+  }
+
   function init() {
     tagEvents();
     var gadget = document.querySelector(".ngm-wa-events");
@@ -139,6 +193,9 @@
       var obs = new MutationObserver(function () { tagEvents(); });
       obs.observe(gadget, { childList: true, subtree: true });
     }
+    buildMarquee();
+    /* Rebuild on resize so the fill always matches the current bar width. */
+    window.addEventListener("resize", debounce(buildMarquee, 200));
   }
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
