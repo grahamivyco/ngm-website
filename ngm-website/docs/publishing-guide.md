@@ -1,7 +1,8 @@
-# NGM Redesign — Deployment / Cutover Guide
+# NGM Redesign — Publishing / Cutover Guide
 
 Everything you need to take the redesign from this repo onto the live Wild Apricot
-site. **Nothing here is on the live site yet** — this is the plan for cutover day.
+site by pasting it in (WA has no GitHub publishing — every change is a manual paste
+into a WA gadget or the CSS tab).
 
 > **Safety net:** before you change the live Global CSS, you already have
 > `global-css/current-live-backup.css` — an exact copy of what's live now. If anything
@@ -22,7 +23,7 @@ Doing it in this order means the site is never half-styled:
    add any native gadget between them, Save.
 4. **Global CSS must be live first.** The page `.html` files carry no `<style>` of
    their own — they rely entirely on the Global CSS for styling, so make sure the
-   Global CSS tab (or CDN link) is live before/when you paste the page gadgets.
+   Global CSS tab holds the full `global.css` before/when you paste the page gadgets.
 5. **Spot-check** each live page (logged out and logged in).
 
 ---
