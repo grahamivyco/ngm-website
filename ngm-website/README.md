@@ -2,14 +2,14 @@
 
 Canonical source of truth for the custom frontend layered on the NGM Wild Apricot (WA) site.
 
-> **Important:** Wild Apricot does **not** deploy from GitHub. This repo is the master
-> copy, backup, and change history for the code. To publish a change you still paste
-> the code into the matching WA gadget or CSS tab. This repo is where the *correct*
-> version always lives.
+> **Important:** Wild Apricot does **not** publish from GitHub. This repo is the master
+> copy, backup, and change history for the code. To publish a change you paste the code
+> into the matching WA gadget (page markup) or the WA **CSS tab** (`global.css`). This
+> repo is where the *correct* version always lives.
 >
-> **Live-loading (optional):** the site-wide **CSS, header, and footer** can be wired to
-> load straight from this repo via a CDN, so editing them here updates the live site with
-> no re-pasting. One-time WA setup + details in [`deploy/`](deploy/README.md).
+> The site-wide `global.css` is pasted **inline** into the WA CSS tab — WA's Content
+> Security Policy refuses externally hosted CSS, so it can't be linked from an outside
+> URL. Every `global.css` change goes live only when you re-paste the CSS tab.
 
 ## How this repo is organized
 

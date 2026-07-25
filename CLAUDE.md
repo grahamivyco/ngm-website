@@ -5,10 +5,13 @@ This repo holds the source for the Needlework Guild of Minnesota's Wild Apricot
 
 ## Single source of truth: page HTML + global.css
 
-- **Styling lives in `ngm-website/global-css/global.css`.** The live site loads
-  this one file (served via jsDelivr:
-  `https://cdn.jsdelivr.net/gh/grahamivyco/ngm-website@main/ngm-website/global-css/global.css`).
-  To change how anything looks, edit `global.css`.
+- **Styling lives in `ngm-website/global-css/global.css`.** The whole live site is
+  styled by this one file, which is **pasted inline into the Wild Apricot CSS tab**
+  (WA admin → **Website → CSS**). To change how anything looks, edit `global.css`
+  here, then paste its full contents into the WA CSS tab and Save to publish.
+  The stylesheet must live in the CSS tab itself — WA's Content Security Policy
+  refuses externally hosted CSS, so it can't be linked from an outside URL. This
+  repo is the master copy and change history; publishing is always a manual paste.
 - **Page markup lives in the `*.html` files** under `ngm-website/pages/<page>/`
   (and `ngm-website/system-pages/<page>/`) — e.g. `01-top.html`,
   `03-bottom.html`. These are the canonical page files: the ones to edit and to
