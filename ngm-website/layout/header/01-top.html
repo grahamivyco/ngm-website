@@ -19,10 +19,14 @@
      Icon files live in /brand (favicon.ico is the one to upload to WA). -->
 <style>
 #ngm,#ngm *,#ngm *::before,#ngm *::after{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans','Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1}
-/* ── Bar ── */
-#ngm{position:fixed;top:0;left:0;right:0;width:100vw;z-index:2147483000;background:rgba(250,247,242,0.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #DDD5C8;box-shadow:0 2px 16px rgba(0,0,0,0.07);transition:box-shadow .25s ease}
-#ngm.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.12)}
-#ngm .ngm-bar{width:100%;padding:0 32px;height:86px;display:flex;align-items:center}
+/* ── Bar ──
+   Bar chrome (background, blur, border, shadow) lives on .ngm-bar — NOT on #ngm —
+   so that when the mobile menu opens, #ngm can become a transparent full-viewport
+   layer (bar + dropdown panel + scrim) without tinting/blurring the whole screen.
+   --bar is the bar height, reused by the panel/scrim so they always sit below it. */
+#ngm{position:fixed;top:0;left:0;right:0;width:100vw;z-index:2147483000;--bar:86px}
+#ngm .ngm-bar{width:100%;padding:0 32px;height:var(--bar);display:flex;align-items:center;position:relative;z-index:2;background:rgba(250,247,242,0.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #DDD5C8;box-shadow:0 2px 16px rgba(0,0,0,0.07);transition:box-shadow .25s ease}
+#ngm.scrolled .ngm-bar{box-shadow:0 4px 24px rgba(0,0,0,.12)}
 /* ── Logo: icon + wordmark text ── */
 #ngm .ngm-logo{display:flex;align-items:center;gap:11px;flex-shrink:0;text-decoration:none;transition:opacity .2s}
 #ngm .ngm-logo:hover{opacity:.78}
@@ -66,22 +70,22 @@
 #ngm.ngm-mob-open .ngm-hbg span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 #ngm.ngm-mob-open .ngm-hbg span:nth-child(2){opacity:0;width:0}
 #ngm.ngm-mob-open .ngm-hbg span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-/* ── Mobile panel ── */
-/* Mobile panel: full-screen below the bar, never taller than the viewport.
-   NOTE: the panel is NOT position:fixed — #ngm has backdrop-filter, which
-   makes #ngm the containing block for fixed descendants, so a fixed panel
-   would anchor to the 86px bar (and collapse) instead of the viewport.
-   Instead the panel flows below the bar and is given an explicit height of
-   (viewport − bar), so bar + panel exactly fill the screen. #ngm is fixed,
-   so the whole stack overlays the page. The inner scrolls if links overflow.
-   dvh (with vh fallback) accounts for mobile browser chrome. */
-#ngm .ngm-mob{display:none;flex-direction:column;background:#FAF7F2;border-top:1px solid #DDD5C8}
-/* When open, #ngm ITSELF fills the viewport (fixed + explicit full height) and
-   becomes a column: the bar keeps its height, the panel flex-fills the rest.
-   This does NOT rely on #ngm auto-growing to fit a fixed-height child, so it
-   survives WA's layout wrappers (which were crushing the panel to a thin strip). */
-#ngm.ngm-mob-open{display:flex;flex-direction:column;height:100vh;height:100dvh}
-#ngm.ngm-mob-open .ngm-mob{display:flex;flex:1 1 auto;min-height:0}
+/* ── Mobile menu: drop-down overlay ──
+   When open, #ngm becomes a TRANSPARENT full-viewport layer. Because #ngm is
+   position:fixed it is the containing block for the absolute panel + scrim, so
+   they anchor to the viewport (not to the 86px bar, which is what used to
+   collapse the panel). The panel is content-height and slides down from behind
+   the bar; the scrim dims the page showing through underneath. */
+#ngm.ngm-mob-open{height:100vh;height:100dvh}
+/* Scrim: dims the page below the bar. Click it to close (JS). */
+#ngm .ngm-scrim{position:absolute;top:var(--bar);left:0;right:0;bottom:0;z-index:0;background:rgba(20,18,16,.5);opacity:0;pointer-events:none;transition:opacity .3s ease}
+#ngm.ngm-mob-open .ngm-scrim{opacity:1;pointer-events:auto}
+/* Panel: opaque dropdown, content-height (capped to the space under the bar),
+   slides down from behind the bar. Hidden + non-interactive until open; the
+   delayed visibility keeps it on screen through the close slide, then hides it
+   so its shadow never peeks below the bar when closed. Inner scrolls if long. */
+#ngm .ngm-mob{display:flex;flex-direction:column;position:absolute;top:var(--bar);left:0;right:0;z-index:1;background:#FAF7F2;border-top:1px solid #DDD5C8;max-height:calc(100dvh - var(--bar));box-shadow:0 16px 30px rgba(0,0,0,.17);transform:translateY(-100%);visibility:hidden;pointer-events:none;transition:transform .34s cubic-bezier(.22,.61,.36,1),visibility 0s linear .34s}
+#ngm.ngm-mob-open .ngm-mob{transform:translateY(0);visibility:visible;pointer-events:auto;transition:transform .34s cubic-bezier(.22,.61,.36,1),visibility 0s}
 #ngm .ngm-mob-inner{flex:1 1 auto;min-height:0;padding:6px 20px 24px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 #ngm .ngm-mob-link{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:left;padding:14px 4px;font-size:1rem;font-weight:400;color:#242424;text-decoration:none;border:none;border-bottom:1px solid #E8E0D4;min-height:52px;background:none;font-family:'DM Sans',sans-serif;letter-spacing:.01em;line-height:1.3;cursor:pointer;transition:color .18s}
 #ngm .ngm-mob-link:hover{color:#3E5538}
@@ -118,7 +122,8 @@
   #ngm .ngm-mob-acts .ngm-ghost,#ngm .ngm-mob-acts .ngm-solid{flex:1}
 }
 @media(max-width:560px){
-  #ngm .ngm-bar{padding:0 16px;height:74px}
+  #ngm{--bar:74px}
+  #ngm .ngm-bar{padding:0 16px}
   #ngm .ngm-logo svg{height:36px}
   #ngm .ngm-logo .ngm-wm .l1{font-size:1.14rem}
   #ngm .ngm-logo .ngm-wm .l2{font-size:.6rem;letter-spacing:.18em}
@@ -126,6 +131,14 @@
 }
 @media(max-width:380px){
   #ngm .ngm-logo .ngm-wm .l1{font-size:.92rem}
+}
+/* ── Revert cleanly to desktop ──
+   The mobile menu only exists ≤980px. If the menu was left open and the viewport
+   grows back to desktop, drop the overlay entirely (the JS resize handler also
+   clears the open state) so the dropdown/scrim can't linger over the desktop nav. */
+@media(min-width:981px){
+  #ngm.ngm-mob-open{height:auto}
+  #ngm .ngm-mob,#ngm .ngm-scrim{display:none}
 }
 /* ── Hide WA default nav + push body down ── */
 .navigation-menu,.waHeaderContainer .navigation-container,.menu-navigation,[class*="header-nav"],#idSystemPageNavigation{display:none!important}
@@ -195,6 +208,8 @@ body.memberContentView #ngm .ngm-member{display:inline-flex}
       <span></span><span></span><span></span>
     </button>
   </div>
+  <!-- ══ SCRIM (dims the page behind the open mobile menu; click to close) ══ -->
+  <div class="ngm-scrim" id="ngm-scrim" aria-hidden="true"></div>
   <!-- ══ MOBILE PANEL ══ -->
   <div class="ngm-mob" id="ngm-mob" role="dialog" aria-label="Navigation menu" aria-hidden="true">
     <div class="ngm-mob-inner">
@@ -241,6 +256,7 @@ body.memberContentView #ngm .ngm-member{display:inline-flex}
   var nav=document.getElementById('ngm');
   var hbg=document.getElementById('ngm-hbg');
   var panel=document.getElementById('ngm-mob');
+  var scrim=document.getElementById('ngm-scrim');
   if(!nav)return;
   /* ── Escape the Wild Apricot stacking-context trap ──
      WA wraps this gadget in layout containers. If ANY ancestor has a
@@ -265,7 +281,11 @@ body.memberContentView #ngm .ngm-member{display:inline-flex}
   function openMob(){nav.classList.add('ngm-mob-open');if(hbg){hbg.setAttribute('aria-expanded','true');hbg.setAttribute('aria-label','Close navigation menu');}if(panel)panel.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
   function closeMob(){nav.classList.remove('ngm-mob-open');if(hbg){hbg.setAttribute('aria-expanded','false');hbg.setAttribute('aria-label','Open navigation menu');}if(panel)panel.setAttribute('aria-hidden','true');document.body.style.overflow='';closeAllSubs();}
   if(hbg){hbg.addEventListener('click',function(e){e.stopPropagation();nav.classList.contains('ngm-mob-open')?closeMob():openMob();});}
+  if(scrim){scrim.addEventListener('click',closeMob);}
   document.addEventListener('click',function(e){if(nav.classList.contains('ngm-mob-open')&&!nav.contains(e.target))closeMob();});
+  /* Reverting to desktop while the menu is open: clear the open state so the
+     overlay doesn't linger (CSS also hides the panel/scrim ≥981px). */
+  window.addEventListener('resize',function(){if(window.innerWidth>980&&nav.classList.contains('ngm-mob-open'))closeMob();});
   /* mobile sub-menus */
   function closeAllSubs(){
     document.querySelectorAll('.ngm-mob-sub.open').forEach(function(s){s.classList.remove('open');s.setAttribute('aria-hidden','true');});
