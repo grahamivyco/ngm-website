@@ -11,7 +11,7 @@
     <div class="ngm-retreat-inner">
       <!-- PHOTO NOTE: replace src with a real retreat photo from WA Files. -->
       <div class="ngm-retreat-photo">
-        <img
+        <img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade"
           src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20Photos/Retreat%20Photo%20NGM%20Update.png"
           alt="Guild members stitching together at the annual retreat"
           loading="eager"

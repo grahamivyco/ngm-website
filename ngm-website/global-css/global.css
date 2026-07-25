@@ -6110,6 +6110,22 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li:hover {
   .ngm-photo-ph::after, .ngm-etype-photo::after, .ngm-bento-item::after { animation: none !important; }
 }
 
+/* ══════════════════════════════════════════════════════════════════
+   CONTENT PHOTO FADE-IN (.ngm-fade) — every photo across the site now
+   loads like the homepage hero: it is eager-loaded (set in the page
+   HTML, so it starts downloading with the page instead of waiting for
+   the reader to scroll to it), sits over the pulsing brand-mark
+   placeholder, and fades in once it finishes. The <img>'s onload adds
+   .is-loaded to trigger the fade.
+   Safety net: a delayed keyframe reveals the image even if onload never
+   fires (e.g. scripting disabled), so a photo can never stay hidden. */
+.ngm-fade { opacity: 0; transition: opacity .6s ease; animation: ngm-fade-reveal 1ms linear 4s forwards; }
+.ngm-fade.is-loaded { opacity: 1; animation: none; }
+@keyframes ngm-fade-reveal { to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .ngm-fade { opacity: 1 !important; transition: none !important; animation: none !important; }
+}
+
 /* ---------- Marquee: GPU-composited, seamless (two identical sets, -50%) ---------- */
 .ngm-marquee-track { will-change: transform; backface-visibility: hidden; }
 @keyframes ngm-scroll { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
