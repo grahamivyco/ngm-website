@@ -6589,3 +6589,25 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
 @media (prefers-reduced-motion: reduce) {
   .ngm-gcard-photo::after { animation: none; opacity: .4; }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   "JOINING BY VIDEO" GREEN BAND (meeting pages). Reuses .ngm-hub-band
+   + .ngm-hub-zoomband (dark-green background, white heading/copy). Adds
+   a button row and a white-outline button for the second CTA.
+══════════════════════════════════════════════════════════════════ */
+.ngm-videoband-btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.ngm-hub-zoomband h2 em { font-style: italic; color: #E7B6A6; }
+.ngm-btn-outline-white, body a.ngm-btn-outline-white {
+  background: transparent;
+  color: #fff !important;
+  border: 1.5px solid rgba(255, 255, 255, .55) !important;
+}
+.ngm-btn-outline-white:hover, body a.ngm-btn-outline-white:hover {
+  background: #fff !important;
+  color: var(--ngm-charcoal) !important;
+  border-color: #fff !important;
+}
