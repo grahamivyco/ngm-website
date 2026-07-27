@@ -6591,23 +6591,17 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   "JOINING BY VIDEO" GREEN BAND (meeting pages). Reuses .ngm-hub-band
-   + .ngm-hub-zoomband (dark-green background, white heading/copy). Adds
-   a button row and a white-outline button for the second CTA.
+   "JOINING BY VIDEO" (meeting pages). Reuses the Member Hub's light-green
+   .ngm-hub-zoom-module tiles — two side by side (members / non-members),
+   stacking on narrow screens.
 ══════════════════════════════════════════════════════════════════ */
-.ngm-videoband-btns {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+.ngm-videoband-tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 8px;
 }
-.ngm-hub-zoomband h2 em { font-style: italic; color: #E7B6A6; }
-.ngm-btn-outline-white, body a.ngm-btn-outline-white {
-  background: transparent;
-  color: #fff !important;
-  border: 1.5px solid rgba(255, 255, 255, .55) !important;
-}
-.ngm-btn-outline-white:hover, body a.ngm-btn-outline-white:hover {
-  background: #fff !important;
-  color: var(--ngm-charcoal) !important;
-  border-color: #fff !important;
+.ngm-videoband-tiles .ngm-hub-zoom-module { margin-top: 0; }
+@media (max-width: 700px) {
+  .ngm-videoband-tiles { grid-template-columns: 1fr; }
 }
