@@ -6453,3 +6453,83 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
 .ngm-mini-name        { font-size: 1.25rem; }  /* was 1.15rem — meeting-card titles */
 .ngm-pullquote        { font-size: 1.50rem; }  /* was 1.40rem */
 .ngm-stat-num         { font-size: 1.75rem; }  /* was 1.60rem — stat marquee numbers */
+
+/* ══════════════════ PLAIN PULSING-GREEN PHOTO LOAD STATE ══════════════════
+   Per request: while a photo loads, show ONLY a gently pulsing green panel —
+   no NGM brand mark, no shimmer sweep, and never any alt text or broken-image
+   icon. The real photo fades in over the green once it has actually loaded.
+
+   This REPLACES the older brand-mark placeholder (the pulsing green Minnesota
+   sprig) everywhere. Appended last so it overrides those earlier rules when
+   the whole file is pasted into the single WA CSS tab. */
+
+/* 1) Solid light-sage base on every photo box — always green, never flashes
+      to the page background while the deeper-green pulse breathes on top. */
+.ngm-hero-photo,
+.ngm-about-hero-photo,
+.ngm-about-photo,
+.ngm-phero-photo,
+.ngm-bento-item,
+.ngm-photo-ph,
+.ngm-etype-photo,
+.ngm-mt-photo {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--ngm-sage-lt);
+}
+
+/* 2) The pulsing green itself — a deeper sage that gently breathes. This
+      reuses the ::after (and ::before, for .ngm-mt-photo image tiles) that
+      previously painted the brand mark, now with NO mark image — just green. */
+.ngm-hero-photo::after,
+.ngm-about-hero-photo::after,
+.ngm-about-photo::after,
+.ngm-phero-photo::after,
+.ngm-bento-item::after,
+.ngm-photo-ph::after,
+.ngm-etype-photo::after,
+.ngm-mt-photo:has(> img)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--ngm-sage);
+  animation: ngm-load-pulse 1.6s ease-in-out infinite;
+}
+@keyframes ngm-load-pulse { 0%, 100% { opacity: .2; } 50% { opacity: .6; } }
+
+/* 3) Remove the old loaders entirely: the homepage hero's shimmer + brand-mark
+      element, and the shimmer sweep ::before on the generic photo boxes. */
+.ngm-hero-loader { display: none !important; }
+.ngm-photo-ph::before,
+.ngm-etype-photo::before,
+.ngm-bento-item::before { content: none !important; background: none !important; animation: none !important; }
+
+/* 4) The real photo sits above the green and — thanks to .ngm-fade — stays
+      FULLY hidden (so no alt text and no broken-image icon) until it loads,
+      then fades in. color/font-size are a belt-and-suspenders backstop so alt
+      text can never paint even if the fade is somehow bypassed. */
+.ngm-hero-photo > img,
+.ngm-about-hero-photo > img,
+.ngm-about-photo > img,
+.ngm-phero-photo > img,
+.ngm-bento-item > img,
+.ngm-photo-ph > img,
+.ngm-etype-photo > img,
+.ngm-mt-photo > img {
+  position: relative;
+  z-index: 1;
+}
+.ngm-fade { opacity: 0; color: transparent; font-size: 0; }
+.ngm-fade.is-loaded { opacity: 1; }
+
+/* 5) Reduced motion: hold a steady green panel instead of pulsing. */
+@media (prefers-reduced-motion: reduce) {
+  .ngm-hero-photo::after, .ngm-about-hero-photo::after, .ngm-about-photo::after,
+  .ngm-phero-photo::after, .ngm-bento-item::after, .ngm-photo-ph::after,
+  .ngm-etype-photo::after, .ngm-mt-photo:has(> img)::before {
+    animation: none !important;
+    opacity: .4;
+  }
+}
