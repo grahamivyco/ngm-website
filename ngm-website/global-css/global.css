@@ -6265,7 +6265,7 @@ body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 48px !important; padd
    the text column's height — never dropping back to a short fixed panel —
    and the address sits directly under the heading (rows hug their content,
    no flexible gap). Applies wherever the two columns sit side by side
-   (≥601px); below that the section stacks and the photo gets a set height. */
+   (601px and up); below that the section stacks and the photo gets a set height. */
 @media (min-width: 601px) {
   .ngm-loc-inner:has(.ngm-loc-head) { grid-template-rows: auto auto; align-items: start; }
   .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-head { margin-bottom: 14px; }
@@ -6558,7 +6558,12 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
 .ngm-gcard { overflow: hidden; }
 .ngm-gcard-photo {
   position: relative;
-  aspect-ratio: 16 / 10;
+  /* 16:10 ratio via padding (10 / 16 = 62.5%) instead of the modern
+     aspect-ratio property — WA's CSS compiler rejects aspect-ratio and
+     drops the whole stylesheet. Children below are absolutely positioned
+     (inset:0), so they fill this padded box. */
+  height: 0;
+  padding-bottom: 62.5%;
   background: var(--ngm-sage-lt);
 }
 .ngm-gcard-photo::after {
