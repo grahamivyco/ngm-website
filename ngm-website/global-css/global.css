@@ -6037,6 +6037,9 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li:hover {
     row-gap:24px;
   }
   .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-head { margin-bottom:0; }
+  /* Stacked: no copy column to match, so give the photo a tall set height
+     (it can't stretch against a sibling here) rather than a short banner. */
+  .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-map { height:340px; }
 }
 
 /* ---------- Hero: centered copy block + branded image load state ---------- */
@@ -6252,9 +6255,12 @@ body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 48px !important; padd
 @media (max-width: 900px) { body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 28px !important; padding-right: 28px !important; } }
 @media (max-width: 600px) { body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 16px !important; padding-right: 16px !important; } }
 
-/* Location on desktop: map fills the text column's height; the address sits
-   directly under the heading (rows hug their content, no flexible gap). */
-@media (min-width: 901px) {
+/* Location, two-column layout (tablet + desktop): the photo always fills
+   the text column's height — never dropping back to a short fixed panel —
+   and the address sits directly under the heading (rows hug their content,
+   no flexible gap). Applies wherever the two columns sit side by side
+   (≥601px); below that the section stacks and the photo gets a set height. */
+@media (min-width: 601px) {
   .ngm-loc-inner:has(.ngm-loc-head) { grid-template-rows: auto auto; align-items: start; }
   .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-head { margin-bottom: 14px; }
   .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-map { align-self: stretch; height: auto; }
@@ -6361,6 +6367,9 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
 .ngm-loc-photo img {
   position: absolute; inset: 0; z-index: 1;
   width: 100%; height: 100%; object-fit: cover; display: block;
+  /* Anchor the crop to the left so the front of the building stays in
+     view at every size, rather than centering on the middle. */
+  object-position: left center;
 }
 .ngm-loc-photo-ph {
   position: absolute; inset: 0; z-index: 0;
@@ -6532,4 +6541,40 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
     animation: none !important;
     opacity: .4;
   }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   GROUP CARDS — photo header (meetings page). A photo caps each card,
+   and the format pill (Hybrid / In person / Zoom) floats into the
+   photo's top-right corner so the card body stays compact. Scoped to
+   .ngm-gcard, which is used only on the meetings page.
+══════════════════════════════════════════════════════════════════ */
+.ngm-gcard { overflow: hidden; }
+.ngm-gcard-photo {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: var(--ngm-sage-lt);
+}
+.ngm-gcard-photo::after {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: var(--ngm-mark) center / 40px auto no-repeat;
+  animation: ngm-ph-pulse 1.6s ease-in-out infinite;
+}
+.ngm-gcard-photo > img {
+  position: absolute; inset: 0; z-index: 1;
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+/* Format pill sits over the photo, top-right — recolored for contrast
+   against the image (base .ngm-gcard-tag is a quiet bordered chip). */
+.ngm-gcard-photo .ngm-gcard-tag {
+  position: absolute; top: 12px; right: 12px; z-index: 2;
+  margin: 0;
+  background: rgba(255, 255, 255, .94);
+  border-color: transparent;
+  color: var(--ngm-charcoal);
+  font-weight: 500;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, .15);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ngm-gcard-photo::after { animation: none; opacity: .4; }
 }
