@@ -4393,7 +4393,13 @@ body.ngm-login-page .WaGadgetLoginForm .loginPanel::after { display: none !impor
 .ngm-mt-map { border-radius:var(--ngm-radius-lg); overflow:hidden; border:1px solid var(--ngm-border); }
 .ngm-mt-map iframe { display:block; width:100%; height:320px; border:none; }
 @media(max-width:820px){ .ngm-mt-hero-grid { grid-template-columns:1fr; gap:32px; } }
-@media(max-width:760px){ .ngm-mt-gallery { grid-template-columns:1fr; } .ngm-mt-loc { grid-template-columns:1fr; gap:28px; } }
+@media(max-width:760px){
+  /* Keep the three photos side by side (as small thumbnails) instead of
+     stacking to one huge column each. */
+  .ngm-mt-gallery { gap:10px; margin-top:28px; }
+  .ngm-mt-gallery .ngm-mt-photo { min-height:120px; }
+  .ngm-mt-loc { grid-template-columns:1fr; gap:28px; }
+}
 
 /* ── Retreat teachers grid ─────────────────────────────────── */
 .ngm-mt-teachers { display:grid; grid-template-columns:repeat(2,1fr); gap:22px; margin-top:40px; }
