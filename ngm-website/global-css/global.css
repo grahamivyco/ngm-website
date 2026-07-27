@@ -9,13 +9,13 @@
    until the full site cutover. To revert the live site, use
    current-live-backup.css instead.
 
-   Fonts are imported below; pages no longer each need their own <link>.
-   At cutover, each page gadget's <style> block can be deleted because its
-   styles live here. (The header/footer gadgets keep their own CSS since
-   they carry HTML+JS, not just CSS.)
+   Fonts (Cormorant Garamond + DM Sans) are loaded by a link tag in WA's
+   page head (Settings -> Site -> Meta-tags -> Raw Headers) — NOT by an
+   @import here. WA's Content Security Policy refuses externally hosted
+   CSS, so an @import of Google Fonts makes WA reject the whole stylesheet
+   on save. All page styles live in this file (the header/footer gadgets
+   keep their own CSS since they carry HTML+JS, not just CSS).
 ══════════════════════════════════════════════════════════════════ */
-
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap');
 
 /* ══════════════════════════════════════════════════════════════════
    DESIGN SYSTEM — shared base (tokens, reset, type, layout, buttons, arrow link, badges)
