@@ -6418,3 +6418,38 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
 .ngm-cta-inner .ngm-h2 { margin-bottom: 18px; }
 .ngm-cta-body, .ngm-cta-inner > p { font-family: var(--ngm-sans); font-size: 1.0625rem; color: var(--ngm-gray); line-height: 1.75; max-width: 560px; margin: 0 auto 28px; }
 .ngm-cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* ══════════════════ READABILITY TYPE-SCALE BUMP ══════════════════
+   Feedback: homepage text reads too small — the eyebrows, card dates and
+   card descriptions were the smallest. This block nudges the whole type
+   scale up, weighted toward that small text. Appended last so it wins over
+   the earlier (and duplicated) definitions in the WA CSS tab, same as the
+   .ngm-phero / .ngm-cta modules above. Display headings (.ngm-h1/.ngm-h2)
+   are intentionally left as-is — they were already large and bumping their
+   clamps risks hero wrapping/overflow.
+
+   These are shared design-system tokens, so the increase carries site-wide
+   (one global.css styles every page) — which keeps the pages consistent. */
+
+/* — Smallest text (biggest relative bump) — */
+.ngm-eyebrow          { font-size: .78rem; }   /* was .70rem — section eyebrows */
+.ngm-retreat-eyebrow  { font-size: .76rem; }   /* was .68rem */
+.ngm-addr-label       { font-size: .76rem; }   /* was .68rem */
+.ngm-stat-label       { font-size: .90rem; }   /* was .80rem — stat marquee labels */
+.ngm-mini-when        { font-size: .88rem; }   /* was .78rem — meeting-card dates */
+.ngm-mini-desc        { font-size: .94rem; }   /* was .84rem — meeting-card descriptions */
+.ngm-retreat-meta-item{ font-size: .92rem; }   /* was .82rem — retreat date */
+
+/* — Body / lead copy (lighter bump) — */
+.ngm-lead,
+.ngm-hero-body,
+.ngm-upcoming-intro,
+.ngm-join-body        { font-size: 1.15rem; }  /* was 1.0625rem */
+.ngm-about-body p,
+.ngm-retreat-body,
+.ngm-address          { font-size: 1.08rem; }  /* was 1rem */
+
+/* — Card titles & accents — */
+.ngm-mini-name        { font-size: 1.25rem; }  /* was 1.15rem — meeting-card titles */
+.ngm-pullquote        { font-size: 1.50rem; }  /* was 1.40rem */
+.ngm-stat-num         { font-size: 1.75rem; }  /* was 1.60rem — stat marquee numbers */
