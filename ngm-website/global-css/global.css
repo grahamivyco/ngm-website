@@ -6267,7 +6267,7 @@ body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 48px !important; padd
    no flexible gap). Applies wherever the two columns sit side by side
    (601px and up); below that the section stacks and the photo gets a set height. */
 @media (min-width: 601px) {
-  .ngm-loc-inner:has(.ngm-loc-head) { grid-template-rows: auto auto; align-items: start; }
+  .ngm-loc-inner:has(.ngm-loc-head) { grid-template-rows: auto auto; align-items: start; row-gap: 6px; }
   .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-head { margin-bottom: 14px; }
   .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-map { align-self: stretch; height: auto; }
 }
