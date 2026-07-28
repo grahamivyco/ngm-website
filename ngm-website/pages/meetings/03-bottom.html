@@ -95,7 +95,7 @@
     <div class="ngm-groups-grid">
       <a class="ngm-gcard public" href="/Come-&amp;-Stitch">
         <div class="ngm-gcard-photo">
-          <span class="ngm-gcard-tag">In person</span>
+          <span class="ngm-gcard-tag">Hybrid</span>
           <img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade"
             src="https://needleworkguildmn.org/resources/Pictures/Gallery%20Photos/IMG_0524.jpg"
             alt="A relaxed weekend stitching session" loading="lazy"
@@ -126,7 +126,7 @@
     </div>
   </div>
 </section>
-<section class="ngm ngm-sec ngm-sec-linen">
+<section class="ngm ngm-sec ngm-sec-cream">
   <div class="ngm-con">
     <div class="ngm-loc-inner">
       <div class="ngm-loc-head">
@@ -134,7 +134,7 @@
         <h2 class="ngm-h2" style="margin-bottom:0">Where we <em>meet</em></h2>
       </div>
       <div class="ngm-loc-addr">
-        <p class="ngm-loc-note" style="margin:0 0 16px">Most groups meet at Minnesota Valley Unitarian Universalist Fellowship (MVUUF) in Bloomington. A few gather in members' homes or meet online &mdash; check the individual meeting for where it's held.</p>
+        <p class="ngm-loc-note" style="font-size:1.0625rem;line-height:1.8;margin:0 0 20px">Most groups meet at Minnesota Valley Unitarian Universalist Fellowship (MVUUF) in Bloomington. A few gather in members' homes or meet online &mdash; check the individual meeting for where it's held.</p>
         <span class="ngm-addr-label">Meeting location</span>
         <address class="ngm-address">
           <a class="ngm-loc-dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=10715+Zenith+Ave+S+Bloomington+MN+55431" target="_blank" rel="noopener noreferrer">
@@ -148,8 +148,6 @@
           6600 Lyndale Ave S<br>
           Richfield, MN 55423
         </address>
-        <span class="ngm-addr-label">Joining by video</span>
-        <p class="ngm-loc-note">Log in to the Member Hub &mdash; the Zoom link is there.</p>
         <span class="ngm-addr-label">Mailing address</span>
         <address class="ngm-address">
           Needlework Guild of Minnesota<br>
@@ -167,6 +165,28 @@
         >
       </div>
     </div>
+    <div class="ngm-visit-zoom">
+      <span class="ngm-addr-label">Joining by video</span>
+      <p class="ngm-visit-zoom-copy">Many of our meetings are on Zoom, in whole or in part. The link is available to members, and if you&rsquo;re not a member yet, just request it &mdash; we&rsquo;ll be happy to email it to you.</p>
+      <div class="ngm-videoband-tiles">
+        <a class="ngm-hub-zoom-module" href="/member/">
+          <span class="ngm-hub-zoom-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span>
+          <div class="ngm-hub-zoom-tile-body">
+            <h4>Member Hub</h4>
+            <p>Access the Zoom link.</p>
+          </div>
+          <span class="ngm-hub-zoom-tile-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+        <a class="ngm-hub-zoom-module" href="/request-the-link">
+          <span class="ngm-hub-zoom-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></span>
+          <div class="ngm-hub-zoom-tile-body">
+            <h4>Request the Link</h4>
+            <p>Not a member? We&rsquo;ll email it to you.</p>
+          </div>
+          <span class="ngm-hub-zoom-tile-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </div>
+    </div>
   </div>
 </section>
 <div class="ngm ngm-about-cta">
@@ -180,3 +200,15 @@
     </div>
   </div>
 </div>
+<script>
+/* Member Hub tile: logged-in members go straight to /member/; guests are
+   sent to log in and returned to /member/ afterwards. WA tags <body> with
+   publicContentView (guest) or memberContentView (logged in). */
+(function () {
+  if (document.body && document.body.classList.contains("publicContentView")) {
+    var login = "/Sys/Login/?ReturnUrl=" + encodeURIComponent("/member/");
+    var tiles = document.querySelectorAll('a.ngm-hub-zoom-module[href="/member/"]');
+    for (var i = 0; i < tiles.length; i++) { tiles[i].setAttribute("href", login); }
+  }
+})();
+</script>
