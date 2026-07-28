@@ -8,7 +8,7 @@
           <h2 class="ngm-h2" style="margin-bottom:0">Where we <em>meet</em></h2>
         </div>
         <div class="ngm-loc-addr">
-          <p class="ngm-loc-note" style="font-size:1.0625rem;line-height:1.8;margin:0 0 20px">This group meets at Minnesota Valley Unitarian Universalist Fellowship (MVUUF) in Bloomington, and on Zoom. Your first visit is always free &mdash; you don&rsquo;t have to be a member to come and stitch with us.</p>
+          <p class="ngm-loc-note" style="font-size:1.0625rem;line-height:1.8;margin:0 0 20px">This group meets at Minnesota Valley Unitarian Universalist Fellowship (MVUUF) in Bloomington, and on Zoom. We would love to have you.</p>
           <span class="ngm-addr-label">Meeting location</span>
           <address class="ngm-address">
             <a class="ngm-loc-dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=10715+Zenith+Ave+S+Bloomington+MN+55431" target="_blank" rel="noopener noreferrer">
@@ -40,15 +40,15 @@
             <span class="ngm-hub-zoom-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span>
             <div class="ngm-hub-zoom-tile-body">
               <h4>Member Hub</h4>
-              <p>The Zoom link lives here.</p>
+              <p>Access the Zoom link.</p>
             </div>
             <span class="ngm-hub-zoom-tile-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
           </a>
           <a class="ngm-hub-zoom-module" href="/request-the-link">
             <span class="ngm-hub-zoom-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></span>
             <div class="ngm-hub-zoom-tile-body">
-              <h4>Request the link</h4>
-              <p>We&rsquo;ll email it to you.</p>
+              <h4>Request the Link</h4>
+              <p>Not a member? We&rsquo;ll email it to you.</p>
             </div>
             <span class="ngm-hub-zoom-tile-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
           </a>
@@ -69,3 +69,17 @@
     </div>
   </div>
 </div>
+<script>
+/* Member Hub tile: logged-in members go straight to /member/; guests are
+   sent to log in and returned to /member/ afterwards. WA tags <body> with
+   publicContentView (guest) or memberContentView (logged in). If neither is
+   present (e.g. the editor), the link falls back to /member/ — a restricted
+   page, so WA still routes guests through login. */
+(function () {
+  if (document.body && document.body.classList.contains("publicContentView")) {
+    var login = "/Sys/Login/?ReturnUrl=" + encodeURIComponent("/member/");
+    var tiles = document.querySelectorAll('a.ngm-hub-zoom-module[href="/member/"]');
+    for (var i = 0; i < tiles.length; i++) { tiles[i].setAttribute("href", login); }
+  }
+})();
+</script>

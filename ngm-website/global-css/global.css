@@ -6023,10 +6023,13 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li:hover {
   .ngm-hero-body, .ngm-lead, .ngm-upcoming-intro,
   .ngm-about-body, .ngm-about-body p, .ngm-pullquote,
   .ngm-join-body, .ngm-retreat-body, .ngm-groups-intro,
-  .ngm-address, .ngm-addr-label {
+  .ngm-address, .ngm-addr-label,
+  .ngm-visit-zoom-copy {
     text-align:center !important;
   }
   .ngm-pullquote { border-left:none !important; padding-left:0 !important; }
+  /* Hero meta (day/time + format badge) centres with the rest of the hero. */
+  .ngm-mt-meta { justify-content:center !important; }
 
   /* CTAs: stack, full width, centered */
   .ngm-hero-btns, .ngm-join-btns { flex-direction:column; align-items:stretch; }
@@ -6616,15 +6619,6 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
   margin-top: 8px;
 }
 .ngm-videoband-tiles .ngm-hub-zoom-module { margin-top: 0; }
-/* Tile title: DM Sans (matches the section copy) instead of the heavier
-   serif — a clean medium weight, not a display face. */
-.ngm-videoband-tiles .ngm-hub-zoom-tile-body h4 {
-  font-family: var(--ngm-sans) !important;
-  font-size: 1.0625rem !important;
-  font-weight: 500 !important;
-  color: var(--ngm-charcoal);
-  line-height: 1.3;
-}
 /* Tile descriptions: lighter/quieter, like the muted event-date text. */
 .ngm-videoband-tiles .ngm-hub-zoom-tile-body p { color: var(--ngm-gray-lt); }
 @media (max-width: 700px) {
