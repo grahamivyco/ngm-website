@@ -6605,3 +6605,18 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
 @media (max-width: 700px) {
   .ngm-videoband-tiles { grid-template-columns: 1fr; }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   CLICKABLE GROUP CARDS (meetings page). Each .ngm-gcard is an <a> to its
+   meeting page — reset the anchor styling and add a hover lift so the
+   whole card reads as clickable.
+══════════════════════════════════════════════════════════════════ */
+a.ngm-gcard {
+  text-decoration: none;
+  color: inherit;
+  transition: background-color .25s ease, border-color .25s ease, transform .2s ease, box-shadow .2s ease;
+}
+a.ngm-gcard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(62, 85, 56, .16);
+}

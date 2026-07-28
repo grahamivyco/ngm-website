@@ -1,7 +1,7 @@
 <!-- Canonical page markup — this is the file to edit and to paste into the WA Custom-HTML gadget. Styling lives in global-css/global.css (pasted into the WA CSS tab; must be live in WA first). There is no separate self-contained version. -->
 <!-- GROUP CARD PHOTOS: each card's src points at a representative gallery
      photo with an onerror fallback. Swap in a real per-group photo URL from
-     the WA file manager when available. -->
+     the WA file manager when available. Each card links to its meeting page. -->
 <section class="ngm ngm-sec ngm-sec-white" id="ngm-groups">
   <div class="ngm-con">
     <span class="ngm-eyebrow">Groups</span>
@@ -10,7 +10,7 @@
 
     <h3 class="ngm-groups-subhead">Daytime meetings</h3>
     <div class="ngm-groups-grid">
-      <div class="ngm-gcard">
+      <a class="ngm-gcard" href="/stitch-in-duplicate">
         <div class="ngm-gcard-photo">
           <span class="ngm-gcard-tag">Hybrid</span>
           <img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade"
@@ -24,8 +24,8 @@
           <div class="ngm-gcard-when">4th Tuesday · 10 am – 2 pm</div>
           <p>Open stitching with a monthly program.</p>
         </div>
-      </div>
-      <div class="ngm-gcard">
+      </a>
+      <a class="ngm-gcard" href="/daytime-counted-thread">
         <div class="ngm-gcard-photo">
           <span class="ngm-gcard-tag">Hybrid</span>
           <img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade"
@@ -39,8 +39,8 @@
           <div class="ngm-gcard-when">2nd Tuesday · 10 am – 2 pm</div>
           <p>Counted thread and canvas needlepoint, alternating monthly.</p>
         </div>
-      </div>
-      <div class="ngm-gcard">
+      </a>
+      <a class="ngm-gcard" href="/potpourri-stitchers">
         <div class="ngm-gcard-photo">
           <span class="ngm-gcard-tag">In person</span>
           <img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade"
@@ -54,12 +54,12 @@
           <div class="ngm-gcard-when">3rd Tuesday · 10 am – 2 pm</div>
           <p>A variety group — embroidery, stumpwork, and more, in members' homes.</p>
         </div>
-      </div>
+      </a>
     </div>
 
     <h3 class="ngm-groups-subhead">Evening meetings</h3>
     <div class="ngm-groups-grid">
-      <div class="ngm-gcard">
+      <a class="ngm-gcard" href="/stitch-in-duplicate">
         <div class="ngm-gcard-photo">
           <span class="ngm-gcard-tag">Zoom</span>
           <img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade"
@@ -73,8 +73,8 @@
           <div class="ngm-gcard-when">4th Tuesday · 7 – 9 pm</div>
           <p>Our evening session, for members who work days.</p>
         </div>
-      </div>
-      <div class="ngm-gcard">
+      </a>
+      <a class="ngm-gcard" href="/evening-needlepointers">
         <div class="ngm-gcard-photo">
           <span class="ngm-gcard-tag">Hybrid</span>
           <img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade"
@@ -88,12 +88,12 @@
           <div class="ngm-gcard-when">3rd Thursday · 7 – 9 pm</div>
           <p>Specialty threads and stitches on canvas.</p>
         </div>
-      </div>
+      </a>
     </div>
 
     <h3 class="ngm-groups-subhead">Weekend meetings</h3>
     <div class="ngm-groups-grid">
-      <div class="ngm-gcard public">
+      <a class="ngm-gcard public" href="/calendar">
         <div class="ngm-gcard-photo">
           <span class="ngm-gcard-tag">In person</span>
           <img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade"
@@ -107,8 +107,8 @@
           <div class="ngm-gcard-when public">3rd Saturday · 10 am – 12 pm</div>
           <p>A relaxed, social session open to everyone.</p>
         </div>
-      </div>
-      <div class="ngm-gcard public">
+      </a>
+      <a class="ngm-gcard public" href="/calendar">
         <div class="ngm-gcard-photo">
           <span class="ngm-gcard-tag">In person</span>
           <img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade"
@@ -122,7 +122,7 @@
           <div class="ngm-gcard-when public">1st or 2nd Sunday · 1 – 4 pm</div>
           <p>An informal afternoon of stitching, open to everyone.</p>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
