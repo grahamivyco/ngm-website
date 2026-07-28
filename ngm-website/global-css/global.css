@@ -6591,10 +6591,24 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   "JOINING BY VIDEO" (meeting pages). Reuses the Member Hub's light-green
-   .ngm-hub-zoom-module tiles — two side by side (members / non-members),
-   stacking on narrow screens.
+   "JOINING BY VIDEO" — a subsection inside the "Where we meet" block, sat
+   under the physical-location details (separated by a rule). Reuses the
+   Member Hub's light-green .ngm-hub-zoom-module tiles, two side by side
+   (members / non-members), stacking on narrow screens.
 ══════════════════════════════════════════════════════════════════ */
+.ngm-visit-zoom {
+  margin-top: 40px;
+  padding-top: 36px;
+  border-top: 1px solid var(--ngm-border);
+}
+.ngm-visit-zoom-copy {
+  font-family: var(--ngm-sans);
+  font-size: 1.0625rem;
+  color: var(--ngm-gray);
+  line-height: 1.75;
+  max-width: 640px;
+  margin: 8px 0 24px;
+}
 .ngm-videoband-tiles {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -6602,6 +6616,8 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
   margin-top: 8px;
 }
 .ngm-videoband-tiles .ngm-hub-zoom-module { margin-top: 0; }
+/* Tile descriptions: lighter/quieter, like the muted event-date text. */
+.ngm-videoband-tiles .ngm-hub-zoom-tile-body p { color: var(--ngm-gray-lt); }
 @media (max-width: 700px) {
   .ngm-videoband-tiles { grid-template-columns: 1fr; }
 }
