@@ -6257,7 +6257,7 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li .date span {
   .ngm-upcoming-center { text-align: left; }
   .ngm-upcoming-center .ngm-upcoming-intro { margin-left: 0; margin-right: 0; }
 }
-body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 48px !important; padding-right: 48px !important; }
+body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 48px !important; padding-right: 48px !important; padding-bottom: 64px !important; }
 @media (max-width: 900px) { body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 28px !important; padding-right: 28px !important; } }
 @media (max-width: 600px) { body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 16px !important; padding-right: 16px !important; } }
 
@@ -6616,6 +6616,15 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
   margin-top: 8px;
 }
 .ngm-videoband-tiles .ngm-hub-zoom-module { margin-top: 0; }
+/* Tile title: DM Sans (matches the section copy) instead of the heavier
+   serif — a clean medium weight, not a display face. */
+.ngm-videoband-tiles .ngm-hub-zoom-tile-body h4 {
+  font-family: var(--ngm-sans) !important;
+  font-size: 1.0625rem !important;
+  font-weight: 500 !important;
+  color: var(--ngm-charcoal);
+  line-height: 1.3;
+}
 /* Tile descriptions: lighter/quieter, like the muted event-date text. */
 .ngm-videoband-tiles .ngm-hub-zoom-tile-body p { color: var(--ngm-gray-lt); }
 @media (max-width: 700px) {
