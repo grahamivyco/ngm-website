@@ -6509,17 +6509,17 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
   background: var(--ngm-sage-lt);
   border: 1.5px solid #CBDCC2;
   border-radius: var(--ngm-radius-lg);
-  box-shadow: var(--ngm-shm);
-  padding: 34px 30px;
+  padding: 38px 32px;
 }
 .ngm-rl-check {
   display: inline-flex; align-items: center; justify-content: center;
   width: 32px; height: 32px; border-radius: 50%;
-  background: var(--ngm-sage-dk); color: #fff; margin-bottom: 12px;
+  background: var(--ngm-sage-dk); color: #fff; margin-bottom: 22px;
 }
 .ngm-rl-check svg { width: 17px; height: 17px; }
 .ngm-rl-thanks h3 { font-family: var(--ngm-serif); font-weight: 400; color: var(--ngm-charcoal); font-size: 1.8rem; margin-bottom: 8px; }
-.ngm-rl-thanks p { font-family: var(--ngm-sans); color: var(--ngm-gray); line-height: 1.7; margin: 0; }
+/* Copy matches .ngm-lead (same size/weight/colour as the hero intro). */
+.ngm-rl-thanks p { font-family: var(--ngm-sans); font-size: 1.0625rem; font-weight: 400; color: var(--ngm-gray); line-height: 1.8; margin: 0; }
 /* Tablet & mobile: the two columns stack — center the form / thank-you card. */
 @media (max-width: 820px) {
   .ngm-rl-wrap { max-width: 460px; margin-left: auto; margin-right: auto; }
