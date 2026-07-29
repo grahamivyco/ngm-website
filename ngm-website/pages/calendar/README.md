@@ -34,7 +34,7 @@ title top-left, then the items. Swatches use the **exact** category colours
 the calendar paints on its event chips (the `--cat` map in global.css). If
 you add or recolour an event category, update both places. Beneath the items
 sits a "Want to add something to the calendar?" tile — no button; the words
-"Feedback &amp; Ideas form" in the copy link to the **Feedback & Ideas Google
+"Ideas &amp; Feedback form" in the copy link to the **Ideas & Feedback Google
 Form**. Keep that href in sync with `layout/feedback-button/01-top.html`.
 
 ### Grid look

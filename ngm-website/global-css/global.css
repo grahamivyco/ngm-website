@@ -1411,7 +1411,7 @@ body [class*="LayoutContainer"] {
    Top padding ZERO to kill the gap under the hero. Even padding on the
    sides + bottom so the grid has breathing room on all sides. */
 .ngm-cal-body { background: #fff; padding: 0 40px; }
-.ngm-cal-body-inner { max-width: 1080px; margin: 0 auto 56px; padding: 24px 0 0; }
+.ngm-cal-body-inner { max-width: 1080px; margin: 0 auto 64px; padding: 24px 0 0; }  /* 64px = standard section bottom padding below the Key */
 /* ───── WA CALENDAR GADGET styling ─────
    CONFIRMED via Inspect: the gadget's real class is
    .WaGadgetEventsStateCalendar (inside the broader .WaGadgetEvents),
@@ -1972,21 +1972,17 @@ body .ngm-cal .monthViewType .EventListCalendar th {
    items. Its swatches use the EXACT category colours the calendar paints
    on its event chips (see the `--cat` mapping in the month-grid block). */
 .ngm-key {
-  max-width: 1080px; margin: 0 auto;
+  max-width: 1080px; margin: 0 auto; box-sizing: border-box;
   background: #fff; border: 1px solid var(--ngm-border);
   border-radius: var(--ngm-radius-lg); box-shadow: var(--ngm-sh);
   padding: 30px 32px;
 }
-/* breathing room: tight to the month grid above, clear air below before the
-   next band (the Visit section / Join CTA). */
-.ngm-cal-body-inner .ngm-key { margin-top: 14px; margin-bottom: 16px; }
-/* Line the Key card up with the calendar grid's side edges. The gadget carries
-   12px side gutters ≤1100px (see .WaGadgetEventsStateCalendar); match them here
-   so the card's edges sit flush with the grid at every width (they already
-   share the 1080px inner width above 1100px). */
-@media (max-width: 1100px) {
-  .ngm-cal-body-inner .ngm-key { margin-left: 12px !important; margin-right: 12px !important; }
-}
+/* Same width + side gutter as the calendar grid at EVERY width. The gadget is
+   capped to 1080px with a 12px side padding, so give the Key the SAME 12px side
+   inset (as margin, since the card is the visible box) — its edges then sit flush
+   with the grid. Small top gap to the grid; the section's bottom padding (on
+   .ngm-cal-body-inner) provides the standard space below. */
+.ngm-cal-body-inner .ngm-key { margin: 6px 12px 0; }
 .ngm-key .ngm-eyebrow { margin-bottom: 10px; }
 .ngm-key-title {
   font-family: var(--ngm-serif) !important; font-size: 1.45rem; font-weight: 400;
@@ -2016,8 +2012,8 @@ body .ngm-cal .monthViewType .EventListCalendar th {
 .ngm-key-swatch.special   { background: #8A5A7A; } /* Workshops & Special — plum */
 .ngm-key-swatch.board     { background: #4A5A6A; } /* Board & Admin — slate */
 .ngm-key-text h3 {
-  font-family: var(--ngm-serif) !important; font-size: 1.02rem; font-weight: 400;
-  color: var(--ngm-charcoal); text-transform: none !important; margin: 0 0 2px; line-height: 1.2;
+  font-family: var(--ngm-sans) !important; font-size: .95rem; font-weight: 600;
+  color: var(--ngm-charcoal); text-transform: none !important; margin: 0 0 3px; line-height: 1.25;
 }
 .ngm-key-text p {
   font-family: var(--ngm-sans); font-size: .8rem; color: var(--ngm-gray); line-height: 1.55; margin: 0;
@@ -5173,7 +5169,7 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar {
    the grid run to the right edge). Applies at every width, no media query. */
 body .WaGadgetEventsStateCalendar {
   max-width: 1080px !important;
-  margin-left: auto !important; margin-right: auto !important;
+  margin: 0 auto !important;   /* centre + no stray vertical gap above the Key */
   padding-left: 12px !important; padding-right: 12px !important;
   box-sizing: border-box !important;
 }
