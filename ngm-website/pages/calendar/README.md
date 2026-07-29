@@ -19,11 +19,13 @@ name, the abbreviation swap — is CSS, live-scoped under `#idViewSwitchersTable
 `.WaGadgetEventsStateCalendar` in `global.css` (the `.ngm-cal` class does NOT stick
 on the live gadget).
 
-### Weekday abbreviations (2 tiers)
-`desktop (>1024)` full name (`.ngm-wd-f`) · `everything ≤1024` — tablet AND
-phone — the 3-letter abbreviation (`.ngm-wd-a`, Sun Mon Tue…). The
-single-letter tier was dropped so the day labels stay readable at every
-width. The JS still emits `.ngm-wd-1`; it's simply never shown.
+### Weekday abbreviations (3 tiers)
+`desktop (>1024)` full name (`.ngm-wd-f`, Sunday…) · `tablet (601–1024)` the
+3-letter abbreviation (`.ngm-wd-a`, Sun Mon Tue…) · `mobile (≤600)` the single
+letter (`.ngm-wd-1`, S M T W T F S) — the 7 narrow phone columns can't fit 3
+letters. The JS emits all three spans; CSS shows one per breakpoint. Each shown
+tier is `display:inline-block` (a plain `inline` span was collapsing to 0px wide
+in WA's table, which blanked the letters).
 
 ### Key module
 `03-bottom.html` carries a `.ngm-key` module that sits INSIDE the calendar

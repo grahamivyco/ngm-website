@@ -5166,16 +5166,16 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar {
   border-radius: var(--ngm-radius-lg) !important;
   overflow: hidden !important;
 }
-/* The grid must NEVER touch the viewport edges. The page section
-   (.ngm-cal-body) pads the wide layouts; below the desktop breakpoint WA's
-   own responsive CSS full-bleeds gadgets (negative margins), so pin the
-   margins and add a small side padding on the gadget itself. */
-body .WaGadgetEventsStateCalendar { margin-left: 0 !important; margin-right: 0 !important; }
-@media (max-width: 1100px) {
-  body .WaGadgetEventsStateCalendar {
-    padding-left: 12px !important; padding-right: 12px !important;
-    box-sizing: border-box !important;
-  }
+/* The grid must NEVER touch the viewport edges — at ANY width. Cap the gadget
+   to the content width, centre it, and always keep a side gutter. This holds
+   even when WA full-bleeds the gadget (negative margins) below its breakpoint
+   OR when the wrapper fails to constrain it on wide desktops (which was letting
+   the grid run to the right edge). Applies at every width, no media query. */
+body .WaGadgetEventsStateCalendar {
+  max-width: 1080px !important;
+  margin-left: auto !important; margin-right: auto !important;
+  padding-left: 12px !important; padding-right: 12px !important;
+  box-sizing: border-box !important;
 }
 /* Equal columns everywhere: the date cells ship inline width:14% but the header
    cells have none — pin all of them to 1/7 so fixed layout distributes evenly.
@@ -5254,11 +5254,18 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHe
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-f { display: inline-block !important; white-space: nowrap !important; }
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a,
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 { display: none !important; }
-/* tablet AND mobile (≤1024): 3-letter abbreviation */
+/* tablet (601–1024): 3-letter abbreviation (Sun Mon Tue…) */
 @media (max-width: 1024px) {
   body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-f,
   body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 { display: none !important; }
   body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a { display: inline-block !important; white-space: nowrap !important; }
+}
+/* mobile (≤600): single letter (S M T W T F S) — the 7 narrow columns can't
+   fit 3 letters, so drop to one. Comes after the ≤1024 block so it wins. */
+@media (max-width: 600px) {
+  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-f,
+  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a { display: none !important; }
+  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 { display: inline-block !important; white-space: nowrap !important; }
 }
 /* ALWAYS keep the weekday row + cells visible, at EVERY width — WA's responsive
    CSS hides the day-of-week row at its own breakpoint (the OTHER half of the
