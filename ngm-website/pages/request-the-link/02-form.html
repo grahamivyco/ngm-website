@@ -1,9 +1,10 @@
 <!-- Canonical page markup — edit here, paste into the WA Custom-HTML gadget. Styling lives in global-css/global.css. This is the branded request form; it sits BETWEEN 01-top.html and 03-bottom.html (see 01-top.html for the full page structure and README.md for the Google Form + Apps Script wiring).
 
-     BEFORE IT WORKS — fill in the four placeholders (see README.md):
+     BEFORE IT WORKS — fill in the five placeholders (see README.md):
        __FORM_ACTION__    the hidden Google Form's /formResponse URL
        __ENTRY_NAME__     entry id for the Name question
        __ENTRY_EMAIL__    entry id for the Email question
+       __ENTRY_MEETING__  entry id for the "Which meeting?" question
        __ENTRY_MESSAGE__  entry id for the "Message" question
 -->
 <div class="ngm">
@@ -18,6 +19,15 @@
           <div class="ngm-rl-field">
             <label for="rlEmail">Email <span class="ngm-rl-opt">&mdash; required, we send the link here</span></label>
             <input id="rlEmail" name="__ENTRY_EMAIL__" type="email" autocomplete="email" required>
+          </div>
+          <div class="ngm-rl-field">
+            <label for="rlMeeting">Which meeting? <span class="ngm-rl-opt">&mdash; optional</span></label>
+            <select id="rlMeeting" name="__ENTRY_MEETING__">
+              <option value="">No preference / not sure yet</option>
+              <option>Daytime Stitch-In</option>
+              <option>Evening Stitch-In</option>
+              <option>Another Guild meeting</option>
+            </select>
           </div>
           <div class="ngm-rl-field">
             <label for="rlMessage">Message <span class="ngm-rl-opt">&mdash; edit if you like, or just send it</span></label>

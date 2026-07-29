@@ -15,9 +15,10 @@ Styling is in `global-css/global.css` (`.ngm-rl-*`).
 ## One-time setup
 
 ### 1. Make the hidden Google Form
-Google Form with three questions, in this order:
+Google Form with four questions, in this order:
 - **Name** — Short answer
 - **Email** — Short answer, **Required**
+- **Which meeting?** — Short answer (or Dropdown)
 - **Message** — Paragraph (holds the prefilled "I'm not a member…" note; the
   visitor can edit it before sending)
 
@@ -35,6 +36,7 @@ It's never shown to anyone, so don't bother styling it.
 | `__FORM_ACTION__` | the `/formResponse` URL |
 | `__ENTRY_NAME__` | Name question's `entry.…` id |
 | `__ENTRY_EMAIL__` | Email question's `entry.…` id |
+| `__ENTRY_MEETING__` | "Which meeting?" question's `entry.…` id |
 | `__ENTRY_MESSAGE__` | "Message" question's `entry.…` id |
 
 ### 4. Add the auto-reply (Apps Script)
