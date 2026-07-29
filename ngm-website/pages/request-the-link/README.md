@@ -18,11 +18,22 @@ Styling is in `global-css/global.css` (`.ngm-rl-*`).
 Google Form with four questions, in this order:
 - **Name** — Short answer
 - **Email** — Short answer, **Required**
-- **Which meeting?** — Short answer (or Dropdown)
+- **Which meeting?** — **Short answer** (recommended — see warning)
 - **Message** — Paragraph (holds the prefilled "I'm not a member…" note; the
   visitor can edit it before sending)
 
 It's never shown to anyone, so don't bother styling it.
+
+> **⚠️ Make "Which meeting?" a Short answer, not a Dropdown/Multiple choice.**
+> Google validates choice questions against their option list: any value it
+> doesn't recognise is rejected. Because our page posts through a hidden iframe
+> and never reads Google's response, a rejected submission is *silent* — the
+> visitor still sees "Check your inbox", but nothing is recorded and the
+> Apps Script auto-reply never runs, so **no link email is sent.** A Short
+> answer accepts whatever the branded dropdown sends, so the on-site
+> `<select>` options can say anything. (If you insist on a dropdown, its
+> options must match the `<option>`s in `02-form.html` **character for
+> character.**)
 
 ### 2. Get the form's action URL + entry ids
 - Open the live form → right-click → **View page source** → search `entry.` —

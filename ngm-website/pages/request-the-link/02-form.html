@@ -1,28 +1,33 @@
 <!-- Canonical page markup — edit here, paste into the WA Custom-HTML gadget. Styling lives in global-css/global.css. This is the branded request form; it sits BETWEEN 01-top.html and 03-bottom.html (see 01-top.html for the full page structure and README.md for the Google Form + Apps Script wiring).
 
-     BEFORE IT WORKS — fill in the five placeholders (see README.md):
-       __FORM_ACTION__    the hidden Google Form's /formResponse URL
-       __ENTRY_NAME__     entry id for the Name question
-       __ENTRY_EMAIL__    entry id for the Email question
-       __ENTRY_MEETING__  entry id for the "Which meeting?" question
-       __ENTRY_MESSAGE__  entry id for the "Message" question
+     WIRED to the live hidden Google Form (form id 1FAIpQLSdHUEpdX3DAQzMKyAnL6cCdAB5SRBMBeLgCbpwrXQAH3ZFr5A):
+       action           .../formResponse
+       Name             entry.1887642062
+       Email            entry.1387094665
+       Which meeting?   entry.692599503   (see NOTE below)
+       Message          entry.2137921043
+     NOTE: the "Which meeting?" question on the Google Form must be a SHORT
+     ANSWER (or its options must EXACTLY match the <option>s below). A
+     multiple-choice / dropdown question silently rejects any value it doesn't
+     recognise — the visitor still sees "Check your inbox", but nothing is
+     recorded and the auto-reply never fires. See README.md.
 -->
 <div class="ngm">
   <section class="ngm-sec ngm-sec-cream" style="padding-top:0">
     <div class="ngm-con" style="max-width:680px">
       <div class="ngm-rl-wrap" id="ngmRl">
-        <form class="ngm-rl-form" id="ngmRlForm" action="__FORM_ACTION__" method="post" target="ngmRlSink">
+        <form class="ngm-rl-form" id="ngmRlForm" action="https://docs.google.com/forms/d/e/1FAIpQLSdHUEpdX3DAQzMKyAnL6cCdAB5SRBMBeLgCbpwrXQAH3ZFr5A/formResponse" method="post" target="ngmRlSink">
           <div class="ngm-rl-field">
             <label for="rlName">Name <span class="ngm-rl-opt">&mdash; optional</span></label>
-            <input id="rlName" name="__ENTRY_NAME__" type="text" autocomplete="name">
+            <input id="rlName" name="entry.1887642062" type="text" autocomplete="name">
           </div>
           <div class="ngm-rl-field">
             <label for="rlEmail">Email <span class="ngm-rl-opt">&mdash; required, we send the link here</span></label>
-            <input id="rlEmail" name="__ENTRY_EMAIL__" type="email" autocomplete="email" required>
+            <input id="rlEmail" name="entry.1387094665" type="email" autocomplete="email" required>
           </div>
           <div class="ngm-rl-field">
             <label for="rlMeeting">Which meeting? <span class="ngm-rl-opt">&mdash; optional</span></label>
-            <select id="rlMeeting" name="__ENTRY_MEETING__">
+            <select id="rlMeeting" name="entry.692599503">
               <option value="">No preference / not sure yet</option>
               <option>Daytime Stitch-In</option>
               <option>Evening Stitch-In</option>
@@ -31,7 +36,7 @@
           </div>
           <div class="ngm-rl-field">
             <label for="rlMessage">Message <span class="ngm-rl-opt">&mdash; edit if you like, or just send it</span></label>
-            <textarea id="rlMessage" name="__ENTRY_MESSAGE__" rows="3">Hi! I'm not a member yet and I'd like to request the Zoom meeting link. Thank you!</textarea>
+            <textarea id="rlMessage" name="entry.2137921043" rows="3">Hi! I'm not a member yet and I'd like to request the Zoom meeting link. Thank you!</textarea>
           </div>
           <button type="submit" class="ngm-btn ngm-btn-green">Email me the Zoom link</button>
           <p class="ngm-rl-note">
