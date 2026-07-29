@@ -27,8 +27,13 @@ as a row in that sheet.
 
 ## Notes
 
-- Label is `Ideas or bugs on the new site?` on wider screens and shortens to
-  `Feedback` at ≤560px so the pill stays small on phones.
+- **Copy:** `Website Feedback & Ideas` on wider screens, shortening to
+  `Feedback` at ≤560px so the pill stays small on phones. Lightbulb icon.
+- **Color:** light sage (`#C7D4B6`) with deep-green text (`#35472F`).
+- **Docks above the footer:** a small script watches the footer (`#ngmf`) and
+  lifts the pill to rest just above it once the footer scrolls into view, so
+  it never overlaps the footer. Floats normally elsewhere. Falls back to the
+  plain fixed position if no footer is present.
 - `z-index` sits just below the header, so the open mobile menu covers it.
 - Self-contained on purpose (like `layout/header`, `layout/footer`,
   `layout/wrapper-reset`) — do **not** move its styles into `global.css`.
