@@ -6370,9 +6370,10 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
 /* Meeting tiles: lighter weight on the date line (was reading heavy). */
 .ngm-mini-when { font-weight: 400 !important; }
 
-/* Location: a church photo fills the panel; until the real URL is set, a
-   branded placeholder with the venue name shows instead of a broken image. */
-.ngm-loc-photo { position: relative; background: var(--ngm-sage-lt); }
+/* Location: a church photo fills the panel. While it loads, a plain pulsing
+   green panel shows behind it — NO venue name text and no broken-image icon —
+   matching the site-wide loader. The real photo fades in over it once loaded. */
+.ngm-loc-photo { position: relative; overflow: hidden; background: var(--ngm-sage-lt); }
 .ngm-loc-photo img {
   position: absolute; inset: 0; z-index: 1;
   width: 100%; height: 100%; object-fit: cover; display: block;
@@ -6380,12 +6381,16 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
      view at every size, rather than centering on the middle. */
   object-position: left center;
 }
+/* Pulsing-green load state (was the venue-name text placeholder). Text is
+   collapsed away so no words ever paint while the photo is loading. */
 .ngm-loc-photo-ph {
   position: absolute; inset: 0; z-index: 0;
-  display: flex; align-items: center; justify-content: center; text-align: center;
-  padding: 24px;
-  font-family: var(--ngm-serif); font-size: 1.15rem; line-height: 1.35;
-  color: var(--ngm-sage-dk);
+  background: var(--ngm-sage);
+  animation: ngm-load-pulse 1.6s ease-in-out infinite;
+  font-size: 0; color: transparent;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ngm-loc-photo-ph { animation: none !important; opacity: .4; }
 }
 /* Meeting-location address is a directions link — underlined. */
 .ngm-loc-dir, body a.ngm-loc-dir {
@@ -6569,10 +6574,12 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
   padding-bottom: 62.5%;
   background: var(--ngm-sage-lt);
 }
+/* Load state: a plain pulsing green panel — NO brand mark — matching the
+   site-wide loader. The real photo fades in over it once it has loaded. */
 .ngm-gcard-photo::after {
   content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-  background: var(--ngm-mark) center / 40px auto no-repeat;
-  animation: ngm-ph-pulse 1.6s ease-in-out infinite;
+  background: var(--ngm-sage);
+  animation: ngm-load-pulse 1.6s ease-in-out infinite;
 }
 .ngm-gcard-photo > img {
   position: absolute; inset: 0; z-index: 1;
@@ -6590,7 +6597,7 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
   box-shadow: 0 1px 5px rgba(0, 0, 0, .15);
 }
 @media (prefers-reduced-motion: reduce) {
-  .ngm-gcard-photo::after { animation: none; opacity: .4; }
+  .ngm-gcard-photo::after { animation: none !important; opacity: .4; }
 }
 
 /* ══════════════════════════════════════════════════════════════════
