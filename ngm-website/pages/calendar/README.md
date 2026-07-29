@@ -5,6 +5,7 @@
 2. `02-wa-gadget.txt` — native WA month-grid "Events Calendar", class `ngm-cal`
 3. `03-bottom.html` — Custom HTML — the **Key** module (INSIDE the calendar
    section, right under the month grid), then CLOSES the wrapper divs, then
+   the **Visit** section (same "Where we meet" block as the homepage), then
    the Join CTA
 
 ## Toolbar / weekday JS
@@ -30,18 +31,18 @@ section (before the wrapper divs close), styled as a compact card: "Key"
 title top-left, then the items. Swatches use the **exact** category colours
 the calendar paints on its event chips (the `--cat` map in global.css). If
 you add or recolour an event category, update both places. Beneath the items
-sits a "Want to add something to the calendar?" tile whose button links to
-the **Feedback & Ideas Google Form** — keep its href in sync with
-`layout/feedback-button/01-top.html`.
+sits a "Want to add something to the calendar?" tile — no button; the words
+"Feedback &amp; Ideas form" in the copy link to the **Feedback & Ideas Google
+Form**. Keep that href in sync with `layout/feedback-button/01-top.html`.
 
 ### Grid look
 No card/frame around the calendar — the month title, nav and grid sit on the
 plain page background. Vertical column dividers plus ONE thin horizontal
 line where each week row meets the next (the row's top border — no doubled
 inset line inside cells). Event chips are solid category tiles that **wrap**
-to the full title (rounded corners, never clipped). At ≤1024px the gadget
-carries its own 14px side gutters so the grid and the ‹/Today/› buttons
-never run edge-to-edge.
+to the full title (rounded corners, never clipped). At ≤1100px the gadget
+carries its own 12px side gutters (on top of the section padding) so the grid
+and the ‹/Today/› buttons never run edge-to-edge at any width.
 
 ## Status
 - ✅ All three blocks present. Paste order: `01-top` → WA Calendar gadget
