@@ -51,6 +51,8 @@ function onFormSubmit(e) {
   if (!email) return; // email required, but guard anyway
   MailApp.sendEmail({
     to: email,
+    replyTo: 'inquiry@needleworkguildmn.org', // replies go to the guild, not the account running the script
+    name: 'Needlework Guild of Minnesota',    // display name in the recipient's inbox
     subject: 'Your Zoom link — Needlework Guild of Minnesota',
     htmlBody: 'Hi ' + (name || 'there') + ',<br><br>'
             + 'Welcome! Here is the Zoom link for Guild meetings:<br><br>'
