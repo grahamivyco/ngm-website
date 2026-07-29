@@ -6409,6 +6409,28 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
    module); a touch of top spacing so it clears the hero copy. */
 .ngm-mtg-hero-zoom { margin-top: 28px; max-width: 440px; }
 
+/* Request-the-Link — branded native form. Posts to a hidden Google Form; the
+   auto-reply with the Zoom link is sent by Apps Script (see the page README).
+   Visitors only ever see this NGM form. */
+.ngm-rl-wrap { max-width: 480px; }
+.ngm-rl-form { display: grid; gap: 16px; }
+.ngm-rl-field { display: grid; gap: 6px; }
+.ngm-rl-field label { font-family: var(--ngm-sans); font-size: .82rem; font-weight: 600; color: var(--ngm-charcoal); }
+.ngm-rl-field label .ngm-rl-opt { font-weight: 400; color: var(--ngm-gray-lt); }
+.ngm-rl-field input, .ngm-rl-field select {
+  font-family: var(--ngm-sans); font-size: .95rem; color: var(--ngm-charcoal);
+  background: #fff; border: 1.5px solid var(--ngm-border); border-radius: 12px; padding: 12px 14px; width: 100%;
+}
+.ngm-rl-field input:focus, .ngm-rl-field select:focus { outline: none; border-color: var(--ngm-sage); box-shadow: 0 0 0 3px var(--ngm-sage-lt); }
+.ngm-rl-form .ngm-btn { margin-top: 4px; justify-content: center; }
+.ngm-rl-note { font-family: var(--ngm-sans); font-size: .78rem; color: var(--ngm-gray-lt); display: flex; align-items: center; gap: 7px; margin: 0; }
+.ngm-rl-note svg { width: 13px; height: 13px; flex: none; }
+.ngm-rl-thanks { display: none; }
+.ngm-rl-wrap.is-sent .ngm-rl-form { display: none; }
+.ngm-rl-wrap.is-sent .ngm-rl-thanks { display: block; }
+.ngm-rl-thanks h3 { font-family: var(--ngm-serif); font-weight: 400; color: var(--ngm-charcoal); font-size: 1.8rem; margin-bottom: 8px; }
+.ngm-rl-thanks p { font-family: var(--ngm-sans); color: var(--ngm-gray); line-height: 1.7; }
+
 /* ══════════════════════════════════════════════════════════════════
    SHARED INTERIOR MODULES (converge meetings/events onto the homepage
    design language). Appended last so they win in the single WA CSS tab.

@@ -2,23 +2,13 @@
 
      PAGE STRUCTURE (3 gadgets, top to bottom):
        1. This Custom-HTML gadget — the hero/intro.
-       2. A Wild Apricot FORM gadget (added in WA, not here) — the actual
-          form that collects the request and AUTO-SENDS the Zoom link.
-          Configure it with:
-            • Fields: Name, Email, "Which meeting?" (dropdown or free text).
-            • Autoresponder → this is what auto-sends the link. Turn it ON and
-              put the Zoom link + passcode in the autoresponder body (e.g.
-              "Here's your Zoom link for Guild meetings: …"). The requester
-              gets it the moment they submit — no volunteer step. (Board
-              decision, Jul 2026: auto-send, to save handling inquiry emails.)
-            • Send the link ONLY in the emailed autoresponder — NOT on the
-              on-screen confirmation — so the address they typed is the small
-              barrier that keeps drive-by trolls out.
-            • Notification email → inquiry@needleworkguildmn.org, so a human
-              still sees who requested it (and can follow up if needed).
-          Alternative (stronger, still automatic): make the form a Zoom
-          registration link instead — Zoom emails each person their own link
-          and you get a roster. Either works; the autoresponder is the quickest.
+       2. The 02-form.html Custom-HTML gadget — the branded NGM request form.
+          It posts to a HIDDEN Google Form; an Apps Script auto-emails the Zoom
+          link. Visitors only ever see our form, never Google. The link lives
+          in the script, not on the page, so it stays private. Full setup (make
+          the Google Form, get the entry ids, paste the Apps Script) is in
+          README.md. (Board decision, Jul 2026: auto-send, to save handling
+          inquiry emails.)
        3. The 03-bottom.html Custom-HTML gadget — the "what happens next" note.
 -->
 <div class="ngm">
