@@ -1,0 +1,24 @@
+<!-- Canonical page markup — this is the file to edit and to paste into the WA Custom-HTML gadget. Styling lives in global-css/global.css (pasted into the WA CSS tab; must be live in WA first). There is no separate self-contained version.
+
+     PAGE STRUCTURE (3 gadgets, top to bottom):
+       1. This Custom-HTML gadget — the hero/intro.
+       2. A Wild Apricot FORM gadget (added in WA, not here) — the actual
+          form that collects and sends the request. Configure it with:
+            • Fields: Name, Email, "Which meeting?" (dropdown or free text).
+            • Form settings → notification email → inquiry@needleworkguildmn.org
+              (whoever will reply with the Zoom link).
+            • Autoresponder → a short "Thanks — we'll email you the Zoom link
+              shortly" confirmation. Do NOT auto-send the link here: a person
+              replies with it, since it's the members' link for every meeting.
+       3. The 03-bottom.html Custom-HTML gadget — the "what happens next" note.
+-->
+<div class="ngm">
+  <section class="ngm-sec ngm-sec-cream">
+    <div class="ngm-con" style="max-width:680px">
+      <span class="ngm-eyebrow">Visit on Zoom</span>
+      <h1 class="ngm-h1">Request the meeting <em>Zoom link</em></h1>
+      <p class="ngm-lead">Not a member yet, but want to try a meeting online? Share a few details and a guild volunteer will email you the Zoom link &mdash; usually within a day. Your first visit is always free, and the same link works for every Guild meeting.</p>
+      <p style="font-family:var(--ngm-sans);font-size:.95rem;color:var(--ngm-gray-lt);line-height:1.7;margin-top:10px">Just want to come in person? You don&rsquo;t need the link &mdash; <a class="ngm-inline-link" href="/monthly-meetings">find a meeting and drop in&nbsp;&rarr;</a></p>
+    </div>
+  </section>
+</div>

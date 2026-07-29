@@ -15,7 +15,8 @@ paste into the WA Custom-HTML gadgets:
 2. `02-wa-gadget.txt`  → the NATIVE WA "Upcoming events" gadget
                           (add in WA, CSS class = `ngm-wa-events` — see file)
 3. `03-bottom.html` → Custom HTML gadget #2
-                          (Retreat → About → Meetings → Location → Join)
+                          (About → Meetings group cards → Events (Retreat tile
+                           + event cards) → Location → Join)
 
 These two files are the only page markup — they carry no embedded `<style>`
 block; all CSS lives in `global.css`.

@@ -6023,10 +6023,13 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li:hover {
   .ngm-hero-body, .ngm-lead, .ngm-upcoming-intro,
   .ngm-about-body, .ngm-about-body p, .ngm-pullquote,
   .ngm-join-body, .ngm-retreat-body, .ngm-groups-intro,
-  .ngm-address, .ngm-addr-label {
+  .ngm-address, .ngm-addr-label,
+  .ngm-visit-zoom-copy {
     text-align:center !important;
   }
   .ngm-pullquote { border-left:none !important; padding-left:0 !important; }
+  /* Hero meta (day/time + format badge) centres with the rest of the hero. */
+  .ngm-mt-meta { justify-content:center !important; }
 
   /* CTAs: stack, full width, centered */
   .ngm-hero-btns, .ngm-join-btns { flex-direction:column; align-items:stretch; }
@@ -6257,7 +6260,7 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li .date span {
   .ngm-upcoming-center { text-align: left; }
   .ngm-upcoming-center .ngm-upcoming-intro { margin-left: 0; margin-right: 0; }
 }
-body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 48px !important; padding-right: 48px !important; }
+body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 48px !important; padding-right: 48px !important; padding-bottom: 64px !important; }
 @media (max-width: 900px) { body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 28px !important; padding-right: 28px !important; } }
 @media (max-width: 600px) { body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 16px !important; padding-right: 16px !important; } }
 
@@ -6267,7 +6270,7 @@ body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 48px !important; padd
    no flexible gap). Applies wherever the two columns sit side by side
    (601px and up); below that the section stacks and the photo gets a set height. */
 @media (min-width: 601px) {
-  .ngm-loc-inner:has(.ngm-loc-head) { grid-template-rows: auto auto; align-items: start; }
+  .ngm-loc-inner:has(.ngm-loc-head) { grid-template-rows: auto auto; align-items: start; row-gap: 6px; }
   .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-head { margin-bottom: 14px; }
   .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-map { align-self: stretch; height: auto; }
 }
@@ -6367,9 +6370,10 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
 /* Meeting tiles: lighter weight on the date line (was reading heavy). */
 .ngm-mini-when { font-weight: 400 !important; }
 
-/* Location: a church photo fills the panel; until the real URL is set, a
-   branded placeholder with the venue name shows instead of a broken image. */
-.ngm-loc-photo { position: relative; background: var(--ngm-sage-lt); }
+/* Location: a church photo fills the panel. While it loads, a plain pulsing
+   green panel shows behind it — NO venue name text and no broken-image icon —
+   matching the site-wide loader. The real photo fades in over it once loaded. */
+.ngm-loc-photo { position: relative; overflow: hidden; background: var(--ngm-sage-lt); }
 .ngm-loc-photo img {
   position: absolute; inset: 0; z-index: 1;
   width: 100%; height: 100%; object-fit: cover; display: block;
@@ -6377,12 +6381,16 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
      view at every size, rather than centering on the middle. */
   object-position: left center;
 }
+/* Pulsing-green load state (was the venue-name text placeholder). Text is
+   collapsed away so no words ever paint while the photo is loading. */
 .ngm-loc-photo-ph {
   position: absolute; inset: 0; z-index: 0;
-  display: flex; align-items: center; justify-content: center; text-align: center;
-  padding: 24px;
-  font-family: var(--ngm-serif); font-size: 1.15rem; line-height: 1.35;
-  color: var(--ngm-sage-dk);
+  background: var(--ngm-sage);
+  animation: ngm-load-pulse 1.6s ease-in-out infinite;
+  font-size: 0; color: transparent;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ngm-loc-photo-ph { animation: none !important; opacity: .4; }
 }
 /* Meeting-location address is a directions link — underlined. */
 .ngm-loc-dir, body a.ngm-loc-dir {
@@ -6566,10 +6574,12 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
   padding-bottom: 62.5%;
   background: var(--ngm-sage-lt);
 }
+/* Load state: a plain pulsing green panel — NO brand mark — matching the
+   site-wide loader. The real photo fades in over it once it has loaded. */
 .ngm-gcard-photo::after {
   content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-  background: var(--ngm-mark) center / 40px auto no-repeat;
-  animation: ngm-ph-pulse 1.6s ease-in-out infinite;
+  background: var(--ngm-sage);
+  animation: ngm-load-pulse 1.6s ease-in-out infinite;
 }
 .ngm-gcard-photo > img {
   position: absolute; inset: 0; z-index: 1;
@@ -6587,5 +6597,52 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
   box-shadow: 0 1px 5px rgba(0, 0, 0, .15);
 }
 @media (prefers-reduced-motion: reduce) {
-  .ngm-gcard-photo::after { animation: none; opacity: .4; }
+  .ngm-gcard-photo::after { animation: none !important; opacity: .4; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   "JOINING BY VIDEO" — a subsection inside the "Where we meet" block, sat
+   under the physical-location details (separated by a rule). Reuses the
+   Member Hub's light-green .ngm-hub-zoom-module tiles, two side by side
+   (members / non-members), stacking on narrow screens.
+══════════════════════════════════════════════════════════════════ */
+.ngm-visit-zoom {
+  margin-top: 40px;
+  padding-top: 36px;
+  border-top: 1px solid var(--ngm-border);
+}
+.ngm-visit-zoom-copy {
+  font-family: var(--ngm-sans);
+  font-size: 1.0625rem;
+  color: var(--ngm-gray);
+  line-height: 1.75;
+  max-width: 640px;
+  margin: 8px 0 24px;
+}
+.ngm-videoband-tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 8px;
+}
+.ngm-videoband-tiles .ngm-hub-zoom-module { margin-top: 0; }
+/* Tile descriptions: lighter/quieter, like the muted event-date text. */
+.ngm-videoband-tiles .ngm-hub-zoom-tile-body p { color: var(--ngm-gray-lt); }
+@media (max-width: 700px) {
+  .ngm-videoband-tiles { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   CLICKABLE GROUP CARDS (meetings page). Each .ngm-gcard is an <a> to its
+   meeting page — reset the anchor styling and add a hover lift so the
+   whole card reads as clickable.
+══════════════════════════════════════════════════════════════════ */
+a.ngm-gcard {
+  text-decoration: none;
+  color: inherit;
+  transition: background-color .25s ease, border-color .25s ease, transform .2s ease, box-shadow .2s ease;
+}
+a.ngm-gcard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(62, 85, 56, .16);
 }

@@ -1,56 +1,173 @@
-<!-- Canonical page markup — this is the file to edit and to paste into the WA Custom-HTML gadget. Styling lives in global-css/global.css (pasted into the WA CSS tab; must be live in WA first). There is no separate self-contained version. -->
-<section class="ngm ngm-sec ngm-sec-white">
+<!-- Canonical page markup — this is the file to edit and to paste into the WA Custom-HTML gadget. Styling lives in global-css/global.css (pasted into the WA CSS tab; must be live in WA first). There is no separate self-contained version. This gadget sits BELOW the Wild Apricot upcoming-events gadget. -->
+<!-- EVENT CARD PHOTOS: each card's src points at a representative photo with an
+     onerror fallback. Swap in a real per-event photo URL from the WA file
+     manager when available. Each card links to its event page. -->
+<section class="ngm ngm-sec ngm-sec-white" id="ngm-events-groups">
   <div class="ngm-con">
-    <span class="ngm-eyebrow">Beyond the retreat</span>
-    <h2 class="ngm-h2">Other ways to <em>gather</em></h2>
-    <p class="ngm-lead">The Guild offers special programs that fall outside the regular monthly meetings — workshops and lectures with nationally known instructors, seasonal getaways, and more. <a class="ngm-inline-link" href="/calendar">See the full calendar&nbsp;&rarr;</a></p>
-    <div class="ngm-mini-grid">
-      <a class="ngm-mini" href="/japanese-embroidery">
-        <h3 class="ngm-mini-name">Traditional Japanese Embroidery</h3>
-        <div class="ngm-mini-when"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Twice a year</div>
-        <p class="ngm-mini-desc">Two workshops a year with Kay Stanis, certified by Kurenai Kai. Up to six phases are taught at once, but each must be taken in order. Open to anyone interested.</p>
+    <span class="ngm-eyebrow">Programs</span>
+    <h2 class="ngm-h2">Find your <em>event</em></h2>
+    <p class="ngm-groups-intro">Beyond the monthly meetings, the Guild gathers for signature events, workshops with visiting teachers, and seasonal getaways throughout the year. For dates and details, <a class="ngm-inline-link" href="/calendar">view the Guild calendar&nbsp;&rarr;</a></p>
+
+    <h3 class="ngm-groups-subhead">Featured event</h3>
+    <div class="ngm-retreat ngm-retreat-tile" style="margin:0 0 44px">
+      <div class="ngm-retreat-inner">
+        <div class="ngm-retreat-photo">
+          <img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade"
+            src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20Photos/Retreat%20Photo%20NGM%20Update.png"
+            alt="Guild members stitching at the annual retreat"
+            loading="eager"
+            onerror="this.onerror=null;this.src='https://needleworkguildmn.org/resources/Pictures/Website%20Update%20-%20Photos/Retreat%20Photo%202NGM.jpeg'"
+          >
+        </div>
+        <div class="ngm-retreat-copy">
+          <span class="ngm-retreat-eyebrow">Retreat 2026</span>
+          <h2 class="ngm-h2-dark">The biggest event <em>of the year</em></h2>
+          <div class="ngm-retreat-meta">
+            <div class="ngm-retreat-meta-item">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              August 12&ndash;15, 2026
+            </div>
+          </div>
+          <p class="ngm-retreat-body">The highlight of the guild year. Three days away with nationally recognized instructors, your favorite projects, and a whole community of stitchers — all in one place. It's exclusively for members, and it's worth being one.</p>
+          <a class="ngm-btn ngm-btn-white ngm-btn-sm ngm-btn-fit" href="/retreat">
+            Learn about the 2026 Retreat
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="ngm-groups-subhead">Signature events</h3>
+    <div class="ngm-groups-grid">
+      <a class="ngm-gcard" href="/calendar">
+        <div class="ngm-gcard-photo">
+          <img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade"
+            src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20-%20Photos/NGM%20Stitch%20.jpeg"
+            alt="A winter stitch-in getaway" loading="eager"
+            onerror="this.onerror=null;this.src='https://needleworkguildmn.org/resources/Pictures/Gallery%20Photos/IMG_0524.jpg'">
+        </div>
+        <div class="ngm-gcard-body">
+          <span class="ngm-gcard-body-badge">Winter getaway</span>
+          <h3>March to the Finish</h3>
+          <div class="ngm-gcard-when">Late winter</div>
+          <p>A winter stitch-in getaway &mdash; dedicated time to make progress, away from distractions.</p>
+        </div>
       </a>
-      <a class="ngm-mini" href="/workshops">
-        <h3 class="ngm-mini-name">Workshops &amp; Lectures</h3>
-        <div class="ngm-mini-when"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Throughout the year</div>
-        <p class="ngm-mini-desc">Sessions with nationally known instructors throughout the year, teaching new techniques and projects. Recent and upcoming teachers include Catherine Theron.</p>
+      <a class="ngm-gcard" href="/fall-finish">
+        <div class="ngm-gcard-photo">
+          <img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade"
+            src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20-%20Photos/NGM%20Retreat%20photo%20people%20smiling.jpeg"
+            alt="A relaxed autumn day of finishing projects" loading="eager"
+            onerror="this.onerror=null;this.src='https://needleworkguildmn.org/resources/Pictures/Gallery%20Photos/IMG_0504.jpg'">
+        </div>
+        <div class="ngm-gcard-body">
+          <span class="ngm-gcard-body-badge">Seasonal event</span>
+          <h3>A Fall Finish</h3>
+          <div class="ngm-gcard-when">November 7&ndash;8, 2026</div>
+          <p>A relaxed autumn day (or two) to finish projects and enjoy fellow stitchers.</p>
+        </div>
       </a>
-      <a class="ngm-mini" href="/fifth-tuesday">
-        <h3 class="ngm-mini-name">5th Tuesday Open Stitching</h3>
-        <div class="ngm-mini-when"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Months with a 5th Tuesday</div>
-        <p class="ngm-mini-desc">A bonus open-stitching session held on months that have a fifth Tuesday. Bring any project and stitch alongside fellow members — no program, just company.</p>
+    </div>
+
+    <h3 class="ngm-groups-subhead">Workshops &amp; programs</h3>
+    <div class="ngm-groups-grid">
+      <a class="ngm-gcard" href="/workshops">
+        <div class="ngm-gcard-photo">
+          <img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade"
+            src="https://needleworkguildmn.org/resources/Pictures/Workshop%20-%20Bendig%20-%20cropped.jpg"
+            alt="Members at a Guild workshop" loading="eager"
+            onerror="this.onerror=null;this.src='https://needleworkguildmn.org/resources/Pictures/Website%20Update%20-%20Photos/NGM%20Retreat%20Photo%203.jpeg'">
+        </div>
+        <div class="ngm-gcard-body">
+          <span class="ngm-gcard-body-badge">Workshops</span>
+          <h3>Workshops &amp; Lectures</h3>
+          <div class="ngm-gcard-when">Throughout the year</div>
+          <p>Sessions with nationally known instructors, teaching new techniques and projects.</p>
+        </div>
       </a>
-      <a class="ngm-mini" href="/calendar">
-        <h3 class="ngm-mini-name">March to the Finish</h3>
-        <div class="ngm-mini-when"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Winter getaway</div>
-        <p class="ngm-mini-desc">A winter getaway and stitch-in — dedicated time to make progress on projects, away from everyday distractions, in good company.</p>
+      <a class="ngm-gcard" href="/japanese-embroidery">
+        <div class="ngm-gcard-photo">
+          <img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade"
+            src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20-%20Photos/NGM%20Retreat%20Photo%203.jpeg"
+            alt="A Japanese embroidery workshop" loading="eager"
+            onerror="this.onerror=null;this.src='https://needleworkguildmn.org/resources/Pictures/Website%20Update%20-%20Photos/Retreat%20Photo%202NGM.jpeg'">
+        </div>
+        <div class="ngm-gcard-body">
+          <span class="ngm-gcard-body-badge">Workshop series</span>
+          <h3>Traditional Japanese Embroidery</h3>
+          <div class="ngm-gcard-when">Twice a year</div>
+          <p>Nihon shishu with Kay Stanis, certified by Kurenai Kai &mdash; up to six phases, taken in order.</p>
+        </div>
       </a>
-      <a class="ngm-mini" href="/calendar">
-        <h3 class="ngm-mini-name">A Fall Finish</h3>
-        <div class="ngm-mini-when"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Fall</div>
-        <p class="ngm-mini-desc">A seasonal stitching event to wrap up projects as the year winds down — a relaxed day of finishing and fellowship.</p>
-      </a>
-      <a class="ngm-mini" href="/calendar">
-        <h3 class="ngm-mini-name">Outreach Activities</h3>
-        <div class="ngm-mini-when"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Year-round</div>
-        <p class="ngm-mini-desc">Community outreach that shares the craft beyond the Guild — bringing needlework to new audiences and giving back.</p>
+      <a class="ngm-gcard" href="/fifth-tuesday">
+        <div class="ngm-gcard-photo">
+          <img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade"
+            src="https://needleworkguildmn.org/resources/Pictures/Gallery%20Photos/IMG_0504.jpg"
+            alt="Members at a Fifth Tuesday open-stitching session" loading="eager"
+            onerror="this.onerror=null;this.src='https://needleworkguildmn.org/resources/Pictures/Gallery%20Photos/IMG_0524.jpg'">
+        </div>
+        <div class="ngm-gcard-body">
+          <span class="ngm-gcard-body-badge">Bonus session</span>
+          <h3>5th Tuesday Open Stitching</h3>
+          <div class="ngm-gcard-when">Months with a 5th Tuesday</div>
+          <p>A bonus open-stitching session &mdash; bring any project, no program, just company.</p>
+        </div>
       </a>
     </div>
   </div>
 </section>
-<section class="ngm ngm-sec ngm-sec-linen">
-  <div class="ngm-con" style="text-align:left">
-    <p style="font-family:var(--ngm-sans);font-size:.82rem;color:var(--ngm-gray-lt);line-height:1.65;text-align:left">Some events are members-only; others are open to all. Most programs are free for members, though some workshops carry a small materials fee for kits and the Retreat has its own registration cost. Open any event for full details and to register &mdash; members should log in first so member pricing and access apply.</p>
+
+<section class="ngm ngm-sec ngm-sec-cream">
+  <div class="ngm-con">
+    <div class="ngm-loc-head" style="margin-bottom:26px">
+      <span class="ngm-eyebrow">Members</span>
+      <h2 class="ngm-h2" style="margin-bottom:0">Registering for <em>events</em></h2>
+    </div>
+    <div class="ngm-visit-zoom">
+      <span class="ngm-addr-label">Before you register</span>
+      <p class="ngm-visit-zoom-copy">Guild events are for members, and most offer member pricing. Log in before you register so member access and pricing apply &mdash; and if you&rsquo;re not a member yet, you&rsquo;re always welcome to join.</p>
+      <div class="ngm-videoband-tiles">
+        <a class="ngm-hub-zoom-module" href="/member/">
+          <span class="ngm-hub-zoom-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg></span>
+          <div class="ngm-hub-zoom-tile-body">
+            <h4>Member Hub</h4>
+            <p>Log in to register.</p>
+          </div>
+          <span class="ngm-hub-zoom-tile-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+        <a class="ngm-hub-zoom-module" href="/join">
+          <span class="ngm-hub-zoom-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></span>
+          <div class="ngm-hub-zoom-tile-body">
+            <h4>Join the Guild</h4>
+            <p>Not a member yet? It&rsquo;s $30 a year.</p>
+          </div>
+          <span class="ngm-hub-zoom-tile-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </div>
+    </div>
   </div>
 </section>
+
 <div class="ngm ngm-cta">
   <div class="ngm-cta-inner">
     <span class="ngm-eyebrow">Join</span>
     <h2 class="ngm-h2">Find your people<br>and your <em>stitching</em></h2>
-    <p>We'd love to have you. Come sit in on a Stitch-In, or any of our other monthly meetings — in person or on Zoom, whichever fits your calendar. Try as many as you're curious about. Once you've found the one (or three) that feel like yours, join us for just $30 a year.</p>
+    <p>We'd love to have you. Come sit in on a Stitch-In, join us for a workshop, or come away to the Retreat &mdash; whatever fits your calendar. Try as many as you're curious about. Once you've found your people, join us for just $30 a year.</p>
     <div class="ngm-cta-btns">
       <a class="ngm-btn ngm-btn-rose" href="/join">Join the Guild</a>
       <a class="ngm-btn ngm-btn-outline-rose" href="/calendar">See our calendar</a>
     </div>
   </div>
 </div>
+<script>
+/* Member Hub tile: logged-in members go straight to /member/; guests are
+   sent to log in and returned to /member/ afterwards. WA tags <body> with
+   publicContentView (guest) or memberContentView (logged in). */
+(function () {
+  if (document.body && document.body.classList.contains("publicContentView")) {
+    var login = "/Sys/Login/?ReturnUrl=" + encodeURIComponent("/member/");
+    var tiles = document.querySelectorAll('a.ngm-hub-zoom-module[href="/member/"]');
+    for (var i = 0; i < tiles.length; i++) { tiles[i].setAttribute("href", login); }
+  }
+})();
+</script>
