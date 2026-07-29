@@ -6475,37 +6475,47 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
    module); a touch of top spacing so it clears the hero copy. */
 .ngm-mtg-hero-zoom { margin-top: 28px; max-width: 440px; }
 
-/* Request-the-Link — branded native form. Posts to a hidden Google Form; the
-   auto-reply with the Zoom link is sent by Apps Script (see the page README).
-   Visitors only ever see this NGM form. */
-.ngm-rl-wrap { max-width: 480px; }
-.ngm-rl-form { display: grid; gap: 16px; }
-.ngm-rl-field { display: grid; gap: 6px; }
-.ngm-rl-field label { font-family: var(--ngm-sans); font-size: .82rem; font-weight: 600; color: var(--ngm-charcoal); }
-.ngm-rl-field label .ngm-rl-opt { font-weight: 400; color: var(--ngm-gray-lt); }
-.ngm-rl-field label .ngm-rl-req { color: #C0392B; font-weight: 700; margin-left: 2px; }
-.ngm-rl-field input, .ngm-rl-field select, .ngm-rl-field textarea {
-  font-family: var(--ngm-sans); font-size: .95rem; line-height: 1.4; color: var(--ngm-charcoal);
-  background: #fff; border: 1.5px solid var(--ngm-border); border-radius: 12px; padding: 12px 14px; width: 100%;
-  box-sizing: border-box; -webkit-appearance: none; appearance: none;
-}
-/* Custom dropdown caret, set in from the right edge so it isn't cramped. */
-.ngm-rl-field select {
-  padding-right: 44px;
+/* Request-the-Link — branded form, styled like the contact form (.ngm-cform /
+   .ngm-field outlined card). Posts to a hidden Google Form; the auto-reply with
+   the Zoom link is sent by Apps Script (see the page README). Visitors only ever
+   see this NGM form. */
+.ngm-rl-wrap { width: 100%; }
+.ngm-rl-opt { font-weight: 400; color: var(--ngm-gray-lt); }
+.ngm-rl-req { color: #C0392B; font-weight: 700; margin-left: 2px; }
+/* Dropdown: match the .ngm-field text inputs, plus a roomy custom caret. */
+.ngm-field select {
+  width: 100%; box-sizing: border-box;
+  font-family: var(--ngm-sans); font-size: .95rem; color: var(--ngm-charcoal);
+  background-color: var(--ngm-cream);
+  border: 1px solid var(--ngm-border); border-radius: var(--ngm-radius);
+  padding: 12px 50px 12px 14px;
+  -webkit-appearance: none; appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239A5C4A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat: no-repeat; background-position: right 16px center;
+  background-repeat: no-repeat; background-position: right 20px center;
+  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
-.ngm-rl-field textarea { min-height: 96px; line-height: 1.6; resize: vertical; }
-.ngm-rl-field input:focus, .ngm-rl-field select:focus, .ngm-rl-field textarea:focus { outline: none; border-color: var(--ngm-sage); box-shadow: 0 0 0 3px var(--ngm-sage-lt); }
-/* Small, left-aligned submit (grid item → shrink to content at the start). */
-.ngm-rl-form .ngm-btn { margin-top: 4px; justify-self: start; padding: 10px 20px; font-size: .85rem !important; }
-.ngm-rl-note { font-family: var(--ngm-sans); font-size: .78rem; color: var(--ngm-gray-lt); display: flex; align-items: center; gap: 7px; margin: 0; }
-.ngm-rl-note svg { width: 13px; height: 13px; flex: none; }
+.ngm-field select:focus { outline: none; background-color: #fff; border-color: var(--ngm-sage); box-shadow: 0 0 0 3px rgba(92,122,82,.14); }
+/* The prefilled message keeps the star/optional label pattern; small textarea. */
+.ngm-rl-form textarea { min-height: 92px; line-height: 1.6; }
+/* Form ⇄ thank-you swap. Thank-you is a soft-green tile with a checkmark. */
 .ngm-rl-thanks { display: none; }
 .ngm-rl-wrap.is-sent .ngm-rl-form { display: none; }
-.ngm-rl-wrap.is-sent .ngm-rl-thanks { display: block; }
+.ngm-rl-wrap.is-sent .ngm-rl-thanks {
+  display: block;
+  background: var(--ngm-sage-lt);
+  border: 1.5px solid #CBDCC2;
+  border-radius: var(--ngm-radius-lg);
+  box-shadow: var(--ngm-shm);
+  padding: 34px 30px;
+}
+.ngm-rl-check {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--ngm-sage-dk); color: #fff; margin-bottom: 14px;
+}
+.ngm-rl-check svg { width: 24px; height: 24px; }
 .ngm-rl-thanks h3 { font-family: var(--ngm-serif); font-weight: 400; color: var(--ngm-charcoal); font-size: 1.8rem; margin-bottom: 8px; }
-.ngm-rl-thanks p { font-family: var(--ngm-sans); color: var(--ngm-gray); line-height: 1.7; }
+.ngm-rl-thanks p { font-family: var(--ngm-sans); color: var(--ngm-gray); line-height: 1.7; margin: 0; }
 
 /* ══════════════════════════════════════════════════════════════════
    SHARED INTERIOR MODULES (converge meetings/events onto the homepage

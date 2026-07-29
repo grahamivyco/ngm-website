@@ -1,24 +1,169 @@
-<!-- Canonical page markup — this is the file to edit and to paste into the WA Custom-HTML gadget. Styling lives in global-css/global.css (pasted into the WA CSS tab; must be live in WA first). There is no separate self-contained version.
+<!-- Canonical page markup — edit here, paste into ONE Wild Apricot Custom-HTML gadget. Styling lives in global-css/global.css (pasted into the WA CSS tab; must be live in WA first). There is no separate self-contained version.
 
-     PAGE STRUCTURE (3 gadgets, top to bottom):
-       1. This Custom-HTML gadget — the hero/intro.
-       2. The 02-form.html Custom-HTML gadget — the branded NGM request form.
-          It posts to a HIDDEN Google Form; an Apps Script auto-emails the Zoom
-          link. Visitors only ever see our form, never Google. The link lives
-          in the script, not on the page, so it stays private. Full setup (make
-          the Google Form, get the entry ids, paste the Apps Script) is in
-          README.md. (Board decision, Jul 2026: auto-send, to save handling
-          inquiry emails.)
-       3. The 03-bottom.html Custom-HTML gadget — a "members already have it"
-          band (Member Hub button) + the Join CTA. (No "what happens next" note:
-          the form swaps to its own "Check your inbox" state on submit.)
+     WHOLE PAGE IN ONE GADGET (top to bottom):
+       1. Hero + form, two columns on desktop (copy left, form card right).
+          The form is styled like the contact-page form (.ngm-cform / .ngm-field
+          outlined card, small button). It posts to a HIDDEN Google Form; an
+          Apps Script auto-emails the Zoom link. Visitors only ever see our
+          form. On submit it swaps to a "Check your inbox" success tile.
+       2. Visit — come in person, with the address + church photo.
+       3. "Already a member?" — a full-width Member Hub tile.
+       4. Join CTA (same as the About page).
+
+     WIRED to the live hidden Google Form (form id 1FAIpQLSdHUEpdX3DAQzMKyAnL6cCdAB5SRBMBeLgCbpwrXQAH3ZFr5A):
+       action .../formResponse · Name entry.1887642062 · Email entry.1387094665
+       Which meeting? entry.692599503 · Message entry.2137921043
+     NOTE: the Google Form's "Which meeting?" question must be a SHORT ANSWER
+     (or its options must match the <option>s below exactly), or a choice
+     question will silently reject the submission and no email is sent.
 -->
 <div class="ngm">
+  <!-- ══ 1. HERO + FORM (two columns on desktop) ══ -->
   <section class="ngm-sec ngm-sec-cream">
-    <div class="ngm-con" style="max-width:680px">
-      <span class="ngm-eyebrow">Request the link</span>
-      <h1 class="ngm-h1">Stitch with us <em>online</em></h1>
-      <p class="ngm-lead">Not a member yet, but want to try a meeting online? Share a few details and we&rsquo;ll email you the Zoom link straight away. Your first visit is always free.</p>
+    <div class="ngm-con">
+      <div class="ngm-mt-hero-grid">
+        <div>
+          <span class="ngm-eyebrow">Request the link</span>
+          <h1 class="ngm-h1">Stitch with us <em>online</em></h1>
+          <p class="ngm-lead">Not a member yet, but want to try a meeting online? Share a few details and we&rsquo;ll email you the Zoom link straight away. Your first visit is always free.</p>
+        </div>
+        <div class="ngm-rl-wrap" id="ngmRl">
+          <form class="ngm-cform ngm-rl-form" id="ngmRlForm" action="https://docs.google.com/forms/d/e/1FAIpQLSdHUEpdX3DAQzMKyAnL6cCdAB5SRBMBeLgCbpwrXQAH3ZFr5A/formResponse" method="post" target="ngmRlSink">
+            <h2 class="ngm-cform-head">Request the Zoom link</h2>
+            <p class="ngm-cform-sub">Not a member yet? We&rsquo;ll email it right over &mdash; usually within a few minutes.</p>
+            <div class="ngm-field">
+              <label for="rlName">Name <span class="ngm-rl-opt">&mdash; optional</span></label>
+              <input id="rlName" name="entry.1887642062" type="text" placeholder="Your name" autocomplete="name">
+            </div>
+            <div class="ngm-field">
+              <label for="rlEmail">Email <span class="ngm-rl-req" aria-hidden="true">*</span></label>
+              <input id="rlEmail" name="entry.1387094665" type="email" placeholder="you@example.com" autocomplete="email" required>
+            </div>
+            <div class="ngm-field">
+              <label for="rlMeeting">Which meeting? <span class="ngm-rl-opt">&mdash; optional</span></label>
+              <select id="rlMeeting" name="entry.692599503">
+                <option value="">No preference / not sure yet</option>
+                <option>Daytime Counted Thread &amp; Needlepoint</option>
+                <option>Potpourri Stitchers</option>
+                <option>Evening Needlepointers</option>
+                <option>Daytime Stitch-In</option>
+                <option>Evening Stitch-In</option>
+                <option>Sunday Tea &amp; Stitch</option>
+                <option>Come &amp; Stitch</option>
+              </select>
+            </div>
+            <div class="ngm-field">
+              <label for="rlMessage">Message <span class="ngm-rl-opt">&mdash; edit if you like, or just send it</span></label>
+              <textarea id="rlMessage" name="entry.2137921043" rows="3">Hi! I'm not a member yet and I'd like to request the Zoom meeting link. Thank you!</textarea>
+            </div>
+            <button type="submit" class="ngm-btn ngm-btn-green ngm-btn-sm">Email me the Zoom link</button>
+          </form>
+          <div class="ngm-rl-thanks">
+            <span class="ngm-rl-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <h3>Check your inbox</h3>
+            <p>Your Zoom link is on its way to the email you gave us &mdash; it should land within a few minutes. Don&rsquo;t see it? Peek in your spam folder, or email <a class="ngm-inline-link" href="mailto:inquiry@needleworkguildmn.org">inquiry@needleworkguildmn.org</a> and we&rsquo;ll help. We can&rsquo;t wait to stitch with you.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
+
+  <!-- ══ 2. VISIT — come in person ══ -->
+  <section class="ngm ngm-sec ngm-sec-white">
+    <div class="ngm-con">
+      <div class="ngm-loc-inner">
+        <div class="ngm-loc-head">
+          <span class="ngm-eyebrow">Visit</span>
+          <h2 class="ngm-h2" style="margin-bottom:0">Or come <em>in person</em></h2>
+        </div>
+        <div class="ngm-loc-addr">
+          <p class="ngm-loc-note" style="font-size:1.0625rem;line-height:1.8;margin:0 0 20px">You don&rsquo;t have to meet with us online &mdash; you&rsquo;re just as welcome to join us in real life, no link needed. Here&rsquo;s where we gather in Bloomington. We&rsquo;d love to see you.</p>
+          <span class="ngm-addr-label">Meeting location</span>
+          <address class="ngm-address">
+            <a class="ngm-loc-dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=10715+Zenith+Ave+S+Bloomington+MN+55431" target="_blank" rel="noopener noreferrer">
+              Minnesota Valley Unitarian Universalist Fellowship<br>
+              10715 Zenith Avenue South<br>
+              Bloomington, MN 55431
+            </a>
+          </address>
+          <span class="ngm-addr-label">Mailing address</span>
+          <address class="ngm-address">
+            Needlework Guild of Minnesota<br>
+            PO Box 16506<br>
+            St. Louis Park, MN 55416
+          </address>
+        </div>
+        <div class="ngm-loc-map ngm-loc-photo">
+          <span class="ngm-loc-photo-ph">Minnesota Valley Unitarian<br>Universalist Fellowship</span>
+          <img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade"
+            src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20Photos/MVUUF.jpeg"
+            alt="Minnesota Valley Unitarian Universalist Fellowship — our meeting location in Bloomington"
+            loading="lazy"
+            onerror="this.style.display='none'">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 3. ALREADY A MEMBER? — full-width Member Hub tile ══ -->
+  <section class="ngm ngm-sec ngm-sec-cream">
+    <div class="ngm-con">
+      <div class="ngm-visit-zoom">
+        <span class="ngm-addr-label">Already a member?</span>
+        <p class="ngm-visit-zoom-copy">No need for the form &mdash; your Zoom link is waiting in the Member Hub. Log in and you&rsquo;re one click away.</p>
+        <div class="ngm-videoband-tiles" style="grid-template-columns:1fr">
+          <a class="ngm-hub-zoom-module" href="/member/">
+            <span class="ngm-hub-zoom-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span>
+            <div class="ngm-hub-zoom-tile-body">
+              <h4>Member Hub</h4>
+              <p>Log in for the Zoom link.</p>
+            </div>
+            <span class="ngm-hub-zoom-tile-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 4. JOIN CTA ══ -->
+  <div class="ngm ngm-about-cta">
+    <div class="ngm-about-cta-inner">
+      <span class="ngm-eyebrow">Join</span>
+      <h2 class="ngm-h2">Find your people<br>and your <em>stitching</em></h2>
+      <p>We&rsquo;d love to have you. Come sit in on a meeting &mdash; in person or on Zoom, whichever fits your calendar. Try as many as you&rsquo;re curious about. Once you&rsquo;ve found the one (or three) that feel like yours, join us for just $30 a year.</p>
+      <div class="ngm-about-cta-btns">
+        <a class="ngm-btn ngm-btn-rose" href="/join">Join the Guild</a>
+        <a class="ngm-btn ngm-btn-outline-rose" href="/calendar">See our calendar</a>
+      </div>
+    </div>
+  </div>
 </div>
+<!-- Hidden submit target: the Google Form's confirmation loads here, not the
+     page, so the visitor stays on-site and sees our own "Check your inbox". -->
+<iframe name="ngmRlSink" id="ngmRlSink" title="hidden form target" style="display:none" tabindex="-1" aria-hidden="true"></iframe>
+<script>
+(function(){
+  var wrap=document.getElementById('ngmRl'),
+      form=document.getElementById('ngmRlForm'),
+      sink=document.getElementById('ngmRlSink'),
+      sent=false;
+  if(form&&sink){
+    form.addEventListener('submit',function(){ sent=true; });
+    /* The hidden iframe fires 'load' on insert and again after the POST — only
+       the post-submit load flips to the thank-you state. */
+    sink.addEventListener('load',function(){
+      if(!sent)return; sent=false;
+      wrap.classList.add('is-sent');
+      wrap.scrollIntoView({behavior:'smooth',block:'center'});
+    });
+  }
+  /* Member Hub tile: logged-in members go to /member/; guests are sent to log
+     in and returned to /member/. WA tags <body> with publicContentView (guest)
+     or memberContentView (logged in). */
+  if (document.body && document.body.classList.contains("publicContentView")) {
+    var login = "/Sys/Login/?ReturnUrl=" + encodeURIComponent("/member/");
+    var tiles = document.querySelectorAll('a.ngm-hub-zoom-module[href="/member/"]');
+    for (var i = 0; i < tiles.length; i++) { tiles[i].setAttribute("href", login); }
+  }
+})();
+</script>

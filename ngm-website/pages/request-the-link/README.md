@@ -4,13 +4,17 @@ A branded NGM form that auto-emails the Zoom link. Visitors only ever see our
 form; a hidden Google Form + a short Apps Script do the sending. The link lives
 in the script, not on the page, so it stays off public view.
 
-## Files (paste each into its own Custom HTML gadget, top to bottom)
+## File (paste into ONE Custom HTML gadget)
 
-1. `01-top.html` — hero / intro
-2. `02-form.html` — the branded form (has 4 placeholders to fill, below)
-3. `03-bottom.html` — the "what happens next" note
+- `01-top.html` — the **whole page** in a single gadget: two-column hero + form
+  (copy left, contact-style outlined form card right), then Visit (come in
+  person), an "Already a member?" full-width Member Hub tile, and the Join CTA.
+  On submit the form swaps to a "Check your inbox" success tile.
 
-Styling is in `global-css/global.css` (`.ngm-rl-*`).
+The Google Form action URL and entry ids are already wired into `01-top.html`
+(form id `1FAIpQLSdHUEpdX3DAQzMKyAnL6cCdAB5SRBMBeLgCbpwrXQAH3ZFr5A`).
+Styling is in `global-css/global.css` (`.ngm-rl-*`, plus the shared `.ngm-cform`
+/ `.ngm-field` contact-form styles and `.ngm-mt-hero-grid`).
 
 ## One-time setup
 
