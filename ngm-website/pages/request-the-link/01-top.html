@@ -3,13 +3,22 @@
      PAGE STRUCTURE (3 gadgets, top to bottom):
        1. This Custom-HTML gadget — the hero/intro.
        2. A Wild Apricot FORM gadget (added in WA, not here) — the actual
-          form that collects and sends the request. Configure it with:
+          form that collects the request and AUTO-SENDS the Zoom link.
+          Configure it with:
             • Fields: Name, Email, "Which meeting?" (dropdown or free text).
-            • Form settings → notification email → inquiry@needleworkguildmn.org
-              (whoever will reply with the Zoom link).
-            • Autoresponder → a short "Thanks — we'll email you the Zoom link
-              shortly" confirmation. Do NOT auto-send the link here: a person
-              replies with it, since it's the members' link for every meeting.
+            • Autoresponder → this is what auto-sends the link. Turn it ON and
+              put the Zoom link + passcode in the autoresponder body (e.g.
+              "Here's your Zoom link for Guild meetings: …"). The requester
+              gets it the moment they submit — no volunteer step. (Board
+              decision, Jul 2026: auto-send, to save handling inquiry emails.)
+            • Send the link ONLY in the emailed autoresponder — NOT on the
+              on-screen confirmation — so the address they typed is the small
+              barrier that keeps drive-by trolls out.
+            • Notification email → inquiry@needleworkguildmn.org, so a human
+              still sees who requested it (and can follow up if needed).
+          Alternative (stronger, still automatic): make the form a Zoom
+          registration link instead — Zoom emails each person their own link
+          and you get a roster. Either works; the autoresponder is the quickest.
        3. The 03-bottom.html Custom-HTML gadget — the "what happens next" note.
 -->
 <div class="ngm">
@@ -17,7 +26,7 @@
     <div class="ngm-con" style="max-width:680px">
       <span class="ngm-eyebrow">Visit on Zoom</span>
       <h1 class="ngm-h1">Request the meeting <em>Zoom link</em></h1>
-      <p class="ngm-lead">Not a member yet, but want to try a meeting online? Share a few details and a guild volunteer will email you the Zoom link &mdash; usually within a day. Your first visit is always free, and the same link works for every Guild meeting.</p>
+      <p class="ngm-lead">Not a member yet, but want to try a meeting online? Share a few details and we&rsquo;ll email you the Zoom link straight away. Your first visit is always free, and the same link works for every Guild meeting.</p>
       <p style="font-family:var(--ngm-sans);font-size:.95rem;color:var(--ngm-gray-lt);line-height:1.7;margin-top:10px">Just want to come in person? You don&rsquo;t need the link &mdash; <a class="ngm-inline-link" href="/monthly-meetings">find a meeting and drop in&nbsp;&rarr;</a></p>
     </div>
   </section>
