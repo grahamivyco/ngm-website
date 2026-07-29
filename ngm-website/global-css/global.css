@@ -5414,6 +5414,29 @@ body .WaGadgetEventsStateDetails .eventInfoBoxValue span {
 body .WaGadgetEventsStateDetails .boxBodyContentContainer .inner {
   font-family: var(--ngm-sans) !important; color: var(--ngm-charcoal) !important; line-height: 1.7 !important;
 }
+/* links anywhere in the details gadget (Add to my calendar, links in the
+   description) → sage, quiet underline on hover. The Back link keeps its
+   own rule above. */
+body .WaGadgetEventsStateDetails a {
+  color: var(--ngm-sage-dk) !important; text-decoration: none !important;
+}
+body .WaGadgetEventsStateDetails a:hover { text-decoration: underline !important; }
+/* breathing room around the gadget so it doesn't hug the sandwich gadgets */
+body .WaGadgetEventsStateDetails { padding: 8px 0 28px !important; }
+
+/* ── Sandwich gadgets on the Event details system page ──
+   01-top.html: a slim strip holding the "Back to the full calendar" pill.
+   03-bottom.html: the Visit section (Member Hub / Request-the-Link tiles). */
+.ngm-evd-top {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 28px 24px 6px;
+}
+/* the Visit band spans edge-to-edge like other .ngm-sec sections; trim its
+   vertical padding a touch — it follows a text-heavy gadget. */
+.ngm-evd-visit { padding-top: 56px; padding-bottom: 64px; }
+.ngm-evd-visit .ngm-lead { max-width: 640px; }
+.ngm-evd-visit .ngm-videoband-tiles { max-width: 760px; margin-top: 26px; }
 
 /* ══════════════════════════════════════════════════════════════════
    MEMBER DIRECTORY  (.WaGadgetMemberDirectory)
