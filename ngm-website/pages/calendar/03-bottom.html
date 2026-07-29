@@ -1,15 +1,9 @@
-<!-- Canonical page markup — paste into the WA Custom-HTML gadget. Styling lives in global-css/global.css (pasted into the WA CSS tab; must be live in WA first). Closes .ngm-cal-body-inner + .ngm-cal-body (opened in 01-top.html), then the Key module + Join CTA. Paste order: 01-top.html -> WA Calendar gadget (class ngm-cal) -> 03-bottom.html -->
-  </div>
-</div>
+<!-- Canonical page markup — paste into the WA Custom-HTML gadget. Styling lives in global-css/global.css (pasted into the WA CSS tab; must be live in WA first). The KEY module lives INSIDE the calendar section (.ngm-cal-body-inner, opened in 01-top.html) so it reads as part of the calendar, then the wrappers close, then the Join CTA. Paste order: 01-top.html -> WA Calendar gadget (class ngm-cal) -> 03-bottom.html -->
 
-<section class="ngm ngm-sec ngm-sec-cream">
-  <div class="ngm-con">
-    <!-- KEY: a self-contained module whose swatches match the calendar's
+    <!-- KEY: title top-left, then the key items. Swatches match the calendar's
          event-chip colours, so the key reflects the calendar itself. -->
     <div class="ngm-key">
-      <span class="ngm-eyebrow">Key</span>
-      <h2 class="ngm-h2">Find what you <em>want</em></h2>
-      <p class="ngm-key-intro">Every event on the calendar is tinted by the group or type it belongs to. Use the key to spot the ones you're looking for.</p>
+      <h2 class="ngm-key-title">Key</h2>
       <div class="ngm-key-grid">
         <div class="ngm-key-item">
           <span class="ngm-key-swatch stitch-in"></span>
@@ -40,14 +34,17 @@
           <div class="ngm-key-text"><h3>Board &amp; Admin</h3><p>Guild business, deadlines &amp; submissions.</p></div>
         </div>
       </div>
-      <!-- email tile: submit something for the calendar (plain text + underlined email) -->
+      <!-- CTA tile: submit something for the calendar via the Feedback & Ideas
+           form. ►►► Keep this href in sync with layout/feedback-button/01-top.html
+           (the floating button) — both point at the same Google Form. ◄◄◄ -->
       <div class="ngm-key-cta">
         <h3>Want to add something to the calendar?</h3>
-        <p>Send your event details and we'll get it on the calendar — <a href="mailto:admin@needleworkguildmn.org">admin@needleworkguildmn.org</a>.</p>
+        <p>Guild event, program idea, or a date we missed — send it through the Feedback &amp; Ideas form and we'll get it on the calendar.</p>
+        <a class="ngm-btn ngm-btn-green" href="https://forms.gle/REPLACE-WITH-YOUR-GOOGLE-FORM-LINK" target="_blank" rel="noopener noreferrer">Share ideas &amp; feedback</a>
       </div>
     </div>
   </div>
-</section>
+</div>
 
 <div class="ngm ngm-cal-cta">
   <div class="ngm-cal-cta-inner">
