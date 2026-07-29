@@ -1,9 +1,45 @@
-<!-- Canonical page markup — this is the file to edit and to paste into the WA Custom-HTML gadget. Styling lives in global-css/global.css (pasted into the WA CSS tab; must be live in WA first). There is no separate self-contained version. This gadget sits BELOW the Wild Apricot form gadget (see 01-top.html for the full page structure). -->
+<!-- Canonical page markup — edit here, paste into the WA Custom-HTML gadget. Styling lives in global-css/global.css. Sits BELOW the form gadget (02-form.html). Two bands: (1) a "members already have it" band with just the Member Hub button, (2) the Join CTA (same as the About page). No "what happens next" note — the form swaps to its own "Check your inbox" state on submit. -->
 <div class="ngm">
-  <section class="ngm-sec ngm-sec-white">
-    <div class="ngm-con" style="max-width:680px">
-      <span class="ngm-addr-label">What happens next</span>
-      <p class="ngm-loc-note">Check your inbox &mdash; the Zoom link is on its way to you now. It works for every Guild meeting, so once you have it you can drop in on any of them. Don&rsquo;t see it in a few minutes? Check your spam folder, or email <a class="ngm-inline-link" href="mailto:inquiry@needleworkguildmn.org">inquiry@needleworkguildmn.org</a>.</p>
+  <section class="ngm ngm-sec ngm-sec-white">
+    <div class="ngm-con">
+      <div class="ngm-visit-zoom">
+        <span class="ngm-addr-label">Already a member?</span>
+        <p class="ngm-visit-zoom-copy">No need for the form &mdash; your Zoom link is waiting in the Member Hub. Log in and you&rsquo;re one click away.</p>
+        <div class="ngm-videoband-tiles" style="max-width:440px">
+          <a class="ngm-hub-zoom-module" href="/member/">
+            <span class="ngm-hub-zoom-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span>
+            <div class="ngm-hub-zoom-tile-body">
+              <h4>Member Hub</h4>
+              <p>Log in for the Zoom link.</p>
+            </div>
+            <span class="ngm-hub-zoom-tile-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
+
+  <div class="ngm ngm-about-cta">
+    <div class="ngm-about-cta-inner">
+      <span class="ngm-eyebrow">Join</span>
+      <h2 class="ngm-h2">Find your people<br>and your <em>stitching</em></h2>
+      <p>We&rsquo;d love to have you. Come sit in on a meeting &mdash; in person or on Zoom, whichever fits your calendar. Try as many as you&rsquo;re curious about. Once you&rsquo;ve found the one (or three) that feel like yours, join us for just $30 a year.</p>
+      <div class="ngm-about-cta-btns">
+        <a class="ngm-btn ngm-btn-rose" href="/join">Join the Guild</a>
+        <a class="ngm-btn ngm-btn-outline-rose" href="/calendar">See our calendar</a>
+      </div>
+    </div>
+  </div>
 </div>
+<script>
+/* Member Hub tile: logged-in members go straight to /member/; guests are sent
+   to log in and returned to /member/ afterwards. WA tags <body> with
+   publicContentView (guest) or memberContentView (logged in). */
+(function () {
+  if (document.body && document.body.classList.contains("publicContentView")) {
+    var login = "/Sys/Login/?ReturnUrl=" + encodeURIComponent("/member/");
+    var tiles = document.querySelectorAll('a.ngm-hub-zoom-module[href="/member/"]');
+    for (var i = 0; i < tiles.length; i++) { tiles[i].setAttribute("href", login); }
+  }
+})();
+</script>

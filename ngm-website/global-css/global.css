@@ -6483,13 +6483,22 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
 .ngm-rl-field { display: grid; gap: 6px; }
 .ngm-rl-field label { font-family: var(--ngm-sans); font-size: .82rem; font-weight: 600; color: var(--ngm-charcoal); }
 .ngm-rl-field label .ngm-rl-opt { font-weight: 400; color: var(--ngm-gray-lt); }
+.ngm-rl-field label .ngm-rl-req { color: #C0392B; font-weight: 700; margin-left: 2px; }
 .ngm-rl-field input, .ngm-rl-field select, .ngm-rl-field textarea {
-  font-family: var(--ngm-sans); font-size: .95rem; color: var(--ngm-charcoal);
+  font-family: var(--ngm-sans); font-size: .95rem; line-height: 1.4; color: var(--ngm-charcoal);
   background: #fff; border: 1.5px solid var(--ngm-border); border-radius: 12px; padding: 12px 14px; width: 100%;
+  box-sizing: border-box; -webkit-appearance: none; appearance: none;
+}
+/* Custom dropdown caret, set in from the right edge so it isn't cramped. */
+.ngm-rl-field select {
+  padding-right: 44px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239A5C4A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 16px center;
 }
 .ngm-rl-field textarea { min-height: 96px; line-height: 1.6; resize: vertical; }
 .ngm-rl-field input:focus, .ngm-rl-field select:focus, .ngm-rl-field textarea:focus { outline: none; border-color: var(--ngm-sage); box-shadow: 0 0 0 3px var(--ngm-sage-lt); }
-.ngm-rl-form .ngm-btn { margin-top: 4px; justify-content: center; }
+/* Small, left-aligned submit (grid item → shrink to content at the start). */
+.ngm-rl-form .ngm-btn { margin-top: 4px; justify-self: start; padding: 10px 20px; font-size: .85rem !important; }
 .ngm-rl-note { font-family: var(--ngm-sans); font-size: .78rem; color: var(--ngm-gray-lt); display: flex; align-items: center; gap: 7px; margin: 0; }
 .ngm-rl-note svg { width: 13px; height: 13px; flex: none; }
 .ngm-rl-thanks { display: none; }
