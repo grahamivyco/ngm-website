@@ -5,8 +5,8 @@
 2. `02-wa-gadget.txt` — native WA month-grid "Events Calendar", class `ngm-cal`
 3. `03-bottom.html` — Custom HTML — the **Key** module (INSIDE the calendar
    section, right under the month grid), then CLOSES the wrapper divs, then
-   the **Visit** section (same "Where we meet" block as the homepage), then
-   the Join CTA
+   the **Visit** section (same "Where we meet" block as the homepage). No Join
+   CTA (removed).
 
 ## Toolbar / weekday JS
 `01-top.html` ships a small inline `<script>` the calendar
