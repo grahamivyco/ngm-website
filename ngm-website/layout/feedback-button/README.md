@@ -15,15 +15,14 @@ Paste the whole `01-top.html` block into a Custom HTML gadget in the
 footer). It is `position:fixed`, so it floats no matter where the gadget
 sits in the layout.
 
-## The one thing to edit
+## Form link
 
-In `01-top.html`, replace the `href` on the `#ngmfb` link
-(`https://forms.gle/REPLACE-WITH-YOUR-GOOGLE-FORM-LINK`) with your Google
-Form's share link.
+The `href` on the `#ngmfb` link points at the live NGM feedback form:
+`https://forms.gle/BPz9eZNpCSxLpEmNA`. If the form is ever rebuilt or moved
+(e.g. re-created under a different owner), just swap that one `href`.
 
-**To wire the form to a Sheet:** open the Form → **Responses** tab →
-**Link to Sheets** → *Create new spreadsheet*. Every submission then lands
-as a row in that sheet.
+The form is linked to a Google Sheet (Form → **Responses** → **Link to
+Sheets**), so every submission lands as a row for tracking.
 
 ## Notes
 
