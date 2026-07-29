@@ -1468,6 +1468,17 @@ html body .WaGadgetEventsStateCalendar {
   box-shadow: none !important;
   overflow: visible !important;
 }
+/* Tablet & phone: a small gutter on BOTH sides of the calendar block, carried
+   on the gadget itself so it holds even where WA's responsive CSS makes the
+   gadget full-bleed (the page-wrapper padding wasn't reaching it). This also
+   insets the ‹ / Today / › toolbar row, so on phones the buttons no longer
+   stretch edge-to-edge of the viewport. */
+@media (max-width: 1024px) {
+  html body div.WaGadgetEventsStateCalendar,
+  html body .WaGadgetEventsStateCalendar {
+    padding: 8px 14px 0 !important;
+  }
+}
 /* WA renders an inner gadget wrapper + the form; keep them transparent so the
    linen card shows through behind the toolbar (title + nav), not just the
    padding frame. */
@@ -1950,18 +1961,26 @@ body .ngm-cal .monthViewType .EventListCalendar th {
   border-color: var(--ngm-linen-dk) !important;
 }
 /* ── KEY / LEGEND MODULE ──────────────────────────────────────────────
-   A self-contained card ("module") that sits below the calendar. Its
-   swatches use the EXACT category colours the calendar paints on its event
-   chips (see the `--cat` mapping in the month-grid block), and they're the
-   same rounded-rectangle shape as the chips, so the key genuinely reflects
-   the calendar. Carries its own single-word eyebrow ("Legend"). */
+   A self-contained card ("module") that now lives INSIDE the calendar
+   section (.ngm-cal-body-inner, right under the month grid) — not in a
+   separate page band. Compact: a small serif title top-LEFT, then the key
+   items. Its swatches use the EXACT category colours the calendar paints
+   on its event chips (see the `--cat` mapping in the month-grid block). */
 .ngm-key {
   max-width: 1080px; margin: 0 auto;
   background: #fff; border: 1px solid var(--ngm-border);
   border-radius: var(--ngm-radius-lg); box-shadow: var(--ngm-sh);
-  padding: 34px 36px;
+  padding: 30px 32px;
 }
+/* breathing room: tight to the month grid above, clear air below before the
+   next band (the Visit section / Join CTA). */
+.ngm-cal-body-inner .ngm-key { margin-top: 14px; margin-bottom: 16px; }
 .ngm-key .ngm-eyebrow { margin-bottom: 10px; }
+.ngm-key-title {
+  font-family: var(--ngm-serif) !important; font-size: 1.45rem; font-weight: 400;
+  color: var(--ngm-charcoal); text-transform: none !important;
+  text-align: left; margin: 0 0 20px; line-height: 1.2;
+}
 .ngm-key .ngm-h2 { margin-bottom: 8px; }
 .ngm-key-intro {
   font-family: var(--ngm-sans); font-size: .95rem; color: var(--ngm-gray);
@@ -1991,12 +2010,14 @@ body .ngm-cal .monthViewType .EventListCalendar th {
 .ngm-key-text p {
   font-family: var(--ngm-sans); font-size: .8rem; color: var(--ngm-gray); line-height: 1.55; margin: 0;
 }
-/* email tile — a highlighted tile INSIDE the key module for submitting events.
-   Plain text (no button); the email is an underlined inline link in the copy. */
+/* "Want to add something?" tile — a highlighted tile INSIDE the key module
+   that sends people to the Feedback & Ideas form (same form as the floating
+   feedback button). Copy + a small pill button. */
 .ngm-key-cta {
-  margin-top: 26px; padding: 18px 22px;
+  margin-top: 26px; padding: 20px 22px;
   background: var(--ngm-sage-lt); border-radius: var(--ngm-radius);
 }
+.ngm-key-cta .ngm-btn { margin-top: 14px; }
 .ngm-key-cta h3 {
   font-family: var(--ngm-serif) !important; font-size: 1.12rem; font-weight: 400;
   color: var(--ngm-charcoal); text-transform: none !important; margin: 0 0 4px; line-height: 1.2;
@@ -2004,13 +2025,14 @@ body .ngm-cal .monthViewType .EventListCalendar th {
 .ngm-key-cta p {
   font-family: var(--ngm-sans); font-size: .9rem; color: var(--ngm-gray); line-height: 1.6; margin: 0;
 }
-.ngm-key-cta a,
-body .ngm-key-cta a {
+/* inline links in the tile copy (NOT the pill button) */
+.ngm-key-cta a:not(.ngm-btn),
+body .ngm-key-cta a:not(.ngm-btn) {
   color: var(--ngm-sage-dk) !important; font-weight: 500 !important;
   text-decoration: underline !important; text-underline-offset: 2px !important;
 }
-.ngm-key-cta a:hover,
-body .ngm-key-cta a:hover { color: var(--ngm-sage) !important; }
+.ngm-key-cta a:not(.ngm-btn):hover,
+body .ngm-key-cta a:not(.ngm-btn):hover { color: var(--ngm-sage) !important; }
 @media (max-width: 560px) {
   .ngm-key { padding: 26px 22px; }
   .ngm-key-grid { grid-template-columns: 1fr; }
@@ -2107,6 +2129,10 @@ body .WaPlaceHolderWide > div { padding-top: 0 !important; padding-bottom: 0 !im
   line-height: 1.8; max-width: 620px; margin-bottom: 40px;
 }
 .ngm-groups-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+/* Larger viewports: three cards to a row */
+@media (min-width: 1100px) {
+  .ngm-groups-grid { grid-template-columns: repeat(3, 1fr); }
+}
 .ngm-groups-grid + .ngm-groups-subhead { margin-top: 44px; }
 /* Day-part subhead that labels each block of group cards
    (Daytime / Evening / Weekend). */
@@ -2145,9 +2171,12 @@ body .WaPlaceHolderWide > div { padding-top: 0 !important; padding-bottom: 0 !im
 }
 .ngm-gcard-when.public { color: #2D4A7A; }
 .ngm-gcard-when.paused { color: var(--ngm-gray-lt); }
+/* Description copy — SAME spec as the member hub's volunteer-role cards
+   (.ngm-hub-vrole p). font-weight pinned to 400 because the whole card is an
+   <a> and WA's theme bolds anchor text. */
 .ngm-gcard p {
-  font-family: var(--ngm-sans); font-size: .875rem; color: var(--ngm-gray);
-  line-height: 1.75; flex: 1; margin-bottom: 16px;
+  font-family: var(--ngm-sans); font-size: .8rem; font-weight: 400; color: var(--ngm-gray);
+  line-height: 1.55; flex: 1; margin-bottom: 16px;
 }
 .ngm-gcard-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; }
 .ngm-gcard-tag {
@@ -2231,7 +2260,6 @@ body .WaPlaceHolderWide > div { padding-top: 0 !important; padding-bottom: 0 !im
   .ngm-mtg-hero-copy p { max-width: 100%; }
   .ngm-mtg-hero-photo { height: 240px; }
   .ngm-sec { padding: 60px 28px; }
-  .ngm-groups-grid { grid-template-columns: 1fr; }
   .ngm-loc-grid { grid-template-columns: 1fr; gap: 32px; }
   .ngm-mtg-cta { padding: 60px 28px; }
   .ngm-groups-intro { max-width: 100% !important; }
@@ -2240,6 +2268,8 @@ body .WaPlaceHolderWide > div { padding-top: 0 !important; padding-bottom: 0 !im
 @media (max-width: 560px) {
   .ngm-mtg-hero { padding: 44px 18px 44px; }
   .ngm-sec { padding: 48px 18px; }
+  /* single column only on phones — tablets keep two across */
+  .ngm-groups-grid { grid-template-columns: 1fr; }
   .ngm-mtg-cta { padding: 48px 18px; }
   body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 18px !important; padding-right: 18px !important; }
 }
@@ -5050,10 +5080,15 @@ body .WaGadgetContactProfile table.genericListTable .grayedOut { color: var(--ng
 body .WaGadgetContactProfile .typeTextLabelNoData { color: var(--ngm-gray-lt) !important; font-style: italic !important; }
 
 /* hero: two columns — welcome copy left, action tiles right */
-.ngm-hub-hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;max-width:1080px;margin:0 auto;}
-.ngm-hub-hero-copy p{max-width:none;}
-.ngm-hub-hero-side{display:flex;flex-direction:column;gap:14px;}
-@media(max-width:900px){.ngm-hub-hero-grid{grid-template-columns:1fr;gap:30px;}}
+.ngm-hub-hero-grid{display:grid;grid-template-columns:1fr auto;gap:44px;align-items:start;max-width:1080px;margin:0 auto;}
+.ngm-hub-hero-copy p{max-width:640px;}
+.ngm-hub-hero-side{display:flex;flex-direction:column;gap:14px;align-items:flex-end;}
+@media(max-width:900px){.ngm-hub-hero-grid{grid-template-columns:1fr;gap:22px;}.ngm-hub-hero-side{order:-1;align-items:flex-start;}}
+/* Profile pill — a small pill in the hero's top-right corner (icon + "Profile"),
+   replacing the old wide "Profile & details" card. */
+.ngm-hub-pill{display:inline-flex;align-items:center;gap:9px;padding:11px 20px;background:#fff;border:1px solid var(--ngm-border);border-radius:100px;text-decoration:none!important;color:var(--ngm-charcoal);font-family:var(--ngm-sans);font-size:.9rem;font-weight:600;white-space:nowrap;box-shadow:var(--ngm-sh);transition:border-color .18s,box-shadow .18s,transform .18s;}
+.ngm-hub-pill svg{width:18px;height:18px;color:var(--ngm-sage-dk);flex-shrink:0;}
+.ngm-hub-pill:hover{border-color:var(--ngm-sage);box-shadow:0 10px 24px rgba(0,0,0,.08);transform:translateY(-2px);color:var(--ngm-charcoal);}
 /* single meeting Zoom link, as a light tile (not a dark band) */
 .ngm-hub-zoom-tile{display:flex;align-items:center;gap:16px;background:var(--ngm-sage-lt);border:1px solid #DBE6D5;border-radius:var(--ngm-radius-lg);padding:20px 22px;text-decoration:none!important;color:var(--ngm-charcoal);transition:transform .18s,box-shadow .18s;}
 .ngm-hub-zoom-tile:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(62,85,56,.14);}
@@ -5061,7 +5096,7 @@ body .WaGadgetContactProfile .typeTextLabelNoData { color: var(--ngm-gray-lt) !i
 .ngm-hub-zoom-tile-icon svg{width:26px;height:26px;}
 .ngm-hub-zoom-tile-body{flex:1;min-width:0;}
 .ngm-hub-zoom-tile-body h4{font-family:var(--ngm-serif)!important;font-size:1.3rem;font-weight:400;color:var(--ngm-charcoal);margin:0 0 3px;line-height:1.2;}
-.ngm-hub-zoom-tile-body p{font-family:var(--ngm-sans);font-size:.83rem;color:var(--ngm-gray);line-height:1.5;margin:0;}
+.ngm-hub-zoom-tile-body p{font-family:var(--ngm-sans);font-size:.8rem;font-weight:400;color:var(--ngm-gray);line-height:1.5;margin:0;}
 .ngm-hub-zoom-tile-go{flex-shrink:0;color:var(--ngm-sage-dk);display:inline-flex;transition:transform .18s;}
 .ngm-hub-zoom-tile-go svg{width:20px;height:20px;}
 .ngm-hub-zoom-tile:hover .ngm-hub-zoom-tile-go{transform:translateX(3px);}
@@ -5071,10 +5106,6 @@ body .WaGadgetContactProfile .typeTextLabelNoData { color: var(--ngm-gray-lt) !i
 .ngm-hub-zoom-module .ngm-hub-zoom-tile-body h4{margin:0;}
 .ngm-hub-zoom-module:hover .ngm-hub-zoom-tile-go{transform:translateX(3px);}
 /* profile card sits on the right of the hero; subtext lists the profile tabs */
-.ngm-hub-acard-tabs{display:block;font-family:var(--ngm-sans);font-size:.78rem;color:var(--ngm-gray-lt);line-height:1.55;margin-top:7px;}
-.ngm-hub-hero-side .ngm-hub-acard{align-items:flex-start;}
-.ngm-hub-hero-side .ngm-hub-acard-icon{margin-top:2px;}
-.ngm-hub-hero-side .ngm-hub-acard-go{align-self:center;}
 /* volunteer positions — compact board written out on the hub */
 .ngm-hub-vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px;}
 .ngm-hub-vrole{background:#fff;border:1px solid var(--ngm-border);border-radius:var(--ngm-radius);padding:16px 18px;}
@@ -5123,6 +5154,17 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar {
   border-radius: var(--ngm-radius-lg) !important;
   overflow: hidden !important;
 }
+/* The grid must NEVER touch the viewport edges. The page section
+   (.ngm-cal-body) pads the wide layouts; below the desktop breakpoint WA's
+   own responsive CSS full-bleeds gadgets (negative margins), so pin the
+   margins and add a small side padding on the gadget itself. */
+body .WaGadgetEventsStateCalendar { margin-left: 0 !important; margin-right: 0 !important; }
+@media (max-width: 1100px) {
+  body .WaGadgetEventsStateCalendar {
+    padding-left: 12px !important; padding-right: 12px !important;
+    box-sizing: border-box !important;
+  }
+}
 /* Equal columns everywhere: the date cells ship inline width:14% but the header
    cells have none — pin all of them to 1/7 so fixed layout distributes evenly.
    min-width:0 + box-sizing lets them shrink so the 7 columns always fit the
@@ -5154,32 +5196,34 @@ html body .WaGadgetEventsStateCalendar .monthViewType table.EventListCalendar td
 body .WaGadgetEventsStateCalendar table.EventListCalendar td,
 body .WaGadgetEventsStateCalendar table.EventListCalendar th {
   border: 0 !important; border-right: 1px solid var(--ngm-linen-dk) !important;
+  background-image: none !important;   /* some WA themes paint an extra separator as a background gradient */
 }
 body .WaGadgetEventsStateCalendar table.EventListCalendar td:last-child,
 body .WaGadgetEventsStateCalendar table.EventListCalendar th:last-child { border-right: 0 !important; }
-/* Thin horizontal line above EVERY week row — the simple, robust rule (the one
-   that reliably rendered before). The header's border-bottom is dropped (below),
-   so the first week row's own top border becomes the line under the green weekday
-   bar — clean single 1px lines throughout, no fragile `+ :has()` combinator. */
-body .WaGadgetEventsStateCalendar table.EventListCalendar tr:has(a.calendarDate) > td {
+/* Thin horizontal line above EVERY week row — ONE line where a week row ends
+   and the next begins (the row's own top border; there is no separate line
+   drawn inside the cells). Scoped to DIRECT children of the month table
+   (`> tbody > tr`) so it can never hit the nested date-number table inside a
+   cell — that nested table's <tr> also contains a.calendarDate, and matching
+   it was what painted the doubled, inset "second line" in every cell. */
+body .WaGadgetEventsStateCalendar table.EventListCalendar > tbody > tr:has(a.calendarDate) > td {
   border-top: 1px solid var(--ngm-linen-dk) !important;
 }
-/* …but NOT inside the nested date-number table (its <tr> also contains
-   .calendarDate, so the rule above drew a stray line inside each cell).
-   Strip ALL borders on nested-table cells — no inner horizontal line and
-   no stray vertical line after the date number. */
+/* Belt & suspenders: strip ALL borders on the nested date-number table and its
+   cells — no inner horizontal line and no stray vertical line after the date. */
+body .WaGadgetEventsStateCalendar table.EventListCalendar table,
 body .WaGadgetEventsStateCalendar table.EventListCalendar table td,
-body .WaGadgetEventsStateCalendar table.EventListCalendar table th {
+body .WaGadgetEventsStateCalendar table.EventListCalendar table th,
+body .WaGadgetEventsStateCalendar table.EventListCalendar table tr {
   border: 0 !important;
 }
 /* day-of-week header band — REAL weekday text. This theme does NOT paint CSS
    ::after generated content on table cells, so we can't inject abbreviations in
-   CSS. Instead the page gadget's JS wraps each header in three spans —
-   <span class="ngm-wd-f">Sunday</span><span class="ngm-wd-a">Sun</span><span
-   class="ngm-wd-1">S</span> — and we swap which one shows by width (display
-   toggling works without pseudo content):
-     desktop (>1024) = full name,  tablet (601–1024) = 3-letter,
-     mobile (≤600)   = single letter. */
+   CSS. Instead the page gadget's JS wraps each header in spans —
+   <span class="ngm-wd-f">Sunday</span><span class="ngm-wd-a">Sun</span> (plus a
+   legacy .ngm-wd-1 that's never shown) — and we swap which one shows by width
+   (display toggling works without pseudo content):
+     desktop (>1024) = full name,  everything ≤1024 = 3-letter abbreviation. */
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader {
   background: var(--ngm-sage-lt) !important; color: var(--ngm-sage-dk) !important;
   font-family: var(--ngm-sans) !important; font-weight: 600 !important;
@@ -5187,28 +5231,22 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHe
   font-size: .66rem !important; text-align: center !important; padding: 9px 2px !important;
   border-bottom: 0 !important;   /* the first week row's top border is the line under the green bar (avoids a doubled line) */
 }
-/* THREE tiers, each showing ONE JS-emitted span as REAL text at normal size:
-   .ngm-wd-f full · .ngm-wd-a 3-letter · .ngm-wd-1 single letter. No ::first-letter
-   / font-size:0 trick — that was rendering BLANK in the live gadget, which (at the
-   ≤600 mobile width, the same width the toolbar stacks) is exactly why the letters
-   vanished. The single-letter span is real text the JS reliably emits, so it can't
-   go blank. Breakpoints match the toolbar: full >1024 · 3-letter 601–1024 ·
-   1-letter ≤600. If the JS hasn't run, WA's own full text node still shows. */
+/* TWO tiers, each showing ONE JS-emitted span as REAL text at normal size:
+   .ngm-wd-f full · .ngm-wd-a 3-letter. No ::first-letter / font-size:0 trick —
+   that was rendering BLANK in the live gadget, which is exactly why the letters
+   vanished. Breakpoints match the toolbar: full name >1024 · 3-letter
+   abbreviation (Sun Mon Tue …) everywhere ≤1024, INCLUDING phones — the
+   abbreviation must stay readable at every width, so the single-letter tier
+   was dropped. If the JS hasn't run, WA's own full text node still shows. */
 /* desktop base: full name */
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-f { display: inline !important; }
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a,
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 { display: none !important; }
-/* tablet (≤1024): 3-letter */
+/* tablet AND mobile (≤1024): 3-letter abbreviation */
 @media (max-width: 1024px) {
   body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-f,
   body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 { display: none !important; }
   body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a { display: inline !important; }
-}
-/* mobile (≤600): single letter — the real .ngm-wd-1 span, full size (never blank) */
-@media (max-width: 600px) {
-  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-f,
-  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a { display: none !important; }
-  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 { display: inline !important; }
 }
 /* ALWAYS keep the weekday row + cells visible, at EVERY width — WA's responsive
    CSS hides the day-of-week row at its own breakpoint (the OTHER half of the
@@ -5307,7 +5345,7 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar .eventTime {
    plain text over the cell and only the coloured chip has a fill.
    The chips are <a> and are unaffected. */
 body .WaGadgetEventsStateCalendar table.EventListCalendar td div {
-  background: none !important; background-color: transparent !important;
+  background: none !important; background-color: transparent !important; background-image: none !important;
   border: 0 !important; box-shadow: none !important; border-radius: 0 !important;
 }
 /* Let the wrapper div around each event grow with the now-multi-line chip —
@@ -5414,6 +5452,29 @@ body .WaGadgetEventsStateDetails .eventInfoBoxValue span {
 body .WaGadgetEventsStateDetails .boxBodyContentContainer .inner {
   font-family: var(--ngm-sans) !important; color: var(--ngm-charcoal) !important; line-height: 1.7 !important;
 }
+/* links anywhere in the details gadget (Add to my calendar, links in the
+   description) → sage, quiet underline on hover. The Back link keeps its
+   own rule above. */
+body .WaGadgetEventsStateDetails a {
+  color: var(--ngm-sage-dk) !important; text-decoration: none !important;
+}
+body .WaGadgetEventsStateDetails a:hover { text-decoration: underline !important; }
+/* breathing room around the gadget so it doesn't hug the sandwich gadgets */
+body .WaGadgetEventsStateDetails { padding: 8px 0 28px !important; }
+
+/* ── Sandwich gadgets on the Event details system page ──
+   01-top.html: a slim strip holding the "Back to the full calendar" pill.
+   03-bottom.html: the Visit section (Member Hub / Request-the-Link tiles). */
+.ngm-evd-top {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 28px 24px 6px;
+}
+/* the Visit band spans edge-to-edge like other .ngm-sec sections; trim its
+   vertical padding a touch — it follows a text-heavy gadget. */
+.ngm-evd-visit { padding-top: 56px; padding-bottom: 64px; }
+.ngm-evd-visit .ngm-lead { max-width: 640px; }
+.ngm-evd-visit .ngm-videoband-tiles { max-width: 760px; margin-top: 26px; }
 
 /* ══════════════════════════════════════════════════════════════════
    MEMBER DIRECTORY  (.WaGadgetMemberDirectory)
@@ -6414,6 +6475,28 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
    module); a touch of top spacing so it clears the hero copy. */
 .ngm-mtg-hero-zoom { margin-top: 28px; max-width: 440px; }
 
+/* Request-the-Link — branded native form. Posts to a hidden Google Form; the
+   auto-reply with the Zoom link is sent by Apps Script (see the page README).
+   Visitors only ever see this NGM form. */
+.ngm-rl-wrap { max-width: 480px; }
+.ngm-rl-form { display: grid; gap: 16px; }
+.ngm-rl-field { display: grid; gap: 6px; }
+.ngm-rl-field label { font-family: var(--ngm-sans); font-size: .82rem; font-weight: 600; color: var(--ngm-charcoal); }
+.ngm-rl-field label .ngm-rl-opt { font-weight: 400; color: var(--ngm-gray-lt); }
+.ngm-rl-field input, .ngm-rl-field select {
+  font-family: var(--ngm-sans); font-size: .95rem; color: var(--ngm-charcoal);
+  background: #fff; border: 1.5px solid var(--ngm-border); border-radius: 12px; padding: 12px 14px; width: 100%;
+}
+.ngm-rl-field input:focus, .ngm-rl-field select:focus { outline: none; border-color: var(--ngm-sage); box-shadow: 0 0 0 3px var(--ngm-sage-lt); }
+.ngm-rl-form .ngm-btn { margin-top: 4px; justify-content: center; }
+.ngm-rl-note { font-family: var(--ngm-sans); font-size: .78rem; color: var(--ngm-gray-lt); display: flex; align-items: center; gap: 7px; margin: 0; }
+.ngm-rl-note svg { width: 13px; height: 13px; flex: none; }
+.ngm-rl-thanks { display: none; }
+.ngm-rl-wrap.is-sent .ngm-rl-form { display: none; }
+.ngm-rl-wrap.is-sent .ngm-rl-thanks { display: block; }
+.ngm-rl-thanks h3 { font-family: var(--ngm-serif); font-weight: 400; color: var(--ngm-charcoal); font-size: 1.8rem; margin-bottom: 8px; }
+.ngm-rl-thanks p { font-family: var(--ngm-sans); color: var(--ngm-gray); line-height: 1.7; }
+
 /* ══════════════════════════════════════════════════════════════════
    SHARED INTERIOR MODULES (converge meetings/events onto the homepage
    design language). Appended last so they win in the single WA CSS tab.
@@ -6656,35 +6739,24 @@ a.ngm-gcard:hover {
 .ngm-social {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 28px;
+  gap: 2px;
+  margin-top: 24px;
+  margin-left: -10px;      /* optical: align first icon to the text edge */
   flex-wrap: wrap;
-}
-.ngm-social-label {
-  font-family: var(--ngm-sans);
-  font-size: .78rem;
-  font-weight: 600;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--ngm-gray-lt);
-  margin-right: 2px;
 }
 .ngm-social-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: #fff;
-  border: 1px solid var(--ngm-border);
+  width: 46px;
+  height: 46px;
+  border-radius: 11px;
   color: var(--ngm-sage-dk);
-  transition: background-color .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+  transition: background-color .2s ease, color .2s ease, transform .2s ease;
 }
-.ngm-social-btn svg { width: 20px; height: 20px; display: block; }
+.ngm-social-btn svg { width: 27px; height: 27px; display: block; }
 .ngm-social-btn:hover {
   background: var(--ngm-sage-dk);
-  border-color: var(--ngm-sage-dk);
   color: #fff;
   transform: translateY(-2px);
 }
@@ -6694,13 +6766,15 @@ a.ngm-gcard:hover {
   background: #fff;
   border: 1px solid var(--ngm-border);
   border-radius: var(--ngm-radius-lg);
-  box-shadow: var(--ngm-shx);
-  padding: 32px;
+  box-shadow: var(--ngm-shm);
+  padding: 30px;
 }
 .ngm-cform-head {
   font-family: var(--ngm-serif) !important;
   font-size: 1.65rem;
   font-weight: 400;
+  text-transform: none !important;
+  letter-spacing: normal !important;
   color: var(--ngm-charcoal);
   margin: 0 0 6px;
   line-height: 1.2;
@@ -6734,7 +6808,7 @@ a.ngm-gcard:hover {
   padding: 12px 14px;
   transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
-.ngm-field textarea { min-height: 120px; resize: vertical; }
+.ngm-field textarea { min-height: 118px; resize: vertical; }
 .ngm-field input:focus,
 .ngm-field textarea:focus {
   outline: none;
@@ -6744,16 +6818,22 @@ a.ngm-gcard:hover {
 }
 .ngm-field input::placeholder,
 .ngm-field textarea::placeholder { color: var(--ngm-gray-lt); }
-.ngm-cform .ngm-btn { width: 100%; justify-content: center; margin-top: 6px; }
-.ngm-cform-note {
-  font-family: var(--ngm-sans);
-  font-size: .82rem;
-  color: var(--ngm-gray-lt);
-  line-height: 1.6;
-  margin: 16px 0 0;
-  text-align: center;
+/* Send button: small + left-aligned on desktop/tablet, full-width on mobile. */
+.ngm-cform .ngm-btn { width: auto; margin-top: 4px; }
+@media (max-width: 600px) {
+  .ngm-cform .ngm-btn { width: 100%; justify-content: center; }
 }
-.ngm-cform-note a { color: var(--ngm-sage-dk); text-decoration: none; border-bottom: 1px solid rgba(62, 85, 56, .3); }
 @media (max-width: 820px) {
   .ngm-cform { padding: 26px; }
+}
+
+/* Volunteer board (contact page): keep every role/email row uniform — one line
+   on desktop, and all rows stack to two lines together below the breakpoint,
+   rather than some wrapping and some not. Scoped to the contact board so the
+   Member Hub roster is unaffected. */
+.ngm-cboard .ngm-hub-ltop { flex-wrap: nowrap; gap: 6px 14px; }
+.ngm-cboard .ngm-hub-lrole { white-space: nowrap; }
+.ngm-cboard .ngm-hub-lemail { white-space: nowrap; }
+@media (max-width: 1080px) {
+  .ngm-cboard .ngm-hub-ltop { flex-direction: column; align-items: flex-start; gap: 3px; }
 }
