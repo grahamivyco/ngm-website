@@ -6656,22 +6656,22 @@ a.ngm-gcard:hover {
 .ngm-social {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
   margin-top: 24px;
-  margin-left: -8px;       /* optical: align first icon to the text edge */
+  margin-left: -10px;      /* optical: align first icon to the text edge */
   flex-wrap: wrap;
 }
 .ngm-social-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  width: 46px;
+  height: 46px;
+  border-radius: 11px;
   color: var(--ngm-sage-dk);
   transition: background-color .2s ease, color .2s ease, transform .2s ease;
 }
-.ngm-social-btn svg { width: 22px; height: 22px; display: block; }
+.ngm-social-btn svg { width: 27px; height: 27px; display: block; }
 .ngm-social-btn:hover {
   background: var(--ngm-sage-dk);
   color: #fff;
@@ -6680,8 +6680,8 @@ a.ngm-gcard:hover {
 
 /* Branded inquiry form — hero right column, in place of the photo. */
 .ngm-cform {
-  background: var(--ngm-linen);
-  border: 1px solid var(--ngm-linen-dk);
+  background: #fff;
+  border: 1px solid var(--ngm-border);
   border-radius: var(--ngm-radius-lg);
   box-shadow: var(--ngm-shm);
   padding: 30px;
@@ -6719,7 +6719,7 @@ a.ngm-gcard:hover {
   font-family: var(--ngm-sans);
   font-size: .95rem;
   color: var(--ngm-charcoal);
-  background: #fff;
+  background: var(--ngm-cream);
   border: 1px solid var(--ngm-border);
   border-radius: var(--ngm-radius);
   padding: 12px 14px;
