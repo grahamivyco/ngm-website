@@ -6,9 +6,9 @@
           outlined card, small button). It posts to a HIDDEN Google Form; an
           Apps Script auto-emails the Zoom link. Visitors only ever see our
           form. On submit it swaps to a "Check your inbox" success tile.
-       2. Visit — come in person, with the address + church photo.
-       3. "Already a member?" — a full-width Member Hub tile.
-       4. Join CTA (same as the About page).
+       2. Visit — come in person (address + church photo) + an "Already a
+          member?" full-width Member Hub tile, in the same section.
+       3. Join CTA (same as the About page).
 
      WIRED to the live hidden Google Form (form id 1FAIpQLSdHUEpdX3DAQzMKyAnL6cCdAB5SRBMBeLgCbpwrXQAH3ZFr5A):
        action .../formResponse · Name entry.1887642062 · Email entry.1387094665
@@ -29,10 +29,8 @@
         </div>
         <div class="ngm-rl-wrap" id="ngmRl">
           <form class="ngm-cform ngm-rl-form" id="ngmRlForm" action="https://docs.google.com/forms/d/e/1FAIpQLSdHUEpdX3DAQzMKyAnL6cCdAB5SRBMBeLgCbpwrXQAH3ZFr5A/formResponse" method="post" target="ngmRlSink">
-            <h2 class="ngm-cform-head">Request the Zoom link</h2>
-            <p class="ngm-cform-sub">Not a member yet? We&rsquo;ll email it right over &mdash; usually within a few minutes.</p>
             <div class="ngm-field">
-              <label for="rlName">Name <span class="ngm-rl-opt">&mdash; optional</span></label>
+              <label for="rlName">Name</label>
               <input id="rlName" name="entry.1887642062" type="text" placeholder="Your name" autocomplete="name">
             </div>
             <div class="ngm-field">
@@ -40,7 +38,7 @@
               <input id="rlEmail" name="entry.1387094665" type="email" placeholder="you@example.com" autocomplete="email" required>
             </div>
             <div class="ngm-field">
-              <label for="rlMeeting">Which meeting? <span class="ngm-rl-opt">&mdash; optional</span></label>
+              <label for="rlMeeting">Which meeting?</label>
               <select id="rlMeeting" name="entry.692599503">
                 <option value="">No preference / not sure yet</option>
                 <option>Daytime Counted Thread &amp; Needlepoint</option>
@@ -53,10 +51,10 @@
               </select>
             </div>
             <div class="ngm-field">
-              <label for="rlMessage">Message <span class="ngm-rl-opt">&mdash; edit if you like, or just send it</span></label>
+              <label for="rlMessage">Message</label>
               <textarea id="rlMessage" name="entry.2137921043" rows="3">Hi! I'm not a member yet and I'd like to request the Zoom meeting link. Thank you!</textarea>
             </div>
-            <button type="submit" class="ngm-btn ngm-btn-green ngm-btn-sm">Email me the Zoom link</button>
+            <button type="submit" class="ngm-btn ngm-btn-green">Email me the Zoom link</button>
           </form>
           <div class="ngm-rl-thanks">
             <span class="ngm-rl-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
@@ -102,12 +100,7 @@
             onerror="this.style.display='none'">
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ══ 3. ALREADY A MEMBER? — full-width Member Hub tile ══ -->
-  <section class="ngm ngm-sec ngm-sec-cream">
-    <div class="ngm-con">
+      <!-- Already a member? — full-width Member Hub tile, same section as Visit -->
       <div class="ngm-visit-zoom">
         <span class="ngm-addr-label">Already a member?</span>
         <p class="ngm-visit-zoom-copy">No need for the form &mdash; your Zoom link is waiting in the Member Hub. Log in and you&rsquo;re one click away.</p>

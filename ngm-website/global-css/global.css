@@ -6482,6 +6482,10 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
 .ngm-rl-wrap { width: 100%; }
 .ngm-rl-opt { font-weight: 400; color: var(--ngm-gray-lt); }
 .ngm-rl-req { color: #C0392B; font-weight: 700; margin-left: 2px; }
+/* Lock input/select heights so focus (border + shadow only) never reflows the
+   page — fixes the field "shrinking" and page jump on click. */
+.ngm-rl-form .ngm-field input,
+.ngm-rl-form .ngm-field select { height: 50px; }
 /* Dropdown: match the .ngm-field text inputs, plus a roomy custom caret. */
 .ngm-field select {
   width: 100%; box-sizing: border-box;
@@ -6510,12 +6514,16 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
 }
 .ngm-rl-check {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 46px; height: 46px; border-radius: 50%;
-  background: var(--ngm-sage-dk); color: #fff; margin-bottom: 14px;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--ngm-sage-dk); color: #fff; margin-bottom: 12px;
 }
-.ngm-rl-check svg { width: 24px; height: 24px; }
+.ngm-rl-check svg { width: 17px; height: 17px; }
 .ngm-rl-thanks h3 { font-family: var(--ngm-serif); font-weight: 400; color: var(--ngm-charcoal); font-size: 1.8rem; margin-bottom: 8px; }
 .ngm-rl-thanks p { font-family: var(--ngm-sans); color: var(--ngm-gray); line-height: 1.7; margin: 0; }
+/* Tablet & mobile: the two columns stack — center the form / thank-you card. */
+@media (max-width: 820px) {
+  .ngm-rl-wrap { max-width: 460px; margin-left: auto; margin-right: auto; }
+}
 
 /* ══════════════════════════════════════════════════════════════════
    SHARED INTERIOR MODULES (converge meetings/events onto the homepage
