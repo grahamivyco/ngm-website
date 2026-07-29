@@ -5274,6 +5274,16 @@ html body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalen
 html body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 {
   visibility: visible !important; opacity: 1 !important;
 }
+/* Defensive: some WA themes blank the weekday text on a CHILD element
+   (<nobr>/<span>/<a>) at narrow widths via font-size:0 / color:transparent —
+   which the cell-level font-size can't reach, so the green header band shows
+   but the letters vanish. Force EVERY descendant of the header cell to inherit
+   the cell's size and colour so the text can't be zeroed out. Does not touch
+   `display`, so the .ngm-wd-* tier swap (full ⇄ 3-letter) still works. */
+html body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader * {
+  font-size: inherit !important; color: inherit !important;
+  line-height: inherit !important; visibility: visible !important; opacity: 1 !important;
+}
 /* day cells — tight padding so the coloured tiles use nearly the full cell */
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarItemDefault,
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarItemInactive,
