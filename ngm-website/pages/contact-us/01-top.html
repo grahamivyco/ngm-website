@@ -4,126 +4,151 @@
     <div class="ngm-con">
       <div class="ngm-mt-hero-grid">
         <div>
-          <span class="ngm-eyebrow">Get in touch</span>
+          <span class="ngm-eyebrow">Contact</span>
           <h1 class="ngm-h1">We&rsquo;d love to <em>hear from you</em></h1>
-          <div class="ngm-mt-meta"><span class="ngm-mt-when">Members and visitors always welcome</span></div>
-          <p class="ngm-lead">Whether you have a question about membership, want to visit a meeting, or just want to say hello &mdash; we'd love to hear from you.</p>
-          <div class="ngm-mt-hero-btns">
-            <a class="ngm-btn ngm-btn-green" href="mailto:inquiry@needleworkguildmn.org">Email us</a>
-            <a class="ngm-btn ngm-btn-outline" href="/monthly-meetings">Visit a meeting</a>
+          <p class="ngm-lead">Have a question about membership, want to visit a meeting, or just want to say hello? Send us a note with the form, or email us any time at <a href="mailto:inquiry@needleworkguildmn.org">inquiry@needleworkguildmn.org</a> &mdash; we read every message and will get back to you soon.</p>
+          <div class="ngm-social">
+            <span class="ngm-social-label">Follow along</span>
+            <a class="ngm-social-btn" href="https://www.facebook.com/NeedleworkGuildMN" target="_blank" rel="noopener noreferrer" aria-label="Needlework Guild of Minnesota on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987H7.898v-2.89h2.54V9.797c0-2.507 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg></a>
+            <a class="ngm-social-btn" href="https://www.instagram.com/needleworkguildmn/" target="_blank" rel="noopener noreferrer" aria-label="Needlework Guild of Minnesota on Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
           </div>
         </div>
-        <div class="ngm-mt-photo" style="min-height:380px;padding:0;overflow:hidden;border:none"><img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade" src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20-%20Photos/NGM%20Retreat%20photo%20people%20smiling.jpeg" alt="Guild members smiling together" loading="eager" style="width:100%;height:100%;object-fit:cover;border-radius:var(--ngm-radius-lg)"></div>
+        <!-- BRANDED INQUIRY FORM — visual placeholder that matches the site while the
+             live form gadget is pending authorization. Once the form is approved,
+             replace the fields inside <form> with the embedded form gadget (keep the
+             .ngm-cform wrapper so the branded card styling stays). -->
+        <div class="ngm-cform">
+          <h2 class="ngm-cform-head">Send us a message</h2>
+          <p class="ngm-cform-sub">Fill in a few details and we&rsquo;ll be in touch.</p>
+          <form class="ngm-cform-form" action="#" method="post" novalidate>
+            <div class="ngm-field">
+              <label for="ngm-cf-name">Name</label>
+              <input id="ngm-cf-name" name="name" type="text" placeholder="Your name" autocomplete="name">
+            </div>
+            <div class="ngm-field">
+              <label for="ngm-cf-email">Email</label>
+              <input id="ngm-cf-email" name="email" type="email" placeholder="you@example.com" autocomplete="email">
+            </div>
+            <div class="ngm-field">
+              <label for="ngm-cf-subject">Subject</label>
+              <input id="ngm-cf-subject" name="subject" type="text" placeholder="What&rsquo;s this about?">
+            </div>
+            <div class="ngm-field">
+              <label for="ngm-cf-message">Message</label>
+              <textarea id="ngm-cf-message" name="message" placeholder="How can we help?"></textarea>
+            </div>
+            <button class="ngm-btn ngm-btn-green" type="submit">Send message</button>
+          </form>
+          <p class="ngm-cform-note">Prefer email? Write to <a href="mailto:inquiry@needleworkguildmn.org">inquiry@needleworkguildmn.org</a>.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="ngm-sec ngm-sec-white">
-    <div class="ngm-con">
-      <span class="ngm-eyebrow">Reach us</span>
-      <h2 class="ngm-h2">How to <em>get in touch</em></h2>
-      <div class="ngm-mt-details">
-        <div class="ngm-mt-detail ngm-mt-cbox ngm-cbox-email"><span class="ngm-mt-cbox-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><div><h3>Email</h3><p><a href="mailto:inquiry@needleworkguildmn.org">inquiry@needleworkguildmn.org</a></p></div></div>
-        <div class="ngm-mt-detail ngm-mt-cbox ngm-cbox-addr"><span class="ngm-mt-cbox-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span><div><h3>Mailing address</h3><p>Needlework Guild of Minnesota<br>PO Box 16506<br>St. Louis Park, MN 55416</p></div></div>
-        <a class="ngm-mt-detail ngm-mt-cbox ngm-cbox-fb" href="https://www.facebook.com/NeedleworkGuildMN" target="_blank" rel="noopener noreferrer" aria-label="Needlework Guild of Minnesota on Facebook"><span class="ngm-mt-cbox-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987H7.898v-2.89h2.54V9.797c0-2.507 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg></span><div><h3>Facebook</h3><p>Follow the Guild</p></div></a>
-        <a class="ngm-mt-detail ngm-mt-cbox ngm-cbox-ig" href="https://www.instagram.com/needleworkguildmn/" target="_blank" rel="noopener noreferrer" aria-label="Needlework Guild of Minnesota on Instagram"><span class="ngm-mt-cbox-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></span><div><h3>Instagram</h3><p>See our stitching</p></div></a>
-      </div>
-    </div>
-  </section>
-
-  <section class="ngm-sec ngm-sec-linen">
-    <div class="ngm-con">
+  <section class="ngm ngm-hub-band ngm-hub-white">
+    <div class="ngm-hub-inner">
       <span class="ngm-eyebrow">Volunteer board</span>
       <h2 class="ngm-h2">Reach the <em>right person</em></h2>
-      <p class="ngm-leadership-intro">The Guild is run entirely by volunteer members. Each role below has its own email address &mdash; write to the one closest to your question and it will reach the right person.</p>
-      <div class="ngm-lcard-grid">
-        <div class="ngm-lcard"><span class="ngm-lcard-role">President</span><a class="ngm-lcard-email" href="mailto:president@needleworkguildmn.org">president@needleworkguildmn.org</a></div>
-        <div class="ngm-lcard"><span class="ngm-lcard-role">Vice President</span><a class="ngm-lcard-email" href="mailto:vicepresident@needleworkguildmn.org">vicepresident@needleworkguildmn.org</a></div>
-        <div class="ngm-lcard"><span class="ngm-lcard-role">Treasurer</span><a class="ngm-lcard-email" href="mailto:ngmtreasurer@needleworkguildmn.org">ngmtreasurer@needleworkguildmn.org</a></div>
-        <div class="ngm-lcard"><span class="ngm-lcard-role">Secretary</span><a class="ngm-lcard-email" href="mailto:secretary@needleworkguildmn.org">secretary@needleworkguildmn.org</a></div>
-        <div class="ngm-lcard"><span class="ngm-lcard-role">Events</span><a class="ngm-lcard-email" href="mailto:ngmprograms@needleworkguildmn.org">ngmprograms@needleworkguildmn.org</a></div>
-        <div class="ngm-lcard"><span class="ngm-lcard-role">Sunday Blast</span><a class="ngm-lcard-email" href="mailto:newseditor@needleworkguildmn.org">newseditor@needleworkguildmn.org</a></div>
-        <div class="ngm-lcard"><span class="ngm-lcard-role">Advertising</span><a class="ngm-lcard-email" href="mailto:ngmadvertising@needleworkguildmn.org">ngmadvertising@needleworkguildmn.org</a></div>
-        <div class="ngm-lcard"><span class="ngm-lcard-role">Website Manager</span><a class="ngm-lcard-email" href="mailto:website@needleworkguildmn.org">website@needleworkguildmn.org</a></div>
-        <div class="ngm-lcard"><span class="ngm-lcard-role">Website Communications</span><a class="ngm-lcard-email" href="mailto:communications@needleworkguildmn.org">communications@needleworkguildmn.org</a></div>
-        <div class="ngm-lcard"><span class="ngm-lcard-role">Librarian</span><a class="ngm-lcard-email" href="mailto:librarian@needleworkguildmn.org">librarian@needleworkguildmn.org</a></div>
-        <div class="ngm-lcard"><span class="ngm-lcard-role">Shop Manager</span><a class="ngm-lcard-email" href="mailto:shopmanager@needleworkguildmn.org">shopmanager@needleworkguildmn.org</a></div>
-        <div class="ngm-lcard"><span class="ngm-lcard-role">Retreat Chair</span><a class="ngm-lcard-email" href="mailto:retreatchairs@needleworkguildmn.org">retreatchairs@needleworkguildmn.org</a></div>
-        <div class="ngm-lcard"><span class="ngm-lcard-role">Daytime Stitch-In</span><a class="ngm-lcard-email" href="mailto:daytimestitchin@needleworkguildmn.org">daytimestitchin@needleworkguildmn.org</a></div>
-        <div class="ngm-lcard"><span class="ngm-lcard-role">Evening Stitch-In</span><a class="ngm-lcard-email" href="mailto:eveningstitchin@needleworkguildmn.org">eveningstitchin@needleworkguildmn.org</a></div>
+      <p class="ngm-lead">The Guild is run entirely by volunteer members. Each role has its own email &mdash; write to the one closest to your question and it&rsquo;ll reach the right person.</p>
+      <div class="ngm-hub-lead-grid">
+        <div class="ngm-hub-lrow"><div class="ngm-hub-ltop"><span class="ngm-hub-lrole">President</span><span class="ngm-hub-lemail">president@needleworkguildmn.org</span></div><span class="ngm-hub-lname">Vivien Smith</span></div>
+        <div class="ngm-hub-lrow"><div class="ngm-hub-ltop"><span class="ngm-hub-lrole">Vice President</span><span class="ngm-hub-lemail">vicepresident@needleworkguildmn.org</span></div><span class="ngm-hub-lname">Carrie Hancock</span></div>
+        <div class="ngm-hub-lrow"><div class="ngm-hub-ltop"><span class="ngm-hub-lrole">Treasurer</span><span class="ngm-hub-lemail">ngmtreasurer@needleworkguildmn.org</span></div><span class="ngm-hub-lname">Linda Lundstrom</span></div>
+        <div class="ngm-hub-lrow"><div class="ngm-hub-ltop"><span class="ngm-hub-lrole">Secretary</span><span class="ngm-hub-lemail">secretary@needleworkguildmn.org</span></div><span class="ngm-hub-lname">Karen Hesse</span></div>
+        <div class="ngm-hub-lrow"><div class="ngm-hub-ltop"><span class="ngm-hub-lrole">Events</span><span class="ngm-hub-lemail">ngmprograms@needleworkguildmn.org</span></div><span class="ngm-hub-lname">Linda Tischer &amp; Kym Duea</span></div>
+        <div class="ngm-hub-lrow"><div class="ngm-hub-ltop"><span class="ngm-hub-lrole">Sunday Blast</span><span class="ngm-hub-lemail">newseditor@needleworkguildmn.org</span></div><span class="ngm-hub-lname">Michelle Ingram</span></div>
+        <div class="ngm-hub-lrow"><div class="ngm-hub-ltop"><span class="ngm-hub-lrole">Advertising</span><span class="ngm-hub-lemail">ngmadvertising@needleworkguildmn.org</span></div><span class="ngm-hub-lname">Kym Duea</span></div>
+        <div class="ngm-hub-lrow"><div class="ngm-hub-ltop"><span class="ngm-hub-lrole">Website Manager</span><span class="ngm-hub-lemail">website@needleworkguildmn.org</span></div></div>
+        <div class="ngm-hub-lrow"><div class="ngm-hub-ltop"><span class="ngm-hub-lrole">Website Communications</span><span class="ngm-hub-lemail">communications@needleworkguildmn.org</span></div></div>
+        <div class="ngm-hub-lrow"><div class="ngm-hub-ltop"><span class="ngm-hub-lrole">Librarian</span><span class="ngm-hub-lemail">librarian@needleworkguildmn.org</span></div><span class="ngm-hub-lname">Janet Rock &amp; Jeanne Cur</span></div>
+        <div class="ngm-hub-lrow"><div class="ngm-hub-ltop"><span class="ngm-hub-lrole">Shop Manager</span><span class="ngm-hub-lemail">shopmanager@needleworkguildmn.org</span></div><span class="ngm-hub-lname">Theresa Pietenpol</span></div>
+        <div class="ngm-hub-lrow"><div class="ngm-hub-ltop"><span class="ngm-hub-lrole">Retreat Chair</span><span class="ngm-hub-lemail">retreatchairs@needleworkguildmn.org</span></div><span class="ngm-hub-lname">Jane Tracy</span></div>
+        <div class="ngm-hub-lrow"><div class="ngm-hub-ltop"><span class="ngm-hub-lrole">Daytime Stitch-In</span><span class="ngm-hub-lemail">daytimestitchin@needleworkguildmn.org</span></div><span class="ngm-hub-lname">Laura Ericksen</span></div>
+        <div class="ngm-hub-lrow"><div class="ngm-hub-ltop"><span class="ngm-hub-lrole">Evening Stitch-In</span><span class="ngm-hub-lemail">eveningstitchin@needleworkguildmn.org</span></div><span class="ngm-hub-lname">Julie Mafi</span></div>
       </div>
-      <p class="ngm-lcard-note">Not sure who to write? <a href="mailto:inquiry@needleworkguildmn.org">Email the Guild</a> and we'll point you to the right person.</p>
+      <p class="ngm-hub-help">Not sure who to write? Email <a href="mailto:inquiry@needleworkguildmn.org">inquiry@needleworkguildmn.org</a> and we&rsquo;ll point you to the right person.</p>
     </div>
   </section>
 
-  <section class="ngm-sec ngm-sec-cream">
+  <section class="ngm ngm-sec ngm-sec-cream">
     <div class="ngm-con">
       <div class="ngm-loc-inner">
-        <div>
-          <span class="ngm-eyebrow">Find us</span>
-          <h2 class="ngm-h2">Where we <em>meet</em></h2>
-          <span class="ngm-addr-label">Meeting location</span>
-          <address class="ngm-address">Minnesota Valley Unitarian Universalist Fellowship<br>10715 Zenith Avenue South<br>Bloomington, MN 55431</address>
-          <span class="ngm-addr-label">Mailing address</span>
-          <address class="ngm-address">Needlework Guild of Minnesota<br>PO Box 16506<br>St. Louis Park, MN 55416</address>
-          <p style="margin-top:20px;font-family:var(--ngm-sans);font-size:.95rem;color:var(--ngm-gray-lt)">Need to find us? <a class="ngm-arrow-link" style="font-size:.95rem" href="https://www.google.com/maps/search/?api=1&query=10715+Zenith+Ave+S+Bloomington+MN+55431" target="_blank" rel="noopener noreferrer">Get directions <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></p>
+        <div class="ngm-loc-head">
+          <span class="ngm-eyebrow">Visit</span>
+          <h2 class="ngm-h2" style="margin-bottom:0">Where we <em>meet</em></h2>
         </div>
-        <div class="ngm-loc-map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2829.9!2d-93.336!3d44.841!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87f61ef0e6e7e3c1%3A0x7c9daaf2eddcd!2s10715+Zenith+Ave+S%2C+Bloomington%2C+MN+55431!5e0!3m2!1sen!2sus" allowfullscreen loading="eager" title="Meeting location: 10715 Zenith Avenue South, Bloomington MN" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+        <div class="ngm-loc-addr">
+          <p class="ngm-loc-note" style="font-size:1.0625rem;line-height:1.8;margin:0 0 20px">Most groups meet at Minnesota Valley Unitarian Universalist Fellowship (MVUUF) in Bloomington. A few gather in members' homes or meet online &mdash; check the individual meeting for where it's held.</p>
+          <span class="ngm-addr-label">Meeting location</span>
+          <address class="ngm-address">
+            <a class="ngm-loc-dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=10715+Zenith+Ave+S+Bloomington+MN+55431" target="_blank" rel="noopener noreferrer">
+              10715 Zenith Avenue South<br>
+              Bloomington, MN 55431
+            </a>
+          </address>
+          <span class="ngm-addr-label">Mailing address</span>
+          <address class="ngm-address">
+            Needlework Guild of Minnesota<br>
+            PO Box 16506<br>
+            St. Louis Park, MN 55416
+          </address>
+        </div>
+        <div class="ngm-loc-map ngm-loc-photo">
+          <span class="ngm-loc-photo-ph">Minnesota Valley Unitarian<br>Universalist Fellowship</span>
+          <img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade"
+            src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20Photos/MVUUF.jpeg"
+            alt="Minnesota Valley Unitarian Universalist Fellowship — our meeting location in Bloomington"
+            loading="eager"
+            onerror="this.style.display='none'"
+          >
+        </div>
+      </div>
+      <div class="ngm-visit-zoom">
+        <span class="ngm-addr-label">Joining by video</span>
+        <p class="ngm-visit-zoom-copy">Many of our meetings are on Zoom, in whole or in part. The link is available to members, and if you&rsquo;re not a member yet, just request it &mdash; we&rsquo;ll be happy to email it to you.</p>
+        <div class="ngm-videoband-tiles">
+          <a class="ngm-hub-zoom-module" href="/member/">
+            <span class="ngm-hub-zoom-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span>
+            <div class="ngm-hub-zoom-tile-body">
+              <h4>Member Hub</h4>
+              <p>Access the Zoom link.</p>
+            </div>
+            <span class="ngm-hub-zoom-tile-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          </a>
+          <a class="ngm-hub-zoom-module" href="/request-the-link">
+            <span class="ngm-hub-zoom-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></span>
+            <div class="ngm-hub-zoom-tile-body">
+              <h4>Request the Link</h4>
+              <p>Not a member? We&rsquo;ll email it to you.</p>
+            </div>
+            <span class="ngm-hub-zoom-tile-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <div class="ngm ngm-si-cta">
-    <div class="ngm-si-cta-inner">
-      <span class="ngm-eyebrow">Come see us</span>
-      <h2 class="ngm-h2">Pull up a chair and <em>stitch</em></h2>
-      <p>The best way to get to know the Guild is to visit. Your first visit to any meeting is always free &mdash; no signup needed.</p>
-      <div class="ngm-si-cta-btns">
-        <a class="ngm-btn ngm-btn-rose" href="/monthly-meetings">Find a group to try</a>
-        <a class="ngm-btn ngm-btn-outline-rose" href="/join">Join the Guild</a>
+  <div class="ngm ngm-about-cta">
+    <div class="ngm-about-cta-inner">
+      <span class="ngm-eyebrow">Join</span>
+      <h2 class="ngm-h2">Find your people<br>and your <em>stitching</em></h2>
+      <p>We'd love to have you. Come sit in on a Stitch-In, or any of our other monthly meetings — in person or on Zoom, whichever fits your calendar. Try as many as you're curious about. Once you've found the one (or three) that feel like yours, join us for just $30 a year.</p>
+      <div class="ngm-about-cta-btns">
+        <a class="ngm-btn ngm-btn-rose" href="/join">Join the Guild</a>
+        <a class="ngm-btn ngm-btn-outline-rose" href="/calendar">See our calendar</a>
       </div>
     </div>
   </div>
 </div>
 <script>
+/* Member Hub tile: logged-in members go straight to /member/; guests are
+   sent to log in and returned to /member/ afterwards. WA tags <body> with
+   publicContentView (guest) or memberContentView (logged in). */
 (function () {
-  function label(t){ if(t==="zoom")return "Zoom"; if(t==="virtual")return "Online"; if(t==="hybrid")return "Hybrid"; return "In person"; }
-  function classify(text){ var s=(text||"").toLowerCase();
-    if(s.indexOf("zoom")>-1) return "zoom";
-    if(s.indexOf("videoconference")>-1||s.indexOf("video conference")>-1||s.indexOf("online")>-1) return "virtual";
-    if(s.indexOf("hybrid")>-1) return "hybrid"; return "person"; }
-  function tagEvents(){
-    var items=document.querySelectorAll(".ngm-wa-events.upcomingEventsStyle001 ul li");
-    items.forEach(function(li){
-      if(li.getAttribute("data-tag-done")==="1") return;
-      var locEl=li.querySelector(".location");
-      var tag=classify(locEl?locEl.textContent:""); li.setAttribute("data-tag",tag);
-      var chip=document.createElement("span"); chip.className="ngm-evt-tag"; chip.textContent=label(tag);
-      var titleEl=li.querySelector(".title");
-      if(titleEl) li.insertBefore(chip,titleEl); else li.insertBefore(chip,li.firstChild);
-      var titleLink=li.querySelector(".title a");
-      if(titleLink&&titleLink.href){ li.style.cursor="pointer";
-        li.addEventListener("click",function(e){ if(e.target.closest("a"))return; window.location.href=titleLink.href; }); }
-      li.setAttribute("data-tag-done","1");
-    });
+  if (document.body && document.body.classList.contains("publicContentView")) {
+    var login = "/Sys/Login/?ReturnUrl=" + encodeURIComponent("/member/");
+    var tiles = document.querySelectorAll('a.ngm-hub-zoom-module[href="/member/"]');
+    for (var i = 0; i < tiles.length; i++) { tiles[i].setAttribute("href", login); }
   }
-  function init(){ tagEvents(); var g=document.querySelector(".ngm-wa-events");
-    if(g&&window.MutationObserver){ new MutationObserver(function(){tagEvents();}).observe(g,{childList:true,subtree:true}); } }
-  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
-})();
-</script>
-<script>
-(function () {
-  function wire(item){
-    var summary=item.querySelector("summary"); var wrap=item.querySelector(".ngm-faq-wrap");
-    if(!summary||!wrap) return;
-    summary.addEventListener("click",function(e){
-      if(!item.open) return; e.preventDefault(); item.classList.add("ngm-faq-closing");
-      var done=function(){ wrap.removeEventListener("transitionend",done); item.removeAttribute("open"); item.classList.remove("ngm-faq-closing"); };
-      wrap.addEventListener("transitionend",done); setTimeout(done,400);
-    });
-  }
-  function init(){ document.querySelectorAll(".ngm-faq-card").forEach(wire); }
-  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
 })();
 </script>
