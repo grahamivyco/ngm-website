@@ -5251,14 +5251,14 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHe
    abbreviation must stay readable at every width, so the single-letter tier
    was dropped. If the JS hasn't run, WA's own full text node still shows. */
 /* desktop base: full name */
-body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-f { display: inline !important; }
+body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-f { display: inline-block !important; white-space: nowrap !important; }
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a,
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 { display: none !important; }
 /* tablet AND mobile (≤1024): 3-letter abbreviation */
 @media (max-width: 1024px) {
   body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-f,
   body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-1 { display: none !important; }
-  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a { display: inline !important; }
+  body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader .ngm-wd-a { display: inline-block !important; white-space: nowrap !important; }
 }
 /* ALWAYS keep the weekday row + cells visible, at EVERY width — WA's responsive
    CSS hides the day-of-week row at its own breakpoint (the OTHER half of the
