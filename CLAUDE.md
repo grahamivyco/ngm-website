@@ -7,21 +7,11 @@ This repo holds the source for the Needlework Guild of Minnesota's Wild Apricot
 
 - **Styling lives in `ngm-website/global-css/global.css`.** The whole live site is
   styled by this one file, which is **pasted inline into the Wild Apricot CSS tab**
-  (WA admin → **Website → CSS**). `global.css` is the master copy you edit — the
-  readable, commented source of truth and change history. The stylesheet must live
-  in the CSS tab itself — WA's Content Security Policy refuses externally hosted
-  CSS, so it can't be linked from an outside URL; publishing is always a manual paste.
-- **Publish the minified copy, `global-css/global.min.css`.** WA's CSS field has a
-  length limit that the full commented `global.css` now exceeds — pasting the full
-  file can fail to save and leave the whole site unstyled. So after editing
-  `global.css`, regenerate the minified file and paste **that** into the WA CSS tab:
-
-  ```
-  npx clean-css-cli -o ngm-website/global-css/global.min.css ngm-website/global-css/global.css
-  ```
-
-  `global.min.css` is a generated artifact (never hand-edit it) and renders
-  identically to the master. Commit both together so they stay in sync.
+  (WA admin → **Website → CSS**). To change how anything looks, edit `global.css`
+  here, then paste its full contents into the WA CSS tab and Save to publish.
+  The stylesheet must live in the CSS tab itself — WA's Content Security Policy
+  refuses externally hosted CSS, so it can't be linked from an outside URL. This
+  repo is the master copy and change history; publishing is always a manual paste.
 - **Page markup lives in the `*.html` files** under `ngm-website/pages/<page>/`
   (and `ngm-website/system-pages/<page>/`) — e.g. `01-top.html`,
   `03-bottom.html`. These are the canonical page files: the ones to edit and to
