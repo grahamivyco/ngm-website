@@ -6656,51 +6656,42 @@ a.ngm-gcard:hover {
 .ngm-social {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 28px;
+  gap: 4px;
+  margin-top: 24px;
+  margin-left: -8px;       /* optical: align first icon to the text edge */
   flex-wrap: wrap;
-}
-.ngm-social-label {
-  font-family: var(--ngm-sans);
-  font-size: .78rem;
-  font-weight: 600;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--ngm-gray-lt);
-  margin-right: 2px;
 }
 .ngm-social-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: #fff;
-  border: 1px solid var(--ngm-border);
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
   color: var(--ngm-sage-dk);
-  transition: background-color .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+  transition: background-color .2s ease, color .2s ease, transform .2s ease;
 }
-.ngm-social-btn svg { width: 20px; height: 20px; display: block; }
+.ngm-social-btn svg { width: 22px; height: 22px; display: block; }
 .ngm-social-btn:hover {
   background: var(--ngm-sage-dk);
-  border-color: var(--ngm-sage-dk);
   color: #fff;
   transform: translateY(-2px);
 }
 
 /* Branded inquiry form — hero right column, in place of the photo. */
 .ngm-cform {
-  background: #fff;
-  border: 1px solid var(--ngm-border);
+  background: var(--ngm-linen);
+  border: 1px solid var(--ngm-linen-dk);
   border-radius: var(--ngm-radius-lg);
-  box-shadow: var(--ngm-shx);
-  padding: 32px;
+  box-shadow: var(--ngm-shm);
+  padding: 30px;
 }
 .ngm-cform-head {
   font-family: var(--ngm-serif) !important;
   font-size: 1.65rem;
   font-weight: 400;
+  text-transform: none !important;
+  letter-spacing: normal !important;
   color: var(--ngm-charcoal);
   margin: 0 0 6px;
   line-height: 1.2;
@@ -6728,13 +6719,13 @@ a.ngm-gcard:hover {
   font-family: var(--ngm-sans);
   font-size: .95rem;
   color: var(--ngm-charcoal);
-  background: var(--ngm-cream);
+  background: #fff;
   border: 1px solid var(--ngm-border);
   border-radius: var(--ngm-radius);
   padding: 12px 14px;
   transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
-.ngm-field textarea { min-height: 120px; resize: vertical; }
+.ngm-field textarea { min-height: 118px; resize: vertical; }
 .ngm-field input:focus,
 .ngm-field textarea:focus {
   outline: none;
@@ -6744,16 +6735,22 @@ a.ngm-gcard:hover {
 }
 .ngm-field input::placeholder,
 .ngm-field textarea::placeholder { color: var(--ngm-gray-lt); }
-.ngm-cform .ngm-btn { width: 100%; justify-content: center; margin-top: 6px; }
-.ngm-cform-note {
-  font-family: var(--ngm-sans);
-  font-size: .82rem;
-  color: var(--ngm-gray-lt);
-  line-height: 1.6;
-  margin: 16px 0 0;
-  text-align: center;
+/* Send button: small + left-aligned on desktop/tablet, full-width on mobile. */
+.ngm-cform .ngm-btn { width: auto; margin-top: 4px; }
+@media (max-width: 600px) {
+  .ngm-cform .ngm-btn { width: 100%; justify-content: center; }
 }
-.ngm-cform-note a { color: var(--ngm-sage-dk); text-decoration: none; border-bottom: 1px solid rgba(62, 85, 56, .3); }
 @media (max-width: 820px) {
   .ngm-cform { padding: 26px; }
+}
+
+/* Volunteer board (contact page): keep every role/email row uniform — one line
+   on desktop, and all rows stack to two lines together below the breakpoint,
+   rather than some wrapping and some not. Scoped to the contact board so the
+   Member Hub roster is unaffected. */
+.ngm-cboard .ngm-hub-ltop { flex-wrap: nowrap; gap: 6px 14px; }
+.ngm-cboard .ngm-hub-lrole { white-space: nowrap; }
+.ngm-cboard .ngm-hub-lemail { white-space: nowrap; }
+@media (max-width: 1080px) {
+  .ngm-cboard .ngm-hub-ltop { flex-direction: column; align-items: flex-start; gap: 3px; }
 }
