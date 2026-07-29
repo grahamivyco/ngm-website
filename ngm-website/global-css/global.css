@@ -1975,6 +1975,13 @@ body .ngm-cal .monthViewType .EventListCalendar th {
 /* breathing room: tight to the month grid above, clear air below before the
    next band (the Visit section / Join CTA). */
 .ngm-cal-body-inner .ngm-key { margin-top: 14px; margin-bottom: 16px; }
+/* Line the Key card up with the calendar grid's side edges. The gadget carries
+   12px side gutters ≤1100px (see .WaGadgetEventsStateCalendar); match them here
+   so the card's edges sit flush with the grid at every width (they already
+   share the 1080px inner width above 1100px). */
+@media (max-width: 1100px) {
+  .ngm-cal-body-inner .ngm-key { margin-left: 12px !important; margin-right: 12px !important; }
+}
 .ngm-key .ngm-eyebrow { margin-bottom: 10px; }
 .ngm-key-title {
   font-family: var(--ngm-serif) !important; font-size: 1.45rem; font-weight: 400;
