@@ -28,7 +28,8 @@ as a row in that sheet.
 ## Notes
 
 - **Copy:** `Website Feedback & Ideas` on wider screens, shortening to
-  `Feedback` at ≤560px so the pill stays small on phones. Lightbulb icon.
+  `Feedback` at ≤560px so the pill stays small on phones. Monitor icon with
+  an exclamation point on the screen.
 - **Color:** light sage (`#C7D4B6`) with deep-green text (`#35472F`).
 - **Docks above the footer:** a small script watches the footer (`#ngmf`) and
   lifts the pill to rest just above it once the footer scrolls into view, so
