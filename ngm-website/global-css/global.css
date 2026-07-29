@@ -6483,11 +6483,12 @@ body .ngm-wa-events .gadgetStyleBody { max-width: 1080px !important; }
 .ngm-rl-field { display: grid; gap: 6px; }
 .ngm-rl-field label { font-family: var(--ngm-sans); font-size: .82rem; font-weight: 600; color: var(--ngm-charcoal); }
 .ngm-rl-field label .ngm-rl-opt { font-weight: 400; color: var(--ngm-gray-lt); }
-.ngm-rl-field input, .ngm-rl-field select {
+.ngm-rl-field input, .ngm-rl-field select, .ngm-rl-field textarea {
   font-family: var(--ngm-sans); font-size: .95rem; color: var(--ngm-charcoal);
   background: #fff; border: 1.5px solid var(--ngm-border); border-radius: 12px; padding: 12px 14px; width: 100%;
 }
-.ngm-rl-field input:focus, .ngm-rl-field select:focus { outline: none; border-color: var(--ngm-sage); box-shadow: 0 0 0 3px var(--ngm-sage-lt); }
+.ngm-rl-field textarea { min-height: 96px; line-height: 1.6; resize: vertical; }
+.ngm-rl-field input:focus, .ngm-rl-field select:focus, .ngm-rl-field textarea:focus { outline: none; border-color: var(--ngm-sage); box-shadow: 0 0 0 3px var(--ngm-sage-lt); }
 .ngm-rl-form .ngm-btn { margin-top: 4px; justify-content: center; }
 .ngm-rl-note { font-family: var(--ngm-sans); font-size: .78rem; color: var(--ngm-gray-lt); display: flex; align-items: center; gap: 7px; margin: 0; }
 .ngm-rl-note svg { width: 13px; height: 13px; flex: none; }

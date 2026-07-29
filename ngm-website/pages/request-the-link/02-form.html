@@ -4,7 +4,7 @@
        __FORM_ACTION__    the hidden Google Form's /formResponse URL
        __ENTRY_NAME__     entry id for the Name question
        __ENTRY_EMAIL__    entry id for the Email question
-       __ENTRY_MEETING__  entry id for the "Which meeting?" question
+       __ENTRY_MESSAGE__  entry id for the "Message" question
 -->
 <div class="ngm">
   <section class="ngm-sec ngm-sec-cream" style="padding-top:0">
@@ -20,13 +20,8 @@
             <input id="rlEmail" name="__ENTRY_EMAIL__" type="email" autocomplete="email" required>
           </div>
           <div class="ngm-rl-field">
-            <label for="rlMeeting">Which meeting? <span class="ngm-rl-opt">&mdash; optional</span></label>
-            <select id="rlMeeting" name="__ENTRY_MEETING__">
-              <option value="">No preference / not sure yet</option>
-              <option>Daytime Stitch-In</option>
-              <option>Evening Stitch-In</option>
-              <option>Another Guild meeting</option>
-            </select>
+            <label for="rlMessage">Message <span class="ngm-rl-opt">&mdash; edit if you like, or just send it</span></label>
+            <textarea id="rlMessage" name="__ENTRY_MESSAGE__" rows="3">Hi! I'm not a member yet and I'd like to request the Zoom meeting link. Thank you!</textarea>
           </div>
           <button type="submit" class="ngm-btn ngm-btn-green">Email me the Zoom link</button>
           <p class="ngm-rl-note">
