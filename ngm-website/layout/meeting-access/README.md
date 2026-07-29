@@ -42,7 +42,7 @@ right one — guests see `.ma-guest`, members see `.ma-member`.
 
 In `01-top.html`, update the two links marked `SET URL`:
 
-- the **Request-the-Link** page (guest button) — currently `/request-the-link`
+- the **Request-the-Link** page (guest button) — currently `/Request-The-Link`
 - the **Member Hub** page (member button) — currently `/member-hub`
 
 The guest state also links "Sign in for the link" to `/log-in` — adjust if your
