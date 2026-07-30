@@ -1453,13 +1453,14 @@ html body .WaGadgetEventsStateCalendar {
   display: block !important;      /* so margin:auto can centre it */
   float: none !important;
   width: auto !important;
-  max-width: 1180px !important;
+  max-width: 1080px !important;
   margin: 12px auto 40px !important;
   /* NO card form — the month title, nav and grid sit on the plain page
-     background: no linen fill, no border, no shadow, no rounded frame. Only a
-     hair of side padding so the grid isn't flush to the viewport edge. Kept
+     background: no linen fill, no border, no shadow, no rounded frame. The
+     12px side padding keeps the grid off the viewport edges at every width
+     (this is the authoritative rule; it out-ranks the other gadget rule). Kept
      centred via margin:auto. */
-  padding: 8px 0 0 !important;
+  padding: 8px 12px 0 !important;
   box-sizing: border-box !important;
   background: transparent !important;
   background-image: none !important;
