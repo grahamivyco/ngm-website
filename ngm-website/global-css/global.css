@@ -1410,8 +1410,8 @@ body [class*="LayoutContainer"] {
 /* ── Calendar body wrapper (blends into the page — white, no band) ──
    Top padding ZERO to kill the gap under the hero. Even padding on the
    sides + bottom so the grid has breathing room on all sides. */
-.ngm-cal-body { background: #fff; padding: 0 40px; }
-.ngm-cal-body-inner { max-width: 1080px; margin: 0 auto 64px; padding: 24px 0 0; }  /* 64px = standard section bottom padding below the Key */
+.ngm-cal-body { background: #fff; padding: 0 40px 64px; }  /* 64px bottom = standard section padding below the Key */
+.ngm-cal-body-inner { max-width: 1080px; margin: 0 auto; padding: 24px 0 0; }
 /* ───── WA CALENDAR GADGET styling ─────
    CONFIRMED via Inspect: the gadget's real class is
    .WaGadgetEventsStateCalendar (inside the broader .WaGadgetEvents),
@@ -1971,18 +1971,16 @@ body .ngm-cal .monthViewType .EventListCalendar th {
    separate page band. Compact: a small serif title top-LEFT, then the key
    items. Its swatches use the EXACT category colours the calendar paints
    on its event chips (see the `--cat` mapping in the month-grid block). */
+/* Outer wrapper mirrors the calendar gadget EXACTLY (1080 cap · centred · 12px
+   side gutter), so the Key card's visible box always matches the grid table's
+   width and edges at every width. The card fills the wrapper. */
+.ngm-key-wrap { max-width: 1080px; margin: 6px auto 0; padding: 0 12px; box-sizing: border-box; }
 .ngm-key {
-  max-width: 1080px; margin: 0 auto; box-sizing: border-box;
+  width: 100%; box-sizing: border-box;
   background: #fff; border: 1px solid var(--ngm-border);
   border-radius: var(--ngm-radius-lg); box-shadow: var(--ngm-sh);
   padding: 30px 32px;
 }
-/* Same width + side gutter as the calendar grid at EVERY width. The gadget is
-   capped to 1080px with a 12px side padding, so give the Key the SAME 12px side
-   inset (as margin, since the card is the visible box) — its edges then sit flush
-   with the grid. Small top gap to the grid; the section's bottom padding (on
-   .ngm-cal-body-inner) provides the standard space below. */
-.ngm-cal-body-inner .ngm-key { margin: 6px 12px 0; }
 .ngm-key .ngm-eyebrow { margin-bottom: 10px; }
 .ngm-key-title {
   font-family: var(--ngm-serif) !important; font-size: 1.45rem; font-weight: 400;
@@ -2012,7 +2010,7 @@ body .ngm-cal .monthViewType .EventListCalendar th {
 .ngm-key-swatch.special   { background: #8A5A7A; } /* Workshops & Special — plum */
 .ngm-key-swatch.board     { background: #4A5A6A; } /* Board & Admin — slate */
 .ngm-key-text h3 {
-  font-family: var(--ngm-sans) !important; font-size: .95rem; font-weight: 600;
+  font-family: var(--ngm-sans) !important; font-size: .95rem; font-weight: 500;
   color: var(--ngm-charcoal); text-transform: none !important; margin: 0 0 3px; line-height: 1.25;
 }
 .ngm-key-text p {
@@ -2055,15 +2053,15 @@ body .ngm-key-cta a:not(.ngm-btn):hover { color: var(--ngm-sage) !important; }
   .ngm-cal-hero { padding: 52px 28px 44px; }
   .ngm-cal-hero p { max-width: 100%; }
   /* Top stays 0 (no hero gap); keep comfortable side padding */
-  .ngm-cal-body { padding: 0 24px; }
-  .ngm-cal-body-inner { margin: 0 auto 48px; padding: 20px 0 0; }
+  .ngm-cal-body { padding: 0 24px 56px; }
+  .ngm-cal-body-inner { margin: 0 auto; padding: 20px 0 0; }
   .ngm-sec { padding: 56px 28px; }
   .ngm-cal-cta { padding: 56px 28px; }
 }
 @media (max-width: 560px) {
   .ngm-cal-hero { padding: 40px 18px 36px; }
-  .ngm-cal-body { padding: 0 16px; }
-  .ngm-cal-body-inner { margin: 0 auto 40px; padding: 16px 0 0; }
+  .ngm-cal-body { padding: 0 16px 44px; }
+  .ngm-cal-body-inner { margin: 0 auto; padding: 16px 0 0; }
   .ngm-sec { padding: 44px 18px; }
   .ngm-cal-cta { padding: 44px 18px; }
   /* WA calendar grid gets cramped on tiny screens — let it scroll */
@@ -5183,7 +5181,7 @@ html body .WaGadgetEventsStateCalendar table.EventListCalendar {
 }
 html body .WaGadgetEventsStateCalendar table.EventListCalendar > tbody > tr > td,
 html body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarHeader {
-  width: 14.285% !important; box-sizing: border-box !important; overflow: hidden !important;
+  width: 14.285% !important; box-sizing: border-box !important; overflow: visible !important;
 }
 /* Equal columns everywhere: the date cells ship inline width:14% but the header
    cells have none — pin all of them to 1/7 so fixed layout distributes evenly.
@@ -5193,7 +5191,7 @@ html body .WaGadgetEventsStateCalendar table.EventListCalendar > tbody > tr > td
   width: 14.285% !important;
   min-width: 0 !important;
   box-sizing: border-box !important;
-  overflow: hidden !important;
+  overflow: visible !important;   /* rows grow with the chip — never clip its rounded corners */
 }
 /* Force EVERY structural grid element square (cells, rows, the nested
    date-number tables, the WA item cells) so no inner curve can show.
@@ -5406,7 +5404,7 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar td div:has(> a:not(.ca
      the viewport exactly (no overflow), and clip anything that spills */
   body .WaGadgetEventsStateCalendar table.EventListCalendar td,
   body .WaGadgetEventsStateCalendar table.EventListCalendar th {
-    box-sizing: border-box !important; width: 14.28% !important; overflow: hidden !important;
+    box-sizing: border-box !important; width: 14.28% !important; overflow: visible !important;
   }
   /* weekday header on phones: FORCE it visible (WA's own mobile CSS hides
      the day-of-week row — that's why the days vanished on small screens)

@@ -4,9 +4,10 @@
 1. `01-top.html` — Custom HTML (hero) — OPENS wrapper divs, does NOT close them
 2. `02-wa-gadget.txt` — native WA month-grid "Events Calendar", class `ngm-cal`
 3. `03-bottom.html` — Custom HTML — the **Key** module (INSIDE the calendar
-   section, right under the month grid), then CLOSES the wrapper divs, then
-   the **Visit** section (same "Where we meet" block as the homepage). No Join
-   CTA (removed).
+   section, right under the month grid; wrapped in `.ngm-key-wrap` so it lines
+   up with the grid), then CLOSES the wrapper divs, then the **Visit** section
+   (same "Where we meet" block as the homepage), then the **Join CTA** (same
+   "Find your people…" block as the About page).
 
 ## Toolbar / weekday JS
 `01-top.html` ships a small inline `<script>` the calendar

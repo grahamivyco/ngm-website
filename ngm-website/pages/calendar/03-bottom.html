@@ -1,7 +1,10 @@
 <!-- Canonical page markup — paste into the WA Custom-HTML gadget. Styling lives in global-css/global.css (pasted into the WA CSS tab; must be live in WA first). The KEY module lives INSIDE the calendar section (.ngm-cal-body-inner, opened in 01-top.html) so it reads as part of the calendar, then the wrappers close, then the Join CTA. Paste order: 01-top.html -> WA Calendar gadget (class ngm-cal) -> 03-bottom.html -->
 
     <!-- KEY: title top-left, then the key items. Swatches match the calendar's
-         event-chip colours, so the key reflects the calendar itself. -->
+         event-chip colours, so the key reflects the calendar itself.
+         .ngm-key-wrap mirrors the calendar gadget's box (1080 cap + 12px gutter)
+         so the card lines up with the grid at every width. -->
+    <div class="ngm-key-wrap">
     <div class="ngm-key">
       <h2 class="ngm-key-title">Key</h2>
       <div class="ngm-key-grid">
@@ -42,6 +45,7 @@
         <h3>Want to add something to the calendar?</h3>
         <p>Guild event, program idea, or a date we missed — send it through the <a href="https://forms.gle/BPz9eZNpCSxLpEmNA" target="_blank" rel="noopener noreferrer">Ideas &amp; Feedback form</a> and we'll get it on the calendar.</p>
       </div>
+    </div>
     </div>
   </div>
 </div>
@@ -106,6 +110,19 @@
     </div>
   </div>
 </section>
+
+<!-- JOIN CTA — same section as the About page ("Find your people…"). -->
+<div class="ngm ngm-about-cta">
+  <div class="ngm-about-cta-inner">
+    <span class="ngm-eyebrow">Join</span>
+    <h2 class="ngm-h2">Find your people<br>and your <em>stitching</em></h2>
+    <p>We&rsquo;d love to have you. Come sit in on a Stitch-In, or any of our other monthly meetings &mdash; in person or on Zoom, whichever fits your calendar. Try as many as you&rsquo;re curious about. Once you&rsquo;ve found the one (or three) that feel like yours, join us for just $30 a year.</p>
+    <div class="ngm-about-cta-btns">
+      <a class="ngm-btn ngm-btn-rose" href="/join">Join the Guild</a>
+      <a class="ngm-btn ngm-btn-outline-rose" href="/about-us">Learn about us</a>
+    </div>
+  </div>
+</div>
 <script>
 /* Member Hub tile: logged-in members go straight to /member/; guests are
    sent to log in and returned to /member/ afterwards. WA tags <body> with
