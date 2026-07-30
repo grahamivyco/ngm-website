@@ -1410,7 +1410,7 @@ body [class*="LayoutContainer"] {
 /* ── Calendar body wrapper (blends into the page — white, no band) ──
    Top padding ZERO to kill the gap under the hero. Even padding on the
    sides + bottom so the grid has breathing room on all sides. */
-.ngm-cal-body { background: #fff; padding: 0 40px 64px; }  /* 64px bottom = standard section padding below the Key */
+.ngm-cal-body { background: #fff; padding: 0 40px; }
 .ngm-cal-body-inner { max-width: 1080px; margin: 0 auto; padding: 24px 0 0; }
 /* ───── WA CALENDAR GADGET styling ─────
    CONFIRMED via Inspect: the gadget's real class is
@@ -1974,7 +1974,7 @@ body .ngm-cal .monthViewType .EventListCalendar th {
 /* Outer wrapper mirrors the calendar gadget EXACTLY (1080 cap · centred · 12px
    side gutter), so the Key card's visible box always matches the grid table's
    width and edges at every width. The card fills the wrapper. */
-.ngm-key-wrap { max-width: 1080px; margin: 6px auto 0; padding: 0 12px; box-sizing: border-box; }
+.ngm-key-wrap { max-width: 1080px; margin: 6px auto 0; padding: 0 12px 64px; box-sizing: border-box; }  /* padding-bottom = standard section space below the Key (can't margin-collapse) */
 .ngm-key {
   width: 100%; box-sizing: border-box;
   background: #fff; border: 1px solid var(--ngm-border);
@@ -2053,15 +2053,17 @@ body .ngm-key-cta a:not(.ngm-btn):hover { color: var(--ngm-sage) !important; }
   .ngm-cal-hero { padding: 52px 28px 44px; }
   .ngm-cal-hero p { max-width: 100%; }
   /* Top stays 0 (no hero gap); keep comfortable side padding */
-  .ngm-cal-body { padding: 0 24px 56px; }
+  .ngm-cal-body { padding: 0 24px; }
   .ngm-cal-body-inner { margin: 0 auto; padding: 20px 0 0; }
+  .ngm-key-wrap { padding-bottom: 56px; }
   .ngm-sec { padding: 56px 28px; }
   .ngm-cal-cta { padding: 56px 28px; }
 }
 @media (max-width: 560px) {
   .ngm-cal-hero { padding: 40px 18px 36px; }
-  .ngm-cal-body { padding: 0 16px 44px; }
+  .ngm-cal-body { padding: 0 16px; }
   .ngm-cal-body-inner { margin: 0 auto; padding: 16px 0 0; }
+  .ngm-key-wrap { padding-bottom: 44px; }
   .ngm-sec { padding: 44px 18px; }
   .ngm-cal-cta { padding: 44px 18px; }
   /* WA calendar grid gets cramped on tiny screens — let it scroll */
