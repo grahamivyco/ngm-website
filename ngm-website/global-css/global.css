@@ -3685,6 +3685,15 @@ body.ngm-login-page .WaGadgetLoginForm{ display:block; width:100%; box-sizing:bo
   /* tighten the space directly above the join line (desktop only) */
   body.ngm-login-page .ngm-login-foot{ padding-top:0 !important; }
   body.ngm-login-page .ngm-login-foot-inner{ padding-top:0 !important; }
+  /* ── Short-page fix: fill the viewport ──
+     The login/auth pages are shorter than most windows, which left a white
+     void under the footer. Give both cells of the split row the full height
+     under the fixed header (on table cells height acts as MIN-height, so
+     nothing clips on short windows) — the row fills the first screen and the
+     footer starts at its bottom edge. */
+  body.ngm-login-page tr.WaLayoutRow:has(.ngm-login-hero) > td.WaLayoutItem{
+    height: calc(100vh - var(--ngm-head-h));
+  }
 }
 @media(max-width:980px){
   /* ── Force the WA 2-column row to STACK once the mobile menu appears ──
@@ -4544,6 +4553,15 @@ body a.ngm-lcard-email:hover { color:var(--ngm-sage-dk)!important; }
 .WABranding,
 #idFooterPoweredByContainer,
 #idFooterPoweredByWA { display: none !important; }
+/* The branding band sits inside its own layout zone
+   (div.zonePlace.zoneWABranding — verified in the live DOM); with the band
+   hidden the zone still keeps its own height/padding, which is the white
+   strip under the footer. Collapse the whole zone, and zero any bottom
+   spacing on the page layout wrapper for good measure.
+   (#idPageShadingContainer is NOT the strip — it's WA's hidden off-screen
+   admin wait-overlay; leave it alone.) */
+.zonePlace.zoneWABranding { display: none !important; }
+body .mLayout { padding-bottom: 0 !important; margin-bottom: 0 !important; }
 
 /* Rounded gadget wrapper helper */
 .rounded-box { border-radius: 16px; overflow: hidden; }
