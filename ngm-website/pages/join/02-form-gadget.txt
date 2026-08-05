@@ -1,0 +1,20 @@
+NATIVE WA GADGET — "Membership application"
+===========================================
+Add the native WA "Membership application" gadget DIRECTLY on the Join page
+(slug /Join-Duplicate), BETWEEN 01-top.html and 03-bottom.html, in the SAME
+layout column. Putting it here (not only on WA's separate /application page)
+is what makes the form start inline — visitors land on Join and begin with the
+email step right away instead of clicking through to another page.
+
+1. Add gadget -> "Membership application".
+2. It should offer the single $30/yr membership level (term June 1 – May 31).
+3. Set the layout ROW background to white (#FFFFFF) so it continues the
+   "Start here" band from 01-top into 03-bottom's first section.
+
+No CSS class is needed: the form is skinned by the site-wide MEMBERSHIP
+APPLICATION blocks in global.css plus the JOIN PAGE block scoped to
+body.ngm-join-page (added by 01-top.html's script), which cards the embedded
+form and centres it in the white band.
+
+The separate /application page keeps working as-is — WA may still redirect
+later steps (payment/confirmation) through its native flow, which is fine.

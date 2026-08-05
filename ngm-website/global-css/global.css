@@ -6149,6 +6149,18 @@ body .WaGadgetMembershipApplication .gadgetStyleBody {
   body .WaGadgetMembershipApplication { margin: 20px 16px 40px !important; }
   body .WaGadgetMembershipApplication .gadgetStyleBody { padding: 24px 20px !important; }
 }
+/* ── JOIN PAGE embed (body.ngm-join-page, added by pages/join/01-top.html) ──
+   The gadget sits directly under the "Start here" heading on /join (see
+   pages/join/02-form-gadget.txt). Paint the gadget's immediate wrapper white
+   so the band reads continuous with the heading section above (the WA row
+   background is set white in the editor too — this is the CSS fallback), and
+   tuck the card up under the heading. Everything else comes from the
+   site-wide card + form skin above. */
+body.ngm-join-page *:has(> .WaGadgetMembershipApplication) { background: #fff !important; }
+body.ngm-join-page .WaGadgetMembershipApplication { margin: 10px auto 64px !important; }
+@media (max-width: 640px) {
+  body.ngm-join-page .WaGadgetMembershipApplication { margin: 6px 16px 44px !important; }
+}
 
 /* ══════════════════════════════════════════════════════════════════
    DONATION FORM  (native WA "Donation form" gadget, embedded on /donate)
