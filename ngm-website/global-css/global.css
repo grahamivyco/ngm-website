@@ -6175,6 +6175,8 @@ body .WaGadgetDonationForm .navigationContainer input[id$="_next"] {
   color: #fff !important; background: var(--ngm-sage-dk) !important;
   border: 1.5px solid var(--ngm-sage-dk) !important; border-radius: 999px !important;
   padding: 12px 32px !important; cursor: pointer !important; transition: background .15s ease !important;
+  text-transform: none !important; letter-spacing: normal !important;
+  min-width: 0 !important; margin: 0 !important;
   -webkit-appearance: none !important; appearance: none !important;
 }
 body.ngm-donate-page .navigationContainer input.nextButton.button:hover,
@@ -6193,6 +6195,7 @@ body .WaGadgetDonationForm .navigationContainer input[name$="$cancel"] {
   background: transparent !important; border: none !important; box-shadow: none !important;
   color: var(--ngm-gray) !important; font-family: var(--ngm-sans) !important; font-size: .9rem !important;
   font-weight: 500 !important; padding: 10px 6px !important; text-decoration: none !important;
+  text-transform: none !important; letter-spacing: normal !important; min-width: 0 !important; margin: 0 !important;
   cursor: pointer !important; -webkit-appearance: none !important; appearance: none !important;
 }
 body.ngm-donate-page .navigationContainer input[id$="_cancel"]:hover,

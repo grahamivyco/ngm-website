@@ -46,5 +46,26 @@
     e.preventDefault();
     t.scrollIntoView({ behavior: "smooth", block: "start" });
   });
+
+  /* Relabel WA's donation submit button. Its value ("Pay with card") is
+     server-rendered, so CSS can't change it — but the form redirects to PayPal,
+     so "Donate securely" reads better. WA re-renders the button on AJAX
+     postbacks (e.g. changing the amount), so re-apply on DOM changes. The
+     value-equality guard makes the write idempotent, so the observer can't loop. */
+  var LABEL = "Donate securely";
+  function relabel() {
+    var btns = document.querySelectorAll('input.nextButton.button[id$="_next"]');
+    for (var i = 0; i < btns.length; i++) {
+      if (btns[i].value !== LABEL) btns[i].value = LABEL;
+    }
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", relabel);
+  } else {
+    relabel();
+  }
+  try {
+    new MutationObserver(relabel).observe(document.documentElement, { childList: true, subtree: true });
+  } catch (e) { /* observer unsupported — the load-time pass still applies */ }
 })();
 </script>
