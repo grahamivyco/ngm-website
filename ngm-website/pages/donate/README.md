@@ -44,13 +44,19 @@ fallback — and cards `#idGeneralFormContainer` (the container that holds the
 whole form: title → fields → reCAPTCHA → "Pay with card"), flattening WA's
 sliced rounded-corner box chrome around it.
 
-### Two-column field layout
-On desktop/tablet the form fields flow in a 6-column grid (First/Last and the
-phone pairs side by side; City/State/Zip three across; email/street/country/
-amount/textareas full width); it stacks to one column on mobile. The spans are
-mapped to the WA field **ids** in the "DONATION FORM" block of `global.css`
-(e.g. `#idContainer12024896` = Email). If you add or remove donation fields in
-WA, unknown fields fall back to half-width and any removed field's rule just
-goes inert — update the id map if you want a new field placed differently.
+### Field layout
+On desktop the fields flow in a 6-column grid where **every field is full width
+by default**; only two groups pair up — **First + Last name** side by side, and
+**City / State / Zip** three across. On **tablet** (641–900px) City/State/Zip
+drop to their own lines; the rest is unchanged. It **stacks** to one column at
+≤640px. `min-width:0` on each cell keeps long helper text (the "Donor
+directions" hint) wrapping inside the form so nothing overflows into horizontal
+scroll. Dropdowns use a custom chevron inset from the right. Spans map to WA
+field **ids** in the "DONATION FORM" block of `global.css` (e.g.
+`#idContainer12024897`/`…898` = First/Last, `…931/932/933` = City/State/Zip);
+added fields fall back to full width and removed fields' rules go inert.
+
+### Hero photo
+Hidden on tablet & mobile (≤900px) so the copy leads straight to the form.
 
 After the master `global.css` is live, use the `.html` versions.

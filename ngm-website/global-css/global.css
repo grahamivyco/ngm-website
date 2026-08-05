@@ -6127,6 +6127,16 @@ body .WaGadgetDonationForm .fieldBody textarea:focus {
   outline: none !important; border-color: var(--ngm-sage) !important;
   box-shadow: 0 0 0 3px rgba(92,122,82,.15) !important;
 }
+/* Dropdowns: swap the native arrow (which sat flush to the edge) for a custom
+   chevron inset from the right, with matching padding so the text never runs
+   under it. */
+body.ngm-donate-page .fieldBody select,
+body .WaGadgetDonationForm .fieldBody select {
+  -webkit-appearance: none !important; -moz-appearance: none !important; appearance: none !important;
+  padding-right: 40px !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23656565' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important; background-position: right 14px center !important; background-size: 14px 14px !important;
+}
 /* Amount is a short field, not a full-width bar */
 body.ngm-donate-page .donationAmountContainer .fieldBody input,
 body .WaGadgetDonationForm .donationAmountContainer .fieldBody input { max-width: 220px !important; }
@@ -6153,41 +6163,40 @@ body .WaGadgetDonationForm .fieldContainer { padding: 3px 0 !important; }
 /* Shorter multi-line boxes (WA renders "Donor directions" as rows=6) */
 body.ngm-donate-page .fieldBody textarea,
 body .WaGadgetDonationForm .fieldBody textarea { min-height: 0 !important; height: 84px !important; }
-/* ── Two-column field layout (desktop/tablet) ──────────────────────────────
-   The form is full-width now, so the fields flow in a grid instead of one long
-   field per row. The fields are the direct children of the section's .inner
-   box; make that a 6-col grid and span each field by how wide it should read:
-   halves span 3 (First/Last, the two phone pairs), the City/State/Zip row spans
-   2 each (three across), and long fields (email, street, country, amount,
-   textareas) span all 6. Spans are mapped by WA field id — if donation fields
-   are added or removed, unknown ones simply fall back to half-width (span 3),
-   and rules for removed fields go inert. Stacks to one column on mobile. */
+/* ── Field layout grid (desktop/tablet) ────────────────────────────────────
+   The fields are the direct children of the section's .inner box; make that a
+   6-col grid. Every field is FULL WIDTH (its own line) by default, and only two
+   groups pair up: First + Last name side by side (span 3), and City / State /
+   Zip three across (span 2 — desktop only; they drop to their own lines on
+   tablet). min-width:0 on every field lets a cell shrink to the grid track so
+   long helper text (e.g. the "Donor directions" hint) wraps INSIDE the form
+   instead of overflowing and causing horizontal scroll. Stacks on mobile.
+   Spans map to WA field ids; added fields fall back to full width, and rules
+   for removed fields go inert. */
 @media (min-width: 641px) {
   body.ngm-donate-page #idSectionDonationFormContainer .inner {
     display: grid !important; grid-template-columns: repeat(6, 1fr) !important;
     gap: 14px 22px !important; align-items: start !important;
   }
   body.ngm-donate-page #idSectionDonationFormContainer .inner > .fieldContainer {
-    grid-column: span 3 !important; padding: 0 !important;
+    grid-column: span 6 !important; min-width: 0 !important; padding: 0 !important;
   }
-  /* City / State / Zip → thirds, three across */
+  /* First name + Last name side by side */
+  body.ngm-donate-page #idContainer12024897,   /* First name */
+  body.ngm-donate-page #idContainer12024898 {  /* Last name  */
+    grid-column: span 3 !important;
+  }
+  /* the float-clear helper isn't a field — drop it from the grid */
+  body.ngm-donate-page #idSectionDonationFormContainer .clearEndContainer { display: none !important; }
+}
+/* Desktop only: City / State / Zip three across (they take their own lines on
+   tablet, where they'd be too cramped side by side) */
+@media (min-width: 901px) {
   body.ngm-donate-page #idContainer12118931,   /* City  */
   body.ngm-donate-page #idContainer12118932,   /* State */
   body.ngm-donate-page #idContainer12118933 {  /* Zip   */
     grid-column: span 2 !important;
   }
-  /* Long fields → full width */
-  body.ngm-donate-page #idContainer12024896,   /* Email            */
-  body.ngm-donate-page #idContainer12118929,   /* Street Address 1 */
-  body.ngm-donate-page #idContainer12118930,   /* Street Address 2 */
-  body.ngm-donate-page #idContainer12118934,   /* Country          */
-  body.ngm-donate-page #idContainer12143216,   /* Donor Note       */
-  body.ngm-donate-page .donationAmountContainer,                 /* Amount */
-  body.ngm-donate-page .fieldContainer:has(.multiLinesContainer) /* Donor directions (textarea) */ {
-    grid-column: span 6 !important;
-  }
-  /* the float-clear helper isn't a field — drop it from the grid */
-  body.ngm-donate-page #idSectionDonationFormContainer .clearEndContainer { display: none !important; }
 }
 /* Checkbox groups (Preferred / Alternative phone type) → tidy rows */
 body.ngm-donate-page .checkboxGroupContainer .fieldLabel,
@@ -6276,14 +6285,11 @@ body.ngm-donate-page .ngm-pillars {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
   gap: 18px !important; margin-top: 30px !important;
 }
-body.ngm-donate-page .ngm-pillar {
-  background: #fff !important; border: 1px solid var(--ngm-border) !important; box-shadow: none !important;
-  padding: 22px 24px !important; transform: none !important;
-  transition: border-color .18s ease, box-shadow .18s ease !important;
-}
+/* Border only — no background fill, no hover state */
+body.ngm-donate-page .ngm-pillar,
 body.ngm-donate-page .ngm-pillar:hover {
-  background: #fff !important; border-color: var(--ngm-sage) !important;
-  box-shadow: var(--ngm-sh) !important; transform: none !important;
+  background: transparent !important; border: 1px solid var(--ngm-border) !important;
+  box-shadow: none !important; padding: 22px 24px !important; transform: none !important; transition: none !important;
 }
 /* bare icon: strip the chip background, box, and padding — just the svg */
 body.ngm-donate-page .ngm-pillar-icon,
@@ -6294,6 +6300,16 @@ body.ngm-donate-page .ngm-pillar:hover .ngm-pillar-icon {
 body.ngm-donate-page .ngm-pillar-icon svg { width: 28px !important; height: 28px !important; }
 body.ngm-donate-page .ngm-pillar h3 { font-size: 1.2rem !important; margin-bottom: 6px !important; }
 body.ngm-donate-page .ngm-pillar p { font-size: .92rem !important; line-height: 1.65 !important; }
+/* Mobile: stack the Alternatives one full-width column */
+@media (max-width: 640px) {
+  body.ngm-donate-page .ngm-pillars { grid-template-columns: 1fr !important; }
+}
+/* Hero: drop the photo on tablet & mobile so the copy leads straight to the
+   form (people reach it faster); the copy column then fills the width. */
+@media (max-width: 900px) {
+  body.ngm-donate-page .ngm-mt-hero-grid { grid-template-columns: 1fr !important; }
+  body.ngm-donate-page .ngm-mt-hero-grid .ngm-mt-photo { display: none !important; }
+}
 /* Read-only review values: links (e.g. the email) on-brand, not WA magenta */
 body .WaGadgetMembershipApplication .fieldBody a,
 body .WaGadgetPublicWizard .fieldBody a {
