@@ -5977,6 +5977,239 @@ body .WaGadgetMembershipApplication .gadgetStyleBody {
   body .WaGadgetMembershipApplication { margin: 20px 16px 40px !important; }
   body .WaGadgetMembershipApplication .gadgetStyleBody { padding: 24px 20px !important; }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   DONATION FORM  (native WA "Donation form" gadget, embedded on /donate)
+   ────────────────────────────────────────────────────────────────
+   The donation form uses the SAME inner markup as the membership wizard —
+   .fieldContainer / .fieldLabel / .mandatorySymbol / .typeInstruction /
+   .fieldBody inputs / h3.formTitle / .navigationContainer / .nextButton —
+   but a different (and unreliable) gadget wrapper class. So we scope on the
+   PAGE: body.ngm-donate-page is added by pages/donate/01-top.html, which is
+   robust no matter what wrapper WA emits. .WaGadgetDonationForm is added as a
+   fallback in case the form is ever placed on WA's own /donation page. The
+   whole form (title → fields → reCAPTCHA → "Pay with card") lives inside
+   #idGeneralFormContainer; we card THAT and flatten WA's sliced-corner box
+   chrome around it. Visuals mirror the membership skin so both read as one
+   system. Verified against the live donation-form DOM.
+══════════════════════════════════════════════════════════════════ */
+/* ── Card + centre the whole form; strip WA's rounded-corner sprite chrome ── */
+body.ngm-donate-page #idGeneralFormContainer,
+body .WaGadgetDonationForm #idGeneralFormContainer {
+  max-width: 780px !important; margin: 0 auto !important;
+  background: #fff !important; border: 1px solid var(--ngm-border) !important;
+  border-radius: var(--ngm-radius-lg) !important; box-shadow: var(--ngm-shm) !important;
+  padding: 26px clamp(20px,3vw,40px) 32px !important; box-sizing: border-box !important;
+}
+/* Hide the sprite corner caps (empty spacer divs that drew the old box edges) */
+body.ngm-donate-page #idGeneralFormContainer .cornersContainer,
+body .WaGadgetDonationForm #idGeneralFormContainer .cornersContainer { display: none !important; }
+/* Flatten every nested WA box wrapper so only OUR card shows (bg/border/shadow
+   off). The .d1–.d9 + .inner slice-divs are zeroed explicitly — NEVER with a
+   [class^="d"] selector, which would also catch .dropdownFieldContainer /
+   .donationAmountContainer. */
+body.ngm-donate-page #idGeneralFormContainer .formOuterContainer,
+body.ngm-donate-page #idGeneralFormContainer .formContainer,
+body.ngm-donate-page #idGeneralFormContainer .generalFormContainer,
+body.ngm-donate-page #idGeneralFormContainer .generalFieldsOuterContainer,
+body.ngm-donate-page #idGeneralFormContainer .generalFieldsContainer,
+body.ngm-donate-page #idGeneralFormContainer .sectionOuterContainer,
+body.ngm-donate-page #idGeneralFormContainer .sectionContainer,
+body.ngm-donate-page #idGeneralFormContainer .formTitleOuterContainer,
+body.ngm-donate-page #idGeneralFormContainer .formTitleContainer,
+body.ngm-donate-page #idGeneralFormContainer .navigationOuterContainer,
+body.ngm-donate-page #idGeneralFormContainer .navigationContainer,
+body.ngm-donate-page #idGeneralFormContainer .d1,
+body.ngm-donate-page #idGeneralFormContainer .d2,
+body.ngm-donate-page #idGeneralFormContainer .d3,
+body.ngm-donate-page #idGeneralFormContainer .d4,
+body.ngm-donate-page #idGeneralFormContainer .d5,
+body.ngm-donate-page #idGeneralFormContainer .d6,
+body.ngm-donate-page #idGeneralFormContainer .d7,
+body.ngm-donate-page #idGeneralFormContainer .d8,
+body.ngm-donate-page #idGeneralFormContainer .d9,
+body.ngm-donate-page #idGeneralFormContainer .inner,
+body .WaGadgetDonationForm #idGeneralFormContainer .formOuterContainer,
+body .WaGadgetDonationForm #idGeneralFormContainer .formContainer,
+body .WaGadgetDonationForm #idGeneralFormContainer .generalFormContainer,
+body .WaGadgetDonationForm #idGeneralFormContainer .generalFieldsOuterContainer,
+body .WaGadgetDonationForm #idGeneralFormContainer .generalFieldsContainer,
+body .WaGadgetDonationForm #idGeneralFormContainer .sectionOuterContainer,
+body .WaGadgetDonationForm #idGeneralFormContainer .sectionContainer,
+body .WaGadgetDonationForm #idGeneralFormContainer .formTitleOuterContainer,
+body .WaGadgetDonationForm #idGeneralFormContainer .formTitleContainer,
+body .WaGadgetDonationForm #idGeneralFormContainer .navigationOuterContainer,
+body .WaGadgetDonationForm #idGeneralFormContainer .navigationContainer,
+body .WaGadgetDonationForm #idGeneralFormContainer .d1,
+body .WaGadgetDonationForm #idGeneralFormContainer .d2,
+body .WaGadgetDonationForm #idGeneralFormContainer .d3,
+body .WaGadgetDonationForm #idGeneralFormContainer .d4,
+body .WaGadgetDonationForm #idGeneralFormContainer .d5,
+body .WaGadgetDonationForm #idGeneralFormContainer .d6,
+body .WaGadgetDonationForm #idGeneralFormContainer .d7,
+body .WaGadgetDonationForm #idGeneralFormContainer .d8,
+body .WaGadgetDonationForm #idGeneralFormContainer .d9,
+body .WaGadgetDonationForm #idGeneralFormContainer .inner {
+  background: transparent !important; border: none !important; box-shadow: none !important;
+  padding: 0 !important; margin: 0 !important;
+}
+/* Title + "* Mandatory fields" note */
+body.ngm-donate-page #idGeneralFormContainer h3.formTitle,
+body .WaGadgetDonationForm h3.formTitle {
+  font-family: var(--ngm-serif) !important; font-weight: 400 !important;
+  color: var(--ngm-charcoal) !important; font-size: 1.7rem !important; line-height: 1.2 !important;
+  margin: 0 0 4px !important;
+}
+body.ngm-donate-page #idGeneralFormContainer .mandatoryFieldsTitle,
+body .WaGadgetDonationForm .mandatoryFieldsTitle {
+  font-family: var(--ngm-sans) !important; font-size: .8rem !important;
+  color: var(--ngm-gray) !important; margin: 0 0 20px !important;
+}
+/* Field labels + mandatory marker (page-scoped: no other .fieldLabel here) */
+body.ngm-donate-page .fieldLabel,
+body .WaGadgetDonationForm .fieldLabel {
+  font-family: var(--ngm-sans) !important; color: var(--ngm-charcoal) !important;
+}
+body.ngm-donate-page .mandatoryLabel,
+body .WaGadgetDonationForm .mandatoryLabel {
+  font-family: var(--ngm-sans) !important; font-weight: 600 !important; color: var(--ngm-charcoal) !important;
+}
+body.ngm-donate-page .mandatorySymbol,
+body .WaGadgetDonationForm .mandatorySymbol { color: var(--ngm-rose) !important; font-weight: 700 !important; }
+/* Hint text + inline validation */
+body.ngm-donate-page .typeInstruction,
+body .WaGadgetDonationForm .typeInstruction {
+  font-family: var(--ngm-sans) !important; font-size: .8rem !important;
+  color: var(--ngm-gray-lt) !important; margin-top: 3px !important;
+}
+body.ngm-donate-page .validationError,
+body .WaGadgetDonationForm .validationError {
+  font-family: var(--ngm-sans) !important; font-size: .82rem !important; color: var(--ngm-rose-dk) !important;
+}
+/* Inputs / selects / textarea — cream-free white fields with a sage focus ring */
+body.ngm-donate-page .fieldBody input[type="text"],
+body.ngm-donate-page .fieldBody input.typeText,
+body.ngm-donate-page .fieldBody input.typeTextBox,
+body.ngm-donate-page .fieldBody select,
+body.ngm-donate-page .fieldBody textarea,
+body .WaGadgetDonationForm .fieldBody input[type="text"],
+body .WaGadgetDonationForm .fieldBody input.typeText,
+body .WaGadgetDonationForm .fieldBody input.typeTextBox,
+body .WaGadgetDonationForm .fieldBody select,
+body .WaGadgetDonationForm .fieldBody textarea {
+  font-family: var(--ngm-sans) !important; font-size: .95rem !important; padding: 10px 13px !important;
+  border: 1px solid var(--ngm-border) !important; border-radius: 10px !important;
+  background: #fff !important; color: var(--ngm-charcoal) !important; box-sizing: border-box !important;
+  width: 100% !important; max-width: 100% !important;
+}
+body.ngm-donate-page .fieldBody input:focus,
+body.ngm-donate-page .fieldBody select:focus,
+body.ngm-donate-page .fieldBody textarea:focus,
+body .WaGadgetDonationForm .fieldBody input:focus,
+body .WaGadgetDonationForm .fieldBody select:focus,
+body .WaGadgetDonationForm .fieldBody textarea:focus {
+  outline: none !important; border-color: var(--ngm-sage) !important;
+  box-shadow: 0 0 0 3px rgba(92,122,82,.15) !important;
+}
+/* Amount is a short field, not a full-width bar */
+body.ngm-donate-page .donationAmountContainer .fieldBody input,
+body .WaGadgetDonationForm .donationAmountContainer .fieldBody input { max-width: 220px !important; }
+/* Stacked field layout: WA lays each field as a <table> (label cell / input
+   cell). Force those parts to blocks so the label sits above the input.
+   .fieldSubContainer is WA-only, so this can't touch the page's own markup. */
+body.ngm-donate-page .fieldSubContainer table,
+body.ngm-donate-page .fieldSubContainer tbody,
+body.ngm-donate-page .fieldSubContainer tr,
+body.ngm-donate-page .fieldSubContainer td,
+body .WaGadgetDonationForm .fieldSubContainer table,
+body .WaGadgetDonationForm .fieldSubContainer tbody,
+body .WaGadgetDonationForm .fieldSubContainer tr,
+body .WaGadgetDonationForm .fieldSubContainer td {
+  display: block !important; width: 100% !important; max-width: 100% !important;
+}
+body.ngm-donate-page .fieldSubContainer td.left,
+body .WaGadgetDonationForm .fieldSubContainer td.left { padding: 0 0 6px 0 !important; text-align: left !important; }
+body.ngm-donate-page .fieldSubContainer td.right,
+body .WaGadgetDonationForm .fieldSubContainer td.right { padding: 0 !important; }
+/* Breathing room between field rows */
+body.ngm-donate-page .fieldContainer,
+body .WaGadgetDonationForm .fieldContainer { padding: 7px 0 !important; }
+/* Checkbox groups (Preferred / Alternative phone type) → tidy rows */
+body.ngm-donate-page .checkboxGroupContainer .fieldLabel,
+body .WaGadgetDonationForm .checkboxGroupContainer .fieldLabel {
+  font-family: var(--ngm-sans) !important; font-weight: 600 !important; color: var(--ngm-charcoal) !important;
+}
+body.ngm-donate-page .groupBodyVertical .fieldItem,
+body .WaGadgetDonationForm .groupBodyVertical .fieldItem {
+  display: flex !important; align-items: center !important; gap: 8px !important; margin: 3px 0 !important;
+}
+body.ngm-donate-page .groupBodyVertical .typeCheckbox,
+body .WaGadgetDonationForm .groupBodyVertical .typeCheckbox {
+  accent-color: var(--ngm-sage-dk) !important; width: 16px !important; height: 16px !important;
+}
+body.ngm-donate-page .groupBodyVertical .label .textLine,
+body .WaGadgetDonationForm .groupBodyVertical .label .textLine {
+  font-family: var(--ngm-sans) !important; color: var(--ngm-charcoal) !important;
+}
+/* reCAPTCHA: just give it air; the empty label cell collapses to nothing */
+body.ngm-donate-page #idReCaptchaContainer,
+body .WaGadgetDonationForm #idReCaptchaContainer { margin-top: 8px !important; }
+body.ngm-donate-page #idReCaptchaContainer .fieldLabel,
+body .WaGadgetDonationForm #idReCaptchaContainer .fieldLabel { display: none !important; }
+/* ── Navigation: "Pay with card" (primary) right, Cancel (quiet) left ── */
+body.ngm-donate-page .navigationContainer .inner,
+body .WaGadgetDonationForm .navigationContainer .inner {
+  display: flex !important; flex-wrap: wrap !important; align-items: center !important;
+  justify-content: flex-end !important; gap: 14px !important; margin-top: 8px !important;
+}
+body.ngm-donate-page .navigationContainer .left,
+body .WaGadgetDonationForm .navigationContainer .left { order: 1 !important; float: none !important; width: auto !important; }
+body.ngm-donate-page .navigationContainer .right,
+body .WaGadgetDonationForm .navigationContainer .right { order: 2 !important; float: none !important; width: auto !important; }
+/* "Pay with card" → filled sage pill (it carries .nextButton.button) */
+body.ngm-donate-page .navigationContainer input.nextButton.button,
+body.ngm-donate-page .navigationContainer input[id$="_next"],
+body .WaGadgetDonationForm .navigationContainer input.nextButton.button,
+body .WaGadgetDonationForm .navigationContainer input[id$="_next"] {
+  font-family: var(--ngm-sans) !important; font-size: .95rem !important; font-weight: 600 !important;
+  color: #fff !important; background: var(--ngm-sage-dk) !important;
+  border: 1.5px solid var(--ngm-sage-dk) !important; border-radius: 999px !important;
+  padding: 12px 32px !important; cursor: pointer !important; transition: background .15s ease !important;
+  -webkit-appearance: none !important; appearance: none !important;
+}
+body.ngm-donate-page .navigationContainer input.nextButton.button:hover,
+body.ngm-donate-page .navigationContainer input[id$="_next"]:hover,
+body .WaGadgetDonationForm .navigationContainer input.nextButton.button:hover,
+body .WaGadgetDonationForm .navigationContainer input[id$="_next"]:hover {
+  background: var(--ngm-sage) !important; border-color: var(--ngm-sage) !important;
+}
+/* Cancel ("Exit donation?") → quiet grey text link, not a button */
+body.ngm-donate-page .navigationContainer input[id$="_cancel"],
+body.ngm-donate-page .navigationContainer input[id$="_cancelNoScript"],
+body.ngm-donate-page .navigationContainer input[name$="$cancel"],
+body .WaGadgetDonationForm .navigationContainer input[id$="_cancel"],
+body .WaGadgetDonationForm .navigationContainer input[id$="_cancelNoScript"],
+body .WaGadgetDonationForm .navigationContainer input[name$="$cancel"] {
+  background: transparent !important; border: none !important; box-shadow: none !important;
+  color: var(--ngm-gray) !important; font-family: var(--ngm-sans) !important; font-size: .9rem !important;
+  font-weight: 500 !important; padding: 10px 6px !important; text-decoration: none !important;
+  cursor: pointer !important; -webkit-appearance: none !important; appearance: none !important;
+}
+body.ngm-donate-page .navigationContainer input[id$="_cancel"]:hover,
+body.ngm-donate-page .navigationContainer input[name$="$cancel"]:hover,
+body .WaGadgetDonationForm .navigationContainer input[id$="_cancel"]:hover,
+body .WaGadgetDonationForm .navigationContainer input[name$="$cancel"]:hover {
+  color: var(--ngm-sage-dk) !important; text-decoration: underline !important; background: transparent !important;
+}
+/* Mobile */
+@media (max-width: 640px) {
+  body.ngm-donate-page #idGeneralFormContainer,
+  body .WaGadgetDonationForm #idGeneralFormContainer { margin: 0 !important; padding: 22px 18px 26px !important; }
+  body.ngm-donate-page .navigationContainer .inner,
+  body .WaGadgetDonationForm .navigationContainer .inner { flex-direction: column !important; align-items: stretch !important; }
+  body.ngm-donate-page .navigationContainer input.nextButton.button,
+  body .WaGadgetDonationForm .navigationContainer input.nextButton.button { width: 100% !important; }
+}
 /* Read-only review values: links (e.g. the email) on-brand, not WA magenta */
 body .WaGadgetMembershipApplication .fieldBody a,
 body .WaGadgetPublicWizard .fieldBody a {
