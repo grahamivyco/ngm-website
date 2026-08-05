@@ -4560,6 +4560,9 @@ body a.ngm-lcard-email:hover { color:var(--ngm-sage-dk)!important; }
    spacing on the page layout wrapper for good measure.
    (#idPageShadingContainer is NOT the strip — it's WA's hidden off-screen
    admin wait-overlay; leave it alone.) */
+/* NB: the live zone class is "zoneWAbranding" — lowercase b (verified in the
+   DOM); both spellings kept in case WA ever normalises it. */
+.zonePlace.zoneWAbranding,
 .zonePlace.zoneWABranding { display: none !important; }
 body .mLayout { padding-bottom: 0 !important; margin-bottom: 0 !important; }
 
