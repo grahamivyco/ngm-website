@@ -6167,10 +6167,27 @@ body.ngm-join-page .WaGadgetMembershipApplication {
 body.ngm-join-page .WaGadgetMembershipApplication .gadgetStyleBody {
   padding: 24px clamp(24px, 4vw, 48px) 22px !important;
 }
-/* The gadget's own title + "* Mandatory fields" note repeat the "Begin your
-   membership" heading band right above — hide them to shrink the card. */
-body.ngm-join-page .WaGadgetMembershipApplication h3.formTitle,
+/* Keep the gadget's own title (the card looked bare without one) but drop
+   the "* Mandatory fields" note. Strip the leftover box chrome — the bare
+   divider line WA draws across the top of the card — and collapse the empty
+   wrapper space that pushed the Next button far below the email field. */
 body.ngm-join-page .WaGadgetMembershipApplication .mandatoryFieldsTitle { display: none !important; }
+body.ngm-join-page .WaGadgetMembershipApplication hr,
+body.ngm-join-page .WaGadgetMembershipApplication .sectionDelimiter { display: none !important; }
+body.ngm-join-page .WaGadgetMembershipApplication .formTitleOuterContainer,
+body.ngm-join-page .WaGadgetMembershipApplication .formTitleContainer,
+body.ngm-join-page .WaGadgetMembershipApplication .formOuterContainer,
+body.ngm-join-page .WaGadgetMembershipApplication .formContainer,
+body.ngm-join-page .WaGadgetMembershipApplication .generalFormContainer,
+body.ngm-join-page .WaGadgetMembershipApplication .generalFieldsOuterContainer,
+body.ngm-join-page .WaGadgetMembershipApplication .generalFieldsContainer,
+body.ngm-join-page .WaGadgetMembershipApplication .sectionOuterContainer,
+body.ngm-join-page .WaGadgetMembershipApplication .sectionContainer {
+  border: none !important; background: transparent !important;
+  padding: 0 !important; margin: 0 !important; min-height: 0 !important;
+}
+body.ngm-join-page .WaGadgetMembershipApplication .fieldMain,
+body.ngm-join-page .WaGadgetMembershipApplication .fieldBody { min-height: 0 !important; }
 body.ngm-join-page .WaGadgetMembershipApplication .fieldContainer { padding: 3px 0 !important; }
 body.ngm-join-page .WaGadgetMembershipApplication .navigationOuterContainer,
 body.ngm-join-page .WaGadgetMembershipApplication .navigationContainer {
