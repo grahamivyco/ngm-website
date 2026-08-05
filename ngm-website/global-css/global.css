@@ -3673,6 +3673,17 @@ body.ngm-login-page .WaLayoutContainer,
 body.ngm-login-page .WaLayoutContainerOnly{ margin:0 !important; }
 body.ngm-login-page .WaPlaceHolder,
 body.ngm-login-page .WaLayoutPlaceHolder{ margin:0 !important; padding:0 !important; }
+/* The classless wrapper divs INSIDE the placeholders carry theme padding that
+   WA's inline style only zeroes on two sides (style="padding-bottom:0;
+   padding-left:0" — top/right survive). No class to hook, so hit the direct
+   children. Also un-constrain the theme's 1230px content box and stretch the
+   layout tables, so the split truly reaches the page edges. */
+body.ngm-login-page .WaPlaceHolder > div,
+body.ngm-login-page .WaLayoutPlaceHolder > div{ margin:0 !important; padding:0 !important; }
+body.ngm-login-page .mLayout,
+body.ngm-login-page .zonePlace.zoneContent,
+body.ngm-login-page .WaPlaceHolderContent{ max-width:none !important; margin:0 !important; padding:0 !important; }
+body.ngm-login-page table.WaLayoutTable{ width:100% !important; }
 body.ngm-login-page td.WaLayoutItem{ padding:0 !important; }
 body.ngm-login-page td.WaLayoutSeparator{ width:0 !important; padding:0 !important; }
 body.ngm-login-page td.WaLayoutSeparator > div{ width:0 !important; }
