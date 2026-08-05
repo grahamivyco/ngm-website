@@ -6153,6 +6153,42 @@ body .WaGadgetDonationForm .fieldContainer { padding: 3px 0 !important; }
 /* Shorter multi-line boxes (WA renders "Donor directions" as rows=6) */
 body.ngm-donate-page .fieldBody textarea,
 body .WaGadgetDonationForm .fieldBody textarea { min-height: 0 !important; height: 84px !important; }
+/* ── Two-column field layout (desktop/tablet) ──────────────────────────────
+   The form is full-width now, so the fields flow in a grid instead of one long
+   field per row. The fields are the direct children of the section's .inner
+   box; make that a 6-col grid and span each field by how wide it should read:
+   halves span 3 (First/Last, the two phone pairs), the City/State/Zip row spans
+   2 each (three across), and long fields (email, street, country, amount,
+   textareas) span all 6. Spans are mapped by WA field id — if donation fields
+   are added or removed, unknown ones simply fall back to half-width (span 3),
+   and rules for removed fields go inert. Stacks to one column on mobile. */
+@media (min-width: 641px) {
+  body.ngm-donate-page #idSectionDonationFormContainer .inner {
+    display: grid !important; grid-template-columns: repeat(6, 1fr) !important;
+    gap: 14px 22px !important; align-items: start !important;
+  }
+  body.ngm-donate-page #idSectionDonationFormContainer .inner > .fieldContainer {
+    grid-column: span 3 !important; padding: 0 !important;
+  }
+  /* City / State / Zip → thirds, three across */
+  body.ngm-donate-page #idContainer12118931,   /* City  */
+  body.ngm-donate-page #idContainer12118932,   /* State */
+  body.ngm-donate-page #idContainer12118933 {  /* Zip   */
+    grid-column: span 2 !important;
+  }
+  /* Long fields → full width */
+  body.ngm-donate-page #idContainer12024896,   /* Email            */
+  body.ngm-donate-page #idContainer12118929,   /* Street Address 1 */
+  body.ngm-donate-page #idContainer12118930,   /* Street Address 2 */
+  body.ngm-donate-page #idContainer12118934,   /* Country          */
+  body.ngm-donate-page #idContainer12143216,   /* Donor Note       */
+  body.ngm-donate-page .donationAmountContainer,                 /* Amount */
+  body.ngm-donate-page .fieldContainer:has(.multiLinesContainer) /* Donor directions (textarea) */ {
+    grid-column: span 6 !important;
+  }
+  /* the float-clear helper isn't a field — drop it from the grid */
+  body.ngm-donate-page #idSectionDonationFormContainer .clearEndContainer { display: none !important; }
+}
 /* Checkbox groups (Preferred / Alternative phone type) → tidy rows */
 body.ngm-donate-page .checkboxGroupContainer .fieldLabel,
 body .WaGadgetDonationForm .checkboxGroupContainer .fieldLabel {

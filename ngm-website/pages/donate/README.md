@@ -44,4 +44,13 @@ fallback — and cards `#idGeneralFormContainer` (the container that holds the
 whole form: title → fields → reCAPTCHA → "Pay with card"), flattening WA's
 sliced rounded-corner box chrome around it.
 
+### Two-column field layout
+On desktop/tablet the form fields flow in a 6-column grid (First/Last and the
+phone pairs side by side; City/State/Zip three across; email/street/country/
+amount/textareas full width); it stacks to one column on mobile. The spans are
+mapped to the WA field **ids** in the "DONATION FORM" block of `global.css`
+(e.g. `#idContainer12024896` = Email). If you add or remove donation fields in
+WA, unknown fields fall back to half-width and any removed field's rule just
+goes inert — update the id map if you want a new field placed differently.
+
 After the master `global.css` is live, use the `.html` versions.
