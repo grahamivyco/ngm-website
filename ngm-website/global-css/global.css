@@ -919,9 +919,14 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"]  .ngm-evt-ta
    toolbar adds its own space that is NOT on the live page.
 ────────────────────────────────────────────────────────── */
 /* Remove the box padding/margin WA puts around each custom-HTML
-   gadget body, so our full-bleed sections truly reach the edges. */
+   gadget body, so our full-bleed sections truly reach the edges.
+   NB: the LIVE class is "WaGadgetCustomHTML" (uppercase HTML — verified in
+   the DOM) and CSS classes are case-sensitive, so both spellings are listed;
+   the lowercase variant is kept in case any theme emits it. */
 body .WaGadgetCustomHtml,
-body .WaGadgetCustomHtml .gadgetStyleBody {
+body .WaGadgetCustomHtml .gadgetStyleBody,
+body .WaGadgetCustomHTML,
+body .WaGadgetCustomHTML .gadgetStyleBody {
   margin: 0 !important;
   padding: 0 !important;
 }
@@ -3655,6 +3660,23 @@ body .ngm-login-hero .ngm-lh-sub{ font-family:var(--ngm-sans)!important; font-si
 .ngm-login-foot a{ font-family:var(--ngm-sans); font-weight:500; color:var(--ngm-sage-dk); text-decoration:none; border-bottom:1px solid rgba(62,85,56,.3); padding-bottom:1px; transition:border-color .18s; }
 .ngm-login-foot a:hover{ border-color:var(--ngm-sage-dk); }
 
+/* ── Flatten WA wrapper chrome on the login/auth pages ──
+   Theme margins on gadget wrappers and padding on layout cells/placeholders
+   inset the split from the edges (white strip on top + gutters around the
+   sage cell — seen on the live /Sys/Login). Zero them all, page-scoped.
+   The auth gadget is excluded from the margin reset (its card centres with
+   margin:auto); the auth cell's own padding rule below out-ranks the
+   td reset via :has(). */
+body.ngm-login-page .zoneContent .WaGadget:not(.WaGadgetAuthorizationRequired){ margin:0 !important; }
+body.ngm-login-page .zoneContent .gadgetStyleBody{ margin:0 !important; padding:0 !important; }
+body.ngm-login-page .WaLayoutContainer,
+body.ngm-login-page .WaLayoutContainerOnly{ margin:0 !important; }
+body.ngm-login-page .WaPlaceHolder,
+body.ngm-login-page .WaLayoutPlaceHolder{ margin:0 !important; padding:0 !important; }
+body.ngm-login-page td.WaLayoutItem{ padding:0 !important; }
+body.ngm-login-page td.WaLayoutSeparator{ width:0 !important; padding:0 !important; }
+body.ngm-login-page td.WaLayoutSeparator > div{ width:0 !important; }
+
 /* ── Give the form gadget breathing room; full-width block so the card
    always centres (via .loginContainer/.loginPanel margin:auto) ── */
 body.ngm-login-page .WaGadgetLoginForm{ display:block; width:100%; box-sizing:border-box; padding:44px 20px 20px; }
@@ -3695,10 +3717,14 @@ body.ngm-login-page .WaGadgetLoginForm{ display:block; width:100%; box-sizing:bo
     background-repeat:no-repeat !important;
     background-position:center !important;
   }
-  /* the hero div is transparent now (the cell carries the sage) */
+  /* the hero div is transparent now (the cell carries the sage). It also
+     carries the 90%-viewport height itself (flex-centred copy) so the tall
+     panel doesn't depend on the td height rule matching WA's structure. */
   body.ngm-login-page .ngm-login-hero{
     background:transparent !important;
     padding:clamp(48px,6vw,72px) clamp(36px,4vw,68px) !important;
+    min-height:calc(90vh - var(--ngm-head-h));
+    display:flex; flex-direction:column; justify-content:center;
   }
   /* centre the form card vertically in its equal-height cell too */
   body.ngm-login-page td.WaLayoutItem:has(.WaGadgetLoginForm){ vertical-align:middle !important; }
@@ -4184,20 +4210,19 @@ body .WaGadgetAuthorizationRequired .loginPageTable td {
   padding: 0 !important;
 }
 
-/* Field labels ("Email" / "Password") */
-body .WaGadgetAuthorizationRequired .mandatory {
-  display: block !important;
-  font-size: .8rem !important;
-  font-weight: 500 !important;
-  color: #656565 !important;
-  margin-bottom: 6px !important;
-}
+/* Field labels ("Email" / "Password") — HIDDEN to match the /log-in form,
+   which labels the fields with in-field placeholders instead. The
+   placeholders are set by the small script in system-pages/login/01-top.html
+   (the native auth form ships without them). */
+body .WaGadgetAuthorizationRequired .mandatory { display: none !important; }
 body .WaGadgetAuthorizationRequired .mandatorySymbol { display: none !important; }
 
-/* Email + password inputs */
+/* Email + password inputs — same size/skin as the /log-in form fields
+   (height:auto beats WA's fixed input height, which made these look short) */
 body .WaGadgetAuthorizationRequired #idLoginBox input,
 body .WaGadgetAuthorizationRequired #idPasswordBox input {
   width: 100% !important;
+  height: auto !important;
   font-size: .95rem !important;
   padding: 12px 14px !important;
   border: 1px solid #DDD5C8 !important;
