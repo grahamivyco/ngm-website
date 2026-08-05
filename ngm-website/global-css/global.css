@@ -3606,37 +3606,23 @@ a.ngm-hub-card:hover .ngm-hub-card-cta { gap: 10px; }
 ══════════════════════════════════════════════════════════════════ */
 body.ngm-login-page{ --ngm-hero-w:50vw; --ngm-head-h:86px; background:#fff; overflow-x:hidden; }
 
-/* ── Hero visuals (also render standalone in 01-top.html preview) ── */
+/* ── Hero visuals (also render standalone in 01-top.html preview) ──
+   Plain green panel: no dot texture, no rose glow, no needle-mark icon —
+   just the soft sage gradient behind the copy. */
 .ngm-login-hero{
   position:relative; overflow:hidden;
   background:radial-gradient(120% 90% at 15% 0%,#4a6342 0%,var(--ngm-sage-dk) 55%,#33472e 100%);
   color:var(--ngm-cream);
   padding:56px clamp(24px,4vw,68px);
 }
-.ngm-login-hero::before{
-  content:""; position:absolute; inset:0; opacity:.10; pointer-events:none;
-  background-image:radial-gradient(circle at 1px 1px,#fff 1.2px,transparent 0);
-  background-size:26px 26px;
-}
-.ngm-lh-glow{
-  position:absolute; width:520px; height:520px; border-radius:50%; pointer-events:none;
-  background:radial-gradient(circle,rgba(184,114,96,.30),transparent 62%);
-  right:-160px; top:-120px;
-}
 .ngm-login-hero-inner{ position:relative; max-width:440px; }
-.ngm-login-mark{ display:block; width:52px; height:57px; margin-bottom:30px; }
 /* NOTE: body-prefixed + !important because WA's theme (casefile_guardian)
    uses very high-specificity heading rules that otherwise recolour this h1
    purple and force UPPERCASE — see docs/wa-notes.md. */
 body .ngm-login-hero .ngm-lh-eyebrow{ display:block; font-family:var(--ngm-sans)!important; font-size:.72rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase!important; color:#D8B7AC!important; margin-bottom:18px; }
 body .ngm-login-hero .ngm-lh-title{ font-family:var(--ngm-serif)!important; font-weight:500; font-size:clamp(2.3rem,3.6vw,3.4rem); line-height:1.08; color:var(--ngm-cream)!important; text-transform:none!important; letter-spacing:.01em; margin-bottom:20px; }
 body .ngm-login-hero .ngm-lh-title em{ font-style:italic!important; color:#E7C0B4!important; text-transform:none!important; }
-body .ngm-login-hero .ngm-lh-sub{ font-family:var(--ngm-sans)!important; font-size:1.04rem!important; line-height:1.75!important; color:rgba(250,247,242,.82)!important; text-transform:none!important; margin-bottom:38px; max-width:400px; }
-body .ngm-login-hero .ngm-lh-list li{ color:rgba(250,247,242,.92)!important; text-transform:none!important; }
-.ngm-lh-list{ list-style:none; display:flex; flex-direction:column; gap:16px; margin:0; padding:0; }
-.ngm-lh-list li{ display:flex; align-items:center; gap:14px; font-family:var(--ngm-sans); font-size:.98rem; color:rgba(250,247,242,.92); }
-.ngm-lh-tick{ flex-shrink:0; width:26px; height:26px; border-radius:50%; background:rgba(255,255,255,.12); border:1px solid rgba(231,192,180,.5); display:flex; align-items:center; justify-content:center; }
-.ngm-lh-tick svg{ width:13px; height:13px; fill:none; stroke:#E7C0B4; stroke-width:3; stroke-linecap:round; stroke-linejoin:round; }
+body .ngm-login-hero .ngm-lh-sub{ font-family:var(--ngm-sans)!important; font-size:1.04rem!important; line-height:1.75!important; color:rgba(250,247,242,.82)!important; text-transform:none!important; margin-bottom:0; max-width:400px; }
 
 /* ── Join line beneath the form (03-bottom) ── */
 .ngm-login-foot{ background:transparent; padding:6px 24px 32px; text-align:center; }
@@ -3669,27 +3655,24 @@ body.ngm-login-page .WaGadgetLoginForm{ display:block; width:100%; box-sizing:bo
      them 50/50 — so we must NOT set display/flex on the <td> (that pulls it out
      of the table and collapses its width, which is what broke it before).
      Instead we paint the sage straight onto the LEFT cell so it fills the full
-     (equal) height, and vertical-align:middle centres the hero content. The
-     dot texture moves onto the cell too (the hero div is now transparent).
+     (equal) height, and vertical-align:middle centres the hero content (the
+     hero div is transparent; the cell carries the plain sage gradient).
      Guarded against BOTH form gadgets (.WaGadgetLoginForm on /log-in,
      .WaGadgetAuthorizationRequired on /Sys/Login) so a nested/outer cell that
      contains hero + form can never be painted green. */
   body.ngm-login-page td.WaLayoutItem:has(.ngm-login-hero):not(:has(.WaGadgetLoginForm)):not(:has(.WaGadgetAuthorizationRequired)){
     vertical-align:middle !important;
     background-color:#3E5538 !important;
-    background-image:
-      radial-gradient(circle at 1px 1px, rgba(255,255,255,.10) 1.2px, transparent 0),
-      radial-gradient(120% 90% at 15% 0%, #4a6342 0%, #3E5538 55%, #33472e 100%) !important;
-    background-size:26px 26px, auto !important;
-    background-repeat:repeat, no-repeat !important;
-    background-position:0 0, center !important;
+    background-image:radial-gradient(120% 90% at 15% 0%, #4a6342 0%, #3E5538 55%, #33472e 100%) !important;
+    background-size:auto !important;
+    background-repeat:no-repeat !important;
+    background-position:center !important;
   }
-  /* the hero div is transparent now (the cell carries the sage + texture) */
+  /* the hero div is transparent now (the cell carries the sage) */
   body.ngm-login-page .ngm-login-hero{
     background:transparent !important;
     padding:clamp(48px,6vw,72px) clamp(36px,4vw,68px) !important;
   }
-  body.ngm-login-page .ngm-login-hero::before{ display:none !important; }
   /* centre the form card vertically in its equal-height cell too */
   body.ngm-login-page td.WaLayoutItem:has(.WaGadgetLoginForm){ vertical-align:middle !important; }
   body.ngm-login-page .WaGadgetLoginForm{
@@ -3728,17 +3711,14 @@ body.ngm-login-page .WaGadgetLoginForm{ display:block; width:100%; box-sizing:bo
   body.ngm-login-page .ngm:has(> .ngm-login-hero){ height:auto !important; }
 
   /* Stacked (tablet + phone): slim branded hero strip on top so the LOGIN
-     FORM leads — same treatment across tablet and mobile. Subcopy + benefits
-     (nice-to-have context) hidden. */
+     FORM leads — same treatment across tablet and mobile. Eyebrow stays above
+     the title; the subcopy (nice-to-have context) is hidden. */
   body.ngm-login-page .ngm-login-hero{ padding:22px 22px 24px; text-align:center; }
   body.ngm-login-page .ngm-login-hero-inner{ max-width:none; }
-  body.ngm-login-page .ngm-lh-glow{ display:none; }
-  body.ngm-login-page .ngm-login-mark{ display:none; }
-  body.ngm-login-page .ngm-lh-eyebrow{ display:none; }
+  body.ngm-login-page .ngm-lh-eyebrow{ margin-bottom:8px; }
   body.ngm-login-page .ngm-lh-title{ font-size:1.55rem; line-height:1.15; margin-bottom:0; }
   body.ngm-login-page .ngm-lh-title br{ display:none; }
-  body.ngm-login-page .ngm-lh-sub,
-  body.ngm-login-page .ngm-lh-list{ display:none; }
+  body.ngm-login-page .ngm-lh-sub{ display:none; }
   body.ngm-login-page .WaGadgetLoginForm{ padding:26px 16px 14px !important; }
 }
 
