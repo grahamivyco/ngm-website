@@ -6157,9 +6157,25 @@ body .WaGadgetMembershipApplication .gadgetStyleBody {
    tuck the card up under the heading. Everything else comes from the
    site-wide card + form skin above. */
 body.ngm-join-page *:has(> .WaGadgetMembershipApplication) { background: #fff !important; }
-body.ngm-join-page .WaGadgetMembershipApplication { margin: 10px auto 64px !important; }
+/* Wider card (1080px like the donate form), clear air between the heading
+   copy above and the form, and a tighter interior: less space between the
+   email field and the Next button, and less dead space under the button. */
+body.ngm-join-page .WaGadgetMembershipApplication {
+  max-width: 1080px !important;
+  margin: 34px auto 64px !important;
+}
+body.ngm-join-page .WaGadgetMembershipApplication .gadgetStyleBody {
+  padding: 32px clamp(24px, 4vw, 48px) 26px !important;
+}
+body.ngm-join-page .WaGadgetMembershipApplication .fieldContainer { padding: 3px 0 !important; }
+body.ngm-join-page .WaGadgetMembershipApplication .navigationOuterContainer,
+body.ngm-join-page .WaGadgetMembershipApplication .navigationContainer {
+  margin: 12px 0 0 !important;
+  padding: 0 !important;
+}
 @media (max-width: 640px) {
-  body.ngm-join-page .WaGadgetMembershipApplication { margin: 6px 16px 44px !important; }
+  body.ngm-join-page .WaGadgetMembershipApplication { margin: 22px 16px 44px !important; }
+  body.ngm-join-page .WaGadgetMembershipApplication .gadgetStyleBody { padding: 22px 18px 20px !important; }
 }
 
 /* ══════════════════════════════════════════════════════════════════
