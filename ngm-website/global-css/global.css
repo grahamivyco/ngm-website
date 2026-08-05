@@ -6165,8 +6165,12 @@ body.ngm-join-page .WaGadgetMembershipApplication {
   margin: 34px auto 64px !important;
 }
 body.ngm-join-page .WaGadgetMembershipApplication .gadgetStyleBody {
-  padding: 32px clamp(24px, 4vw, 48px) 26px !important;
+  padding: 24px clamp(24px, 4vw, 48px) 22px !important;
 }
+/* The gadget's own title + "* Mandatory fields" note repeat the "Begin your
+   membership" heading band right above — hide them to shrink the card. */
+body.ngm-join-page .WaGadgetMembershipApplication h3.formTitle,
+body.ngm-join-page .WaGadgetMembershipApplication .mandatoryFieldsTitle { display: none !important; }
 body.ngm-join-page .WaGadgetMembershipApplication .fieldContainer { padding: 3px 0 !important; }
 body.ngm-join-page .WaGadgetMembershipApplication .navigationOuterContainer,
 body.ngm-join-page .WaGadgetMembershipApplication .navigationContainer {
