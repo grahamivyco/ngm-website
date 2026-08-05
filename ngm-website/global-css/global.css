@@ -3614,6 +3614,21 @@ body.ngm-login-page{ --ngm-hero-w:50vw; --ngm-head-h:86px; background:#fff; over
    is re-pasting system-pages/login/01-top.html into that page's gadget
    (which also updates the eyebrow text — CSS can't rewrite "Member Login"). */
 .ngm-lh-glow, .ngm-login-mark, .ngm-lh-list{ display:none !important; }
+/* Old-markup gadgets also still say "Member Login" in the eyebrow. Zero out
+   the rendered text and draw "Log In" with a pseudo-element instead, so the
+   page reads right from a CSS publish alone. On the NEW markup (text already
+   "Log In") this renders identically, so it's safe everywhere. Remove both
+   this and the hide-rule above once every hero gadget carries the current
+   01-top.html. */
+body .ngm-login-hero .ngm-lh-eyebrow{ font-size:0 !important; line-height:0 !important; }
+body .ngm-login-hero .ngm-lh-eyebrow::after{
+  content:"Log In";
+  display:block;
+  font-family:var(--ngm-sans) !important;
+  font-size:.72rem; font-weight:600; line-height:1.2;
+  letter-spacing:.2em; text-transform:uppercase !important;
+  color:#D8B7AC !important;
+}
 
 /* ── Hero visuals (also render standalone in 01-top.html preview) ──
    Plain green panel: no dot texture, no rose glow, no needle-mark icon —
