@@ -3670,7 +3670,7 @@ body .ngm-login-hero .ngm-lh-sub{ font-family:var(--ngm-sans)!important; font-si
 body.ngm-login-page .zoneContent .WaGadget:not(.WaGadgetAuthorizationRequired){ margin:0 !important; }
 body.ngm-login-page .zoneContent .gadgetStyleBody{ margin:0 !important; padding:0 !important; }
 body.ngm-login-page .WaLayoutContainer,
-body.ngm-login-page .WaLayoutContainerOnly{ margin:0 !important; }
+body.ngm-login-page .WaLayoutContainerOnly{ margin:0 !important; padding:0 !important; }
 body.ngm-login-page .WaPlaceHolder,
 body.ngm-login-page .WaLayoutPlaceHolder{ margin:0 !important; padding:0 !important; }
 /* The classless wrapper divs INSIDE the placeholders carry theme padding that
@@ -3683,7 +3683,14 @@ body.ngm-login-page .WaLayoutPlaceHolder > div{ margin:0 !important; padding:0 !
 body.ngm-login-page .mLayout,
 body.ngm-login-page .zonePlace.zoneContent,
 body.ngm-login-page .WaPlaceHolderContent{ max-width:none !important; margin:0 !important; padding:0 !important; }
-body.ngm-login-page table.WaLayoutTable{ width:100% !important; }
+/* cellspacing="0" is only a weak presentational hint — if the theme sets
+   border-spacing on layout tables it wins, ringing every cell with even
+   space on ALL sides (the exact symptom on the live /Sys/Login). Collapse. */
+body.ngm-login-page table.WaLayoutTable{
+  width:100% !important;
+  border-collapse:collapse !important;
+  border-spacing:0 !important;
+}
 body.ngm-login-page td.WaLayoutItem{ padding:0 !important; }
 body.ngm-login-page td.WaLayoutSeparator{ width:0 !important; padding:0 !important; }
 body.ngm-login-page td.WaLayoutSeparator > div{ width:0 !important; }
