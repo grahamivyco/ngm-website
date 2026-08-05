@@ -6249,24 +6249,18 @@ body .WaGadgetDonationForm .navigationContainer input.nextButton.button:hover,
 body .WaGadgetDonationForm .navigationContainer input[id$="_next"]:hover {
   background: var(--ngm-sage) !important; border-color: var(--ngm-sage) !important;
 }
-/* Cancel ("Exit donation?") → quiet grey text link, not a button */
+/* Cancel button ("Exit donation?") → hidden. It lives alone in the nav's .left
+   group, so hide that group and the cancel inputs (belt-and-suspenders). The
+   remaining "Donate securely" button stays right-aligned. */
+body.ngm-donate-page .navigationContainer .left,
+body .WaGadgetDonationForm .navigationContainer .left,
 body.ngm-donate-page .navigationContainer input[id$="_cancel"],
 body.ngm-donate-page .navigationContainer input[id$="_cancelNoScript"],
 body.ngm-donate-page .navigationContainer input[name$="$cancel"],
 body .WaGadgetDonationForm .navigationContainer input[id$="_cancel"],
 body .WaGadgetDonationForm .navigationContainer input[id$="_cancelNoScript"],
 body .WaGadgetDonationForm .navigationContainer input[name$="$cancel"] {
-  background: transparent !important; border: none !important; box-shadow: none !important;
-  color: var(--ngm-gray) !important; font-family: var(--ngm-sans) !important; font-size: .9rem !important;
-  font-weight: 500 !important; padding: 10px 6px !important; text-decoration: none !important;
-  text-transform: none !important; letter-spacing: normal !important; min-width: 0 !important; margin: 0 !important;
-  cursor: pointer !important; -webkit-appearance: none !important; appearance: none !important;
-}
-body.ngm-donate-page .navigationContainer input[id$="_cancel"]:hover,
-body.ngm-donate-page .navigationContainer input[name$="$cancel"]:hover,
-body .WaGadgetDonationForm .navigationContainer input[id$="_cancel"]:hover,
-body .WaGadgetDonationForm .navigationContainer input[name$="$cancel"]:hover {
-  color: var(--ngm-sage-dk) !important; text-decoration: underline !important; background: transparent !important;
+  display: none !important;
 }
 /* Mobile */
 @media (max-width: 640px) {
