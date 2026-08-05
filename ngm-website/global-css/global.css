@@ -3813,8 +3813,14 @@ body.ngm-login-page .WaGadgetLoginForm{ display:block; width:100%; box-sizing:bo
    the page's white background and the white .WaGadgetAuthorizationRequired
    card (styled further below) centres on it — matching the login form exactly.
 ══════════════════════════════════════════════════════════════════ */
+/* NB: the form-cell rules carry :not(:has(td)) — :has() matches at ANY depth,
+   so without it the OUTER full-width wrapper cell (which contains the whole
+   nested 2-column layout, form included) also matched and its padding ringed
+   the entire split (verified on the live /Sys/Login: td#id_WhGgC1Z got
+   padding:48px 56px). Only the innermost cell — the one with no <td> inside —
+   is the real form cell. */
 @media(min-width:981px){
-  body.ngm-login-page td.WaLayoutItem:has(.WaGadgetAuthorizationRequired){
+  body.ngm-login-page td.WaLayoutItem:has(.WaGadgetAuthorizationRequired):not(:has(td)){
     vertical-align:middle !important;
     padding:48px clamp(24px,4vw,56px) !important;
   }
@@ -3826,7 +3832,7 @@ body.ngm-login-page .WaGadgetLoginForm{ display:block; width:100%; box-sizing:bo
   body.ngm-login-page *:has(.WaGadgetAuthorizationRequired):not(:has(.ngm-login-hero)){
     display:block !important; width:100% !important; max-width:100% !important; float:none !important;
   }
-  body.ngm-login-page td.WaLayoutItem:has(.WaGadgetAuthorizationRequired){
+  body.ngm-login-page td.WaLayoutItem:has(.WaGadgetAuthorizationRequired):not(:has(td)){
     padding:16px 16px 28px !important;
   }
 }
