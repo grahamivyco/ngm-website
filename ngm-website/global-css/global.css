@@ -3606,6 +3606,15 @@ a.ngm-hub-card:hover .ngm-hub-card-cta { gap: 10px; }
 ══════════════════════════════════════════════════════════════════ */
 body.ngm-login-page{ --ngm-hero-w:50vw; --ngm-head-h:86px; background:#fff; overflow-x:hidden; }
 
+/* ── SAFETY NET for stale hero gadgets ──
+   The hero markup dropped the glow, needle-mark icon and tick checklist, but
+   a WA gadget that still has the OLD 01-top.html pasted (e.g. /Sys/Login
+   before its re-paste) would render them unstyled — giant sizeless SVGs and
+   raw bullets. Hide those legacy elements wherever they appear; the real fix
+   is re-pasting system-pages/login/01-top.html into that page's gadget
+   (which also updates the eyebrow text — CSS can't rewrite "Member Login"). */
+.ngm-lh-glow, .ngm-login-mark, .ngm-lh-list{ display:none !important; }
+
 /* ── Hero visuals (also render standalone in 01-top.html preview) ──
    Plain green panel: no dot texture, no rose glow, no needle-mark icon —
    just the soft sage gradient behind the copy. */
