@@ -5,13 +5,14 @@
 Sandwich, one layout column:
 1. `01-top.html` — Custom HTML: hero (eyebrow "Donate" + short copy that folds
    in why-give, where gifts go, and the 501(c)(3) / tax-deductible line, beside
-   a photo) then the "Give online" heading. Tags `<body class="ngm-donate-page">`
-   and makes the hero **"Donate now"** button scroll to the inline form
-   (`#ngm-give`) instead of leaving for WA's separate `/donation` page — visitors
-   reach the form without clicking through.
+   a photo — no CTA buttons) then the "Give online" heading (`#ngm-give`). Tags
+   `<body class="ngm-donate-page">` so `global.css` can skin the form, and
+   relabels the submit button to "Donate securely".
 2. Native WA **"Donation form"** gadget — placed RIGHT HERE, in the same
    layout column, so the form shows inline on the page (no extra step). No CSS
-   class needed; it's skinned by `global.css` (see `02-form-gadget.txt`).
+   class needed; it's skinned by `global.css` (see `02-form-gadget.txt`). The
+   skin paints the form's layout cell linen (`#F0EAE0`, same band as "Give
+   online") with normal section spacing above and below.
 3. `03-bottom.html` — Custom HTML: **Other ways to give** as three icon cards
    (`.ngm-pillars` — By mail / Give monthly / In honor or memory), then the
    thank-you CTA. There is no FAQ section: its answers were folded into the hero

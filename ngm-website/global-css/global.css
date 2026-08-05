@@ -5993,13 +5993,24 @@ body .WaGadgetMembershipApplication .gadgetStyleBody {
    chrome around it. Visuals mirror the membership skin so both read as one
    system. Verified against the live donation-form DOM.
 ══════════════════════════════════════════════════════════════════ */
+/* ── Linen band + section spacing around the form ──────────────────────────
+   Paint the WA layout CELL that holds the donation form linen (#F0EAE0), so
+   the form sits on the same colour as the "Give online" band above it, with
+   normal section padding above and below. Guarded with :not(:has(...)) so it
+   can NEVER bleed onto the hero or the "other ways" cards if WA ever nests all
+   three custom blocks in one cell — in that case it simply doesn't paint, and
+   you can set the form row's background to #F0EAE0 in the WA layout editor. */
+body.ngm-donate-page td.WaLayoutItem:has(#idGeneralFormContainer):not(:has(.ngm-mt-hero-grid)):not(:has(.ngm-si-cta)) {
+  background: var(--ngm-linen) !important;
+  padding: 60px 24px 44px !important; box-sizing: border-box !important;
+}
 /* ── Card + centre the whole form; strip WA's rounded-corner sprite chrome ── */
 body.ngm-donate-page #idGeneralFormContainer,
 body .WaGadgetDonationForm #idGeneralFormContainer {
   max-width: 780px !important; margin: 0 auto !important;
   background: #fff !important; border: 1px solid var(--ngm-border) !important;
   border-radius: var(--ngm-radius-lg) !important; box-shadow: var(--ngm-shm) !important;
-  padding: 26px clamp(20px,3vw,40px) 32px !important; box-sizing: border-box !important;
+  padding: 22px clamp(20px,3vw,40px) 24px !important; box-sizing: border-box !important;
 }
 /* Hide the sprite corner caps (empty spacer divs that drew the old box edges) */
 body.ngm-donate-page #idGeneralFormContainer .cornersContainer,
@@ -6097,7 +6108,7 @@ body .WaGadgetDonationForm .fieldBody input.typeText,
 body .WaGadgetDonationForm .fieldBody input.typeTextBox,
 body .WaGadgetDonationForm .fieldBody select,
 body .WaGadgetDonationForm .fieldBody textarea {
-  font-family: var(--ngm-sans) !important; font-size: .95rem !important; padding: 10px 13px !important;
+  font-family: var(--ngm-sans) !important; font-size: .95rem !important; padding: 8px 12px !important;
   border: 1px solid var(--ngm-border) !important; border-radius: 10px !important;
   background: #fff !important; color: var(--ngm-charcoal) !important; box-sizing: border-box !important;
   width: 100% !important; max-width: 100% !important;
@@ -6128,12 +6139,15 @@ body .WaGadgetDonationForm .fieldSubContainer td {
   display: block !important; width: 100% !important; max-width: 100% !important;
 }
 body.ngm-donate-page .fieldSubContainer td.left,
-body .WaGadgetDonationForm .fieldSubContainer td.left { padding: 0 0 6px 0 !important; text-align: left !important; }
+body .WaGadgetDonationForm .fieldSubContainer td.left { padding: 0 0 4px 0 !important; text-align: left !important; }
 body.ngm-donate-page .fieldSubContainer td.right,
 body .WaGadgetDonationForm .fieldSubContainer td.right { padding: 0 !important; }
-/* Breathing room between field rows */
+/* Tighter rhythm between field rows so the tall form isn't so tall */
 body.ngm-donate-page .fieldContainer,
-body .WaGadgetDonationForm .fieldContainer { padding: 7px 0 !important; }
+body .WaGadgetDonationForm .fieldContainer { padding: 3px 0 !important; }
+/* Shorter multi-line boxes (WA renders "Donor directions" as rows=6) */
+body.ngm-donate-page .fieldBody textarea,
+body .WaGadgetDonationForm .fieldBody textarea { min-height: 0 !important; height: 84px !important; }
 /* Checkbox groups (Preferred / Alternative phone type) → tidy rows */
 body.ngm-donate-page .checkboxGroupContainer .fieldLabel,
 body .WaGadgetDonationForm .checkboxGroupContainer .fieldLabel {
@@ -6206,6 +6220,9 @@ body .WaGadgetDonationForm .navigationContainer input[name$="$cancel"]:hover {
 }
 /* Mobile */
 @media (max-width: 640px) {
+  body.ngm-donate-page td.WaLayoutItem:has(#idGeneralFormContainer):not(:has(.ngm-mt-hero-grid)):not(:has(.ngm-si-cta)) {
+    padding: 44px 16px 36px !important;
+  }
   body.ngm-donate-page #idGeneralFormContainer,
   body .WaGadgetDonationForm #idGeneralFormContainer { margin: 0 !important; padding: 22px 18px 26px !important; }
   body.ngm-donate-page .navigationContainer .inner,
