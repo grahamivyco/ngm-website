@@ -3645,6 +3645,10 @@ body .ngm-login-hero .ngm-lh-list li{ color:rgba(250,247,242,.92)!important; tex
 .ngm-login-foot a{ font-family:var(--ngm-sans); font-weight:500; color:var(--ngm-sage-dk); text-decoration:none; border-bottom:1px solid rgba(62,85,56,.3); padding-bottom:1px; transition:border-color .18s; }
 .ngm-login-foot a:hover{ border-color:var(--ngm-sage-dk); }
 
+/* ── Give the form gadget breathing room; full-width block so the card
+   always centres (via .loginContainer/.loginPanel margin:auto) ── */
+body.ngm-login-page .WaGadgetLoginForm{ display:block; width:100%; box-sizing:border-box; padding:44px 20px 20px; }
+
 /* ── TWO-COLUMN SPLIT ──────────────────────────────────────────────────
    Structure on the WA page: a 2-column layout ROW — Custom HTML block (the
    hero) in the LEFT column, native login gadget in the RIGHT column. The
@@ -3657,22 +3661,21 @@ body .ngm-login-hero .ngm-lh-list li{ color:rgba(250,247,242,.92)!important; tex
    header's mobile-nav breakpoint, 980px). ABOVE it the columns are side by
    side (full hero panel); AT/BELOW it they stack (slim hero strip, like
    mobile) so the form leads. */
-/* ══ LOGIN LAYOUT — side-by-side on desktop, stacked on mobile ══
-   DESKTOP (≥981): 2-column — green hero on the LEFT, white form on the RIGHT.
-   MOBILE (≤980): stacked — green hero band on top, form below.
-   Robust: green side keys on our own .ngm-login-hero marker; white side keys on
-   the REAL form gadget .WaGadgetAuthorizationRequired (the /Sys/Login form is
-   that gadget, NOT .WaGadgetLoginForm — which is why the old split failed). */
-body.ngm-login-page{ background: var(--ngm-cream) !important; }
-body.ngm-login-page .ngm-login-mark{ margin-bottom:22px !important; }
-
-/* ── DESKTOP: two columns ── */
 @media(min-width:981px){
-  body.ngm-login-page tr.WaLayoutRow:has(.ngm-login-hero) > td.WaLayoutItem{
-    width:50% !important; vertical-align:middle !important;
-  }
-  /* GREEN = the hero cell (full-height sage + dot texture); hero div transparent */
-  body.ngm-login-page td.WaLayoutItem:has(.ngm-login-hero){
+  /* ── Equal-height columns — WA renders the 2-column row as a TABLE ──
+     Structure (from the live DOM):
+       table.WaLayoutTable > tr.WaLayoutRow > td.WaLayoutItem[style="width:50%"]
+     Table cells in a row are ALREADY equal height and the inline width:50% makes
+     them 50/50 — so we must NOT set display/flex on the <td> (that pulls it out
+     of the table and collapses its width, which is what broke it before).
+     Instead we paint the sage straight onto the LEFT cell so it fills the full
+     (equal) height, and vertical-align:middle centres the hero content. The
+     dot texture moves onto the cell too (the hero div is now transparent).
+     Guarded against BOTH form gadgets (.WaGadgetLoginForm on /log-in,
+     .WaGadgetAuthorizationRequired on /Sys/Login) so a nested/outer cell that
+     contains hero + form can never be painted green. */
+  body.ngm-login-page td.WaLayoutItem:has(.ngm-login-hero):not(:has(.WaGadgetLoginForm)):not(:has(.WaGadgetAuthorizationRequired)){
+    vertical-align:middle !important;
     background-color:#3E5538 !important;
     background-image:
       radial-gradient(circle at 1px 1px, rgba(255,255,255,.10) 1.2px, transparent 0),
@@ -3680,75 +3683,64 @@ body.ngm-login-page .ngm-login-mark{ margin-bottom:22px !important; }
     background-size:26px 26px, auto !important;
     background-repeat:repeat, no-repeat !important;
     background-position:0 0, center !important;
-    padding:0 !important;
   }
+  /* the hero div is transparent now (the cell carries the sage + texture) */
   body.ngm-login-page .ngm-login-hero{
-    background:transparent !important; text-align:left !important;
+    background:transparent !important;
     padding:clamp(48px,6vw,72px) clamp(36px,4vw,68px) !important;
   }
   body.ngm-login-page .ngm-login-hero::before{ display:none !important; }
-  body.ngm-login-page .ngm-login-hero-inner{ max-width:440px !important; margin:0 auto !important; text-align:left !important; }
-  body.ngm-login-page .ngm-lh-list{ text-align:left !important; margin-left:0 !important; }
-  /* WHITE = the form cell (contains the real auth gadget) */
-  body.ngm-login-page td.WaLayoutItem:has(.WaGadgetAuthorizationRequired){
-    background:#fff !important; vertical-align:middle !important; padding:48px clamp(24px,4vw,56px) !important;
+  /* centre the form card vertically in its equal-height cell too */
+  body.ngm-login-page td.WaLayoutItem:has(.WaGadgetLoginForm){ vertical-align:middle !important; }
+  body.ngm-login-page .WaGadgetLoginForm{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    /* less bottom padding so the "not a member?" join line sits closer to the card */
+    padding:48px clamp(24px,4vw,56px) 10px !important;
   }
+  /* tighten the space directly above the join line (desktop only) */
   body.ngm-login-page .ngm-login-foot{ padding-top:0 !important; }
+  body.ngm-login-page .ngm-login-foot-inner{ padding-top:0 !important; }
 }
-
-/* ── MOBILE / TABLET: stacked, green hero band on top ── */
 @media(max-width:980px){
-  body.ngm-login-page tr.WaLayoutRow:has(.ngm-login-hero){ display:block !important; width:100% !important; }
-  body.ngm-login-page tr.WaLayoutRow:has(.ngm-login-hero) > td.WaLayoutItem{
-    display:block !important; width:100% !important; max-width:100% !important; padding:0 !important;
+  /* ── Force the WA 2-column row to STACK once the mobile menu appears ──
+     WA keeps its two columns side by side well below the header's mobile-nav
+     breakpoint, which left the slim hero sitting next to the form with a big
+     empty gap. We can't rely on WA's own column classes, so :has() finds the
+     row (any element containing BOTH the hero and the form) and lays it out
+     vertically; the column cells are forced to full-width blocks. Scoped to
+     the login page, so nothing else is affected. */
+  body.ngm-login-page *:has(.ngm-login-hero):has(.WaGadgetLoginForm){
+    display:block !important;
   }
-  body.ngm-login-page .ngm-login-hero{
-    background: radial-gradient(130% 120% at 50% -10%, #4a6342 0%, var(--ngm-sage-dk) 55%, #33472e 100%) !important;
-    padding:34px 20px 38px !important; text-align:center !important;
+  /* Every wrapper on the hero side, and every wrapper on the form side, becomes
+     a full-width block so each stacks edge-to-edge (kills any flex shrink). */
+  body.ngm-login-page *:has(.ngm-login-hero):not(:has(.WaGadgetLoginForm)),
+  body.ngm-login-page *:has(.WaGadgetLoginForm):not(:has(.ngm-login-hero)){
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    float:none !important;
   }
-  body.ngm-login-page .ngm-login-hero-inner{ max-width:640px !important; margin:0 auto !important; text-align:center !important; }
-  body.ngm-login-page .ngm-lh-list{ display:inline-flex !important; flex-direction:column !important; text-align:left !important; margin:22px auto 0 !important; }
-}
+  /* undo the desktop height:100% fill so the stacked hero is a content-height strip */
+  body.ngm-login-page .ngm-login-hero,
+  body.ngm-login-page .ngm:has(> .ngm-login-hero){ height:auto !important; }
 
-/* ── System-login form skin (openAuthFormContainer / oAuth… / authFormContainer
-   / loginButton — the REAL /Sys/Login classes) → centred white card ── */
-body.ngm-login-page .openAuthFormContainer{
-  max-width:460px !important; margin:0 auto !important; box-sizing:border-box !important;
-  background:#fff !important; border:1px solid var(--ngm-border) !important;
-  border-radius:var(--ngm-radius-lg) !important; box-shadow:var(--ngm-shm) !important;
-  padding:34px 30px !important;
+  /* Stacked (tablet + phone): slim branded hero strip on top so the LOGIN
+     FORM leads — same treatment across tablet and mobile. Subcopy + benefits
+     (nice-to-have context) hidden. */
+  body.ngm-login-page .ngm-login-hero{ padding:22px 22px 24px; text-align:center; }
+  body.ngm-login-page .ngm-login-hero-inner{ max-width:none; }
+  body.ngm-login-page .ngm-lh-glow{ display:none; }
+  body.ngm-login-page .ngm-login-mark{ display:none; }
+  body.ngm-login-page .ngm-lh-eyebrow{ display:none; }
+  body.ngm-login-page .ngm-lh-title{ font-size:1.55rem; line-height:1.15; margin-bottom:0; }
+  body.ngm-login-page .ngm-lh-title br{ display:none; }
+  body.ngm-login-page .ngm-lh-sub,
+  body.ngm-login-page .ngm-lh-list{ display:none; }
+  body.ngm-login-page .WaGadgetLoginForm{ padding:26px 16px 14px !important; }
 }
-body.ngm-login-page .oAuthButtonsContainer{ display:flex !important; flex-direction:column !important; gap:12px !important; margin:0 0 4px !important; }
-body.ngm-login-page .wa-authenticateLoginLink{
-  display:flex !important; align-items:center !important; justify-content:center !important; gap:10px !important;
-  width:100% !important; box-sizing:border-box !important;
-  background:#fff !important; border:1.5px solid var(--ngm-border) !important; border-radius:100px !important;
-  padding:12px 18px !important; font-family:var(--ngm-sans) !important; font-size:.92rem !important; font-weight:500 !important;
-  color:var(--ngm-charcoal) !important; text-decoration:none !important; transition:background .15s,border-color .15s !important;
-}
-body.ngm-login-page .wa-authenticateLoginLink:hover{ background:var(--ngm-cream) !important; border-color:var(--ngm-sage) !important; }
-body.ngm-login-page .authenticateLoginText{ font-family:var(--ngm-sans) !important; color:var(--ngm-charcoal) !important; }
-body.ngm-login-page .authFormContainer input[type="text"],
-body.ngm-login-page .authFormContainer input[type="email"],
-body.ngm-login-page .authFormContainer input[type="password"],
-body.ngm-login-page .loginPageTable input[type="text"],
-body.ngm-login-page .loginPageTable input[type="password"]{
-  width:100% !important; box-sizing:border-box !important;
-  font-family:var(--ngm-sans) !important; font-size:.95rem !important; color:var(--ngm-charcoal) !important;
-  background:var(--ngm-cream) !important; border:1px solid var(--ngm-border) !important; border-radius:var(--ngm-radius) !important;
-  padding:12px 14px !important;
-}
-body.ngm-login-page .authFormContainer input:focus,
-body.ngm-login-page .loginPageTable input:focus{ outline:none !important; background:#fff !important; border-color:var(--ngm-sage) !important; box-shadow:0 0 0 3px rgba(92,122,82,.14) !important; }
-body.ngm-login-page .mandatorySymbol{ color:#C0392B !important; }
-body.ngm-login-page .loginButton{
-  display:inline-flex !important; align-items:center !important; justify-content:center !important;
-  width:100% !important; box-sizing:border-box !important;
-  background:var(--ngm-sage-dk) !important; color:#fff !important; border:none !important; border-radius:100px !important;
-  padding:13px 22px !important; font-family:var(--ngm-sans) !important; font-size:.95rem !important; font-weight:500 !important;
-  cursor:pointer !important; text-decoration:none !important; transition:opacity .18s !important;
-}
-body.ngm-login-page .loginButton:hover{ opacity:.9 !important; }
 
 /* ══════════════════════════════════════════════════════════════════
    AUTHORIZATION-REQUIRED page — same split-screen as login, LINEN half
