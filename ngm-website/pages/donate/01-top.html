@@ -1,13 +1,15 @@
 <!-- Canonical page markup — this is the file to edit and to paste into the WA Custom-HTML gadget. Styling lives in global-css/global.css (pasted into the WA CSS tab; must be live in WA first). There is no separate self-contained version. -->
 <div class="ngm">
+  <!-- ══ HERO — eyebrow "Donate", short merged copy (why give + where gifts go
+       + 501(c)(3) / tax-deductible), photo alongside. ══ -->
   <section class="ngm-sec ngm-sec-cream">
     <div class="ngm-con">
       <div class="ngm-mt-hero-grid">
         <div>
-          <span class="ngm-eyebrow">Support the Guild</span>
+          <span class="ngm-eyebrow">Donate</span>
           <h1 class="ngm-h1">Help keep needlework <em>thriving</em></h1>
-          <div class="ngm-mt-meta"><span class="ngm-mt-when">The Guild is a 501(c)(3) nonprofit</span><span class="ngm-badge ngm-badge-person">Tax-deductible</span></div>
-          <p class="ngm-lead">Your gift helps the Needlework Guild of Minnesota teach, preserve, and celebrate the needle arts &mdash; and keeps membership affordable for everyone.</p>
+          <div class="ngm-mt-meta"><span class="ngm-badge ngm-badge-person">501(c)(3) nonprofit &middot; Tax-deductible</span></div>
+          <p class="ngm-lead">The Needlework Guild of Minnesota is a registered 501(c)(3) nonprofit, so your gift is tax-deductible as allowed by law. Donations fund our programs and guest instructors, sustain the members&rsquo; library, and support community outreach &mdash; all while keeping dues low so anyone can join.</p>
           <div class="ngm-mt-hero-btns"><a class="ngm-btn ngm-btn-green" href="#ngm-give">Donate now</a><a class="ngm-btn ngm-btn-outline" href="/join">Become a member</a></div>
         </div>
         <div class="ngm-mt-photo" style="min-height:380px;padding:0;overflow:hidden;border:none"><img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade" src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20-%20Photos/Retreat%20Photo%20Quilt%20NGM.jpeg" alt="Members and their needlework" loading="eager" style="width:100%;height:100%;object-fit:cover;border-radius:var(--ngm-radius-lg)"></div>
@@ -15,20 +17,9 @@
     </div>
   </section>
 
-  <section class="ngm-sec ngm-sec-white">
-    <div class="ngm-con ngm-mt-about">
-      <span class="ngm-eyebrow">Why give</span>
-      <h2 class="ngm-h2">Your gift keeps us <em>stitching</em></h2>
-      <p>As a registered 501(c)(3) educational nonprofit, the Guild runs on member dues and the generosity of donors. Gifts fund programs and guest instructors, sustain our members' library, support community outreach, and keep dues low so anyone can join.</p>
-      <ul class="ngm-mt-tags"><li>Programs & classes</li><li>Guest instructors</li><li>The members' library</li><li>Community outreach</li></ul>
-      <div class="ngm-mt-gallery">
-        <div class="ngm-mt-photo" style="padding:0;overflow:hidden;border:none"><img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade" src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20-%20Photos/NGM%20Circle%20Stitch.jpeg" alt="Members stitching together" loading="eager" style="width:100%;height:100%;object-fit:cover;border-radius:var(--ngm-radius-lg)"></div>
-        <div class="ngm-mt-photo" style="padding:0;overflow:hidden;border:none"><img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade" src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20-%20Photos/NGM%20Cat%20Stitch.jpeg" alt="A workshop in progress" loading="eager" style="width:100%;height:100%;object-fit:cover;border-radius:var(--ngm-radius-lg)"></div>
-        <div class="ngm-mt-photo" style="padding:0;overflow:hidden;border:none"><img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade" src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20-%20Photos/NGM%20Circle%20Stitch.jpeg" alt="A finished needlework piece" loading="eager" style="width:100%;height:100%;object-fit:cover;border-radius:var(--ngm-radius-lg)"></div>
-      </div>
-    </div>
-  </section>
-
+  <!-- ══ GIVE ONLINE heading — sits directly above the WA Donation form gadget.
+       #ngm-give is the hero button's scroll target. Linen band continues through
+       the form row into 03-bottom. ══ -->
   <section id="ngm-give" class="ngm ngm-sec ngm-sec-linen" style="padding-bottom:0;scroll-margin-top:100px">
     <div class="ngm-con">
       <div class="ngm-upcoming-head">
@@ -55,47 +46,5 @@
     e.preventDefault();
     t.scrollIntoView({ behavior: "smooth", block: "start" });
   });
-})();
-</script>
-<script>
-(function () {
-  function label(t){ if(t==="zoom")return "Zoom"; if(t==="virtual")return "Online"; if(t==="hybrid")return "Hybrid"; return "In person"; }
-  function classify(text){ var s=(text||"").toLowerCase();
-    if(s.indexOf("zoom")>-1) return "zoom";
-    if(s.indexOf("videoconference")>-1||s.indexOf("video conference")>-1||s.indexOf("online")>-1) return "virtual";
-    if(s.indexOf("hybrid")>-1) return "hybrid"; return "person"; }
-  function tagEvents(){
-    var items=document.querySelectorAll(".ngm-wa-events.upcomingEventsStyle001 ul li");
-    items.forEach(function(li){
-      if(li.getAttribute("data-tag-done")==="1") return;
-      var locEl=li.querySelector(".location");
-      var tag=classify(locEl?locEl.textContent:""); li.setAttribute("data-tag",tag);
-      var chip=document.createElement("span"); chip.className="ngm-evt-tag"; chip.textContent=label(tag);
-      var titleEl=li.querySelector(".title");
-      if(titleEl) li.insertBefore(chip,titleEl); else li.insertBefore(chip,li.firstChild);
-      var titleLink=li.querySelector(".title a");
-      if(titleLink&&titleLink.href){ li.style.cursor="pointer";
-        li.addEventListener("click",function(e){ if(e.target.closest("a"))return; window.location.href=titleLink.href; }); }
-      li.setAttribute("data-tag-done","1");
-    });
-  }
-  function init(){ tagEvents(); var g=document.querySelector(".ngm-wa-events");
-    if(g&&window.MutationObserver){ new MutationObserver(function(){tagEvents();}).observe(g,{childList:true,subtree:true}); } }
-  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
-})();
-</script>
-<script>
-(function () {
-  function wire(item){
-    var summary=item.querySelector("summary"); var wrap=item.querySelector(".ngm-faq-wrap");
-    if(!summary||!wrap) return;
-    summary.addEventListener("click",function(e){
-      if(!item.open) return; e.preventDefault(); item.classList.add("ngm-faq-closing");
-      var done=function(){ wrap.removeEventListener("transitionend",done); item.removeAttribute("open"); item.classList.remove("ngm-faq-closing"); };
-      wrap.addEventListener("transitionend",done); setTimeout(done,400);
-    });
-  }
-  function init(){ document.querySelectorAll(".ngm-faq-card").forEach(wire); }
-  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
 })();
 </script>

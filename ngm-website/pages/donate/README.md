@@ -3,14 +3,19 @@
 **WA page:** Donate  ·  **URL:** `/donate`
 
 Sandwich, one layout column:
-1. `01-top.html` — Custom HTML (hero, why-give, "Give online" heading). Tags
-   `<body class="ngm-donate-page">` and makes the hero **"Donate now"** button
-   scroll to the inline form (`#ngm-give`) instead of leaving for WA's separate
-   `/donation` page — visitors reach the form without clicking through.
+1. `01-top.html` — Custom HTML: hero (eyebrow "Donate" + short copy that folds
+   in why-give, where gifts go, and the 501(c)(3) / tax-deductible line, beside
+   a photo) then the "Give online" heading. Tags `<body class="ngm-donate-page">`
+   and makes the hero **"Donate now"** button scroll to the inline form
+   (`#ngm-give`) instead of leaving for WA's separate `/donation` page — visitors
+   reach the form without clicking through.
 2. Native WA **"Donation form"** gadget — placed RIGHT HERE, in the same
    layout column, so the form shows inline on the page (no extra step). No CSS
    class needed; it's skinned by `global.css` (see `02-form-gadget.txt`).
-3. `03-bottom.html` — Custom HTML (other ways to give, FAQ, thank-you CTA)
+3. `03-bottom.html` — Custom HTML: **Other ways to give** as three icon cards
+   (`.ngm-pillars` — By mail / Give monthly / In honor or memory), then the
+   thank-you CTA. There is no FAQ section: its answers were folded into the hero
+   copy (tax-deductible, where gifts go) and the cards (monthly, in honor).
 
 The linen band runs continuously: the "Give online" heading in `01-top`
 (`padding-bottom:0`), through the form's layout row (set it to linen `#F0EAE0`),
