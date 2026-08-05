@@ -3741,6 +3741,9 @@ body.ngm-login-page .WaGadgetLoginForm{ display:block; width:100%; box-sizing:bo
   body.ngm-login-page .ngm-login-hero{
     background:transparent !important;
     padding:clamp(48px,6vw,72px) clamp(36px,4vw,68px) !important;
+    /* border-box, or the padding stacks ON TOP of the min-height (content-box
+       default) and the panel grows to ~full viewport instead of 90% */
+    box-sizing:border-box !important;
     min-height:calc(90vh - var(--ngm-head-h));
     display:flex; flex-direction:column; justify-content:center;
   }
