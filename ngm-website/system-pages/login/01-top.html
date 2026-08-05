@@ -14,4 +14,23 @@
      then 03-bottom.html follows — both sit in the right half via Global CSS. -->
 <script>
   document.body.classList.add('ngm-login-page');
+  /* /Sys/Login + authorization-required: the native auth form ships its
+     "Email"/"Password" labels above the fields and no placeholders. The
+     labels are hidden by global.css to match the /log-in form, so give the
+     inputs the same in-field placeholder labels here. */
+  (function () {
+    function ngmAuthPlaceholders() {
+      var g = document.querySelector('.WaGadgetAuthorizationRequired');
+      if (!g) return;
+      var e = g.querySelector('input[name="email"]');
+      if (e && !e.placeholder) e.placeholder = 'Email';
+      var p = g.querySelector('input[name="password"]');
+      if (p && !p.placeholder) p.placeholder = 'Password';
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', ngmAuthPlaceholders);
+    } else {
+      ngmAuthPlaceholders();
+    }
+  }());
 </script>
