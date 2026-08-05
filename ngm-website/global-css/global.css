@@ -4532,8 +4532,18 @@ body a.ngm-lcard-email:hover { color:var(--ngm-sage-dk)!important; }
 /* ══════════════════════════════════════════════════════════════════
    UTILITIES (carried over from live CSS; purple relics intentionally dropped)
 ══════════════════════════════════════════════════════════════════ */
-/* Hide Wild Apricot 'Powered by' badge */
-.WaGadgetPoweredBy { display: none !important; }
+/* Hide Wild Apricot 'Powered by' branding — both the gadget form and the
+   system band WA appends below the page (.WABranding > #idFooterPoweredByContainer),
+   which left a white strip under our footer. The credit is shown instead in
+   our own footer bottom bar (layout/footer/01-top.html), where it replaces
+   the old Terms of Service / Privacy Policy links.
+   ⚠ If a white strip remains after publish, some WA wrapper around
+   .WABranding still has its own padding — find it with the inspect-the-gap
+   recipe in section 19 and add it here. */
+.WaGadgetPoweredBy,
+.WABranding,
+#idFooterPoweredByContainer,
+#idFooterPoweredByWA { display: none !important; }
 
 /* Rounded gadget wrapper helper */
 .rounded-box { border-radius: 16px; overflow: hidden; }
