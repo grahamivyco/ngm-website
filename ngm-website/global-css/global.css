@@ -5993,17 +5993,18 @@ body .WaGadgetMembershipApplication .gadgetStyleBody {
    chrome around it. Visuals mirror the membership skin so both read as one
    system. Verified against the live donation-form DOM.
 ══════════════════════════════════════════════════════════════════ */
-/* ── Linen band + section spacing around the form ──────────────────────────
-   The form must sit on the SAME linen (#F0EAE0) as the "Give online" band
-   above it, with generous top/bottom/side margins so the white card floats.
-   We paint the donation form's IMMEDIATE PARENT — the gadget's own full-width
-   content box (*:has(> #idGeneralFormContainer)) — not the WA layout cell: the
-   cell often also holds the surrounding custom-HTML blocks, so a cell rule
-   couldn't paint just the form. This parent wraps only the form, so it's safe.
-   .WaGadgetDonationForm is a belt-and-suspenders colour fallback. */
+/* ── White band + section spacing around the form ──────────────────────────
+   The form section is WHITE (matching the "Give" heading band above it) so it
+   stands apart from the linen "Alternatives" section below. Generous
+   top/bottom/side margins let the white form card sit in a clean white field
+   (its border + shadow still define it). We paint the donation form's
+   IMMEDIATE PARENT — the gadget's own full-width content box
+   (*:has(> #idGeneralFormContainer)) — not the WA layout cell, which often
+   also holds the surrounding custom-HTML blocks. This parent wraps only the
+   form, so it's safe. .WaGadgetDonationForm is a colour fallback. */
 body.ngm-donate-page *:has(> #idGeneralFormContainer),
 body.ngm-donate-page .WaGadgetDonationForm {
-  background: var(--ngm-linen) !important;
+  background: #fff !important;
 }
 body.ngm-donate-page *:has(> #idGeneralFormContainer) {
   padding: 64px clamp(20px,5vw,72px) 68px !important; box-sizing: border-box !important;
@@ -6232,33 +6233,23 @@ body .WaGadgetDonationForm .navigationContainer input[name$="$cancel"]:hover {
   body.ngm-donate-page .navigationContainer input.nextButton.button,
   body .WaGadgetDonationForm .navigationContainer input.nextButton.button { width: 100% !important; }
 }
-/* ── "Other ways to give" tiles: clear hover lift (page-scoped so the Join
-   page's .ngm-pillar is untouched) + a contact CTA card ── */
+/* ── "Alternatives" tiles: compact + hover lift ────────────────────────────
+   Page-scoped so the Join page's .ngm-pillar is untouched. Less padding and a
+   smaller icon so the cards don't carry so much empty space; the get-in-touch
+   CTA lives in the intro copy above them, so these three stay purely
+   informational. ── */
+body.ngm-donate-page .ngm-pillars { gap: 16px !important; margin-top: 30px !important; }
 body.ngm-donate-page .ngm-pillar {
+  padding: 20px 22px !important;
   transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background-color .22s ease !important;
 }
+body.ngm-donate-page .ngm-pillar-icon { width: 42px !important; height: 42px !important; margin-bottom: 12px !important; }
+body.ngm-donate-page .ngm-pillar-icon svg { width: 22px !important; height: 22px !important; }
+body.ngm-donate-page .ngm-pillar h3 { font-size: 1.2rem !important; margin-bottom: 5px !important; }
+body.ngm-donate-page .ngm-pillar p { font-size: .9rem !important; line-height: 1.6 !important; }
 body.ngm-donate-page .ngm-pillar:hover {
   background: #fff !important; border-color: var(--ngm-sage) !important;
   transform: translateY(-4px) !important; box-shadow: var(--ngm-shm) !important;
-}
-/* Contact CTA card inside the "other ways" section */
-.ngm-give-contact {
-  display: flex; align-items: center; justify-content: space-between; gap: 28px;
-  background: #fff; border: 1px solid var(--ngm-border); border-radius: var(--ngm-radius-lg);
-  box-shadow: var(--ngm-sh); padding: 28px 34px; margin-top: 28px;
-  transition: box-shadow .18s ease, border-color .18s ease;
-}
-.ngm-give-contact:hover { box-shadow: var(--ngm-shm); border-color: var(--ngm-sage); }
-.ngm-give-contact-txt h3 {
-  font-family: var(--ngm-serif) !important; font-size: 1.45rem; font-weight: 400;
-  color: var(--ngm-charcoal); text-transform: none !important; margin: 0 0 4px; line-height: 1.2;
-}
-.ngm-give-contact-txt p {
-  font-family: var(--ngm-sans); font-size: .95rem; color: var(--ngm-gray); line-height: 1.6; margin: 0;
-}
-.ngm-give-contact .ngm-btn { flex-shrink: 0; }
-@media (max-width: 640px) {
-  .ngm-give-contact { flex-direction: column; align-items: flex-start; padding: 24px 22px; }
 }
 /* Read-only review values: links (e.g. the email) on-brand, not WA magenta */
 body .WaGadgetMembershipApplication .fieldBody a,

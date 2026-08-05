@@ -13,10 +13,19 @@ Sandwich, one layout column:
    class needed; it's skinned by `global.css` (see `02-form-gadget.txt`). The
    skin paints the form's layout cell linen (`#F0EAE0`, same band as "Give
    online") with normal section spacing above and below.
-3. `03-bottom.html` — Custom HTML: **Other ways to give** as three icon cards
-   (`.ngm-pillars` — By mail / Give monthly / In honor or memory), then the
-   thank-you CTA. There is no FAQ section: its answers were folded into the hero
-   copy (tax-deductible, where gifts go) and the cards (monthly, in honor).
+3. `03-bottom.html` — Custom HTML: **Alternatives** (eyebrow) — three compact
+   icon tiles (`.ngm-pillars` — By mail / Give monthly / In honor or memory)
+   with the "Get in touch" contact link folded into the intro copy above them;
+   then the **Join** section (identical to the About page's "Find your people…"
+   block). This section is linen so it stands apart from the white form section.
+   There is no FAQ: its answers live in the hero copy (tax-deductible, where
+   gifts go) and the tiles (monthly, in honor).
+
+## Backgrounds
+Hero = cream; the **"Give" heading band and the form = white**; **Alternatives
+= linen** (so the form doesn't blend into it); Join = its own band. The form's
+white field is painted on the gadget's own content box — see the "DONATION
+FORM" block in `global.css`.
 
 The linen band runs continuously: the "Give online" heading in `01-top`
 (`padding-bottom:0`), through the form's layout row (set it to linen `#F0EAE0`),
