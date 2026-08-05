@@ -6007,15 +6007,15 @@ body.ngm-donate-page .WaGadgetDonationForm {
   background: #fff !important;
 }
 body.ngm-donate-page *:has(> #idGeneralFormContainer) {
-  padding: 64px clamp(20px,5vw,72px) 68px !important; box-sizing: border-box !important;
+  padding: 64px 48px 68px !important; box-sizing: border-box !important;
 }
 /* ── Card + centre the whole form; strip WA's rounded-corner sprite chrome ── */
 body.ngm-donate-page #idGeneralFormContainer,
 body .WaGadgetDonationForm #idGeneralFormContainer {
-  max-width: 780px !important; margin: 0 auto !important;
+  max-width: 1080px !important; margin: 0 auto !important;
   background: #fff !important; border: 1px solid var(--ngm-border) !important;
-  border-radius: var(--ngm-radius-lg) !important; box-shadow: var(--ngm-shm) !important;
-  padding: 22px clamp(20px,3vw,40px) 24px !important; box-sizing: border-box !important;
+  border-radius: var(--ngm-radius-lg) !important; box-shadow: var(--ngm-sh) !important;
+  padding: 30px clamp(24px,4vw,56px) 34px !important; box-sizing: border-box !important;
 }
 /* Hide the sprite corner caps (empty spacer divs that drew the old box edges) */
 body.ngm-donate-page #idGeneralFormContainer .cornersContainer,
@@ -6233,21 +6233,29 @@ body .WaGadgetDonationForm .navigationContainer input[name$="$cancel"]:hover {
   body.ngm-donate-page .navigationContainer input.nextButton.button,
   body .WaGadgetDonationForm .navigationContainer input.nextButton.button { width: 100% !important; }
 }
-/* ── "Alternatives" — borderless, editorial: just icon + heading + text on the
-   linen, no card. Page-scoped so the Join page's carded .ngm-pillar is
-   untouched. The get-in-touch CTA lives in the intro copy above, so these
-   three stay purely informational (no hover/lift). ── */
-body.ngm-donate-page .ngm-pillars { gap: 22px 40px !important; margin-top: 30px !important; }
-body.ngm-donate-page .ngm-pillar,
-body.ngm-donate-page .ngm-pillar:hover {
-  background: transparent !important; border: none !important; box-shadow: none !important;
-  padding: 0 !important; transform: none !important; transition: none !important;
+/* ── "Alternatives" — bordered cards with a BARE icon (no sage chip/box behind
+   it), staying side by side as long as they fit and only wrapping near mobile.
+   Page-scoped so the Join page's carded .ngm-pillar is untouched. ── */
+body.ngm-donate-page .ngm-pillars {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+  gap: 18px !important; margin-top: 30px !important;
 }
-body.ngm-donate-page .ngm-pillar-icon { width: 44px !important; height: 44px !important; margin-bottom: 14px !important; }
-/* keep the icon chip its soft sage even on hover (base rule turns it linen,
-   which would vanish against this linen section) */
-body.ngm-donate-page .ngm-pillar:hover .ngm-pillar-icon { background: var(--ngm-sage-lt) !important; }
-body.ngm-donate-page .ngm-pillar-icon svg { width: 22px !important; height: 22px !important; }
+body.ngm-donate-page .ngm-pillar {
+  background: #fff !important; border: 1px solid var(--ngm-border) !important; box-shadow: none !important;
+  padding: 22px 24px !important; transform: none !important;
+  transition: border-color .18s ease, box-shadow .18s ease !important;
+}
+body.ngm-donate-page .ngm-pillar:hover {
+  background: #fff !important; border-color: var(--ngm-sage) !important;
+  box-shadow: var(--ngm-sh) !important; transform: none !important;
+}
+/* bare icon: strip the chip background, box, and padding — just the svg */
+body.ngm-donate-page .ngm-pillar-icon,
+body.ngm-donate-page .ngm-pillar:hover .ngm-pillar-icon {
+  background: transparent !important; width: auto !important; height: auto !important;
+  padding: 0 !important; margin: 0 0 12px !important; border-radius: 0 !important; display: block !important;
+}
+body.ngm-donate-page .ngm-pillar-icon svg { width: 28px !important; height: 28px !important; }
 body.ngm-donate-page .ngm-pillar h3 { font-size: 1.2rem !important; margin-bottom: 6px !important; }
 body.ngm-donate-page .ngm-pillar p { font-size: .92rem !important; line-height: 1.65 !important; }
 /* Read-only review values: links (e.g. the email) on-brand, not WA magenta */

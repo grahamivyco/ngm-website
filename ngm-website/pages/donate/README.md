@@ -13,10 +13,11 @@ Sandwich, one layout column:
    class needed; it's skinned by `global.css` (see `02-form-gadget.txt`). The
    skin paints the form's layout cell linen (`#F0EAE0`, same band as "Give
    online") with normal section spacing above and below.
-3. `03-bottom.html` — Custom HTML: **Alternatives** (eyebrow) — three borderless
-   icon items (`.ngm-pillars` — By mail / Give monthly / In honor or memory,
-   no card/background, straight on the linen) with the "Get in touch" contact
-   link folded into the intro copy above them;
+3. `03-bottom.html` — Custom HTML: **Alternatives** (eyebrow) — three bordered
+   cards (`.ngm-pillars` — By mail / Give monthly / In honor or memory) with a
+   BARE icon (no sage chip behind it); they stay side by side until they wrap
+   near mobile. The "Get in touch" contact link is folded into the intro copy
+   above them;
    then the **Join** section (identical to the About page's "Find your people…"
    block). This section is linen so it stands apart from the white form section.
    There is no FAQ: its answers live in the hero copy (tax-deductible, where
