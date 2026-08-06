@@ -6229,14 +6229,8 @@ body .WaGadgetPublicWizard .available-payment-methods .payment-icons {
     justify-content: flex-start !important;
   }
 }
-/* Manual payments has no description of its own — say what choosing it does */
-body .WaGadgetMembershipApplication .payment-method-card:has([id$="_btnInvoiceMe"]) .payment-method-description::after,
-body .WaGadgetPublicWizard .payment-method-card:has([id$="_btnInvoiceMe"]) .payment-method-description::after {
-  content: "Prefer to pay by check? Choose this option and we\2019ll email you an invoice with payment instructions.";
-  display: block !important;
-  font-family: var(--ngm-sans) !important; font-size: .88rem !important;
-  color: var(--ngm-gray) !important; line-height: 1.6 !important;
-}
+/* (The Manual-payments description text is appended by the 01-top.html
+   script; it inherits .payment-method-description styling above.) */
 /* Total-amount summary rows (review/payment step table) */
 body .WaGadgetMembershipApplication td.labelInfoColumn,
 body .WaGadgetPublicWizard td.labelInfoColumn {
@@ -6318,41 +6312,62 @@ body .WaGadgetPublicWizard .payment-method-right {
   display: flex !important; flex-direction: column !important;
   align-items: flex-end !important; gap: 8px !important; flex-shrink: 0 !important;
 }
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   body .WaGadgetMembershipApplication .payment-method-content,
   body .WaGadgetPublicWizard .payment-method-content {
     flex-direction: column !important; align-items: stretch !important;
   }
   body .WaGadgetMembershipApplication .payment-method-right,
-  body .WaGadgetPublicWizard .payment-method-right { align-items: stretch !important; }
+  body .WaGadgetPublicWizard .payment-method-right {
+    width: 100% !important; align-items: stretch !important;
+  }
   body .WaGadgetMembershipApplication input.payment-action-button,
-  body .WaGadgetPublicWizard input.payment-action-button { width: 100% !important; }
+  body .WaGadgetPublicWizard input.payment-action-button {
+    width: 100% !important; min-width: 0 !important; box-sizing: border-box !important;
+  }
+}
+/* Nothing inside a payment card may exceed the card's width */
+body .WaGadgetMembershipApplication .payment-method-card,
+body .WaGadgetMembershipApplication .payment-method-content,
+body .WaGadgetMembershipApplication .payment-method-description,
+body .WaGadgetMembershipApplication .payment-method-right,
+body .WaGadgetPublicWizard .payment-method-card,
+body .WaGadgetPublicWizard .payment-method-content,
+body .WaGadgetPublicWizard .payment-method-description,
+body .WaGadgetPublicWizard .payment-method-right {
+  max-width: 100% !important; min-width: 0 !important; box-sizing: border-box !important;
 }
 /* ── Wizard mobile: no sideways overflow ─────────────────────────────────
    The review tile's LEVEL/TOTAL table (nowrap eyebrow labels + a fixed label
    column) and the read-only rows' 30% floated label column both push wider
    than the card on small screens. Stack every label ABOVE its value and let
    nothing exceed the card's width. */
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   body .WaGadgetMembershipApplication,
   body .WaGadgetPublicWizard { overflow-x: hidden !important; }
-  /* Review tile: keep the label|value table but fix its column split and let
-     everything wrap — the desktop nowrap eyebrow labels were forcing the
-     table wider than the tile. (Block-ifying the tds shifted content out of
-     the box, so the table stays a table.) */
+  /* Review tile → ONE column on tablet/mobile: each label sits above its
+     value. The earlier one-column attempt shifted text out of the box
+     because the theme's text-align:right + nowrap stayed on the block-ified
+     cells — both are reset here, which is what makes the stack safe. */
   body .WaGadgetMembershipApplication .commonMessageBox table,
-  body .WaGadgetPublicWizard .commonMessageBox table {
-    width: 100% !important; max-width: 100% !important;
-    table-layout: fixed !important; margin: 0 !important;
+  body .WaGadgetMembershipApplication .commonMessageBox tbody,
+  body .WaGadgetMembershipApplication .commonMessageBox tr,
+  body .WaGadgetMembershipApplication .commonMessageBox td,
+  body .WaGadgetPublicWizard .commonMessageBox table,
+  body .WaGadgetPublicWizard .commonMessageBox tbody,
+  body .WaGadgetPublicWizard .commonMessageBox tr,
+  body .WaGadgetPublicWizard .commonMessageBox td {
+    display: block !important; width: 100% !important; max-width: 100% !important;
+    box-sizing: border-box !important; text-align: left !important;
+    white-space: normal !important; float: none !important;
   }
   body .WaGadgetMembershipApplication .commonMessageBox .labelInfoColumn,
   body .WaGadgetPublicWizard .commonMessageBox .labelInfoColumn {
-    white-space: normal !important; width: 38% !important;
-    padding: 12px 10px 12px 0 !important;
+    padding: 14px 0 2px !important;
   }
   body .WaGadgetMembershipApplication .commonMessageBox .infoColumn,
   body .WaGadgetPublicWizard .commonMessageBox .infoColumn {
-    overflow-wrap: break-word !important;
+    padding: 0 0 4px !important; overflow-wrap: break-word !important;
   }
   /* Application-data rows: drop the floated 30% right-aligned label column */
   body .WaGadgetMembershipApplication .fieldContainer .fieldLabel,
@@ -6365,17 +6380,25 @@ body .WaGadgetPublicWizard .payment-method-right {
     float: none !important; width: 100% !important;
   }
 }
-/* Card option label: say the card checkout runs through PayPal. (The Pay
-   button already submits to the site's configured processor — PayPal — this
-   just makes that visible up front.) Text swapped via ::after since the
-   markup is WA's. */
-body .WaGadgetMembershipApplication label[for="creditCardRadio"] h3,
-body .WaGadgetPublicWizard label[for="creditCardRadio"] h3 { font-size: 0 !important; }
-body .WaGadgetMembershipApplication label[for="creditCardRadio"] h3::after,
-body .WaGadgetPublicWizard label[for="creditCardRadio"] h3::after {
-  content: "Credit or debit card \2014 secure checkout through PayPal";
-  font-family: var(--ngm-sans) !important; font-size: 1.05rem !important;
-  font-weight: 600 !important; color: var(--ngm-charcoal) !important;
+/* Card option titles/descriptions: the 01-top.html script sets the credit
+   card title to "Credit or debit card" and folds "Secure checkout through
+   PayPal." into the description below, plus adds the Manual-payments
+   invoice-by-check description. */
+/* Section title the script inserts above the payment cards */
+body .WaGadgetMembershipApplication .ngm-pay-head,
+body .WaGadgetPublicWizard .ngm-pay-head { display: block !important; margin: 36px 0 14px !important; }
+body .WaGadgetMembershipApplication .ngm-pay-eyebrow,
+body .WaGadgetPublicWizard .ngm-pay-eyebrow {
+  display: block !important; font-family: var(--ngm-sans) !important;
+  font-size: .72rem !important; font-weight: 600 !important;
+  letter-spacing: .16em !important; text-transform: uppercase !important;
+  color: var(--ngm-sage-dk) !important; margin-bottom: 4px !important;
+}
+body .WaGadgetMembershipApplication .ngm-pay-title,
+body .WaGadgetPublicWizard .ngm-pay-title {
+  display: block !important; font-family: var(--ngm-serif) !important;
+  font-weight: 400 !important; font-size: 1.5rem !important;
+  color: var(--ngm-charcoal) !important; line-height: 1.2 !important;
 }
 /* ── "Application data" read-only rows: the theme sets both columns in 16px
    Lato (labels bold, right-aligned in a 30% float column). Keep the two-column
@@ -6393,47 +6416,13 @@ body .WaGadgetPublicWizard .fieldBody > span {
   font-family: var(--ngm-sans) !important; font-size: .95rem !important;
   color: var(--ngm-charcoal) !important; line-height: 1.6 !important;
 }
-/* ── Review step: Back ABOVE the "Review and confirm" tile, Cancel BELOW the
-   Application data. Both live in the same .navigationContainer between the
-   tile and the payment cards, so: find their true common parent (whatever WA
-   element directly holds BOTH the nav and the .commonMessageBox), make it a
-   flex column, dissolve the nav wrappers with display:contents so .right
-   (Back) and .left (Cancel) become reorderable flex items, then order Back
-   first and Cancel last. If WA's nesting differs the :has() simply never
-   matches and the layout stays as-is. */
-body .WaGadgetMembershipApplicationStateReview *:has(> .navigationContainer):has(.commonMessageBox),
-body .WaGadgetMembershipApplicationStateReview *:has(> .navigationOuterContainer):has(.commonMessageBox) {
-  display: flex !important; flex-direction: column !important;
-}
-/* Dissolve the nav wrappers ONLY inside a matched parent, so a structure
-   mismatch leaves the normal nav layout instead of loose buttons. */
-body .WaGadgetMembershipApplicationStateReview *:has(> .navigationContainer):has(.commonMessageBox) .navigationContainer,
-body .WaGadgetMembershipApplicationStateReview *:has(> .navigationContainer):has(.commonMessageBox) .navigationContainer .inner,
-body .WaGadgetMembershipApplicationStateReview *:has(> .navigationOuterContainer):has(.commonMessageBox) .navigationOuterContainer,
-body .WaGadgetMembershipApplicationStateReview *:has(> .navigationOuterContainer):has(.commonMessageBox) .navigationContainer,
-body .WaGadgetMembershipApplicationStateReview *:has(> .navigationOuterContainer):has(.commonMessageBox) .navigationContainer .inner {
-  display: contents !important;
-}
-/* Explicit ordering: default children (payment cards, application data) sit
-   in the middle; whichever child holds the review tile goes above them; the
-   Back row leads and the Cancel row trails. */
-body .WaGadgetMembershipApplicationStateReview *:has(> .navigationContainer):has(.commonMessageBox) > *,
-body .WaGadgetMembershipApplicationStateReview *:has(> .navigationOuterContainer):has(.commonMessageBox) > * {
-  order: 3;
-}
-body .WaGadgetMembershipApplicationStateReview *:has(> .navigationContainer):has(.commonMessageBox) > :is(.commonMessageBox, *:has(.commonMessageBox)),
-body .WaGadgetMembershipApplicationStateReview *:has(> .navigationOuterContainer):has(.commonMessageBox) > :is(.commonMessageBox, *:has(.commonMessageBox)) {
-  order: 2;
-}
-/* Back row → first, small breathing room under it */
-body .WaGadgetMembershipApplicationStateReview .navigationContainer .inner .right {
-  order: -1 !important; margin: 0 0 14px !important;
-}
-/* Cancel row → after everything (application data included), centered */
-body .WaGadgetMembershipApplicationStateReview .navigationContainer .inner .left {
-  order: 99 !important; margin: 28px 0 0 !important;
-  display: flex !important; justify-content: center !important;
-}
+/* ── Review step: Back/Cancel placement is handled by the script in
+   system-pages/membership-application/01-top.html (WA's wrapper nesting
+   defeated pure-CSS reordering twice). The script renames Back to "Edit",
+   moves its row above the Review-and-confirm tile, and moves the Cancel row
+   below the Application data. The rules here only STYLE those rows —
+   selectors avoid .navigationContainer/.inner so they keep matching after
+   the rows are moved. */
 /* The theme floats these buttons and hands them stray margins (12px, even a
    180px right margin on Back) — neutralise inside the nav rows. */
 body .WaGadgetMembershipApplicationStateReview .navigationContainer .inner .right > *,
@@ -6930,8 +6919,21 @@ body .WaGadgetPublicWizard .commonMessageBox .levelPrice {
 }
 body .WaGadgetMembershipApplication .commonMessageBox .labelTitle,
 body .WaGadgetPublicWizard .commonMessageBox .labelTitle {
-  font-family: var(--ngm-sans) !important; font-weight: 700 !important;
-  font-size: 1.15rem !important; color: var(--ngm-sage-dk) !important;
+  font-family: var(--ngm-sans) !important; font-weight: 600 !important;
+  font-size: 1.05rem !important; color: var(--ngm-sage-dk) !important;
+}
+/* Everything in the value column uses the site sans — the theme was leaking
+   16px Lato into the level line — and the level NAME reads serif, like the
+   site's other headings. */
+body .WaGadgetMembershipApplication .commonMessageBox .infoColumn span,
+body .WaGadgetPublicWizard .commonMessageBox .infoColumn span {
+  font-family: var(--ngm-sans) !important;
+}
+body .WaGadgetMembershipApplication .commonMessageBox .infoColumn > span:first-child > span:first-child:not(.levelPrice),
+body .WaGadgetPublicWizard .commonMessageBox .infoColumn > span:first-child > span:first-child:not(.levelPrice) {
+  font-family: var(--ngm-serif) !important; font-size: 1.3rem !important;
+  font-weight: 400 !important; color: var(--ngm-charcoal) !important;
+  line-height: 1.25 !important;
 }
 /* Renewal / recurring / payment instructions → quiet gray */
 body .WaGadgetMembershipApplication .commonMessageBox .levelRenewal,
