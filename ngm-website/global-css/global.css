@@ -4926,6 +4926,28 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"] .ngm-evt-tag
 @media(max-width:820px){.ngm-hub-zgrid{grid-template-columns:1fr 1fr;}}
 @media(max-width:520px){.ngm-hub-zgrid{grid-template-columns:1fr;}}
 
+/* ── Member-hub DASHBOARD (redesign): hero quick actions, grouped
+   resources, leadership person-cards grouped by team ── */
+.ngm-hub-qgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px;}
+.ngm-hub-task-featured{background:var(--ngm-sage-dk);border:1px solid var(--ngm-sage-dk);}
+.ngm-hub-task-featured .ngm-hub-ticon{background:rgba(255,255,255,.14);color:#fff;}
+.ngm-hub-task-featured h3{color:#fff;}
+.ngm-hub-task-featured p{color:rgba(255,255,255,.85);}
+.ngm-hub-task-featured .ngm-hub-tgo{color:#fff;}
+.ngm-hub-rgroup{margin-top:34px;}
+.ngm-hub-rgroup:first-of-type{margin-top:10px;}
+.ngm-hub-rgroup-title,.ngm-hub-team-title{font-family:var(--ngm-sans);font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ngm-sage-dk);margin:0 0 12px;}
+.ngm-hub-team{margin-top:34px;}
+.ngm-hub-team:first-of-type{margin-top:6px;}
+.ngm-hub-people{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.ngm-hub-person{background:#fff;border:1px solid var(--ngm-border);border-radius:var(--ngm-radius);padding:18px 20px;}
+.ngm-hub-person-name{display:block;font-family:var(--ngm-serif);font-size:1.18rem;color:var(--ngm-charcoal);line-height:1.2;}
+.ngm-hub-person-role{display:block;font-family:var(--ngm-sans);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ngm-sage-dk);margin-top:4px;}
+a.ngm-hub-person-email{display:block;font-family:var(--ngm-sans);font-size:.82rem;color:var(--ngm-gray);margin-top:9px;text-decoration:none;word-break:break-all;transition:color .15s;}
+a.ngm-hub-person-email:hover{color:var(--ngm-sage-dk);}
+@media(max-width:900px){.ngm-hub-qgrid{grid-template-columns:1fr;}.ngm-hub-people{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.ngm-hub-people{grid-template-columns:1fr;}}
+
 /* account: two primary cards above the tab tiles */
 .ngm-hub-acct-top{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:6px;margin-bottom:16px;}
 .ngm-hub-acard{display:flex;align-items:center;gap:18px;background:#fff;border:1px solid var(--ngm-border);border-radius:var(--ngm-radius-lg);padding:24px 26px;text-decoration:none!important;color:var(--ngm-charcoal);transition:border-color .18s,box-shadow .18s,transform .18s;}
