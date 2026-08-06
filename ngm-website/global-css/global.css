@@ -6082,7 +6082,7 @@ body .WaGadgetPublicWizard .cancelButton,
 body .WaGadgetPublicWizard [id$="_cancel"],
 body .WaGadgetPublicWizard [id$="_cancelTop"] {
   background: transparent !important; border: none !important; border-radius: 0 !important;
-  box-shadow: none !important; color: var(--ngm-gray) !important;
+  box-shadow: none !important; color: var(--ngm-rose-dk) !important;
   font-family: var(--ngm-sans) !important; font-size: .9rem !important; font-weight: 500 !important;
   letter-spacing: normal !important; text-transform: none !important;
   padding: 10px 6px !important; text-decoration: none !important; cursor: pointer !important;
@@ -6093,7 +6093,7 @@ body .WaGadgetMembershipApplication [id$="_cancelTop"]:hover,
 body .WaGadgetPublicWizard .cancelButton:hover,
 body .WaGadgetPublicWizard [id$="_cancel"]:hover,
 body .WaGadgetPublicWizard [id$="_cancelTop"]:hover {
-  background: transparent !important; color: var(--ngm-sage-dk) !important;
+  background: transparent !important; color: var(--ngm-rose) !important;
   text-decoration: underline !important;
 }
 /* ══ Review-step action buttons — reorder + hierarchy ══════════════════
@@ -6381,11 +6381,6 @@ body .WaGadgetPublicWizard .payment-method-right {
   body .WaGadgetMembershipApplication .fieldBody,
   body .WaGadgetPublicWizard .fieldBody {
     float: none !important; width: 100% !important;
-  }
-  /* Cancel (its row keeps class .left after the script moves it) → full width */
-  body .WaGadgetMembershipApplicationStateReview .left,
-  body .WaGadgetMembershipApplicationStateReview .left input {
-    width: 100% !important; box-sizing: border-box !important;
   }
 }
 /* Divider lines in the wizard (e.g. under "Application data") → soft linen */
