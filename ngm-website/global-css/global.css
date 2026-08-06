@@ -6136,15 +6136,16 @@ body .WaGadgetMembershipApplicationStateReview .right [id$="_prevTop"]:hover {
 /* CANCEL → rose "negative" outline button at the bottom */
 body .WaGadgetMembershipApplicationStateReview .left [id$="_cancel"],
 body .WaGadgetMembershipApplicationStateReview .left [id$="_cancelTop"] {
-  background: transparent !important; color: var(--ngm-rose-dk) !important;
-  border: 1.5px solid var(--ngm-rose-dk) !important; border-radius: 999px !important; box-shadow: none !important;
-  font-family: var(--ngm-sans) !important; font-weight: 600 !important; font-size: .9rem !important;
-  text-transform: none !important; letter-spacing: normal !important; padding: 10px 26px !important;
+  background: var(--ngm-rose) !important; color: #fff !important;
+  border: 1.5px solid var(--ngm-rose) !important; border-radius: 999px !important; box-shadow: none !important;
+  font-family: var(--ngm-sans) !important; font-weight: 600 !important; font-size: .95rem !important;
+  text-transform: none !important; letter-spacing: normal !important; padding: 10px 28px !important;
   text-decoration: none !important; cursor: pointer !important;
 }
 body .WaGadgetMembershipApplicationStateReview .left [id$="_cancel"]:hover,
 body .WaGadgetMembershipApplicationStateReview .left [id$="_cancelTop"]:hover {
-  background: var(--ngm-rose-dk) !important; color: #fff !important; text-decoration: none !important;
+  background: var(--ngm-rose-dk) !important; border-color: var(--ngm-rose-dk) !important;
+  color: #fff !important; text-decoration: none !important;
 }
 /* Mobile: stack the Pay/Invoice/Back row full-width with spacing */
 @media (max-width: 600px) {
@@ -6421,7 +6422,7 @@ body .WaGadgetPublicWizard .ngm-review-actions {
   align-items: center !important; gap: 14px !important;
   margin: 34px 0 4px !important;
 }
-@media (max-width: 900px) {
+@media (max-width: 640px) {
   body .WaGadgetMembershipApplication .ngm-review-actions,
   body .WaGadgetPublicWizard .ngm-review-actions {
     flex-direction: column !important; align-items: stretch !important;
