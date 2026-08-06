@@ -6405,11 +6405,21 @@ body .WaGadgetPublicWizard .ngm-review-actions {
   align-items: center !important; gap: 14px !important;
   margin: 34px 0 4px !important;
 }
+/* desktop & tablet: Cancel left, Edit right */
+body .WaGadgetMembershipApplication .ngm-review-actions .left,
+body .WaGadgetPublicWizard .ngm-review-actions .left { order: 1 !important; }
+body .WaGadgetMembershipApplication .ngm-review-actions .right,
+body .WaGadgetPublicWizard .ngm-review-actions .right { order: 2 !important; }
 @media (max-width: 640px) {
   body .WaGadgetMembershipApplication .ngm-review-actions,
   body .WaGadgetPublicWizard .ngm-review-actions {
     flex-direction: column !important; align-items: stretch !important;
   }
+  /* stacked: Edit back on top, Cancel below */
+  body .WaGadgetMembershipApplication .ngm-review-actions .right,
+  body .WaGadgetPublicWizard .ngm-review-actions .right { order: 1 !important; }
+  body .WaGadgetMembershipApplication .ngm-review-actions .left,
+  body .WaGadgetPublicWizard .ngm-review-actions .left { order: 2 !important; }
   body .WaGadgetMembershipApplication .ngm-review-actions .right,
   body .WaGadgetMembershipApplication .ngm-review-actions .right input,
   body .WaGadgetMembershipApplication .ngm-review-actions .left,
