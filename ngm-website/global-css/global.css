@@ -6208,11 +6208,34 @@ body .WaGadgetPublicWizard input.pay-with-card-button:hover,
 body .WaGadgetPublicWizard input[id$="_btnPayWithCard"]:hover {
   background: var(--ngm-sage) !important; border-color: var(--ngm-sage) !important;
 }
-/* "Available payment methods:" caption stays quiet */
+/* "Available payment methods:" caption stays quiet — and wraps instead of
+   overflowing the card (the theme's flex-end row pushed it out the left edge
+   on narrow screens) */
 body .WaGadgetMembershipApplication .available-payment-methods,
 body .WaGadgetPublicWizard .available-payment-methods {
   font-family: var(--ngm-sans) !important; font-size: .78rem !important;
   color: var(--ngm-gray-lt) !important;
+  display: flex !important; flex-wrap: wrap !important; align-items: center !important;
+  justify-content: flex-end !important; gap: 6px 8px !important;
+  max-width: 100% !important; min-width: 0 !important;
+}
+body .WaGadgetMembershipApplication .available-payment-methods .payment-icons,
+body .WaGadgetPublicWizard .available-payment-methods .payment-icons {
+  display: flex !important; flex-wrap: wrap !important; gap: 6px !important;
+}
+@media (max-width: 700px) {
+  body .WaGadgetMembershipApplication .available-payment-methods,
+  body .WaGadgetPublicWizard .available-payment-methods {
+    justify-content: flex-start !important;
+  }
+}
+/* Manual payments has no description of its own — say what choosing it does */
+body .WaGadgetMembershipApplication .payment-method-card:has([id$="_btnInvoiceMe"]) .payment-method-description::after,
+body .WaGadgetPublicWizard .payment-method-card:has([id$="_btnInvoiceMe"]) .payment-method-description::after {
+  content: "Prefer to pay by check? Choose this option and we\2019ll email you an invoice with payment instructions.";
+  display: block !important;
+  font-family: var(--ngm-sans) !important; font-size: .88rem !important;
+  color: var(--ngm-gray) !important; line-height: 1.6 !important;
 }
 /* Total-amount summary rows (review/payment step table) */
 body .WaGadgetMembershipApplication td.labelInfoColumn,
@@ -6313,23 +6336,24 @@ body .WaGadgetPublicWizard .payment-method-right {
 @media (max-width: 700px) {
   body .WaGadgetMembershipApplication,
   body .WaGadgetPublicWizard { overflow-x: hidden !important; }
+  /* Review tile: keep the label|value table but fix its column split and let
+     everything wrap — the desktop nowrap eyebrow labels were forcing the
+     table wider than the tile. (Block-ifying the tds shifted content out of
+     the box, so the table stays a table.) */
   body .WaGadgetMembershipApplication .commonMessageBox table,
-  body .WaGadgetMembershipApplication .commonMessageBox tbody,
-  body .WaGadgetMembershipApplication .commonMessageBox tr,
-  body .WaGadgetMembershipApplication .commonMessageBox td,
-  body .WaGadgetPublicWizard .commonMessageBox table,
-  body .WaGadgetPublicWizard .commonMessageBox tbody,
-  body .WaGadgetPublicWizard .commonMessageBox tr,
-  body .WaGadgetPublicWizard .commonMessageBox td {
-    display: block !important; width: 100% !important; box-sizing: border-box !important;
+  body .WaGadgetPublicWizard .commonMessageBox table {
+    width: 100% !important; max-width: 100% !important;
+    table-layout: fixed !important; margin: 0 !important;
   }
   body .WaGadgetMembershipApplication .commonMessageBox .labelInfoColumn,
   body .WaGadgetPublicWizard .commonMessageBox .labelInfoColumn {
-    white-space: normal !important; text-align: left !important;
-    padding: 12px 0 3px !important;
+    white-space: normal !important; width: 38% !important;
+    padding: 12px 10px 12px 0 !important;
   }
   body .WaGadgetMembershipApplication .commonMessageBox .infoColumn,
-  body .WaGadgetPublicWizard .commonMessageBox .infoColumn { padding: 0 0 6px !important; }
+  body .WaGadgetPublicWizard .commonMessageBox .infoColumn {
+    overflow-wrap: break-word !important;
+  }
   /* Application-data rows: drop the floated 30% right-aligned label column */
   body .WaGadgetMembershipApplication .fieldContainer .fieldLabel,
   body .WaGadgetPublicWizard .fieldContainer .fieldLabel {
@@ -6377,14 +6401,29 @@ body .WaGadgetPublicWizard .fieldBody > span {
    (Back) and .left (Cancel) become reorderable flex items, then order Back
    first and Cancel last. If WA's nesting differs the :has() simply never
    matches and the layout stays as-is. */
-body .WaGadgetMembershipApplicationStateReview *:has(> .navigationOuterContainer):has(> .commonMessageBox),
-body .WaGadgetMembershipApplicationStateReview *:has(> .navigationContainer):has(> .commonMessageBox) {
+body .WaGadgetMembershipApplicationStateReview *:has(> .navigationContainer):has(.commonMessageBox),
+body .WaGadgetMembershipApplicationStateReview *:has(> .navigationOuterContainer):has(.commonMessageBox) {
   display: flex !important; flex-direction: column !important;
 }
-body .WaGadgetMembershipApplicationStateReview .navigationOuterContainer,
-body .WaGadgetMembershipApplicationStateReview .navigationContainer,
-body .WaGadgetMembershipApplicationStateReview .navigationContainer .inner {
+/* Dissolve the nav wrappers ONLY inside a matched parent, so a structure
+   mismatch leaves the normal nav layout instead of loose buttons. */
+body .WaGadgetMembershipApplicationStateReview *:has(> .navigationContainer):has(.commonMessageBox) .navigationContainer,
+body .WaGadgetMembershipApplicationStateReview *:has(> .navigationContainer):has(.commonMessageBox) .navigationContainer .inner,
+body .WaGadgetMembershipApplicationStateReview *:has(> .navigationOuterContainer):has(.commonMessageBox) .navigationOuterContainer,
+body .WaGadgetMembershipApplicationStateReview *:has(> .navigationOuterContainer):has(.commonMessageBox) .navigationContainer,
+body .WaGadgetMembershipApplicationStateReview *:has(> .navigationOuterContainer):has(.commonMessageBox) .navigationContainer .inner {
   display: contents !important;
+}
+/* Explicit ordering: default children (payment cards, application data) sit
+   in the middle; whichever child holds the review tile goes above them; the
+   Back row leads and the Cancel row trails. */
+body .WaGadgetMembershipApplicationStateReview *:has(> .navigationContainer):has(.commonMessageBox) > *,
+body .WaGadgetMembershipApplicationStateReview *:has(> .navigationOuterContainer):has(.commonMessageBox) > * {
+  order: 3;
+}
+body .WaGadgetMembershipApplicationStateReview *:has(> .navigationContainer):has(.commonMessageBox) > :is(.commonMessageBox, *:has(.commonMessageBox)),
+body .WaGadgetMembershipApplicationStateReview *:has(> .navigationOuterContainer):has(.commonMessageBox) > :is(.commonMessageBox, *:has(.commonMessageBox)) {
+  order: 2;
 }
 /* Back row → first, small breathing room under it */
 body .WaGadgetMembershipApplicationStateReview .navigationContainer .inner .right {
@@ -6394,6 +6433,12 @@ body .WaGadgetMembershipApplicationStateReview .navigationContainer .inner .righ
 body .WaGadgetMembershipApplicationStateReview .navigationContainer .inner .left {
   order: 99 !important; margin: 28px 0 0 !important;
   display: flex !important; justify-content: center !important;
+}
+/* The theme floats these buttons and hands them stray margins (12px, even a
+   180px right margin on Back) — neutralise inside the nav rows. */
+body .WaGadgetMembershipApplicationStateReview .navigationContainer .inner .right > *,
+body .WaGadgetMembershipApplicationStateReview .navigationContainer .inner .left > * {
+  float: none !important; margin: 0 !important;
 }
 /* ── Stacked field layout: labels ABOVE inputs ──────────────────────────
    WA lays each field out as a <table> with a label cell (td.left) and an
