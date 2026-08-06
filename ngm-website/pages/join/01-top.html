@@ -1,9 +1,9 @@
 <!-- Canonical page markup — this is the file to edit and to paste into the WA Custom-HTML gadget. Styling lives in global-css/global.css (pasted into the WA CSS tab; must be live in WA first). There is no separate self-contained version. -->
 <div class="ngm">
   <!-- ══ HERO — donate-style: eyebrow "Join", "Become a member", copy with the
-       membership facts folded in (dues, membership year, first visit free),
-       social buttons under the copy, photo alongside. No CTAs — the form is
-       right below on this same page. ══ -->
+       membership facts folded in, photo alongside. One CTA: the membership
+       application lives on its own page (/application), so the button sends
+       people there instead of embedding the form here. ══ -->
   <section class="ngm-sec ngm-sec-cream">
     <div class="ngm-con">
       <div class="ngm-mt-hero-grid">
@@ -11,29 +11,13 @@
           <span class="ngm-eyebrow">Join</span>
           <h1 class="ngm-h1">Become a <em>member</em></h1>
           <p class="ngm-lead">Connect with people who love needlework, learn new skills, and be part of a welcoming community that&rsquo;s been stitching together since 1972 &mdash; everyone is welcome, and membership is just $30 a year.</p>
-          <p class="ngm-lead" style="margin-top:14px"><a class="ngm-inline-link" href="#ngm-join-start">Begin the application form below&nbsp;&darr;</a></p>
+          <div class="ngm-join-hero-btns">
+            <a class="ngm-btn ngm-btn-rose ngm-btn-lg" href="/application">Start the membership application</a>
+          </div>
         </div>
         <div class="ngm-mt-photo" style="min-height:380px;padding:0;overflow:hidden;border:none"><img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade" src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20-%20Photos/Retreat%20Photo%202NGM.jpeg" alt="Guild members enjoying needlework together" loading="eager" style="width:100%;height:100%;object-fit:cover;border-radius:var(--ngm-radius-lg)" onerror="this.onerror=null;this.src='https://needleworkguildmn.org/resources/Pictures/Join%20page%20cropped.jpg'"></div>
       </div>
     </div>
   </section>
 
-  <!-- ══ START HERE heading — sits directly above the native WA Membership
-       application gadget (see 02-form-gadget.txt). The form starts with the
-       email step, so new members begin right on this page instead of being
-       sent to /application. White band continues through the form row. ══ -->
-  <section id="ngm-join-start" class="ngm ngm-sec ngm-sec-white" style="padding-bottom:0;scroll-margin-top:100px">
-    <div class="ngm-con">
-      <div class="ngm-upcoming-head">
-        <span class="ngm-eyebrow">Start here</span>
-        <h2 class="ngm-h2">Begin your <em>membership</em></h2>
-        <p class="ngm-upcoming-intro">Enter your email to create your account and complete your membership in just a few minutes.</p>
-      </div>
-    </div>
-  </section>
 </div>
-<script>
-  /* Tag <body> so global.css can skin the embedded native WA "Membership
-     application" gadget (see the JOIN PAGE block in global.css). */
-  if (document.body) document.body.classList.add("ngm-join-page");
-</script>

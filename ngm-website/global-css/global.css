@@ -6212,13 +6212,11 @@ body .WaGadgetMembershipApplication .gadgetStyleBody {
   body .WaGadgetMembershipApplication { margin: 20px 16px 40px !important; }
   body .WaGadgetMembershipApplication .gadgetStyleBody { padding: 24px 20px !important; }
 }
-/* ── JOIN PAGE embed (body.ngm-join-page, added by pages/join/01-top.html) ──
-   The gadget sits directly under the "Start here" heading on /join (see
-   pages/join/02-form-gadget.txt). Paint the gadget's immediate wrapper white
-   so the band reads continuous with the heading section above (the WA row
-   background is set white in the editor too — this is the CSS fallback), and
-   tuck the card up under the heading. Everything else comes from the
-   site-wide card + form skin above. */
+/* ── JOIN PAGE embed (body.ngm-join-page) — PARKED / currently inert ──
+   The Join page no longer embeds the Membership-application gadget (the form
+   lives on /application; see pages/join/02-form-gadget.txt) and 01-top.html
+   no longer adds the ngm-join-page body class, so nothing matches these
+   rules. Kept as a reference in case the embedded-form layout returns. */
 body.ngm-join-page *:has(> .WaGadgetMembershipApplication) { background: #fff !important; }
 /* Wider card (1080px like the donate form), clear air between the heading
    copy above and the form, and a tighter interior: less space between the
