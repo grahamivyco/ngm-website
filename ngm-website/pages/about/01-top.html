@@ -110,3 +110,8 @@
     </div>
   </div>
 </div>
+<script>
+  /* Tag <body> so global.css can scope about-page-only rules
+     (mobile centre-alignment — see the ABOUT PAGE block). */
+  if (document.body) document.body.classList.add("ngm-about-page");
+</script>
