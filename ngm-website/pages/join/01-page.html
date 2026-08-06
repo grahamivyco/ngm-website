@@ -1,8 +1,27 @@
-<!-- Canonical page markup — this is the file to edit and to paste into the WA Custom-HTML gadget. Styling lives in global-css/global.css (pasted into the WA CSS tab; must be live in WA first). There is no separate self-contained version. -->
+<!-- Canonical page markup — the WHOLE Join page in one file, pasted into a single WA Custom-HTML gadget. Styling lives in global-css/global.css (pasted into the WA CSS tab; must be live in WA first). There is no separate self-contained version. -->
 <div class="ngm">
+  <!-- ══ HERO — donate-style: eyebrow "Join", "Become a member", copy with the
+       membership facts folded in, photo alongside. One CTA: the membership
+       application lives on its own page (/application), so the button sends
+       people there instead of embedding the form here. ══ -->
+  <section class="ngm-sec ngm-sec-cream">
+    <div class="ngm-con">
+      <div class="ngm-mt-hero-grid">
+        <div>
+          <span class="ngm-eyebrow">Join</span>
+          <h1 class="ngm-h1">Become a <em>member</em></h1>
+          <p class="ngm-lead">Connect with people who love needlework, learn new skills, and be part of a welcoming community that&rsquo;s been stitching together since 1972 &mdash; everyone is welcome, and membership is just $30 a year.</p>
+          <div class="ngm-join-hero-btns">
+            <a class="ngm-btn ngm-btn-rose ngm-btn-lg" href="/application">Start the membership application</a>
+          </div>
+        </div>
+        <div class="ngm-mt-photo" style="min-height:380px;padding:0;overflow:hidden;border:none"><img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade" src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20-%20Photos/Retreat%20Photo%202NGM.jpeg" alt="Guild members enjoying needlework together" loading="eager" style="width:100%;height:100%;object-fit:cover;border-radius:var(--ngm-radius-lg)" onerror="this.onerror=null;this.src='https://needleworkguildmn.org/resources/Pictures/Join%20page%20cropped.jpg'"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ══ PRICING — the old price card's facts folded into plain copy: no
-       badge, no tags, no in-card checklist, no trust icons. Linen so it
-       stands apart from the white form band above. ══ -->
+       badge, no tags, no in-card checklist, no trust icons. ══ -->
   <section class="ngm ngm-sec ngm-sec-linen">
     <div class="ngm-con" style="text-align:center">
       <span class="ngm-eyebrow">Membership</span>
@@ -65,9 +84,7 @@
     </div>
   </section>
 
-  <!-- ══ CONTACT CTA — replaces the old "Ready to stitch / Become a member
-       today" band (the join CTA is the form at the top of this page now).
-       Reuses the .ngm-join-cta rose band styling. ══ -->
+  <!-- ══ CONTACT CTA — rose band; the join CTA is the hero button now. ══ -->
   <div class="ngm ngm-join-cta">
     <div class="ngm-join-cta-inner">
       <span class="ngm-eyebrow">Questions?</span>

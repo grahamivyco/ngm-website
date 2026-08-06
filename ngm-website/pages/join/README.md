@@ -1,30 +1,38 @@
 # Join
 
 **WA page:** Join (slug `/Join-Duplicate`)
-**Structure:** TWO Custom-HTML gadgets stacked in one column — the
-membership form is NOT embedded here; it lives on its own page,
-`/application` (see `system-pages/membership-application/`).
+**Structure:** ONE Custom-HTML gadget holding the whole page —
+`01-page.html`. The membership form is NOT embedded here; it lives on its
+own page, `/application` (see `system-pages/membership-application/`).
 
-1. `01-top.html` — hero: eyebrow **Join**, "Become a member", membership
-   facts folded into the copy ($30/year, welcoming since 1972), photo
-   alongside, and one CTA button — "Start the membership application" —
-   linking to `/application`.
-2. `03-bottom.html` — pricing as plain copy (linen; big lone $30 with the
-   per-month/June–May details folded into the lead), the homepage
-   "Visit / Come stitch with us" section (cream, with the Zoom tiles band),
-   and a "Questions? / We'd love to help" rose CTA band linking to
-   /contact-us. Ends with the Member-Hub-tile login-redirect script.
+`01-page.html`, top to bottom:
 
-`02-form-gadget.txt` records that the native WA "Membership application"
-gadget was REMOVED from this page and how to delete it in the WA editor.
-Earlier iterations embedded the form between the two gadgets, but WA
-renders the form's later steps (payment, confirmation) in-page surrounded
-by the marketing sections — so the form moved to the dedicated
-`/application` page instead.
+1. **Hero** (cream) — eyebrow **Join**, "Become a member", membership facts
+   folded into the copy ($30/year, welcoming since 1972), photo alongside,
+   and one CTA button — "Start the membership application" — linking to
+   `/application`.
+2. **Pricing** (linen) — big lone $30 with the per-month/June–May details
+   folded into the lead copy.
+3. **Visit** (cream) — the homepage "Come stitch with us" section with the
+   MVUUF address/photo and the Zoom tiles band.
+4. **Contact CTA** (rose band) — "Questions? / We'd love to help" linking
+   to /contact-us.
+5. Ends with the Member-Hub-tile login-redirect script.
+
+## WA editor setup
+
+The Join page should contain exactly one Custom-HTML gadget, holding
+`01-page.html`. Earlier versions used two Custom-HTML gadgets (01-top /
+03-bottom) with the native WA "Membership application" gadget between
+them — WA rendered the form's later steps (payment, confirmation) in-page
+surrounded by the marketing sections, so the form moved to the dedicated
+`/application` page. If the old gadgets/rows are still present: delete the
+Membership-application gadget and the second Custom-HTML gadget, and paste
+`01-page.html` into the remaining one.
 
 Styling: global.css. The JOIN PAGE embed block scoped to
-`body.ngm-join-page` is now inert (01-top no longer adds that body class)
-and is kept only as a parked reference.
+`body.ngm-join-page` is now inert (this page no longer adds that body
+class) and is kept only as a parked reference.
 
 ## Open TODO
 - Replace hero photo if desired (currently a real /resources URL).
