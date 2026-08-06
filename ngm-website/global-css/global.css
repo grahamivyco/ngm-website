@@ -6251,11 +6251,11 @@ body .WaGadgetPublicWizard td.infoColumn .levelRenewal,
 body .WaGadgetPublicWizard td.infoColumn .levelRecurring {
   font-size: .88rem !important; color: var(--ngm-gray) !important;
 }
-/* the amount itself ("$30.00 (USD)") */
+/* the amount itself ("$30.00 (USD)") — site sans, charcoal, calm weight */
 body .WaGadgetMembershipApplication strong.labelTitle,
 body .WaGadgetPublicWizard strong.labelTitle {
-  font-family: var(--ngm-sans) !important; font-size: 1.15rem !important;
-  font-weight: 600 !important; color: var(--ngm-sage-dk) !important;
+  font-family: var(--ngm-sans) !important; font-size: 1.05rem !important;
+  font-weight: 500 !important; color: var(--ngm-charcoal) !important;
 }
 /* ── "Member already exists" message + any plain WA input.button ─────────
    When the email entered already has an account, WA shows Login /
@@ -6379,6 +6379,17 @@ body .WaGadgetPublicWizard .payment-method-right {
   body .WaGadgetPublicWizard .fieldBody {
     float: none !important; width: 100% !important;
   }
+  /* Cancel (its row keeps class .left after the script moves it) → full width */
+  body .WaGadgetMembershipApplicationStateReview .left,
+  body .WaGadgetMembershipApplicationStateReview .left input {
+    width: 100% !important; box-sizing: border-box !important;
+  }
+}
+/* Divider lines in the wizard (e.g. under "Application data") → soft linen */
+body .WaGadgetMembershipApplication hr,
+body .WaGadgetPublicWizard hr {
+  border: none !important; border-top: 1px solid var(--ngm-linen-dk) !important;
+  height: 0 !important; background: none !important; margin: 10px 0 18px !important;
 }
 /* Card option titles/descriptions: the 01-top.html script sets the credit
    card title to "Credit or debit card" and folds "Secure checkout through
@@ -6919,8 +6930,8 @@ body .WaGadgetPublicWizard .commonMessageBox .levelPrice {
 }
 body .WaGadgetMembershipApplication .commonMessageBox .labelTitle,
 body .WaGadgetPublicWizard .commonMessageBox .labelTitle {
-  font-family: var(--ngm-sans) !important; font-weight: 600 !important;
-  font-size: 1.05rem !important; color: var(--ngm-sage-dk) !important;
+  font-family: var(--ngm-sans) !important; font-weight: 500 !important;
+  font-size: 1.05rem !important; color: var(--ngm-charcoal) !important;
 }
 /* Everything in the value column uses the site sans — the theme was leaking
    16px Lato into the level line — and the level NAME reads serif, like the

@@ -19,20 +19,34 @@
     var gadget = document.querySelector('.WaGadgetMembershipApplication');
     if (!gadget || !/StateReview/.test(gadget.className)) return;
 
-    /* Back → "Edit", and its row moves ABOVE the Review-and-confirm tile */
-    var box = gadget.querySelector('.commonMessageBox');
+    /* Back → "Edit", and its row moves to sit just above "Application data"
+       (fallback: above the first field row) */
     var back = gadget.querySelector('input[id$="_prevTop"], input[id$="_prev"]');
-    if (back && box) {
+    var fields = gadget.querySelectorAll('.fieldContainer');
+    if (back) {
       back.value = 'Edit';
       var backRow = back.closest('.right') || back;
-      var boxWrap = box.closest('[id$="_infoMessageBox"]') || box;
-      boxWrap.parentNode.insertBefore(backRow, boxWrap);
-      backRow.style.margin = '0 0 10px';
+      var anchor = null;
+      var nodes = gadget.querySelectorAll('h1,h2,h3,h4,h5,div,span,legend');
+      for (var n = 0; n < nodes.length; n++) {
+        if (nodes[n].children.length === 0 &&
+            nodes[n].textContent.replace(/\s+/g, ' ').trim() === 'Application data') {
+          anchor = nodes[n]; break;
+        }
+      }
+      while (anchor && anchor.parentNode && anchor.parentNode !== gadget &&
+             anchor.parentNode.children.length === 1) {
+        anchor = anchor.parentNode;
+      }
+      if (!anchor && fields.length) anchor = fields[0];
+      if (anchor && anchor.parentNode) {
+        anchor.parentNode.insertBefore(backRow, anchor);
+        backRow.style.cssText += ';margin:30px 0 4px;float:none;width:auto;';
+      }
     }
 
     /* Cancel row moves BELOW the Application data (after the last field row) */
     var cancel = gadget.querySelector('input[id$="_cancelTop"], input[id$="_cancel"]');
-    var fields = gadget.querySelectorAll('.fieldContainer');
     if (cancel && fields.length) {
       var cancelRow = cancel.closest('.left') || cancel;
       var last = fields[fields.length - 1];
