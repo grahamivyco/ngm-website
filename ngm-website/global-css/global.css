@@ -6120,16 +6120,18 @@ body .WaGadgetMembershipApplicationStateReview .right [id$="_next"],
 body .WaGadgetMembershipApplicationStateReview .right [id$="_nextTop"] { order: 2 !important; }
 body .WaGadgetMembershipApplicationStateReview .right [id$="_prev"],
 body .WaGadgetMembershipApplicationStateReview .right [id$="_prevTop"] { order: 3 !important; }
-/* BACK → tertiary text word */
+/* EDIT (Back) → secondary outline pill, slightly larger text */
 body .WaGadgetMembershipApplicationStateReview .right [id$="_prev"],
 body .WaGadgetMembershipApplicationStateReview .right [id$="_prevTop"] {
-  background: transparent !important; border: none !important; border-radius: 0 !important; box-shadow: none !important;
-  color: var(--ngm-gray) !important; font-weight: 500 !important; text-transform: none !important;
-  letter-spacing: normal !important; padding: 10px 6px !important; text-decoration: none !important;
+  background: transparent !important; border: 1.5px solid var(--ngm-sage-dk) !important;
+  border-radius: 999px !important; box-shadow: none !important;
+  color: var(--ngm-sage-dk) !important; font-family: var(--ngm-sans) !important;
+  font-size: .95rem !important; font-weight: 600 !important; text-transform: none !important;
+  letter-spacing: normal !important; padding: 10px 28px !important; text-decoration: none !important;
 }
 body .WaGadgetMembershipApplicationStateReview .right [id$="_prev"]:hover,
 body .WaGadgetMembershipApplicationStateReview .right [id$="_prevTop"]:hover {
-  color: var(--ngm-sage-dk) !important; text-decoration: underline !important; background: transparent !important;
+  background: var(--ngm-sage-dk) !important; color: #fff !important; text-decoration: none !important;
 }
 /* CANCEL → rose "negative" outline button at the bottom */
 body .WaGadgetMembershipApplicationStateReview .left [id$="_cancel"],
@@ -6251,11 +6253,11 @@ body .WaGadgetPublicWizard td.infoColumn .levelRenewal,
 body .WaGadgetPublicWizard td.infoColumn .levelRecurring {
   font-size: .88rem !important; color: var(--ngm-gray) !important;
 }
-/* the amount itself ("$30.00 (USD)") — site sans, charcoal, calm weight */
+/* the amount itself ("$30.00 (USD)") — serif, matching the level name */
 body .WaGadgetMembershipApplication strong.labelTitle,
 body .WaGadgetPublicWizard strong.labelTitle {
-  font-family: var(--ngm-sans) !important; font-size: 1.05rem !important;
-  font-weight: 500 !important; color: var(--ngm-charcoal) !important;
+  font-family: var(--ngm-serif) !important; font-size: 1.3rem !important;
+  font-weight: 400 !important; color: var(--ngm-charcoal) !important;
 }
 /* ── "Member already exists" message + any plain WA input.button ─────────
    When the email entered already has an account, WA shows Login /
@@ -6945,8 +6947,8 @@ body .WaGadgetPublicWizard .commonMessageBox .levelPrice {
 }
 body .WaGadgetMembershipApplication .commonMessageBox .labelTitle,
 body .WaGadgetPublicWizard .commonMessageBox .labelTitle {
-  font-family: var(--ngm-sans) !important; font-weight: 500 !important;
-  font-size: 1.05rem !important; color: var(--ngm-charcoal) !important;
+  font-family: var(--ngm-serif) !important; font-weight: 400 !important;
+  font-size: 1.3rem !important; color: var(--ngm-charcoal) !important;
 }
 /* THE tile-clipping culprit (confirmed via console trace): the theme hands
    .kvTable — the wrapper around each LEVEL/TOTAL table — margin-left:-40px,
@@ -6964,6 +6966,13 @@ body .WaGadgetPublicWizard .commonMessageBox .infoColumn span {
 }
 body .WaGadgetMembershipApplication .commonMessageBox .infoColumn > span:first-child > span:first-child:not(.levelPrice),
 body .WaGadgetPublicWizard .commonMessageBox .infoColumn > span:first-child > span:first-child:not(.levelPrice) {
+  font-family: var(--ngm-serif) !important; font-size: 1.3rem !important;
+  font-weight: 400 !important; color: var(--ngm-charcoal) !important;
+  line-height: 1.25 !important;
+}
+/* …and the price beside it matches the name exactly — one serif line */
+body .WaGadgetMembershipApplication .commonMessageBox .infoColumn span.levelPrice,
+body .WaGadgetPublicWizard .commonMessageBox .infoColumn span.levelPrice {
   font-family: var(--ngm-serif) !important; font-size: 1.3rem !important;
   font-weight: 400 !important; color: var(--ngm-charcoal) !important;
   line-height: 1.25 !important;
