@@ -12,9 +12,9 @@ around what members come to DO, not around telling a story:
      tile (the ONLY green element, prominent by size and color), single
      guild Zoom link (`SET URL`), "room opens 5 minutes early" folded in.
    - **My profile** → `/Sys/Profile` (bare path — resolves to whoever is
-     logged in; NEVER add a `?memberId=`) — white `.ngm-hub-acard`.
-   - **Member resources** → in-page anchor `#ngm-hub-resources` — white
-     `.ngm-hub-acard`.
+     logged in; NEVER add a `?memberId=`) — slim white `.ngm-hub-acard`.
+   - (No Member-resources tile — the resources section sits directly
+     below the hero, so a tile pointing at it was redundant.)
 2. **Member resources** (white) — tiles GROUPED for scanning:
    - *Stay Connected* — Member directory (`/member-directory`), Newsletter
      archive (`SET URL`).
