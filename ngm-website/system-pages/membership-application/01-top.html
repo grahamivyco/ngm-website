@@ -19,40 +19,28 @@
     var gadget = document.querySelector('.WaGadgetMembershipApplication');
     if (!gadget || !/StateReview/.test(gadget.className)) return;
 
-    /* Back → "Edit", and its row moves to sit just above "Application data"
-       (fallback: above the first field row) */
+    /* Edit (Back) + Cancel form ONE action row right below the Application
+       data: Edit left / Cancel right on desktop; stacked (Edit above,
+       Cancel below) on tablet and mobile — layout via .ngm-review-actions
+       in global.css. */
     var back = gadget.querySelector('input[id$="_prevTop"], input[id$="_prev"]');
-    var fields = gadget.querySelectorAll('.fieldContainer');
-    if (back) {
-      back.value = 'Edit';
-      var backRow = back.closest('.right') || back;
-      var anchor = null;
-      var nodes = gadget.querySelectorAll('h1,h2,h3,h4,h5,div,span,legend');
-      for (var n = 0; n < nodes.length; n++) {
-        if (nodes[n].children.length === 0 &&
-            nodes[n].textContent.replace(/\s+/g, ' ').trim() === 'Application data') {
-          anchor = nodes[n]; break;
-        }
-      }
-      while (anchor && anchor.parentNode && anchor.parentNode !== gadget &&
-             anchor.parentNode.children.length === 1) {
-        anchor = anchor.parentNode;
-      }
-      if (!anchor && fields.length) anchor = fields[0];
-      if (anchor && anchor.parentNode) {
-        anchor.parentNode.insertBefore(backRow, anchor);
-        backRow.style.cssText += ';margin:30px 0 4px;float:none;width:auto;';
-      }
-    }
-
-    /* Cancel row moves BELOW the Application data (after the last field row) */
     var cancel = gadget.querySelector('input[id$="_cancelTop"], input[id$="_cancel"]');
-    if (cancel && fields.length) {
-      var cancelRow = cancel.closest('.left') || cancel;
+    var fields = gadget.querySelectorAll('.fieldContainer');
+    if ((back || cancel) && fields.length) {
       var last = fields[fields.length - 1];
-      if (last.parentNode) {
-        last.parentNode.appendChild(cancelRow);
-        cancelRow.style.cssText += ';margin:32px 0 0;display:flex;justify-content:center;float:none;width:auto;';
+      var actions = document.createElement('div');
+      actions.className = 'ngm-review-actions';
+      last.parentNode.appendChild(actions);
+      if (back) {
+        back.value = 'Edit';
+        var backRow = back.closest('.right') || back;
+        backRow.style.cssText += ';float:none;margin:0;width:auto;';
+        actions.appendChild(backRow);
+      }
+      if (cancel) {
+        var cancelRow = cancel.closest('.left') || cancel;
+        cancelRow.style.cssText += ';float:none;margin:0;width:auto;display:block;';
+        actions.appendChild(cancelRow);
       }
     }
 
