@@ -3,14 +3,14 @@
 **WA page:** Join (slug `/Join-Duplicate`)
 **Structure:** ONE Custom-HTML gadget holding the whole page —
 `01-page.html`. The membership form is NOT embedded here; it lives on its
-own page, `/application` (see `system-pages/membership-application/`).
+own page, `/Application-Duplicate/` (see `system-pages/membership-application/`).
 
 `01-page.html`, top to bottom:
 
 1. **Hero** (cream) — eyebrow **Join**, "Become a member", membership facts
    folded into the copy ($30/year, welcoming since 1972), photo alongside,
    and one CTA button — "Start the membership application" — linking to
-   `/application`.
+   `/Application-Duplicate/`.
 2. **Pricing** (linen) — big lone $30 with the per-month/June–May details
    folded into the lead copy.
 3. **Visit** (cream) — the homepage "Come stitch with us" section with the
@@ -26,7 +26,7 @@ The Join page should contain exactly one Custom-HTML gadget, holding
 03-bottom) with the native WA "Membership application" gadget between
 them — WA rendered the form's later steps (payment, confirmation) in-page
 surrounded by the marketing sections, so the form moved to the dedicated
-`/application` page. If the old gadgets/rows are still present: delete the
+`/Application-Duplicate/` page. If the old gadgets/rows are still present: delete the
 Membership-application gadget and the second Custom-HTML gadget, and paste
 `01-page.html` into the remaining one.
 

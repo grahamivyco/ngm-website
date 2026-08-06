@@ -61,7 +61,7 @@ For every sandwich page, set the native gadget's **CSS class** and filter per it
 | Page | Live URL | Status |
 |------|----------|--------|
 | Login | `/Sys/Login` | ✅ Built — branded heading (`system-pages/login/`) + form skin in Global CSS |
-| Membership application | `/application` | Skin in Global CSS + optional branded heading (`system-pages/membership-application/`) |
+| Membership application | `/Application-Duplicate/` | Skin in Global CSS + optional branded heading (`system-pages/membership-application/`) |
 | Member profile | `/Sys/Profile` | CSS-only skin in Global CSS (verify against the live page) |
 | Renewal | `/Sys/Profile` renewal flow | CSS-only skin in Global CSS (verify) |
 | Contact profile | contact profile screen | CSS-only skin in Global CSS (verify) |
