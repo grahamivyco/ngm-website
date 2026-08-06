@@ -6413,6 +6413,30 @@ body .WaGadgetPublicWizard .ngm-pay-title {
   font-weight: 400 !important; font-size: 1.5rem !important;
   color: var(--ngm-charcoal) !important; line-height: 1.2 !important;
 }
+/* Action row the script builds under the Application data:
+   desktop Edit left / Cancel right; tablet & mobile stacked, Edit first */
+body .WaGadgetMembershipApplication .ngm-review-actions,
+body .WaGadgetPublicWizard .ngm-review-actions {
+  display: flex !important; justify-content: space-between !important;
+  align-items: center !important; gap: 14px !important;
+  margin: 34px 0 4px !important;
+}
+@media (max-width: 900px) {
+  body .WaGadgetMembershipApplication .ngm-review-actions,
+  body .WaGadgetPublicWizard .ngm-review-actions {
+    flex-direction: column !important; align-items: stretch !important;
+  }
+  body .WaGadgetMembershipApplication .ngm-review-actions .right,
+  body .WaGadgetMembershipApplication .ngm-review-actions .right input,
+  body .WaGadgetMembershipApplication .ngm-review-actions .left,
+  body .WaGadgetMembershipApplication .ngm-review-actions .left input,
+  body .WaGadgetPublicWizard .ngm-review-actions .right,
+  body .WaGadgetPublicWizard .ngm-review-actions .right input,
+  body .WaGadgetPublicWizard .ngm-review-actions .left,
+  body .WaGadgetPublicWizard .ngm-review-actions .left input {
+    width: 100% !important; box-sizing: border-box !important;
+  }
+}
 /* ── "Application data" read-only rows: the theme sets both columns in 16px
    Lato (labels bold, right-aligned in a 30% float column) and the review
    step's labels at a big 20px. Match EVERY .fieldLabel in the wizard (the
@@ -6510,6 +6534,11 @@ body .WaGadgetMembershipApplication {
 body .WaGadgetMembershipApplication .gadgetStyleBody {
   padding: 36px 40px !important;
   box-sizing: border-box !important;
+}
+/* Tablet: the auto side margins collapse to 0 once the viewport nears the
+   1080px card width — keep breathing room around the card */
+@media (min-width: 641px) and (max-width: 1160px) {
+  body .WaGadgetMembershipApplication { margin: 28px 24px 56px !important; }
 }
 @media (max-width: 640px) {
   body .WaGadgetMembershipApplication { margin: 20px 16px 40px !important; }
