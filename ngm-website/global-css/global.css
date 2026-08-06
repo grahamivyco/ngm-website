@@ -4934,6 +4934,12 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"] .ngm-evt-tag
 .ngm-hub-hero .ngm-hub-zoom-module .ngm-hub-zoom-tile-body h4{margin:0 0 3px;}
 .ngm-hub-hero .ngm-hub-acct-top{margin-top:16px;margin-bottom:0;}
 .ngm-hub-hero .ngm-hub-acard-body{display:block;}
+/* slimmer profile card in the hero */
+.ngm-hub-hero .ngm-hub-acard{padding:16px 20px;}
+.ngm-hub-hero .ngm-hub-acard-icon{width:42px;height:42px;border-radius:12px;}
+.ngm-hub-hero .ngm-hub-acard-icon svg{width:21px;height:21px;}
+.ngm-hub-hero .ngm-hub-acard-body h4{font-size:1.18rem;}
+.ngm-hub-hero .ngm-hub-acard-body p{font-size:.82rem;}
 .ngm-hub-rgroup{margin-top:34px;}
 .ngm-hub-rgroup:first-of-type{margin-top:10px;}
 .ngm-hub-rgroup-title,.ngm-hub-team-title{font-family:var(--ngm-sans);font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ngm-sage-dk);margin:0 0 12px;}
