@@ -6240,6 +6240,33 @@ body .WaGadgetPublicWizard strong.labelTitle {
   font-family: var(--ngm-sans) !important; font-size: 1.15rem !important;
   font-weight: 600 !important; color: var(--ngm-sage-dk) !important;
 }
+/* ── "Member already exists" message + any plain WA input.button ─────────
+   When the email entered already has an account, WA shows Login /
+   Forgot-password submits with only class="button" — the theme's blue Lato
+   uppercase style. Catch-all: any input.button inside the wizard becomes the
+   filled sage pill; Forgot password (id suffix _forgotPasswordButton) drops
+   to the outline secondary pill. */
+body .WaGadgetMembershipApplication input.button,
+body .WaGadgetPublicWizard input.button {
+  font-family: var(--ngm-sans) !important; font-size: .9rem !important; font-weight: 600 !important;
+  color: #fff !important; background: var(--ngm-sage-dk) !important;
+  border: 1.5px solid var(--ngm-sage-dk) !important; border-radius: 999px !important;
+  padding: 10px 26px !important; min-width: 0 !important;
+  text-transform: none !important; letter-spacing: normal !important;
+  cursor: pointer !important; transition: all .15s ease !important;
+}
+body .WaGadgetMembershipApplication input.button:hover,
+body .WaGadgetPublicWizard input.button:hover {
+  background: var(--ngm-sage) !important; border-color: var(--ngm-sage) !important;
+}
+body .WaGadgetMembershipApplication input.button[id$="_forgotPasswordButton"],
+body .WaGadgetPublicWizard input.button[id$="_forgotPasswordButton"] {
+  color: var(--ngm-sage-dk) !important; background: transparent !important;
+}
+body .WaGadgetMembershipApplication input.button[id$="_forgotPasswordButton"]:hover,
+body .WaGadgetPublicWizard input.button[id$="_forgotPasswordButton"]:hover {
+  background: var(--ngm-sage-dk) !important; color: #fff !important;
+}
 /* ── Stacked field layout: labels ABOVE inputs ──────────────────────────
    WA lays each field out as a <table> with a label cell (td.left) and an
    input cell (td.right). Force those table parts to blocks so the label sits
