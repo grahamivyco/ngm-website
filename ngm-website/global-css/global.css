@@ -6412,13 +6412,28 @@ body .WaGadgetPublicWizard .ngm-pay-title {
   color: var(--ngm-charcoal) !important; line-height: 1.2 !important;
 }
 /* ── "Application data" read-only rows: the theme sets both columns in 16px
-   Lato (labels bold, right-aligned in a 30% float column). Keep the two-column
-   alignment but put label + value in the site sans at a calmer size. */
-body .WaGadgetMembershipApplication .fieldContainer .fieldLabel,
-body .WaGadgetPublicWizard .fieldContainer .fieldLabel {
+   Lato (labels bold, right-aligned in a 30% float column) and the review
+   step's labels at a big 20px. Match EVERY .fieldLabel in the wizard (the
+   review-step ones sit outside .fieldContainer) to the site sans at a calmer
+   size. */
+body .WaGadgetMembershipApplication .fieldLabel,
+body .WaGadgetPublicWizard .fieldLabel {
   font-family: var(--ngm-sans) !important; font-size: .95rem !important;
   font-weight: 600 !important; color: var(--ngm-charcoal) !important;
   line-height: 1.6 !important;
+}
+/* "Application data" heading: already the serif h3.formTitle — unfloat it so
+   the divider under it sits cleanly on its own line, with air around it */
+body .WaGadgetMembershipApplication h3.formTitle,
+body .WaGadgetPublicWizard h3.formTitle {
+  float: none !important; margin: 0 0 6px !important;
+}
+/* the divider carried by the title containers → soft linen */
+body .WaGadgetMembershipApplication .formTitleOuterContainer,
+body .WaGadgetMembershipApplication .formTitleContainer,
+body .WaGadgetPublicWizard .formTitleOuterContainer,
+body .WaGadgetPublicWizard .formTitleContainer {
+  border-bottom-color: var(--ngm-linen-dk) !important;
 }
 body .WaGadgetMembershipApplication .fieldBody,
 body .WaGadgetMembershipApplication .fieldBody > span,
@@ -6932,6 +6947,13 @@ body .WaGadgetMembershipApplication .commonMessageBox .labelTitle,
 body .WaGadgetPublicWizard .commonMessageBox .labelTitle {
   font-family: var(--ngm-sans) !important; font-weight: 500 !important;
   font-size: 1.05rem !important; color: var(--ngm-charcoal) !important;
+}
+/* THE tile-clipping culprit (confirmed via console trace): the theme hands
+   .kvTable — the wrapper around each LEVEL/TOTAL table — margin-left:-40px,
+   dragging the content out of the box's left edge. */
+body .WaGadgetMembershipApplication .commonMessageBox .kvTable,
+body .WaGadgetPublicWizard .commonMessageBox .kvTable {
+  margin: 0 !important; width: auto !important; max-width: 100% !important;
 }
 /* Everything in the value column uses the site sans — the theme was leaking
    16px Lato into the level line — and the level NAME reads serif, like the
