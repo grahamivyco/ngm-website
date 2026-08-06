@@ -1129,6 +1129,24 @@ body .WaPlaceHolderWide > div {
           mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 @media (max-width: 900px) { .ngm-feat3 { grid-template-columns: 1fr; gap: 16px; } }
+/* ── ABOUT PAGE, mobile: centre-align everything, cards included ──
+   body.ngm-about-page is added by pages/about/01-top.html. Scoped to the
+   page so other pages' stacked layouts keep their left alignment. */
+@media (max-width: 900px) {
+  body.ngm-about-page .ngm-about-hero-inner,
+  body.ngm-about-page .ngm-con,
+  body.ngm-about-page .ngm-history-simple,
+  body.ngm-about-page .ngm-feat { text-align: center; }
+  body.ngm-about-page .ngm-hero-btns,
+  body.ngm-about-page .ngm-about-cta-btns { justify-content: center; }
+  body.ngm-about-page .ngm-feat-icon { margin-left: auto; margin-right: auto; }
+  /* centred checklist: the check becomes an inline mark before the text
+     instead of an absolutely-pinned left column */
+  body.ngm-about-page .ngm-feat li { padding-left: 0; }
+  body.ngm-about-page .ngm-feat li::before {
+    position: static; display: inline-block; margin-right: 8px; vertical-align: -2px;
+  }
+}
 @media (max-width: 760px) { .ngm-perk-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 480px) { .ngm-perk-grid { grid-template-columns: 1fr; } }
 .ngm-do-grid {
