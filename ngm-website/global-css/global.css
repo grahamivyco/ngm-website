@@ -74,6 +74,12 @@
   text-transform: none !important;
   margin-bottom: 20px;
 }
+/* WA's theme (casefile_guardian) has very high-specificity heading rules
+   that recolour bare h1/h2s PURPLE (seen live on the Join hero). Body-prefix
+   + !important so the brand colours always win; ems keep their own colour
+   via their later, more specific rules. */
+body .ngm-h1, body .ngm-h2 { color: var(--ngm-charcoal) !important; }
+body .ngm-h2-dark { color: #fff !important; }
 .ngm-h2 {
   font-family: var(--ngm-serif) !important;
   font-size: clamp(2rem, 3.5vw, 2.8rem);
