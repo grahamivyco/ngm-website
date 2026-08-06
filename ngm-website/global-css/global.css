@@ -7008,6 +7008,44 @@ body .WaGadgetPublicWizard .commonMessageBox .levelRecurring {
   font-size: .88rem !important; color: var(--ngm-gray) !important;
 }
 
+/* ── WA status/message boxes SITE-WIDE (e.g. the "Your application has been
+   submitted" box after finishing the membership application, which renders
+   outside the application gadget). Same sliced .cww construction as the
+   review tile: linen panel, site fonts, sage pill on any action button. */
+body .commonMessageBox .messageBox {
+  background: var(--ngm-linen) !important;
+  border: 1px solid var(--ngm-border) !important;
+  border-radius: var(--ngm-radius-lg) !important;
+  overflow: hidden !important;
+}
+body .commonMessageBox .cww { display: none !important; }
+body .commonMessageBox .cww,
+body .commonMessageBox .cww *,
+body .commonMessageBox .cww-inner,
+body .commonMessageBox .cww-co {
+  background: transparent !important; border: none !important; box-shadow: none !important;
+}
+body .commonMessageBox .cww-co { padding: 22px 26px !important; }
+body .commonMessageBox .text,
+body .commonMessageBox .text span {
+  font-family: var(--ngm-sans) !important; font-size: .98rem !important;
+  color: var(--ngm-charcoal) !important; line-height: 1.7 !important;
+}
+body .commonMessageBox .buttons { margin-top: 14px !important; }
+body .commonMessageBox .buttons input.button,
+body .commonMessageBox .buttons input.typeButton {
+  font-family: var(--ngm-sans) !important; font-size: .9rem !important; font-weight: 600 !important;
+  color: #fff !important; background: var(--ngm-sage-dk) !important;
+  border: 1.5px solid var(--ngm-sage-dk) !important; border-radius: 999px !important;
+  padding: 10px 26px !important; min-width: 0 !important;
+  text-transform: none !important; letter-spacing: normal !important;
+  cursor: pointer !important; transition: background .15s ease !important;
+}
+body .commonMessageBox .buttons input.button:hover,
+body .commonMessageBox .buttons input.typeButton:hover {
+  background: var(--ngm-sage) !important; border-color: var(--ngm-sage) !important;
+}
+
 /* ══════════════════════════════════════════════════════════════════
    HOMEPAGE + GLOBAL MOBILE — LIVE OVERRIDES  (added last on purpose)
    These are appended at the end of global.css so they win over the
