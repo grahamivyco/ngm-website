@@ -4927,13 +4927,13 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"] .ngm-evt-tag
 @media(max-width:520px){.ngm-hub-zgrid{grid-template-columns:1fr;}}
 
 /* ── Member-hub DASHBOARD (redesign): hero quick actions, grouped
-   resources, leadership person-cards grouped by team ── */
-.ngm-hub-qgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px;}
-.ngm-hub-task-featured{background:var(--ngm-sage-dk);border:1px solid var(--ngm-sage-dk);}
-.ngm-hub-task-featured .ngm-hub-ticon{background:rgba(255,255,255,.14);color:#fff;}
-.ngm-hub-task-featured h3{color:#fff;}
-.ngm-hub-task-featured p{color:rgba(255,255,255,.85);}
-.ngm-hub-task-featured .ngm-hub-tgo{color:#fff;}
+   resources, leadership person-cards grouped by team.
+   Hero: the light-sage wide zoom-module leads (only green element),
+   Profile + Resources follow as white acards. ── */
+.ngm-hub-hero .ngm-hub-zoom-module{margin-top:30px;}
+.ngm-hub-hero .ngm-hub-zoom-module .ngm-hub-zoom-tile-body h4{margin:0 0 3px;}
+.ngm-hub-hero .ngm-hub-acct-top{margin-top:16px;margin-bottom:0;}
+.ngm-hub-hero .ngm-hub-acard-body{display:block;}
 .ngm-hub-rgroup{margin-top:34px;}
 .ngm-hub-rgroup:first-of-type{margin-top:10px;}
 .ngm-hub-rgroup-title,.ngm-hub-team-title{font-family:var(--ngm-sans);font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ngm-sage-dk);margin:0 0 12px;}
@@ -4945,7 +4945,7 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"] .ngm-evt-tag
 .ngm-hub-person-role{display:block;font-family:var(--ngm-sans);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ngm-sage-dk);margin-top:4px;}
 a.ngm-hub-person-email{display:block;font-family:var(--ngm-sans);font-size:.82rem;color:var(--ngm-gray);margin-top:9px;text-decoration:none;word-break:break-all;transition:color .15s;}
 a.ngm-hub-person-email:hover{color:var(--ngm-sage-dk);}
-@media(max-width:900px){.ngm-hub-qgrid{grid-template-columns:1fr;}.ngm-hub-people{grid-template-columns:1fr 1fr;}}
+@media(max-width:900px){.ngm-hub-people{grid-template-columns:1fr 1fr;}}
 @media(max-width:560px){.ngm-hub-people{grid-template-columns:1fr;}}
 
 /* account: two primary cards above the tab tiles */

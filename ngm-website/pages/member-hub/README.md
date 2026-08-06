@@ -8,11 +8,13 @@ around what members come to DO, not around telling a story:
 
 1. **Hero** — "Welcome back. / Everything included with your membership,
    all in one place." plus the THREE quick actions members use most:
-   - **Join today's meeting** (featured sage card) — the single guild Zoom
-     link (`SET URL`), with "room opens 5 minutes early" folded in.
+   - **Join today's meeting** — the wide light-sage `.ngm-hub-zoom-module`
+     tile (the ONLY green element, prominent by size and color), single
+     guild Zoom link (`SET URL`), "room opens 5 minutes early" folded in.
    - **My profile** → `/Sys/Profile` (bare path — resolves to whoever is
-     logged in; NEVER add a `?memberId=`).
-   - **Member resources** → in-page anchor `#ngm-hub-resources`.
+     logged in; NEVER add a `?memberId=`) — white `.ngm-hub-acard`.
+   - **Member resources** → in-page anchor `#ngm-hub-resources` — white
+     `.ngm-hub-acard`.
 2. **Member resources** (white) — tiles GROUPED for scanning:
    - *Stay Connected* — Member directory (`/member-directory`), Newsletter
      archive (`SET URL`).

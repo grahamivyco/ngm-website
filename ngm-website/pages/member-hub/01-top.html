@@ -1,30 +1,38 @@
 <!-- Canonical page markup — this is the file to edit and to paste into the WA Custom-HTML gadget. Styling lives in global-css/global.css (pasted into the WA CSS tab; must be live in WA first). There is no separate self-contained version. -->
 
 <!-- ══ HERO — dashboard, not landing page: short welcome + the three quick
-     actions members use most. The Zoom card is the featured (sage) one. ══ -->
+     actions members use most. The Zoom action keeps the light-sage wide-tile
+     look (the only green element — prominent by size and color); Profile and
+     Resources sit below as white cards. ══ -->
 <div class="ngm ngm-hub-hero">
   <div class="ngm-hub-inner">
     <span class="ngm-eyebrow">Member Hub</span>
     <h1 class="ngm-h1">Welcome <em>back</em>.</h1>
     <p>Everything included with your membership, all in one place.</p>
-    <div class="ngm-hub-qgrid">
-      <a class="ngm-hub-task ngm-hub-task-featured" href="#"><!-- SET URL: the single guild Zoom meeting link -->
-        <span class="ngm-hub-ticon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span>
-        <h3>Join today's meeting</h3>
+    <a class="ngm-hub-zoom-module" href="#"><!-- SET URL: the single guild Zoom meeting link -->
+      <span class="ngm-hub-zoom-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span>
+      <div class="ngm-hub-zoom-tile-body">
+        <h4>Join today's meeting</h4>
         <p>One Zoom link for every Guild meeting &mdash; Stitch-Ins, Special Interest Groups, workshops, and board meetings. The room opens 5 minutes before each meeting begins.</p>
-        <span class="ngm-hub-tgo">Join the meeting <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </div>
+      <span class="ngm-hub-zoom-tile-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+    </a>
+    <div class="ngm-hub-acct-top">
+      <a class="ngm-hub-acard" href="/Sys/Profile">
+        <span class="ngm-hub-acard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+        <span class="ngm-hub-acard-body">
+          <h4>My profile</h4>
+          <p>Update your contact information, renew your membership, and manage registrations, invoices, and email preferences.</p>
+        </span>
+        <span class="ngm-hub-acard-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
-      <a class="ngm-hub-task" href="/Sys/Profile">
-        <span class="ngm-hub-ticon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
-        <h3>My profile</h3>
-        <p>Update your contact information, renew your membership, and manage registrations, invoices, and email preferences.</p>
-        <span class="ngm-hub-tgo">View profile <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-      </a>
-      <a class="ngm-hub-task" href="#ngm-hub-resources">
-        <span class="ngm-hub-ticon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="M4 5a2 2 0 0 1 2-2h7v18H6a2 2 0 0 1-2-2z"/><path d="M13 3h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5"/></svg></span>
-        <h3>Member resources</h3>
-        <p>Newsletters, the lending library, meeting handouts, Guild documents, and more.</p>
-        <span class="ngm-hub-tgo">Browse resources <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      <a class="ngm-hub-acard" href="#ngm-hub-resources">
+        <span class="ngm-hub-acard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="M4 5a2 2 0 0 1 2-2h7v18H6a2 2 0 0 1-2-2z"/><path d="M13 3h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5"/></svg></span>
+        <span class="ngm-hub-acard-body">
+          <h4>Member resources</h4>
+          <p>Newsletters, the lending library, meeting handouts, Guild documents, and more.</p>
+        </span>
+        <span class="ngm-hub-acard-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
     </div>
   </div>
