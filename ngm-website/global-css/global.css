@@ -5144,9 +5144,17 @@ body .WaGadgetContactProfile .memberFieldHeadingTitle {
 /* row labels down the left (Send message form, Email, …) */
 body .WaGadgetContactProfile th.memberFieldTitle { text-align: left !important; font-weight: 400 !important; }
 body .WaGadgetContactProfile .memberFieldTitle span { color: var(--ngm-charcoal) !important; font-size: .9rem !important; }
-/* the selected-visibility indicator cells, centred under each column */
+/* the selected-visibility indicator cells, centred under each column.
+   WA's check indicator (.cbe…Image divs, e.g. .otherMembersImage) is an
+   EMPTY div painted by a theme background sprite — it computed to
+   display:inline with no width/height, and an inline empty div has no box
+   to paint the sprite in. Give it an explicit centred box. */
 body .WaGadgetContactProfile .memberFieldValueTD { text-align: center !important; }
-body .WaGadgetContactProfile .memberFieldValueTD > div { margin: 0 auto !important; }
+body .WaGadgetContactProfile .memberFieldValueTD > div {
+  display: inline-block !important; width: 18px !important; height: 18px !important;
+  margin: 0 auto !important; vertical-align: middle !important;
+  background-repeat: no-repeat !important; background-position: center !important;
+}
 
 /* ---- Email subscriptions tab: "Subscribed" status labels ---- */
 body .WaGadgetContactProfile .labeledImage span { color: var(--ngm-sage-dk) !important; font-weight: 600 !important; }
