@@ -56,37 +56,10 @@
     var bal = document.querySelector('.WaGadgetContactProfile .totalBalance');
     if (bal) menu.parentNode.insertBefore(bal, menu);
 
-    /* Collapse to the dropdown the moment the tabs can't fit the row —
-       at ANY width, not a fixed breakpoint. The needed width is the sum
-       of the visible tabs plus the flex gap, measured while visible. */
-    var needed = 0;
-    function measure() {
-      var w = 0, visible = 0;
-      var lis = menu.querySelectorAll('li');
-      for (var j = 0; j < lis.length; j++) {
-        if (lis[j].offsetParent !== null && lis[j].offsetWidth > 0) {
-          w += lis[j].offsetWidth; visible++;
-        }
-      }
-      if (visible) needed = w + 24 * (visible - 1) + 2;
-    }
-    function update() {
-      var available = (menu.parentNode || menu).clientWidth;
-      if (needed > available) {
-        menu.classList.add('ngm-tabs-collapsed');
-        select.classList.add('ngm-tabselect-on');
-        tabLabel.classList.add('ngm-tabselect-on');
-      } else {
-        menu.classList.remove('ngm-tabs-collapsed');
-        select.classList.remove('ngm-tabselect-on');
-        tabLabel.classList.remove('ngm-tabselect-on');
-      }
-    }
-    measure(); update();
-    window.addEventListener('resize', function () {
-      if (!menu.classList.contains('ngm-tabs-collapsed')) measure();
-      update();
-    });
+    /* The dropdown is the tab UI at EVERY width now (desktop included) */
+    menu.classList.add('ngm-tabs-collapsed');
+    select.classList.add('ngm-tabselect-on');
+    tabLabel.classList.add('ngm-tabselect-on');
   }
   /* WA renders edit-mode Cancel as a bare submit with no onclick, so the
      form's client validation can silently swallow the click. Make Cancel
