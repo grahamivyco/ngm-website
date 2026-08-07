@@ -4950,7 +4950,11 @@ body .ngm-hub-qa-primary p{color:#4C5A46!important;}
 /* buttons are the standard site pills (.ngm-btn ngm-btn-green / -outline,
    .ngm-btn-fit keeps them from stretching); just size their arrow icons */
 .ngm-hub-qa-card .ngm-btn svg{width:15px;height:15px;}
-@media(max-width:860px){.ngm-hub-qa{grid-template-columns:1fr;}}
+@media(max-width:860px){
+  .ngm-hub-qa{grid-template-columns:1fr;}
+  /* stacked cards: both buttons identical — full width, same padding/height */
+  body .ngm-hub-qa-card .ngm-btn{align-self:stretch!important;width:100%!important;justify-content:center!important;padding:12px 26px!important;box-sizing:border-box!important;}
+}
 .ngm-hub-rgroup{margin-top:34px;}
 .ngm-hub-rgroup:first-of-type{margin-top:10px;}
 .ngm-hub-rgroup-title,.ngm-hub-team-title{font-family:var(--ngm-sans);font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ngm-sage-dk);margin:0 0 12px;}
