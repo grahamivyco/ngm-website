@@ -1,6 +1,14 @@
 # Member Profile
 
-**WA page:** `/Sys/Profile` — CSS-only (Wild Apricot does not allow custom HTML here).
+**WA page:** `/Sys/Profile` — CSS skin + ONE Custom-HTML gadget
+(`01-top.html`, the branded "My profile" banner).
+
+> Earlier notes said WA blocks custom HTML on this page; the system-page
+> editor does offer the Gadgets toolbar here, so the banner goes in as a
+> Custom-HTML gadget. In the WA editor: DELETE the old "Contact Profile"
+> Headline gadget (the red "Click EDIT PROFILE" arrow goes with it) and
+> paste `01-top.html` into a Custom-HTML gadget at the top of the page.
+> The `.ngm-sys` styles it uses are already in global.css.
 
 > **Mockups:** see [`mockups/`](mockups/) — `profile-buildable` is the CSS-only
 > target this skin should produce; `profile-concept` is aspirational and **cannot**
