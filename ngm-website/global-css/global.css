@@ -4960,8 +4960,8 @@ body .ngm-hub-qa-primary p{color:#4C5A46!important;}
 .ngm-hub-person{background:#fff;border:1px solid var(--ngm-border);border-radius:var(--ngm-radius);padding:18px 20px;}
 .ngm-hub-person-name{display:block;font-family:var(--ngm-serif);font-size:1.18rem;color:var(--ngm-charcoal);line-height:1.2;}
 .ngm-hub-person-role{display:block;font-family:var(--ngm-sans);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ngm-sage-dk);margin-top:4px;}
-a.ngm-hub-person-email{display:block;font-family:var(--ngm-sans);font-size:.82rem;color:var(--ngm-gray);margin-top:9px;text-decoration:none;word-break:break-all;transition:color .15s;}
-a.ngm-hub-person-email:hover{color:var(--ngm-sage-dk);}
+body a.ngm-hub-person-email{display:block;font-family:var(--ngm-sans)!important;font-size:.78rem!important;font-weight:400!important;color:var(--ngm-gray)!important;margin-top:9px;text-decoration:none!important;overflow-wrap:anywhere;transition:color .15s;}
+body a.ngm-hub-person-email:hover{color:var(--ngm-sage-dk)!important;}
 @media(max-width:900px){.ngm-hub-people{grid-template-columns:1fr 1fr;}}
 @media(max-width:560px){.ngm-hub-people{grid-template-columns:1fr;}}
 
