@@ -91,8 +91,24 @@
       waEdit.click();
     });
   }
+  /* Privacy section: add a title + explainer above "Show profile to others"
+     (the .includeMeView block only renders visibly on the Privacy section,
+     so other sections are untouched). */
+  function addPrivacyIntro() {
+    var anchor = document.querySelector('.WaGadgetContactProfile .includeMeView');
+    if (!anchor || anchor.offsetParent === null || document.getElementById('ngm-priv-intro')) return;
+    var host = anchor.closest('.profileDetailsOuterContainer') || anchor;
+    var box = document.createElement('div');
+    box.id = 'ngm-priv-intro';
+    box.className = 'ngm-priv-intro';
+    box.innerHTML =
+      '<h3>Your directory profile</h3>' +
+      '<p>Other members can look you up in the member directory \u2014 your directory profile is what they see. \u201CShow profile to others\u201D controls whether you appear at all, and \u201CDetails to show\u201D sets who can see each detail: Anybody (including site visitors), Members only (logged-in Guild members), or No access (hidden from everyone).</p>';
+    host.parentNode.insertBefore(box, host);
+  }
   function run() {
     if (document.body) document.body.classList.add('ngm-profile-page');
+    try { addPrivacyIntro(); } catch (e) { /* skip the intro */ }
     try { buildTabSelect(); } catch (e) { /* leave tabs as-is */ }
     try { fixCancel(); } catch (e) { /* leave WA behavior */ }
     try { wireBannerEdit(); } catch (e) { /* leave banner CTA inert */ }
