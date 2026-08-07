@@ -5375,11 +5375,12 @@ body .WaGadgetContactProfile input[type="checkbox"]:checked::after {
     float: none !important; display: block !important;
     text-align: left !important; padding: 6px 0 0 !important;
   }
-  /* tabs: the banner script builds a dropdown (#ngm-prof-tabselect) from
-     the tab bar — show it and hide the tab list on small screens */
-  body .WaGadgetContactProfile ul.memberDetailsTabMenu { display: none !important; }
-  body .ngm-prof-tabselect { display: block !important; }
 }
+/* tabs ↔ dropdown swap is measurement-driven: the banner script adds
+   .ngm-tabs-collapsed / .ngm-tabselect-on whenever the tab row can't fit
+   its container (any viewport width), and removes them when it can. */
+body .WaGadgetContactProfile ul.memberDetailsTabMenu.ngm-tabs-collapsed { display: none !important; }
+body .ngm-prof-tabselect.ngm-tabselect-on { display: block !important; }
 /* the profile-tab dropdown (hidden on desktop; mobile rule above shows it) */
 body .ngm-prof-tabselect {
   display: none; width: 100%; box-sizing: border-box;
