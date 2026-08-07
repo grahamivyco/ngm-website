@@ -5057,13 +5057,22 @@ body .WaGadgetContactProfile .memberDirectoryDetailsLink {
 
 /* ---- tab bar: ul.memberDetailsTabMenu ---- */
 body .WaGadgetContactProfile ul.memberDetailsTabMenu {
-  display: flex !important; flex-wrap: wrap !important; gap: 26px !important;
+  display: flex !important; flex-wrap: nowrap !important; gap: 24px !important;
   list-style: none !important; margin: 6px 0 30px !important; padding: 0 !important;
   border-bottom: 1px solid var(--ngm-border) !important;
+  overflow-x: auto !important; -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: none !important;
+}
+body .WaGadgetContactProfile ul.memberDetailsTabMenu::-webkit-scrollbar { display: none !important; }
+/* edit mode hides some tabs but leaves their <li> boxes behind as gaps —
+   drop any tab with no visible label */
+body .WaGadgetContactProfile ul.memberDetailsTabMenu li:not(:has(:is(a,span):not([style*="none"]))) {
+  display: none !important;
 }
 body .WaGadgetContactProfile ul.memberDetailsTabMenu li {
   float: none !important; margin: 0 !important; padding: 0 0 12px !important;
   background: none !important; border: none !important; list-style: none !important;
+  white-space: nowrap !important; flex-shrink: 0 !important;
 }
 body .WaGadgetContactProfile ul.memberDetailsTabMenu li a,
 body .WaGadgetContactProfile ul.memberDetailsTabMenu li span {
@@ -5135,25 +5144,68 @@ body .WaGadgetContactProfile #memberFieldTable th,
 body .WaGadgetContactProfile #memberFieldTable td {
   border-bottom: 1px solid #F0EDE6 !important; padding: 12px 14px !important; vertical-align: middle !important;
 }
-/* three column headers: Anybody / Members / No access — sage eyebrows, centred */
-body .WaGadgetContactProfile .memberFieldHeadingTD { text-align: center !important; }
-body .WaGadgetContactProfile .memberFieldHeadingTitle {
-  color: var(--ngm-sage) !important; font-weight: 600 !important;
-  font-size: .72rem !important; letter-spacing: .12em !important; text-transform: uppercase !important;
+/* MODERNIZED GRID — no theme sprites, no three-column layout. The header
+   row is dropped entirely and every field renders as one flex row:
+   view mode  →  "Field name          [state pill]"
+   edit mode  →  "Field name   ○ Anybody ○ Members ○ No access"
+   (state pills come from the .anybodyImage/.otherMembersImage/.nobodyImage
+   divs WA renders in the selected cell; radio labels come from the radios'
+   value suffixes — the empty cells are hidden.) */
+body .WaGadgetContactProfile #memberFieldTable,
+body .WaGadgetContactProfile #memberFieldTable tbody { display: block !important; width: 100% !important; }
+body .WaGadgetContactProfile #memberFieldTable tr {
+  display: flex !important; flex-wrap: wrap !important; align-items: center !important;
+  gap: 6px 14px !important; padding: 11px 0 !important;
+  border-bottom: 1px solid #F0EDE6 !important;
 }
-/* row labels down the left (Send message form, Email, …) */
-body .WaGadgetContactProfile th.memberFieldTitle { text-align: left !important; font-weight: 400 !important; }
+body .WaGadgetContactProfile #memberFieldTable tr:last-child { border-bottom: none !important; }
+/* the old Anybody/Members/No-access header row goes away in both modes */
+body .WaGadgetContactProfile #memberFieldTable tr:has(.memberFieldHeadingTD) { display: none !important; }
+body .WaGadgetContactProfile #memberFieldTable th,
+body .WaGadgetContactProfile #memberFieldTable td {
+  display: block !important; border: none !important; padding: 0 !important; width: auto !important;
+}
+body .WaGadgetContactProfile th.memberFieldTitle { flex: 1 1 240px !important; text-align: left !important; font-weight: 400 !important; }
 body .WaGadgetContactProfile .memberFieldTitle span { color: var(--ngm-charcoal) !important; font-size: .9rem !important; }
-/* the selected-visibility indicator cells, centred under each column.
-   WA's check indicator (.cbe…Image divs, e.g. .otherMembersImage) is an
-   EMPTY div painted by a theme background sprite — it computed to
-   display:inline with no width/height, and an inline empty div has no box
-   to paint the sprite in. Give it an explicit centred box. */
-body .WaGadgetContactProfile .memberFieldValueTD { text-align: center !important; }
+/* the little email/level gif icons on the row labels: gone */
+body .WaGadgetContactProfile th.memberFieldTitle img { display: none !important; }
+/* cells: only the ones that carry a state div (view) or a radio (edit) show */
+body .WaGadgetContactProfile td.memberFieldValueTD {
+  display: inline-flex !important; align-items: center !important; gap: 6px !important;
+}
+body .WaGadgetContactProfile td.memberFieldValueTD:not(:has(div, input)) { display: none !important; }
+/* view mode: the sprite div becomes a text pill */
 body .WaGadgetContactProfile .memberFieldValueTD > div {
-  display: inline-block !important; width: 18px !important; height: 18px !important;
-  margin: 0 auto !important; vertical-align: middle !important;
-  background-repeat: no-repeat !important; background-position: center !important;
+  background: none !important; width: auto !important; height: auto !important;
+  display: inline-block !important; margin: 0 !important;
+}
+body .WaGadgetContactProfile .memberFieldValueTD > div::after {
+  font-family: var(--ngm-sans) !important; font-size: .75rem !important; font-weight: 600 !important;
+  padding: 4px 12px !important; border-radius: 999px !important; white-space: nowrap !important;
+  display: inline-block !important; line-height: 1.4 !important;
+}
+body .WaGadgetContactProfile .memberFieldValueTD > .anybodyImage::after {
+  content: "Anybody"; background: var(--ngm-rose-lt); color: var(--ngm-rose-dk);
+}
+body .WaGadgetContactProfile .memberFieldValueTD > .otherMembersImage::after {
+  content: "Members only"; background: var(--ngm-sage-lt); color: var(--ngm-sage-dk);
+}
+body .WaGadgetContactProfile .memberFieldValueTD > .nobodyImage::after {
+  content: "No access"; background: var(--ngm-linen); color: var(--ngm-gray);
+}
+/* edit mode: label each radio in place of the removed column headers */
+body .WaGadgetContactProfile td.memberFieldValueTD:has(> input[type="radio"])::after {
+  font-family: var(--ngm-sans) !important; font-size: .82rem !important;
+  color: var(--ngm-gray) !important; white-space: nowrap !important;
+}
+body .WaGadgetContactProfile td.memberFieldValueTD:has(> input[value$="anybodyradio" i])::after { content: "Anybody"; }
+body .WaGadgetContactProfile td.memberFieldValueTD:has(> input[value$="membersradio" i])::after { content: "Members"; }
+body .WaGadgetContactProfile td.memberFieldValueTD:has(> input[value$="nobodyradio" i])::after { content: "No access"; }
+/* "Show profile to others": modern checkbox + clear label */
+body .WaGadgetContactProfile input[type="checkbox"] { width: 17px !important; height: 17px !important; vertical-align: middle !important; }
+body .WaGadgetContactProfile label[for$="IncludeMeInMemberDirectory"] {
+  color: var(--ngm-charcoal) !important; font-weight: 600 !important;
+  font-size: .95rem !important; margin-left: 8px !important; vertical-align: middle !important;
 }
 
 /* ---- Email subscriptions tab: "Subscribed" status labels ---- */
@@ -5250,12 +5302,14 @@ body .WaGadgetContactProfile textarea { min-height: 110px !important; }
 body .WaGadgetContactProfile input.typeButton { margin: 8px 10px 8px 0 !important; }
 /* Save keeps the filled sage pill from the typeButton rule above; Cancel
    drops to the quiet rose text link used across the application wizard */
-body .WaGadgetContactProfile input.typeButton[id*="ancel"] {
+body .WaGadgetContactProfile input.typeButton[id*="ancel"],
+body .WaGadgetContactProfile input.typeButton[value="Cancel"] {
   background: transparent !important; border: none !important; border-radius: 0 !important;
   box-shadow: none !important; color: var(--ngm-rose-dk) !important;
   font-weight: 500 !important; padding: 12px 10px !important;
 }
-body .WaGadgetContactProfile input.typeButton[id*="ancel"]:hover {
+body .WaGadgetContactProfile input.typeButton[id*="ancel"]:hover,
+body .WaGadgetContactProfile input.typeButton[value="Cancel"]:hover {
   background: transparent !important; color: var(--ngm-rose) !important;
   text-decoration: underline !important;
 }
