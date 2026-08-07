@@ -6,15 +6,18 @@ after login. ONE Custom-HTML gadget holding `01-top.html`.
 Redesigned as a **dashboard, not a landing page** — the page is organized
 around what members come to DO, not around telling a story:
 
-1. **Hero** — "Welcome back. / Everything included with your membership,
-   all in one place." plus the THREE quick actions members use most:
-   - **Join today's meeting** — the wide light-sage `.ngm-hub-zoom-module`
-     tile (the ONLY green element, prominent by size and color), single
-     guild Zoom link (`SET URL`), "room opens 5 minutes early" folded in.
-   - **My profile** → `/Sys/Profile` (bare path — resolves to whoever is
-     logged in; NEVER add a `?memberId=`) — slim white `.ngm-hub-acard`.
-   - (No Member-resources tile — the resources section sits directly
-     below the hero, so a tile pointing at it was redundant.)
+1. **Hero** — compact dashboard (`.ngm-hub-qa` grid): eyebrow, "Welcome
+   back.", one supporting line, then TWO quick-action cards:
+   - **Join today's meeting** — the PRIMARY card: larger (1.55fr), soft
+     green, video icon, expanded copy, filled sage "Join the meeting →"
+     button (single guild Zoom link, `SET URL`). Its `.ngm-hub-qa-meta`
+     div is an empty slot reserved for future dynamic info (next-meeting
+     name/time or an "Available now" `.ngm-hub-qa-badge`) so that can be
+     added later without changing the layout.
+   - **My profile** — secondary white card, person icon, outline
+     "View my profile →" button → `/Sys/Profile` (bare path — resolves to
+     whoever is logged in; NEVER add a `?memberId=`).
+   - Cards stack (primary first) under 860px.
 2. **Member resources** (white) — tiles GROUPED for scanning:
    - *Stay Connected* — Member directory (`/member-directory`), Newsletter
      archive (`SET URL`).

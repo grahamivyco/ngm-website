@@ -1,31 +1,34 @@
 <!-- Canonical page markup — this is the file to edit and to paste into the WA Custom-HTML gadget. Styling lives in global-css/global.css (pasted into the WA CSS tab; must be live in WA first). There is no separate self-contained version. -->
 
-<!-- ══ HERO — dashboard, not landing page: short welcome + the three quick
-     actions members use most. The Zoom action keeps the light-sage wide-tile
-     look (the only green element — prominent by size and color); Profile and
-     Resources sit below as white cards. ══ -->
+<!-- ══ HERO — compact dashboard: welcome + TWO quick-action cards. Primary
+     (large, soft green) = Join today's meeting; secondary (white) = My
+     profile. The primary card's .ngm-hub-qa-meta div is an empty slot
+     reserved for future dynamic info (next-meeting name/time, an
+     "Available now" badge) — fill it later without changing the layout,
+     e.g. <span class="ngm-hub-qa-badge">Available now</span>. ══ -->
 <div class="ngm ngm-hub-hero">
   <div class="ngm-hub-inner">
     <span class="ngm-eyebrow">Member Hub</span>
     <h1 class="ngm-h1">Welcome <em>back</em>.</h1>
     <p>Everything included with your membership, all in one place.</p>
-    <a class="ngm-hub-zoom-module" href="#"><!-- SET URL: the single guild Zoom meeting link -->
-      <span class="ngm-hub-zoom-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span>
-      <div class="ngm-hub-zoom-tile-body">
-        <h4>Join today's meeting</h4>
-        <p>One Zoom link for every Guild meeting &mdash; Stitch-Ins, Special Interest Groups, workshops, and board meetings. The room opens 5 minutes before each meeting begins.</p>
+    <div class="ngm-hub-qa">
+      <div class="ngm-hub-qa-card ngm-hub-qa-primary">
+        <div class="ngm-hub-qa-head">
+          <span class="ngm-hub-qa-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span>
+          <div class="ngm-hub-qa-meta"><!-- dynamic slot: next meeting / "Available now" --></div>
+        </div>
+        <h3>Join today's meeting</h3>
+        <p>One Zoom link for every Guild meeting &mdash; including Stitch-Ins, Special Interest Groups, workshops, and board meetings. The room opens 5 minutes before each meeting.</p>
+        <a class="ngm-hub-qa-btn" href="#"><!-- SET URL: the single guild Zoom meeting link -->Join the meeting <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
-      <span class="ngm-hub-zoom-tile-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-    </a>
-    <div class="ngm-hub-acct-top">
-      <a class="ngm-hub-acard" href="/Sys/Profile">
-        <span class="ngm-hub-acard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
-        <span class="ngm-hub-acard-body">
-          <h4>My profile</h4>
-          <p>Update your contact information, renew your membership, and manage registrations, invoices, and email preferences.</p>
-        </span>
-        <span class="ngm-hub-acard-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-      </a>
+      <div class="ngm-hub-qa-card">
+        <div class="ngm-hub-qa-head">
+          <span class="ngm-hub-qa-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span>
+        </div>
+        <h3>My profile</h3>
+        <p>Update your contact information, renew your membership, manage registrations, invoices, and email preferences.</p>
+        <a class="ngm-hub-qa-btn ngm-hub-qa-btn-outline" href="/Sys/Profile">View my profile <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
     </div>
   </div>
 </div>
