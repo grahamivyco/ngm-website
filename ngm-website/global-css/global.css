@@ -5069,6 +5069,15 @@ body .WaGadgetContactProfile input[id$="editButtonTop"].typeButton:hover,
 body .WaGadgetContactProfile input[id$="editButtonBottom"].typeButton:hover {
   background: var(--ngm-sage-lt) !important;
 }
+/* Edit profile lives in ONE place — the banner CTA. WA's in-card Edit
+   button is visually removed but kept in the layout tree (NOT display:none)
+   because the banner CTA works by clicking it; "My directory profile"
+   becomes the only visible item in the card's top row. */
+body .WaGadgetContactProfile input[id$="editButtonTop"].typeButton {
+  position: absolute !important; opacity: 0 !important;
+  pointer-events: none !important; width: 1px !important; height: 1px !important;
+  padding: 0 !important; border: 0 !important; margin: 0 !important; overflow: hidden !important;
+}
 body .WaGadgetContactProfile .memberDirectoryDetailsLink {
   color: var(--ngm-sage-dk) !important; font-weight: 600 !important;
   font-size: .88rem !important; text-decoration: none !important; margin-left: 6px;
