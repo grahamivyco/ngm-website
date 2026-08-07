@@ -10,7 +10,7 @@ around what members come to DO, not around telling a story:
    back.", one supporting line, then TWO quick-action cards:
    - **Join today's meeting** — the PRIMARY card: larger (1.55fr), soft
      green, video icon, expanded copy, filled sage "Join the meeting →"
-     button (single guild Zoom link, `SET URL`). Its `.ngm-hub-qa-meta`
+     button (real guild Zoom link set, opens in a new tab). Its `.ngm-hub-qa-meta`
      div is an empty slot reserved for future dynamic info (next-meeting
      name/time or an "Available now" `.ngm-hub-qa-badge`) so that can be
      added later without changing the layout.
@@ -40,7 +40,6 @@ Styling: global.css `.ngm-hub-*` (dashboard additions: `.ngm-hub-qgrid`,
 `.ngm-hub-person*`).
 
 ## SET URLs still to fill (search `SET URL` in 01-top.html)
-- Guild Zoom meeting link (hero featured card).
 - Newsletter archive, Meeting handouts, Bylaws & policies (currently
   `/resources` fallback).
 - Board minutes, Financial reports, Financial forms (Google Drive links).
