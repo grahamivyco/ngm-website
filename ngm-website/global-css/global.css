@@ -4968,6 +4968,25 @@ body .ngm-hub-qa-primary p{color:#4C5A46!important;}
 body a.ngm-hub-person-email{display:block;font-family:var(--ngm-sans)!important;font-size:.78rem!important;font-weight:400!important;color:var(--ngm-gray)!important;margin-top:7px;text-decoration:none!important;white-space:nowrap;transition:color .15s;}
 body a.ngm-hub-person-email:hover{color:var(--ngm-sage-dk)!important;}
 @media(max-width:1020px){.ngm-hub-people{grid-template-columns:1fr 1fr;}}
+/* hub mobile: tiles as wide as the About-page cards (28px sides on tablet,
+   18px on phones), more air between stacked hero cards, centered tile
+   content on phones (tablet keeps left-aligned content per earlier call) */
+@media(max-width:900px){
+  .ngm-hub-hero{padding:52px 28px 44px;}
+  .ngm-hub-band{padding:60px 28px;}
+}
+@media(max-width:860px){
+  .ngm-hub-qa{gap:24px;}
+}
+@media(max-width:640px){
+  .ngm-hub-qa-card{text-align:center;align-items:center;}
+  .ngm-hub-qa-head{justify-content:center;}
+  .ngm-hub-rtile{text-align:center;align-items:center;}
+}
+@media(max-width:560px){
+  .ngm-hub-hero{padding:44px 18px 40px;}
+  .ngm-hub-band{padding:48px 18px;}
+}
 @media(max-width:640px){.ngm-hub-people{grid-template-columns:1fr;}}
 
 /* account: two primary cards above the tab tiles */
