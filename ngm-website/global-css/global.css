@@ -5208,8 +5208,17 @@ body .WaGadgetContactProfile label[for$="IncludeMeInMemberDirectory"] {
   font-size: .95rem !important; margin-left: 8px !important; vertical-align: middle !important;
 }
 
-/* ---- Email subscriptions tab: "Subscribed" status labels ---- */
+/* ---- Email subscriptions tab: "Subscribed" status labels. WA marks the
+        state with old gif bullets (icon-checked.gif) — hide every bullet gif
+        and draw a sage check only where the hidden img was the CHECKED one
+        (src*="icon-checked" does not match "icon-unchecked"). ---- */
 body .WaGadgetContactProfile .labeledImage span { color: var(--ngm-sage-dk) !important; font-weight: 600 !important; }
+body .WaGadgetContactProfile img[src*="html_res/images/bullets"] { display: none !important; }
+body .WaGadgetContactProfile .labeledImage:has(img[src*="icon-checked"])::before {
+  content: ""; display: inline-block; width: 15px; height: 15px;
+  margin-right: 7px; vertical-align: -2px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233E5538' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/contain no-repeat;
+}
 
 /* ---- Social network login: Connect / Disconnect as design-system chips ---- */
 body .WaGadgetContactProfile .socialLogin {
