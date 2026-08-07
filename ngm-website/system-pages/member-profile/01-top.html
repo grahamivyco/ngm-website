@@ -47,10 +47,10 @@
       var a = links[parseInt(select.value, 10)];
       if (a) a.click();
     });
-    var label = document.createElement('span');
-    label.className = 'ngm-prof-tablabel';
-    label.textContent = 'Profile section';
-    menu.parentNode.insertBefore(label, menu);
+    var tabLabel = document.createElement('span');
+    tabLabel.className = 'ngm-prof-tablabel';
+    tabLabel.textContent = 'Profile section';
+    menu.parentNode.insertBefore(tabLabel, menu);
     menu.parentNode.insertBefore(select, menu);
     /* Balance reads as its own line under the dropdown/tabs */
     var bal = document.querySelector('.WaGadgetContactProfile .totalBalance');
@@ -75,11 +75,11 @@
       if (needed > available) {
         menu.classList.add('ngm-tabs-collapsed');
         select.classList.add('ngm-tabselect-on');
-        label.classList.add('ngm-tabselect-on');
+        tabLabel.classList.add('ngm-tabselect-on');
       } else {
         menu.classList.remove('ngm-tabs-collapsed');
         select.classList.remove('ngm-tabselect-on');
-        label.classList.remove('ngm-tabselect-on');
+        tabLabel.classList.remove('ngm-tabselect-on');
       }
     }
     measure(); update();
