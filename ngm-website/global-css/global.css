@@ -5323,6 +5323,77 @@ body .WaGadgetContactProfile input.typeButton[value="Cancel"]:hover {
   text-decoration: underline !important;
 }
 
+/* ---- ROUND 2 of profile polish (from the edit-mode review) ---- */
+/* ONE pair of action buttons: edit mode keeps the BOTTOM Save/Cancel (end
+   of a long form is where the decision happens) and drops the top pair;
+   view mode keeps the TOP Edit and drops the bottom one. */
+body .WaGadgetContactProfile input.typeButton[value="Save"][id$="Top"],
+body .WaGadgetContactProfile input.typeButton[value="Cancel"][id$="Top"],
+body .WaGadgetContactProfile input[id$="editButtonBottom"] { display: none !important; }
+/* the little gif icons on Privacy row titles (email-ico.gif etc.) — gone */
+body .WaGadgetContactProfile img[src*="-ico"],
+body .WaGadgetContactProfile img[src*="MemberProfile/images"] { display: none !important; }
+/* "* Mandatory fields" note — gone */
+body .WaGadgetContactProfile .mandatoryFieldsTitle,
+body .WaGadgetContactProfile [id$="mandatoryFieldsLabel"],
+body .WaGadgetContactProfile [class*="mandatoryFields"] { display: none !important; }
+/* form labels read LEFT-aligned in their column (theme right-aligns them) */
+body .WaGadgetContactProfile .fieldLabel { text-align: left !important; }
+/* "Forum subscriptions" — the Guild has no forums */
+body .WaGadgetContactProfile [id*="orumSubscription"] { display: none !important; }
+/* checkboxes: rounded custom draw (matching the application's soft look) */
+body .WaGadgetContactProfile input[type="checkbox"] {
+  appearance: none !important; -webkit-appearance: none !important;
+  width: 18px !important; height: 18px !important;
+  border: 1.5px solid var(--ngm-border) !important; border-radius: 6px !important;
+  background: #fff !important; cursor: pointer !important;
+  position: relative !important; vertical-align: middle !important;
+}
+body .WaGadgetContactProfile input[type="checkbox"]:checked {
+  background: var(--ngm-sage-dk) !important; border-color: var(--ngm-sage-dk) !important;
+}
+body .WaGadgetContactProfile input[type="checkbox"]:checked::after {
+  content: ""; position: absolute; left: 5px; top: 1.5px;
+  width: 4px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+/* mobile: labels stack ABOVE their fields; privacy rows put the field name
+   on its own line with all three radio choices together on the next line;
+   tables read left-aligned */
+@media (max-width: 700px) {
+  body .WaGadgetContactProfile .fieldLabel,
+  body .WaGadgetContactProfile .fieldBody {
+    float: none !important; width: 100% !important; box-sizing: border-box !important;
+  }
+  body .WaGadgetContactProfile .fieldLabel { padding: 0 0 3px !important; }
+  body .WaGadgetContactProfile #memberFieldTable th.memberFieldTitle { flex: 1 1 100% !important; }
+  body .WaGadgetContactProfile #memberFieldTable tr { gap: 4px 12px !important; }
+  body .WaGadgetContactProfile td.memberFieldValueTD:has(> input[type="radio"])::after { font-size: .78rem !important; }
+  body .WaGadgetContactProfile table th,
+  body .WaGadgetContactProfile table td { text-align: left !important; }
+  /* tabs: wrapping pill chips instead of a sideways scroll nobody discovers */
+  body .WaGadgetContactProfile ul.memberDetailsTabMenu {
+    flex-wrap: wrap !important; overflow: visible !important; gap: 8px !important;
+    border-bottom: none !important; margin-bottom: 22px !important;
+  }
+  body .WaGadgetContactProfile ul.memberDetailsTabMenu li {
+    padding: 0 !important;
+  }
+  body .WaGadgetContactProfile ul.memberDetailsTabMenu li a,
+  body .WaGadgetContactProfile ul.memberDetailsTabMenu li span {
+    display: inline-block !important; padding: 7px 14px !important;
+    border: 1px solid var(--ngm-border) !important; border-radius: 999px !important;
+    font-size: .82rem !important; background: #fff !important;
+  }
+  body .WaGadgetContactProfile ul.memberDetailsTabMenu li span:not([style*="none"]) {
+    background: var(--ngm-sage-dk) !important; border-color: var(--ngm-sage-dk) !important;
+    color: #fff !important;
+  }
+  body .WaGadgetContactProfile ul.memberDetailsTabMenu li:has(span:not([style*="none"])) {
+    box-shadow: none !important;
+  }
+}
+
 /* ---- separate profile sub-pages (Event registrations / Invoices / Donations)
         still use generic WA table markup; kept provisional until captured live. ---- */
 body [class*="EventRegistrations"] table, body [class*="Finances"] table,
