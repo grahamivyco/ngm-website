@@ -76,6 +76,7 @@
     }
   }
   function run() {
+    if (document.body) document.body.classList.add('ngm-profile-page');
     try { buildTabSelect(); } catch (e) { /* leave tabs as-is */ }
     try { fixCancel(); } catch (e) { /* leave WA behavior */ }
   }

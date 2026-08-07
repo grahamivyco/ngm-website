@@ -5012,6 +5012,25 @@ body .WaGadgetContactProfile {
   margin: 4px auto 52px !important;
   box-sizing: border-box !important;
 }
+/* ONE surface: the banner script tags body.ngm-profile-page, and the page
+   area behind the card turns cream so the banner flows straight into it
+   (no banner-band / white-zone seam) */
+body.ngm-profile-page,
+body.ngm-profile-page .mLayout,
+body.ngm-profile-page #idPageShadingContainer,
+body.ngm-profile-page .zonePlace.zoneContent,
+body.ngm-profile-page .WaPlaceHolderContent {
+  background: var(--ngm-cream) !important;
+}
+/* card keeps side air at every width, mirroring the application card:
+   auto-centering collapses to 0 side margin once the viewport nears the
+   940px card width */
+@media (min-width: 641px) and (max-width: 1000px) {
+  body .WaGadgetContactProfile { margin: 4px 24px 52px !important; }
+}
+@media (max-width: 640px) {
+  body .WaGadgetContactProfile { margin: 4px 16px 44px !important; }
+}
 /* fonts: DM Sans everywhere, Cormorant on the page heading */
 body .WaGadgetContactProfile, body .WaGadgetContactProfile *,
 body .WaGadgetBreadcrumbs, body .WaGadgetBreadcrumbs * {
