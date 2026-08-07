@@ -5393,11 +5393,15 @@ body .ngm-prof-tabselect,
 body .WaGadgetContactProfile select.ngm-prof-tabselect {
   display: none; width: 100%; box-sizing: border-box;
   margin: 6px 0 24px; padding: 11px 40px 11px 14px;
-  font-family: var(--ngm-sans) !important; font-size: .95rem !important;
+  font-family: var(--ngm-sans) !important; font-size: 16px !important;
   font-weight: 500; color: var(--ngm-charcoal) !important;
   background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233E5538' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") right 14px center/16px no-repeat !important;
   border: 1px solid var(--ngm-border) !important; border-radius: var(--ngm-radius) !important;
   appearance: none; -webkit-appearance: none; cursor: pointer;
+}
+body .ngm-prof-tabselect option,
+body .WaGadgetContactProfile select.ngm-prof-tabselect option {
+  font-size: 16px !important; font-family: var(--ngm-sans) !important;
 }
 body .ngm-prof-tabselect:focus,
 body .WaGadgetContactProfile select.ngm-prof-tabselect:focus {
