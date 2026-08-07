@@ -4957,7 +4957,7 @@ body .ngm-hub-qa-primary p{color:#4C5A46!important;}
   body .ngm-hub-qa-card .ngm-btn{align-self:stretch!important;width:100%!important;justify-content:center!important;padding:12px 26px!important;box-sizing:border-box!important;}
 }
 .ngm-hub-rgroup{margin-top:34px;}
-.ngm-hub-rgroup:first-of-type{margin-top:10px;}
+.ngm-hub-rgroup:first-of-type{margin-top:34px;}
 .ngm-hub-rgroup-title,.ngm-hub-team-title{font-family:var(--ngm-sans);font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ngm-sage-dk);margin:0 0 12px;}
 .ngm-hub-team{margin-top:34px;}
 .ngm-hub-team:first-of-type{margin-top:6px;}
