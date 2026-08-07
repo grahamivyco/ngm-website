@@ -5371,6 +5371,10 @@ body .WaGadgetContactProfile input[type="checkbox"]:checked::after {
   body .WaGadgetContactProfile td.memberFieldValueTD:has(> input[type="radio"])::after { font-size: .78rem !important; }
   body .WaGadgetContactProfile table th,
   body .WaGadgetContactProfile table td { text-align: left !important; }
+  body .WaGadgetContactProfile .totalBalance {
+    float: none !important; display: block !important;
+    text-align: left !important; padding: 6px 0 0 !important;
+  }
   /* tabs: the banner script builds a dropdown (#ngm-prof-tabselect) from
      the tab bar — show it and hide the tab list on small screens */
   body .WaGadgetContactProfile ul.memberDetailsTabMenu { display: none !important; }
@@ -5403,11 +5407,13 @@ body [class*="Invoices"] table th, body [class*="Donations"] table th {
   font-weight: 600 !important; text-align: left !important; padding: 12px 14px !important;
   border-bottom: 1px solid var(--ngm-border) !important;
 }
-body [class*="EventRegistrations"] table td, body [class*="Finances"] table td,
-body [class*="Invoices"] table td, body [class*="Donations"] table td {
+body [class*="EventRegistrations"] table:has(th) td, body [class*="Finances"] table:has(th) td,
+body [class*="Invoices"] table:has(th) td, body [class*="Donations"] table:has(th) td {
   padding: 12px 14px !important; border-bottom: 1px solid var(--ngm-border) !important;
   color: var(--ngm-charcoal) !important;
 }
+/* the cached-list reload cell holds only a hidden admin link — drop it */
+body .WaGadgetContactProfile td.reloadContainer { display: none !important; }
 
 /* ══════════════════════════════════════════════════════════════════
    MEMBER PUBLIC PROFILE  —  /Sys/PublicProfile
