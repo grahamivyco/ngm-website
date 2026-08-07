@@ -12,3 +12,48 @@
     </div>
   </section>
 </div>
+<script>
+/* NGM — mobile tab dropdown for the profile. Builds a <select> from WA's
+   ul.memberDetailsTabMenu; picking an option clicks the real tab link, so
+   WA's postback navigation keeps working. CSS shows the select and hides
+   the tab bar under 700px; desktop keeps the underline tabs. Guarded so a
+   missing tab bar just means nothing happens. */
+(function () {
+  function buildTabSelect() {
+    var menu = document.querySelector('.WaGadgetContactProfile ul.memberDetailsTabMenu');
+    if (!menu || document.getElementById('ngm-prof-tabselect')) return;
+    var items = menu.querySelectorAll('li');
+    var links = [];
+    var select = document.createElement('select');
+    select.id = 'ngm-prof-tabselect';
+    select.className = 'ngm-prof-tabselect';
+    select.setAttribute('aria-label', 'Profile section');
+    for (var i = 0; i < items.length; i++) {
+      var a = items[i].querySelector('a');
+      var span = items[i].querySelector('span');
+      var visibleSpan = span && (span.getAttribute('style') || '').indexOf('none') === -1;
+      var label = ((visibleSpan ? span : a) || {}).textContent || '';
+      label = label.replace(/\s+/g, ' ').trim();
+      if (!label) continue;               /* hidden tab (edit mode) — skip */
+      var opt = document.createElement('option');
+      opt.value = String(links.length);
+      opt.textContent = label;
+      if (visibleSpan) opt.selected = true;   /* current tab */
+      links.push(a);
+      select.appendChild(opt);
+    }
+    if (select.options.length < 2) return;
+    select.addEventListener('change', function () {
+      var a = links[parseInt(select.value, 10)];
+      if (a) a.click();
+    });
+    menu.parentNode.insertBefore(select, menu);
+  }
+  function run() { try { buildTabSelect(); } catch (e) { /* leave tabs as-is */ } }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
+})();
+</script>

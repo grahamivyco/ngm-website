@@ -5371,27 +5371,24 @@ body .WaGadgetContactProfile input[type="checkbox"]:checked::after {
   body .WaGadgetContactProfile td.memberFieldValueTD:has(> input[type="radio"])::after { font-size: .78rem !important; }
   body .WaGadgetContactProfile table th,
   body .WaGadgetContactProfile table td { text-align: left !important; }
-  /* tabs: wrapping pill chips instead of a sideways scroll nobody discovers */
-  body .WaGadgetContactProfile ul.memberDetailsTabMenu {
-    flex-wrap: wrap !important; overflow: visible !important; gap: 8px !important;
-    border-bottom: none !important; margin-bottom: 22px !important;
-  }
-  body .WaGadgetContactProfile ul.memberDetailsTabMenu li {
-    padding: 0 !important;
-  }
-  body .WaGadgetContactProfile ul.memberDetailsTabMenu li a,
-  body .WaGadgetContactProfile ul.memberDetailsTabMenu li span {
-    display: inline-block !important; padding: 7px 14px !important;
-    border: 1px solid var(--ngm-border) !important; border-radius: 999px !important;
-    font-size: .82rem !important; background: #fff !important;
-  }
-  body .WaGadgetContactProfile ul.memberDetailsTabMenu li span:not([style*="none"]) {
-    background: var(--ngm-sage-dk) !important; border-color: var(--ngm-sage-dk) !important;
-    color: #fff !important;
-  }
-  body .WaGadgetContactProfile ul.memberDetailsTabMenu li:has(span:not([style*="none"])) {
-    box-shadow: none !important;
-  }
+  /* tabs: the banner script builds a dropdown (#ngm-prof-tabselect) from
+     the tab bar — show it and hide the tab list on small screens */
+  body .WaGadgetContactProfile ul.memberDetailsTabMenu { display: none !important; }
+  body .ngm-prof-tabselect { display: block !important; }
+}
+/* the profile-tab dropdown (hidden on desktop; mobile rule above shows it) */
+body .ngm-prof-tabselect {
+  display: none; width: 100%; box-sizing: border-box;
+  margin: 6px 0 24px; padding: 11px 40px 11px 14px;
+  font-family: var(--ngm-sans) !important; font-size: .95rem !important;
+  font-weight: 500; color: var(--ngm-charcoal) !important;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233E5538' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") right 14px center/16px no-repeat !important;
+  border: 1px solid var(--ngm-border) !important; border-radius: var(--ngm-radius) !important;
+  appearance: none; -webkit-appearance: none; cursor: pointer;
+}
+body .ngm-prof-tabselect:focus {
+  border-color: var(--ngm-sage) !important; outline: none !important;
+  box-shadow: 0 0 0 3px rgba(92,122,82,.14) !important;
 }
 
 /* ---- separate profile sub-pages (Event registrations / Invoices / Donations)
