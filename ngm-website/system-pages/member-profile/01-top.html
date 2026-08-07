@@ -88,7 +88,24 @@
       update();
     });
   }
-  function run() { try { buildTabSelect(); } catch (e) { /* leave tabs as-is */ } }
+  /* WA renders edit-mode Cancel as a bare submit with no onclick, so the
+     form's client validation can silently swallow the click. Make Cancel
+     deterministic: go straight back to view mode (keeping ?memberId= when
+     an admin is viewing someone else's profile). View mode has no
+     [value="Cancel"] buttons, so this wires nothing there. */
+  function fixCancel() {
+    var cancels = document.querySelectorAll('.WaGadgetContactProfile input.typeButton[value="Cancel"]');
+    for (var c = 0; c < cancels.length; c++) {
+      cancels[c].addEventListener('click', function (ev) {
+        ev.preventDefault();
+        window.location.href = '/Sys/Profile/' + window.location.search;
+      });
+    }
+  }
+  function run() {
+    try { buildTabSelect(); } catch (e) { /* leave tabs as-is */ }
+    try { fixCancel(); } catch (e) { /* leave WA behavior */ }
+  }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', run);
   } else {
