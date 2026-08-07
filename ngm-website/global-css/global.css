@@ -5241,7 +5241,19 @@ body .ngm-priv-intro p {
   color: var(--ngm-gray) !important; line-height: 1.7 !important;
   margin: 0 !important; max-width: 640px;
 }
-/* "Show profile to others" view mode: hide WA's gif check, draw sage */
+/* "Show profile to others" view mode: hide WA's gif check, draw sage.
+   Keyed BOTH to .includeMeView and, container-agnostically, to whatever
+   element directly holds the view…IncludeMeInMemberDirectory span. */
+body .WaGadgetContactProfile *:has(> [id$="IncludeMeInMemberDirectory"]) > img { display: none !important; }
+body .WaGadgetContactProfile [id$="viewIncludeMeInMemberDirectory"] {
+  color: var(--ngm-charcoal) !important; font-weight: 600 !important;
+  font-size: .95rem !important; vertical-align: middle !important;
+}
+body .WaGadgetContactProfile *:has(> [id$="viewIncludeMeInMemberDirectory"])::before {
+  content: ""; display: inline-block; width: 15px; height: 15px;
+  margin-right: 7px; vertical-align: -2px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233E5538' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/contain no-repeat;
+}
 body .WaGadgetContactProfile .includeMeView img { display: none !important; }
 body .WaGadgetContactProfile .includeMeView:has(img)::before {
   content: ""; display: inline-block; width: 15px; height: 15px;
