@@ -5232,6 +5232,14 @@ body .WaGadgetContactProfile .fieldBody select,
 body .WaGadgetContactProfile .fieldBody textarea {
   width: 100% !important; max-width: 100% !important; box-sizing: border-box !important;
 }
+/* sizing & rhythm to match the application form: breathing room per field
+   row, air above section headers, labels sitting close to their inputs,
+   roomier textareas, and spacing around the action buttons */
+body .WaGadgetContactProfile .fieldContainer { padding: 6px 0 !important; }
+body .WaGadgetContactProfile .captionContainer { margin: 26px 0 12px !important; }
+body .WaGadgetContactProfile .fieldLabel { margin-bottom: 4px !important; }
+body .WaGadgetContactProfile textarea { min-height: 110px !important; }
+body .WaGadgetContactProfile input.typeButton { margin: 8px 10px 8px 0 !important; }
 /* Save keeps the filled sage pill from the typeButton rule above; Cancel
    drops to the quiet rose text link used across the application wizard */
 body .WaGadgetContactProfile input.typeButton[id*="ancel"] {
