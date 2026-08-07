@@ -5208,19 +5208,19 @@ body .WaGadgetContactProfile .memberFieldValueTD > div {
   display: inline-block !important; margin: 0 !important;
 }
 body .WaGadgetContactProfile .memberFieldValueTD > div::after {
-  font-family: var(--ngm-sans) !important; font-size: .75rem !important; font-weight: 600 !important;
-  padding: 4px 12px !important; border-radius: 999px !important; white-space: nowrap !important;
-  display: inline-block !important; line-height: 1.4 !important;
+  font-family: var(--ngm-sans) !important; font-size: .88rem !important; font-weight: 500 !important;
+  color: var(--ngm-gray) !important; white-space: nowrap !important;
+  display: inline-block !important; line-height: 1.5 !important;
 }
-body .WaGadgetContactProfile .memberFieldValueTD > .anybodyImage::after {
-  content: "Anybody"; background: var(--ngm-rose-lt); color: var(--ngm-rose-dk);
-}
-body .WaGadgetContactProfile .memberFieldValueTD > .otherMembersImage::after {
-  content: "Members only"; background: var(--ngm-sage-lt); color: var(--ngm-sage-dk);
-}
-body .WaGadgetContactProfile .memberFieldValueTD > .nobodyImage::after {
-  content: "No access"; background: var(--ngm-linen); color: var(--ngm-gray);
-}
+body .WaGadgetContactProfile .memberFieldValueTD > .anybodyImage::after { content: "Anybody"; }
+body .WaGadgetContactProfile .memberFieldValueTD > .otherMembersImage::after { content: "Members only"; }
+body .WaGadgetContactProfile .memberFieldValueTD > .nobodyImage::after { content: "No access"; }
+/* view mode puts a classless nbsp div in every UNSELECTED cell — hide those
+   cells so only the selected state's text shows */
+body .WaGadgetContactProfile td.memberFieldValueTD > div:not([class]) { display: none !important; }
+body .WaGadgetContactProfile td.memberFieldValueTD:has(> div:not([class])) { display: none !important; }
+/* belt & braces: NO images anywhere in the privacy grid */
+body .WaGadgetContactProfile #memberFieldTable img { display: none !important; }
 /* edit mode: label each radio in place of the removed column headers */
 body .WaGadgetContactProfile td.memberFieldValueTD:has(> input[type="radio"])::after {
   font-family: var(--ngm-sans) !important; font-size: .82rem !important;
@@ -5229,6 +5229,17 @@ body .WaGadgetContactProfile td.memberFieldValueTD:has(> input[type="radio"])::a
 body .WaGadgetContactProfile td.memberFieldValueTD:has(> input[value$="anybodyradio" i])::after { content: "Anybody"; }
 body .WaGadgetContactProfile td.memberFieldValueTD:has(> input[value$="membersradio" i])::after { content: "Members"; }
 body .WaGadgetContactProfile td.memberFieldValueTD:has(> input[value$="nobodyradio" i])::after { content: "No access"; }
+/* "Show profile to others" view mode: hide WA's gif check, draw sage */
+body .WaGadgetContactProfile .includeMeView img { display: none !important; }
+body .WaGadgetContactProfile .includeMeView:has(img)::before {
+  content: ""; display: inline-block; width: 15px; height: 15px;
+  margin-right: 7px; vertical-align: -2px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233E5538' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+body .WaGadgetContactProfile .includeMeView label {
+  color: var(--ngm-charcoal) !important; font-weight: 600 !important;
+  font-size: .95rem !important; margin-left: 8px !important; vertical-align: middle !important;
+}
 /* "Show profile to others": modern checkbox + clear label */
 body .WaGadgetContactProfile input[type="checkbox"] { width: 17px !important; height: 17px !important; vertical-align: middle !important; }
 body .WaGadgetContactProfile label[for$="IncludeMeInMemberDirectory"] {
