@@ -9,6 +9,10 @@
       <span class="ngm-sys-eyebrow">Member account</span>
       <h1 class="ngm-sys-title">My <em>profile</em></h1>
       <p class="ngm-sys-sub">Your membership, contact details, event registrations, invoices, and email preferences &mdash; review and update them any time.</p>
+      <div class="ngm-sys-btns">
+        <a class="ngm-sys-btn ngm-sys-btn-green" id="ngm-banner-edit" href="#">Edit profile</a>
+        <a class="ngm-sys-btn ngm-sys-btn-outline" href="/member/">Back to Member Hub</a>
+      </div>
     </div>
   </section>
 </div>
@@ -75,10 +79,23 @@
       });
     }
   }
+  /* Banner "Edit profile" CTA clicks WA's real Edit button; in edit mode
+     (no Edit button on the page) the CTA hides itself. */
+  function wireBannerEdit() {
+    var btn = document.getElementById('ngm-banner-edit');
+    if (!btn) return;
+    var waEdit = document.querySelector('.WaGadgetContactProfile input[id$="editButtonTop"]');
+    if (!waEdit || waEdit.offsetParent === null) { btn.style.display = 'none'; return; }
+    btn.addEventListener('click', function (ev) {
+      ev.preventDefault();
+      waEdit.click();
+    });
+  }
   function run() {
     if (document.body) document.body.classList.add('ngm-profile-page');
     try { buildTabSelect(); } catch (e) { /* leave tabs as-is */ }
     try { fixCancel(); } catch (e) { /* leave WA behavior */ }
+    try { wireBannerEdit(); } catch (e) { /* leave banner CTA inert */ }
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', run);
