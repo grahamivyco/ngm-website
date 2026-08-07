@@ -7367,8 +7367,8 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li .date span {
      (beats the element's inline text-align:left) */
   .ngm-loc-addr p { text-align: center !important; }
 
-  /* CTAs: thicker, a little less than full width, centered; primary wider
-     than secondary */
+  /* CTAs: thicker, a little less than full width, centered; primary and
+     secondary share the same width and height */
   .ngm-hero-btns, .ngm-join-btns { flex-direction: column; align-items: center; }
   .ngm-btn, body a.ngm-btn {
     display: flex !important;
@@ -7378,13 +7378,7 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li .date span {
     padding: 16px 26px !important;          /* thicker than desktop/tablet */
     font-size: .95rem !important;
     justify-content: center !important;
-  }
-  /* secondary (outline) buttons: narrower + a touch less tall */
-  .ngm-btn-outline, .ngm-btn-outline-rose,
-  body a.ngm-btn-outline, body a.ngm-btn-outline-rose {
-    width: 74% !important;
-    max-width: 300px !important;
-    padding: 13px 24px !important;
+    box-sizing: border-box !important;
   }
   .ngm-btn-fit { align-self: center !important; }
 }
