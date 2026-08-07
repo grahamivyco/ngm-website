@@ -5371,18 +5371,26 @@ body .WaGadgetContactProfile input[type="checkbox"]:checked::after {
   body .WaGadgetContactProfile td.memberFieldValueTD:has(> input[type="radio"])::after { font-size: .78rem !important; }
   body .WaGadgetContactProfile table th,
   body .WaGadgetContactProfile table td { text-align: left !important; }
-  body .WaGadgetContactProfile .totalBalance {
-    float: none !important; display: block !important;
-    text-align: left !important; padding: 6px 0 0 !important;
-  }
 }
 /* tabs ↔ dropdown swap is measurement-driven: the banner script adds
    .ngm-tabs-collapsed / .ngm-tabselect-on whenever the tab row can't fit
    its container (any viewport width), and removes them when it can. */
 body .WaGadgetContactProfile ul.memberDetailsTabMenu.ngm-tabs-collapsed { display: none !important; }
-body .ngm-prof-tabselect.ngm-tabselect-on { display: block !important; }
-/* the profile-tab dropdown (hidden on desktop; mobile rule above shows it) */
-body .ngm-prof-tabselect {
+body .ngm-prof-tabselect.ngm-tabselect-on,
+body .WaGadgetContactProfile select.ngm-prof-tabselect.ngm-tabselect-on { display: block !important; }
+/* label above the dropdown ("Profile section") — shows with it */
+body .ngm-prof-tablabel { display: none; }
+body .ngm-prof-tablabel.ngm-tabselect-on {
+  display: block !important; font-family: var(--ngm-sans) !important;
+  font-size: .72rem !important; font-weight: 600 !important;
+  letter-spacing: .14em !important; text-transform: uppercase !important;
+  color: var(--ngm-sage-dk) !important; margin: 10px 0 6px !important;
+}
+/* stray theme divider under the toolbar — gone */
+body .WaGadgetContactProfile hr { display: none !important; }
+/* the profile-tab dropdown (shown only when the tabs can't fit) */
+body .ngm-prof-tabselect,
+body .WaGadgetContactProfile select.ngm-prof-tabselect {
   display: none; width: 100%; box-sizing: border-box;
   margin: 6px 0 24px; padding: 11px 40px 11px 14px;
   font-family: var(--ngm-sans) !important; font-size: .95rem !important;
@@ -5391,7 +5399,8 @@ body .ngm-prof-tabselect {
   border: 1px solid var(--ngm-border) !important; border-radius: var(--ngm-radius) !important;
   appearance: none; -webkit-appearance: none; cursor: pointer;
 }
-body .ngm-prof-tabselect:focus {
+body .ngm-prof-tabselect:focus,
+body .WaGadgetContactProfile select.ngm-prof-tabselect:focus {
   border-color: var(--ngm-sage) !important; outline: none !important;
   box-shadow: 0 0 0 3px rgba(92,122,82,.14) !important;
 }
@@ -5415,6 +5424,32 @@ body [class*="Invoices"] table:has(th) td, body [class*="Donations"] table:has(t
 }
 /* the cached-list reload cell holds only a hidden admin link — drop it */
 body .WaGadgetContactProfile td.reloadContainer { display: none !important; }
+/* Balance: its own quiet line (the banner script places it under the tabs/dropdown) */
+body .WaGadgetContactProfile .totalBalance {
+  float: none !important; display: block !important; text-align: left !important;
+  padding: 0 !important; margin: 2px 0 14px !important;
+  font-size: 1rem !important;
+}
+/* mobile: every payment/registration/donation record reads as its own tile */
+@media (max-width: 700px) {
+  body [class*="Finances"] table:has(th) tr:has(td),
+  body [class*="EventRegistrations"] table:has(th) tr:has(td),
+  body [class*="Donations"] table:has(th) tr:has(td) {
+    display: block !important; background: #fff !important;
+    border: 1px solid var(--ngm-border) !important;
+    border-radius: var(--ngm-radius) !important;
+    padding: 14px 16px !important; margin: 0 0 12px !important;
+  }
+  body [class*="Finances"] table:has(th) tr:has(td) td,
+  body [class*="EventRegistrations"] table:has(th) tr:has(td) td,
+  body [class*="Donations"] table:has(th) tr:has(td) td {
+    display: block !important; border: none !important;
+    padding: 2px 0 !important; text-align: left !important;
+  }
+  body [class*="Finances"] table:has(th) tr:not(:has(td)),
+  body [class*="EventRegistrations"] table:has(th) tr:not(:has(td)),
+  body [class*="Donations"] table:has(th) tr:not(:has(td)) { display: none !important; }
+}
 
 /* ══════════════════════════════════════════════════════════════════
    MEMBER PUBLIC PROFILE  —  /Sys/PublicProfile

@@ -47,7 +47,14 @@
       var a = links[parseInt(select.value, 10)];
       if (a) a.click();
     });
+    var label = document.createElement('span');
+    label.className = 'ngm-prof-tablabel';
+    label.textContent = 'Profile section';
+    menu.parentNode.insertBefore(label, menu);
     menu.parentNode.insertBefore(select, menu);
+    /* Balance reads as its own line under the dropdown/tabs */
+    var bal = document.querySelector('.WaGadgetContactProfile .totalBalance');
+    if (bal) menu.parentNode.insertBefore(bal, menu);
 
     /* Collapse to the dropdown the moment the tabs can't fit the row —
        at ANY width, not a fixed breakpoint. The needed width is the sum
@@ -68,9 +75,11 @@
       if (needed > available) {
         menu.classList.add('ngm-tabs-collapsed');
         select.classList.add('ngm-tabselect-on');
+        label.classList.add('ngm-tabselect-on');
       } else {
         menu.classList.remove('ngm-tabs-collapsed');
         select.classList.remove('ngm-tabselect-on');
+        label.classList.remove('ngm-tabselect-on');
       }
     }
     measure(); update();
