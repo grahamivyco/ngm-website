@@ -5336,10 +5336,17 @@ body .WaGadgetContactProfile input[id$="editButtonBottom"] { display: none !impo
 /* the little gif icons on Privacy row titles (email-ico.gif etc.) — gone */
 body .WaGadgetContactProfile img[src*="-ico"],
 body .WaGadgetContactProfile img[src*="MemberProfile/images"] { display: none !important; }
-/* "* Mandatory fields" note — gone */
+/* "* Mandatory fields" note — gone, INCLUDING its framed container box
+   (the id$=_mandatoryHolder wrapper was the stubborn gray line) */
 body .WaGadgetContactProfile .mandatoryFieldsTitle,
 body .WaGadgetContactProfile [id$="mandatoryFieldsLabel"],
+body .WaGadgetContactProfile [id$="_mandatoryHolder"],
 body .WaGadgetContactProfile [class*="mandatoryFields"] { display: none !important; }
+/* WA inserts EMPTY spacer .fieldContainer divs between every real field —
+   with row padding they doubled the gaps; collapse them */
+body .WaGadgetContactProfile .fieldContainer:not(:has(input, select, textarea, span, strong, img, a, h4)) {
+  display: none !important;
+}
 /* form labels read LEFT-aligned in their column (theme right-aligns them) */
 body .WaGadgetContactProfile .fieldLabel { text-align: left !important; }
 /* "Forum subscriptions" — the Guild has no forums */
@@ -5391,10 +5398,10 @@ body .ngm-prof-tablabel.ngm-tabselect-on {
 }
 /* stray theme divider under the toolbar — gone */
 body .WaGadgetContactProfile hr { display: none !important; }
-/* the profile-tab dropdown (shown only when the tabs can't fit) */
+/* the profile-tab dropdown — the tab UI at every width */
 body .ngm-prof-tabselect,
 body .WaGadgetContactProfile select.ngm-prof-tabselect {
-  display: none; width: 100%; box-sizing: border-box;
+  display: none; width: 100%; max-width: 420px; box-sizing: border-box;
   margin: 6px 0 24px; padding: 11px 40px 11px 14px;
   font-family: var(--ngm-sans) !important; font-size: 16px !important;
   font-weight: 500; color: var(--ngm-charcoal) !important;
