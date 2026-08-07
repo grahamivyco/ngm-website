@@ -5229,6 +5229,20 @@ body .WaGadgetContactProfile td.memberFieldValueTD:has(> input[type="radio"])::a
 body .WaGadgetContactProfile td.memberFieldValueTD:has(> input[value$="anybodyradio" i])::after { content: "Anybody"; }
 body .WaGadgetContactProfile td.memberFieldValueTD:has(> input[value$="membersradio" i])::after { content: "Members"; }
 body .WaGadgetContactProfile td.memberFieldValueTD:has(> input[value$="nobodyradio" i])::after { content: "No access"; }
+/* Card header (inserted by the banner script): form title + directory-
+   profile explanation */
+body .ngm-card-head { margin: 0 0 18px; padding-bottom: 16px; border-bottom: 1px solid var(--ngm-linen-dk); }
+body .ngm-card-head h2 {
+  font-family: var(--ngm-serif) !important; font-size: 1.6rem !important;
+  font-weight: 400 !important; color: var(--ngm-charcoal) !important;
+  margin: 0 0 6px !important; line-height: 1.15 !important; text-transform: none !important;
+}
+body .ngm-card-head p {
+  font-family: var(--ngm-sans) !important; font-size: .92rem !important;
+  color: var(--ngm-gray) !important; line-height: 1.7 !important;
+  margin: 0 !important; max-width: 640px;
+}
+body .ngm-card-head p strong { color: var(--ngm-charcoal) !important; font-weight: 600 !important; }
 /* Privacy-section intro (inserted by the banner script) */
 body .ngm-priv-intro { margin: 4px 0 20px; }
 body .ngm-priv-intro h3 {

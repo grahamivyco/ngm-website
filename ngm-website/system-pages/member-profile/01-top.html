@@ -106,8 +106,22 @@
       '<p>Other members can look you up in the member directory \u2014 your directory profile is what they see. \u201CShow profile to others\u201D controls whether you appear at all, and \u201CDetails to show\u201D sets who can see each detail: Anybody (including site visitors), Members only (logged-in Guild members), or No access (hidden from everyone).</p>';
     host.parentNode.insertBefore(box, host);
   }
+  /* Card header: a title for the whole form, with "My directory profile"
+     explained (that link otherwise sits unexplained at the top of the card). */
+  function addCardHead() {
+    var card = document.querySelector('.WaGadgetContactProfile');
+    if (!card || document.getElementById('ngm-card-head')) return;
+    var head = document.createElement('div');
+    head.id = 'ngm-card-head';
+    head.className = 'ngm-card-head';
+    head.innerHTML =
+      '<h2>Your account</h2>' +
+      '<p>Everything the Guild has on file for you, section by section. <strong>My directory profile</strong> shows your entry as other members see it in the member directory.</p>';
+    card.insertBefore(head, card.firstChild);
+  }
   function run() {
     if (document.body) document.body.classList.add('ngm-profile-page');
+    try { addCardHead(); } catch (e) { /* skip the header */ }
     try { addPrivacyIntro(); } catch (e) { /* skip the intro */ }
     try { buildTabSelect(); } catch (e) { /* leave tabs as-is */ }
     try { fixCancel(); } catch (e) { /* leave WA behavior */ }
