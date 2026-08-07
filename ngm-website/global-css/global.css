@@ -5211,6 +5211,39 @@ body .WaGadgetContactProfile label { color: var(--ngm-sage-dk) !important; }
         if that field id ever changes, update or remove this line. ---- */
 body .WaGadgetContactProfile #idContainer12024901 { display: none !important; }
 
+/* ---- EDIT-PROFILE FORM: the same conventions as the membership
+        application — rose mandatory asterisk, rose inline validation,
+        sage checks/radios, inputs filling their column, and Save (filled)
+        vs Cancel (quiet rose text link) hierarchy. ---- */
+body .WaGadgetContactProfile .mandatorySymbol { color: var(--ngm-rose) !important; font-weight: 700 !important; }
+body .WaGadgetContactProfile .mandatoryLabel { font-weight: 600 !important; }
+body .WaGadgetContactProfile .validationError {
+  font-family: var(--ngm-sans) !important; font-size: .82rem !important;
+  color: var(--ngm-rose-dk) !important;
+}
+body .WaGadgetContactProfile input[type="checkbox"],
+body .WaGadgetContactProfile input[type="radio"] {
+  accent-color: var(--ngm-sage-dk) !important;
+}
+body .WaGadgetContactProfile .fieldBody input[type="text"],
+body .WaGadgetContactProfile .fieldBody input[type="email"],
+body .WaGadgetContactProfile .fieldBody input[type="tel"],
+body .WaGadgetContactProfile .fieldBody select,
+body .WaGadgetContactProfile .fieldBody textarea {
+  width: 100% !important; max-width: 100% !important; box-sizing: border-box !important;
+}
+/* Save keeps the filled sage pill from the typeButton rule above; Cancel
+   drops to the quiet rose text link used across the application wizard */
+body .WaGadgetContactProfile input.typeButton[id*="ancel"] {
+  background: transparent !important; border: none !important; border-radius: 0 !important;
+  box-shadow: none !important; color: var(--ngm-rose-dk) !important;
+  font-weight: 500 !important; padding: 12px 10px !important;
+}
+body .WaGadgetContactProfile input.typeButton[id*="ancel"]:hover {
+  background: transparent !important; color: var(--ngm-rose) !important;
+  text-decoration: underline !important;
+}
+
 /* ---- separate profile sub-pages (Event registrations / Invoices / Donations)
         still use generic WA table markup; kept provisional until captured live. ---- */
 body [class*="EventRegistrations"] table, body [class*="Finances"] table,
