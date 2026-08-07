@@ -4930,16 +4930,29 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"] .ngm-evt-tag
    resources, leadership person-cards grouped by team.
    Hero: the light-sage wide zoom-module leads (only green element),
    Profile + Resources follow as white acards. ── */
-.ngm-hub-hero .ngm-hub-zoom-module{margin-top:30px;}
-.ngm-hub-hero .ngm-hub-zoom-module .ngm-hub-zoom-tile-body h4{margin:0 0 3px;}
-.ngm-hub-hero .ngm-hub-acct-top{margin-top:16px;margin-bottom:0;}
-.ngm-hub-hero .ngm-hub-acard-body{display:block;}
-/* slimmer profile card in the hero */
-.ngm-hub-hero .ngm-hub-acard{padding:16px 20px;}
-.ngm-hub-hero .ngm-hub-acard-icon{width:42px;height:42px;border-radius:12px;}
-.ngm-hub-hero .ngm-hub-acard-icon svg{width:21px;height:21px;}
-.ngm-hub-hero .ngm-hub-acard-body h4{font-size:1.18rem;}
-.ngm-hub-hero .ngm-hub-acard-body p{font-size:.82rem;}
+/* Hero quick-action cards: primary (soft green, Join meeting) + secondary
+   (white, My profile). .ngm-hub-qa-meta is the reserved dynamic-info slot;
+   .ngm-hub-qa-badge styles a future "Available now" pill. */
+.ngm-hub-hero{padding:56px 48px 52px;}
+.ngm-hub-qa{display:grid;grid-template-columns:1.55fr 1fr;gap:18px;align-items:stretch;margin-top:30px;}
+.ngm-hub-qa-card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--ngm-border);border-radius:var(--ngm-radius-lg);padding:26px 28px 24px;}
+.ngm-hub-qa-primary{background:#D6E3CC;border-color:#C1D3B2;}
+.ngm-hub-qa-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;}
+.ngm-hub-qa-icon{width:48px;height:48px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--ngm-sage-lt);border-radius:13px;color:var(--ngm-sage-dk);}
+.ngm-hub-qa-primary .ngm-hub-qa-icon{background:#fff;}
+.ngm-hub-qa-icon svg{width:24px;height:24px;}
+.ngm-hub-qa-meta{font-family:var(--ngm-sans);font-size:.8rem;font-weight:500;color:var(--ngm-sage-dk);text-align:right;}
+.ngm-hub-qa-badge{display:inline-flex;align-items:center;gap:6px;background:#fff;border-radius:999px;padding:5px 12px;font-size:.75rem;font-weight:600;color:var(--ngm-sage-dk);}
+.ngm-hub-qa-badge::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ngm-sage);}
+.ngm-hub-qa-card h3{font-family:var(--ngm-serif)!important;font-size:1.5rem;font-weight:400;color:var(--ngm-charcoal);margin:0 0 8px;line-height:1.15;}
+.ngm-hub-qa-card p{font-family:var(--ngm-sans);font-size:.92rem;color:var(--ngm-gray);line-height:1.65;margin:0 0 20px;flex:1;}
+.ngm-hub-qa-primary p{color:#4C5A46;}
+.ngm-hub-qa-btn{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;font-family:var(--ngm-sans);font-size:.9rem;font-weight:600;color:#fff!important;background:var(--ngm-sage-dk);border:1.5px solid var(--ngm-sage-dk);border-radius:999px;padding:10px 24px;text-decoration:none!important;transition:background .15s,color .15s;}
+.ngm-hub-qa-btn:hover{background:var(--ngm-sage);border-color:var(--ngm-sage);}
+.ngm-hub-qa-btn svg{width:15px;height:15px;}
+.ngm-hub-qa-btn-outline{background:transparent;color:var(--ngm-sage-dk)!important;}
+.ngm-hub-qa-btn-outline:hover{background:var(--ngm-sage-dk);border-color:var(--ngm-sage-dk);color:#fff!important;}
+@media(max-width:860px){.ngm-hub-qa{grid-template-columns:1fr;}}
 .ngm-hub-rgroup{margin-top:34px;}
 .ngm-hub-rgroup:first-of-type{margin-top:10px;}
 .ngm-hub-rgroup-title,.ngm-hub-team-title{font-family:var(--ngm-sans);font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ngm-sage-dk);margin:0 0 12px;}
