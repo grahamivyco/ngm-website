@@ -5236,6 +5236,9 @@ body .WaGadgetContactProfile .disconnectExternalProfileButton {
   padding: 8px 16px !important; font-size: .85rem !important; font-weight: 600 !important;
   color: var(--ngm-sage-dk) !important; text-decoration: none !important; background: #fff !important;
   transition: border-color .18s, background .18s !important;
+  /* WA caps these at max-width:105px with overflow:hidden — "Connect" was
+     truncating inside our roomier chip */
+  max-width: none !important; width: auto !important; overflow: visible !important;
 }
 body .WaGadgetContactProfile .connectExternalProfileButton:hover,
 body .WaGadgetContactProfile .disconnectExternalProfileButton:hover {
