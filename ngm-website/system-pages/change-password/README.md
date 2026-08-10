@@ -29,10 +29,10 @@ so the only links to this page are the ones the redesign adds itself: the
 - Each password input: `.password-wrapper > input.typeText` + the same
   broken-Font-Awesome `.toggle-password` eye as the login form (glyph
   collapsed, SVG eye drawn in its place).
-- `.password-strength-meter` bar — the score div carries a `psms-N` class
-  (0/25/50/75/100, verified live at `psms-25`), so the stage colours are
-  restyled to brand tones (rose → sage) directly by class. The track sits
-  a tight 8px under the field (per design — no title above it).
+- `.password-strength-meter` bar — HIDDEN by design (the requirements
+  checklist already shows progress). If it ever comes back: the score div
+  carries a `psms-N` class (0/25/50/75/100, verified live at `psms-25`),
+  so stage colours can be restyled directly by class.
 - `.password-strength-status` requirements list (shown in a sage panel).
   Verified live: an unmet row starts with a bare `-` text node; when met,
   the script swaps it for a green-check GIF `<img>`. The skin hides both
