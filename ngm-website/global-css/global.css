@@ -5669,6 +5669,8 @@ body .WaGadgetChangePassword .introContainer .inner {
   line-height: 1.25 !important;
   color: var(--ngm-charcoal) !important;
   text-align: center !important;
+  text-transform: none !important;   /* theme was uppercasing the title */
+  letter-spacing: normal !important;
   margin-bottom: 22px !important;
 }
 /* Table layout → stacked rows: label above its field, full width */
@@ -5681,6 +5683,7 @@ body .WaGadgetChangePassword .fieldSubContainer td {
   max-width: 100% !important;
   border: 0 !important;
   padding: 0 !important;
+  text-align: left !important;   /* theme right-aligns the label cells */
 }
 body .WaGadgetChangePassword .fieldContainer { margin: 0 0 16px !important; padding: 0 !important; }
 body .WaGadgetChangePassword .fieldLabel {
@@ -5688,6 +5691,7 @@ body .WaGadgetChangePassword .fieldLabel {
   font-weight: 600 !important;
   color: var(--ngm-sage-dk) !important;
   margin: 0 0 6px !important;
+  text-align: left !important;
 }
 body .WaGadgetChangePassword .fieldLabel strong,
 body .WaGadgetChangePassword .fieldLabel label { font-weight: 600 !important; }
