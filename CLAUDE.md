@@ -30,6 +30,19 @@ and the markup-only files were renamed to plain `01-top.html` / `03-bottom.html`
   only.
 - When a change needs new CSS, put it in `global-css/global.css`.
 
+## Native WA forms: verify the DOM via the browser console first
+
+When writing CSS/JS that targets a **native WA form gadget** (login,
+password, event registration, profile, application wizard, etc.), do not
+guess class names or structure. First figure out the real DOM in the
+browser console on the live page — the maintainer prefers this workflow:
+provide a small console snippet to run on the target page (dumping the
+gadget's classes/structure), have them paste the output back, and only
+then write selectors against the verified classes. Existing sections in
+`global.css` note "verified against the live DOM" for the same reason.
+Remember: per-instance ids (`id_XXXX_*`) are unstable — selectors must use
+stable classes only (see `docs/wa-notes.md`).
+
 ## Exceptions (leave as-is unless asked)
 
 A few files are legitimately self-contained (their own CSS/fonts) because they
