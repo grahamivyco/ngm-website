@@ -31,17 +31,15 @@ so the only links to this page are the ones the redesign adds itself: the
   collapsed, SVG eye drawn in its place).
 - `.password-strength-meter` bar — the score div carries a `psms-N` class
   (0/25/50/75/100, verified live at `psms-25`), so the stage colours are
-  restyled to brand tones (rose → sage) directly by class. The track gets
-  a "Password strength" eyebrow title via `::before` (which is why the
-  track has NO overflow:hidden — it would clip the title; the score bar
-  carries its own radius).
+  restyled to brand tones (rose → sage) directly by class. The track sits
+  a tight 8px under the field (per design — no title above it).
 - `.password-strength-status` requirements list (shown in a sage panel).
   Verified live: an unmet row starts with a bare `-` text node; when met,
   the script swaps it for a green-check GIF `<img>`. The skin hides both
   (font-size 0 swallows the text node, the img is display:none) and draws
-  the About-page "why people join" check instead (`.ngm-feat li::before`
-  idiom: bare 15px masked check) — muted linen while unmet, sage when
-  met, same icon shape on every row.
+  its own marker in a constant 15px box: a small grey dot while unmet, the
+  About-page "why people join" check (`.ngm-feat li::before` idiom: bare
+  15px masked sage check) once met.
 - `.validationError` ("Current password incorrect" etc.) — the theme
   positions these absolutely to the RIGHT of the field (they escaped the
   card and clipped); forced static, full-width, below the field.
