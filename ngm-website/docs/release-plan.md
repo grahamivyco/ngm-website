@@ -16,8 +16,9 @@ non-system Login / Profile / Membership-application pages.
 
 Still to style (all reachable from links the redesign ships):
 
-- [ ] **Change password** (`/Sys/Password/Change`) — linked from the login
-      dropdown's "Change password". CSS-only page.
+- [x] **Change password** (`/Sys/Password/Change`) — linked from the login
+      dropdown's "Change password". CSS-only page. Styled against the
+      console-verified DOM (see `system-pages/change-password/README.md`).
 - [ ] **Reset password request** (`/Sys/ResetPasswordRequest`) — the
       "Forgot password" target on the login form and Authorization-required.
 - [ ] **Reset password** — the page the emailed reset link lands on.

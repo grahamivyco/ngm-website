@@ -5585,6 +5585,232 @@ body .WaGadgetContactProfile .totalBalance {
 }
 
 /* ══════════════════════════════════════════════════════════════════
+   CHANGE PASSWORD  —  /Sys/Password/Change
+   ────────────────────────────────────────────────────────────────
+   Linked from the login dropdown's "Change password". CSS-only system
+   page (no Custom-HTML gadget allowed), so everything here hangs off
+   .WaGadgetChangePassword, which WA applies automatically. Verified
+   against the live DOM: an .introContainer ("Change password for
+   <name>") plus a table-based form (.fieldLabel / .fieldBody rows in
+   .fieldContainer), each field in a .password-wrapper with the same
+   broken-Font-Awesome .toggle-password eye as the login form, a
+   .password-strength-meter bar, a requirements list
+   (.password-strength-status), and Save/Cancel as input[type=submit]
+   named submitNewPasswordButton / cancelButton (names are stable; the
+   ctl00_* ids are not). Skin mirrors the auth card above.
+   ══════════════════════════════════════════════════════════════════ */
+body .WaGadgetChangePassword,
+body .WaGadgetChangePassword * {
+  font-family: var(--ngm-sans) !important;
+  letter-spacing: normal !important;
+  box-sizing: border-box !important;
+}
+/* The gadget itself is the white card (intro + form live inside it) */
+body .WaGadgetChangePassword {
+  width: 100% !important;
+  max-width: 460px !important;
+  margin: 28px auto 48px !important;
+  padding: 34px 36px 32px !important;
+  background: #fff !important;
+  border: 1px solid var(--ngm-border) !important;
+  border-radius: 22px !important;
+  box-shadow: 0 12px 40px rgba(62,85,56,.10) !important;
+}
+/* Theme chrome: rounded-corner strips and the d1–d9 / container wrappers
+   carry theme padding/backgrounds — flatten all of it. */
+body .WaGadgetChangePassword .cornersContainer,
+body .WaGadgetChangePassword .clearEndContainer { display: none !important; }
+body .WaGadgetChangePassword .introContainer,
+body .WaGadgetChangePassword .formOuterContainer,
+body .WaGadgetChangePassword .formContainer,
+body .WaGadgetChangePassword .generalFieldsOuterContainer,
+body .WaGadgetChangePassword .generalFieldsContainer,
+body .WaGadgetChangePassword .d1, body .WaGadgetChangePassword .d2,
+body .WaGadgetChangePassword .d3, body .WaGadgetChangePassword .d4,
+body .WaGadgetChangePassword .d5, body .WaGadgetChangePassword .d6,
+body .WaGadgetChangePassword .d7, body .WaGadgetChangePassword .d8,
+body .WaGadgetChangePassword .d9, body .WaGadgetChangePassword .inner {
+  display: block !important;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+/* Intro line ("Change password for <name>") → the card's serif title */
+body .WaGadgetChangePassword .introContainer .inner {
+  font-family: var(--ngm-serif) !important;
+  font-size: 1.55rem !important;
+  font-weight: 600 !important;
+  line-height: 1.25 !important;
+  color: var(--ngm-charcoal) !important;
+  text-align: center !important;
+  margin-bottom: 22px !important;
+}
+/* Table layout → stacked rows: label above its field, full width */
+body .WaGadgetChangePassword .fieldSubContainer table,
+body .WaGadgetChangePassword .fieldSubContainer tbody,
+body .WaGadgetChangePassword .fieldSubContainer tr,
+body .WaGadgetChangePassword .fieldSubContainer td {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
+body .WaGadgetChangePassword .fieldContainer { margin: 0 0 16px !important; padding: 0 !important; }
+body .WaGadgetChangePassword .fieldLabel {
+  font-size: .85rem !important;
+  font-weight: 600 !important;
+  color: var(--ngm-sage-dk) !important;
+  margin: 0 0 6px !important;
+}
+body .WaGadgetChangePassword .fieldLabel strong,
+body .WaGadgetChangePassword .fieldLabel label { font-weight: 600 !important; }
+/* Rows whose label cell has no real <label> (the requirements row's is
+   empty; the button row's is a lone &nbsp;) would leave a stray gap once
+   stacked — hide those label cells. */
+body .WaGadgetChangePassword td.left:not(:has(label)) { display: none !important; }
+/* Required-asterisks off, like the other auth forms (all fields are required) */
+body .WaGadgetChangePassword .mandatorySymbol { display: none !important; }
+
+/* Password inputs — same skin as the /log-in fields */
+body .WaGadgetChangePassword input.typeText {
+  width: 100% !important;
+  height: auto !important;
+  font-size: .95rem !important;
+  padding: 12px 44px 12px 14px !important;   /* right pad clears the eye */
+  border: 1px solid var(--ngm-border) !important;
+  border-radius: 10px !important;
+  background: #fff !important;
+  color: var(--ngm-charcoal) !important;
+}
+body .WaGadgetChangePassword input.typeText:focus {
+  outline: none !important;
+  border-color: var(--ngm-sage) !important;
+  box-shadow: 0 0 0 3px rgba(92,122,82,.15) !important;
+}
+/* Show/hide-password eye (same broken-Font-Awesome fix as the login gadget) */
+body .WaGadgetChangePassword .password-wrapper {
+  position: relative !important;
+  background-image: none !important;
+}
+body .WaGadgetChangePassword .toggle-password {
+  position: absolute !important;
+  right: 12px !important;
+  top: 23px !important;                       /* field is 46px tall; meter/errors stack below */
+  transform: translateY(-50%) !important;
+  width: 22px !important;
+  height: 22px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font: 0/0 a !important;
+  color: transparent !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 20px 20px !important;
+  cursor: pointer !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239A9A9A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24'/%3E%3Cline x1='1' y1='1' x2='23' y2='23'/%3E%3C/svg%3E") !important;
+}
+body .WaGadgetChangePassword .toggle-password.fa-eye-slash {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239A9A9A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24'/%3E%3Cline x1='1' y1='1' x2='23' y2='23'/%3E%3C/svg%3E") !important;
+}
+body .WaGadgetChangePassword .toggle-password.fa-eye {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239A9A9A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E") !important;
+}
+body .WaGadgetChangePassword .toggle-password::before,
+body .WaGadgetChangePassword .toggle-password::after { content: "" !important; }
+
+/* Strength meter under the new-password field — slim sage-tinted track.
+   (The score bar's fill colour is set inline by WA's script; leave it.) */
+body .WaGadgetChangePassword .password-strength-meter {
+  width: 100% !important;
+  height: 4px !important;
+  margin-top: 8px !important;
+  background: var(--ngm-linen-dk) !important;
+  border-radius: 999px !important;
+  overflow: hidden !important;
+}
+body .WaGadgetChangePassword .password-strength-meter-score { height: 100% !important; }
+
+/* Requirements list → quiet sage panel */
+body .WaGadgetChangePassword .fieldBody > div:has(.password-strength-status) {
+  background: var(--ngm-sage-lt) !important;
+  border-radius: 10px !important;
+  padding: 12px 14px !important;
+}
+body .WaGadgetChangePassword .fieldBody p { margin: 0 0 6px !important; }
+body .WaGadgetChangePassword .fieldBody p b {
+  font-size: .82rem !important;
+  font-weight: 600 !important;
+  color: var(--ngm-sage-dk) !important;
+}
+body .WaGadgetChangePassword .password-strength-status {
+  font-size: .82rem !important;
+  line-height: 1.5 !important;
+  color: var(--ngm-gray) !important;
+}
+
+/* Inline validation — rose, same as the wizard forms */
+body .WaGadgetChangePassword .validationError {
+  display: block;
+  font-size: .82rem !important;
+  color: var(--ngm-rose-dk) !important;
+  margin-top: 6px !important;
+}
+
+/* Save (filled sage pill) + Cancel (outline pill) — names are stable */
+body .WaGadgetChangePassword .fieldContainer:has(input[type="submit"]) .fieldBody {
+  display: flex !important;
+  gap: 10px !important;
+  margin-top: 4px !important;
+}
+body .WaGadgetChangePassword input[name="submitNewPasswordButton"],
+body .WaGadgetChangePassword input[name="cancelButton"] {
+  flex: 1 1 0 !important;
+  font-size: .9rem !important;
+  font-weight: 500 !important;
+  border-radius: 100px !important;
+  padding: 12px 26px !important;
+  cursor: pointer !important;
+  text-transform: none !important;
+  transition: all .18s ease !important;
+}
+body .WaGadgetChangePassword input[name="submitNewPasswordButton"] {
+  color: #fff !important;
+  background: var(--ngm-sage-dk) !important;
+  border: 1.5px solid var(--ngm-sage-dk) !important;
+}
+body .WaGadgetChangePassword input[name="submitNewPasswordButton"]:hover {
+  background: var(--ngm-sage) !important;
+  border-color: var(--ngm-sage) !important;
+}
+body .WaGadgetChangePassword input[name="cancelButton"] {
+  color: var(--ngm-sage-dk) !important;
+  background: transparent !important;
+  border: 1.5px solid var(--ngm-sage-dk) !important;
+}
+body .WaGadgetChangePassword input[name="cancelButton"]:hover {
+  background: var(--ngm-sage-dk) !important;
+  color: #fff !important;
+}
+
+/* Phones: card fits the viewport with even gutters */
+@media(max-width:560px){
+  body .WaGadgetChangePassword{
+    max-width: calc(100vw - 32px) !important;
+    margin: 16px auto 32px !important;
+    padding: 22px 18px 20px !important;
+  }
+  body .WaGadgetChangePassword .introContainer .inner{ font-size: 1.35rem !important; }
+  body .WaGadgetChangePassword input.typeText{ padding: 10px 44px 10px 12px !important; }
+  body .WaGadgetChangePassword .toggle-password{ top: 21px !important; }
+  body .WaGadgetChangePassword .fieldContainer:has(input[type="submit"]) .fieldBody{
+    flex-direction: column !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
    MEMBER PUBLIC PROFILE  —  /Sys/PublicProfile
    The "My directory profile" page + what members see of each other in the
    directory. Different gadget (.WaGadgetMemberPublicProfile) than the contact
