@@ -4974,6 +4974,15 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li[data-tag="person"] .ngm-evt-tag
 body .ngm-hub-qa-card h3{font-family:var(--ngm-serif)!important;font-size:var(--ngm-title-card)!important;font-weight:400!important;color:var(--ngm-charcoal)!important;margin:0 0 8px!important;line-height:1.15!important;text-transform:none!important;letter-spacing:normal!important;}
 body .ngm-hub-qa-card p{font-family:var(--ngm-sans)!important;font-size:var(--ngm-copy)!important;color:var(--ngm-gray)!important;line-height:1.65!important;margin:0 0 20px!important;flex:1;}
 body .ngm-hub-qa-primary p{color:#4C5A46!important;}
+/* Primary card: the icon row keeps its top-left spot (it stays first in the
+   column flow), while the title + copy + button group centres in the card's
+   spare height — auto margins above the title and below the button split
+   the leftover space evenly. p loses the flex:1 stretch that would eat the
+   space instead. When the primary card is the taller one (stacked mobile
+   cards included) there is no spare height and the autos collapse to 0. */
+body .ngm-hub-qa-primary h3{margin:auto 0 8px!important;}
+body .ngm-hub-qa-primary p{flex:0 0 auto!important;}
+.ngm-hub-qa-primary .ngm-btn{margin-bottom:auto;}
 /* buttons are the standard site pills (.ngm-btn ngm-btn-green / -outline,
    .ngm-btn-fit keeps them from stretching); just size their arrow icons */
 .ngm-hub-qa-card .ngm-btn svg{width:15px;height:15px;}
