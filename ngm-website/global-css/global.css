@@ -4978,10 +4978,19 @@ body .ngm-hub-qa-primary p{color:#4C5A46!important;}
    .ngm-btn-fit keeps them from stretching); just size their arrow icons */
 .ngm-hub-qa-card .ngm-btn svg{width:15px;height:15px;}
 /* quiet text link under a card's button (Change password on the My-profile
-   card) — same underlined-link idiom as the login form's Forgot password */
-.ngm-hub-qa-sublink{align-self:flex-start;margin-top:12px;font-family:var(--ngm-sans);font-size:.85rem;font-weight:500;color:var(--ngm-sage-dk);text-decoration:none;border-bottom:1px solid rgba(62,85,56,.3);padding-bottom:1px;}
-.ngm-hub-qa-sublink:hover{border-color:var(--ngm-sage-dk);}
-@media(max-width:900px){.ngm-hub-qa{grid-template-columns:1fr;}.ngm-hub-qa-sublink{align-self:center;}}
+   card) — same underlined-link idiom as the login form's Forgot password.
+   body-prefixed + !important so the theme's content-link styling (bold,
+   large, underlined charcoal) can't reassert itself. */
+body .ngm-hub-qa-sublink{
+  display:inline-block!important;align-self:flex-start;margin:12px 0 0!important;
+  font-family:var(--ngm-sans)!important;font-size:.85rem!important;font-weight:500!important;
+  line-height:1.4!important;color:var(--ngm-sage-dk)!important;
+  text-decoration:none!important;text-transform:none!important;letter-spacing:normal!important;
+  background:none!important;border:0!important;border-bottom:1px solid rgba(62,85,56,.3)!important;
+  border-radius:0!important;padding:0 0 1px!important;box-shadow:none!important;
+}
+body .ngm-hub-qa-sublink:hover{color:var(--ngm-sage-dk)!important;border-bottom-color:var(--ngm-sage-dk)!important;background:none!important;}
+@media(max-width:900px){.ngm-hub-qa{grid-template-columns:1fr;}body .ngm-hub-qa-sublink{align-self:center;}}
 /* phones only: both buttons identical — full width, same padding/height
    (tablet keeps natural-width, left-aligned buttons) */
 @media(max-width:640px){
