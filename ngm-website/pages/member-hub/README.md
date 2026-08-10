@@ -20,19 +20,22 @@ around what members come to DO, not around telling a story:
      "Change password" text link (`.ngm-hub-qa-sublink`) →
      `/Sys/Password/Change`.
    - Cards stack (primary first) under 860px.
-2. **Member resources** (white) — tiles GROUPED for scanning:
-   - *Stay Connected* — Member directory (`/member-directory`), Newsletter
-     archive (`SET URL`).
-   - *Learn & Create* — Lending library (`/lending-library`), Meeting
-     handouts (`SET URL`).
-   - *Guild Information* — Bylaws & policies (`SET URL`), Board minutes
-     (`SET URL` Drive), Financial reports (`SET URL` Drive 990s),
-     Financial forms (`SET URL` Drive).
-   - *Get Involved* — ONE Volunteer-positions tile → `/volunteer` (the old
-     14-card volunteer section was removed; the roles live on /volunteer).
+2. **Member resources** (white) — ONE live tile (Member directory →
+   `/member-directory`) plus a single dashed "Coming soon" tile
+   (`.ngm-hub-rtile-soon`, not a link) listing everything still being
+   prepared: newsletter archive, lending library, meeting handouts,
+   bylaws & policies, board minutes, financial reports & forms, and
+   volunteer positions. When one goes live, give it back its own tile
+   (old per-group markup is in git history, pre-#214) and remove it from
+   the coming-soon list.
 3. **Guild leadership** (cream) — person cards, NAME first, role second,
-   email quiet/small, grouped by team: *Executive Board* / *Programs* /
-   *Member Services*. Roles without a person show the role as the card
+   email quiet/small, in THREE side-by-side columns (`.ngm-hub-teams`,
+   stacking under 900px): *Guild Support* (President, VP, Secretary,
+   Treasurer, Librarians, Shop Manager, Advertising, Sunday Blast, the
+   open website roles) / *Monthly Meetings* (Daytime + Evening Stitch-In
+   leads) / *Events* (Events chairs, Retreat chair). "Executive Board"
+   as a heading was retired deliberately — don't reintroduce it. Roles
+   without a person show the role as the card
    title with "Open position".
 4. **Help bar** — "Can't find what you're looking for? Email our volunteer
    website team at admin@needleworkguildmn.org."
