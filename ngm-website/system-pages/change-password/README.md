@@ -1,7 +1,11 @@
 # Change password
 
-**WA page:** system page `/Sys/Password/Change` (linked from the login
-dropdown's "Change password").
+**WA page:** system page `/Sys/Password/Change`.
+**How members get here:** the redesign header does NOT carry WA's native
+account dropdown (it's a custom header with Log Out / Member Hub buttons),
+so the only links to this page are the ones the redesign adds itself: the
+"Change password" text link on the Member Hub's My-profile card and the
+"Change password" banner button on `/Sys/Profile`.
 **Structure:** CSS-ONLY — WA does not allow Custom-HTML gadgets on this
 screen (see `docs/wa-notes.md`), so there is no `01-top.html`. The whole
 skin lives in `global-css/global.css` under the **CHANGE PASSWORD** banner

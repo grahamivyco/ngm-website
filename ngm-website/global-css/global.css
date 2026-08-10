@@ -5591,7 +5591,9 @@ body .WaGadgetContactProfile .totalBalance {
 /* ══════════════════════════════════════════════════════════════════
    CHANGE PASSWORD  —  /Sys/Password/Change
    ────────────────────────────────────────────────────────────────
-   Linked from the login dropdown's "Change password". CSS-only system
+   Reached via the Member Hub My-profile card's "Change password" link
+   and the /Sys/Profile banner button (the custom header has no WA
+   account dropdown). CSS-only system
    page (no Custom-HTML gadget allowed), so everything here hangs off
    .WaGadgetChangePassword, which WA applies automatically. Verified
    against the live DOM: an .introContainer ("Change password for

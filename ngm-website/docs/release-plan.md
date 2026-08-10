@@ -16,9 +16,12 @@ non-system Login / Profile / Membership-application pages.
 
 Still to style (all reachable from links the redesign ships):
 
-- [x] **Change password** (`/Sys/Password/Change`) — linked from the login
-      dropdown's "Change password". CSS-only page. Styled against the
-      console-verified DOM (see `system-pages/change-password/README.md`).
+- [x] **Change password** (`/Sys/Password/Change`) — CSS-only page, styled
+      against the console-verified DOM (see
+      `system-pages/change-password/README.md`). NB the custom header has
+      no WA account dropdown, so the page's only entry points are the ones
+      the redesign adds: the Member Hub My-profile card link and the
+      /Sys/Profile banner button.
 - [ ] **Reset password request** (`/Sys/ResetPasswordRequest`) — the
       "Forgot password" target on the login form and Authorization-required.
 - [ ] **Reset password** — the page the emailed reset link lands on.
