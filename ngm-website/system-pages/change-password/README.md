@@ -22,9 +22,15 @@ and hangs off the automatic `.WaGadgetChangePassword` gadget class.
 - Each password input: `.password-wrapper > input.typeText` + the same
   broken-Font-Awesome `.toggle-password` eye as the login form (glyph
   collapsed, SVG eye drawn in its place).
-- `.password-strength-meter` bar (fill colour comes inline from WA's
-  script) and the `.password-strength-status` requirements list (shown in
-  a sage panel).
+- `.password-strength-meter` bar — the score div carries a `psms-N` class
+  (0/25/50/75/100, verified live at `psms-25`), so the stage colours are
+  restyled to brand tones (rose → sage) directly by class.
+- `.password-strength-status` requirements list (shown in a sage panel).
+  Verified live: an unmet row starts with a bare `-` text node; when met,
+  the script swaps it for a green-check GIF `<img>`. The skin hides both
+  (font-size 0 swallows the text node, the img is display:none) and draws
+  its own marker via `::before` — outlined dot unmet, sage SVG check when
+  met, detected with `:has(img)`.
 - Buttons are `input[type=submit]` with **stable names**
   `submitNewPasswordButton` (Save → filled sage pill) and `cancelButton`
   (Cancel → outline pill). The `ctl00_*` ids are unstable — never used.

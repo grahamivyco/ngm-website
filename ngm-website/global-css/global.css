@@ -5662,14 +5662,16 @@ body .WaGadgetChangePassword .d9, body .WaGadgetChangePassword .inner {
   border: 0 !important;
 }
 /* Intro line ("Change password for <name>") → the card's serif title */
+/* Title — design-system serif treatment (Cormorant 400, sentence case,
+   charcoal), like .ngm-h1/.ngm-h2; the theme was uppercasing + bolding it. */
 body .WaGadgetChangePassword .introContainer .inner {
   font-family: var(--ngm-serif) !important;
-  font-size: 1.55rem !important;
-  font-weight: 600 !important;
-  line-height: 1.25 !important;
+  font-size: 1.7rem !important;
+  font-weight: 400 !important;
+  line-height: 1.15 !important;
   color: var(--ngm-charcoal) !important;
   text-align: center !important;
-  text-transform: none !important;   /* theme was uppercasing the title */
+  text-transform: none !important;
   letter-spacing: normal !important;
   margin-bottom: 22px !important;
 }
@@ -5767,6 +5769,14 @@ body .WaGadgetChangePassword .password-strength-meter-score {
   border-radius: 999px !important;
   transition: width .25s ease, background-color .25s ease !important;
 }
+/* Stage colours — the script sets a psms-N class on the score bar (verified
+   live: psms-25 at one met requirement), so the default red/orange fills can
+   be replaced with brand tones: rose while weak, sage once strong. */
+body .WaGadgetChangePassword .password-strength-meter-score.psms-0   { background: var(--ngm-rose-dk) !important; }
+body .WaGadgetChangePassword .password-strength-meter-score.psms-25  { background: var(--ngm-rose-dk) !important; }
+body .WaGadgetChangePassword .password-strength-meter-score.psms-50  { background: var(--ngm-rose) !important; }
+body .WaGadgetChangePassword .password-strength-meter-score.psms-75  { background: var(--ngm-sage) !important; }
+body .WaGadgetChangePassword .password-strength-meter-score.psms-100 { background: var(--ngm-sage-dk) !important; }
 
 /* Requirements list → quiet sage panel */
 body .WaGadgetChangePassword .fieldBody > div:has(.password-strength-status) {
@@ -5780,18 +5790,60 @@ body .WaGadgetChangePassword .fieldBody p b {
   font-weight: 600 !important;
   color: var(--ngm-sage-dk) !important;
 }
+/* Requirement rows. Verified live: an unmet row starts with a bare "-"
+   text node; when met, the script swaps it for an <img> (green-check GIF).
+   Neither is on-brand, so: font-size 0 on the row swallows the stray "-",
+   the GIF is hidden, and a ::before draws our own marker — a quiet outlined
+   dot while unmet, a sage check (matches the eye-icon SVG idiom) once met,
+   detected via :has(img). The span gets its type size back. */
 body .WaGadgetChangePassword .password-strength-status {
-  font-size: .82rem !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 0 !important;               /* hides the bare "-" text node */
   line-height: 1.5 !important;
   color: var(--ngm-gray) !important;
+  margin: 2px 0 !important;
+}
+body .WaGadgetChangePassword .password-strength-status img { display: none !important; }
+body .WaGadgetChangePassword .password-strength-status::before {
+  content: "" !important;
+  width: 14px !important;
+  height: 14px !important;
+  flex-shrink: 0 !important;
+  border: 1.5px solid var(--ngm-border) !important;   /* unmet: quiet outlined dot */
+  border-radius: 50% !important;
+  background: #fff no-repeat center / 14px 14px !important;
+  box-sizing: border-box !important;
+}
+body .WaGadgetChangePassword .password-strength-status:has(img)::before {
+  border-color: var(--ngm-sage-dk) !important;        /* met: sage check */
+  background-color: var(--ngm-sage-lt) !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233E5538' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") !important;
+  background-size: 9px 9px !important;
+}
+body .WaGadgetChangePassword .password-strength-status span {
+  font-size: .82rem !important;
+  line-height: 1.5 !important;
+}
+body .WaGadgetChangePassword .password-strength-status:has(img) span {
+  color: var(--ngm-sage-dk) !important;
 }
 
-/* Inline validation — rose, same as the wizard forms */
+/* Inline validation — rose, same as the wizard forms. The theme positions
+   these absolutely to the RIGHT of the field (they escaped the card and
+   clipped, e.g. "Current password incorrect") — force them static, full
+   width, below the field. */
 body .WaGadgetChangePassword .validationError {
+  position: static !important;
   display: block;
+  width: auto !important;
+  max-width: 100% !important;
   font-size: .82rem !important;
   color: var(--ngm-rose-dk) !important;
-  margin-top: 6px !important;
+  text-align: left !important;
+  white-space: normal !important;
+  margin: 6px 0 0 !important;
 }
 
 /* Save (filled sage pill) + Cancel (outline pill) — names are stable */
