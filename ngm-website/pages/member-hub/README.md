@@ -16,7 +16,9 @@ around what members come to DO, not around telling a story:
      added later without changing the layout.
    - **My profile** — secondary white card, person icon, outline
      "View my profile →" button → `/Sys/Profile` (bare path — resolves to
-     whoever is logged in; NEVER add a `?memberId=`).
+     whoever is logged in; NEVER add a `?memberId=`), plus a quiet
+     "Change password" text link (`.ngm-hub-qa-sublink`) →
+     `/Sys/Password/Change`.
    - Cards stack (primary first) under 860px.
 2. **Member resources** (white) — tiles GROUPED for scanning:
    - *Stay Connected* — Member directory (`/member-directory`), Newsletter
