@@ -4900,6 +4900,10 @@ body .mLayout { padding-bottom: 0 !important; margin-bottom: 0 !important; }
 .ngm-hub-rgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--ngm-gap);margin-top:6px;}
 .ngm-hub-rtile{display:flex;flex-direction:column;background:var(--ngm-cream);border:1px solid var(--ngm-border);border-radius:var(--ngm-radius);padding:var(--ngm-tile-pad);text-decoration:none!important;color:inherit;transition:border-color .18s,box-shadow .18s;}
 .ngm-hub-rtile:hover{border-color:var(--ngm-sage);box-shadow:var(--ngm-sh);}
+/* "Coming soon" tile — not a link: dashed border, no hover lift */
+.ngm-hub-rtile-soon{border-style:dashed;cursor:default;}
+.ngm-hub-rtile-soon:hover{border-color:var(--ngm-border);box-shadow:none;}
+.ngm-hub-rtile-soon svg{color:var(--ngm-gray-lt);}
 .ngm-hub-rtile svg{width:24px;height:24px;color:var(--ngm-sage-dk);margin-bottom:14px;}
 .ngm-hub-rtile h4{font-family:var(--ngm-serif)!important;font-size:var(--ngm-title-tile);font-weight:400;color:var(--ngm-charcoal);margin-bottom:5px;line-height:1.2;}
 body .ngm-hub-rtile p{font-family:var(--ngm-sans)!important;font-size:var(--ngm-copy)!important;font-weight:400!important;color:var(--ngm-gray)!important;line-height:1.65!important;}
@@ -5010,6 +5014,18 @@ body .ngm-hub-qa-sublink:hover{color:var(--ngm-sage-dk)!important;border-bottom-
 .ngm-hub-rgroup-title,.ngm-hub-team-title{font-family:var(--ngm-sans);font-size:.78rem;font-weight:600;letter-spacing: var(--ngm-eyebrow-track);text-transform:uppercase;color:var(--ngm-sage-dk);margin:0 0 12px;}
 .ngm-hub-team{margin-top:34px;}
 .ngm-hub-team:first-of-type{margin-top:6px;}
+/* Three side-by-side team columns (Guild Support / Monthly Meetings /
+   Events) — people stack single-file inside each column. The two-class
+   .ngm-hub-teams selectors out-specify the standalone .ngm-hub-people
+   media rules below, so the columns hold their single-file stacking. */
+.ngm-hub-teams{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--ngm-gap);align-items:start;margin-top:6px;}
+.ngm-hub-teams .ngm-hub-team{margin-top:0;}
+.ngm-hub-teams .ngm-hub-people{grid-template-columns:1fr;}
+@media(max-width:900px){
+  .ngm-hub-teams{grid-template-columns:1fr;}
+  .ngm-hub-teams .ngm-hub-team{margin-top:28px;}
+  .ngm-hub-teams .ngm-hub-team:first-child{margin-top:0;}
+}
 .ngm-hub-people{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
 .ngm-hub-person{background:#fff;border:1px solid var(--ngm-border);border-radius:var(--ngm-radius);padding:18px 20px;}
 .ngm-hub-person-name{display:block;font-family:var(--ngm-serif);font-size:1.18rem;color:var(--ngm-charcoal);line-height:1.2;}
