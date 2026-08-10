@@ -5675,7 +5675,7 @@ body .WaGadgetChangePassword .introContainer .inner {
   font-weight: 400 !important;
   line-height: 1.15 !important;
   color: var(--ngm-charcoal) !important;
-  text-align: center !important;
+  text-align: left !important;      /* left on tablet/desktop; centred on phones (media block below) */
   text-transform: none !important;
   letter-spacing: normal !important;
   margin-bottom: 22px !important;
@@ -5899,7 +5899,7 @@ body .WaGadgetChangePassword input[name="cancelButton"]:hover {
     margin: 16px auto 32px !important;
     padding: 22px 18px 20px !important;
   }
-  body .WaGadgetChangePassword .introContainer .inner{ font-size: 1.35rem !important; }
+  body .WaGadgetChangePassword .introContainer .inner{ font-size: 1.35rem !important; text-align: center !important; }
   body .WaGadgetChangePassword input.typeText{ padding: 10px 44px 10px 12px !important; }
   body .WaGadgetChangePassword .toggle-password{ top: 21px !important; }
   body .WaGadgetChangePassword .fieldContainer:has(input[type="submit"]) .fieldBody{
