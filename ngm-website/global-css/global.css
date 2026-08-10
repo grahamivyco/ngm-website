@@ -5762,29 +5762,12 @@ body .WaGadgetChangePassword .toggle-password::after { content: "" !important; }
    WA's script — re-tinting the stages needs the live markup; see the
    change-password README.) */
 body .WaGadgetChangePassword .password-strength-meter {
-  position: relative !important;      /* anchors the title pseudo above */
   width: 100% !important;
   height: 6px !important;
-  /* 36px top = 16px gap + room for the "Password strength" eyebrow */
-  margin: 36px 0 4px !important;
+  margin: 8px 0 2px !important;   /* tight 8px under the field, per design */
   background: var(--ngm-linen-dk) !important;
   border-radius: 999px !important;
-  /* NO overflow:hidden — it would clip the title pseudo; the score bar
-     carries its own matching radius instead. */
-}
-/* Eyebrow title above the bar (design-system small uppercase label) */
-body .WaGadgetChangePassword .password-strength-meter::before {
-  content: "Password strength" !important;
-  position: absolute !important;
-  left: 0 !important;
-  bottom: calc(100% + 7px) !important;
-  font-family: var(--ngm-sans) !important;
-  font-size: var(--ngm-eyebrow-size) !important;
-  font-weight: 600 !important;
-  letter-spacing: var(--ngm-eyebrow-track) !important;
-  text-transform: uppercase !important;
-  color: var(--ngm-sage-dk) !important;
-  line-height: 1 !important;
+  overflow: hidden !important;
 }
 body .WaGadgetChangePassword .password-strength-meter-score {
   height: 100% !important;
@@ -5828,22 +5811,26 @@ body .WaGadgetChangePassword .password-strength-status {
   margin: 2px 0 !important;
 }
 body .WaGadgetChangePassword .password-strength-status img { display: none !important; }
-/* Markers are the About-page "why people join" checks EXACTLY
-   (.ngm-feat li::before): bare 15px check drawn via mask, no box or
-   circle. Same icon on every row — muted while unmet, sage when met. */
+/* Markers: unmet = small grey dot; met = the About-page "why people join"
+   check EXACTLY (.ngm-feat li::before idiom — bare 15px sage check via
+   mask). The 15px box stays constant across both states so the text never
+   shifts when a requirement flips. */
 body .WaGadgetChangePassword .password-strength-status::before {
   content: "" !important;
   width: 15px !important;
   height: 15px !important;
   flex-shrink: 0 !important;
-  background-color: var(--ngm-linen-dk) !important;   /* unmet: muted check */
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") center / contain no-repeat !important;
-          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") center / contain no-repeat !important;
+  /* unmet: 6px grey dot centred in the 15px box */
+  background: radial-gradient(circle, var(--ngm-gray-lt) 0 3px, transparent 3.5px) center / 15px 15px no-repeat !important;
+  -webkit-mask: none !important;
+          mask: none !important;
   border: 0 !important;
   border-radius: 0 !important;
 }
 body .WaGadgetChangePassword .password-strength-status:has(img)::before {
-  background-color: var(--ngm-sage) !important;       /* met: sage check */
+  background: var(--ngm-sage) !important;             /* met: sage check */
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") center / contain no-repeat !important;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") center / contain no-repeat !important;
 }
 body .WaGadgetChangePassword .password-strength-status span {
   font-size: .82rem !important;
