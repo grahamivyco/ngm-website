@@ -5680,6 +5680,19 @@ body .WaGadgetChangePassword .introContainer .inner {
   letter-spacing: normal !important;
   margin-bottom: 22px !important;
 }
+/* Small description under the card title (the title text is WA-generated,
+   so the line is drawn with a pseudo). Inherits the title's alignment —
+   left on desktop, centred on phones. */
+body .WaGadgetChangePassword .introContainer .inner::after {
+  content: "Enter your current password first, then choose your new one." !important;
+  display: block !important;
+  font-family: var(--ngm-sans) !important;
+  font-size: .92rem !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  color: var(--ngm-gray) !important;
+  margin-top: 8px !important;
+}
 /* Table layout → stacked rows: label above its field, full width */
 body .WaGadgetChangePassword .fieldSubContainer table,
 body .WaGadgetChangePassword .fieldSubContainer tbody,
@@ -5763,8 +5776,8 @@ body .WaGadgetChangePassword .toggle-password::after { content: "" !important; }
    change-password README.) */
 body .WaGadgetChangePassword .password-strength-meter {
   width: 100% !important;
-  height: 6px !important;
-  margin: 8px 0 2px !important;   /* tight 8px under the field, per design */
+  height: 4px !important;          /* slim bar */
+  margin: 14px 0 2px !important;   /* clear of the field, tighter than the old 36px */
   background: var(--ngm-linen-dk) !important;
   border-radius: 999px !important;
   overflow: hidden !important;
