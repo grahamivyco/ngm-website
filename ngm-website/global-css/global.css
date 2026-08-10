@@ -1726,7 +1726,7 @@ body .ngm-cal .calendarEvent,
 body .ngm-cal .eventTitle,
 body .ngm-cal td a {
   font-family: var(--ngm-sans) !important;
-  font-size: .78rem !important;
+  font-size: .82rem !important;   /* agrees with the event-chip rule below */
   text-decoration: none !important;
 }
 /* ───── TOOLBAR (confirmed markup) ─────
@@ -2129,14 +2129,18 @@ body .ngm-cal .monthViewType .EventListCalendar th {
 .ngm-key-cta p {
   font-family: var(--ngm-sans); font-size: .9rem; color: var(--ngm-gray); line-height: 1.6; margin: 0;
 }
-/* inline links in the tile copy (NOT the pill button) */
+/* inline links in the tile copy (NOT the pill button) — same border-bottom
+   underline idiom as .ngm-inline-link so all inline links read alike */
 .ngm-key-cta a:not(.ngm-btn),
 body .ngm-key-cta a:not(.ngm-btn) {
+  font-family: var(--ngm-sans) !important; font-size: inherit !important;
   color: var(--ngm-sage-dk) !important; font-weight: 500 !important;
-  text-decoration: underline !important; text-underline-offset: 2px !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(62,85,56,.35); padding-bottom: 1px;
+  transition: border-color .15s;
 }
 .ngm-key-cta a:not(.ngm-btn):hover,
-body .ngm-key-cta a:not(.ngm-btn):hover { color: var(--ngm-sage) !important; }
+body .ngm-key-cta a:not(.ngm-btn):hover { border-color: var(--ngm-sage-dk); }
 @media (max-width: 560px) {
   .ngm-key { padding: 26px 22px; }
   .ngm-key-grid { grid-template-columns: 1fr; }
@@ -2281,7 +2285,7 @@ body .WaPlaceHolderWide > div { padding-top: 0 !important; padding-bottom: 0 !im
    (.ngm-hub-vrole p). font-weight pinned to 400 because the whole card is an
    <a> and WA's theme bolds anchor text. */
 .ngm-gcard p {
-  font-family: var(--ngm-sans); font-size: .8rem; font-weight: 400; color: var(--ngm-gray);
+  font-family: var(--ngm-sans); font-size: var(--ngm-copy); font-weight: 400; color: var(--ngm-gray);
   line-height: 1.55; flex: 1; margin-bottom: 16px;
 }
 .ngm-gcard-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; }
@@ -6332,6 +6336,7 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar a[data-tags*="special"
    `white-space:nowrap`, which was truncating titles and clipping a corner. */
 html body .WaGadgetEventsStateCalendar table.EventListCalendar a:not(.calendarDate) {
   display: block !important; font-family: var(--ngm-sans) !important;
+  font-weight: 400 !important;   /* theme bolds anchors; date numeral stays the only 600 */
   font-size: .82rem !important; line-height: 1.26 !important;
   color: #fff !important; text-decoration: none !important;
   background: var(--cat) !important; border: 0 !important;
@@ -8075,16 +8080,22 @@ body .ngm-wa-events.upcomingEventsStyle001 ul li .date span {
    map fills its column with the address tight under the heading.
 ══════════════════════════════════════════════════════════════════ */
 
-/* Inline tertiary link (folded "see the full calendar" / "view all meetings") */
-.ngm-inline-link {
-  color: var(--ngm-sage-dk);
-  font-weight: 500;
-  text-decoration: none;
+/* Inline tertiary link (folded "see the full calendar" / "view all meetings").
+   body-prefixed + !important so WA's theme anchor rules can't re-font or
+   re-bold it; size inherits the host paragraph so the link always matches
+   its surrounding copy. */
+.ngm-inline-link,
+body a.ngm-inline-link {
+  font-family: var(--ngm-sans) !important;
+  font-size: inherit !important;
+  font-weight: 500 !important;
+  color: var(--ngm-sage-dk) !important;
+  text-decoration: none !important;
   white-space: nowrap;
   border-bottom: 1px solid rgba(62,85,56,.35);
   transition: border-color .15s;
 }
-.ngm-inline-link:hover { border-color: var(--ngm-sage-dk); }
+.ngm-inline-link:hover, body a.ngm-inline-link:hover { border-color: var(--ngm-sage-dk); }
 
 /* Hero loader: the brand mark reads a touch larger (keeps its own colors) */
 .ngm-hero-loader-badge svg { width: 38px; height: 38px; }
@@ -8228,8 +8239,12 @@ body .ngm-wa-events .gadgetStyleBody { max-width: var(--ngm-maxw) !important; }
 @media (prefers-reduced-motion: reduce) {
   .ngm-loc-photo-ph { animation: none !important; opacity: .4; }
 }
-/* Meeting-location address is a directions link — underlined. */
+/* Meeting-location address is a directions link — underlined. Family and
+   weight pinned so WA's theme anchor rules can't bold it against the
+   weight-400 address block it sits in. */
 .ngm-loc-dir, body a.ngm-loc-dir {
+  font-family: var(--ngm-sans) !important;
+  font-weight: 400 !important;
   color: var(--ngm-charcoal) !important;
   text-decoration: underline !important;
   text-underline-offset: 3px;
@@ -8240,12 +8255,16 @@ body .ngm-wa-events .gadgetStyleBody { max-width: var(--ngm-maxw) !important; }
   color: var(--ngm-sage-dk) !important;
   text-decoration-color: var(--ngm-sage-dk) !important;
 }
-/* Location-column notes (joining by video, which-format) — sit under an
-   .ngm-addr-label, quieter than the .ngm-address blocks. */
+/* Location-column notes (joining by video, which-format). ONE size for
+   every visit-section note — the lead notes used to carry an inline
+   font-size:1.0625rem override in the markup while follow-up notes fell
+   back to .95rem here; the class now owns the 1.0625rem itself and the
+   inline styles were removed from the pages. */
 .ngm-loc-note {
-  font-family: var(--ngm-sans); font-size: .95rem; color: var(--ngm-gray);
-  line-height: 1.7; margin: 0;
+  font-family: var(--ngm-sans); font-size: 1.0625rem; color: var(--ngm-gray);
+  line-height: 1.8; margin: 0 0 20px;
 }
+.ngm-loc-note:last-child { margin-bottom: 0; }
 /* Zoom "Join the meeting" tile in the meetings hero (reuses the Member-Hub
    module); a touch of top spacing so it clears the hero copy. */
 .ngm-mtg-hero-zoom { margin-top: 28px; max-width: 440px; }
@@ -8349,10 +8368,21 @@ body .ngm-wa-events .gadgetStyleBody { max-width: var(--ngm-maxw) !important; }
 .ngm-mini-desc        { font-size: .94rem; }   /* was .84rem — meeting-card descriptions */
 .ngm-retreat-meta-item{ font-size: .92rem; }   /* was .82rem — retreat date */
 
-/* — Body / lead copy (lighter bump) — */
+/* — Body / lead copy (lighter bump) —
+   The list below is EVERY section-intro/lead paragraph; the original bump
+   skipped .ngm-groups-intro/.ngm-cal-hero/.ngm-about-cta/.ngm-etype-intro/
+   .ngm-ev-cta/.ngm-cta so the homepage's Meetings/Events intros rendered
+   smaller than the Calendar intro right above them. */
 .ngm-lead,
 .ngm-hero-body,
 .ngm-upcoming-intro,
+.ngm-groups-intro,
+.ngm-cal-hero p,
+.ngm-about-cta p,
+.ngm-etype-intro,
+.ngm-ev-cta p,
+.ngm-cta-body,
+.ngm-cta-inner > p,
 .ngm-join-body        { font-size: 1.15rem; }  /* was 1.0625rem */
 .ngm-about-body p,
 .ngm-retreat-body,
