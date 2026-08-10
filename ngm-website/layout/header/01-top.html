@@ -40,7 +40,7 @@
 #ngm .ngm-links>li>a{display:flex;align-items:center;gap:5px;padding:8px 14px;font-size:.85rem;font-weight:400;color:#656565;text-decoration:none;letter-spacing:.03em;border-radius:8px;white-space:nowrap;cursor:pointer;user-select:none;transition:color .2s,background .2s}
 #ngm .ngm-links>li>a:hover,#ngm .ngm-links>li.ngm-hover>a{color:#242424;background:rgba(0,0,0,.04)}
 #ngm .ngm-links>li>a.ngm-active{color:#3E5538;font-weight:500}
-#ngm .ngm-chev{width:14px;height:14px;flex-shrink:0;color:#BABABA;transition:transform .22s ease,color .2s}
+#ngm .ngm-chev{width:16px;height:16px;flex-shrink:0;color:#BABABA;transition:transform .22s ease,color .2s}
 #ngm .ngm-links>li.ngm-hover>a .ngm-chev{transform:rotate(180deg);color:#3E5538}
 /* ── Dropdown ──
    HOVER PERSISTENCE: the dropdown is a child of <li>, and the <li>
@@ -66,9 +66,12 @@
 #ngm .ngm-hbg{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:42px;height:42px;background:none;border:none;border-radius:9px;cursor:pointer;padding:0;flex-shrink:0;margin-left:auto;transition:background .18s;outline:none}
 #ngm .ngm-hbg:hover{background:rgba(0,0,0,.06)}
 #ngm .ngm-hbg:focus-visible{outline:2px solid #5C7A52;outline-offset:2px}
-#ngm .ngm-hbg span{display:block;width:22px;height:2px;background:#242424;border-radius:2px;flex-shrink:0;transform-origin:center;transition:transform .28s ease,opacity .2s ease,width .2s ease}
+/* Bars animate with transform+opacity ONLY — the old width:0 collapse left
+   the rounded middle bar visible as a shrinking dot mid-transition. scaleX
+   fades it in place, so hamburger→X reads as one smooth move. */
+#ngm .ngm-hbg span{display:block;width:22px;height:2px;background:#242424;border-radius:2px;flex-shrink:0;transform-origin:center;transition:transform .28s ease,opacity .18s ease}
 #ngm.ngm-mob-open .ngm-hbg span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-#ngm.ngm-mob-open .ngm-hbg span:nth-child(2){opacity:0;width:0}
+#ngm.ngm-mob-open .ngm-hbg span:nth-child(2){opacity:0;transform:scaleX(.4)}
 #ngm.ngm-mob-open .ngm-hbg span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 /* ── Mobile menu: drop-down overlay ──
    When open, #ngm becomes a TRANSPARENT full-viewport layer. Because #ngm is
@@ -99,14 +102,16 @@
 #ngm .ngm-mob-row .ngm-mob-lbl:hover{color:#3E5538}
 #ngm .ngm-mob-tog{display:flex;align-items:center;justify-content:center;width:52px;min-height:52px;padding:0;background:none;border:none;cursor:pointer;color:#242424;transition:color .18s}
 #ngm .ngm-mob-tog:hover{color:#3E5538}
-#ngm .ngm-mob-tog .ngm-chev{color:#BABABA;transition:transform .22s ease,color .2s}
+#ngm .ngm-mob-tog .ngm-chev{width:22px;height:22px;color:#BABABA;transition:transform .22s ease,color .2s}
 #ngm .ngm-mob-tog[aria-expanded="true"]{color:#3E5538}
 #ngm .ngm-mob-tog[aria-expanded="true"] .ngm-chev{transform:rotate(180deg);color:#3E5538}
 #ngm .ngm-mob-row:has(.ngm-mob-tog[aria-expanded="true"]){border-bottom-color:transparent}
 #ngm .ngm-mob-divider{border:none;border-top:1px solid #DDD5C8;margin:8px 4px 4px}
 #ngm .ngm-mob-sub{display:none;flex-direction:column;background:#fff;border:1px solid #DDD5C8;border-radius:14px;box-shadow:0 6px 20px rgba(0,0,0,.06);margin:4px 0 10px;padding:8px;overflow:hidden}
 #ngm .ngm-mob-sub.open{display:flex}
-#ngm .ngm-mob-sub a{display:flex;align-items:center;padding:11px 14px;min-height:46px;font-size:.9rem;font-weight:400;color:#444;text-decoration:none;line-height:1.35;border:none;border-radius:9px;transition:color .14s,background .14s}
+/* Submenu links match the top-level mobile links exactly (1rem, charcoal,
+   same letter-spacing) — they used to render smaller/greyer. */
+#ngm .ngm-mob-sub a{display:flex;align-items:center;padding:11px 14px;min-height:46px;font-size:1rem;font-weight:400;color:#242424;text-decoration:none;letter-spacing:.01em;line-height:1.35;border:none;border-radius:9px;transition:color .14s,background .14s}
 #ngm .ngm-mob-sub a:hover{background:#EEF3EC;color:#3E5538}
 #ngm .ngm-mob-acts{display:flex;flex-direction:column;gap:10px;padding-top:18px;align-items:stretch;max-width:420px;margin:0 auto;width:100%}
 #ngm .ngm-mob-acts .ngm-ghost,#ngm .ngm-mob-acts .ngm-solid{width:100%;font-size:.9375rem;padding:14px 20px;border-radius:100px}
