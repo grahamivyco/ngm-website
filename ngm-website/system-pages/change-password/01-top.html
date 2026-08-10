@@ -1,0 +1,21 @@
+<!-- Canonical page markup — paste into a WA Custom-HTML gadget at the TOP of
+     the /Sys/Password/Change system page (Website → System pages → Change
+     password), above the native change-password form. Same pattern as the
+     member-profile banner. Styling comes from the .ngm-sys block plus the
+     CHANGE PASSWORD section in global-css/global.css. If the editor refuses
+     a gadget on this page, skip it — the form skin and cream background
+     work without it (body:has fallback in the CSS). -->
+<div class="ngm-sys">
+  <section class="ngm-sys-band">
+    <div class="ngm-sys-inner">
+      <span class="ngm-sys-eyebrow">Member account</span>
+      <h1 class="ngm-sys-title">Change <em>password</em></h1>
+      <p class="ngm-sys-sub">Pick a new password for your account &mdash; you&rsquo;ll use it the next time you log in.</p>
+      <div class="ngm-sys-btns">
+        <a class="ngm-btn ngm-btn-outline" href="/Sys/Profile">Back to my profile</a>
+        <a class="ngm-btn ngm-btn-outline" href="/member/">Back to Member Hub</a>
+      </div>
+    </div>
+  </section>
+</div>
+<script>document.body.classList.add('ngm-password-page');</script>

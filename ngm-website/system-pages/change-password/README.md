@@ -1,42 +1,59 @@
 # Change password
 
 **WA page:** system page `/Sys/Password/Change`.
+**Structure:** CSS skin + ONE optional Custom-HTML gadget (`01-top.html`,
+the branded "Change password" banner — same pattern as the member-profile
+banner). The form skin lives in `global-css/global.css` under the
+**CHANGE PASSWORD** banner and hangs off the automatic
+`.WaGadgetChangePassword` gadget class, so it works even without the
+gadget. The gadget also adds `body.ngm-password-page`; the CSS carries a
+`body:has(.WaGadgetChangePassword)` fallback so the cream page background
+applies either way.
+
 **How members get here:** the redesign header does NOT carry WA's native
 account dropdown (it's a custom header with Log Out / Member Hub buttons),
 so the only links to this page are the ones the redesign adds itself: the
 "Change password" text link on the Member Hub's My-profile card and the
 "Change password" banner button on `/Sys/Profile`.
-**Structure:** CSS-ONLY — WA does not allow Custom-HTML gadgets on this
-screen (see `docs/wa-notes.md`), so there is no `01-top.html`. The whole
-skin lives in `global-css/global.css` under the **CHANGE PASSWORD** banner
-and hangs off the automatic `.WaGadgetChangePassword` gadget class.
 
 ## Verified DOM (live, theme casefile_guardian)
 
-- `.introContainer … .inner` — "Change password for {name}" → styled as
-  the card's serif title.
+- `.introContainer … .inner` — "Change password for {name}" → the card's
+  serif title (design-system Cormorant 400; the theme's uppercase/bold is
+  cleared).
 - Table-based form rows: `.fieldContainer > .fieldSubContainer > table`
   with `td.left .fieldLabel` / `td.right .fieldBody` → stacked to
-  label-above-field. Label cells without a real `<label>` (requirements
-  and button rows) are hidden via `td.left:not(:has(label))`.
+  label-above-field, left-aligned (the theme right-aligns the cells).
+  Label cells without a real `<label>` are hidden via
+  `td.left:not(:has(label))`.
 - Each password input: `.password-wrapper > input.typeText` + the same
   broken-Font-Awesome `.toggle-password` eye as the login form (glyph
   collapsed, SVG eye drawn in its place).
 - `.password-strength-meter` bar — the score div carries a `psms-N` class
   (0/25/50/75/100, verified live at `psms-25`), so the stage colours are
-  restyled to brand tones (rose → sage) directly by class.
+  restyled to brand tones (rose → sage) directly by class. The track gets
+  a "Password strength" eyebrow title via `::before` (which is why the
+  track has NO overflow:hidden — it would clip the title; the score bar
+  carries its own radius).
 - `.password-strength-status` requirements list (shown in a sage panel).
   Verified live: an unmet row starts with a bare `-` text node; when met,
   the script swaps it for a green-check GIF `<img>`. The skin hides both
   (font-size 0 swallows the text node, the img is display:none) and draws
-  its own marker via `::before` — outlined dot unmet, sage SVG check when
-  met, detected with `:has(img)`.
+  the About-page "why people join" check instead (`.ngm-feat li::before`
+  idiom: bare 15px masked check) — muted linen while unmet, sage when
+  met, same icon shape on every row.
+- `.validationError` ("Current password incorrect" etc.) — the theme
+  positions these absolutely to the RIGHT of the field (they escaped the
+  card and clipped); forced static, full-width, below the field.
 - Buttons are `input[type=submit]` with **stable names**
   `submitNewPasswordButton` (Save → filled sage pill) and `cancelButton`
   (Cancel → outline pill). The `ctl00_*` ids are unstable — never used.
 
 ## Publishing
 
-Nothing to paste on the page itself — the skin ships with `global.css`
-(WA admin → Website → CSS). Verify by opening `/Sys/Password/Change`
-logged in and running the change-password flow.
+1. `global.css` → WA admin → Website → CSS (the skin + background).
+2. Optional but recommended: paste `01-top.html` into a Custom-HTML gadget
+   at the top of Website → System pages → Change password.
+3. Verify by opening `/Sys/Password/Change` logged in and running the
+   change-password flow (including a wrong current password, to see the
+   inline error sit below the field).
