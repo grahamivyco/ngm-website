@@ -59,7 +59,7 @@
   --ngm-copy:       .92rem;     /* tile/card body copy */
   /* ── universal type roles — EVERY font-size in this file resolves to one
      of these (plus the h1/h2 clamps and a handful of display one-offs) ── */
-  --ngm-text-lead:  1.15rem;    /* section leads & intros */
+  --ngm-text-lead:  1.0625rem;  /* section leads & intros — SAME as body: one copy size site-wide */
   --ngm-text-body:  1.0625rem;  /* standard body copy / notes */
   --ngm-text-md:    .95rem;     /* secondary copy, form text */
   --ngm-btn-size:   .9rem;      /* buttons, pills, controls */
