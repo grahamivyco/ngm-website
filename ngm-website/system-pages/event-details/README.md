@@ -17,13 +17,16 @@ the Custom-HTML sandwich (see `docs/wa-notes.md`), so the layout is:
 3. `03-bottom.html` — Custom HTML below the gadget: the **Visit** section with
    the Member Hub / Request-the-Link tiles (same module as the homepage and
    contact page), with the login-aware Member Hub link script.
-   **Adaptive:** a script reads the gadget's Location row (plus the
-   description text) and reshapes the section — MVUUF or "hybrid" in
-   either → full block (address, photo, video band); virtual-only → just
-   the Joining-by-video band (no rule line above it); any other venue →
-   just that venue with a Google-Maps directions link — the video band
-   stays only if the description mentions zoom/video. No readable
-   location → full block.
+   **Adaptive:** a script reads the gadget's Location row — the location
+   is authoritative (descriptions say things like "not at MVUUF", so
+   venue names are NOT scanned there). MVUUF or "Hybrid" location → full
+   block (address, photo, video band); virtual-only → just the
+   Joining-by-video band (no rule line above it); a **known venue** from
+   the script's VENUES table (e.g. City Bella for Sunday Tea & Stitch) →
+   that venue's own note, address and photo, mirroring its meeting page;
+   any other venue → just the venue text with a Google-Maps directions
+   link, no photo. For in-person venues the video band stays only if the
+   description mentions zoom/video. No readable location → full block.
 
 Because this is a system page, these two gadgets appear on **every** event's
 page. Keep the copy event-agnostic — each event's own time/location comes from

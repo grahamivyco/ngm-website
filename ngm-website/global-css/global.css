@@ -6540,11 +6540,14 @@ body .WaGadgetEventsStateDetails .boxBodyContentOuterContainer { margin-top: 0 !
   body .WaGadgetEventsStateDetails .boxBodyContentOuterContainer { margin-top: 18px !important; }
 }
 /* photos embedded in event descriptions (the WA editor allows them):
-   capped to the copy column, rounded like the site's photos */
+   capped to the copy column, rounded like the site's photos. The editor
+   often floats them (text wraps alongside) — unfloat so the photo sits
+   on its own line above the copy. */
 body .WaGadgetEventsStateDetails .gadgetEventEditableArea img {
   max-width: 100% !important; height: auto !important;
   border-radius: var(--ngm-radius-lg) !important;
-  display: block !important; margin: 6px 0 16px !important;
+  display: block !important; float: none !important;
+  margin: 6px 0 18px !important;
 }
 /* description typography: paragraph rhythm; bold runs read as sage labels */
 body .WaGadgetEventsStateDetails .gadgetEventEditableArea p { margin: 0 0 14px !important; line-height: 1.7 !important; }
