@@ -16,7 +16,9 @@ the Custom-HTML sandwich (see `docs/wa-notes.md`), so the layout is:
    `global-css/global.css` (section "EVENT — SINGLE EVENT DETAIL PAGE").
 3. `03-bottom.html` — Custom HTML below the gadget: the **Visit** section with
    the Member Hub / Request-the-Link tiles (same module as the homepage and
-   contact page), with the login-aware Member Hub link script.
+   contact page), with the login-aware Member Hub link script, followed by
+   the standard closing **Join CTA** band (`.ngm-about-cta`, event-agnostic
+   copy).
    **Adaptive:** a script reads the gadget's Location row — the location
    is authoritative (descriptions say things like "not at MVUUF", so
    venue names are NOT scanned there). MVUUF or "Hybrid" location → full
