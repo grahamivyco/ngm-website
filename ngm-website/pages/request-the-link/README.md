@@ -36,8 +36,8 @@ It's never shown to anyone, so don't bother styling it.
 > Apps Script auto-reply never runs, so **no link email is sent.** A Short
 > answer accepts whatever the branded dropdown sends, so the on-site
 > `<select>` options can say anything. (If you insist on a dropdown, its
-> options must match the `<option>`s in `02-form.html` **character for
-> character.**)
+> options must match the `<option>`s in the form in `01-top.html`
+> **character for character.**)
 
 ### 2. Get the form's action URL + entry ids
 - Open the live form → right-click → **View page source** → search `entry.` —
@@ -45,14 +45,13 @@ It's never shown to anyone, so don't bother styling it.
 - The action URL is the form's link with `/viewform` changed to
   **`/formResponse`**.
 
-### 3. Fill the 4 placeholders in `02-form.html`
-| Placeholder | Replace with |
-| --- | --- |
-| `__FORM_ACTION__` | the `/formResponse` URL |
-| `__ENTRY_NAME__` | Name question's `entry.…` id |
-| `__ENTRY_EMAIL__` | Email question's `entry.…` id |
-| `__ENTRY_MEETING__` | "Which meeting?" question's `entry.…` id |
-| `__ENTRY_MESSAGE__` | "Message" question's `entry.…` id |
+### 3. Form wiring — ✅ DONE (values live in `01-top.html`)
+The placeholders described above are already filled in the form inside
+`01-top.html` (the old separate `02-form.html` was folded into it):
+`action` → the live `/formResponse` URL · Name `entry.1887642062` ·
+Email `entry.1387094665` · Which meeting? `entry.692599503` ·
+Message `entry.2137921043`. Only redo this if the Google Form's
+questions change (each edit can mint new entry ids).
 
 ### 4. Add the auto-reply (Apps Script)
 In the Google Form: **⋮ menu → Script editor** (or Extensions → Apps Script),
