@@ -6740,24 +6740,25 @@ body .WaGadgetEventsStateDetails { padding: 8px 24px 44px !important; }
 .ngm-evd-visit.ngm-evd-elsewhere .ngm-loc-inner:has(.ngm-loc-head) {
   grid-template-columns: 1fr; grid-template-rows: auto auto; grid-template-areas: "head" "addr";
 }
+/* tile typography matches the tile idiom on the other pages: a clear
+   gap under the serif title, sans copy-size description */
+.ngm-evd-visit .ngm-hub-zoom-module .ngm-hub-zoom-tile-body h4 { margin: 0 0 7px; }
+.ngm-evd-visit .ngm-hub-zoom-module .ngm-hub-zoom-tile-body p {
+  font-family: var(--ngm-sans); font-size: var(--ngm-copy);
+  color: var(--ngm-gray); line-height: 1.6;
+}
 /* phones: each tile goes vertical — icon, then title, then description,
-   centred like the rest of the phone layout — with the arrow pinned to
-   the right edge, vertically centred */
+   centred like the rest of the phone layout. The arrow only shows on
+   tablet/desktop. */
 @media (max-width: 640px) {
   .ngm-evd-visit .ngm-hub-zoom-module {
-    position: relative;
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: 12px;
-    padding: 24px 48px;
+    padding: 26px 24px;
   }
-  .ngm-evd-visit .ngm-hub-zoom-module .ngm-hub-zoom-tile-go {
-    position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
-  }
-  .ngm-evd-visit .ngm-hub-zoom-module:hover .ngm-hub-zoom-tile-go {
-    transform: translateY(-50%) translateX(3px);
-  }
+  .ngm-evd-visit .ngm-hub-zoom-module .ngm-hub-zoom-tile-go { display: none; }
   /* the event title and its eyebrow centre on phones like every page hero */
   body .WaGadgetEventsStateDetails h1.pageTitle { text-align: center !important; }
 }
