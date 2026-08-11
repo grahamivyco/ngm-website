@@ -1149,7 +1149,7 @@ body .WaPlaceHolderWide > div {
 .ngm-perk-icon { width: 38px; height: 38px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: var(--ngm-sage-lt); border-radius: 10px; color: var(--ngm-sage-dk); }
 .ngm-perk-icon svg { width: 20px; height: 20px; }
 .ngm-perk h3 { font-family: var(--ngm-serif) !important; font-size: var(--ngm-text-body); font-weight: 400; color: var(--ngm-charcoal); text-transform: none !important; margin: 0 0 2px; line-height: 1.2; }
-.ngm-perk p { font-family: var(--ngm-sans); font-size: var(--ngm-text-meta); color: var(--ngm-gray); line-height: 1.45; margin: 0; }
+.ngm-perk p { font-family: var(--ngm-sans); font-size: var(--ngm-copy); color: var(--ngm-gray); line-height: 1.45; margin: 0; }
 /* ── Three large feature cards (About "What you'll find here") ──
    One card per theme — Community / Learning / Inspiration — each with an
    icon, a one-line description, and a short checklist. Replaces the old
@@ -1159,7 +1159,7 @@ body .WaPlaceHolderWide > div {
 .ngm-feat-icon { width: var(--ngm-icon-box-sm); height: var(--ngm-icon-box-sm); border-radius: 12px; background: var(--ngm-sage-lt); color: var(--ngm-sage-dk); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
 .ngm-feat-icon svg { width: 24px; height: 24px; }
 .ngm-feat h3 { font-family: var(--ngm-sans) !important; font-size: var(--ngm-text-body) !important; font-weight: 600 !important; color: var(--ngm-charcoal) !important; text-transform: none !important; letter-spacing: normal !important; margin: 0 0 8px !important; line-height: 1.25; }
-.ngm-feat > p { font-family: var(--ngm-sans); font-size: var(--ngm-text-md); color: var(--ngm-gray); line-height: 1.65; margin: 0 0 16px; }
+.ngm-feat > p { font-family: var(--ngm-sans); font-size: var(--ngm-copy); color: var(--ngm-gray); line-height: 1.65; margin: 0 0 16px; }
 .ngm-feat ul { list-style: none; margin: 0; padding: 14px 0 0; border-top: 1px solid var(--ngm-border); }
 .ngm-feat li {
   font-family: var(--ngm-sans); font-size: var(--ngm-copy); color: var(--ngm-gray);
@@ -2140,7 +2140,7 @@ body .ngm-cal .monthViewType .EventListCalendar th {
   color: var(--ngm-charcoal); text-transform: none !important; margin: 0 0 3px; line-height: 1.3;
 }
 .ngm-key-text p {
-  font-family: var(--ngm-sans); font-size: var(--ngm-text-meta); color: var(--ngm-gray); line-height: 1.55; margin: 0;
+  font-family: var(--ngm-sans); font-size: var(--ngm-copy); color: var(--ngm-gray); line-height: 1.55; margin: 0;
 }
 /* "Want to add something?" tile — a highlighted tile INSIDE the key module
    that sends people to the Feedback & Ideas form (same form as the floating
@@ -2155,7 +2155,7 @@ body .ngm-cal .monthViewType .EventListCalendar th {
   color: var(--ngm-charcoal); text-transform: none !important; margin: 0 0 4px; line-height: 1.2;
 }
 .ngm-key-cta p {
-  font-family: var(--ngm-sans); font-size: var(--ngm-btn-size); color: var(--ngm-gray); line-height: 1.6; margin: 0;
+  font-family: var(--ngm-sans); font-size: var(--ngm-copy); color: var(--ngm-gray); line-height: 1.6; margin: 0;
 }
 /* inline links in the tile copy (NOT the pill button) — same border-bottom
    underline idiom as .ngm-inline-link so all inline links read alike */
@@ -2330,7 +2330,7 @@ body .WaPlaceHolderWide > div { padding-top: 0 !important; padding-bottom: 0 !im
 /* ── Location ── */
 .ngm-loc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; margin-top: 36px; }
 .ngm-loc-block h3 { font-family: var(--ngm-serif) !important; font-size: var(--ngm-title-tile); font-weight: 400; color: var(--ngm-charcoal); text-transform: none !important; margin-bottom: 8px; }
-.ngm-loc-block p, .ngm-loc-block address { font-family: var(--ngm-sans); font-size: var(--ngm-text-md); color: var(--ngm-gray); line-height: 1.8; font-style: normal; }
+.ngm-loc-block p, .ngm-loc-block address { font-family: var(--ngm-sans); font-size: var(--ngm-copy); color: var(--ngm-gray); line-height: 1.8; font-style: normal; }
 .ngm-loc-block + .ngm-loc-block { margin-top: 28px; }
 .ngm-loc-block a { color: var(--ngm-sage-dk) !important; text-decoration: none !important; border-bottom: 1px solid rgba(62,85,56,.3); }
 .ngm-loc-block a:hover { border-color: var(--ngm-sage-dk); }
@@ -3073,13 +3073,13 @@ body .WaPlaceHolderContent4 > div { padding-top: 0 !important; padding-bottom: 0
 .ngm-pillar-icon { width: 52px; height: 52px; background: var(--ngm-sage-lt); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
 .ngm-pillar:hover .ngm-pillar-icon { background: var(--ngm-linen); }
 .ngm-pillar h3 { font-family: var(--ngm-serif) !important; font-size: var(--ngm-title-md); font-weight: 400; color: var(--ngm-charcoal); text-transform: none !important; margin-bottom: 8px; line-height: 1.2; }
-.ngm-pillar p { font-family: var(--ngm-sans); font-size: var(--ngm-text-md); color: var(--ngm-gray); line-height: 1.75; margin: 0; }
+.ngm-pillar p { font-family: var(--ngm-sans); font-size: var(--ngm-copy); color: var(--ngm-gray); line-height: 1.75; margin: 0; }
 /* ── What's included ── */
 .ngm-incl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 40px; margin-top: 40px; }
 .ngm-incl-item { display: flex; gap: 14px; align-items: flex-start; }
 .ngm-incl-check { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; background: var(--ngm-sage-lt); display: flex; align-items: center; justify-content: center; margin-top: 2px; }
 .ngm-incl-text h4 { font-family: var(--ngm-sans); font-size: var(--ngm-text-md); font-weight: 600; color: var(--ngm-charcoal); margin-bottom: 2px; }
-.ngm-incl-text p { font-family: var(--ngm-sans); font-size: var(--ngm-text-ui); color: var(--ngm-gray); line-height: 1.65; margin: 0; }
+.ngm-incl-text p { font-family: var(--ngm-sans); font-size: var(--ngm-copy); color: var(--ngm-gray); line-height: 1.65; margin: 0; }
 /* ── Pricing card (richer) ──
    EDIT NOTES: bumped the card up in size — wider max-width (560px),
    more generous padding, larger price figure and checklist text —
@@ -3283,7 +3283,7 @@ body .WaPlaceHolderContent3 > div, body .WaPlaceHolderContent4 > div { padding-t
 .ngm-si-badge { display: inline-block; font-family: var(--ngm-sans); font-size: var(--ngm-tag-size); font-weight: 500; letter-spacing: .09em; text-transform: uppercase; background: var(--ngm-sage-lt); color: var(--ngm-sage-dk); padding: 4px 11px; border-radius: 100px; margin-bottom: 14px; width: fit-content; }
 .ngm-si-card h3 { font-family: var(--ngm-serif) !important; font-size: var(--ngm-title-card); font-weight: 400; color: var(--ngm-charcoal); text-transform: none !important; margin-bottom: 6px; line-height: 1.2; }
 .ngm-si-when { font-family: var(--ngm-sans); font-size: var(--ngm-text-ui); font-weight: 500; color: var(--ngm-sage-dk); margin-bottom: 14px; }
-.ngm-si-card p { font-family: var(--ngm-sans); font-size: var(--ngm-btn-size); color: var(--ngm-gray); line-height: 1.7; flex: 1; margin-bottom: 16px; }
+.ngm-si-card p { font-family: var(--ngm-sans); font-size: var(--ngm-copy); color: var(--ngm-gray); line-height: 1.7; flex: 1; margin-bottom: 16px; }
 .ngm-si-meta { list-style: none; margin: 0; padding: 0; }
 .ngm-si-meta li { font-family: var(--ngm-sans); font-size: var(--ngm-text-ui); color: var(--ngm-gray); line-height: 1.5; padding: 5px 0 5px 24px; position: relative; }
 .ngm-si-meta li::before {
@@ -4685,7 +4685,7 @@ body.ngm-login-page .WaGadgetLoginForm .loginPanel::after { display: none !impor
 .ngm-mt-details { display:grid; grid-template-columns:repeat(2,1fr); gap:22px; margin-top:40px; }
 .ngm-mt-detail { background:#fff; border:1px solid var(--ngm-border); border-radius:var(--ngm-radius-lg); padding:26px 28px; }
 .ngm-mt-detail h3 { font-family:var(--ngm-sans); font-size:var(--ngm-eyebrow-size); font-weight:500; letter-spacing: var(--ngm-eyebrow-track); text-transform:uppercase; color:var(--ngm-sage); margin:0 0 10px; }
-.ngm-mt-detail p { font-family:var(--ngm-sans); font-size:var(--ngm-text-base); color:var(--ngm-gray); line-height:1.7; margin:0; }
+.ngm-mt-detail p { font-family:var(--ngm-sans); font-size:var(--ngm-copy); color:var(--ngm-gray); line-height:1.7; margin:0; }
 .ngm-mt-detail a { color:var(--ngm-sage-dk) !important; }
 /* Photo placeholders — swap the whole box for an <img> when you have a picture.
    No border: a soft sage panel with the pulsing NGM brand mark centered (no
@@ -4729,9 +4729,9 @@ body.ngm-login-page .WaGadgetLoginForm .loginPanel::after { display: none !impor
 .ngm-mt-teachers { display:grid; grid-template-columns:repeat(2,1fr); gap:22px; margin-top:40px; }
 .ngm-mt-teacher { background:#fff; border:1px solid var(--ngm-border); border-radius:var(--ngm-radius-lg); padding:28px 30px; }
 .ngm-mt-teacher h3 { font-family:var(--ngm-serif); font-size:var(--ngm-title-card); font-weight:400; color:var(--ngm-charcoal); text-transform:none; margin:0 0 4px; }
-.ngm-mt-teacher-spec { font-family:var(--ngm-sans); font-size:var(--ngm-text-ui); color:var(--ngm-sage-dk); margin:0 0 14px; }
+.ngm-mt-teacher-spec { font-family:var(--ngm-sans); font-size:var(--ngm-copy); color:var(--ngm-sage-dk); margin:0 0 14px; }
 .ngm-mt-teacher ul { list-style:none; margin:0; padding:0; }
-.ngm-mt-teacher li { font-family:var(--ngm-sans); font-size:var(--ngm-btn-size); color:var(--ngm-gray); line-height:1.5; padding:9px 0; border-top:1px solid #EDE7DC; display:flex; justify-content:space-between; gap:14px; }
+.ngm-mt-teacher li { font-family:var(--ngm-sans); font-size:var(--ngm-copy); color:var(--ngm-gray); line-height:1.5; padding:9px 0; border-top:1px solid #EDE7DC; display:flex; justify-content:space-between; gap:14px; }
 .ngm-mt-teacher li span { color:var(--ngm-sage-dk); white-space:nowrap; font-weight:500; }
 @media(max-width:760px){ .ngm-mt-teachers { grid-template-columns:1fr; } }
 
@@ -4816,7 +4816,7 @@ a.ngm-mt-cbox:hover { border-color:var(--ngm-sage-lt); transform:translateY(var(
 .ngm-mt-cbox-icon { width:46px; height:46px; border-radius:12px; background:var(--ngm-sage-lt); color:var(--ngm-sage-dk); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 .ngm-mt-cbox-icon svg { width:24px; height:24px; }
 .ngm-mt-cbox h3 { font-family:var(--ngm-sans)!important; font-size:var(--ngm-text-base)!important; font-weight:500!important; color:var(--ngm-charcoal)!important; text-transform:none!important; letter-spacing:normal!important; margin:0 0 3px!important; }
-.ngm-mt-cbox p { font-size:var(--ngm-btn-size)!important; color:var(--ngm-gray)!important; margin:0!important; line-height:1.6; }
+.ngm-mt-cbox p { font-size:var(--ngm-copy)!important; color:var(--ngm-gray)!important; margin:0!important; line-height:1.6; }
 .ngm-mt-cbox p a { color:var(--ngm-sage-dk)!important; }
 /* Board roles + emails (from the About page) */
 .ngm-leadership-intro { font-family:var(--ngm-sans); font-size:var(--ngm-text-base); color:var(--ngm-gray); line-height:1.8; max-width:560px; margin-bottom:8px; }
@@ -4922,7 +4922,7 @@ body .mLayout { padding-bottom: 0 !important; margin-bottom: 0 !important; }
 .ngm-hub-ticon{width:56px;height:56px;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:14px;margin-bottom:20px;color:var(--ngm-sage-dk);}
 .ngm-hub-ticon svg{width:28px;height:28px;}
 .ngm-hub-task h3{font-family:var(--ngm-serif)!important;font-size:var(--ngm-title-lg);font-weight:400;color:var(--ngm-charcoal);margin-bottom:8px;line-height:1.15;}
-.ngm-hub-task p{font-family:var(--ngm-sans);font-size:var(--ngm-text-md);color:var(--ngm-gray);line-height:1.65;flex:1;margin-bottom:18px;}
+.ngm-hub-task p{font-family:var(--ngm-sans);font-size:var(--ngm-copy);color:var(--ngm-gray);line-height:1.65;flex:1;margin-bottom:18px;}
 .ngm-hub-tgo{font-family:var(--ngm-sans);font-size:var(--ngm-btn-size);font-weight:600;color:var(--ngm-sage-dk);display:inline-flex;align-items:center;gap:7px;transition:gap .18s;}
 .ngm-hub-task:hover .ngm-hub-tgo{gap:11px;}
 /* coming up heading */
@@ -5090,7 +5090,7 @@ body a.ngm-hub-person-email:hover{color:var(--ngm-sage-dk)!important;}
 .ngm-hub-acard-icon svg{width:26px;height:26px;}
 .ngm-hub-acard-body{flex:1;min-width:0;}
 .ngm-hub-acard-body h4{font-family:var(--ngm-serif)!important;font-size:var(--ngm-title-md);font-weight:400;color:var(--ngm-charcoal);margin:0 0 3px;line-height:1.2;}
-.ngm-hub-acard-body p{font-family:var(--ngm-sans);font-size:var(--ngm-text-ui);color:var(--ngm-gray);line-height:1.5;margin:0;}
+.ngm-hub-acard-body p{font-family:var(--ngm-sans);font-size:var(--ngm-copy);color:var(--ngm-gray);line-height:1.5;margin:0;}
 .ngm-hub-acard-go{flex-shrink:0;color:var(--ngm-sage-dk);display:inline-flex;transition:transform .18s;}
 .ngm-hub-acard-go svg{width:20px;height:20px;}
 .ngm-hub-acard:hover .ngm-hub-acard-go{transform:translateX(3px);}
@@ -6116,7 +6116,7 @@ body .WaGadgetContactProfile .typeTextLabelNoData { color: var(--ngm-gray-lt) !i
 .ngm-hub-zoom-tile-icon svg{width:26px;height:26px;}
 .ngm-hub-zoom-tile-body{flex:1;min-width:0;}
 .ngm-hub-zoom-tile-body h4{font-family:var(--ngm-serif)!important;font-size:var(--ngm-title-md);font-weight:400;color:var(--ngm-charcoal);margin:0 0 3px;line-height:1.2;}
-.ngm-hub-zoom-tile-body p{font-family:var(--ngm-sans);font-size:var(--ngm-text-meta);font-weight:400;color:var(--ngm-gray);line-height:1.5;margin:0;}
+.ngm-hub-zoom-tile-body p{font-family:var(--ngm-sans);font-size:var(--ngm-copy);font-weight:400;color:var(--ngm-gray);line-height:1.5;margin:0;}
 .ngm-hub-zoom-tile-go{flex-shrink:0;color:var(--ngm-sage-dk);display:inline-flex;transition:transform .18s;}
 .ngm-hub-zoom-tile-go svg{width:20px;height:20px;}
 .ngm-hub-zoom-tile:hover .ngm-hub-zoom-tile-go{transform:translateX(3px);}
@@ -6130,7 +6130,7 @@ body .WaGadgetContactProfile .typeTextLabelNoData { color: var(--ngm-gray-lt) !i
 .ngm-hub-vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px;}
 .ngm-hub-vrole{background:#fff;border:1px solid var(--ngm-border);border-radius:var(--ngm-radius);padding:16px 18px;}
 .ngm-hub-vrole h4{font-family:var(--ngm-serif)!important;font-size:var(--ngm-text-body);font-weight:400;color:var(--ngm-charcoal);margin:0 0 4px;line-height:1.2;}
-.ngm-hub-vrole p{font-family:var(--ngm-sans);font-size:var(--ngm-text-meta);color:var(--ngm-gray);line-height:1.5;margin:0;}
+.ngm-hub-vrole p{font-family:var(--ngm-sans);font-size:var(--ngm-copy);color:var(--ngm-gray);line-height:1.5;margin:0;}
 .ngm-hub-vnote{margin-top:22px;font-family:var(--ngm-sans);font-size:var(--ngm-text-md);color:var(--ngm-gray);line-height:1.7;}
 .ngm-hub-vnote a{color:var(--ngm-sage-dk)!important;text-decoration:none;border-bottom:1px solid rgba(62,85,56,.3);}
 @media(max-width:900px){.ngm-hub-vgrid{grid-template-columns:1fr 1fr;}}
@@ -7827,7 +7827,7 @@ body .commonMessageBox .buttons input.typeButton:hover {
 .ngm-mini-name { font-family:var(--ngm-serif); font-size:var(--ngm-text-lead); font-weight:400; color:var(--ngm-charcoal); line-height:1.2; margin-bottom:6px; text-transform:none !important; }
 .ngm-mini-when { display:flex; align-items:center; gap:6px; font-family:var(--ngm-sans); font-size:var(--ngm-eyebrow-size); font-weight:500; color:var(--ngm-sage-dk); margin-bottom:8px; }
 .ngm-mini-when svg { flex-shrink:0; }
-.ngm-mini-desc { font-family:var(--ngm-sans); font-size:var(--ngm-text-ui); color:var(--ngm-gray); line-height:1.55; margin-bottom:12px; flex:1; }
+.ngm-mini-desc { font-family:var(--ngm-sans); font-size:var(--ngm-copy); color:var(--ngm-gray); line-height:1.55; margin-bottom:12px; flex:1; }
 .ngm-mini-pills { display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; }
 .ngm-badge-public { background:var(--ngm-sage-lt); color:var(--ngm-sage-dk); }
 
@@ -8412,7 +8412,7 @@ body .ngm-wa-events .gadgetStyleBody { max-width: var(--ngm-maxw) !important; }
 .ngm-addr-label       { font-size: var(--ngm-eyebrow-size); }   /* was .68rem */
 .ngm-stat-label       { font-size: var(--ngm-btn-size); }   /* was .80rem — stat marquee labels */
 .ngm-mini-when        { font-size: var(--ngm-text-ui); }   /* was .78rem — meeting-card dates */
-.ngm-mini-desc        { font-size: var(--ngm-text-md); }   /* was .84rem — meeting-card descriptions */
+.ngm-mini-desc        { font-size: var(--ngm-copy); }   /* was .84rem — meeting-card descriptions */
 .ngm-retreat-meta-item{ font-size: var(--ngm-copy); }   /* was .82rem — retreat date */
 
 /* — Body / lead copy (lighter bump) —
