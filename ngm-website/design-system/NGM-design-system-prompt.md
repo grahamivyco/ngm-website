@@ -29,7 +29,7 @@ allowlist of display one-offs in `tools/design-check.py`):
 | `--ngm-title-card` | 1.5rem | large card/serif titles |
 | `--ngm-title-md` | 1.3rem | medium card & system titles |
 | `--ngm-title-tile` | 1.22rem | small tile titles, person names |
-| `--ngm-text-lead` | 1.15rem | section leads, intros, Visit & CTA copy |
+| `--ngm-text-lead` | 1.0625rem | section leads, intros, Visit & CTA copy — equals body: ONE copy size |
 | `--ngm-text-body` | 1.0625rem | standard body copy, notes |
 | `--ngm-text-md` | .95rem | secondary copy, form text |
 | `--ngm-copy` | .92rem | card/tile descriptions |
