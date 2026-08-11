@@ -41,6 +41,8 @@ Doing it in this order means the site is never half-styled:
 | Events (landing) | `/events` | Sandwich | Upcoming events |
 | Workshops | `/workshops` | Sandwich | Upcoming events → filter to workshops |
 | Join | `/join` | Single | — |
+| March to the Finish | `/march-to-the-finish` | Single | — |
+| A Fall Finish | `/fall-finish` | Single | — |
 | Meetings | `/monthly-meetings` | Sandwich | Upcoming events |
 | Stitch-Ins | `/daytime-stitch-in` (+ `/evening-stitch-in`) | Sandwich | Upcoming events |
 | Daytime Counted Thread | `/daytime-counted-thread` | Sandwich | Upcoming events → filter to this group |
