@@ -40,7 +40,7 @@
 #ngm .ngm-links>li>a{display:flex;align-items:center;gap:5px;padding:8px 14px;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:400;color:#656565;text-decoration:none;letter-spacing:.03em;border-radius:8px;white-space:nowrap;cursor:pointer;user-select:none;transition:color .2s,background .2s}
 #ngm .ngm-links>li>a:hover,#ngm .ngm-links>li.ngm-hover>a{color:#242424;background:rgba(0,0,0,.04)}
 #ngm .ngm-links>li>a.ngm-active{color:#3E5538;font-weight:500}
-#ngm .ngm-chev{width:16px;height:16px;flex-shrink:0;color:#BABABA;transition:transform .22s ease,color .2s}
+#ngm .ngm-chev{width:18px;height:18px;flex-shrink:0;color:#BABABA;transition:transform .22s ease,color .2s}
 #ngm .ngm-links>li.ngm-hover>a .ngm-chev{transform:rotate(180deg);color:#3E5538}
 /* ── Dropdown ──
    HOVER PERSISTENCE: the dropdown is a child of <li>, and the <li>
@@ -102,7 +102,7 @@
 #ngm .ngm-mob-row .ngm-mob-lbl:hover{color:#3E5538}
 #ngm .ngm-mob-tog{display:flex;align-items:center;justify-content:center;width:52px;min-height:52px;padding:0;background:none;border:none;cursor:pointer;color:#242424;transition:color .18s}
 #ngm .ngm-mob-tog:hover{color:#3E5538}
-#ngm .ngm-mob-tog .ngm-chev{width:22px;height:22px;color:#BABABA;transition:transform .22s ease,color .2s}
+#ngm .ngm-mob-tog .ngm-chev{color:#BABABA;transition:transform .22s ease,color .2s}
 #ngm .ngm-mob-tog[aria-expanded="true"]{color:#3E5538}
 #ngm .ngm-mob-tog[aria-expanded="true"] .ngm-chev{transform:rotate(180deg);color:#3E5538}
 #ngm .ngm-mob-row:has(.ngm-mob-tog[aria-expanded="true"]){border-bottom-color:transparent}
@@ -226,7 +226,7 @@ body.memberContentView #ngm .ngm-member{display:inline-flex}
       <div class="ngm-mob-row">
         <a href="/meetings" class="ngm-mob-lbl">Meetings</a>
         <button class="ngm-mob-tog" id="ngm-mb-m" aria-expanded="false" aria-controls="ngm-mb-ms" aria-label="Toggle Meetings submenu">
-          <svg class="ngm-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <svg class="ngm-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
       </div>
       <div class="ngm-mob-sub" id="ngm-mb-ms" aria-hidden="true">
         <a href="/daytime-counted-thread">Daytime Counted Thread &amp; Needlepoint</a>
@@ -239,7 +239,7 @@ body.memberContentView #ngm .ngm-member{display:inline-flex}
       <div class="ngm-mob-row">
         <a href="/events" class="ngm-mob-lbl">Events</a>
         <button class="ngm-mob-tog" id="ngm-mb-e" aria-expanded="false" aria-controls="ngm-mb-es" aria-label="Toggle Events submenu">
-          <svg class="ngm-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <svg class="ngm-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
       </div>
       <div class="ngm-mob-sub" id="ngm-mb-es" aria-hidden="true">
         <a href="/retreat">Annual Retreat 2026</a>
