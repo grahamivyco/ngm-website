@@ -71,8 +71,9 @@ tile/card padding `--ngm-tile-pad`/`--ngm-card-pad`, icon squares
   (`.ngm-cal-hero`, `.ngm-vol-hero`).
 - **Closing CTA bands:** rose-lt, centred, `--ngm-text-lead` copy, pill
   buttons (`.ngm-si-cta`, `.ngm-about-cta`, `.ngm-vol-cta`).
-- **Breakpoints:** 980 (nav/hamburger), 900 (grids collapse + mobile
-  centring), 640, 560 (phone).
+- **Breakpoints:** 980 (nav/hamburger), 900 (grids collapse — layout
+  only, still left-aligned), 640 (phone centring of copy/tiles/CTAs),
+  560 (phone sizing).
 
 ## Hard rules (checked by tools/design-check.py)
 
