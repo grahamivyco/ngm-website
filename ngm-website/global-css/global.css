@@ -1201,6 +1201,11 @@ body .WaPlaceHolderWide > div {
   .ngm-feat-icon { margin-left: auto; margin-right: auto; }
   .ngm-hub-inner { text-align: center; }
   .ngm-hub-qa-card, .ngm-hub-rtile, .ngm-hub-person, .ngm-hub-help { text-align: center; align-items: center; }
+  /* meeting/event cards: the body is a column flexbox, so the fit-content
+     badge pill ignores text-align — centre the flex items themselves, and
+     the tag/pill rows too */
+  .ngm-gcard-body { align-items: center; text-align: center; }
+  .ngm-gcard-tags, .ngm-gcard-pills { justify-content: center; }
   .ngm-hub-qa-head { justify-content: center; }
   .ngm-hub-qa-card p, .ngm-hub-rtile p { margin-left: auto; margin-right: auto; }
   /* centred checklist: the check becomes an inline mark before the text
