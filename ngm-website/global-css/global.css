@@ -6576,7 +6576,9 @@ body .WaGadgetEventsStateDetails .eventInfoBoxLabel {
 body .WaGadgetEventsStateDetails .eventInfoBoxValue {
   display: block !important; float: none !important;
   margin: 0 !important; padding: 0 !important; width: auto !important;
-  white-space: nowrap !important;
+  /* full-width line; long values (venue + street address) wrap instead
+     of clipping at the box edge */
+  white-space: normal !important; overflow-wrap: break-word !important;
 }
 body .WaGadgetEventsStateDetails .eventInfoBoxValue,
 body .WaGadgetEventsStateDetails .eventInfoBoxValue strong,
