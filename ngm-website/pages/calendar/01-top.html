@@ -9,6 +9,11 @@
       cells, so the abbreviation must be real text). Guards make both passes
       idempotent so the observer can't loop. Month nav is a full page reload. */
 (function () {
+  /* Page flag: lets global.css paint the whole page cream (hero through
+     Key) WITHOUT depending on the unclosed .ngm-cal-body wrapper divs
+     surviving WA's HTML sanitizer. */
+  if (document.body) { document.body.classList.add('ngm-calendar-page'); }
+  else { document.addEventListener('DOMContentLoaded', function () { document.body.classList.add('ngm-calendar-page'); }); }
   function transform() {
     var titles = document.querySelectorAll(
       '.ngm-cal .sectionTitle, #idEventListCalendar .sectionTitle, .WaGadgetEventsStateCalendar .sectionTitle'
