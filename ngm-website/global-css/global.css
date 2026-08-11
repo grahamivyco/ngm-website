@@ -1206,6 +1206,11 @@ body .WaPlaceHolderWide > div {
      the tag/pill rows too */
   .ngm-gcard-body { align-items: center; text-align: center; }
   .ngm-gcard-tags, .ngm-gcard-pills { justify-content: center; }
+  /* pill/badge rows on every page (hero date+badge rows, tag lists, the
+     meetings-page group pills) — flex rows ignore text-align. The
+     upcoming-events gadget's chips (.ngm-wa-events / .ngm-evt-tag) are
+     deliberately EXCLUDED and keep their own alignment. */
+  .ngm-mt-meta, .ngm-mt-tags, .ngm-grouppills { justify-content: center; }
   .ngm-hub-qa-head { justify-content: center; }
   .ngm-hub-qa-card p, .ngm-hub-rtile p { margin-left: auto; margin-right: auto; }
   /* centred checklist: the check becomes an inline mark before the text
