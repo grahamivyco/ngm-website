@@ -6492,7 +6492,41 @@ body .WaGadgetEventsStateDetails a.eventBackLink:hover { color: var(--ngm-sage) 
 body .WaGadgetEventsStateDetails h1.pageTitle,
 body .WaGadgetEventsStateDetails h1.SystemPageTitle {
   font-family: var(--ngm-serif) !important; font-weight: 400 !important;
+  font-size: var(--ngm-h2) !important;
   color: var(--ngm-charcoal) !important; line-height: 1.15 !important;
+  text-transform: none !important; letter-spacing: normal !important;
+  margin: 4px 0 26px !important;
+}
+/* the native "Back" text link duplicates our branded pill above the gadget */
+body .WaGadgetEventsStateDetails .pageBackContainer { display: none !important; }
+/* the gadget itself is the content column: capped, centred, side gutters */
+body .WaGadgetEventsStateDetails {
+  max-width: var(--ngm-maxw) !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+  padding-left: 24px !important; padding-right: 24px !important;
+}
+/* TWO COLUMNS — the When/Location box and the description are siblings
+   inside one flattened wrapper (verified DOM): details left, copy right.
+   Stacks back to one column on tablet/phone. */
+body .WaGadgetEventsStateDetails .boxBodyContainer .inner:has(> .boxBodyInfoOuterContainer) {
+  display: grid !important;
+  grid-template-columns: minmax(260px, 340px) 1fr !important;
+  gap: 12px 36px !important;
+  align-items: start !important;
+}
+body .WaGadgetEventsStateDetails .boxBodyContentOuterContainer { margin-top: 0 !important; }
+@media (max-width: 900px) {
+  body .WaGadgetEventsStateDetails .boxBodyContainer .inner:has(> .boxBodyInfoOuterContainer) {
+    grid-template-columns: 1fr !important;
+  }
+  body .WaGadgetEventsStateDetails .boxBodyContentOuterContainer { margin-top: 18px !important; }
+}
+/* description typography: paragraph rhythm; bold runs read as sage labels */
+body .WaGadgetEventsStateDetails .gadgetEventEditableArea p { margin: 0 0 14px !important; line-height: 1.7 !important; }
+body .WaGadgetEventsStateDetails .gadgetEventEditableArea strong,
+body .WaGadgetEventsStateDetails .gadgetEventEditableArea strong font {
+  font-weight: 600 !important; color: var(--ngm-sage-dk) !important;
 }
 /* When / Location info box → sage-lt panel */
 body .WaGadgetEventsStateDetails .boxInfoContainer {
