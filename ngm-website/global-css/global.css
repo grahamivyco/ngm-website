@@ -6685,6 +6685,16 @@ body .WaGadgetEventsStateDetails ul.registrationInfo li.disabled .regTypeLiValue
 }
 /* future-proof: type pickers once a registration window is open */
 body .WaGadgetEventsStateDetails ul.registrationInfo input[type="radio"] { accent-color: var(--ngm-sage-dk); }
+/* everything stays inside the card — long type names and notes wrap
+   instead of spilling past the panel on narrow screens */
+body .WaGadgetEventsStateDetails .registrationInfoContainer { max-width: 100% !important; overflow: hidden !important; }
+body .WaGadgetEventsStateDetails .registrationInfoContainer .infoText,
+body .WaGadgetEventsStateDetails .regTypeLiLabel,
+body .WaGadgetEventsStateDetails .regTypeLiLabel strong,
+body .WaGadgetEventsStateDetails .regTypeLiValue,
+body .WaGadgetEventsStateDetails .regTypeLiValueSpan {
+  min-width: 0 !important; white-space: normal !important; overflow-wrap: break-word !important;
+}
 /* links anywhere in the details gadget (Add to my calendar, links in the
    description) → sage, quiet underline on hover. The Back link keeps its
    own rule above; the injected .ngm-btn pills keep their own colors (the
@@ -6720,12 +6730,36 @@ body .WaGadgetEventsStateDetails { padding: 8px 24px 44px !important; }
 }
 .ngm-evd-visit.ngm-evd-virtual .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-head { margin-bottom: 0; }
 /* virtual: the video band directly follows the heading — no rule line,
-   no dead space where the photo/address would have been */
+   no dead space where the photo/address would have been. The eyebrow
+   reads "Visit virtually" (set by the script), so the band's own
+   "Joining by video" label is redundant — hidden. */
 .ngm-evd-visit.ngm-evd-virtual .ngm-visit-zoom { margin-top: 8px; padding-top: 0; border-top: 0; }
+.ngm-evd-visit.ngm-evd-virtual .ngm-visit-zoom > .ngm-addr-label { display: none; }
 .ngm-evd-visit.ngm-evd-elsewhere .ngm-loc-map { display: none; }
 .ngm-evd-visit.ngm-evd-nozoom .ngm-visit-zoom { display: none; }
 .ngm-evd-visit.ngm-evd-elsewhere .ngm-loc-inner:has(.ngm-loc-head) {
   grid-template-columns: 1fr; grid-template-rows: auto auto; grid-template-areas: "head" "addr";
+}
+/* phones: each tile goes vertical — icon, then title, then description,
+   centred like the rest of the phone layout — with the arrow pinned to
+   the right edge, vertically centred */
+@media (max-width: 640px) {
+  .ngm-evd-visit .ngm-hub-zoom-module {
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    padding: 24px 48px;
+  }
+  .ngm-evd-visit .ngm-hub-zoom-module .ngm-hub-zoom-tile-go {
+    position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
+  }
+  .ngm-evd-visit .ngm-hub-zoom-module:hover .ngm-hub-zoom-tile-go {
+    transform: translateY(-50%) translateX(3px);
+  }
+  /* the event title and its eyebrow centre on phones like every page hero */
+  body .WaGadgetEventsStateDetails h1.pageTitle { text-align: center !important; }
 }
 
 /* ══════════════════════════════════════════════════════════════════

@@ -114,6 +114,8 @@
     if (/mvuuf|unitarian|zenith|hybrid/.test(l)) return; /* usual place / hybrid — full block */
     if (/video|zoom|online|virtual/.test(l)) {
       sec.classList.add("ngm-evd-virtual");
+      var eb = sec.querySelector(".ngm-loc-head .ngm-eyebrow");
+      if (eb) eb.textContent = "Visit virtually";
       var zc = sec.querySelector(".ngm-visit-zoom-copy");
       if (zc) zc.textContent = "This event is held over Zoom. The link is available to members, and if you’re not a member yet, just request it — we’ll be happy to email it to you.";
       return;
