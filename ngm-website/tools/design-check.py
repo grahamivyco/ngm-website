@@ -29,8 +29,7 @@ CLASS_EXCEPTIONS = {"ngm-cform-form"}
 # Display one-offs that are deliberately not tokens (stat numbers, the $30
 # price figure, hero numerals, the calendar micro-chip). Everything else
 # must be a var(--ngm-*) token.
-SIZE_ALLOWLIST = {"1rem", "1.6rem", "1.65rem", "1.7rem", "1.75rem", "1.8rem",
-                  "2rem", "2.2rem", "2.5rem", "2.75rem", "5rem", ".6rem"}
+SIZE_ALLOWLIST = {"5rem", "2rem"}  # ONLY the $30 price lockup (figure + $-sign sup)
 
 findings = []
 

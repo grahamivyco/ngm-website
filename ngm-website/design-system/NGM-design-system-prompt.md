@@ -22,12 +22,15 @@ after any page or CSS change. It must exit clean.
 
 **Type roles** — every `font-size` resolves to ONE of these tokens
 (plus the `--ngm-h1`/`--ngm-h1-sub`/`--ngm-h2` clamps and a short
-allowlist of display one-offs in `tools/design-check.py`):
+the $30 price-figure lockup, the only remaining literal):
 
 | Token | Size | Role |
 |---|---|---|
 | `--ngm-title-card` | 1.5rem | large card/serif titles |
 | `--ngm-title-md` | 1.3rem | medium card & system titles |
+| `--ngm-title-lg` | 1.7rem | extra-large serif titles, stat numerals |
+| `--ngm-text-base` | 1rem | base-size UI text |
+| `--ngm-h1-mobile` / `--ngm-h2-mobile` | 2.75 / 2.2rem | heading sizes at mobile widths |
 | `--ngm-title-tile` | 1.22rem | small tile titles, person names |
 | `--ngm-text-lead` | 1.0625rem | section leads, intros, Visit & CTA copy — equals body: ONE copy size |
 | `--ngm-text-body` | 1.0625rem | standard body copy, notes |
