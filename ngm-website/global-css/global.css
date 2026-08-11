@@ -8876,8 +8876,10 @@ a.ngm-gcard:hover {
   .ngm-vol-hero, .ngm-lib-hero, .ngm-dir-hero { padding: 52px 28px 44px; }
   .ngm-vol-cta, .ngm-lib-cta { padding: 60px 28px; }
   .ngm-dir-foot { padding: 48px 28px; }
-  .ngm-dir-foot-inner { flex-direction: column; align-items: center; text-align: center; justify-content: center; }
+  /* stacks at tablet but stays LEFT-aligned; centring is phones-only */
+  .ngm-dir-foot-inner { flex-direction: column; align-items: flex-start; }
 }
 @media (max-width: 640px) {
   .ngm-vol-grid, .ngm-vol-pitch-grid, .ngm-lib-steps, .ngm-lib-terms { grid-template-columns: 1fr; }
+  .ngm-dir-foot-inner { align-items: center; text-align: center; justify-content: center; }
 }
