@@ -6497,9 +6497,14 @@ body .WaGadgetEventsStateDetails h1.SystemPageTitle {
   text-transform: none !important; letter-spacing: normal !important;
   margin: 4px 0 26px !important;
 }
-/* "Part of <group> — see the page" link injected by 01-top's script when
-   the event title matches a known group/event type */
-.ngm-evd-type { display: inline-block; margin: -16px 0 26px; }
+/* Pill-button row injected under the event title by 01-top's script:
+   primary (filled) -> calendar, outline -> the matched event/meeting
+   type's page. Replaces the old top back-pill and inline type link. */
+.ngm-evd-btns { display: flex; gap: 10px; flex-wrap: wrap; margin: -12px 0 28px; }
+@media (max-width: 560px) {
+  .ngm-evd-btns { flex-direction: column; align-items: stretch; }
+  .ngm-evd-btns .ngm-btn { justify-content: center; }
+}
 /* the native "Back" text link duplicates our branded pill above the gadget */
 body .WaGadgetEventsStateDetails .pageBackContainer { display: none !important; }
 /* the gadget itself is the content column: capped, centred, side gutters */
@@ -6621,16 +6626,12 @@ body .WaGadgetEventsStateDetails { padding: 8px 24px 44px !important; }
 /* ── Sandwich gadgets on the Event details system page ──
    01-top.html: a slim strip holding the "Back to the full calendar" pill.
    03-bottom.html: the Visit section (Member Hub / Request-the-Link tiles). */
-.ngm-evd-top {
-  max-width: var(--ngm-maxw);
-  margin: 0 auto;
-  padding: 28px 24px 6px;
-}
+.ngm-evd-top { display: none; }  /* old top back-pill strip — replaced by .ngm-evd-btns under the title */
 /* the Visit band spans edge-to-edge like other .ngm-sec sections; trim its
    vertical padding a touch — it follows a text-heavy gadget. */
 .ngm-evd-visit { padding-top: 56px; padding-bottom: 64px; }
 .ngm-evd-visit .ngm-lead { max-width: 640px; }
-.ngm-evd-visit .ngm-videoband-tiles { max-width: 760px; margin-top: 26px; }
+.ngm-evd-visit .ngm-videoband-tiles { max-width: none; margin-top: 26px; }  /* Member Hub + Request tiles span the full band */
 
 /* ══════════════════════════════════════════════════════════════════
    MEMBER DIRECTORY  (.WaGadgetMemberDirectory)
