@@ -7,18 +7,23 @@ the Custom-HTML sandwich (see `docs/wa-notes.md`), so the layout is:
    appends a pill-button row (`.ngm-evd-btns`) at the **end of the event
    description**: primary filled pill back to the calendar, plus an
    outline "More about {type}" pill when the title matches a known
-   group/event type.
+   group/event type. It also moves a description's first embedded photo
+   to the **top of the copy** (events without one just start with text).
+   The "Event description" eyebrow over the title is pure CSS
+   (`h1.pageTitle::before`).
 2. **Native WA "Event details" gadget** (`.WaGadgetEventsStateDetails`) — the
    event title, When/Location box, description, and registration. Skinned from
    `global-css/global.css` (section "EVENT — SINGLE EVENT DETAIL PAGE").
 3. `03-bottom.html` — Custom HTML below the gadget: the **Visit** section with
    the Member Hub / Request-the-Link tiles (same module as the homepage and
    contact page), with the login-aware Member Hub link script.
-   **Adaptive:** a script reads the gadget's Location row and reshapes the
-   section — MVUUF (checked first, so "MVUUF and Zoom" hybrids keep
-   everything) → full block; virtual-only → just the Joining-by-video band;
-   any other venue → just that venue with a Google-Maps directions link (no
-   MVUUF photo, no Zoom band). No readable location → full block.
+   **Adaptive:** a script reads the gadget's Location row (plus the
+   description text) and reshapes the section — MVUUF or "hybrid" in
+   either → full block (address, photo, video band); virtual-only → just
+   the Joining-by-video band (no rule line above it); any other venue →
+   just that venue with a Google-Maps directions link — the video band
+   stays only if the description mentions zoom/video. No readable
+   location → full block.
 
 Because this is a system page, these two gadgets appear on **every** event's
 page. Keep the copy event-agnostic — each event's own time/location comes from

@@ -37,6 +37,16 @@
        gadget itself if an event somehow has no description area */
     var area = gadget.querySelector(".gadgetEventEditableArea") ||
                gadget.querySelector(".boxBodyContentContainer .inner") || gadget;
+    /* PHOTO FIRST — when the description embeds a photo, it leads the
+       copy; events without one just start with text (no reserved slot). */
+    var img = area.querySelector("img");
+    if (img) {
+      var wrap = img.parentNode;
+      area.insertBefore(img, area.firstChild);
+      if (wrap && wrap !== area && !(wrap.textContent || "").replace(/\u00a0/g, " ").trim() && !wrap.querySelector("img")) {
+        wrap.parentNode.removeChild(wrap);
+      }
+    }
     var row = document.createElement("div");
     row.className = "ngm-evd-btns";
     var cal = document.createElement("a");
