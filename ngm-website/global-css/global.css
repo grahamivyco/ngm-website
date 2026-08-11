@@ -1172,13 +1172,15 @@ body .WaPlaceHolderWide > div {
           mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 @media (max-width: 900px) { .ngm-feat3 { grid-template-columns: 1fr; gap: 16px; } }
-/* ── SITE-WIDE, mobile: centre-align page content, cards included ──
+/* ── SITE-WIDE, PHONES ONLY: centre-align page content, cards included ──
    Applies to every branded page (heros, section copy, pillar/feature cards,
    CTAs). Width-capped paragraphs get auto side margins so the capped block
    itself centres, not just the text inside it. Forms are exempted — centred
    field labels hurt scannability, so anything inside a <form> or a WA
-   .fieldContainer stays left-aligned. */
-@media (max-width: 900px) {
+   .fieldContainer stays left-aligned.
+   BREAKPOINT: 640px, NOT 900 — tablets keep the left-aligned desktop
+   layout; only phones centre (per design). */
+@media (max-width: 640px) {
   .ngm .ngm-con,
   .ngm [class*="-hero-inner"],
   .ngm [class*="-hero-copy"],
@@ -5023,7 +5025,8 @@ body .ngm-hub-qa-sublink{
   border-radius:0!important;padding:0 0 1px!important;box-shadow:none!important;
 }
 body .ngm-hub-qa-sublink:hover{color:var(--ngm-sage-dk)!important;border-bottom-color:var(--ngm-sage-dk)!important;background:none!important;}
-@media(max-width:900px){.ngm-hub-qa{grid-template-columns:1fr;}body .ngm-hub-qa-sublink{align-self:center;}}
+@media(max-width:900px){.ngm-hub-qa{grid-template-columns:1fr;}}
+@media(max-width:640px){body .ngm-hub-qa-sublink{align-self:center;}}   /* centres only with the phone centring */
 /* phones only: both buttons identical — full width, same padding/height
    (tablet keeps natural-width, left-aligned buttons) */
 @media(max-width:640px){
