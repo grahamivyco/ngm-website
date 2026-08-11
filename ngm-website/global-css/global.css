@@ -6653,6 +6653,20 @@ body .WaGadgetEventsStateDetails { padding: 8px 24px 44px !important; }
 .ngm-evd-visit { padding-top: 56px; padding-bottom: 64px; }
 .ngm-evd-visit .ngm-lead { max-width: 640px; }
 .ngm-evd-visit .ngm-videoband-tiles { max-width: none; margin-top: 26px; }  /* Member Hub + Request tiles span the full band */
+/* ADAPTIVE STATES — 03-bottom's script tags the section by the event's
+   own location (see the script's comment). The grid collapses to one
+   column when the photo/address are hidden. */
+.ngm-evd-visit.ngm-evd-virtual .ngm-loc-addr,
+.ngm-evd-visit.ngm-evd-virtual .ngm-loc-map { display: none; }
+.ngm-evd-visit.ngm-evd-virtual .ngm-loc-inner:has(.ngm-loc-head) {
+  grid-template-columns: 1fr; grid-template-rows: auto; grid-template-areas: "head";
+}
+.ngm-evd-visit.ngm-evd-virtual .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-head { margin-bottom: 0; }
+.ngm-evd-visit.ngm-evd-elsewhere .ngm-loc-map,
+.ngm-evd-visit.ngm-evd-elsewhere .ngm-visit-zoom { display: none; }
+.ngm-evd-visit.ngm-evd-elsewhere .ngm-loc-inner:has(.ngm-loc-head) {
+  grid-template-columns: 1fr; grid-template-rows: auto auto; grid-template-areas: "head" "addr";
+}
 
 /* ══════════════════════════════════════════════════════════════════
    MEMBER DIRECTORY  (.WaGadgetMemberDirectory)

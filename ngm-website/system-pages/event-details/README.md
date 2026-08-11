@@ -14,6 +14,11 @@ the Custom-HTML sandwich (see `docs/wa-notes.md`), so the layout is:
 3. `03-bottom.html` — Custom HTML below the gadget: the **Visit** section with
    the Member Hub / Request-the-Link tiles (same module as the homepage and
    contact page), with the login-aware Member Hub link script.
+   **Adaptive:** a script reads the gadget's Location row and reshapes the
+   section — MVUUF (checked first, so "MVUUF and Zoom" hybrids keep
+   everything) → full block; virtual-only → just the Joining-by-video band;
+   any other venue → just that venue with a Google-Maps directions link (no
+   MVUUF photo, no Zoom band). No readable location → full block.
 
 Because this is a system page, these two gadgets appear on **every** event's
 page. Keep the copy event-agnostic — each event's own time/location comes from

@@ -63,4 +63,49 @@
     for (var i = 0; i < tiles.length; i++) { tiles[i].setAttribute("href", login); }
   }
 })();
+/* ADAPTIVE VISIT — the section reshapes to the event's own location
+   (read from the gadget's Location row above):
+   - usual place (MVUUF)  -> full block as-is: address, photo, Zoom band
+   - virtual only         -> just the Joining-by-video band
+   - some other venue     -> just that venue (with a directions link);
+                             no MVUUF photo, no Zoom band
+   MVUUF is checked FIRST so hybrid values like "MVUUF and Zoom" keep the
+   full block. No/unreadable location -> full block (safe default). */
+(function () {
+  function adapt() {
+    var sec = document.querySelector(".ngm-evd-visit");
+    var val = document.querySelector(".WaGadgetEventsStateDetails li.eventInfoLocation .eventInfoBoxValue");
+    if (!sec || !val) return;
+    var loc = (val.textContent || "").replace(/\s+/g, " ").trim();
+    if (!loc) return;
+    var l = loc.toLowerCase();
+    if (/mvuuf|unitarian|zenith/.test(l)) return; /* usual place — full block */
+    if (/video|zoom|online|virtual/.test(l)) {
+      sec.classList.add("ngm-evd-virtual");
+      var zc = sec.querySelector(".ngm-visit-zoom-copy");
+      if (zc) zc.textContent = "This event is held over Zoom. The link is available to members, and if you’re not a member yet, just request it — we’ll be happy to email it to you.";
+      return;
+    }
+    sec.classList.add("ngm-evd-elsewhere");
+    var note = sec.querySelector(".ngm-loc-note");
+    if (note) note.textContent = "This event isn’t at our usual meeting place — here’s where to find it.";
+    var lbl = sec.querySelector(".ngm-addr-label");
+    if (lbl) lbl.textContent = "Event location";
+    var addr = sec.querySelector(".ngm-address");
+    if (addr) {
+      addr.innerHTML = "";
+      var a = document.createElement("a");
+      a.className = "ngm-loc-dir";
+      a.href = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(loc);
+      a.target = "_blank"; a.rel = "noopener noreferrer";
+      a.textContent = loc;
+      addr.appendChild(a);
+    }
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", adapt);
+  } else {
+    adapt();
+  }
+})();
 </script>
