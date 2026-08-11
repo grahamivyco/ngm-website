@@ -4,11 +4,16 @@
 on after clicking **Register** on any event (the target of the "How to
 register" bands on the event pages).
 
-## Status: BLOCKED on a live registration form to dump
+## Status: partially unblocked (Aug 2026)
 
-No live event currently has active registration (verified Aug 2026 —
-the checked event's `registrationInfoContainer` is empty). Two ways to
-capture the DOM:
+The **details-page registration block** is now verified and styled: the
+Retreat 2026 event's `registrationInfoContainer` carries `h4.infoTitle`
++ `.infoText` + `ul.registrationInfo` of registration types
+(`regTypeLiLabel`/`regTypeLiValueSpan`, `li.disabled` when closed/full)
+— skinned in `global.css` under the EVENT — SINGLE EVENT DETAIL PAGE
+banner. Still unverified: the **Register button** (the Retreat's window
+is closed, so none renders) and the **multi-step registration wizard**
+this system page hosts. Two ways to capture those:
 
 1. **Fast path:** in WA admin, create a temporary test event (any far
    future date, titled "TEST — ignore"), add one free registration

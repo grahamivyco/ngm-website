@@ -41,9 +41,12 @@ corners + `d1–d9` chrome (flattened, like change-password) →
 `boxBodyInfoContainer > .boxInfoContainer > ul.boxInfo` with
 `li.eventInfoStartDate` / `li.eventInfoStartTime` (its label is a bare
 `&nbsp;` — hidden) / `li.eventInfoLocation`, each `label.eventInfoBoxLabel`
-+ `.eventInfoBoxValue` → empty `.registrationInfoContainer` (register
-buttons unverified — no live event takes registration; see
-`../event-registration/README.md`) → `boxBodyContentContainer.fixedHeight`
++ `.eventInfoBoxValue` → `.registrationInfoContainer` (VERIFIED on the
+Retreat 2026 event: `h4.infoTitle` + `.infoText` + `ul.registrationInfo`
+of types — `label.regTypeLiLabel > strong` + `.regTypeLiValue >
+.regTypeLiValueSpan`, `li.disabled` for closed/full types; empty on
+non-registrable events; the Register button itself is still unverified —
+see `../event-registration/README.md`) → `boxBodyContentContainer.fixedHeight`
 (height unclamped) whose `.inner.gadgetEventEditableArea` holds the
 description with legacy `<font face="Lato">` tags (overridden directly —
 a font tag's face attribute beats inherited fonts).
