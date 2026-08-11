@@ -59,6 +59,8 @@ tile/card padding `--ngm-tile-pad`/`--ngm-card-pad`, icon squares
 - **Inline text links:** `.ngm-inline-link` idiom — sage-dk, weight 500,
   `font-size: inherit`, border-bottom underline `rgba(62,85,56,.35)`
   darkening on hover. Never `text-decoration: underline` for new links.
+  A catch-all (`body .ngm p/li a:not([class])`) applies the same idiom to
+  any classless link in branded copy — but still add the class explicitly.
 - **Checks:** the About-page mask check (`.ngm-feat li::before` idiom) —
   bare 15px sage check, no circle/box.
 - **Tiles/cards:** cream tile on white bands, white tile on cream/linen
