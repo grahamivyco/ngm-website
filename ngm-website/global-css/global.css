@@ -56,7 +56,7 @@
   --ngm-icon-box-sm:46px;       /* icon square on small tiles */
   --ngm-title-card: 1.5rem;     /* serif large-card title */
   --ngm-title-tile: 1.22rem;    /* serif tile title */
-  --ngm-copy:       .92rem;     /* tile/card body copy */
+  --ngm-copy:       1.0625rem;  /* tile/card body copy — equals text-body: ONE copy size everywhere */
   /* ── universal type roles — EVERY font-size in this file resolves to one
      of these (plus the h1/h2 clamps and a handful of display one-offs) ── */
   --ngm-text-lead:  1.0625rem;  /* section leads & intros — SAME as body: one copy size site-wide */
