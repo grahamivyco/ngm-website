@@ -6524,6 +6524,15 @@ body .WaGadgetEventsStateDetails .boxBodyContainer .inner:has(> .boxBodyInfoOute
   align-items: start !important;
 }
 body .WaGadgetEventsStateDetails .boxBodyContentOuterContainer { margin-top: 0 !important; }
+/* eyebrow over the whole details-and-description block (a ::before is a
+   grid item, so it spans both columns) — same look as .ngm-eyebrow */
+body .WaGadgetEventsStateDetails .boxBodyContainer .inner:has(> .boxBodyInfoOuterContainer)::before {
+  content: "Event description";
+  grid-column: 1 / -1;
+  font-family: var(--ngm-sans); font-size: var(--ngm-eyebrow-size); font-weight: 500;
+  letter-spacing: var(--ngm-eyebrow-track); text-transform: uppercase;
+  color: var(--ngm-sage);
+}
 @media (max-width: 900px) {
   body .WaGadgetEventsStateDetails .boxBodyContainer .inner:has(> .boxBodyInfoOuterContainer) {
     grid-template-columns: 1fr !important;
@@ -6549,17 +6558,22 @@ body .WaGadgetEventsStateDetails .boxInfoContainer {
   border-radius: var(--ngm-radius) !important; padding: 8px 22px !important;
 }
 body .WaGadgetEventsStateDetails ul.boxInfo { list-style: none !important; margin: 0 !important; padding: 0 !important; }
-/* each row is LABEL + value on one line */
-body .WaGadgetEventsStateDetails ul.boxInfo li {
-  padding: 8px 0 !important;
-  display: flex !important; align-items: baseline !important; gap: 12px !important;
-}
+/* each row: small-caps title sitting right OVER its value, and the value
+   on a single line (WA's own label/value column layout squeezed the
+   values into a narrow wrapping column — flatten it) */
+body .WaGadgetEventsStateDetails ul.boxInfo li { padding: 7px 0 !important; }
 body .WaGadgetEventsStateDetails .eventInfoBoxLabel {
-  display: block !important; flex: 0 0 76px !important; text-align: right !important;
+  display: block !important; float: none !important;
+  width: auto !important; text-align: left !important;
   font-family: var(--ngm-sans) !important;
   text-transform: uppercase !important; letter-spacing: .08em !important;
   font-size: var(--ngm-tag-size) !important; font-weight: 600 !important; color: var(--ngm-sage-dk) !important;
-  margin-bottom: 0 !important;
+  margin: 0 0 2px !important; padding: 0 !important;
+}
+body .WaGadgetEventsStateDetails .eventInfoBoxValue {
+  display: block !important; float: none !important;
+  margin: 0 !important; padding: 0 !important; width: auto !important;
+  white-space: nowrap !important;
 }
 body .WaGadgetEventsStateDetails .eventInfoBoxValue,
 body .WaGadgetEventsStateDetails .eventInfoBoxValue strong,
@@ -6616,11 +6630,12 @@ body .WaGadgetEventsStateDetails li.eventInfoStartTime .eventInfoBoxLabel::befor
    event is captured — see system-pages/event-registration/README.md. */
 /* links anywhere in the details gadget (Add to my calendar, links in the
    description) → sage, quiet underline on hover. The Back link keeps its
-   own rule above. */
-body .WaGadgetEventsStateDetails a {
+   own rule above; the injected .ngm-btn pills keep their own colors (the
+   filled pill's white text was being repainted sage by this rule). */
+body .WaGadgetEventsStateDetails a:not(.ngm-btn) {
   color: var(--ngm-sage-dk) !important; text-decoration: none !important;
 }
-body .WaGadgetEventsStateDetails a:hover { text-decoration: underline !important; }
+body .WaGadgetEventsStateDetails a:not(.ngm-btn):hover { text-decoration: underline !important; }
 /* breathing room + SIDE GUTTERS (this later rule is the one that wins —
    it used to zero the sides, which glued the title to the viewport edge) */
 body .WaGadgetEventsStateDetails { padding: 8px 24px 44px !important; }
@@ -6638,6 +6653,20 @@ body .WaGadgetEventsStateDetails { padding: 8px 24px 44px !important; }
 .ngm-evd-visit { padding-top: 56px; padding-bottom: 64px; }
 .ngm-evd-visit .ngm-lead { max-width: 640px; }
 .ngm-evd-visit .ngm-videoband-tiles { max-width: none; margin-top: 26px; }  /* Member Hub + Request tiles span the full band */
+/* ADAPTIVE STATES — 03-bottom's script tags the section by the event's
+   own location (see the script's comment). The grid collapses to one
+   column when the photo/address are hidden. */
+.ngm-evd-visit.ngm-evd-virtual .ngm-loc-addr,
+.ngm-evd-visit.ngm-evd-virtual .ngm-loc-map { display: none; }
+.ngm-evd-visit.ngm-evd-virtual .ngm-loc-inner:has(.ngm-loc-head) {
+  grid-template-columns: 1fr; grid-template-rows: auto; grid-template-areas: "head";
+}
+.ngm-evd-visit.ngm-evd-virtual .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-head { margin-bottom: 0; }
+.ngm-evd-visit.ngm-evd-elsewhere .ngm-loc-map,
+.ngm-evd-visit.ngm-evd-elsewhere .ngm-visit-zoom { display: none; }
+.ngm-evd-visit.ngm-evd-elsewhere .ngm-loc-inner:has(.ngm-loc-head) {
+  grid-template-columns: 1fr; grid-template-rows: auto auto; grid-template-areas: "head" "addr";
+}
 
 /* ══════════════════════════════════════════════════════════════════
    MEMBER DIRECTORY  (.WaGadgetMemberDirectory)
