@@ -8393,8 +8393,8 @@ body .ngm-wa-events .gadgetStyleBody { max-width: var(--ngm-maxw) !important; }
 .ngm-ev-cta p,
 .ngm-cta-body,
 .ngm-cta-inner > p,
-.ngm-join-body        { font-size: var(--ngm-text-lead); }  /* was 1.0625rem */
-.ngm-about-body p,
+.ngm-join-body,
+.ngm-about-body p     { font-size: var(--ngm-text-lead); }  /* about-body promoted: reads beside hero-level copy */
 .ngm-retreat-body,
 .ngm-address          { font-size: var(--ngm-text-body); }  /* was 1rem */
 
