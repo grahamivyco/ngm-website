@@ -6512,10 +6512,54 @@ body .WaGadgetEventsStateDetails .eventInfoBoxValue strong,
 body .WaGadgetEventsStateDetails .eventInfoBoxValue span {
   font-family: var(--ngm-sans) !important; font-size: var(--ngm-text-md) !important; color: var(--ngm-charcoal) !important;
 }
-/* description body — set a readable fallback; inline fonts in content still win where present */
+/* description body. VERIFIED live: descriptions carry legacy
+   <font face="Lato"> tags — a font element's face attribute beats
+   INHERITED fonts, so the override must target the font tags directly. */
 body .WaGadgetEventsStateDetails .boxBodyContentContainer .inner {
   font-family: var(--ngm-sans) !important; color: var(--ngm-charcoal) !important; line-height: 1.7 !important;
+  font-size: var(--ngm-text-body) !important;
 }
+body .WaGadgetEventsStateDetails .boxBodyContentContainer .inner font,
+body .WaGadgetEventsStateDetails .boxBodyContentContainer .inner p {
+  font-family: var(--ngm-sans) !important;
+  font-size: var(--ngm-text-body) !important;
+  color: var(--ngm-charcoal) !important;
+}
+/* VERIFIED live: the whole box is wrapped in the theme's rounded-corner
+   strips + d1–d9 chrome (same pattern as change-password) — flatten it
+   so the info box and description sit clean on the page. */
+body .WaGadgetEventsStateDetails .cornersContainer,
+body .WaGadgetEventsStateDetails .clearEndContainer,
+body .WaGadgetEventsStateDetails .pageViewSwitcherOuterContainer { display: none !important; }
+body .WaGadgetEventsStateDetails .boxOuterContainer,
+body .WaGadgetEventsStateDetails .boxContainer,
+body .WaGadgetEventsStateDetails .boxBodyOuterContainer,
+body .WaGadgetEventsStateDetails .boxBodyContainer,
+body .WaGadgetEventsStateDetails .boxBodyInfoOuterContainer,
+body .WaGadgetEventsStateDetails .boxBodyInfoContainer,
+body .WaGadgetEventsStateDetails .boxBodyContentOuterContainer,
+body .WaGadgetEventsStateDetails .boxBodyContentContainer,
+body .WaGadgetEventsStateDetails .boxContainer .d1, body .WaGadgetEventsStateDetails .boxContainer .d2,
+body .WaGadgetEventsStateDetails .boxContainer .d3, body .WaGadgetEventsStateDetails .boxContainer .d4,
+body .WaGadgetEventsStateDetails .boxContainer .d5, body .WaGadgetEventsStateDetails .boxContainer .d6,
+body .WaGadgetEventsStateDetails .boxContainer .d7, body .WaGadgetEventsStateDetails .boxContainer .d8,
+body .WaGadgetEventsStateDetails .boxContainer .d9, body .WaGadgetEventsStateDetails .boxContainer .inner {
+  display: block !important; width: auto !important;
+  margin: 0 !important; padding: 0 !important;
+  background: transparent !important; border: 0 !important;
+}
+/* .fixedHeight clamps the description box — let it grow */
+body .WaGadgetEventsStateDetails .boxBodyContentContainer.fixedHeight {
+  height: auto !important; max-height: none !important; overflow: visible !important;
+}
+/* description gets breathing room below the info box */
+body .WaGadgetEventsStateDetails .boxBodyContentOuterContainer { margin-top: 22px !important; }
+/* time row: its label is a bare &nbsp; — drop it and tuck the time under the date */
+body .WaGadgetEventsStateDetails li.eventInfoStartTime .eventInfoBoxLabel { display: none !important; }
+body .WaGadgetEventsStateDetails li.eventInfoStartTime { padding-top: 0 !important; }
+/* registrationInfoContainer: EMPTY on non-registrable events (verified);
+   its register-button markup is styled once a dump from a registrable
+   event is captured — see system-pages/event-registration/README.md. */
 /* links anywhere in the details gadget (Add to my calendar, links in the
    description) → sage, quiet underline on hover. The Back link keeps its
    own rule above. */
