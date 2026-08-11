@@ -1,16 +1,17 @@
 <!-- Canonical page markup — paste into the Custom-HTML gadget ABOVE the native
      Event details gadget on the WA "Event details" system page. Styling lives in
      global-css/global.css. -->
-<!-- No visible markup here any more: the button row under the event title
-     (primary pill -> calendar, outline pill -> the event/meeting type's
-     page) is injected by the script below, replacing the old top pill. -->
+<!-- No visible markup here any more: the button row at the END of the
+     event description (primary pill -> calendar, outline pill -> the
+     event/meeting type's page) is injected by the script below. -->
 <script>
-/* TITLE BUTTON ROW — Guild event titles follow "Group Name: topic". Under
-   the title we inject a pill-button row: PRIMARY (filled sage) back to the
-   full calendar, and when the title matches a known group/event type, a
-   SECONDARY (outline) "More about ..." pill to that type's page. First
-   match wins (order matters: "Daytime Counted Thread" must beat plain
-   "Stitch-In"). Unmatched titles just get the calendar pill. Idempotent. */
+/* BUTTON ROW — Guild event titles follow "Group Name: topic". At the end
+   of the event description we append a pill-button row: PRIMARY (filled
+   sage) back to the full calendar, and when the title matches a known
+   group/event type, a SECONDARY (outline) "More about ..." pill to that
+   type's page. First match wins (order matters: "Daytime Counted Thread"
+   must beat plain "Stitch-In"). Unmatched titles just get the calendar
+   pill. Idempotent. */
 (function () {
   var TYPES = [
     ["daytime counted thread", "/daytime-counted-thread", "Daytime Counted Thread & Needlepoint"],
@@ -30,8 +31,12 @@
     ["fifth tuesday",          "/5th-tuesday",            "5th Tuesday Open Stitching"]
   ];
   function inject() {
-    var h1 = document.querySelector(".WaGadgetEventsStateDetails h1.pageTitle");
-    if (!h1 || document.querySelector(".ngm-evd-btns")) return;
+    var gadget = document.querySelector(".WaGadgetEventsStateDetails");
+    if (!gadget || document.querySelector(".ngm-evd-btns")) return;
+    /* the row lives at the end of the description copy; fall back to the
+       gadget itself if an event somehow has no description area */
+    var area = gadget.querySelector(".gadgetEventEditableArea") ||
+               gadget.querySelector(".boxBodyContentContainer .inner") || gadget;
     var row = document.createElement("div");
     row.className = "ngm-evd-btns";
     var cal = document.createElement("a");
@@ -39,7 +44,8 @@
     cal.href = "/calendar";
     cal.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back to the full calendar';
     row.appendChild(cal);
-    var title = (h1.textContent || "").toLowerCase();
+    var h1 = gadget.querySelector("h1.pageTitle");
+    var title = (h1 ? h1.textContent : "").toLowerCase();
     for (var i = 0; i < TYPES.length; i++) {
       if (title.indexOf(TYPES[i][0]) > -1) {
         var a = document.createElement("a");
@@ -50,7 +56,7 @@
         break;
       }
     }
-    h1.parentNode.insertBefore(row, h1.nextSibling);
+    area.appendChild(row);
   }
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", inject);
