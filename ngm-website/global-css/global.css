@@ -6497,6 +6497,15 @@ body .WaGadgetEventsStateDetails h1.SystemPageTitle {
   text-transform: none !important; letter-spacing: normal !important;
   margin: 4px 0 26px !important;
 }
+/* eyebrow over the event title — same look as .ngm-eyebrow */
+body .WaGadgetEventsStateDetails h1.pageTitle::before {
+  content: "Event description";
+  display: block;
+  font-family: var(--ngm-sans); font-size: var(--ngm-eyebrow-size); font-weight: 500;
+  letter-spacing: var(--ngm-eyebrow-track); text-transform: uppercase;
+  color: var(--ngm-sage);
+  margin-bottom: 12px;
+}
 /* Pill-button row appended at the END of the event description by
    01-top's script: primary (filled) -> calendar, outline -> the matched
    event/meeting type's page. Replaces the old top back-pill. */
@@ -6524,15 +6533,6 @@ body .WaGadgetEventsStateDetails .boxBodyContainer .inner:has(> .boxBodyInfoOute
   align-items: start !important;
 }
 body .WaGadgetEventsStateDetails .boxBodyContentOuterContainer { margin-top: 0 !important; }
-/* eyebrow over the whole details-and-description block (a ::before is a
-   grid item, so it spans both columns) — same look as .ngm-eyebrow */
-body .WaGadgetEventsStateDetails .boxBodyContainer .inner:has(> .boxBodyInfoOuterContainer)::before {
-  content: "Event description";
-  grid-column: 1 / -1;
-  font-family: var(--ngm-sans); font-size: var(--ngm-eyebrow-size); font-weight: 500;
-  letter-spacing: var(--ngm-eyebrow-track); text-transform: uppercase;
-  color: var(--ngm-sage);
-}
 @media (max-width: 900px) {
   body .WaGadgetEventsStateDetails .boxBodyContainer .inner:has(> .boxBodyInfoOuterContainer) {
     grid-template-columns: 1fr !important;
@@ -6662,8 +6662,11 @@ body .WaGadgetEventsStateDetails { padding: 8px 24px 44px !important; }
   grid-template-columns: 1fr; grid-template-rows: auto; grid-template-areas: "head";
 }
 .ngm-evd-visit.ngm-evd-virtual .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-head { margin-bottom: 0; }
-.ngm-evd-visit.ngm-evd-elsewhere .ngm-loc-map,
-.ngm-evd-visit.ngm-evd-elsewhere .ngm-visit-zoom { display: none; }
+/* virtual: the video band directly follows the heading — no rule line,
+   no dead space where the photo/address would have been */
+.ngm-evd-visit.ngm-evd-virtual .ngm-visit-zoom { margin-top: 8px; padding-top: 0; border-top: 0; }
+.ngm-evd-visit.ngm-evd-elsewhere .ngm-loc-map { display: none; }
+.ngm-evd-visit.ngm-evd-nozoom .ngm-visit-zoom { display: none; }
 .ngm-evd-visit.ngm-evd-elsewhere .ngm-loc-inner:has(.ngm-loc-head) {
   grid-template-columns: 1fr; grid-template-rows: auto auto; grid-template-areas: "head" "addr";
 }
