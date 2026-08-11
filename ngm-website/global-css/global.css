@@ -8680,3 +8680,167 @@ a.ngm-gcard:hover {
 @media (max-width: 1080px) {
   .ngm-cboard .ngm-hub-ltop { flex-direction: column; align-items: flex-start; gap: 3px; }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   VOLUNTEER / LENDING-LIBRARY / MEMBER-DIRECTORY PAGES
+   ────────────────────────────────────────────────────────────────
+   These three pages were authored against ngm-vol-* / ngm-lib-* /
+   ngm-dir-* classes that never had rules (found by a page-vs-CSS class
+   sweep — nothing was lost, the CSS was simply never written). Styles
+   below mirror the site's existing idioms: calendar-hero band, hub
+   tiles, si-cta closing band. All sizes use the universal type tokens.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── Shared hero band (cream, centred, like .ngm-cal-hero) ── */
+.ngm-vol-hero, .ngm-lib-hero, .ngm-dir-hero {
+  background: var(--ngm-cream);
+  padding: 72px 48px 56px;
+  border-bottom: 1px solid var(--ngm-border);
+  text-align: center;
+}
+.ngm-vol-hero-inner, .ngm-lib-hero-inner, .ngm-dir-hero-inner { max-width: 760px; margin: 0 auto; }
+.ngm-vol-hero-inner > p, .ngm-lib-hero-inner > p, .ngm-dir-hero-inner > p.ngm-lead {
+  font-family: var(--ngm-sans); font-size: var(--ngm-text-lead); color: var(--ngm-gray);
+  line-height: 1.8; max-width: 640px; margin: 18px auto 0;
+}
+.ngm-dir-eyebrow-row { display: inline-flex; align-items: center; gap: 8px; }
+.ngm-dir-eyebrow-row svg { width: 15px; height: 15px; color: var(--ngm-sage-dk); flex-shrink: 0; }
+
+/* ── Volunteer: role cards (icon + title + copy, like the hub tiles) ── */
+.ngm-vol-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: var(--ngm-gap); margin-top: 36px;
+}
+.ngm-vol-card {
+  display: flex; align-items: flex-start; gap: 16px;
+  background: var(--ngm-cream); border: 1px solid var(--ngm-border);
+  border-radius: var(--ngm-radius); padding: var(--ngm-tile-pad);
+}
+.ngm-vol-icon {
+  width: var(--ngm-icon-box-sm); height: var(--ngm-icon-box-sm); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--ngm-sage-lt); border-radius: 13px; color: var(--ngm-sage-dk);
+}
+.ngm-vol-body h3 {
+  font-family: var(--ngm-serif); font-size: var(--ngm-title-tile); font-weight: 400;
+  color: var(--ngm-charcoal); margin: 0 0 5px; line-height: 1.2;
+}
+.ngm-vol-body p {
+  font-family: var(--ngm-sans); font-size: var(--ngm-copy); color: var(--ngm-gray);
+  line-height: 1.65; margin: 0;
+}
+
+/* ── Volunteer: "pitch in" mini tiles (white on the linen band) ── */
+.ngm-vol-pitch-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: var(--ngm-gap); margin-top: 36px;
+}
+.ngm-vol-pitch {
+  background: #fff; border: 1px solid var(--ngm-border);
+  border-radius: var(--ngm-radius); padding: var(--ngm-tile-pad);
+}
+.ngm-vol-pitch-icon {
+  width: var(--ngm-icon-box-sm); height: var(--ngm-icon-box-sm);
+  display: flex; align-items: center; justify-content: center;
+  background: var(--ngm-sage-lt); border-radius: 13px; color: var(--ngm-sage-dk);
+  margin-bottom: 14px;
+}
+.ngm-vol-pitch h3 {
+  font-family: var(--ngm-serif); font-size: var(--ngm-title-tile); font-weight: 400;
+  color: var(--ngm-charcoal); margin: 0 0 5px; line-height: 1.2;
+}
+.ngm-vol-pitch p {
+  font-family: var(--ngm-sans); font-size: var(--ngm-copy); color: var(--ngm-gray);
+  line-height: 1.65; margin: 0;
+}
+
+/* ── Volunteer: closing CTA (rose band, like .ngm-si-cta) ── */
+.ngm-vol-cta { background: var(--ngm-rose-lt); padding: 76px 48px; text-align: center; }
+.ngm-vol-cta-inner { max-width: 520px; margin: 0 auto; }
+.ngm-vol-cta p {
+  font-family: var(--ngm-sans); font-size: var(--ngm-text-lead); color: var(--ngm-gray);
+  line-height: 1.8; margin-bottom: 28px;
+}
+.ngm-vol-cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* ── Library: numbered how-to-borrow steps ── */
+.ngm-lib-steps {
+  list-style: none; margin: 32px 0 0; padding: 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--ngm-gap);
+}
+.ngm-lib-step {
+  display: flex; align-items: flex-start; gap: 16px;
+  background: var(--ngm-cream); border: 1px solid var(--ngm-border);
+  border-radius: var(--ngm-radius); padding: var(--ngm-tile-pad);
+}
+.ngm-lib-num {
+  width: 34px; height: 34px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--ngm-sage-dk); color: #fff; border-radius: 50%;
+  font-family: var(--ngm-sans); font-size: var(--ngm-text-md); font-weight: 600;
+}
+.ngm-lib-step h3, .ngm-lib-term h3, .ngm-lib-note h3 {
+  font-family: var(--ngm-serif); font-size: var(--ngm-title-tile); font-weight: 400;
+  color: var(--ngm-charcoal); margin: 0 0 5px; line-height: 1.2;
+}
+.ngm-lib-step p, .ngm-lib-term p, .ngm-lib-note p {
+  font-family: var(--ngm-sans); font-size: var(--ngm-copy); color: var(--ngm-gray);
+  line-height: 1.65; margin: 0;
+}
+
+/* ── Library: borrowing-terms tiles (white on linen) + note rows ── */
+.ngm-lib-terms {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: var(--ngm-gap); margin-top: 32px;
+}
+.ngm-lib-term {
+  display: flex; align-items: flex-start; gap: 16px;
+  background: #fff; border: 1px solid var(--ngm-border);
+  border-radius: var(--ngm-radius); padding: var(--ngm-tile-pad);
+}
+.ngm-lib-term > svg, .ngm-lib-note > svg {
+  width: 24px; height: 24px; flex-shrink: 0; color: var(--ngm-sage-dk); margin-top: 2px;
+}
+.ngm-lib-note {
+  display: flex; align-items: flex-start; gap: 16px;
+  background: var(--ngm-cream); border: 1px solid var(--ngm-border);
+  border-radius: var(--ngm-radius); padding: 20px 22px;
+  max-width: 760px; margin-top: 16px;
+}
+.ngm-lib-note:first-of-type { margin-top: 28px; }
+
+/* ── Library: closing CTA (rose band) ── */
+.ngm-lib-cta { background: var(--ngm-rose-lt); padding: 76px 48px; text-align: center; }
+.ngm-lib-cta-inner { max-width: 520px; margin: 0 auto; }
+.ngm-lib-cta p {
+  font-family: var(--ngm-sans); font-size: var(--ngm-text-lead); color: var(--ngm-gray);
+  line-height: 1.8; margin-bottom: 28px;
+}
+
+/* ── Directory: closing "keep your listing current" band ── */
+.ngm-dir-foot { background: var(--ngm-cream); padding: 64px 48px; }
+.ngm-dir-foot-inner {
+  max-width: var(--ngm-maxw); margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 32px; flex-wrap: wrap;
+}
+.ngm-dir-foot-text p {
+  font-family: var(--ngm-sans); font-size: var(--ngm-text-lead); color: var(--ngm-gray);
+  line-height: 1.8; max-width: 560px; margin: 0;
+}
+.ngm-dir-foot-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ── Responsive ── */
+@media (max-width: 980px) {
+  .ngm-vol-grid { grid-template-columns: 1fr 1fr; }
+  .ngm-vol-pitch-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 900px) {
+  .ngm-vol-hero, .ngm-lib-hero, .ngm-dir-hero { padding: 52px 28px 44px; }
+  .ngm-vol-cta, .ngm-lib-cta { padding: 60px 28px; }
+  .ngm-dir-foot { padding: 48px 28px; }
+  .ngm-dir-foot-inner { flex-direction: column; align-items: center; text-align: center; justify-content: center; }
+}
+@media (max-width: 640px) {
+  .ngm-vol-grid, .ngm-vol-pitch-grid, .ngm-lib-steps, .ngm-lib-terms { grid-template-columns: 1fr; }
+}
