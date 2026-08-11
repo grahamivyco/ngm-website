@@ -6630,9 +6630,61 @@ body .WaGadgetEventsStateDetails .boxBodyContentOuterContainer { margin-top: 22p
 /* time row: WA ships its label as a bare &nbsp; — paint a real "Time"
    title in front of it so the row reads like When and Location */
 body .WaGadgetEventsStateDetails li.eventInfoStartTime .eventInfoBoxLabel::before { content: "Time"; }
-/* registrationInfoContainer: EMPTY on non-registrable events (verified);
-   its register-button markup is styled once a dump from a registrable
-   event is captured — see system-pages/event-registration/README.md. */
+/* REGISTRATION block under the info box — VERIFIED against the Retreat
+   2026 event page source: h4.infoTitle + .infoText ("Base fee:") +
+   ul.registrationInfo of types (label strong + regTypeLiValueSpan note;
+   li.disabled = closed/full). Empty on non-registrable events, so the
+   panel only paints when there's content (:has). The Register button
+   itself is still unverified — no live event shows one; see
+   system-pages/event-registration/README.md. */
+body .WaGadgetEventsStateDetails .registrationInfoContainer:has(.infoTitle) {
+  background: var(--ngm-sage-lt) !important; border: 1px solid var(--ngm-border) !important;
+  border-radius: var(--ngm-radius) !important; padding: 14px 22px 10px !important;
+  margin-top: 14px !important;
+}
+body .WaGadgetEventsStateDetails .registrationInfoContainer h4.infoTitle {
+  font-family: var(--ngm-sans) !important; text-transform: uppercase !important;
+  letter-spacing: .08em !important; font-size: var(--ngm-tag-size) !important;
+  font-weight: 600 !important; color: var(--ngm-sage-dk) !important;
+  margin: 0 0 4px !important; padding: 0 !important;
+}
+body .WaGadgetEventsStateDetails .registrationInfoContainer .infoText {
+  font-family: var(--ngm-sans) !important; font-size: var(--ngm-copy) !important;
+  color: var(--ngm-gray) !important; line-height: 1.6 !important;
+}
+body .WaGadgetEventsStateDetails .registrationInfoContainer .infoText strong {
+  color: var(--ngm-sage-dk) !important; font-weight: 600 !important;
+}
+body .WaGadgetEventsStateDetails ul.registrationInfo {
+  list-style: none !important; margin: 8px 0 0 !important; padding: 0 !important;
+}
+body .WaGadgetEventsStateDetails ul.registrationInfo li {
+  list-style: none !important; padding: 9px 0 !important; margin: 0 !important;
+  border-top: 1px solid var(--ngm-border) !important;
+}
+body .WaGadgetEventsStateDetails .regTypeLiLabel,
+body .WaGadgetEventsStateDetails .regTypeLiLabel strong {
+  display: block !important; float: none !important; width: auto !important;
+  margin: 0 !important; padding: 0 !important; text-align: left !important;
+  font-family: var(--ngm-sans) !important; font-size: var(--ngm-text-md) !important;
+  font-weight: 600 !important; color: var(--ngm-charcoal) !important;
+  line-height: 1.5 !important;
+}
+body .WaGadgetEventsStateDetails .regTypeLiValue,
+body .WaGadgetEventsStateDetails .regTypeLiValueSpan {
+  display: block !important; float: none !important; width: auto !important;
+  margin: 0 !important; padding: 0 !important;
+  font-family: var(--ngm-sans) !important; font-size: var(--ngm-copy) !important;
+  color: var(--ngm-gray) !important; line-height: 1.55 !important;
+}
+/* closed / full types read muted */
+body .WaGadgetEventsStateDetails ul.registrationInfo li.disabled .regTypeLiLabel,
+body .WaGadgetEventsStateDetails ul.registrationInfo li.disabled .regTypeLiLabel strong,
+body .WaGadgetEventsStateDetails ul.registrationInfo li.disabled .regTypeLiValueSpan {
+  color: var(--ngm-gray-lt) !important;
+}
+/* future-proof: type pickers once a registration window is open */
+body .WaGadgetEventsStateDetails ul.registrationInfo input[type="radio"] { accent-color: var(--ngm-sage-dk); }
 /* links anywhere in the details gadget (Add to my calendar, links in the
    description) → sage, quiet underline on hover. The Back link keeps its
    own rule above; the injected .ngm-btn pills keep their own colors (the
