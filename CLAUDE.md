@@ -30,6 +30,25 @@ and the markup-only files were renamed to plain `01-top.html` / `03-bottom.html`
   only.
 - When a change needs new CSS, put it in `global-css/global.css`.
 
+## Design-system conformance (required on every page/CSS change)
+
+The design system is canonical in `ngm-website/design-system/NGM-design-system-prompt.md`
+(tokens + component idioms; the `:root` tokens in `global.css` are the
+source of truth). When creating or editing ANY page markup or CSS:
+
+1. **Read the design-system reference first** and reuse its idioms
+   (buttons, eyebrows, tiles, hero/CTA bands, inline-link style, checks)
+   instead of inventing new patterns.
+2. **Sizes and fonts only via tokens** — `font-size` must use a type-role
+   token (`--ngm-text-*`, `--ngm-title-*`, `--ngm-copy`, `--ngm-btn-size`,
+   `--ngm-eyebrow-size`, `--ngm-tag-size`); families only via
+   `--ngm-sans`/`--ngm-serif`; colors via the `--ngm-` color tokens.
+3. **Every class you put in markup gets rules in `global.css`** — never
+   leave a new `ngm-*` class unstyled.
+4. **Before finishing, run** `python3 ngm-website/tools/design-check.py`
+   and fix every finding — it verifies all of the above mechanically and
+   must exit clean.
+
 ## Native WA forms: verify the DOM via the browser console first
 
 When writing CSS/JS that targets a **native WA form gadget** (login,
