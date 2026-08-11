@@ -67,6 +67,11 @@ tile/card padding `--ngm-tile-pad`/`--ngm-card-pad`, icon squares
   bands; 1px `--ngm-border`, `--ngm-radius`, icon in a `--ngm-sage-lt`
   rounded square, serif `--ngm-title-tile` title, `--ngm-copy` description.
   (See `.ngm-hub-rtile`, `.ngm-vol-card`, `.ngm-lib-term`.)
+- **Tile pairs (primary/secondary):** when two action tiles sit together
+  (Member Hub + Request the Link), the primary keeps the filled light-sage
+  `.ngm-hub-zoom-module` card and the secondary adds
+  `.ngm-hub-zoom-module-alt` — white card, `--ngm-border`, `--ngm-sage-lt`
+  icon chip. The tile version of filled vs outline buttons.
 - **Hero bands:** cream, centred, 72/48/56 padding, border-bottom
   (`.ngm-cal-hero`, `.ngm-vol-hero`).
 - **Closing CTA bands:** rose-lt, centred, `--ngm-text-lead` copy, pill
