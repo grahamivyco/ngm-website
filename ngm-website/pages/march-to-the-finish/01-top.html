@@ -36,6 +36,41 @@
     </div>
   </section>
 
+    <!-- REGISTRATION — standard band: registration runs through the Guild
+       calendar into WA's native event-registration system page; the Member
+       Hub tile routes guests through login first so registrations go
+       through. Same module idiom as the events page. -->
+  <section class="ngm ngm-sec ngm-sec-white">
+    <div class="ngm-con">
+      <div class="ngm-loc-head" style="margin-bottom:26px">
+        <span class="ngm-eyebrow">Registration</span>
+        <h2 class="ngm-h2" style="margin-bottom:0">How to <em>register</em></h2>
+      </div>
+      <div class="ngm-visit-zoom">
+        <span class="ngm-addr-label">Before you register</span>
+        <p class="ngm-visit-zoom-copy">Registration opens on the Guild calendar with each year&rsquo;s dates &mdash; open the event and click Register once it&rsquo;s posted. Members should log in first so registration goes through.</p>
+        <div class="ngm-videoband-tiles">
+          <a class="ngm-hub-zoom-module" href="/member/">
+            <span class="ngm-hub-zoom-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg></span>
+            <div class="ngm-hub-zoom-tile-body">
+              <h4>Member Hub</h4>
+              <p>Log in to register.</p>
+            </div>
+            <span class="ngm-hub-zoom-tile-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          </a>
+          <a class="ngm-hub-zoom-module" href="/join">
+            <span class="ngm-hub-zoom-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></span>
+            <div class="ngm-hub-zoom-tile-body">
+              <h4>Join the Guild</h4>
+              <p>Not a member yet? It&rsquo;s $30 a year.</p>
+            </div>
+            <span class="ngm-hub-zoom-tile-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <div class="ngm ngm-si-cta">
     <div class="ngm-si-cta-inner">
       <span class="ngm-eyebrow">Save the season</span>
@@ -48,3 +83,15 @@
     </div>
   </div>
 </div>
+<script>
+/* Member Hub tile: logged-in members go straight to /member/; guests are
+   sent to log in and returned to /member/ afterwards. WA tags <body> with
+   publicContentView (guest) or memberContentView (logged in). */
+(function () {
+  if (document.body && document.body.classList.contains("publicContentView")) {
+    var login = "/Sys/Login/?ReturnUrl=" + encodeURIComponent("/member/");
+    var tiles = document.querySelectorAll('a.ngm-hub-zoom-module[href="/member/"]');
+    for (var i = 0; i < tiles.length; i++) { tiles[i].setAttribute("href", login); }
+  }
+})();
+</script>
