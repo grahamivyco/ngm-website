@@ -7,3 +7,49 @@
     Back to the full calendar
   </a>
 </div>
+<script>
+/* EVENT-TYPE LINK — Guild event titles follow "Group Name: topic". When the
+   title matches a known group/event type, inject a quiet inline link under
+   the title to that type's main page. First match wins (order matters:
+   "Daytime Counted Thread" must beat plain "Stitch-In"). Titles that match
+   nothing (board meetings, one-offs) get no link. Idempotent. */
+(function () {
+  var TYPES = [
+    ["daytime counted thread", "/daytime-counted-thread", "Daytime Counted Thread & Needlepoint"],
+    ["counted thread",         "/daytime-counted-thread", "Daytime Counted Thread & Needlepoint"],
+    ["daytime stitch-in",      "/daytime-stitch-in",      "the Daytime Stitch-In"],
+    ["evening stitch-in",      "/Evening-Stitch-In",      "the Evening Stitch-In"],
+    ["sunday tea",             "/Sunday-Tea-Stitch",      "Sunday Tea & Stitch"],
+    ["come & stitch",          "/Come-&-Stitch",          "Come & Stitch"],
+    ["come and stitch",        "/Come-&-Stitch",          "Come & Stitch"],
+    ["potpourri",              "/potpourri",              "Potpourri Stitchers"],
+    ["japanese embroidery",    "/japanese-embroidery",    "Traditional Japanese Embroidery"],
+    ["march to the finish",    "/march-to-the-finish",    "March to the Finish"],
+    ["fall finish",            "/fall-finish",            "A Fall Finish"],
+    ["retreat",                "/retreat",                "the Annual Retreat"],
+    ["workshop",               "/workshops",              "Workshops"],
+    ["5th tuesday",            "/5th-tuesday",            "5th Tuesday Open Stitching"],
+    ["fifth tuesday",          "/5th-tuesday",            "5th Tuesday Open Stitching"]
+  ];
+  function inject() {
+    var h1 = document.querySelector(".WaGadgetEventsStateDetails h1.pageTitle");
+    if (!h1 || document.querySelector(".ngm-evd-type")) return;
+    var title = (h1.textContent || "").toLowerCase();
+    for (var i = 0; i < TYPES.length; i++) {
+      if (title.indexOf(TYPES[i][0]) > -1) {
+        var a = document.createElement("a");
+        a.className = "ngm-evd-type ngm-inline-link";
+        a.href = TYPES[i][1];
+        a.textContent = "More about " + TYPES[i][2] + " →";
+        h1.parentNode.insertBefore(a, h1.nextSibling);
+        return;
+      }
+    }
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", inject);
+  } else {
+    inject();
+  }
+})();
+</script>

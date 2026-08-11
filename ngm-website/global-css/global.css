@@ -6497,6 +6497,9 @@ body .WaGadgetEventsStateDetails h1.SystemPageTitle {
   text-transform: none !important; letter-spacing: normal !important;
   margin: 4px 0 26px !important;
 }
+/* "Part of <group> — see the page" link injected by 01-top's script when
+   the event title matches a known group/event type */
+.ngm-evd-type { display: inline-block; margin: -16px 0 26px; }
 /* the native "Back" text link duplicates our branded pill above the gadget */
 body .WaGadgetEventsStateDetails .pageBackContainer { display: none !important; }
 /* the gadget itself is the content column: capped, centred, side gutters */
@@ -6504,7 +6507,7 @@ body .WaGadgetEventsStateDetails {
   max-width: var(--ngm-maxw) !important;
   margin: 0 auto !important;
   box-sizing: border-box !important;
-  padding-left: 24px !important; padding-right: 24px !important;
+  /* side padding lives on the later breathing-room rule below */
 }
 /* TWO COLUMNS — the When/Location box and the description are siblings
    inside one flattened wrapper (verified DOM): details left, copy right.
@@ -6608,8 +6611,12 @@ body .WaGadgetEventsStateDetails a {
   color: var(--ngm-sage-dk) !important; text-decoration: none !important;
 }
 body .WaGadgetEventsStateDetails a:hover { text-decoration: underline !important; }
-/* breathing room around the gadget so it doesn't hug the sandwich gadgets */
-body .WaGadgetEventsStateDetails { padding: 8px 0 28px !important; }
+/* breathing room + SIDE GUTTERS (this later rule is the one that wins —
+   it used to zero the sides, which glued the title to the viewport edge) */
+body .WaGadgetEventsStateDetails { padding: 8px 24px 44px !important; }
+@media (max-width: 560px) {
+  body .WaGadgetEventsStateDetails { padding: 4px 18px 32px !important; }
+}
 
 /* ── Sandwich gadgets on the Event details system page ──
    01-top.html: a slim strip holding the "Back to the full calendar" pill.
