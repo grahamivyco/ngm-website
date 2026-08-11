@@ -2103,7 +2103,7 @@ body .ngm-cal .monthViewType .EventListCalendar th {
 .ngm-key-wrap { max-width: var(--ngm-maxw); margin: 6px auto 0; padding: 0 12px 64px; box-sizing: border-box; }  /* padding-bottom = standard section space below the Key (can't margin-collapse) */
 .ngm-key {
   width: 100%; box-sizing: border-box;
-  background: var(--ngm-cream); border: 1px solid var(--ngm-border);
+  background: #fff; border: 1px solid var(--ngm-border);
   border-radius: var(--ngm-radius-lg); box-shadow: var(--ngm-sh);
   padding: 30px 32px;
 }
@@ -6169,7 +6169,7 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar {
      week too. This is the grid's OWN frame — separate from the removed linen
      card; the month title + nav still sit on the plain page above it. */
   border-collapse: separate !important; border-spacing: 0 !important;
-  background: var(--ngm-cream) !important;   /* same cream as the hero band */
+  background: #fff !important;
   border: 1px solid var(--ngm-linen-dk) !important;
   border-radius: var(--ngm-radius-lg) !important;
   overflow: hidden !important;
@@ -6323,9 +6323,9 @@ body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarIt
   border-color: var(--ngm-linen-dk) !important; background: transparent !important;
   padding: 3px 2px 8px !important; vertical-align: top !important;   /* less L/R padding → tiles get more room */
 }
-/* days outside this month → muted linen (one shade off the cream grid) */
+/* days outside this month → muted cream */
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarItemInactive {
-  background: var(--ngm-linen) !important;
+  background: var(--ngm-cream) !important;
 }
 body .WaGadgetEventsStateCalendar table.EventListCalendar td.EventListCalendarItemInactive a.calendarDate {
   color: var(--ngm-gray-lt) !important;
