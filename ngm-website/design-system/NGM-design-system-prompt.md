@@ -32,7 +32,7 @@ allowlist of display one-offs in `tools/design-check.py`):
 | `--ngm-text-lead` | 1.0625rem | section leads, intros, Visit & CTA copy — equals body: ONE copy size |
 | `--ngm-text-body` | 1.0625rem | standard body copy, notes |
 | `--ngm-text-md` | .95rem | secondary copy, form text |
-| `--ngm-copy` | .92rem | card/tile descriptions |
+| `--ngm-copy` | 1.0625rem | card/tile descriptions — equals body: ONE copy size |
 | `--ngm-btn-size` | .9rem | buttons, pills, controls |
 | `--ngm-text-ui` | .85rem | small UI text, quiet links |
 | `--ngm-text-meta` | .82rem | meta lines, dates, hints |
