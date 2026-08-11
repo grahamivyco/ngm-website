@@ -8112,6 +8112,24 @@ body a.ngm-inline-link {
   transition: border-color .15s;
 }
 .ngm-inline-link:hover, body a.ngm-inline-link:hover { border-color: var(--ngm-sage-dk); }
+/* CATCH-ALL: any CLASSLESS link inside branded copy gets the same idiom
+   automatically — bare <a>s otherwise fall to WA's bold/underlined theme
+   styling (e.g. the contact page's inquiry@ mailtos before they were
+   classed). Scoped to paragraphs and list items inside .ngm sections so
+   buttons, cards, and gadget skins are untouched. */
+body .ngm p a:not([class]),
+body .ngm li a:not([class]) {
+  font-family: var(--ngm-sans) !important;
+  font-size: inherit !important;
+  font-weight: 500 !important;
+  color: var(--ngm-sage-dk) !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(62,85,56,.35);
+  padding-bottom: 1px;
+  transition: border-color .15s;
+}
+body .ngm p a:not([class]):hover,
+body .ngm li a:not([class]):hover { border-color: var(--ngm-sage-dk); }
 
 /* Hero loader: the brand mark reads a touch larger (keeps its own colors) */
 .ngm-hero-loader-badge svg { width: 38px; height: 38px; }
