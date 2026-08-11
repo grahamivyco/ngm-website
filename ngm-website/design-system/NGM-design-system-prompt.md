@@ -35,7 +35,7 @@ the $30 price-figure lockup, the only remaining literal):
 | `--ngm-text-lead` | 1.0625rem | section leads, intros, Visit & CTA copy — equals body: ONE copy size |
 | `--ngm-text-body` | 1.0625rem | standard body copy, notes |
 | `--ngm-text-md` | .95rem | secondary copy, form text |
-| `--ngm-copy` | 1.0625rem | card/tile descriptions — equals body: ONE copy size |
+| `--ngm-copy` | .95rem | card/tile descriptions — ONE size, one step below body copy |
 | `--ngm-btn-size` | .9rem | buttons, pills, controls |
 | `--ngm-text-ui` | .85rem | small UI text, quiet links |
 | `--ngm-text-meta` | .82rem | meta lines, dates, hints |
