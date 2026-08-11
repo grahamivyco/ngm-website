@@ -1508,7 +1508,8 @@ body [class*="LayoutContainer"] {
 .ngm-cal-hero {
   background: var(--ngm-cream);
   padding: 72px 48px 56px;
-  border-bottom: 1px solid var(--ngm-border);
+  /* no border-bottom — the calendar body below shares the cream, so the
+     hero flows straight into the grid as one band */
 }
 .ngm-cal-hero-inner { max-width: var(--ngm-maxw); margin: 0 auto; }
 .ngm-cal-hero p {
@@ -1516,10 +1517,11 @@ body [class*="LayoutContainer"] {
   line-height: 1.8; max-width: 620px; margin-top: 18px;
 }
 .ngm-cal-hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
-/* ── Calendar body wrapper (blends into the page — white, no band) ──
+/* ── Calendar body wrapper — CREAM, continuing the hero band, so the
+   month grid and the Key card sit on the same background as the hero.
    Top padding ZERO to kill the gap under the hero. Even padding on the
    sides + bottom so the grid has breathing room on all sides. */
-.ngm-cal-body { background: #fff; padding: 0 40px; }
+.ngm-cal-body { background: var(--ngm-cream); padding: 0 40px; }
 .ngm-cal-body-inner { max-width: var(--ngm-maxw); margin: 0 auto; padding: 24px 0 0; }
 /* ───── WA CALENDAR GADGET styling ─────
    CONFIRMED via Inspect: the gadget's real class is
