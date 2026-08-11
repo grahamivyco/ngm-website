@@ -63,16 +63,45 @@
     for (var i = 0; i < tiles.length; i++) { tiles[i].setAttribute("href", login); }
   }
 })();
-/* ADAPTIVE VISIT — the section reshapes to the event's own location
-   (the gadget's Location row, plus the description text for context):
-   - usual place / hybrid -> full block: MVUUF address, photo, video band.
-     Triggered by MVUUF (or "hybrid") in the location OR the description,
-     so "Location: Hybrid" events still show where in-person happens.
-   - virtual only         -> just the Joining-by-video band
-   - some other venue     -> just that venue (with a directions link), no
-     MVUUF photo; the video band stays only if the description mentions
-     zoom/video. No/unreadable location -> full block (safe default). */
+/* ADAPTIVE VISIT — the section reshapes to the event's Location row.
+   The LOCATION ROW is authoritative (descriptions say things like
+   "not at MVUUF", so scanning them for venue names misfires):
+   - MVUUF / "Hybrid" in the location -> full block: MVUUF address,
+     photo, video band.
+   - virtual only -> just the Joining-by-video band.
+   - a KNOWN venue (VENUES table) -> the venue's own note, address and
+     photo, exactly like its meeting page (e.g. City Bella for Sunday
+     Tea & Stitch).
+   - any other venue -> just that venue with a directions link, no photo.
+   For in-person venues the video band stays only if the description
+   mentions zoom/video. No/unreadable location -> full block. */
 (function () {
+  /* Known non-MVUUF venues, matched against the Location row. Keep in
+     sync with the venue blocks on the meeting pages. */
+  var VENUES = [
+    {
+      match: /city bella|6600 lyndale|richfield/,
+      note: "This event meets in Kris Hennum’s community room at City Bella in Richfield — not at MVUUF.",
+      addr: "City Bella community room<br>6600 Lyndale Avenue South<br>Richfield, MN 55423",
+      dest: "6600 Lyndale Ave S Richfield MN 55423",
+      photo: "https://needleworkguildmn.org/resources/Pictures/Website%20Update%20-%20Photos/City%20Bella.jpg",
+      ph: "City Bella · Richfield",
+      alt: "City Bella in Richfield — where this event meets"
+    }
+  ];
+  function setAddress(sec, label, html, dest) {
+    var lbl = sec.querySelector(".ngm-addr-label");
+    if (lbl) lbl.textContent = label;
+    var addr = sec.querySelector(".ngm-address");
+    if (!addr) return;
+    addr.innerHTML = "";
+    var a = document.createElement("a");
+    a.className = "ngm-loc-dir";
+    a.href = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(dest);
+    a.target = "_blank"; a.rel = "noopener noreferrer";
+    a.innerHTML = html;
+    addr.appendChild(a);
+  }
   function adapt() {
     var sec = document.querySelector(".ngm-evd-visit");
     var val = document.querySelector(".WaGadgetEventsStateDetails li.eventInfoLocation .eventInfoBoxValue");
@@ -82,31 +111,31 @@
     var descEl = document.querySelector(".WaGadgetEventsStateDetails .gadgetEventEditableArea");
     var desc = descEl ? (descEl.textContent || "").toLowerCase() : "";
     var l = loc.toLowerCase();
-    if (/mvuuf|unitarian|zenith|hybrid/.test(l) ||
-        /mvuuf|unitarian|zenith|hybrid/.test(desc)) return; /* usual place / hybrid — full block */
+    if (/mvuuf|unitarian|zenith|hybrid/.test(l)) return; /* usual place / hybrid — full block */
     if (/video|zoom|online|virtual/.test(l)) {
       sec.classList.add("ngm-evd-virtual");
       var zc = sec.querySelector(".ngm-visit-zoom-copy");
       if (zc) zc.textContent = "This event is held over Zoom. The link is available to members, and if you’re not a member yet, just request it — we’ll be happy to email it to you.";
       return;
     }
-    sec.classList.add("ngm-evd-elsewhere");
-    /* in-person only -> no video band; keep it if the copy mentions zoom */
+    /* in-person elsewhere: no video band unless the copy mentions zoom */
     if (!/zoom|video|virtual|online/.test(desc)) sec.classList.add("ngm-evd-nozoom");
     var note = sec.querySelector(".ngm-loc-note");
-    if (note) note.textContent = "This event isn’t at our usual meeting place — here’s where to find it.";
-    var lbl = sec.querySelector(".ngm-addr-label");
-    if (lbl) lbl.textContent = "Event location";
-    var addr = sec.querySelector(".ngm-address");
-    if (addr) {
-      addr.innerHTML = "";
-      var a = document.createElement("a");
-      a.className = "ngm-loc-dir";
-      a.href = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(loc);
-      a.target = "_blank"; a.rel = "noopener noreferrer";
-      a.textContent = loc;
-      addr.appendChild(a);
+    for (var i = 0; i < VENUES.length; i++) {
+      if (VENUES[i].match.test(l)) {
+        var v = VENUES[i];
+        if (note) note.textContent = v.note;
+        setAddress(sec, "Meeting location", v.addr, v.dest);
+        var img = sec.querySelector(".ngm-loc-map img");
+        if (img) { img.classList.remove("is-loaded"); img.alt = v.alt; img.src = v.photo; }
+        var ph = sec.querySelector(".ngm-loc-photo-ph");
+        if (ph) ph.textContent = v.ph;
+        return; /* keep the full two-column layout, photo and all */
+      }
     }
+    sec.classList.add("ngm-evd-elsewhere");
+    if (note) note.textContent = "This event isn’t at our usual meeting place — here’s where to find it.";
+    setAddress(sec, "Event location", loc.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"), loc);
   }
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", adapt);
