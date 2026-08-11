@@ -3,8 +3,11 @@
 The WA **Event details** system page renders every individual event. It allows
 the Custom-HTML sandwich (see `docs/wa-notes.md`), so the layout is:
 
-1. `01-top.html` — Custom HTML above the native gadget: branded
-   "Back to the full calendar" pill.
+1. `01-top.html` — Custom HTML above the native gadget: script only — it
+   appends a pill-button row (`.ngm-evd-btns`) at the **end of the event
+   description**: primary filled pill back to the calendar, plus an
+   outline "More about {type}" pill when the title matches a known
+   group/event type.
 2. **Native WA "Event details" gadget** (`.WaGadgetEventsStateDetails`) — the
    event title, When/Location box, description, and registration. Skinned from
    `global-css/global.css` (section "EVENT — SINGLE EVENT DETAIL PAGE").

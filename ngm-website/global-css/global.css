@@ -6497,10 +6497,10 @@ body .WaGadgetEventsStateDetails h1.SystemPageTitle {
   text-transform: none !important; letter-spacing: normal !important;
   margin: 4px 0 26px !important;
 }
-/* Pill-button row injected under the event title by 01-top's script:
-   primary (filled) -> calendar, outline -> the matched event/meeting
-   type's page. Replaces the old top back-pill and inline type link. */
-.ngm-evd-btns { display: flex; gap: 10px; flex-wrap: wrap; margin: -12px 0 28px; }
+/* Pill-button row appended at the END of the event description by
+   01-top's script: primary (filled) -> calendar, outline -> the matched
+   event/meeting type's page. Replaces the old top back-pill. */
+.ngm-evd-btns { display: flex; gap: 10px; flex-wrap: wrap; margin: 26px 0 8px; }
 @media (max-width: 560px) {
   .ngm-evd-btns { flex-direction: column; align-items: stretch; }
   .ngm-evd-btns .ngm-btn { justify-content: center; }
@@ -6549,12 +6549,17 @@ body .WaGadgetEventsStateDetails .boxInfoContainer {
   border-radius: var(--ngm-radius) !important; padding: 8px 22px !important;
 }
 body .WaGadgetEventsStateDetails ul.boxInfo { list-style: none !important; margin: 0 !important; padding: 0 !important; }
-body .WaGadgetEventsStateDetails ul.boxInfo li { padding: 8px 0 !important; }
+/* each row is LABEL + value on one line */
+body .WaGadgetEventsStateDetails ul.boxInfo li {
+  padding: 8px 0 !important;
+  display: flex !important; align-items: baseline !important; gap: 12px !important;
+}
 body .WaGadgetEventsStateDetails .eventInfoBoxLabel {
-  display: block !important; font-family: var(--ngm-sans) !important;
+  display: block !important; flex: 0 0 76px !important; text-align: right !important;
+  font-family: var(--ngm-sans) !important;
   text-transform: uppercase !important; letter-spacing: .08em !important;
   font-size: var(--ngm-tag-size) !important; font-weight: 600 !important; color: var(--ngm-sage-dk) !important;
-  margin-bottom: 2px !important;
+  margin-bottom: 0 !important;
 }
 body .WaGadgetEventsStateDetails .eventInfoBoxValue,
 body .WaGadgetEventsStateDetails .eventInfoBoxValue strong,
@@ -6603,9 +6608,9 @@ body .WaGadgetEventsStateDetails .boxBodyContentContainer.fixedHeight {
 }
 /* description gets breathing room below the info box */
 body .WaGadgetEventsStateDetails .boxBodyContentOuterContainer { margin-top: 22px !important; }
-/* time row: its label is a bare &nbsp; — drop it and tuck the time under the date */
-body .WaGadgetEventsStateDetails li.eventInfoStartTime .eventInfoBoxLabel { display: none !important; }
-body .WaGadgetEventsStateDetails li.eventInfoStartTime { padding-top: 0 !important; }
+/* time row: WA ships its label as a bare &nbsp; — paint a real "Time"
+   title in front of it so the row reads like When and Location */
+body .WaGadgetEventsStateDetails li.eventInfoStartTime .eventInfoBoxLabel::before { content: "Time"; }
 /* registrationInfoContainer: EMPTY on non-registrable events (verified);
    its register-button markup is styled once a dump from a registrable
    event is captured — see system-pages/event-registration/README.md. */
@@ -6624,9 +6629,10 @@ body .WaGadgetEventsStateDetails { padding: 8px 24px 44px !important; }
 }
 
 /* ── Sandwich gadgets on the Event details system page ──
-   01-top.html: a slim strip holding the "Back to the full calendar" pill.
+   01-top.html: script only — appends the .ngm-evd-btns pill row at the
+   end of the event description.
    03-bottom.html: the Visit section (Member Hub / Request-the-Link tiles). */
-.ngm-evd-top { display: none; }  /* old top back-pill strip — replaced by .ngm-evd-btns under the title */
+.ngm-evd-top { display: none; }  /* old top back-pill strip — replaced by .ngm-evd-btns in the description */
 /* the Visit band spans edge-to-edge like other .ngm-sec sections; trim its
    vertical padding a touch — it follows a text-heavy gadget. */
 .ngm-evd-visit { padding-top: 56px; padding-bottom: 64px; }
