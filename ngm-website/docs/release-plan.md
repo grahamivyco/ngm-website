@@ -60,7 +60,11 @@ pass to confirm nothing in header/footer links to any of these is enough.
 
 - [ ] Paste `global-css/global.css` into WA → Website → CSS, Save.
       (`current-live-backup.css` is the instant revert if anything breaks.)
-- [ ] Template: paste new header + footer gadgets.
+- [ ] Template: paste new header + footer gadgets — into EVERY template
+      in use, including the one the `/Sys/*` system pages render through
+      (member public profile + Send-message still showed the old tapestry
+      banner / maroon collage / purple nav as of Aug 12; delete those old
+      gadgets from that template too).
 - [ ] Each page in the guide's table, in order — Custom-HTML paste(s) plus
       native middle gadget where the page is a "sandwich".
 - [ ] Join page: confirm it's ONE Custom-HTML gadget (delete the old

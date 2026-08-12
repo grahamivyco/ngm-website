@@ -19,6 +19,15 @@ Doing it in this order means the site is never half-styled:
 2. **Update the site template** with the new header and footer:
    - Header: `layout/header/01-top.html` → the site-wide Custom HTML gadget in the template.
    - Footer: `layout/footer/01-top.html` → the footer gadget.
+   - **Every template, not just the main one.** The `/Sys/*` system pages
+     (member public profile, Send-message, login, etc.) can use a
+     DIFFERENT page template that still carries the old chrome (tapestry
+     strip, maroon photo banner, purple nav). In WA admin → Website →
+     **Page templates**, open each template in use and give it the same
+     treatment: delete the old banner/nav gadgets, paste the new
+     header + footer gadgets. (The new header's CSS also hides WA's
+     native purple navigation menu.) Spot-check
+     `/Sys/PublicProfile/...` and its Send-message page afterwards.
 3. **Do each page** (below). For each: open the WA page, paste the block(s) in order,
    add any native gadget between them, Save.
 4. **Global CSS must be live first.** The page `.html` files carry no `<style>` of
