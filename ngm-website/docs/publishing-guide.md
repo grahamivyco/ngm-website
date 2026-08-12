@@ -54,15 +54,15 @@ Doing it in this order means the site is never half-styled:
 | A Fall Finish | `/fall-finish` | Single | — |
 | Meetings | `/monthly-meetings` | Sandwich | Upcoming events |
 | Stitch-Ins | `/daytime-stitch-in` (+ `/evening-stitch-in`) | Sandwich | Upcoming events |
-| Daytime Counted Thread | `/daytime-counted-thread` | Sandwich | Upcoming events → filter to this group |
+| Daytime Counted Thread | `/daytime-counted-thread-&-needlepoint` | Sandwich | Upcoming events → filter to this group |
 | Evening Needlepointers | `/evening-needlepointers` | Sandwich | " |
 | Potpourri Stitchers | `/potpourri-stitchers` | Sandwich | " |
-| Retreat | `/retreat` | Single | — |
-| Japanese Embroidery | `/japanese-embroidery` | Sandwich | Upcoming events → filter |
+| Retreat | `/annual-retreat-2026` | Single | — |
+| Japanese Embroidery | `/traditional-japanese-embroidery` | Sandwich | Upcoming events → filter |
 | 5th Tuesday | `/fifth-tuesday` | Sandwich | Upcoming events → filter |
 | Member Hub | `/members` | Sandwich | Upcoming events |
 | Donate | `/donate` | Single | — |
-| Contact | `/contact-us` | Single | — |
+| Contact | `/contact` | Single | — |
 
 For every sandwich page, set the native gadget's **CSS class** and filter per its
 `02-wa-gadget.txt`, and set the gadget's layout **row background to linen (#F0EAE0)**.

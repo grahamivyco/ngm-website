@@ -1,6 +1,6 @@
 # Daytime Counted Thread & Needlepoint
 
-**WA page:** Daytime Counted Thread & Needlepoint  ·  **URL:** `/daytime-counted-thread`  (header Meetings menu)
+**WA page:** Daytime Counted Thread & Needlepoint  ·  **URL:** `/daytime-counted-thread-&-needlepoint`  (header Meetings menu)
 
 Sandwich, one layout column:
 1. `01-top.html` — Custom HTML (hero, what-we-explore, details, upcoming heading)

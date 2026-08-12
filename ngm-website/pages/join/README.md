@@ -1,6 +1,6 @@
 # Join
 
-**WA page:** Join (slug `/Join-Duplicate`)
+**WA page:** Join (slug `/join`)
 **Structure:** ONE Custom-HTML gadget holding the whole page —
 `01-page.html`. The membership form is NOT embedded here; it lives on its
 own page, `/Application-Duplicate/` (see `system-pages/membership-application/`).
@@ -16,7 +16,7 @@ own page, `/Application-Duplicate/` (see `system-pages/membership-application/`)
 3. **Visit** (cream) — the homepage "Come stitch with us" section with the
    MVUUF address/photo and the Zoom tiles band.
 4. **Contact CTA** (rose band) — "Questions? / We'd love to help" linking
-   to /contact-us.
+   to /contact.
 5. Ends with the Member-Hub-tile login-redirect script.
 
 ## WA editor setup
