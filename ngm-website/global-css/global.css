@@ -6256,18 +6256,25 @@ body .WaGadgetEmailMember .memberDirectoryDetailsHeaderContainer h2::before {
 /* the old "Send message" caption block below the name (and its rule
    line) — folded into the eyebrow above */
 body .WaGadgetEmailMember .captionOuterContainer { display: none !important; }
-/* buttons at design-system size, standard button type (no caps) */
+/* buttons at design-system size, standard button type (no caps), and
+   STANDARD height — inputs carry an intrinsic line-height that made
+   them taller than the site's .ngm-btn pills, so pin line-height: 1 */
 body .WaGadgetEmailMember input.typeButton,
 body .WaGadgetEmailMember .buttonsContainer input[type="button"],
 body .WaGadgetEmailMember .buttonsContainer input[type="submit"] {
   font-size: var(--ngm-btn-size) !important; font-weight: 500 !important;
   padding: 12px 26px !important; border-radius: 100px !important; border-width: 1.5px !important;
   text-transform: none !important; letter-spacing: normal !important;
+  line-height: 1 !important; height: auto !important;
 }
-/* Cancel LEFT, Send RIGHT (DOM order is Send, Cancel — reversed row) */
-body .WaGadgetEmailMember .buttonsContainer {
+/* Cancel LEFT edge, Send RIGHT edge (DOM order is Send, Cancel —
+   reversed row). The flex is applied to the container AND any inner
+   wrapper div, since WA nests the buttons one level down. */
+body .WaGadgetEmailMember .buttonsContainer,
+body .WaGadgetEmailMember .buttonsContainer div {
   display: flex !important; flex-direction: row-reverse !important;
   justify-content: space-between !important; align-items: center !important;
+  width: 100% !important; float: none !important; box-sizing: border-box !important;
 }
 body .WaGadgetEmailMember .buttonsContainer input[type="submit"] { margin-left: 0 !important; }
 /* the required asterisk reads AFTER the label ("Message subject *"),
