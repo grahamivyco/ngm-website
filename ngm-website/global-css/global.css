@@ -7044,6 +7044,10 @@ body #membersTable tbody tr:hover td:last-child {
   border-top-right-radius: var(--ngm-radius) !important; border-bottom-right-radius: var(--ngm-radius) !important;
 }
 body #membersTable tbody tr:has(+ tr:hover) td { border-bottom-color: transparent !important; }
+/* no separator above the first person or below the last */
+body #membersTable thead, body #membersTable thead tr { border: 0 !important; }
+body #membersTable tbody tr:first-child td { border-top: 0 !important; }
+body #membersTable tbody tr:last-child td { border-bottom: 0 !important; }
 
 /* ---- ROUND 4 — row dump VERIFIED (Aug 2026): the results render into
    table#membersTable, and the theme's own responsive rules ride that ID,
@@ -7052,7 +7056,7 @@ body #membersTable tbody tr:has(+ tr:hover) td { border-bottom-color: transparen
    docs/wa-notes.md.) One tr.normal per person; city/state and
    email/phone are sibling .memberValue divs. ---- */
 @media (max-width: 640px) {
-  body #membersTable thead th { display: none !important; }
+  body #membersTable thead { display: none !important; }
   /* one entry per person, each thing stacked on its own line — name,
      then "City, State", then email, then phone — with a single
      light-beige line between people and no fills or inner lines.
@@ -7068,6 +7072,8 @@ body #membersTable tbody tr:has(+ tr:hover) td { border-bottom-color: transparen
     display: block !important; width: auto !important;
     border: 0 !important; padding: 0 !important; background: transparent !important;
   }
+  /* no separator below the last person on phones either */
+  body #membersTable tbody tr:last-child { border-bottom: 0 !important; }
   /* no hover/tap fill or radius on phones */
   body #membersTable tbody tr:hover td { background: transparent !important; border-radius: 0 !important; }
   body #membersTable td.memberDirectoryColumn1 h5 { margin: 0 !important; }
