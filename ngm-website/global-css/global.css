@@ -5757,15 +5757,20 @@ body .WaGadgetChangePassword .fieldSubContainer td {
   text-align: left !important;   /* theme right-aligns the label cells */
 }
 body .WaGadgetChangePassword .fieldContainer { margin: 0 0 16px !important; padding: 0 !important; }
+/* labels read as eyebrows above their full-width inputs — the same
+   pattern as the directory's SEARCH field */
 body .WaGadgetChangePassword .fieldLabel {
-  font-size: var(--ngm-text-ui) !important;
-  font-weight: 600 !important;
-  color: var(--ngm-sage-dk) !important;
-  margin: 0 0 6px !important;
+  font-family: var(--ngm-sans) !important;
+  font-size: var(--ngm-eyebrow-size) !important;
+  font-weight: 500 !important;
+  letter-spacing: var(--ngm-eyebrow-track) !important;
+  text-transform: uppercase !important;
+  color: var(--ngm-sage) !important;
+  margin: 0 0 8px !important;
   text-align: left !important;
 }
 body .WaGadgetChangePassword .fieldLabel strong,
-body .WaGadgetChangePassword .fieldLabel label { font-weight: 600 !important; }
+body .WaGadgetChangePassword .fieldLabel label { font-weight: 500 !important; }
 /* Rows whose label cell has no real <label> (the requirements row's is
    empty; the button row's is a lone &nbsp;) would leave a stray gap once
    stacked — hide those label cells. */
@@ -6191,13 +6196,26 @@ body .WaGadgetContactProfile #idRecordsFound,
 body .WaGadgetContactProfile #idRecordsFoundNumber { color: var(--ngm-charcoal) !important; font-style: normal !important; font-weight: 600 !important; }
 /* the balance readout (overrides WA's inline green) */
 body .WaGadgetContactProfile .totalBalance { color: var(--ngm-sage-dk) !important; font-weight: 600 !important; }
-/* the grid itself */
-body .WaGadgetContactProfile table.genericListTable { width: 100% !important; border-collapse: collapse !important; }
+/* the grid itself — the directory's list treatment: rounded green
+   header bar with NO underline, a breath of space under it, and only
+   light linen hairlines between transactions (none after the last) */
+body .WaGadgetContactProfile table.genericListTable {
+  width: 100% !important; border-collapse: separate !important; border-spacing: 0 !important;
+}
 body .WaGadgetContactProfile table.genericListTable thead th {
   background: var(--ngm-sage-lt) !important; color: var(--ngm-sage-dk) !important;
   text-transform: uppercase !important; letter-spacing: .08em !important; font-size: var(--ngm-eyebrow-size) !important;
   font-weight: 600 !important; text-align: left !important; padding: 12px 14px !important;
-  border-bottom: 1px solid var(--ngm-border) !important;
+  border-bottom: 0 !important;
+}
+body .WaGadgetContactProfile table.genericListTable thead th:first-child {
+  border-top-left-radius: var(--ngm-radius) !important; border-bottom-left-radius: var(--ngm-radius) !important;
+}
+body .WaGadgetContactProfile table.genericListTable thead th:last-child {
+  border-top-right-radius: var(--ngm-radius) !important; border-bottom-right-radius: var(--ngm-radius) !important;
+}
+body .WaGadgetContactProfile table.genericListTable tbody::before {
+  content: ""; display: table-row; height: 8px;
 }
 body .WaGadgetContactProfile table.genericListTable thead th.rightAlign,
 body .WaGadgetContactProfile table.genericListTable td.rightAlign { text-align: right !important; }
@@ -6208,9 +6226,10 @@ body .WaGadgetContactProfile table.genericListTable tbody td {
 }
 body .WaGadgetContactProfile table.genericListTable tbody td a { color: var(--ngm-sage-dk) !important; }
 body .WaGadgetContactProfile table.genericListTable .memberDirectoryBottomRow {
-  padding: 0 14px 14px !important; border-bottom: 1px solid #F0EDE6 !important;
+  padding: 0 14px 14px !important; border-bottom: 1px solid var(--ngm-linen) !important;
   color: var(--ngm-gray-lt) !important; font-size: var(--ngm-text-meta) !important;
 }
+body .WaGadgetContactProfile table.genericListTable tbody tr:last-child td { border-bottom: 0 !important; }
 body .WaGadgetContactProfile table.genericListTable .grayedOut { color: var(--ngm-gray) !important; }
 /* empty state */
 body .WaGadgetContactProfile .typeTextLabelNoData { color: var(--ngm-gray-lt) !important; font-style: italic !important; }
@@ -7937,6 +7956,13 @@ body.ngm-join-page .WaGadgetMembershipApplication .gadgetStyleBody {
    the "* Mandatory fields" note. Strip the leftover box chrome — the bare
    divider line WA draws across the top of the card — and collapse the empty
    wrapper space that pushed the Next button far below the email field. */
+/* the "* Mandatory fields" note is hidden on EVERY form (the rose
+   asterisks on the labels carry the signal) — wizard, application,
+   donation, wherever they render */
+body .WaGadgetMembershipApplication .mandatoryFieldsTitle,
+body .WaGadgetPublicWizard .mandatoryFieldsTitle,
+body .WaGadgetDonationForm .mandatoryFieldsTitle,
+body.ngm-donate-page #idGeneralFormContainer .mandatoryFieldsTitle,
 body.ngm-join-page .WaGadgetMembershipApplication .mandatoryFieldsTitle { display: none !important; }
 body.ngm-join-page .WaGadgetMembershipApplication hr,
 body.ngm-join-page .WaGadgetMembershipApplication .sectionDelimiter { display: none !important; }
