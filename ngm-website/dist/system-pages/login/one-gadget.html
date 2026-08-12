@@ -1,0 +1,57 @@
+<div class="ngm">
+  <section class="ngm-login-hero">
+    <div class="ngm-login-hero-inner">
+      <span class="ngm-lh-eyebrow">Log In</span>
+      <h1 class="ngm-lh-title">Welcome back, <br><em>stitchers</em></h1>
+      <p class="ngm-lh-sub">Sign in to your Needlework Guild account to register for monthly
+        meetings and events, browse the member directory, and open members-only
+        patterns and resources.</p>
+    </div>
+  </section>
+</div>
+
+<script>  document.body.classList.add('ngm-login-page');
+
+  (function () {
+    function ngmAuthPlaceholders() {
+      var g = document.querySelector('.WaGadgetAuthorizationRequired');
+      if (!g) return;
+      var e = g.querySelector('input[name="email"]');
+      if (e && !e.placeholder) e.placeholder = 'Email';
+      var p = g.querySelector('input[name="password"]');
+      if (p && !p.placeholder) p.placeholder = 'Password';
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', ngmAuthPlaceholders);
+    } else {
+      ngmAuthPlaceholders();
+    }
+  }());
+</script>
+
+<div id="ngm-pg-bottom" style="display:none">
+<div class="ngm">
+  <section class="ngm-login-foot">
+    <div class="ngm-login-foot-inner">
+      <p>Not a member yet? <a href="/join">Join the guild →</a></p>
+    </div>
+  </section>
+</div>
+</div>
+<script>
+(function(){
+  function place(){
+    var bot=document.getElementById('ngm-pg-bottom'); if(!bot) return;
+    var g=bot.closest('.WaGadget');
+    var native=null, sib=g?g.nextElementSibling:null;
+    while(sib){
+      if(sib.classList&&sib.classList.contains('WaGadget')&&!sib.classList.contains('WaGadgetCustomHTML')){native=sib;break;}
+      sib=sib.nextElementSibling;
+    }
+    if(!native){native=document.querySelector('.zoneContent .WaGadget:not(.WaGadgetCustomHTML)');}
+    if(native){native.parentNode.insertBefore(bot,native.nextSibling);}
+    bot.style.display='';
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',place);}else{place();}
+})();
+</script>

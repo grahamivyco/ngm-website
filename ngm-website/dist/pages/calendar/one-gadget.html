@@ -1,0 +1,182 @@
+<script>(function () {
+
+  if (document.body) { document.body.classList.add('ngm-calendar-page'); }
+  else { document.addEventListener('DOMContentLoaded', function () { document.body.classList.add('ngm-calendar-page'); }); }
+  function transform() {
+    var titles = document.querySelectorAll(
+      '.ngm-cal .sectionTitle, #idEventListCalendar .sectionTitle, .WaGadgetEventsStateCalendar .sectionTitle'
+    );
+    for (var i = 0; i < titles.length; i++) {
+      var t = titles[i].textContent;
+      var cleaned = t.replace(/^\s*(Month|Week|Year)\s*:\s*/i, '');
+      if (cleaned !== t) titles[i].textContent = cleaned;
+    }
+    var heads = document.querySelectorAll(
+      '.WaGadgetEventsStateCalendar td.EventListCalendarHeader, .ngm-cal td.EventListCalendarHeader'
+    );
+    for (var j = 0; j < heads.length; j++) {
+      var td = heads[j];
+      if (td.querySelector('.ngm-wd-f')) continue;      // already wrapped
+      var name = (td.textContent || '').trim();
+      if (!name) continue;
+      td.innerHTML =
+        '<span class="ngm-wd-f">' + name + '</span>' +
+        '<span class="ngm-wd-a">' + name.slice(0, 3) + '</span>' +
+        '<span class="ngm-wd-1">' + name.slice(0, 1) + '</span>';
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', transform);
+  } else {
+    transform();
+  }
+  try {
+    var mo = new MutationObserver(transform);
+    mo.observe(document.documentElement, { childList: true, subtree: true, characterData: true });
+    setTimeout(function () { mo.disconnect(); }, 8000);
+  } catch (e) {  }
+})();
+</script>
+<div class="ngm ngm-cal-hero">
+  <div class="ngm-cal-hero-inner">
+    <span class="ngm-eyebrow">Calendar</span>
+    <h1 class="ngm-h1">Everything in one <em>place</em></h1>
+    <p>Browse upcoming meetings, workshops, retreats, and special events. Click any event for full details and registration.</p>
+  </div>
+</div>
+<div class="ngm ngm-cal-body">
+  <div class="ngm-cal-body-inner">
+
+<div id="ngm-pg-bottom" style="display:none">
+<div class="ngm-key-wrap">
+    <div class="ngm-key">
+      <h2 class="ngm-key-title">Key</h2>
+      <div class="ngm-key-grid">
+        <div class="ngm-key-item">
+          <span class="ngm-key-swatch stitch-in"></span>
+          <div class="ngm-key-text"><h3>Stitch-Ins</h3><p>Daytime &amp; evening open stitching.</p></div>
+        </div>
+        <div class="ngm-key-item">
+          <span class="ngm-key-swatch npt"></span>
+          <div class="ngm-key-text"><h3>Counted Thread &amp; Needlepointers</h3><p>The counted-thread &amp; needlepoint groups.</p></div>
+        </div>
+        <div class="ngm-key-item">
+          <span class="ngm-key-swatch potpourri"></span>
+          <div class="ngm-key-text"><h3>Potpourri Stitchers</h3><p>The Potpourri special-interest group.</p></div>
+        </div>
+        <div class="ngm-key-item">
+          <span class="ngm-key-swatch come"></span>
+          <div class="ngm-key-text"><h3>Come &amp; Stitch</h3><p>Casual come-and-stitch gatherings.</p></div>
+        </div>
+        <div class="ngm-key-item">
+          <span class="ngm-key-swatch sunday"></span>
+          <div class="ngm-key-text"><h3>Sunday Tea &amp; Stitch</h3><p>Sunday-afternoon tea &amp; stitching.</p></div>
+        </div>
+        <div class="ngm-key-item">
+          <span class="ngm-key-swatch special"></span>
+          <div class="ngm-key-text"><h3>Workshops &amp; Special Events</h3><p>Workshops, the retreat &amp; special events.</p></div>
+        </div>
+        <div class="ngm-key-item">
+          <span class="ngm-key-swatch board"></span>
+          <div class="ngm-key-text"><h3>Board &amp; Admin</h3><p>Guild business, deadlines &amp; submissions.</p></div>
+        </div>
+      </div>
+
+      <div class="ngm-key-cta">
+        <h3>Want to add something to the calendar?</h3>
+        <p>Guild event, program idea, or a date we missed — send it through the <a href="https://forms.gle/BPz9eZNpCSxLpEmNA" target="_blank" rel="noopener noreferrer">Ideas &amp; Feedback form</a> and we'll get it on the calendar.</p>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<section class="ngm ngm-sec ngm-sec-cream">
+  <div class="ngm-con">
+    <div class="ngm-loc-inner">
+      <div class="ngm-loc-head">
+        <span class="ngm-eyebrow">Visit</span>
+        <h2 class="ngm-h2" style="margin-bottom:0">Where we <em>meet</em></h2>
+      </div>
+      <div class="ngm-loc-addr">
+        <p class="ngm-loc-note">Most groups meet at Minnesota Valley Unitarian Universalist Fellowship (MVUUF) in Bloomington. A few gather in members' homes or meet online &mdash; check the individual meeting for where it's held.</p>
+        <span class="ngm-addr-label">Meeting location</span>
+        <address class="ngm-address">
+          <a class="ngm-loc-dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=10715+Zenith+Ave+S+Bloomington+MN+55431" target="_blank" rel="noopener noreferrer">
+            10715 Zenith Avenue South<br>
+            Bloomington, MN 55431
+          </a>
+        </address>
+      </div>
+      <div class="ngm-loc-map ngm-loc-photo">
+        <span class="ngm-loc-photo-ph">Minnesota Valley Unitarian<br>Universalist Fellowship</span>
+        <img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade"
+          src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20Photos/MVUUF.jpeg"
+          alt="Minnesota Valley Unitarian Universalist Fellowship — our meeting location in Bloomington"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        >
+      </div>
+    </div>
+    <div class="ngm-visit-zoom">
+      <span class="ngm-addr-label">Joining by video</span>
+      <p class="ngm-visit-zoom-copy">Many of our meetings are on Zoom, in whole or in part. The link is available to members, and if you&rsquo;re not a member yet, just request it &mdash; we&rsquo;ll be happy to email it to you.</p>
+      <div class="ngm-videoband-tiles">
+        <a class="ngm-hub-zoom-module" href="/member-hub">
+          <span class="ngm-hub-zoom-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span>
+          <div class="ngm-hub-zoom-tile-body">
+            <h4>Member Hub</h4>
+            <p>Access the Zoom link.</p>
+          </div>
+          <span class="ngm-hub-zoom-tile-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+        <a class="ngm-hub-zoom-module ngm-hub-zoom-module-alt" href="/Request-The-Link">
+          <span class="ngm-hub-zoom-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></span>
+          <div class="ngm-hub-zoom-tile-body">
+            <h4>Request the Link</h4>
+            <p>Not a member? We&rsquo;ll email it to you.</p>
+          </div>
+          <span class="ngm-hub-zoom-tile-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ngm ngm-about-cta">
+  <div class="ngm-about-cta-inner">
+    <span class="ngm-eyebrow">Join</span>
+    <h2 class="ngm-h2">Find your people<br>and your <em>stitching</em></h2>
+    <p>We&rsquo;d love to have you. Come sit in on a Stitch-In, or any of our other monthly meetings &mdash; in person or on Zoom, whichever fits your calendar. Try as many as you&rsquo;re curious about. Once you&rsquo;ve found the one (or three) that feel like yours, join us for just $30 a year.</p>
+    <div class="ngm-about-cta-btns">
+      <a class="ngm-btn ngm-btn-rose" href="/join">Join the Guild</a>
+      <a class="ngm-btn ngm-btn-outline-rose" href="/about">Learn about us</a>
+    </div>
+  </div>
+</div>
+<script>(function () {
+  if (document.body && document.body.classList.contains("publicContentView")) {
+    var login = "/Sys/Login/?ReturnUrl=" + encodeURIComponent("/member-hub");
+    var tiles = document.querySelectorAll('a.ngm-hub-zoom-module[href="/member-hub"]');
+    for (var i = 0; i < tiles.length; i++) { tiles[i].setAttribute("href", login); }
+  }
+})();
+</script>
+</div>
+<script>
+(function(){
+  function place(){
+    var bot=document.getElementById('ngm-pg-bottom'); if(!bot) return;
+    var g=bot.closest('.WaGadget');
+    var native=null, sib=g?g.nextElementSibling:null;
+    while(sib){
+      if(sib.classList&&sib.classList.contains('WaGadget')&&!sib.classList.contains('WaGadgetCustomHTML')){native=sib;break;}
+      sib=sib.nextElementSibling;
+    }
+    if(!native){native=document.querySelector('.zoneContent .WaGadget:not(.WaGadgetCustomHTML)');}
+    if(native){native.parentNode.insertBefore(bot,native.nextSibling);}
+    bot.style.display='';
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',place);}else{place();}
+})();
+</script>

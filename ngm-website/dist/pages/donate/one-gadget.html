@@ -1,0 +1,118 @@
+<div class="ngm">
+
+  <section class="ngm-sec ngm-sec-cream">
+    <div class="ngm-con">
+      <div class="ngm-mt-hero-grid">
+        <div>
+          <span class="ngm-eyebrow">Donate</span>
+          <h1 class="ngm-h1">Help keep needlework <em>thriving</em></h1>
+          <p class="ngm-lead">The Needlework Guild of Minnesota is a registered 501(c)(3) nonprofit, so your gift is tax-deductible as allowed by law. Donations fund our programs and guest instructors, sustain the members&rsquo; library, and support community outreach &mdash; all while keeping dues low so anyone can join.</p>
+        </div>
+        <div class="ngm-mt-photo" style="min-height:380px;padding:0;overflow:hidden;border:none"><img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade" src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20-%20Photos/Retreat%20Photo%20Quilt%20NGM.jpeg" alt="Members and their needlework" loading="eager" style="width:100%;height:100%;object-fit:cover;border-radius:var(--ngm-radius-lg)"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ngm-give" class="ngm ngm-sec ngm-sec-white" style="padding-bottom:0;scroll-margin-top:100px">
+    <div class="ngm-con">
+      <div class="ngm-upcoming-head">
+        <span class="ngm-eyebrow">Give</span>
+        <h2 class="ngm-h2">Make your <em>gift</em></h2>
+        <p class="ngm-upcoming-intro">Use the secure donation form just below to give by card &mdash; a one-time gift or a recurring monthly donation. Every amount makes a difference.</p>
+      </div>
+    </div>
+  </section>
+</div>
+<script>(function () {
+  if (document.body) document.body.classList.add("ngm-donate-page");
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest ? e.target.closest('a[href="#ngm-give"]') : null;
+    if (!a) return;
+    var t = document.getElementById("ngm-give");
+    if (!t) return;
+    e.preventDefault();
+    t.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  var LABEL = "Donate securely";
+  function relabel() {
+    var btns = document.querySelectorAll('input.nextButton.button[id$="_next"]');
+    for (var i = 0; i < btns.length; i++) {
+      if (btns[i].value !== LABEL) btns[i].value = LABEL;
+    }
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", relabel);
+  } else {
+    relabel();
+  }
+  try {
+    new MutationObserver(relabel).observe(document.documentElement, { childList: true, subtree: true });
+  } catch (e) {  }
+})();
+</script>
+
+<div id="ngm-pg-bottom" style="display:none">
+<div class="ngm">
+
+  <section class="ngm ngm-sec ngm-sec-linen">
+    <div class="ngm-con">
+      <span class="ngm-eyebrow">Alternatives</span>
+      <h2 class="ngm-h2">Prefer to give <em>another way?</em></h2>
+      <p class="ngm-upcoming-intro">Send a check, give monthly, or dedicate a gift in someone&rsquo;s honor. Questions, or want to give another way? <a class="ngm-inline-link" href="/contact">Get in touch.</a></p>
+      <div class="ngm-pillars">
+        <div class="ngm-pillar">
+          <div class="ngm-pillar-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage-dk)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+          </div>
+          <h3>By mail</h3>
+          <p>Prefer a check? Make it out to the Needlework Guild of Minnesota and mail it to our PO Box &mdash; the mailing address is in the footer below.</p>
+        </div>
+        <div class="ngm-pillar">
+          <div class="ngm-pillar-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage-dk)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>
+          </div>
+          <h3>Give monthly</h3>
+          <p>Set up a recurring monthly gift in the form above to support the Guild all year long.</p>
+        </div>
+        <div class="ngm-pillar">
+          <div class="ngm-pillar-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--ngm-sage-dk)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+          </div>
+          <h3>In honor or memory</h3>
+          <p>Dedicate a gift to a stitcher you love &mdash; note the honoree with your donation and we&rsquo;ll record the dedication.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ngm ngm-about-cta">
+    <div class="ngm-about-cta-inner">
+      <span class="ngm-eyebrow">Join</span>
+      <h2 class="ngm-h2">Find your people<br>and your <em>stitching</em></h2>
+      <p>We&rsquo;d love to have you. Come sit in on a Stitch-In, or any of our other monthly meetings &mdash; in person or on Zoom, whichever fits your calendar. Try as many as you&rsquo;re curious about. Once you&rsquo;ve found the one (or three) that feel like yours, join us for just $30 a year.</p>
+      <div class="ngm-about-cta-btns">
+        <a class="ngm-btn ngm-btn-rose" href="/join">Join the Guild</a>
+        <a class="ngm-btn ngm-btn-outline-rose" href="/calendar">See our calendar</a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+(function(){
+  function place(){
+    var bot=document.getElementById('ngm-pg-bottom'); if(!bot) return;
+    var g=bot.closest('.WaGadget');
+    var native=null, sib=g?g.nextElementSibling:null;
+    while(sib){
+      if(sib.classList&&sib.classList.contains('WaGadget')&&!sib.classList.contains('WaGadgetCustomHTML')){native=sib;break;}
+      sib=sib.nextElementSibling;
+    }
+    if(!native){native=document.querySelector('.zoneContent .WaGadget:not(.WaGadgetCustomHTML)');}
+    if(native){native.parentNode.insertBefore(bot,native.nextSibling);}
+    bot.style.display='';
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',place);}else{place();}
+})();
+</script>

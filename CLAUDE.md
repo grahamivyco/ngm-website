@@ -86,6 +86,11 @@ the live site. It is GENERATED: never edit it by hand. After changing any
 page file or `global.css`, run `python3 ngm-website/tools/build-dist.py`
 to refresh it (and commit the result).
 
+The build also emits two convenience bundles: `dist/layout/site-chrome/`
+(header + footer + feedback pill as one gadget) and, for every sandwich
+page, `dist/<page>/one-gadget.html` (01-top + 03-bottom as one gadget —
+the bottom half relocates itself below the native gadget at runtime).
+
 ## Summary
 
 Edit the page `*.html` files for markup and `global-css/global.css` for

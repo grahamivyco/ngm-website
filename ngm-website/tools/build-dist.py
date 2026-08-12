@@ -84,6 +84,48 @@ def main() -> int:
         print("ERROR: global.css brace count changed after stripping", file=sys.stderr)
         return 1
 
+    # ONE-GADGET PAGES — for every sandwich page (01-top + 03-bottom around
+    # a native WA gadget), emit <page>/one-gadget.html: paste it as a SINGLE
+    # Custom-HTML gadget ABOVE the native gadget. The top half renders in
+    # place; the bottom half ships hidden and moves itself to just AFTER
+    # the first native (non-CustomHTML) gadget that follows, then reveals —
+    # the footer's lift-and-reveal pattern, so there is no flash.
+    MOVER = """<script>
+(function(){
+  function place(){
+    var bot=document.getElementById('ngm-pg-bottom'); if(!bot) return;
+    var g=bot.closest('.WaGadget');
+    var native=null, sib=g?g.nextElementSibling:null;
+    while(sib){
+      if(sib.classList&&sib.classList.contains('WaGadget')&&!sib.classList.contains('WaGadgetCustomHTML')){native=sib;break;}
+      sib=sib.nextElementSibling;
+    }
+    if(!native){native=document.querySelector('.zoneContent .WaGadget:not(.WaGadgetCustomHTML)');}
+    if(native){native.parentNode.insertBefore(bot,native.nextSibling);}
+    bot.style.display='';
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',place);}else{place();}
+})();
+</script>
+"""
+    combined = 0
+    for base in ("pages", "system-pages"):
+        for d in sorted((ROOT / base).iterdir()):
+            top, bot = d / "01-top.html", d / "03-bottom.html"
+            if not (top.is_file() and bot.is_file()):
+                continue
+            out = DIST / base / d.name / "one-gadget.html"
+            out.write_text(
+                clean_html(top.read_text(encoding="utf-8")).strip() + "\n\n"
+                + '<div id="ngm-pg-bottom" style="display:none">\n'
+                + clean_html(bot.read_text(encoding="utf-8")).strip()
+                + "\n</div>\n" + MOVER,
+                encoding="utf-8",
+            )
+            built.append(out)
+            combined += 1
+    print(f"one-gadget pages: {combined}")
+
     # ONE-PASTE SITE CHROME — header + footer + feedback pill in a single
     # gadget. Paste it at the BOTTOM of the page template (the footer's
     # slot): the header lifts itself to <body> and is position:fixed, the
