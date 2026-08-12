@@ -14,7 +14,7 @@ Sandwich, one layout column:
    skin paints the form's layout cell linen (`#F0EAE0`, same band as "Give
    online") with normal section spacing above and below.
 3. `03-bottom.html` — Custom HTML: **Alternatives** (eyebrow) — three bordered
-   cards (`.ngm-pillars` — By mail / Give monthly / In honor or memory) with a
+   cards (`.ngm-feat3` — By mail / Give monthly / In honor or memory) with a
    BARE icon (no sage chip behind it); they stay side by side until they wrap
    near mobile. The "Get in touch" contact link is folded into the intro copy
    above them;
