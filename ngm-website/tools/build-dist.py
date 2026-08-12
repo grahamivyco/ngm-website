@@ -114,6 +114,10 @@ def main() -> int:
       if(/WaLayoutItem|WaLayoutContainer|WaLayoutTable|WaLayoutRow/.test(c)||t==='TD'||t==='TR'||t==='TBODY'||t==='TABLE'){ a=p; p=a.parentNode; }
       else break;
     }
+    /* climb out of WA's unclassed gadget-stack wrapper (it carries inline
+       padding, which was insetting the moved band) and land as a direct
+       child of the placeholder, still after the native gadget */
+    while(a.parentNode&&a.parentNode!==document.body&&a.parentNode.tagName==='DIV'&&!/WaPlaceHolder|WaGadget/.test(cls(a.parentNode))){ a=a.parentNode; }
     return a;
   }
   function place(tries){
@@ -122,6 +126,9 @@ def main() -> int:
     if(native){
       var a=anchorFor(native);
       if(a.parentNode) a.parentNode.insertBefore(bot,a.nextSibling);
+      /* wear the custom-HTML gadget classes so every full-bleed rule that
+         zeroes gadget padding applies to the moved band too */
+      bot.className='WaGadget WaGadgetCustomHTML gadgetStyleNone';
       bot.style.display='';
       return;
     }
@@ -139,11 +146,34 @@ def main() -> int:
             top, bot = d / "01-top.html", d / "03-bottom.html"
             if not (top.is_file() and bot.is_file()):
                 continue
+            top_html = clean_html(top.read_text(encoding="utf-8")).strip()
+            bot_html = clean_html(bot.read_text(encoding="utf-8")).strip()
+            # BALANCE THE HALVES. Some pages (calendar) deliberately leave
+            # wrappers open in 01-top and close them in 03-bottom, so the
+            # native gadget sits INSIDE them. Wrapped in one div that would
+            # end #ngm-pg-bottom early — only the first section would move.
+            # Move those trailing opening tags into the bottom half instead.
+            opens, i = [], None
+            for m in re.finditer(r"<(div|section)\b[^>]*>|</(?:div|section)\s*>", top_html, re.I):
+                if m.group(0).startswith("</"):
+                    if opens:
+                        opens.pop()
+                else:
+                    opens.append(m.start())
+            if opens:
+                i = opens[0]
+                tail = top_html[i:]
+                if re.sub(r"<[^>]+>", "", tail).strip() == "":
+                    top_html, bot_html = top_html[:i].rstrip(), tail.strip() + "\n" + bot_html
+                else:  # content after the open tag: close here, reopen below
+                    names = re.findall(r"<(div|section)\b[^>]*>", tail, re.I)
+                    top_html += "".join("</%s>" % n for n in reversed(names))
+                    bot_html = "".join(re.findall(r"<(?:div|section)\b[^>]*>", tail, re.I)) + "\n" + bot_html
             out = DIST / base / d.name / "one-gadget.html"
             out.write_text(
-                clean_html(top.read_text(encoding="utf-8")).strip() + "\n\n"
+                top_html + "\n\n"
                 + '<div id="ngm-pg-bottom" style="display:none">\n'
-                + clean_html(bot.read_text(encoding="utf-8")).strip()
+                + bot_html
                 + "\n</div>\n" + MOVER,
                 encoding="utf-8",
             )

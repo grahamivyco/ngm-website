@@ -129,6 +129,10 @@
       if(/WaLayoutItem|WaLayoutContainer|WaLayoutTable|WaLayoutRow/.test(c)||t==='TD'||t==='TR'||t==='TBODY'||t==='TABLE'){ a=p; p=a.parentNode; }
       else break;
     }
+    /* climb out of WA's unclassed gadget-stack wrapper (it carries inline
+       padding, which was insetting the moved band) and land as a direct
+       child of the placeholder, still after the native gadget */
+    while(a.parentNode&&a.parentNode!==document.body&&a.parentNode.tagName==='DIV'&&!/WaPlaceHolder|WaGadget/.test(cls(a.parentNode))){ a=a.parentNode; }
     return a;
   }
   function place(tries){
@@ -137,6 +141,9 @@
     if(native){
       var a=anchorFor(native);
       if(a.parentNode) a.parentNode.insertBefore(bot,a.nextSibling);
+      /* wear the custom-HTML gadget classes so every full-bleed rule that
+         zeroes gadget padding applies to the moved band too */
+      bot.className='WaGadget WaGadgetCustomHTML gadgetStyleNone';
       bot.style.display='';
       return;
     }
