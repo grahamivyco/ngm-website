@@ -6113,6 +6113,67 @@ body .WaGadgetEmailMember .buttonsContainer input[type="submit"] {
   font-size: var(--ngm-text-ui) !important; font-weight: 600 !important; cursor: pointer !important; margin-left: 10px !important; box-shadow: none !important;
 }
 body .WaGadgetEmailMember .buttonsContainer input[type="submit"]:hover { background: var(--ngm-sage-lt) !important; }
+/* ---- VERIFIED full dump (Aug 2026): same nested corners + d1–d9
+   chrome as the public profile, and single-line fields laid out with a
+   TABLE (td.left label / td.right input). Flatten everything, stack
+   the label over a full-width input like the contact-profile form, and
+   contain the whole form in the same white card. ---- */
+body .WaGadgetEmailMember {
+  background: #fff !important;
+  border: 1px solid var(--ngm-border) !important;
+  border-radius: var(--ngm-radius-lg) !important;
+  box-shadow: var(--ngm-shm) !important;
+  padding: 28px clamp(20px, 4vw, 44px) 36px !important;
+  max-width: 940px !important;
+  margin: 24px auto 52px !important;
+  box-sizing: border-box !important;
+}
+@media (min-width: 641px) and (max-width: 1000px) {
+  body .WaGadgetEmailMember { margin: 24px 24px 52px !important; }
+}
+@media (max-width: 640px) {
+  body .WaGadgetEmailMember { margin: 16px 16px 44px !important; }
+}
+body .WaGadgetEmailMember .cornersContainer { display: none !important; }
+body .WaGadgetEmailMember .generalFormOuterContainer,
+body .WaGadgetEmailMember .generalFormContainer,
+body .WaGadgetEmailMember .formOuterContainer,
+body .WaGadgetEmailMember .formContainer,
+body .WaGadgetEmailMember .generalFieldsOuterContainer,
+body .WaGadgetEmailMember .generalFieldsContainer,
+body .WaGadgetEmailMember .captionOuterContainer,
+body .WaGadgetEmailMember .sectionOuterContainer,
+body .WaGadgetEmailMember .sectionContainer,
+body .WaGadgetEmailMember .d1, body .WaGadgetEmailMember .d2,
+body .WaGadgetEmailMember .d3, body .WaGadgetEmailMember .d4,
+body .WaGadgetEmailMember .d5, body .WaGadgetEmailMember .d6,
+body .WaGadgetEmailMember .d7, body .WaGadgetEmailMember .d8,
+body .WaGadgetEmailMember .d9, body .WaGadgetEmailMember .inner {
+  display: block !important; width: auto !important;
+  margin: 0 !important; padding: 0 !important;
+  background: transparent !important; border: 0 !important;
+}
+/* single-line fields ship as tables — unwrap them */
+body .WaGadgetEmailMember .fieldSubContainer table,
+body .WaGadgetEmailMember .fieldSubContainer tbody,
+body .WaGadgetEmailMember .fieldSubContainer tr,
+body .WaGadgetEmailMember .fieldSubContainer td {
+  display: block !important; width: auto !important;
+  padding: 0 !important; margin: 0 !important; border: 0 !important;
+}
+body .WaGadgetEmailMember .fieldContainer { padding: 8px 0 !important; }
+body .WaGadgetEmailMember .fieldLabel { margin-bottom: 4px !important; }
+body .WaGadgetEmailMember .fieldBody input.typeText,
+body .WaGadgetEmailMember .fieldBody textarea {
+  width: 100% !important; max-width: 100% !important; box-sizing: border-box !important;
+}
+body .WaGadgetEmailMember textarea { min-height: 140px !important; }
+/* the "* Mandatory fields" note — hidden, like the contact profile */
+body .WaGadgetEmailMember .mandatoryFieldsTitle { display: none !important; }
+/* rhythm the flattening removed */
+body .WaGadgetEmailMember .memberDirectoryDetailsHeaderContainer { margin: 10px 0 18px !important; }
+body .WaGadgetEmailMember .captionContainer .fieldBody { margin-top: 14px !important; margin-bottom: 6px !important; }
+body .WaGadgetEmailMember .buttonsContainer { margin-top: 18px !important; }
 
 /* ══ Transaction grids on the Invoices & Donations tabs ══
    WA renders these into <table class="genericListTable"> inside
