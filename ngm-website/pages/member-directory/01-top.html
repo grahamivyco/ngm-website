@@ -16,4 +16,19 @@
    cream so the hero flows into it and the gadget reads as a white card —
    same pattern as the profile page's body.ngm-profile-page. */
 document.body.classList.add("ngm-dir-page");
+/* search polish: the native label becomes a bare "Search" (styled as an
+   eyebrow in CSS) and the hint moves inside the input as a placeholder */
+(function () {
+  function polish() {
+    var lbl = document.querySelector("#memberDirectorySearchArea label");
+    if (lbl) lbl.textContent = "Search";
+    var inp = document.querySelector(".memberDirectorySearchArea input[type='text']");
+    if (inp) inp.setAttribute("placeholder", "Search by name, city, or email");
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", polish);
+  } else {
+    polish();
+  }
+})();
 </script>
