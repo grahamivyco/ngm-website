@@ -6000,6 +6000,53 @@ body .WaGadgetMemberPublicProfile .fieldBody .label {
   color: var(--ngm-charcoal) !important; font-size: var(--ngm-btn-size) !important;
 }
 body .WaGadgetMemberPublicProfile .fieldBody a { color: var(--ngm-sage-dk) !important; }
+/* ---- VERIFIED full dump (Aug 2026): the gadget nests the theme's
+   corners + d1–d9 chrome at several levels (details, form,
+   generalFields, caption, section) and inserts EMPTY spacer
+   .fieldContainer rows between fields. Flatten it all and contain the
+   profile in the same white card as /Sys/Profile. ---- */
+body .WaGadgetMemberPublicProfile {
+  background: #fff !important;
+  border: 1px solid var(--ngm-border) !important;
+  border-radius: var(--ngm-radius-lg) !important;
+  box-shadow: var(--ngm-shm) !important;
+  padding: 28px clamp(20px, 4vw, 44px) 36px !important;
+  max-width: 940px !important;
+  margin: 24px auto 52px !important;
+  box-sizing: border-box !important;
+}
+@media (min-width: 641px) and (max-width: 1000px) {
+  body .WaGadgetMemberPublicProfile { margin: 24px 24px 52px !important; }
+}
+@media (max-width: 640px) {
+  body .WaGadgetMemberPublicProfile { margin: 16px 16px 44px !important; }
+}
+body .WaGadgetMemberPublicProfile .cornersContainer { display: none !important; }
+body .WaGadgetMemberPublicProfile .memberDirectoryDetailsOuterContainer,
+body .WaGadgetMemberPublicProfile .memberDirectoryDetailsContainer,
+body .WaGadgetMemberPublicProfile .formOuterContainer,
+body .WaGadgetMemberPublicProfile .formContainer,
+body .WaGadgetMemberPublicProfile .generalFieldsOuterContainer,
+body .WaGadgetMemberPublicProfile .generalFieldsContainer,
+body .WaGadgetMemberPublicProfile .captionOuterContainer,
+body .WaGadgetMemberPublicProfile .sectionOuterContainer,
+body .WaGadgetMemberPublicProfile .sectionContainer,
+body .WaGadgetMemberPublicProfile .d1, body .WaGadgetMemberPublicProfile .d2,
+body .WaGadgetMemberPublicProfile .d3, body .WaGadgetMemberPublicProfile .d4,
+body .WaGadgetMemberPublicProfile .d5, body .WaGadgetMemberPublicProfile .d6,
+body .WaGadgetMemberPublicProfile .d7, body .WaGadgetMemberPublicProfile .d8,
+body .WaGadgetMemberPublicProfile .d9, body .WaGadgetMemberPublicProfile .inner {
+  display: block !important; width: auto !important;
+  margin: 0 !important; padding: 0 !important;
+  background: transparent !important; border: 0 !important;
+}
+/* WA's empty spacer rows between fields — collapsed (real rows hold a
+   value span / the caption h4) */
+body .WaGadgetMemberPublicProfile .fieldContainer:not(:has(span, h4, a, img)) { display: none !important; }
+/* breathing room the flattening removed */
+body .WaGadgetMemberPublicProfile .memberDirectoryDetailsHeaderContainer { margin: 10px 0 18px !important; }
+body .WaGadgetMemberPublicProfile .fieldContainer.simpleTextContainer { padding: 8px 0 !important; }
+body .WaGadgetMemberPublicProfile .captionContainer .fieldBody { margin-top: 14px !important; }
 /* Send-message button as a sage pill */
 body .WaGadgetMemberPublicProfile input.typeButton {
   font-family: var(--ngm-sans) !important; background: var(--ngm-sage-dk) !important; color: #fff !important;
