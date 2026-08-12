@@ -6135,13 +6135,16 @@ body .WaGadgetContactProfile .typeTextLabelNoData { color: var(--ngm-gray-lt) !i
 .ngm-hub-zoom-tile-go svg{width:20px;height:20px;}
 .ngm-hub-zoom-tile:hover .ngm-hub-zoom-tile-go{transform:translateX(3px);}
 /* zoom module: a full-width tile in its own section, a shade deeper */
-.ngm-hub-zoom-module{display:flex;align-items:center;gap:18px;width:100%;background:#D6E3CC;border:1px solid #C1D3B2;border-radius:var(--ngm-radius-lg);padding:24px 28px;margin-top:8px;text-decoration:none!important;color:var(--ngm-charcoal);transition:transform .18s,box-shadow .18s;}
+.ngm-hub-zoom-module{display:flex;align-items:center;gap:18px;width:100%;background:#D6E3CC;border:1px solid #C1D3B2;border-radius:var(--ngm-radius-lg);padding:24px 28px;margin-top:8px;text-decoration:none!important;color:var(--ngm-charcoal);transition:background .18s,border-color .18s;}
 /* SECONDARY tile — the quiet half of a tile pair (e.g. Member Hub =
    primary filled, Request the Link = secondary). White card, standard
    border, sage-tinted icon chip: the tile version of filled vs outline. */
 .ngm-hub-zoom-module.ngm-hub-zoom-module-alt{background:#fff;border-color:var(--ngm-border);}
 .ngm-hub-zoom-module.ngm-hub-zoom-module-alt .ngm-hub-zoom-tile-icon{background:var(--ngm-sage-lt);}
-.ngm-hub-zoom-module:hover{transform:translateY(var(--ngm-lift));box-shadow:var(--ngm-shm);}
+/* hover: no raise — the card deepens a shade and the arrow nudges right
+   (the arrow nudge is the existing .ngm-hub-zoom-tile-go rule below) */
+.ngm-hub-zoom-module:hover{background:#CBDBBE;border-color:#B3C8A1;}
+.ngm-hub-zoom-module.ngm-hub-zoom-module-alt:hover{background:var(--ngm-sage-lt);border-color:#C1D3B2;}
 .ngm-hub-zoom-module .ngm-hub-zoom-tile-body h4{margin:0;}
 .ngm-hub-zoom-module:hover .ngm-hub-zoom-tile-go{transform:translateX(3px);}
 /* profile card sits on the right of the hero; subtext lists the profile tabs */
