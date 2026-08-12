@@ -5049,17 +5049,16 @@ body .ngm-hub-qa-primary p{flex:0 0 auto!important;}
    Events) — people stack single-file inside each column. The two-class
    .ngm-hub-teams selectors out-specify the standalone .ngm-hub-people
    media rules below, so the columns hold their single-file stacking. */
-.ngm-hub-teams{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--ngm-gap);align-items:start;margin-top:6px;}
-.ngm-hub-teams .ngm-hub-team{margin-top:0;}
-.ngm-hub-teams .ngm-hub-people{grid-template-columns:1fr;}
-/* the contact page reuses the columns for its role->email rows */
-.ngm-hub-teams .ngm-hub-lead-grid{grid-template-columns:1fr;}
-/* "* Board member" footnote under the roster columns */
+/* sections stack full-width (Program Leads → Events → Guild Support in
+   the markup); the cards inside each section flow HORIZONTALLY and wrap */
+.ngm-hub-teams{display:block;margin-top:6px;}
+.ngm-hub-teams .ngm-hub-team{margin-top:34px;}
+.ngm-hub-teams .ngm-hub-team:first-child{margin-top:6px;}
+.ngm-hub-teams .ngm-hub-people{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:var(--ngm-gap);align-items:stretch;}
+/* "* Board member" footnote under the roster */
 .ngm-hub-team-foot{font-family:var(--ngm-sans);font-size:var(--ngm-text-meta);color:var(--ngm-gray);margin:14px 0 0;}
 @media(max-width:900px){
-  .ngm-hub-teams{grid-template-columns:1fr;}
   .ngm-hub-teams .ngm-hub-team{margin-top:28px;}
-  .ngm-hub-teams .ngm-hub-team:first-child{margin-top:0;}
 }
 .ngm-hub-people{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
 .ngm-hub-person{background:#fff;border:1px solid var(--ngm-border);border-radius:var(--ngm-radius);padding:18px 20px;}
