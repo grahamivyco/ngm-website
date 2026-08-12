@@ -61,4 +61,4 @@ on this page, that's a WA gadget-style setting, not a CSS change.
   page is the separate `system-pages/member-profile/` task.
 
 ## URLs (set)
-- `03-bottom.html` / `03-bottom.html` "Join the guild" link → `/Join-Duplicate` (the real Join page slug).
+- `03-bottom.html` / `03-bottom.html` "Join the guild" link → `/join` (the real Join page slug).
