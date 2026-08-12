@@ -55,10 +55,12 @@ Doing it in this order means the site is never half-styled:
    which is what made pages visibly re-font on each navigation.
 4. **Do each page** (below). For each: open the WA page, paste the block(s) in order,
    add any native gadget between them, Save.
-4. **Global CSS must be live first.** The page `.html` files carry no `<style>` of
+5. **Global CSS must be live first.** The page `.html` files carry no `<style>` of
    their own — they rely entirely on the Global CSS for styling, so make sure the
    Global CSS tab holds the full `global.css` before/when you paste the page gadgets.
-5. **Spot-check** each live page (logged out and logged in).
+6. **Spot-check** each live page (logged out and logged in) — including the
+   error pages: hit a made-up URL for the 404, and open a members-only page
+   while logged out for the 403.
 
 ---
 
@@ -78,22 +80,22 @@ Doing it in this order means the site is never half-styled:
 | Page | Live URL | Type | Middle gadget |
 |------|----------|------|---------------|
 | Homepage | `/` | Sandwich | Upcoming events (`ngm-wa-events`) |
-| About | `/about-us` | Single | — |
+| About | `/about` | Single | — |
 | Calendar | `/calendar` | Sandwich | WA **Calendar** gadget (`ngm-cal`) |
 | Events (landing) | `/events` | Sandwich | Upcoming events |
 | Workshops | `/workshops` | Sandwich | Upcoming events → filter to workshops |
 | Join | `/join` | Single | — |
 | March to the Finish | `/march-to-the-finish` | Single | — |
 | A Fall Finish | `/a-fall-finish` | Single | — |
-| Meetings | `/monthly-meetings` | Sandwich | Upcoming events |
+| Meetings | `/meetings` | Sandwich | Upcoming events |
 | Stitch-Ins | `/daytime-stitch-in` (+ `/evening-stitch-in`) | Sandwich | Upcoming events |
 | Daytime Counted Thread | `/daytime-counted-thread-&-needlepoint` | Sandwich | Upcoming events → filter to this group |
 | Evening Needlepointers | `/evening-needlepointers` | Sandwich | " |
 | Potpourri Stitchers | `/potpourri-stitchers` | Sandwich | " |
 | Retreat | `/annual-retreat-2026` | Single | — |
 | Japanese Embroidery | `/traditional-japanese-embroidery` | Sandwich | Upcoming events → filter |
-| 5th Tuesday | `/fifth-tuesday` | Sandwich | Upcoming events → filter |
-| Member Hub | `/members` | Sandwich | Upcoming events |
+| 5th Tuesday | `/5th-tuesday-open-stitching` | Sandwich | Upcoming events → filter |
+| Member Hub | `/member-hub` | Single | — |
 | Donate | `/donate` | Single | — |
 | Contact | `/contact` | Single | — |
 
@@ -102,13 +104,27 @@ For every sandwich page, set the native gadget's **CSS class** and filter per it
 
 ## System pages (WA built-ins)
 
-| Page | Live URL | Status |
-|------|----------|--------|
-| Login | `/Sys/Login` | ✅ Built — branded heading (`system-pages/login/`) + form skin in Global CSS |
-| Membership application | `/Application-Duplicate/` | Skin in Global CSS + optional branded heading (`system-pages/membership-application/`) |
-| Member profile | `/Sys/Profile` | CSS-only skin in Global CSS (verify against the live page) |
-| Renewal | `/Sys/Profile` renewal flow | CSS-only skin in Global CSS (verify) |
-| Contact profile | contact profile screen | CSS-only skin in Global CSS (verify) |
+Paste each from `dist/system-pages/<name>/`. Find them in WA admin →
+**Website → System pages**, open the page, and paste into a Custom-HTML
+gadget (some are heading-only banners that sit ABOVE the native content —
+see each page's README).
+
+| WA system page | Paste file | Notes |
+|------|------|------|
+| Page not found (404) | `page-not-found/01-top.html` | Full branded page |
+| Access denied (403) | `access-denied/01-top.html` | Full branded page — members-only message |
+| Authorization required | `authorization-required/01-top.html` | Banner above the native login form |
+| Login | `login/01-top.html` + `03-bottom.html` | Banner + below-form block; form skinned in Global CSS |
+| Change password | `change-password/01-top.html` | Banner above the native form |
+| Event details | `event-details/01-top.html` + `03-bottom.html` | Or `one-gadget.html` (single gadget above the native gadget) |
+| Event registration | — | BLOCKED: needs a live registration to dump (see its README) |
+| Member profile | — | CSS-only skin in Global CSS |
+| Contact profile | `contact-profile/01-top.html` | Banner + CSS skin |
+| Renewal | `renewal/01-top.html` | Banner + CSS skin |
+| Membership application | `membership-application/01-top.html` | Banner; form skinned in Global CSS |
+| Terms of use | `terms-of-use/01-top.html` | Branded heading ABOVE the existing legal text |
+| Unsubscribe | `unsubscribe/01-top.html` | Banner above the native controls |
+| Member directory | `pages/member-directory/01-top.html` | A normal page, not a system page (`/member-directory`) |
 
 The account/login **button** (name → View profile / Change password / Log out) is skinned
 site-wide in Global CSS (`WaGadgetLoginForm`).
