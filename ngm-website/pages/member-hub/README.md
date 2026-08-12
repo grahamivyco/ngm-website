@@ -21,7 +21,7 @@ around what members come to DO, not around telling a story:
      `/Sys/Password/Change`.
    - Cards stack (primary first) under 860px.
 2. **Member resources** (white) — ONE live tile (Member directory →
-   `/member-directory`) plus a single dashed "Coming soon" tile
+   `/directory` — the live WA slug) plus a single dashed "Coming soon" tile
    (`.ngm-hub-rtile-soon`, not a link) listing everything still being
    prepared: newsletter archive, lending library, meeting handouts,
    bylaws & policies, board minutes, financial reports & forms, and

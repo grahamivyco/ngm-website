@@ -14,7 +14,8 @@ members is the native WA gadget itself; we don't rebuild it.
    comes from their own profile, with buttons to edit it or adjust privacy.
 
 ## Wild Apricot setup (the sandwich)
-1. Create a new page (e.g. **Member Directory** at `/member-directory`).
+1. Create a new page (e.g. **Member Directory** at `/directory` — the
+   confirmed live slug; the Member Hub tile and footer link point there).
 2. **Restrict it to members** — page settings → Access → *Members only*.
 3. Add three gadgets, top to bottom:
    - **Custom HTML** gadget → paste `01-top.html`.
