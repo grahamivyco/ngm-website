@@ -17,6 +17,14 @@
      Raw Headers), NOT here. Injecting it from this gadget loads too late —
      WA's default icon flashes first and it never reaches the browser tab.
      Icon files live in /brand (favicon.ico is the one to upload to WA). -->
+<!-- FONTS: loaded HERE so every template that carries the header gets
+     Cormorant Garamond + DM Sans — pages on templates without the Raw
+     Headers font link were falling back to system fonts (header and page
+     type visibly changed on those pages). Duplicate links are harmless:
+     the browser dedupes the second request. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&amp;family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&amp;display=swap">
 <style>
 #ngm,#ngm *,#ngm *::before,#ngm *::after{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans','Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1}
 /* ── Bar ──
@@ -193,7 +201,7 @@ body.memberContentView #ngm .ngm-member{display:inline-flex}
         <ul class="ngm-drop" role="menu" aria-label="Events">
           <li><a href="/annual-retreat-2026" role="menuitem">Annual Retreat 2026</a></li>
           <li><a href="/march-to-the-finish" role="menuitem">March to the Finish</a></li>
-          <li><a href="/fall-finish" role="menuitem">A Fall Finish</a></li>
+          <li><a href="/a-fall-finish" role="menuitem">A Fall Finish</a></li>
           <li><a href="/traditional-japanese-embroidery" role="menuitem">Traditional Japanese Embroidery</a></li>
           <li><a href="/workshops" role="menuitem">Workshops</a></li>
           <li><a href="/5th-tuesday-open-stitching" role="menuitem">5th Tuesday Open Stitching</a></li>
@@ -244,7 +252,7 @@ body.memberContentView #ngm .ngm-member{display:inline-flex}
       <div class="ngm-mob-sub" id="ngm-mb-es" aria-hidden="true">
         <a href="/annual-retreat-2026">Annual Retreat 2026</a>
         <a href="/march-to-the-finish">March to the Finish</a>
-        <a href="/fall-finish">A Fall Finish</a>
+        <a href="/a-fall-finish">A Fall Finish</a>
         <a href="/traditional-japanese-embroidery">Traditional Japanese Embroidery</a>
         <a href="/workshops">Workshops</a>
         <a href="/5th-tuesday-open-stitching">5th Tuesday Open Stitching</a>
