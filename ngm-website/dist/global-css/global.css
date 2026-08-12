@@ -4039,7 +4039,7 @@ body .ngm-sys-btn{display:inline-flex;align-items:center;justify-content:center;
 .ngm-sys-btn-outline:hover{background:var(--ngm-sage-dk);color:#fff!important;}
 
 .ngm-sys-band.ngm-sys-fill{
-  min-height:var(--ngm-sys-fill,52vh);
+  min-height:var(--ngm-sys-fill,calc(100vh - 240px));
   display:flex;align-items:center;justify-content:center;
 }
 @media(max-width:640px){.ngm-sys-band{padding:40px var(--ngm-pad-x-sm) 36px;}}

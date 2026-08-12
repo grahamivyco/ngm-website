@@ -4905,15 +4905,16 @@ body .ngm-sys-btn{display:inline-flex;align-items:center;justify-content:center;
 .ngm-sys-btn-green:hover{background:var(--ngm-sage);border-color:var(--ngm-sage);}
 .ngm-sys-btn-outline{background:transparent;color:var(--ngm-sage-dk)!important;border-color:var(--ngm-sage-dk);}
 .ngm-sys-btn-outline:hover{background:var(--ngm-sage-dk);color:#fff!important;}
-/* FULL-SCREEN VARIANT (404). The band is the page's whole content, so it
-   fills the gap between the fixed header and the footer instead of sitting
-   as a short strip with the footer floating up the screen. The exact
-   height comes from --ngm-sys-fill, which the page's own script measures
-   (innerHeight - header - footer) and re-measures on resize; the 52vh
-   fallback keeps the band reasonable if the script never runs. Content is
+/* FULL-SCREEN VARIANT (404). The band is the page's whole content, so at
+   its natural height the page ended above the fold and left empty
+   background under the footer. It fills the screen instead, stopping just
+   short so the START of the footer still shows. The exact height comes
+   from --ngm-sys-fill, which the page's own script measures
+   (innerHeight - header - a peek of the footer) and re-measures on resize;
+   the calc() fallback approximates it if the script never runs. Content is
    flex-centred inside it. */
 .ngm-sys-band.ngm-sys-fill{
-  min-height:var(--ngm-sys-fill,52vh);
+  min-height:var(--ngm-sys-fill,calc(100vh - 240px));
   display:flex;align-items:center;justify-content:center;
 }
 @media(max-width:640px){.ngm-sys-band{padding:40px var(--ngm-pad-x-sm) 36px;}}

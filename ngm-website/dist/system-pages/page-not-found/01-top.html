@@ -19,7 +19,9 @@
     var foot = document.getElementById("ngmf");
     var h = head ? head.getBoundingClientRect().height : 0;
     var f = foot && foot.offsetParent !== null ? foot.getBoundingClientRect().height : 0;
-    band.style.setProperty("--ngm-sys-fill", Math.max(0, window.innerHeight - h - f) + "px");
+    var peek = Math.min(Math.max(110, window.innerHeight * 0.14), 190);
+    if (f) peek = Math.min(peek, f);
+    band.style.setProperty("--ngm-sys-fill", Math.max(0, window.innerHeight - h - peek) + "px");
   }
   fit();
   window.addEventListener("resize", fit);

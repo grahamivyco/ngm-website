@@ -13,14 +13,18 @@
   </section>
 </div>
 <script>
-/* FILL THE SCREEN — the 404 band is the page's only content, so on a tall
-   window it left the footer floating halfway up. Give the band a minimum
-   height of exactly the space between the fixed header and the footer:
-     innerHeight - #ngm (fixed header) - #ngmf (footer)
-   Both are measured live because the header shrinks at mobile and the
-   footer's height depends on how its columns wrap. The footer lifts itself
-   into place asynchronously (it stays display:none until .ngmf-placed), so
-   remeasure on resize, on load, and whenever either element changes size. */
+/* FILL THE SCREEN — the 404 band is the page's only content, so at its
+   natural height the whole page came up SHORTER than the window and left a
+   band of empty background under the footer. The band takes up the rest of
+   the screen instead:
+     innerHeight - #ngm (fixed header) - a peek of the footer
+   The peek is deliberate: filling the exact gap down to the footer's TOP
+   would put the entire footer on screen, and the page should end with just
+   the start of it showing (the rest arrives on scroll). It's ~14% of the
+   window, floored at 110px and capped at 190px so it stays a glimpse on
+   both short laptops and tall monitors — and never taller than the footer
+   itself. The header is measured rather than hard-coded because it shrinks
+   at mobile; remeasure on resize, on load, and whenever it changes size. */
 (function () {
   var band = document.querySelector(".ngm-sys-fill");
   if (!band) return;
@@ -29,7 +33,9 @@
     var foot = document.getElementById("ngmf");
     var h = head ? head.getBoundingClientRect().height : 0;
     var f = foot && foot.offsetParent !== null ? foot.getBoundingClientRect().height : 0;
-    band.style.setProperty("--ngm-sys-fill", Math.max(0, window.innerHeight - h - f) + "px");
+    var peek = Math.min(Math.max(110, window.innerHeight * 0.14), 190);
+    if (f) peek = Math.min(peek, f);
+    band.style.setProperty("--ngm-sys-fill", Math.max(0, window.innerHeight - h - peek) + "px");
   }
   fit();
   window.addEventListener("resize", fit);
