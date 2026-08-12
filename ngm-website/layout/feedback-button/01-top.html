@@ -110,7 +110,10 @@
     var vh=window.innerHeight||document.documentElement.clientHeight;
     var footerTop=footer.getBoundingClientRect().top;
     var showing=vh-footerTop;               /* px of footer visible at the bottom */
-    if(showing>0){
+    /* clamp: only dock while the footer is genuinely peeking in from the
+       bottom — a footer that sits above the viewport (mis-placed gadget,
+       tall-footer phones) must never fling the pill off its corner */
+    if(showing>0&&showing<vh-72){
       btn.style.bottom=(showing+MARGIN)+'px';   /* sit just above the footer */
     }else{
       btn.style.bottom='';                       /* revert to CSS (with safe-area) */

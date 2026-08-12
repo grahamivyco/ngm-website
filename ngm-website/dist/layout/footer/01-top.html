@@ -131,4 +131,13 @@ body.memberContentView #ngmf .gi-member{display:block}
   }
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',ngmfApplyState);}else{ngmfApplyState();}
 }());
+
+(function(){
+  function ngmfLift(){
+    var f=document.getElementById('ngmf');
+    if(f&&document.body&&document.body.lastElementChild!==f){document.body.appendChild(f);}
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',ngmfLift);}else{ngmfLift();}
+  window.addEventListener('load',ngmfLift);
+}());
 </script>

@@ -161,4 +161,17 @@ body.memberContentView #ngmf .gi-member{display:block}
   }
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',ngmfApplyState);}else{ngmfApplyState();}
 }());
+/* ── FOOTER LIFT ──
+   The footer renders at the very BOTTOM of the page no matter where its
+   gadget sits in the template (so the combined site-chrome gadget can be
+   pasted anywhere, including the top): once the DOM is parsed, the footer
+   moves itself to the end of <body>. Same body-lift trick as the header. */
+(function(){
+  function ngmfLift(){
+    var f=document.getElementById('ngmf');
+    if(f&&document.body&&document.body.lastElementChild!==f){document.body.appendChild(f);}
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',ngmfLift);}else{ngmfLift();}
+  window.addEventListener('load',ngmfLift);
+}());
 </script>

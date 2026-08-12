@@ -419,6 +419,15 @@ body.memberContentView #ngmf .gi-member{display:block}
   }
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',ngmfApplyState);}else{ngmfApplyState();}
 }());
+
+(function(){
+  function ngmfLift(){
+    var f=document.getElementById('ngmf');
+    if(f&&document.body&&document.body.lastElementChild!==f){document.body.appendChild(f);}
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',ngmfLift);}else{ngmfLift();}
+  window.addEventListener('load',ngmfLift);
+}());
 </script>
 
 <style>#ngmfb,#ngmfb *,#ngmfb *::before,#ngmfb *::after{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans','Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1}
@@ -500,7 +509,8 @@ body.memberContentView #ngmf .gi-member{display:block}
     var vh=window.innerHeight||document.documentElement.clientHeight;
     var footerTop=footer.getBoundingClientRect().top;
     var showing=vh-footerTop;               
-    if(showing>0){
+
+    if(showing>0&&showing<vh-72){
       btn.style.bottom=(showing+MARGIN)+'px';   
     }else{
       btn.style.bottom='';                       
