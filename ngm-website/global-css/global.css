@@ -5965,6 +5965,21 @@ body .WaGadgetChangePassword input[name="cancelButton"]:hover {
    ══════════════════════════════════════════════════════════════════ */
 body .WaGadgetMemberPublicProfile,
 body .WaGadgetMemberPublicProfile * { font-family: var(--ngm-sans) !important; }
+/* card-on-cream like /Sys/Profile. These pages can't carry a body-class
+   script (no custom HTML on /Sys), so the cream page comes from :has() —
+   this also removes the odd colored strip above the card. */
+body:has(.WaGadgetMemberPublicProfile),
+body:has(.WaGadgetEmailMember),
+body:has(.WaGadgetMemberPublicProfile) .mLayout,
+body:has(.WaGadgetEmailMember) .mLayout,
+body:has(.WaGadgetMemberPublicProfile) #idPageShadingContainer,
+body:has(.WaGadgetEmailMember) #idPageShadingContainer,
+body:has(.WaGadgetMemberPublicProfile) .zonePlace.zoneContent,
+body:has(.WaGadgetEmailMember) .zonePlace.zoneContent,
+body:has(.WaGadgetMemberPublicProfile) .WaPlaceHolderContent,
+body:has(.WaGadgetEmailMember) .WaPlaceHolderContent {
+  background: var(--ngm-cream) !important;
+}
 /* member name heading (holds the name + a Send-message button) */
 body .WaGadgetMemberPublicProfile .memberDirectoryDetailsHeaderContainer h2,
 body .WaGadgetMemberPublicProfile h2 {
@@ -6086,12 +6101,20 @@ body .WaGadgetMemberPublicProfile .memberDirectoryDetailsHeaderContainer { margi
 body .WaGadgetMemberPublicProfile { padding-top: 24px !important; }
 /* no line under the last row */
 body .WaGadgetMemberPublicProfile .fieldContainer.simpleTextContainer:not(:has(~ .fieldContainer.simpleTextContainer)) { border-bottom: 0 !important; }
-/* Send-message button as a sage pill */
+/* Send message rides the BOTTOM-RIGHT corner, on the Back pill's row */
+body .WaGadgetMemberPublicProfile { position: relative !important; }
+body .WaGadgetMemberPublicProfile .sendMailButtonContainer {
+  position: absolute !important;
+  right: clamp(20px, 4vw, 44px) !important;
+  bottom: 36px !important;
+}
+/* Send-message button as a sage pill (design-system .ngm-btn metrics) */
 body .WaGadgetMemberPublicProfile input.typeButton {
   font-family: var(--ngm-sans) !important; background: var(--ngm-sage-dk) !important; color: #fff !important;
-  border: 1px solid var(--ngm-sage-dk) !important; border-radius: 999px !important;
-  padding: 10px 20px !important; font-size: var(--ngm-text-meta) !important; font-weight: 600 !important;
+  border: 1.5px solid var(--ngm-sage-dk) !important; border-radius: 100px !important;
+  padding: 12px 26px !important; font-size: var(--ngm-btn-size) !important; font-weight: 500 !important;
   cursor: pointer !important; box-shadow: none !important; text-transform: none !important;
+  letter-spacing: normal !important;
 }
 body .WaGadgetMemberPublicProfile input.typeButton:hover { background: var(--ngm-sage) !important; }
 
@@ -6223,7 +6246,7 @@ body .WaGadgetEmailMember .memberDirectoryDetailsHeaderContainer h2 {
 }
 body .WaGadgetEmailMember .memberDirectoryDetailsHeaderContainer { margin: 0 0 8px !important; }
 body .WaGadgetEmailMember .memberDirectoryDetailsHeaderContainer h2::before {
-  content: "Send a message to";
+  content: "Send message";
   display: block;
   font-family: var(--ngm-sans); font-size: var(--ngm-eyebrow-size); font-weight: 500;
   letter-spacing: var(--ngm-eyebrow-track); text-transform: uppercase;
@@ -6233,13 +6256,35 @@ body .WaGadgetEmailMember .memberDirectoryDetailsHeaderContainer h2::before {
 /* the old "Send message" caption block below the name (and its rule
    line) — folded into the eyebrow above */
 body .WaGadgetEmailMember .captionOuterContainer { display: none !important; }
-/* buttons at design-system size */
+/* buttons at design-system size, standard button type (no caps) */
 body .WaGadgetEmailMember input.typeButton,
 body .WaGadgetEmailMember .buttonsContainer input[type="button"],
 body .WaGadgetEmailMember .buttonsContainer input[type="submit"] {
   font-size: var(--ngm-btn-size) !important; font-weight: 500 !important;
   padding: 12px 26px !important; border-radius: 100px !important; border-width: 1.5px !important;
+  text-transform: none !important; letter-spacing: normal !important;
 }
+/* Cancel LEFT, Send RIGHT (DOM order is Send, Cancel — reversed row) */
+body .WaGadgetEmailMember .buttonsContainer {
+  display: flex !important; flex-direction: row-reverse !important;
+  justify-content: space-between !important; align-items: center !important;
+}
+body .WaGadgetEmailMember .buttonsContainer input[type="submit"] { margin-left: 0 !important; }
+/* the required asterisk reads AFTER the label ("Message subject *"),
+   rose, matching the site's mandatory styling */
+body .WaGadgetEmailMember .fieldLabel {
+  display: flex !important; flex-direction: row-reverse !important;
+  justify-content: flex-end !important; align-items: baseline !important; gap: 3px !important;
+}
+body .WaGadgetEmailMember .mandatorySymbol { color: var(--ngm-rose) !important; font-weight: 600 !important; }
+/* the Body row: theme floats its label/body side by side (it's the one
+   non-table row) — stack it like the rest: label over full-width field */
+body .WaGadgetEmailMember .fieldSubContainer .fieldLabel,
+body .WaGadgetEmailMember .fieldSubContainer .fieldBody {
+  float: none !important; width: auto !important;
+  margin-left: 0 !important; margin-right: 0 !important; text-align: left !important;
+}
+body .WaGadgetEmailMember .fieldSubContainer.multiLinesContainer .fieldBody { display: block !important; }
 
 /* ══ Transaction grids on the Invoices & Donations tabs ══
    WA renders these into <table class="genericListTable"> inside
