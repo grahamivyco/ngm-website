@@ -1,0 +1,118 @@
+<div class="ngm">
+  <section class="ngm-sec ngm-sec-cream">
+    <div class="ngm-con">
+      <div class="ngm-mt-hero-grid">
+        <div>
+          <span class="ngm-eyebrow">Special Interest Group</span>
+          <h1 class="ngm-h1">Potpourri <em>Stitchers</em></h1>
+          <div class="ngm-mt-meta">
+            <span class="ngm-mt-when">3rd Tuesday &middot; 10 am &ndash; 2 pm</span>
+            <span class="ngm-badge ngm-badge-person">In person</span>
+          </div>
+          <p class="ngm-lead">A variety group that wanders across techniques &mdash; surface embroidery one month, stumpwork, shadow work, heirloom sewing, smocking, or quilting the next &mdash; in the relaxed setting of a member&rsquo;s home. All skill levels welcome, and you&rsquo;re always free to bring whatever you&rsquo;re stitching.</p>
+          <div class="ngm-mt-hero-btns">
+            <a class="ngm-btn ngm-btn-green" href="/calendar">See the calendar</a>
+            <a class="ngm-btn ngm-btn-outline" href="/monthly-meetings">See other meetings</a>
+          </div>
+        </div>
+        <div class="ngm-mt-photo" style="min-height:360px;padding:0;overflow:hidden;border:none"><img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade" src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20-%20Photos/Retreat%20Photo%202NGM.jpeg" alt="The Potpourri Stitchers group at a meeting" loading="eager" fetchpriority="high" style="width:100%;height:100%;object-fit:cover;border-radius:var(--ngm-radius-lg)"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ngm ngm-sec ngm-sec-linen" style="padding-bottom:28px">
+    <div class="ngm-con">
+      <div class="ngm-upcoming-head ngm-upcoming-center">
+        <span class="ngm-eyebrow">Coming up</span>
+        <h2 class="ngm-h2">Upcoming <em>meetings</em></h2>
+        <p class="ngm-upcoming-intro">The next Potpourri Stitchers meetings &mdash; click any event for details and to register, or <a class="ngm-inline-link" href="/calendar">see the full calendar&nbsp;&rarr;</a></p>
+      </div>
+    </div>
+  </section>
+</div>
+<script>(function () {
+  function label(t){ if(t==="zoom")return "Zoom"; if(t==="virtual")return "Online"; if(t==="hybrid")return "Hybrid"; return "In person"; }
+  function classify(text){ var s=(text||"").toLowerCase();
+    if(s.indexOf("zoom")>-1) return "zoom";
+    if(s.indexOf("videoconference")>-1||s.indexOf("video conference")>-1||s.indexOf("online")>-1) return "virtual";
+    if(s.indexOf("hybrid")>-1) return "hybrid"; return "person"; }
+  function tagEvents(){
+    var items=document.querySelectorAll(".ngm-wa-events.upcomingEventsStyle001 ul li");
+    items.forEach(function(li){
+      if(li.getAttribute("data-tag-done")==="1") return;
+      var locEl=li.querySelector(".location");
+      var tag=classify(locEl?locEl.textContent:""); li.setAttribute("data-tag",tag);
+      var chip=document.createElement("span"); chip.className="ngm-evt-tag"; chip.textContent=label(tag);
+      var titleEl=li.querySelector(".title");
+      if(titleEl) li.insertBefore(chip,titleEl); else li.insertBefore(chip,li.firstChild);
+      var titleLink=li.querySelector(".title a");
+      if(titleLink&&titleLink.href){ li.style.cursor="pointer";
+        li.addEventListener("click",function(e){ if(e.target.closest("a"))return; window.location.href=titleLink.href; }); }
+      li.setAttribute("data-tag-done","1");
+    });
+  }
+  function init(){ tagEvents(); var g=document.querySelector(".ngm-wa-events");
+    if(g&&window.MutationObserver){ new MutationObserver(function(){tagEvents();}).observe(g,{childList:true,subtree:true}); } }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
+})();
+</script>
+
+<div id="ngm-pg-bottom" style="display:none">
+<div class="ngm">
+  <section class="ngm ngm-sec ngm-sec-cream">
+    <div class="ngm-con">
+      <div class="ngm-loc-inner">
+        <div class="ngm-loc-head">
+          <span class="ngm-eyebrow">Visit</span>
+          <h2 class="ngm-h2" style="margin-bottom:0">Where we <em>meet</em></h2>
+        </div>
+        <div class="ngm-loc-addr">
+          <p class="ngm-loc-note">Potpourri Stitchers gathers in members&rsquo; homes, rotating each month. We would love to have you.</p>
+          <span class="ngm-addr-label">Where it&rsquo;s held</span>
+          <p class="ngm-loc-note">In a member&rsquo;s home &mdash; the hostess shares her address with the group each month. Bring your own lunch; coffee, tea, and dessert are provided by the hostess.</p>
+          <span class="ngm-addr-label">Planning to come?</span>
+
+          <p class="ngm-loc-note">Please let the hostess know you&rsquo;ll be attending so she can plan. <a class="ngm-inline-link" href="/contact">Get in touch&nbsp;&rarr;</a></p>
+        </div>
+        <div class="ngm-loc-map ngm-loc-photo">
+          <span class="ngm-loc-photo-ph">Potpourri Stitchers</span>
+          <img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade"
+            src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20-%20Photos/NGM%20Circle%20Stitch.jpeg"
+            alt="Potpourri Stitchers gathered to stitch"
+            loading="eager"
+            onerror="this.style.display='none'">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ngm ngm-about-cta">
+    <div class="ngm-about-cta-inner">
+      <span class="ngm-eyebrow">Join</span>
+      <h2 class="ngm-h2">Find your people<br>and your <em>stitching</em></h2>
+      <p>We&rsquo;d love to have you. Come sit in on this group, or any of our other monthly meetings &mdash; in person or on Zoom, whichever fits your calendar. Try as many as you&rsquo;re curious about. Once you&rsquo;ve found the one (or three) that feel like yours, join us for just $30 a year.</p>
+      <div class="ngm-about-cta-btns">
+        <a class="ngm-btn ngm-btn-rose" href="/join">Join the Guild</a>
+        <a class="ngm-btn ngm-btn-outline-rose" href="/calendar">See our calendar</a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+(function(){
+  function place(){
+    var bot=document.getElementById('ngm-pg-bottom'); if(!bot) return;
+    var g=bot.closest('.WaGadget');
+    var native=null, sib=g?g.nextElementSibling:null;
+    while(sib){
+      if(sib.classList&&sib.classList.contains('WaGadget')&&!sib.classList.contains('WaGadgetCustomHTML')){native=sib;break;}
+      sib=sib.nextElementSibling;
+    }
+    if(!native){native=document.querySelector('.zoneContent .WaGadget:not(.WaGadgetCustomHTML)');}
+    if(native){native.parentNode.insertBefore(bot,native.nextSibling);}
+    bot.style.display='';
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',place);}else{place();}
+})();
+</script>

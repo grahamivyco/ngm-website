@@ -67,6 +67,14 @@ Doing it in this order means the site is never half-styled:
 **Single** = one Custom HTML gadget (`01-top.html`).
 **Sandwich** = `01-top.html` → native WA gadget (see the page's `02-wa-gadget.txt`) → `03-bottom.html`.
 
+> **Sandwich pages can be ONE gadget.** Every sandwich page also has
+> `dist/<page>/one-gadget.html`: paste that single file into ONE Custom-HTML
+> gadget placed **above** the native gadget, and skip the bottom gadget
+> entirely. The top half renders in place; the bottom half is hidden until a
+> script moves it directly **below** the native gadget, then reveals it (no
+> flash). The separate `01-top.html` / `03-bottom.html` files remain if you
+> prefer two gadgets.
+
 | Page | Live URL | Type | Middle gadget |
 |------|----------|------|---------------|
 | Homepage | `/` | Sandwich | Upcoming events (`ngm-wa-events`) |
