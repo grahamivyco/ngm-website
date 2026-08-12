@@ -40,7 +40,20 @@ Doing it in this order means the site is never half-styled:
      header + footer gadgets. (The new header's CSS also hides WA's
      native purple navigation menu.) Spot-check
      `/Sys/PublicProfile/...` and its Send-message page afterwards.
-3. **Do each page** (below). For each: open the WA page, paste the block(s) in order,
+3. **Fonts in Raw Headers** (kills the font flash on every click). WA admin →
+   **Settings → Site → Meta-tags → Raw Headers** — add:
+
+   ```html
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap">
+   ```
+
+   Raw Headers reach every page on every template BEFORE first paint. The
+   header gadget carries the same links as a fallback (the browser dedupes
+   the duplicate request) — but body-gadget links load after first paint,
+   which is what made pages visibly re-font on each navigation.
+4. **Do each page** (below). For each: open the WA page, paste the block(s) in order,
    add any native gadget between them, Save.
 4. **Global CSS must be live first.** The page `.html` files carry no `<style>` of
    their own — they rely entirely on the Global CSS for styling, so make sure the
