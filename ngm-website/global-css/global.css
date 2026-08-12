@@ -7084,7 +7084,9 @@ body #membersTable tbody::before { content: ""; display: table-row; height: 10px
    tighter entries; hover/tap = rounded sage over the WHOLE entry;
    lines between entries fade around the hovered one */
 @media (max-width: 900px) {
-  body #membersTable tbody tr { padding: 10px 12px !important; }
+  /* generous side padding so the hovered entry's fill has clear air
+     around the text */
+  body #membersTable tbody tr { padding: 12px 16px !important; }
   body #membersTable tbody tr:hover {
     background: var(--ngm-sage-lt) !important;
     border-radius: var(--ngm-radius) !important;
