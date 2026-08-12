@@ -1,7 +1,7 @@
 # Member Directory  (members-only)
 
 **Current shape (Aug 2026):** hero with CTA pair — Edit your profile
-(primary, `/Sys/Profile`) + Back to the Member Hub (outline, `/member/`) —
+(primary, `/Sys/Profile`) + Back to the Member Hub (outline, `/member-hub`) —
 then the native gadget as a **white card on a cream page** (the profile
 form's card-on-cream look; `body.ngm-dir-page` flag set by 01-top's
 script). The old closing "Your listing" band was removed — delete its

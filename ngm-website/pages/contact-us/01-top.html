@@ -117,7 +117,7 @@
         <span class="ngm-addr-label">Joining by video</span>
         <p class="ngm-visit-zoom-copy">Many of our meetings are on Zoom, in whole or in part. The link is available to members, and if you&rsquo;re not a member yet, just request it &mdash; we&rsquo;ll be happy to email it to you.</p>
         <div class="ngm-videoband-tiles">
-          <a class="ngm-hub-zoom-module" href="/member/">
+          <a class="ngm-hub-zoom-module" href="/member-hub">
             <span class="ngm-hub-zoom-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span>
             <div class="ngm-hub-zoom-tile-body">
               <h4>Member Hub</h4>
@@ -151,13 +151,13 @@
   </div>
 </div>
 <script>
-/* Member Hub tile: logged-in members go straight to /member/; guests are
-   sent to log in and returned to /member/ afterwards. WA tags <body> with
+/* Member Hub tile: logged-in members go straight to /member-hub; guests are
+   sent to log in and returned to /member-hub afterwards. WA tags <body> with
    publicContentView (guest) or memberContentView (logged in). */
 (function () {
   if (document.body && document.body.classList.contains("publicContentView")) {
-    var login = "/Sys/Login/?ReturnUrl=" + encodeURIComponent("/member/");
-    var tiles = document.querySelectorAll('a.ngm-hub-zoom-module[href="/member/"]');
+    var login = "/Sys/Login/?ReturnUrl=" + encodeURIComponent("/member-hub");
+    var tiles = document.querySelectorAll('a.ngm-hub-zoom-module[href="/member-hub"]');
     for (var i = 0; i < tiles.length; i++) { tiles[i].setAttribute("href", login); }
   }
 })();
