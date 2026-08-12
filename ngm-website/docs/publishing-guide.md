@@ -24,11 +24,11 @@ Doing it in this order means the site is never half-styled:
    `global-css/global.css` → Save. (This is the whole redesign's styling.)
 2. **Update the site template** with the new chrome — ONE gadget:
    - Paste `dist/layout/site-chrome/01-top.html` (header + footer +
-     feedback pill combined) into a single Custom HTML gadget at the
-     **BOTTOM** of the template, and delete the old separate
-     header/footer/feedback gadgets. The header positions itself at the
-     top automatically (it is fixed and lifts itself onto `<body>`);
-     the footer renders where the gadget sits.
+     feedback pill combined) into a single Custom HTML gadget
+     **anywhere** in the template, and delete the old separate
+     header/footer/feedback gadgets. Every piece positions itself: the
+     header fixes to the top, the footer lifts itself to the very
+     bottom of the page, the pill floats bottom-right.
    - (The separate `dist/layout/header|footer|feedback-button` files
      still exist if you prefer three gadgets.)
    - **Every template, not just the main one.** The `/Sys/*` system pages

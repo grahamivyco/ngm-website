@@ -77,7 +77,8 @@
     var vh=window.innerHeight||document.documentElement.clientHeight;
     var footerTop=footer.getBoundingClientRect().top;
     var showing=vh-footerTop;               
-    if(showing>0){
+
+    if(showing>0&&showing<vh-72){
       btn.style.bottom=(showing+MARGIN)+'px';   
     }else{
       btn.style.bottom='';                       
