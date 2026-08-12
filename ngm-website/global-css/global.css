@@ -2695,6 +2695,53 @@ body .WaPlaceHolderWide > div { padding-top: 0 !important; padding-bottom: 0 !im
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") center / contain no-repeat;
           mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") center / contain no-repeat;
 }
+/* ── RETREAT SITE NOTICE (.ngm-rt-notice) ──────────────────────────────
+   Slim sage-dk band at the very top of the Retreat page. The retreat site
+   carries the class projects, the schedule and the per-class registration
+   deadlines, so it leads the page rather than waiting for a hero button.
+   The WHOLE band is the anchor — body-prefixed with !important on the font
+   properties because WA's theme re-fonts and bolds anchors (see wa-notes).
+   Text left, destination right; both stack and centre on phones. */
+body a.ngm-rt-notice, .ngm-rt-notice {
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  flex-wrap: wrap;
+  background: var(--ngm-sage-dk);
+  padding: 16px var(--ngm-pad-x);
+  text-decoration: none !important; border-bottom: 1px solid rgba(255,255,255,.12);
+  transition: background .2s;
+}
+body a.ngm-rt-notice:hover { background: #33472e; }
+.ngm-rt-notice-main { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+.ngm-rt-notice-eyebrow {
+  font-family: var(--ngm-sans) !important; font-size: var(--ngm-eyebrow-size) !important;
+  font-weight: 600 !important; letter-spacing: var(--ngm-eyebrow-track);
+  text-transform: uppercase !important; color: var(--ngm-rose-lt) !important;
+}
+.ngm-rt-notice-text {
+  font-family: var(--ngm-sans) !important; font-size: var(--ngm-text-md) !important;
+  font-weight: 400 !important; line-height: 1.5; color: rgba(250,247,242,.88) !important;
+  text-transform: none !important;
+}
+.ngm-rt-notice-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--ngm-sans) !important; font-size: var(--ngm-btn-size) !important;
+  font-weight: 500 !important; line-height: 1 !important; letter-spacing: normal !important;
+  text-transform: none !important; color: #fff !important; white-space: nowrap;
+}
+.ngm-rt-notice-cta svg { flex-shrink: 0; transition: transform .18s; }
+body a.ngm-rt-notice:hover .ngm-rt-notice-cta svg { transform: translateX(3px); }
+@media(max-width:900px){
+  body a.ngm-rt-notice, .ngm-rt-notice { padding: 14px var(--ngm-pad-x-md); }
+}
+@media(max-width:640px){
+  /* phone: stack and centre, matching how the CTAs centre at this width */
+  body a.ngm-rt-notice, .ngm-rt-notice {
+    flex-direction: column; align-items: center; text-align: center; gap: 10px;
+    padding: 14px var(--ngm-pad-x-sm);
+  }
+  .ngm-rt-notice-main { flex-direction: column; align-items: center; gap: 4px; }
+}
+
 /* ── Events heading (intro above the gadget) ── */
 .ngm-upcoming-head { margin-bottom: 0; }
 .ngm-upcoming-intro {
