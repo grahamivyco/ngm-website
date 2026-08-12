@@ -6280,6 +6280,11 @@ body .WaGadgetEmailMember .buttonsContainer .fieldBody {
   align-items: center !important; width: 100% !important;
   float: none !important; box-sizing: border-box !important;
 }
+/* the Body-row fix later in this section sets .fieldBody { width: auto },
+   which shrink-wrapped this row and left Send's auto margin no room —
+   flex-grow keeps the buttons' wrappers filling the full row */
+body .WaGadgetEmailMember .buttonsContainer .fieldSubContainer,
+body .WaGadgetEmailMember .buttonsContainer .fieldBody { flex: 1 1 auto !important; }
 body .WaGadgetEmailMember .buttonsContainer input[type="submit"] {
   order: 1 !important; margin-left: 0 !important; margin-right: auto !important;
 }
