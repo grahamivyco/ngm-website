@@ -1185,7 +1185,6 @@ body .WaPlaceHolderWide > div {
   .ngm [class*="-hero-inner"],
   .ngm [class*="-hero-copy"],
   .ngm-history-simple,
-  .ngm-pillar,
   .ngm-feat,
   .ngm-incl-item,
   .ngm-join-cta-inner,
@@ -1197,7 +1196,6 @@ body .WaPlaceHolderWide > div {
   .ngm [class*="-hero-inner"] p { margin-left: auto; margin-right: auto; }
   .ngm [class*="-btns"],
   .ngm .ngm-social { justify-content: center; }
-  .ngm-pillar-icon,
   .ngm-feat-icon { margin-left: auto; margin-right: auto; }
   .ngm-hub-inner { text-align: center; }
   .ngm-hub-qa-card, .ngm-hub-rtile, .ngm-hub-person, .ngm-hub-help { text-align: center; align-items: center; }
@@ -3077,21 +3075,6 @@ body .WaPlaceHolderContent4 > div { padding-top: 0 !important; padding-bottom: 0
 .ngm-join-hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
 .ngm-join-hero-photo { height: 400px; overflow: hidden; border-radius: var(--ngm-radius-lg); box-shadow: var(--ngm-shx); }
 .ngm-join-hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-/* ── Why join (3 cards) ── */
-.ngm-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 44px; }
-.ngm-pillar {
-  text-align: left;
-  background: #fff;
-  border: 1px solid var(--ngm-border);
-  border-radius: var(--ngm-radius-lg);
-  padding: 30px 28px;
-  transition: background-color .22s ease, border-color .22s ease;
-}
-.ngm-pillar:hover { background: var(--ngm-sage-lt); border-color: var(--ngm-sage-lt); }
-.ngm-pillar-icon { width: 52px; height: 52px; background: var(--ngm-sage-lt); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
-.ngm-pillar:hover .ngm-pillar-icon { background: var(--ngm-linen); }
-.ngm-pillar h3 { font-family: var(--ngm-serif) !important; font-size: var(--ngm-title-md); font-weight: 400; color: var(--ngm-charcoal); text-transform: none !important; margin-bottom: 8px; line-height: 1.2; }
-.ngm-pillar p { font-family: var(--ngm-sans); font-size: var(--ngm-copy); color: var(--ngm-gray); line-height: 1.75; margin: 0; }
 /* ── What's included ── */
 .ngm-incl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 40px; margin-top: 40px; }
 .ngm-incl-item { display: flex; gap: 14px; align-items: flex-start; }
@@ -3149,7 +3132,6 @@ body .WaPlaceHolderContent4 > div { padding-top: 0 !important; padding-bottom: 0
   .ngm-join-hero-copy p { max-width: 100%; }
   .ngm-join-hero-photo { height: 260px; order: -1; }
   .ngm-sec { padding: 60px var(--ngm-pad-x-md); }
-  .ngm-pillars { grid-template-columns: 1fr; gap: 32px; }
   .ngm-incl-grid { grid-template-columns: 1fr; }
   .ngm-join-cta { padding: 60px 28px; }
 }
@@ -8437,33 +8419,6 @@ body .WaGadgetDonationForm .navigationContainer input[name$="$cancel"] {
   body.ngm-donate-page .navigationContainer input.nextButton.button,
   body .WaGadgetDonationForm .navigationContainer input.nextButton.button { width: 100% !important; }
 }
-/* ── "Alternatives" — bordered cards with a BARE icon (no sage chip/box behind
-   it), staying side by side as long as they fit and only wrapping near mobile.
-   Page-scoped so the Join page's carded .ngm-pillar is untouched. ── */
-body.ngm-donate-page .ngm-pillars {
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
-  gap: 18px !important; margin-top: 30px !important;
-}
-/* Border only — no background fill, no hover state */
-body.ngm-donate-page .ngm-pillar,
-body.ngm-donate-page .ngm-pillar:hover {
-  background: transparent !important; border: 1px solid var(--ngm-border) !important;
-  box-shadow: none !important; padding: 22px 24px !important; transform: none !important; transition: none !important;
-}
-/* bare icon: strip the chip background, box, and padding — just the svg */
-body.ngm-donate-page .ngm-pillar-icon,
-body.ngm-donate-page .ngm-pillar:hover .ngm-pillar-icon {
-  background: transparent !important; width: auto !important; height: auto !important;
-  padding: 0 !important; margin: 0 0 12px !important; border-radius: 0 !important; display: block !important;
-}
-body.ngm-donate-page .ngm-pillar-icon svg { width: 28px !important; height: 28px !important; }
-body.ngm-donate-page .ngm-pillar h3 { font-size: var(--ngm-title-tile) !important; margin-bottom: 6px !important; }
-body.ngm-donate-page .ngm-pillar p { font-size: var(--ngm-copy) !important; line-height: 1.65 !important; }
-/* Mobile: stack the Alternatives one full-width column */
-@media (max-width: 640px) {
-  body.ngm-donate-page .ngm-pillars { grid-template-columns: 1fr !important; }
-}
-/* Hero: drop the photo on tablet & mobile so the copy leads straight to the
    form (people reach it faster); the copy column then fills the width. */
 @media (max-width: 900px) {
   body.ngm-donate-page .ngm-mt-hero-grid { grid-template-columns: 1fr !important; }

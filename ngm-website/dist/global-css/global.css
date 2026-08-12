@@ -1002,7 +1002,6 @@ body .WaPlaceHolderWide > div {
   .ngm [class*="-hero-inner"],
   .ngm [class*="-hero-copy"],
   .ngm-history-simple,
-  .ngm-pillar,
   .ngm-feat,
   .ngm-incl-item,
   .ngm-join-cta-inner,
@@ -1014,7 +1013,6 @@ body .WaPlaceHolderWide > div {
   .ngm [class*="-hero-inner"] p { margin-left: auto; margin-right: auto; }
   .ngm [class*="-btns"],
   .ngm .ngm-social { justify-content: center; }
-  .ngm-pillar-icon,
   .ngm-feat-icon { margin-left: auto; margin-right: auto; }
   .ngm-hub-inner { text-align: center; }
   .ngm-hub-qa-card, .ngm-hub-rtile, .ngm-hub-person, .ngm-hub-help { text-align: center; align-items: center; }
@@ -2582,21 +2580,6 @@ body .WaPlaceHolderContent4 > div { padding-top: 0 !important; padding-bottom: 0
 .ngm-join-hero-photo { height: 400px; overflow: hidden; border-radius: var(--ngm-radius-lg); box-shadow: var(--ngm-shx); }
 .ngm-join-hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-.ngm-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 44px; }
-.ngm-pillar {
-  text-align: left;
-  background: #fff;
-  border: 1px solid var(--ngm-border);
-  border-radius: var(--ngm-radius-lg);
-  padding: 30px 28px;
-  transition: background-color .22s ease, border-color .22s ease;
-}
-.ngm-pillar:hover { background: var(--ngm-sage-lt); border-color: var(--ngm-sage-lt); }
-.ngm-pillar-icon { width: 52px; height: 52px; background: var(--ngm-sage-lt); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
-.ngm-pillar:hover .ngm-pillar-icon { background: var(--ngm-linen); }
-.ngm-pillar h3 { font-family: var(--ngm-serif) !important; font-size: var(--ngm-title-md); font-weight: 400; color: var(--ngm-charcoal); text-transform: none !important; margin-bottom: 8px; line-height: 1.2; }
-.ngm-pillar p { font-family: var(--ngm-sans); font-size: var(--ngm-copy); color: var(--ngm-gray); line-height: 1.75; margin: 0; }
-
 .ngm-incl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 40px; margin-top: 40px; }
 .ngm-incl-item { display: flex; gap: 14px; align-items: flex-start; }
 .ngm-incl-check { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; background: var(--ngm-sage-lt); display: flex; align-items: center; justify-content: center; margin-top: 2px; }
@@ -2650,7 +2633,6 @@ body .WaPlaceHolderContent4 > div { padding-top: 0 !important; padding-bottom: 0
   .ngm-join-hero-copy p { max-width: 100%; }
   .ngm-join-hero-photo { height: 260px; order: -1; }
   .ngm-sec { padding: 60px var(--ngm-pad-x-md); }
-  .ngm-pillars { grid-template-columns: 1fr; gap: 32px; }
   .ngm-incl-grid { grid-template-columns: 1fr; }
   .ngm-join-cta { padding: 60px 28px; }
 }
@@ -7020,31 +7002,7 @@ body .WaGadgetDonationForm .navigationContainer input[name$="$cancel"] {
   body.ngm-donate-page .navigationContainer input.nextButton.button,
   body .WaGadgetDonationForm .navigationContainer input.nextButton.button { width: 100% !important; }
 }
-
-body.ngm-donate-page .ngm-pillars {
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
-  gap: 18px !important; margin-top: 30px !important;
-}
-
-body.ngm-donate-page .ngm-pillar,
-body.ngm-donate-page .ngm-pillar:hover {
-  background: transparent !important; border: 1px solid var(--ngm-border) !important;
-  box-shadow: none !important; padding: 22px 24px !important; transform: none !important; transition: none !important;
-}
-
-body.ngm-donate-page .ngm-pillar-icon,
-body.ngm-donate-page .ngm-pillar:hover .ngm-pillar-icon {
-  background: transparent !important; width: auto !important; height: auto !important;
-  padding: 0 !important; margin: 0 0 12px !important; border-radius: 0 !important; display: block !important;
-}
-body.ngm-donate-page .ngm-pillar-icon svg { width: 28px !important; height: 28px !important; }
-body.ngm-donate-page .ngm-pillar h3 { font-size: var(--ngm-title-tile) !important; margin-bottom: 6px !important; }
-body.ngm-donate-page .ngm-pillar p { font-size: var(--ngm-copy) !important; line-height: 1.65 !important; }
-
-@media (max-width: 640px) {
-  body.ngm-donate-page .ngm-pillars { grid-template-columns: 1fr !important; }
-}
-
+   form (people reach it faster); the copy column then fills the width. */
 @media (max-width: 900px) {
   body.ngm-donate-page .ngm-mt-hero-grid { grid-template-columns: 1fr !important; }
   body.ngm-donate-page .ngm-mt-hero-grid .ngm-mt-photo { display: none !important; }
