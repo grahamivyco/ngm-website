@@ -1,6 +1,6 @@
 # Member Hub  (members-only dashboard)
 
-**WA page:** Member Home (`/member/`), members-only, set as the landing page
+**WA page:** Member Home (`/member-hub`), members-only, set as the landing page
 after login. ONE Custom-HTML gadget holding `01-top.html`.
 
 Redesigned as a **dashboard, not a landing page** — the page is organized
