@@ -3805,6 +3805,17 @@ body.ngm-login-page .WaLayoutPlaceHolder > div{ margin:0 !important; padding:0 !
 body.ngm-login-page .mLayout,
 body.ngm-login-page .zonePlace.zoneContent,
 body.ngm-login-page .WaPlaceHolderContent{ max-width:none !important; margin:0 !important; padding:0 !important; }
+/* …and #mLayout carries min-height:100%, which holds the page open to a
+   full viewport no matter how short the content is. VERIFIED live on
+   /log-in: every wrapper from the split row up measured 611px, but
+   #mLayout measured 800px (= the window) — 189px of empty theme box
+   between the bottom of the split and the top of the footer. The
+   .ngm-sys system pages hit the same trap and zero it the same way
+   (see the #idContentContainer/.mLayout rule further down). The split's
+   own 74vh height is what keeps the page tall; this only removes the
+   theme's floor. */
+body.ngm-login-page #mLayout,
+body.ngm-login-page .mLayout{ min-height:0 !important; }
 /* cellspacing="0" is only a weak presentational hint — if the theme sets
    border-spacing on layout tables it wins, ringing every cell with even
    space on ALL sides (the exact symptom on the live /Sys/Login). Collapse. */
