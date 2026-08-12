@@ -6781,6 +6781,30 @@ body .WaGadgetEventsStateDetails { padding: 8px 24px 44px !important; }
    rendered by WA's JS and are empty in page source, so they can't be
    skinned blind here — this styles the search UI around them.
 ══════════════════════════════════════════════════════════════════ */
+/* ---- CARD: the whole gadget (search + results) sits in one white card
+   on the cream page, echoing the profile form (.WaGadgetContactProfile) —
+   hairline border, soft shadow, generous padding, centered max-width.
+   Wider than the profile's 940px because the results are a 3-col table. */
+body .WaGadgetMemberDirectory {
+  background: #fff !important;
+  border: 1px solid var(--ngm-border) !important;
+  border-radius: var(--ngm-radius-lg) !important;
+  box-shadow: var(--ngm-shm) !important;
+  padding: 26px clamp(20px, 4vw, 44px) 32px !important;
+  max-width: 1080px !important;
+  margin: 40px auto 56px !important;
+  box-sizing: border-box !important;
+}
+@media (min-width: 641px) and (max-width: 1140px) {
+  body .WaGadgetMemberDirectory { margin: 32px 24px 48px !important; }
+}
+@media (max-width: 640px) {
+  body .WaGadgetMemberDirectory { margin: 24px 16px 40px !important; padding: 20px 16px 24px !important; }
+}
+/* DM Sans everywhere inside the card, same as the profile form */
+body .WaGadgetMemberDirectory, body .WaGadgetMemberDirectory * {
+  font-family: var(--ngm-sans) !important;
+}
 /* simple search: label + input */
 body .WaGadgetMemberDirectory #memberDirectorySearchArea label,
 body .WaGadgetMemberDirectory .memberDirectorySearchArea label {
@@ -8429,7 +8453,7 @@ body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 48px !important; padd
      by the earlier mobile block: thicker, primary wider than secondary). */
   .ngm-si-cta-btns, .ngm-mt-hero-btns, .ngm-si-hero-btns, .ngm-hero-btns,
   .ngm-join-btns, .ngm-vol-cta-btns, .ngm-mtg-hero-btns, .ngm-mtg-cta-btns,
-  .ngm-join-hero-btns, .ngm-ev-cta-btns, .ngm-dir-foot-btns,
+  .ngm-join-hero-btns, .ngm-ev-cta-btns, .ngm-dir-hero-btns,
   .ngm-about-cta-btns, .ngm-cal-hero-btns, .ngm-cal-cta-btns {
     display: flex !important;
     flex-direction: column;
@@ -8990,6 +9014,18 @@ a.ngm-gcard:hover {
 }
 .ngm-dir-eyebrow-row { display: inline-flex; align-items: center; gap: 8px; }
 .ngm-dir-eyebrow-row svg { width: 15px; height: 15px; color: var(--ngm-sage-dk); flex-shrink: 0; }
+/* hero CTA pair: Edit your profile (primary) + back to the hub (outline) */
+.ngm-dir-hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+/* the whole content area behind the directory gadget turns cream (flag
+   set by 01-top's script) so the white gadget card reads like the
+   profile page's card-on-cream */
+body.ngm-dir-page,
+body.ngm-dir-page .mLayout,
+body.ngm-dir-page #idPageShadingContainer,
+body.ngm-dir-page .zonePlace.zoneContent,
+body.ngm-dir-page .WaPlaceHolderContent {
+  background: var(--ngm-cream) !important;
+}
 
 /* ── Volunteer: role cards (icon + title + copy, like the hub tiles) ── */
 .ngm-vol-grid {
@@ -9102,18 +9138,8 @@ a.ngm-gcard:hover {
   line-height: 1.8; margin-bottom: 28px;
 }
 
-/* ── Directory: closing "keep your listing current" band ── */
-.ngm-dir-foot { background: var(--ngm-cream); padding: 64px 48px; }
-.ngm-dir-foot-inner {
-  max-width: var(--ngm-maxw); margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 32px; flex-wrap: wrap;
-}
-.ngm-dir-foot-text p {
-  font-family: var(--ngm-sans); font-size: var(--ngm-text-lead); color: var(--ngm-gray);
-  line-height: 1.8; max-width: 560px; margin: 0;
-}
-.ngm-dir-foot-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+/* (the directory's closing "keep your listing current" band was removed —
+   the hero CTAs carry the profile/hub links now) */
 
 /* ── Responsive ── */
 @media (max-width: 980px) {
@@ -9123,11 +9149,7 @@ a.ngm-gcard:hover {
 @media (max-width: 900px) {
   .ngm-vol-hero, .ngm-lib-hero, .ngm-dir-hero { padding: 52px 28px 44px; }
   .ngm-vol-cta, .ngm-lib-cta { padding: 60px 28px; }
-  .ngm-dir-foot { padding: 48px 28px; }
-  /* stacks at tablet but stays LEFT-aligned; centring is phones-only */
-  .ngm-dir-foot-inner { flex-direction: column; align-items: flex-start; }
 }
 @media (max-width: 640px) {
   .ngm-vol-grid, .ngm-vol-pitch-grid, .ngm-lib-steps, .ngm-lib-terms { grid-template-columns: 1fr; }
-  .ngm-dir-foot-inner { align-items: center; text-align: center; justify-content: center; }
 }
