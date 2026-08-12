@@ -22,9 +22,15 @@ Doing it in this order means the site is never half-styled:
 
 1. **Paste the master Global CSS.** WA admin → **CSS** tab → replace its contents with
    `global-css/global.css` → Save. (This is the whole redesign's styling.)
-2. **Update the site template** with the new header and footer:
-   - Header: `layout/header/01-top.html` → the site-wide Custom HTML gadget in the template.
-   - Footer: `layout/footer/01-top.html` → the footer gadget.
+2. **Update the site template** with the new chrome — ONE gadget:
+   - Paste `dist/layout/site-chrome/01-top.html` (header + footer +
+     feedback pill combined) into a single Custom HTML gadget at the
+     **BOTTOM** of the template, and delete the old separate
+     header/footer/feedback gadgets. The header positions itself at the
+     top automatically (it is fixed and lifts itself onto `<body>`);
+     the footer renders where the gadget sits.
+   - (The separate `dist/layout/header|footer|feedback-button` files
+     still exist if you prefer three gadgets.)
    - **Every template, not just the main one.** The `/Sys/*` system pages
      (member public profile, Send-message, login, etc.) can use a
      DIFFERENT page template that still carries the old chrome (tapestry

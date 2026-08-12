@@ -84,6 +84,24 @@ def main() -> int:
         print("ERROR: global.css brace count changed after stripping", file=sys.stderr)
         return 1
 
+    # ONE-PASTE SITE CHROME — header + footer + feedback pill in a single
+    # gadget. Paste it at the BOTTOM of the page template (the footer's
+    # slot): the header lifts itself to <body> and is position:fixed, the
+    # pill floats, and the footer renders right where the gadget sits.
+    # Replaces the three separate template gadgets.
+    chrome = "\n\n".join(
+        (DIST / rel).read_text(encoding="utf-8").strip()
+        for rel in (
+            "layout/header/01-top.html",
+            "layout/footer/01-top.html",
+            "layout/feedback-button/01-top.html",
+        )
+    ) + "\n"
+    chrome_out = DIST / "layout" / "site-chrome" / "01-top.html"
+    chrome_out.parent.mkdir(parents=True, exist_ok=True)
+    chrome_out.write_text(chrome, encoding="utf-8")
+    built.append(chrome_out)
+
     (DIST / "README.md").write_text(
         "# dist — production paste copies (GENERATED)\n\n"
         "Comment-free twins of every paste file. Paste into Wild Apricot\n"
