@@ -4037,6 +4037,11 @@ body .ngm-sys-btn{display:inline-flex;align-items:center;justify-content:center;
 .ngm-sys-btn-green:hover{background:var(--ngm-sage);border-color:var(--ngm-sage);}
 .ngm-sys-btn-outline{background:transparent;color:var(--ngm-sage-dk)!important;border-color:var(--ngm-sage-dk);}
 .ngm-sys-btn-outline:hover{background:var(--ngm-sage-dk);color:#fff!important;}
+
+.ngm-sys-band.ngm-sys-fill{
+  min-height:var(--ngm-sys-fill,52vh);
+  display:flex;align-items:center;justify-content:center;
+}
 @media(max-width:640px){.ngm-sys-band{padding:40px var(--ngm-pad-x-sm) 36px;}}
 
 body:has(.ngm-sys) #idContentContainer,
