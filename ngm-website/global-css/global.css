@@ -3866,7 +3866,7 @@ body.ngm-login-page .WaGadgetLoginForm{ display:block; width:100%; box-sizing:bo
     /* border-box, or the padding stacks ON TOP of the min-height (content-box
        default) and the panel grows to ~full viewport instead of 90% */
     box-sizing:border-box !important;
-    min-height:calc(74vh - var(--ngm-head-h));
+    min-height:560px;
     display:flex; flex-direction:column; justify-content:center;
   }
   /* centre the form card vertically in its equal-height cell too */
@@ -3881,16 +3881,13 @@ body.ngm-login-page .WaGadgetLoginForm{ display:block; width:100%; box-sizing:bo
   /* tighten the space directly above the join line (desktop only) */
   body.ngm-login-page .ngm-login-foot{ padding-top:0 !important; }
   body.ngm-login-page .ngm-login-foot-inner{ padding-top:0 !important; }
-  /* ── Short-page fix: fill ~90% of the viewport ──
-     The login/auth pages are shorter than most windows, which left a white
-     void under the footer. Give both cells of the split row enough height
-     that the split ends at 90% of the viewport — so the top of the footer is
-     already visible at the bottom of the first screen instead of hiding
-     below the fold. (On table cells height acts as MIN-height, so nothing
-     clips on short windows.) */
-  body.ngm-login-page tr.WaLayoutRow:has(.ngm-login-hero) > td.WaLayoutItem{
-    height: calc(74vh - var(--ngm-head-h));
-  }
+  /* NO forced viewport height. The row is content-height (the hero's
+     560px floor sets it, and the table makes both cells match), so the
+     footer starts immediately under the split — no white strip between
+     them. The old rule stretched the cells to a fraction of the viewport,
+     which is what left empty space under the form and beneath the panel.
+     (It existed back when the footer was too short to fill the screen;
+     the footer is tall now, so the page fills regardless.) */
 }
 @media(max-width:980px){
   /* ── Force the WA 2-column row to STACK once the mobile menu appears ──
