@@ -5323,9 +5323,12 @@ body .WaGadgetContactProfile .typeTextLabelNoData { color: var(--ngm-gray-lt) !i
 .ngm-hub-zoom-module.ngm-hub-zoom-module-alt{background:#fff;border-color:var(--ngm-border);}
 .ngm-hub-zoom-module.ngm-hub-zoom-module-alt .ngm-hub-zoom-tile-icon{background:var(--ngm-sage-lt);}
 
-.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/Request-The-Link"]{background:#fff;border-color:var(--ngm-border);}
-.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/Request-The-Link"] .ngm-hub-zoom-tile-icon{background:var(--ngm-sage-lt);}
-.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/Request-The-Link"]:hover{background:var(--ngm-sage-lt);border-color:#C1D3B2;}
+.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/Request-The-Link"],
+.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/join"]{background:#fff;border-color:var(--ngm-border);}
+.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/Request-The-Link"] .ngm-hub-zoom-tile-icon,
+.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/join"] .ngm-hub-zoom-tile-icon{background:var(--ngm-sage-lt);}
+.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/Request-The-Link"]:hover,
+.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/join"]:hover{background:var(--ngm-sage-lt);border-color:#C1D3B2;}
 
 .ngm-hub-zoom-module:hover{background:#CBDBBE;border-color:#B3C8A1;}
 .ngm-hub-zoom-module.ngm-hub-zoom-module-alt:hover{background:var(--ngm-sage-lt);border-color:#C1D3B2;}

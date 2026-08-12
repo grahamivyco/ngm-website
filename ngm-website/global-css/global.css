@@ -6397,11 +6397,15 @@ body .WaGadgetContactProfile .typeTextLabelNoData { color: var(--ngm-gray-lt) !i
    border, sage-tinted icon chip: the tile version of filled vs outline. */
 .ngm-hub-zoom-module.ngm-hub-zoom-module-alt{background:#fff;border-color:var(--ngm-border);}
 .ngm-hub-zoom-module.ngm-hub-zoom-module-alt .ngm-hub-zoom-tile-icon{background:var(--ngm-sage-lt);}
-/* belt-and-braces: Request-the-Link reads secondary even where a gadget
+/* belt-and-braces: the pair's SECOND tile (Request the Link, or Join the
+   Guild on the registration bands) reads secondary even where a gadget
    hasn't been re-pasted with the -alt class yet (keyed on its href) */
-.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/Request-The-Link"]{background:#fff;border-color:var(--ngm-border);}
-.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/Request-The-Link"] .ngm-hub-zoom-tile-icon{background:var(--ngm-sage-lt);}
-.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/Request-The-Link"]:hover{background:var(--ngm-sage-lt);border-color:#C1D3B2;}
+.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/Request-The-Link"],
+.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/join"]{background:#fff;border-color:var(--ngm-border);}
+.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/Request-The-Link"] .ngm-hub-zoom-tile-icon,
+.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/join"] .ngm-hub-zoom-tile-icon{background:var(--ngm-sage-lt);}
+.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/Request-The-Link"]:hover,
+.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/join"]:hover{background:var(--ngm-sage-lt);border-color:#C1D3B2;}
 /* hover: no raise — the card deepens a shade and the arrow nudges right
    (the arrow nudge is the existing .ngm-hub-zoom-tile-go rule below) */
 .ngm-hub-zoom-module:hover{background:#CBDBBE;border-color:#B3C8A1;}
