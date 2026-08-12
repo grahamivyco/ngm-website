@@ -51,7 +51,7 @@ Doing it in this order means the site is never half-styled:
 | Workshops | `/workshops` | Sandwich | Upcoming events → filter to workshops |
 | Join | `/join` | Single | — |
 | March to the Finish | `/march-to-the-finish` | Single | — |
-| A Fall Finish | `/fall-finish` | Single | — |
+| A Fall Finish | `/a-fall-finish` | Single | — |
 | Meetings | `/monthly-meetings` | Sandwich | Upcoming events |
 | Stitch-Ins | `/daytime-stitch-in` (+ `/evening-stitch-in`) | Sandwich | Upcoming events |
 | Daytime Counted Thread | `/daytime-counted-thread-&-needlepoint` | Sandwich | Upcoming events → filter to this group |
@@ -88,7 +88,7 @@ The redesign uses placeholders where only you know the real WA page:
 
 | Where | Placeholder | Point it at |
 |-------|-------------|-------------|
-| Member Hub cards (`member-hub/03-bottom.html`) | `/directory` | your WA member directory page |
+| Member Hub cards (`member-hub/03-bottom.html`) | `/member-directory` | your WA member directory page |
 | Member Hub cards | `/resources` | your member-only resources / documents page |
 | Donate buttons (`donate/01-top.html`) | `/donation` | your WA donation form |
 

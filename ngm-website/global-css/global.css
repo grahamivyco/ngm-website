@@ -4686,6 +4686,15 @@ body.ngm-login-page .WaGadgetLoginForm .loginPanel::after { display: none !impor
 ══════════════════════════════════════════════════════════════════ */
 /* ── Meeting-type detail pages (ngm-mt-*) ──────────────────── */
 .ngm-mt-hero-grid { display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center; }
+/* subpage hero titles read one step smaller than the homepage display
+   size — the meeting/event page titles were oversized */
+.ngm-mt-hero-grid .ngm-h1 { font-size: var(--ngm-h2) !important; }
+/* NO LOADING JUMP: the hero photo box is a FIXED height (min-height
+   alone let the box grow to the image's intrinsic ratio once it loaded,
+   jumping the whole page) — the img object-fit:covers the fixed box */
+.ngm-mt-hero-grid .ngm-mt-photo { height: 420px; min-height: 0; }
+.ngm-mt-hero-grid .ngm-mt-photo > img { width: 100%; height: 100%; object-fit: cover; }
+@media(max-width:820px){ .ngm-mt-hero-grid .ngm-mt-photo { height: 260px; } }
 .ngm-mt-meta { display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin:2px 0 20px; }
 .ngm-mt-when { font-family:var(--ngm-sans); font-size:var(--ngm-text-md); font-weight:500; color:var(--ngm-sage-dk); }
 .ngm-mt-hero-btns { display:flex; gap:12px; flex-wrap:wrap; margin-top:28px; }

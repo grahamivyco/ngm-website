@@ -1,6 +1,6 @@
 # A Fall Finish
 
-**WA page:** A Fall Finish  ·  **URL:** `/fall-finish`  (linked from the
+**WA page:** A Fall Finish  ·  **URL:** `/a-fall-finish`  (linked from the
 Events page and homepage event cards)
 
 SINGLE Custom-HTML gadget — `01-top.html` (hero with date/venue/cost meta,
