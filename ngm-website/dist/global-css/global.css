@@ -3188,6 +3188,9 @@ body.ngm-login-page .WaPlaceHolderContent{ max-width:none !important; margin:0 !
 body.ngm-login-page #mLayout,
 body.ngm-login-page .mLayout{ min-height:0 !important; }
 
+body:has(.WaGadgetAuthorizationRequired) #mLayout,
+body:has(.WaGadgetAuthorizationRequired) .mLayout{ min-height:0 !important; }
+
 body.ngm-login-page table.WaLayoutTable{
   width:100% !important;
   border-collapse:collapse !important;

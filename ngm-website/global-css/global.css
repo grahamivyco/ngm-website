@@ -3816,6 +3816,14 @@ body.ngm-login-page .WaPlaceHolderContent{ max-width:none !important; margin:0 !
    theme's floor. */
 body.ngm-login-page #mLayout,
 body.ngm-login-page .mLayout{ min-height:0 !important; }
+/* Same floor, same gap, on the Authorization-required page. That page can be
+   built EITHER way — as the .ngm-sys banner above the native form (its
+   01-top.html), or as the login split with the hero in the left cell (see
+   the AUTHORIZATION REQUIRED note below). Each route already inherits the
+   zero from its own block, but only implicitly; keying off the native gadget
+   covers the page whichever way it was built. */
+body:has(.WaGadgetAuthorizationRequired) #mLayout,
+body:has(.WaGadgetAuthorizationRequired) .mLayout{ min-height:0 !important; }
 /* cellspacing="0" is only a weak presentational hint — if the theme sets
    border-spacing on layout tables it wins, ringing every cell with even
    space on ALL sides (the exact symptom on the live /Sys/Login). Collapse. */
