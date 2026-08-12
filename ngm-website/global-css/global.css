@@ -6049,9 +6049,43 @@ body .WaGadgetMemberPublicProfile .d9, body .WaGadgetMemberPublicProfile .inner 
    value span / the caption h4) */
 body .WaGadgetMemberPublicProfile .fieldContainer:not(:has(span, h4, a, img)) { display: none !important; }
 /* breathing room the flattening removed */
-body .WaGadgetMemberPublicProfile .memberDirectoryDetailsHeaderContainer { margin: 10px 0 18px !important; }
 body .WaGadgetMemberPublicProfile .fieldContainer.simpleTextContainer { padding: 8px 0 !important; }
-body .WaGadgetMemberPublicProfile .captionContainer .fieldBody { margin-top: 14px !important; }
+
+/* ---- layout pass (maintainer review, Aug 2026): eyebrow ABOVE the
+   name, smaller name, details starting right under the header, Back as
+   an outline pill UNDER the details, no line after the last row ---- */
+/* Back moves to the bottom: the form becomes a flex column and the
+   title/back container is ordered after the details */
+body .WaGadgetMemberPublicProfile form#form { display: flex !important; flex-direction: column !important; }
+body .WaGadgetMemberPublicProfile .memberDirectoryDetailsOuterContainer { order: 1 !important; }
+body .WaGadgetMemberPublicProfile .pageTitleOuterContainer { order: 2 !important; margin: 24px 0 0 !important; }
+body .WaGadgetMemberPublicProfile .pageBackContainer a {
+  display: inline-flex !important; align-items: center !important; gap: 6px !important;
+  background: transparent !important; border: 1.5px solid var(--ngm-sage-dk) !important;
+  border-radius: 999px !important; padding: 10px 24px !important;
+  font-size: var(--ngm-btn-size) !important; font-weight: 600 !important;
+  color: var(--ngm-sage-dk) !important; text-decoration: none !important;
+  transition: background .18s !important;
+}
+body .WaGadgetMemberPublicProfile .pageBackContainer a:hover { background: var(--ngm-sage-lt) !important; }
+/* eyebrow above the name — painted on the heading (its ::before takes a
+   full flex row); the old caption block and its rule line are hidden */
+body .WaGadgetMemberPublicProfile .memberDirectoryDetailsHeaderContainer h2::before {
+  content: "Member profile details";
+  flex-basis: 100%;
+  font-family: var(--ngm-sans); font-size: var(--ngm-eyebrow-size); font-weight: 500;
+  letter-spacing: var(--ngm-eyebrow-track); text-transform: uppercase;
+  color: var(--ngm-sage);
+}
+body .WaGadgetMemberPublicProfile .captionOuterContainer { display: none !important; }
+/* smaller name; tight rhythm — the rows start right under the header */
+body .WaGadgetMemberPublicProfile .memberDirectoryDetailsHeaderContainer h2 {
+  font-size: var(--ngm-title-lg) !important; margin: 0 !important; row-gap: 8px !important;
+}
+body .WaGadgetMemberPublicProfile .memberDirectoryDetailsHeaderContainer { margin: 0 0 8px !important; }
+body .WaGadgetMemberPublicProfile { padding-top: 24px !important; }
+/* no line under the last row */
+body .WaGadgetMemberPublicProfile .fieldContainer.simpleTextContainer:not(:has(~ .fieldContainer.simpleTextContainer)) { border-bottom: 0 !important; }
 /* Send-message button as a sage pill */
 body .WaGadgetMemberPublicProfile input.typeButton {
   font-family: var(--ngm-sans) !important; background: var(--ngm-sage-dk) !important; color: #fff !important;
