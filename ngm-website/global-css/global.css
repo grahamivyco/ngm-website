@@ -7006,8 +7006,41 @@ body .WaGadgetMemberDirectory .memberValue a { font-size: var(--ngm-text-md) !im
   body .WaGadgetMemberDirectory tr.normal td {
     display: inline !important; border: 0 !important; padding: 0 !important;
   }
-  body .WaGadgetMemberDirectory td.memberDirectoryColumn2::before { content: "\00a0\00b7 "; color: var(--ngm-gray-lt); }
   body .WaGadgetMemberDirectory td.memberDirectoryColumn3 { display: block !important; margin-top: 5px !important; }
+}
+
+/* ---- ROUND 3 (second live review) ---- */
+/* column-header bar: just a rounded green bar — no line under it */
+body .WaGadgetMemberDirectory .memberDirectoryOuterContainer th { border: 0 !important; }
+body .WaGadgetMemberDirectory .memberDirectoryOuterContainer th:first-child {
+  border-top-left-radius: var(--ngm-radius) !important; border-bottom-left-radius: var(--ngm-radius) !important;
+}
+body .WaGadgetMemberDirectory .memberDirectoryOuterContainer th:last-child {
+  border-top-right-radius: var(--ngm-radius) !important; border-bottom-right-radius: var(--ngm-radius) !important;
+}
+/* ONE kind of line everywhere: kill every border and background the
+   theme paints on the results (rows, cells, zebra tint), then repaint a
+   single light-beige hairline — the same line at every viewport */
+body .WaGadgetMemberDirectory .memberDirectoryOuterContainer table,
+body .WaGadgetMemberDirectory .memberDirectoryOuterContainer tbody,
+body .WaGadgetMemberDirectory .memberDirectoryOuterContainer tr,
+body .WaGadgetMemberDirectory .memberDirectoryOuterContainer td { border: 0 !important; }
+body .WaGadgetMemberDirectory .memberDirectoryOuterContainer tr,
+body .WaGadgetMemberDirectory .memberDirectoryOuterContainer td { background: transparent !important; }
+body .WaGadgetMemberDirectory .memberDirectoryOuterContainer tbody tr td { border-bottom: 1px solid var(--ngm-linen) !important; }
+/* hover (desktop/tablet): light sage, rounded corners — restated after
+   the reset above so it survives */
+body .WaGadgetMemberDirectory tr.normal:hover td,
+body .WaGadgetMemberDirectory tr.over td { background: var(--ngm-sage-lt) !important; }
+@media (max-width: 640px) {
+  /* no dot before the location, and no lines between the parts of one
+     person — one light-beige line between people */
+  body .WaGadgetMemberDirectory .memberDirectoryOuterContainer tbody tr td { border: 0 !important; }
+  body .WaGadgetMemberDirectory .memberDirectoryOuterContainer tr.normal { border-bottom: 1px solid var(--ngm-linen) !important; }
+  /* no hover/tap fill on phones — tapping was making rows look like they
+     expand; the row is just a link */
+  body .WaGadgetMemberDirectory tr.normal:hover td,
+  body .WaGadgetMemberDirectory tr.over td { background: transparent !important; }
 }
 
 /* ══════════════════════════════════════════════════════════════════
