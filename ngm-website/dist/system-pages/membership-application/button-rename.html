@@ -1,0 +1,17 @@
+<script>(function () {
+  function renameButtons() {
+    var inputs = document.querySelectorAll('input[type="submit"], input[type="button"]');
+    for (var i = 0; i < inputs.length; i++) {
+      var el = inputs[i];
+      var v = (el.value || '').trim();
+      if (v === 'Pay with credit or debit card') { el.value = 'Pay Online'; }
+      else if (v === 'Invoice me') { el.value = 'Pay by check (invoice me)'; }
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renameButtons);
+  } else {
+    renameButtons();
+  }
+}());
+</script>

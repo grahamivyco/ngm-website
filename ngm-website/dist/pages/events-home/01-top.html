@@ -1,0 +1,64 @@
+<div class="ngm ngm-phero">
+  <div class="ngm-phero-inner">
+    <div class="ngm-phero-copy">
+      <span class="ngm-eyebrow">Events</span>
+      <h1 class="ngm-h1">More than the <em>everyday</em></h1>
+      <p>The Guild year is shaped by special events &mdash; the beloved annual Retreat, workshops with nationally known teachers, seasonal getaways, and more. Here's what's coming up, and how to be part of it.</p>
+      <div class="ngm-phero-btns">
+        <a class="ngm-btn ngm-btn-green" href="/calendar">See the calendar</a>
+        <a class="ngm-btn ngm-btn-outline" href="/join">Join the Guild</a>
+      </div>
+    </div>
+    <div class="ngm-phero-photo">
+      <img decoding="async" class="ngm-fade" loading="eager" onload="this.classList.add('is-loaded')"
+        src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20Photos/Needlework%20Guild%20Hero%20Image.png"
+        alt="Guild members gathered at an event"
+        onerror="this.onerror=null;this.src='https://needleworkguildmn.org/resources/Pictures/Website%20Update%20Photos/Retreat%20Photo%20NGM%20Update.png'">
+    </div>
+  </div>
+</div>
+<section class="ngm ngm-sec ngm-sec-linen" style="padding-bottom:28px">
+  <div class="ngm-con">
+    <div class="ngm-upcoming-head ngm-upcoming-center">
+      <span class="ngm-eyebrow">Coming up</span>
+      <h2 class="ngm-h2">Upcoming <em>events</em></h2>
+      <p class="ngm-upcoming-intro">Workshops, programs, and special gatherings on the calendar &mdash; click any event for details and to register, or <a class="ngm-inline-link" href="/calendar">see the full calendar&nbsp;&rarr;</a></p>
+    </div>
+  </div>
+</section>
+<script>(function () {
+  function label(t){ if(t==="zoom")return "Zoom"; if(t==="virtual")return "Online"; if(t==="hybrid")return "Hybrid"; return "In person"; }
+  function classify(text){
+    var s=(text||"").toLowerCase();
+    if(s.indexOf("zoom")>-1) return "zoom";
+    if(s.indexOf("videoconference")>-1||s.indexOf("video conference")>-1||s.indexOf("online")>-1) return "virtual";
+    if(s.indexOf("hybrid")>-1) return "hybrid";
+    return "person";
+  }
+  function tagEvents(){
+    var items=document.querySelectorAll(".ngm-wa-events.upcomingEventsStyle001 ul li");
+    items.forEach(function(li){
+      if(li.getAttribute("data-tag-done")==="1") return;
+      var locEl=li.querySelector(".location");
+      var tag=classify(locEl?locEl.textContent:"");
+      li.setAttribute("data-tag",tag);
+      var chip=document.createElement("span");
+      chip.className="ngm-evt-tag"; chip.textContent=label(tag);
+      var titleEl=li.querySelector(".title");
+      if(titleEl) li.insertBefore(chip,titleEl); else li.insertBefore(chip,li.firstChild);
+      var titleLink=li.querySelector(".title a");
+      if(titleLink&&titleLink.href){
+        li.style.cursor="pointer";
+        li.addEventListener("click",function(e){ if(e.target.closest("a"))return; window.location.href=titleLink.href; });
+      }
+      li.setAttribute("data-tag-done","1");
+    });
+  }
+  function init(){
+    tagEvents();
+    var g=document.querySelector(".ngm-wa-events");
+    if(g&&window.MutationObserver){ new MutationObserver(function(){tagEvents();}).observe(g,{childList:true,subtree:true}); }
+  }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
+})();
+</script>

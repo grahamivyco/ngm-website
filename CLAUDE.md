@@ -78,7 +78,16 @@ Photos are hosted on the WA file manager and referenced by full URL, e.g.
 `https://needleworkguildmn.org/resources/Pictures/Website%20Update%20Photos/<file>`.
 Reference images by URL; don't commit large binaries to the repo.
 
+## Production paste copies: `ngm-website/dist/` (generated)
+
+`ngm-website/dist/` holds comment-stripped twins of every paste file — the
+copies actually pasted into Wild Apricot, so maintainer notes never reach
+the live site. It is GENERATED: never edit it by hand. After changing any
+page file or `global.css`, run `python3 ngm-website/tools/build-dist.py`
+to refresh it (and commit the result).
+
 ## Summary
 
 Edit the page `*.html` files for markup and `global-css/global.css` for
-styling. That's it — there is no second copy to keep in sync.
+styling — then regenerate `dist/` for the paste copies. There is no other
+copy to keep in sync.

@@ -1,0 +1,117 @@
+<div class="ngm-sys">
+  <section class="ngm-sys-band">
+    <div class="ngm-sys-inner">
+      <span class="ngm-sys-eyebrow">Member account</span>
+      <h1 class="ngm-sys-title">My <em>profile</em></h1>
+      <p class="ngm-sys-sub">Your membership, contact details, event registrations, invoices, and email preferences &mdash; review and update them any time.</p>
+      <div class="ngm-sys-btns">
+        <a class="ngm-btn ngm-btn-green" id="ngm-banner-edit" href="#">Edit profile</a>
+        <a class="ngm-btn ngm-btn-outline" href="/Sys/Password/Change">Change password</a>
+        <a class="ngm-btn ngm-btn-outline" href="/member-hub">Back to Member Hub</a>
+      </div>
+    </div>
+  </section>
+</div>
+<script>(function () {
+  function buildTabSelect() {
+    var menu = document.querySelector('.WaGadgetContactProfile ul.memberDetailsTabMenu');
+    if (!menu || document.getElementById('ngm-prof-tabselect')) return;
+    var items = menu.querySelectorAll('li');
+    var links = [];
+    var select = document.createElement('select');
+    select.id = 'ngm-prof-tabselect';
+    select.className = 'ngm-prof-tabselect';
+    select.setAttribute('aria-label', 'Profile section');
+    for (var i = 0; i < items.length; i++) {
+      var a = items[i].querySelector('a');
+      var span = items[i].querySelector('span');
+      var visibleSpan = span && (span.getAttribute('style') || '').indexOf('none') === -1;
+      var label = ((visibleSpan ? span : a) || {}).textContent || '';
+      label = label.replace(/\s+/g, ' ').trim();
+      if (!label) continue;               
+      var opt = document.createElement('option');
+      opt.value = String(links.length);
+      opt.textContent = label;
+      if (visibleSpan) opt.selected = true;   
+      links.push(a);
+      select.appendChild(opt);
+    }
+    if (select.options.length < 2) return;
+    select.addEventListener('change', function () {
+      var a = links[parseInt(select.value, 10)];
+      if (a) a.click();
+    });
+    var tabLabel = document.createElement('span');
+    tabLabel.className = 'ngm-prof-tablabel';
+    tabLabel.textContent = 'Profile section';
+    menu.parentNode.insertBefore(tabLabel, menu);
+    menu.parentNode.insertBefore(select, menu);
+
+    var bal = document.querySelector('.WaGadgetContactProfile .totalBalance');
+    if (bal) menu.parentNode.insertBefore(bal, menu);
+
+    menu.classList.add('ngm-tabs-collapsed');
+    select.classList.add('ngm-tabselect-on');
+    tabLabel.classList.add('ngm-tabselect-on');
+  }
+
+  function fixCancel() {
+    var cancels = document.querySelectorAll('.WaGadgetContactProfile input.typeButton[value="Cancel"]');
+    for (var c = 0; c < cancels.length; c++) {
+      cancels[c].addEventListener('click', function (ev) {
+        ev.preventDefault();
+        window.location.href = '/Sys/Profile/' + window.location.search;
+      });
+    }
+  }
+
+  function wireBannerEdit() {
+    var btn = document.getElementById('ngm-banner-edit');
+    if (!btn) return;
+    var waEdit = document.querySelector('.WaGadgetContactProfile input[id$="editButtonTop"]');
+    if (!waEdit || waEdit.offsetParent === null) { btn.style.display = 'none'; return; }
+    btn.addEventListener('click', function (ev) {
+      ev.preventDefault();
+      waEdit.click();
+    });
+  }
+
+  function addPrivacyIntro() {
+    var anchor = document.querySelector('.WaGadgetContactProfile .includeMeView');
+    if (!anchor || anchor.offsetParent === null || document.getElementById('ngm-priv-intro')) return;
+    var host = anchor.closest('.profileDetailsOuterContainer') || anchor;
+    var box = document.createElement('div');
+    box.id = 'ngm-priv-intro';
+    box.className = 'ngm-priv-intro';
+    box.innerHTML =
+      '<h3>Your directory profile</h3>' +
+      '<p>Choose whether you appear in the member directory, and who can see each detail.</p>';
+    host.parentNode.insertBefore(box, host);
+  }
+
+  function addCardHead() {
+    var card = document.querySelector('.WaGadgetContactProfile');
+    if (!card || document.getElementById('ngm-card-head')) return;
+    var head = document.createElement('div');
+    head.id = 'ngm-card-head';
+    head.className = 'ngm-card-head';
+    head.innerHTML =
+      '<h2>Your account</h2>' +
+      '<p><strong>My directory profile</strong> shows how other members see you in the directory.</p>';
+    card.insertBefore(head, card.firstChild);
+  }
+  function run() {
+    if (document.body) document.body.classList.add('ngm-profile-page');
+    try { addCardHead(); } catch (e) {  }
+    try { addPrivacyIntro(); } catch (e) {  }
+    try { buildTabSelect(); } catch (e) {  }
+    try { fixCancel(); } catch (e) {  }
+    try { wireBannerEdit(); } catch (e) {  }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
+})();
+</script>

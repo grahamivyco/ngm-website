@@ -1,0 +1,140 @@
+<section class="ngm ngm-sec ngm-sec-cream ngm-evd-visit">
+  <div class="ngm-con">
+    <div class="ngm-loc-inner">
+      <div class="ngm-loc-head">
+        <span class="ngm-eyebrow">Visit</span>
+        <h2 class="ngm-h2" style="margin-bottom:0">Where we <em>meet</em></h2>
+      </div>
+      <div class="ngm-loc-addr">
+        <p class="ngm-loc-note">This event&rsquo;s own time and location are listed above. Most Guild gatherings are at Minnesota Valley Unitarian Universalist Fellowship (MVUUF) in Bloomington &mdash; a few meet in members&rsquo; homes or online.</p>
+        <span class="ngm-addr-label">Usual location</span>
+        <address class="ngm-address">
+          <a class="ngm-loc-dir" href="https://www.google.com/maps/dir/?api=1&amp;destination=10715+Zenith+Ave+S+Bloomington+MN+55431" target="_blank" rel="noopener noreferrer">
+            10715 Zenith Avenue South<br>
+            Bloomington, MN 55431
+          </a>
+        </address>
+      </div>
+      <div class="ngm-loc-map ngm-loc-photo">
+        <span class="ngm-loc-photo-ph">Minnesota Valley Unitarian<br>Universalist Fellowship</span>
+        <img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade"
+          src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20Photos/MVUUF.jpeg"
+          alt="Minnesota Valley Unitarian Universalist Fellowship — our meeting location in Bloomington"
+          loading="lazy"
+          onerror="this.style.display='none'">
+      </div>
+    </div>
+    <div class="ngm-visit-zoom">
+      <span class="ngm-addr-label">Joining by video</span>
+      <p class="ngm-visit-zoom-copy">Many of our meetings are on Zoom, in whole or in part. The link is available to members, and if you&rsquo;re not a member yet, just request it &mdash; we&rsquo;ll be happy to email it to you.</p>
+      <div class="ngm-videoband-tiles">
+      <a class="ngm-hub-zoom-module" href="/member-hub">
+        <span class="ngm-hub-zoom-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span>
+        <div class="ngm-hub-zoom-tile-body">
+          <h4>Member Hub</h4>
+          <p>Access the Zoom link.</p>
+        </div>
+        <span class="ngm-hub-zoom-tile-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a class="ngm-hub-zoom-module ngm-hub-zoom-module-alt" href="/Request-The-Link">
+        <span class="ngm-hub-zoom-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></span>
+        <div class="ngm-hub-zoom-tile-body">
+          <h4>Request the Link</h4>
+          <p>Not a member? We&rsquo;ll email it to you.</p>
+        </div>
+        <span class="ngm-hub-zoom-tile-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ngm ngm-about-cta">
+  <div class="ngm-about-cta-inner">
+    <span class="ngm-eyebrow">Join</span>
+    <h2 class="ngm-h2">Find your people<br>and your <em>stitching</em></h2>
+    <p>We&rsquo;d love to have you. Come sit in on any of our monthly meetings or events &mdash; in person or on Zoom, whichever fits your calendar. Once you&rsquo;ve found the one (or three) that feel like yours, join us for just $30 a year.</p>
+    <div class="ngm-about-cta-btns">
+      <a class="ngm-btn ngm-btn-rose" href="/join">Join the Guild</a>
+      <a class="ngm-btn ngm-btn-outline-rose" href="/calendar">See our calendar</a>
+    </div>
+  </div>
+</div>
+<script>(function () {
+  if (document.body && document.body.classList.contains("publicContentView")) {
+    var login = "/Sys/Login/?ReturnUrl=" + encodeURIComponent("/member-hub");
+    var tiles = document.querySelectorAll('a.ngm-hub-zoom-module[href="/member-hub"]');
+    for (var i = 0; i < tiles.length; i++) { tiles[i].setAttribute("href", login); }
+  }
+})();
+
+(function () {
+
+  var VENUES = [
+    {
+      match: /city bella|6600 lyndale|richfield/,
+      note: "This event meets in Kris Hennum’s community room at City Bella in Richfield — not at MVUUF.",
+      addr: "City Bella community room<br>6600 Lyndale Avenue South<br>Richfield, MN 55423",
+      dest: "6600 Lyndale Ave S Richfield MN 55423",
+      photo: "https://needleworkguildmn.org/resources/Pictures/Website%20Update%20-%20Photos/City%20Bella.jpg",
+      ph: "City Bella · Richfield",
+      alt: "City Bella in Richfield — where this event meets"
+    }
+  ];
+  function setAddress(sec, label, html, dest) {
+    var lbl = sec.querySelector(".ngm-addr-label");
+    if (lbl) lbl.textContent = label;
+    var addr = sec.querySelector(".ngm-address");
+    if (!addr) return;
+    addr.innerHTML = "";
+    var a = document.createElement("a");
+    a.className = "ngm-loc-dir";
+    a.href = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(dest);
+    a.target = "_blank"; a.rel = "noopener noreferrer";
+    a.innerHTML = html;
+    addr.appendChild(a);
+  }
+  function adapt() {
+    var sec = document.querySelector(".ngm-evd-visit");
+    var val = document.querySelector(".WaGadgetEventsStateDetails li.eventInfoLocation .eventInfoBoxValue");
+    if (!sec || !val) return;
+    var loc = (val.textContent || "").replace(/\s+/g, " ").trim();
+    if (!loc) return;
+    var descEl = document.querySelector(".WaGadgetEventsStateDetails .gadgetEventEditableArea");
+    var desc = descEl ? (descEl.textContent || "").toLowerCase() : "";
+    var l = loc.toLowerCase();
+    if (/mvuuf|unitarian|zenith|hybrid/.test(l)) return; 
+    if (/video|zoom|online|virtual/.test(l)) {
+      sec.classList.add("ngm-evd-virtual");
+      var eb = sec.querySelector(".ngm-loc-head .ngm-eyebrow");
+      if (eb) eb.textContent = "Visit virtually";
+      var zc = sec.querySelector(".ngm-visit-zoom-copy");
+      if (zc) zc.textContent = "This event is held over Zoom. The link is available to members, and if you’re not a member yet, just request it — we’ll be happy to email it to you.";
+      return;
+    }
+
+    if (!/zoom|video|virtual|online/.test(desc)) sec.classList.add("ngm-evd-nozoom");
+    var note = sec.querySelector(".ngm-loc-note");
+    for (var i = 0; i < VENUES.length; i++) {
+      if (VENUES[i].match.test(l)) {
+        var v = VENUES[i];
+        if (note) note.textContent = v.note;
+        setAddress(sec, "Meeting location", v.addr, v.dest);
+        var img = sec.querySelector(".ngm-loc-map img");
+        if (img) { img.classList.remove("is-loaded"); img.alt = v.alt; img.src = v.photo; }
+        var ph = sec.querySelector(".ngm-loc-photo-ph");
+        if (ph) ph.textContent = v.ph;
+        return; 
+      }
+    }
+    sec.classList.add("ngm-evd-elsewhere");
+    if (note) note.textContent = "This event isn’t at our usual meeting place — here’s where to find it.";
+    setAddress(sec, "Event location", loc.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"), loc);
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", adapt);
+  } else {
+    adapt();
+  }
+})();
+</script>

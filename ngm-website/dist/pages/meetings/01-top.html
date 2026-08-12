@@ -1,0 +1,65 @@
+<div class="ngm ngm-phero">
+  <div class="ngm-phero-inner">
+    <div class="ngm-phero-copy">
+      <span class="ngm-eyebrow">Meetings</span>
+      <h1 class="ngm-h1">Come stitch <em>with us</em></h1>
+      <p>There's a group for every stitcher. Easygoing Stitch-Ins welcome any project, while Special Interest Groups dig into counted thread, needlepoint, and a wandering mix of techniques — daytime, evening, and weekend, in person and on Zoom. The groups meet every month, and members are welcome at every one.</p>
+      <div class="ngm-phero-btns">
+        <a class="ngm-btn ngm-btn-green" href="/calendar">See the calendar</a>
+        <a class="ngm-btn ngm-btn-outline" href="/join">Join the Guild</a>
+      </div>
+    </div>
+    <div class="ngm-phero-photo">
+      <img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade"
+        src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20Photos/Retreat%20Photo%20NGM%20Update.png"
+        alt="Guild members gathered around a table at a monthly meeting"
+        loading="eager"
+      >
+    </div>
+  </div>
+</div>
+<section class="ngm ngm-sec ngm-sec-linen" style="padding-bottom:28px">
+  <div class="ngm-con">
+    <div class="ngm-upcoming-head ngm-upcoming-center">
+      <span class="ngm-eyebrow">Calendar</span>
+      <h2 class="ngm-h2">Upcoming <em>meetings</em></h2>
+      <p class="ngm-upcoming-intro">The next meetings on the calendar — click any event for details. Most meetings are free for members; some workshops have a registration fee, so see individual events for details on price. Looking for everything at once? <a class="ngm-inline-link" href="/calendar">See the full calendar&nbsp;&rarr;</a></p>
+    </div>
+  </div>
+</section>
+<script>(function () {
+  function label(t){ if(t==="zoom")return "Zoom"; if(t==="virtual")return "Online"; if(t==="hybrid")return "Hybrid"; return "In person"; }
+  function classify(text){
+    var s=(text||"").toLowerCase();
+    if(s.indexOf("zoom")>-1) return "zoom";
+    if(s.indexOf("videoconference")>-1||s.indexOf("video conference")>-1||s.indexOf("online")>-1) return "virtual";
+    if(s.indexOf("hybrid")>-1) return "hybrid";
+    return "person";
+  }
+  function tagEvents(){
+    var items=document.querySelectorAll(".ngm-wa-events.upcomingEventsStyle001 ul li");
+    items.forEach(function(li){
+      if(li.getAttribute("data-tag-done")==="1") return;
+      var locEl=li.querySelector(".location");
+      var tag=classify(locEl?locEl.textContent:"");
+      li.setAttribute("data-tag",tag);
+      var chip=document.createElement("span");
+      chip.className="ngm-evt-tag"; chip.textContent=label(tag);
+      var titleEl=li.querySelector(".title");
+      if(titleEl) li.insertBefore(chip,titleEl); else li.insertBefore(chip,li.firstChild);
+      var titleLink=li.querySelector(".title a");
+      if(titleLink&&titleLink.href){
+        li.style.cursor="pointer";
+        li.addEventListener("click",function(e){ if(e.target.closest("a"))return; window.location.href=titleLink.href; });
+      }
+      li.setAttribute("data-tag-done","1");
+    });
+  }
+  function init(){
+    tagEvents();
+    var g=document.querySelector(".ngm-wa-events");
+    if(g&&window.MutationObserver){ new MutationObserver(function(){tagEvents();}).observe(g,{childList:true,subtree:true}); }
+  }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
+})();
+</script>

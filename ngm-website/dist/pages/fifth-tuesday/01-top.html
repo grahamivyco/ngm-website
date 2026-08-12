@@ -1,0 +1,50 @@
+<div class="ngm">
+  <section class="ngm-sec ngm-sec-cream">
+    <div class="ngm-con">
+      <div class="ngm-mt-hero-grid">
+        <div>
+          <span class="ngm-eyebrow">Bonus session</span>
+          <h1 class="ngm-h1">5th Tuesday <em>Open Stitching</em></h1>
+          <div class="ngm-mt-meta"><span class="ngm-mt-when">Only on months with a 5th Tuesday &middot; all welcome</span><span class="ngm-badge ngm-badge-person">Open to all</span></div>
+          <p class="ngm-lead">A bonus open-stitching session held on the months that have a fifth Tuesday. Bring any project and stitch alongside fellow members &mdash; no program, just company.</p>
+          <div class="ngm-mt-hero-btns"><a class="ngm-btn ngm-btn-green" href="/calendar">See upcoming dates</a><a class="ngm-btn ngm-btn-outline" href="/events">All events</a></div>
+        </div>
+        <div class="ngm-mt-photo" style="min-height:380px;padding:0;overflow:hidden;border:none"><img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade" src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20-%20Photos/NGM%20Retreat%20Photo%203.jpeg" alt="Members gathered at a Fifth Tuesday session" loading="eager" style="width:100%;height:100%;object-fit:cover;border-radius:var(--ngm-radius-lg)"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ngm ngm-sec ngm-sec-linen" style="padding-bottom:28px">
+    <div class="ngm-con"><div class="ngm-upcoming-head ngm-upcoming-center">
+      <span class="ngm-eyebrow">Coming up</span>
+      <h2 class="ngm-h2">Upcoming <em>5th Tuesdays</em></h2>
+      <p class="ngm-upcoming-intro">The next 5th Tuesday sessions &mdash; click any event for details, or <a class="ngm-inline-link" href="/calendar">see the full calendar&nbsp;&rarr;</a></p>
+    </div></div>
+  </section>
+</div>
+<script>(function () {
+  function label(t){ if(t==="zoom")return "Zoom"; if(t==="virtual")return "Online"; if(t==="hybrid")return "Hybrid"; return "In person"; }
+  function classify(text){ var s=(text||"").toLowerCase();
+    if(s.indexOf("zoom")>-1) return "zoom";
+    if(s.indexOf("videoconference")>-1||s.indexOf("video conference")>-1||s.indexOf("online")>-1) return "virtual";
+    if(s.indexOf("hybrid")>-1) return "hybrid"; return "person"; }
+  function tagEvents(){
+    var items=document.querySelectorAll(".ngm-wa-events.upcomingEventsStyle001 ul li");
+    items.forEach(function(li){
+      if(li.getAttribute("data-tag-done")==="1") return;
+      var locEl=li.querySelector(".location");
+      var tag=classify(locEl?locEl.textContent:""); li.setAttribute("data-tag",tag);
+      var chip=document.createElement("span"); chip.className="ngm-evt-tag"; chip.textContent=label(tag);
+      var titleEl=li.querySelector(".title");
+      if(titleEl) li.insertBefore(chip,titleEl); else li.insertBefore(chip,li.firstChild);
+      var titleLink=li.querySelector(".title a");
+      if(titleLink&&titleLink.href){ li.style.cursor="pointer";
+        li.addEventListener("click",function(e){ if(e.target.closest("a"))return; window.location.href=titleLink.href; }); }
+      li.setAttribute("data-tag-done","1");
+    });
+  }
+  function init(){ tagEvents(); var g=document.querySelector(".ngm-wa-events");
+    if(g&&window.MutationObserver){ new MutationObserver(function(){tagEvents();}).observe(g,{childList:true,subtree:true}); } }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded",init); } else { init(); }
+})();
+</script>
