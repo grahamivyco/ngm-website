@@ -1,6 +1,6 @@
 # Sunday Tea & Stitch
 
-**WA page:** Sunday Tea & Stitch  ·  **URL:** `/Sunday-Tea-Stitch`  (header Meetings menu)
+**WA page:** Sunday Tea & Stitch  ·  **URL:** `/sunday-tea-&-stitch`  (header Meetings menu)
 
 Sandwich, one layout column:
 1. `01-top.html` — Custom HTML (hero, details, upcoming heading + event-tagging script)
