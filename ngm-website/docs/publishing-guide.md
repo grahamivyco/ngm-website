@@ -128,7 +128,7 @@ see each page's README).
 | Member profile | — | CSS-only skin in Global CSS |
 | Contact profile | `contact-profile/01-top.html` | Banner + CSS skin |
 | Renewal | `renewal/01-top.html` | Banner + CSS skin |
-| Membership application | `membership-application/01-top.html` | Banner; form skinned in Global CSS |
+| Membership application | `membership-application/01-top.html` | Lives at `/application` (the Join page's CTA links there); banner, form skinned in Global CSS |
 | Terms of use | `terms-of-use/01-top.html` | Branded heading ABOVE the existing legal text |
 | Unsubscribe | `unsubscribe/01-top.html` | Banner above the native controls |
 | Member directory | `pages/member-directory/01-top.html` | A normal page, not a system page (`/member-directory`) |
