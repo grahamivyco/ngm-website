@@ -7051,24 +7051,25 @@ body .WaGadgetMemberDirectory tr.over td { background: var(--ngm-sage-lt) !impor
    email/phone are sibling .memberValue divs. ---- */
 @media (max-width: 640px) {
   body #membersTable thead th { display: none !important; }
-  /* one entry per person: "Name  City, State" with contact below, a
-     single light-beige line between people, no fills */
+  /* one entry per person, each thing stacked on its own line — name,
+     then "City, State", then email, then phone — with a single
+     light-beige line between people and no fills or inner lines */
   body #membersTable tr.normal {
     display: block !important; width: auto !important;
     padding: 12px 4px !important; background: transparent !important;
     border: 0 !important; border-bottom: 1px solid var(--ngm-linen) !important;
   }
   body #membersTable tr.normal td {
-    display: inline !important; width: auto !important;
+    display: block !important; width: auto !important;
     border: 0 !important; padding: 0 !important; background: transparent !important;
   }
-  body #membersTable td.memberDirectoryColumn1 .memberValue,
-  body #membersTable td.memberDirectoryColumn1 h5 { display: inline !important; margin: 0 !important; }
-  body #membersTable td.memberDirectoryColumn2 { margin-left: 8px !important; }
+  body #membersTable td.memberDirectoryColumn1 h5 { margin: 0 !important; }
+  body #membersTable td.memberDirectoryColumn2 { margin-top: 3px !important; }
+  /* city + state stay together as ONE line */
   body #membersTable td.memberDirectoryColumn2 .memberValue { display: inline !important; }
-  body #membersTable td.memberDirectoryColumn3 { display: block !important; margin-top: 5px !important; }
-  body #membersTable td.memberDirectoryColumn3 .memberValue { display: inline !important; }
-  body #membersTable td.memberDirectoryColumn3 .memberValue + .memberValue { margin-left: 12px !important; }
+  body #membersTable td.memberDirectoryColumn3 { margin-top: 3px !important; }
+  /* email and phone each on their own line */
+  body #membersTable td.memberDirectoryColumn3 .memberValue { display: block !important; }
 }
 
 /* ══════════════════════════════════════════════════════════════════
