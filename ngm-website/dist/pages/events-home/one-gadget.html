@@ -261,18 +261,43 @@
 </div>
 <script>
 (function(){
-  function place(){
-    var bot=document.getElementById('ngm-pg-bottom'); if(!bot) return;
-    var g=bot.closest('.WaGadget');
-    var native=null, sib=g?g.nextElementSibling:null;
-    while(sib){
-      if(sib.classList&&sib.classList.contains('WaGadget')&&!sib.classList.contains('WaGadgetCustomHTML')){native=sib;break;}
-      sib=sib.nextElementSibling;
+  function cls(el){ var c=el.className; return typeof c==='string'?c:''; }
+  function isNative(el){ var c=cls(el); return /WaGadget[A-Z]/.test(c) && c.indexOf('WaGadgetCustomHTML')===-1; }
+  function mine(bot){ var p=bot.parentNode; while(p&&p!==document.body){ if(/WaGadgetCustomHTML/.test(cls(p))) return p; p=p.parentNode; } return null; }
+  function findNative(bot){
+    var own=mine(bot), all=document.querySelectorAll('[class*="WaGadget"]'), after=null, any=null;
+    for(var i=0;i<all.length;i++){
+      var el=all[i];
+      if(!isNative(el)) continue;
+      if(own&&(el.contains(own)||own.contains(el))) continue;
+      if(el.contains(bot)) continue;
+      if(!any) any=el;
+      if(own&&!after&&(own.compareDocumentPosition(el)&Node.DOCUMENT_POSITION_FOLLOWING)) after=el;
     }
-    if(!native){native=document.querySelector('.zoneContent .WaGadget:not(.WaGadgetCustomHTML)');}
-    if(native){native.parentNode.insertBefore(bot,native.nextSibling);}
+    return after||any;
+  }
+  function anchorFor(el){
+    var a=el,p=a.parentNode;
+    while(p&&p!==document.body){
+      var c=cls(p), t=p.tagName;
+      if(/WaLayoutItem|WaLayoutContainer|WaLayoutTable|WaLayoutRow/.test(c)||t==='TD'||t==='TR'||t==='TBODY'||t==='TABLE'){ a=p; p=a.parentNode; }
+      else break;
+    }
+    return a;
+  }
+  function place(tries){
+    var bot=document.getElementById('ngm-pg-bottom'); if(!bot) return;
+    var native=findNative(bot);
+    if(native){
+      var a=anchorFor(native);
+      if(a.parentNode) a.parentNode.insertBefore(bot,a.nextSibling);
+      bot.style.display='';
+      return;
+    }
+    if(tries>0){ setTimeout(function(){ place(tries-1); },100); return; }
     bot.style.display='';
   }
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',place);}else{place();}
+  function start(){ place(30); }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',start);}else{start();}
 })();
 </script>
