@@ -1533,14 +1533,16 @@ body [class*="LayoutContainer"] {
    month grid and the Key card sit on the same background as the hero.
    Top padding ZERO to kill the gap under the hero. Even padding on the
    sides + bottom so the grid has breathing room on all sides. */
-.ngm-cal-body { background: var(--ngm-cream); padding: 0 40px; }
-/* Belt & braces: the cream must NOT depend on the unclosed .ngm-cal-body
+/* the Key band sits on the SAME white surface as the calendar grid */
+.ngm-cal-body { background: #fff; padding: 0 40px; }
+/* Belt & braces: the calendar surface must NOT depend on the .ngm-cal-body
    wrapper reaching around the native gadget (WA's sanitizer may auto-close
-   it, leaving the calendar outside). The 01-top script tags the body with
-   .ngm-calendar-page; painting the page itself cream guarantees hero →
-   grid → Key sit on one cream surface. Sections lower on the page
-   (.ngm-sec-*, CTA bands) paint their own backgrounds over it. */
-body.ngm-calendar-page { background: var(--ngm-cream) !important; }
+   it, and in one-gadget mode the wrapper moves with the Key). The 01-top
+   script tags the body with .ngm-calendar-page; painting the page itself
+   white guarantees the grid and the Key sit on ONE white surface. The hero
+   and the sections below (.ngm-sec-*, CTA bands) paint their own colours
+   over it. */
+body.ngm-calendar-page { background: #fff !important; }
 body.ngm-calendar-page .WaPlaceHolder,
 body.ngm-calendar-page .WaLayoutPlaceHolder,
 body.ngm-calendar-page .WaPlaceHolderContent { background: transparent !important; }

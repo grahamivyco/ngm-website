@@ -1312,9 +1312,9 @@ body [class*="LayoutContainer"] {
 }
 .ngm-cal-hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
 
-.ngm-cal-body { background: var(--ngm-cream); padding: 0 40px; }
+.ngm-cal-body { background: #fff; padding: 0 40px; }
 
-body.ngm-calendar-page { background: var(--ngm-cream) !important; }
+body.ngm-calendar-page { background: #fff !important; }
 body.ngm-calendar-page .WaPlaceHolder,
 body.ngm-calendar-page .WaLayoutPlaceHolder,
 body.ngm-calendar-page .WaPlaceHolderContent { background: transparent !important; }
