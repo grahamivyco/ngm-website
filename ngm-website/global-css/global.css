@@ -6805,6 +6805,66 @@ body .WaGadgetMemberDirectory {
 body .WaGadgetMemberDirectory, body .WaGadgetMemberDirectory * {
   font-family: var(--ngm-sans) !important;
 }
+/* ---- SEARCH TOOLBAR — VERIFIED via console (Aug 2026): the search area
+   is theme corners + d1–d9 chrome around an .inner holding the label,
+   the live-search input, and span.searchResult (Found + Show pager).
+   Flatten the chrome; the .inner becomes one soft toolbar row. ---- */
+body .WaGadgetMemberDirectory .cornersContainer,
+body .WaGadgetMemberDirectory .clearEndContainer { display: none !important; }
+body .WaGadgetMemberDirectory .memberDirectorySearchAreaOuterContainer,
+body .WaGadgetMemberDirectory .memberDirectorySearchArea,
+body .WaGadgetMemberDirectory .memberDirectorySearchArea .d1,
+body .WaGadgetMemberDirectory .memberDirectorySearchArea .d2,
+body .WaGadgetMemberDirectory .memberDirectorySearchArea .d3,
+body .WaGadgetMemberDirectory .memberDirectorySearchArea .d4,
+body .WaGadgetMemberDirectory .memberDirectorySearchArea .d5,
+body .WaGadgetMemberDirectory .memberDirectorySearchArea .d6,
+body .WaGadgetMemberDirectory .memberDirectorySearchArea .d7,
+body .WaGadgetMemberDirectory .memberDirectorySearchArea .d8,
+body .WaGadgetMemberDirectory .memberDirectorySearchArea .d9 {
+  display: block !important; width: auto !important;
+  margin: 0 !important; padding: 0 !important;
+  background: transparent !important; border: 0 !important;
+}
+body .WaGadgetMemberDirectory .memberDirectorySearchArea .inner {
+  display: flex !important; align-items: center !important;
+  gap: 12px !important; flex-wrap: wrap !important;
+  background: var(--ngm-sage-lt) !important;
+  border: 1px solid var(--ngm-border) !important;
+  border-radius: var(--ngm-radius) !important;
+  padding: 14px 18px !important;
+  margin: 10px 0 22px !important;
+}
+body .WaGadgetMemberDirectory .memberDirectorySearchArea input[type="text"] {
+  flex: 1 1 240px !important; min-width: 160px !important;
+}
+/* Found + Show readout rides the right edge of the toolbar */
+body .WaGadgetMemberDirectory .searchResult {
+  margin-left: auto !important; display: inline-flex !important;
+  align-items: center !important; gap: 4px !important; white-space: nowrap !important;
+}
+/* pager selects (toolbar + the duplicate under the table) */
+body .WaGadgetMemberDirectory .searchResult select,
+body .WaGadgetMemberDirectory #idPagingData2 select {
+  font-size: var(--ngm-text-ui) !important; color: var(--ngm-charcoal) !important;
+  background: #fff !important; border: 1px solid var(--ngm-border) !important;
+  border-radius: 8px !important; padding: 5px 8px !important;
+  margin-left: 6px !important; cursor: pointer !important;
+}
+body .WaGadgetMemberDirectory #idPagingData2 {
+  display: block !important; margin-top: 14px !important; text-align: right !important;
+  font-size: var(--ngm-text-ui) !important; color: var(--ngm-gray) !important;
+}
+/* Advanced-search link: quiet, right-aligned above the toolbar; its
+   generalForm wrappers flatten (verified — corners chrome again) */
+body .WaGadgetMemberDirectory .advSearchContainerLink .generalFormOuterContainer,
+body .WaGadgetMemberDirectory .advSearchContainerLink .generalFormContainer,
+body .WaGadgetMemberDirectory .advSearchContainerLink .generalFormContainer .inner {
+  display: block !important; width: auto !important;
+  margin: 0 !important; padding: 0 !important;
+  background: transparent !important; border: 0 !important;
+}
+body .WaGadgetMemberDirectory .advSearchContainerLink { text-align: right !important; margin: 0 0 4px !important; }
 /* simple search: label + input */
 body .WaGadgetMemberDirectory #memberDirectorySearchArea label,
 body .WaGadgetMemberDirectory .memberDirectorySearchArea label {
