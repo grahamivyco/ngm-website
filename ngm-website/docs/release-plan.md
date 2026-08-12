@@ -48,11 +48,6 @@ pass to confirm nothing in header/footer links to any of these is enough.
 - [ ] Homepage + About — swap `REPLACE_WITH_..._GALLERY` photo placeholders
       for real `/resources/Pictures/...` URLs. (About tiles have `onerror`
       fallbacks, so this is non-blocking; homepage hero should be real.)
-- [ ] `layout/suggestion-button/01-top.html` — fill the three Google-Form
-      placeholders (`__ENTRY_IDEA__`, `__ENTRY_NAME__`, form action). If the
-      form isn't ready, hold this gadget out of the release.
-- [ ] `layout/wrapper-reset/01-top.html` — replace `REPLACE_HUB` with the
-      real Member-Hub gadget ID.
 - [ ] Contact-us — the branded inquiry form is a visual placeholder until the
       live form gadget is authorized; decide whether it ships as-is.
 

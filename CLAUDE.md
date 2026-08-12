@@ -68,7 +68,7 @@ A few files are legitimately self-contained (their own CSS/fonts) because they
 have no global-CSS equivalent — do not "slim" or delete them unless explicitly
 asked:
 
-- `ngm-website/layout/header/`, `layout/footer/`, `layout/wrapper-reset/`
+- `ngm-website/layout/header/`, `layout/footer/`, `layout/feedback-button/`
 - A handful of `system-pages/` (e.g. `contact-profile`, `member-profile`,
   `renewal`, and the `mockups/`).
 

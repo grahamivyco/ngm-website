@@ -20,7 +20,6 @@ ngm-website/
 ├── layout/
 │   ├── header/          Nav header gadget
 │   ├── footer/          Footer gadget
-│   └── wrapper-reset/   WA Wrapper Reset gadget
 ├── pages/               One folder per public page (each = the Custom HTML gadget code)
 │   ├── homepage/
 │   ├── about/
