@@ -5323,6 +5323,10 @@ body .WaGadgetContactProfile .typeTextLabelNoData { color: var(--ngm-gray-lt) !i
 .ngm-hub-zoom-module.ngm-hub-zoom-module-alt{background:#fff;border-color:var(--ngm-border);}
 .ngm-hub-zoom-module.ngm-hub-zoom-module-alt .ngm-hub-zoom-tile-icon{background:var(--ngm-sage-lt);}
 
+.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/Request-The-Link"]{background:#fff;border-color:var(--ngm-border);}
+.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/Request-The-Link"] .ngm-hub-zoom-tile-icon{background:var(--ngm-sage-lt);}
+.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/Request-The-Link"]:hover{background:var(--ngm-sage-lt);border-color:#C1D3B2;}
+
 .ngm-hub-zoom-module:hover{background:#CBDBBE;border-color:#B3C8A1;}
 .ngm-hub-zoom-module.ngm-hub-zoom-module-alt:hover{background:var(--ngm-sage-lt);border-color:#C1D3B2;}
 .ngm-hub-zoom-module .ngm-hub-zoom-tile-body h4{margin:0;}
@@ -7429,7 +7433,7 @@ body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 48px !important; padd
 @media (max-width: 900px) { body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 28px !important; padding-right: 28px !important; } }
 @media (max-width: 640px) { body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 16px !important; padding-right: 16px !important; } }
 
-@media (min-width: 601px) {
+@media (min-width: 641px) {
   .ngm-loc-inner:has(.ngm-loc-head) { grid-template-rows: auto auto; align-items: start; row-gap: 6px; }
   .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-head { margin-bottom: 14px; }
   .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-map { align-self: stretch; height: auto; }

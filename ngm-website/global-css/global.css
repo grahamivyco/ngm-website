@@ -6397,6 +6397,11 @@ body .WaGadgetContactProfile .typeTextLabelNoData { color: var(--ngm-gray-lt) !i
    border, sage-tinted icon chip: the tile version of filled vs outline. */
 .ngm-hub-zoom-module.ngm-hub-zoom-module-alt{background:#fff;border-color:var(--ngm-border);}
 .ngm-hub-zoom-module.ngm-hub-zoom-module-alt .ngm-hub-zoom-tile-icon{background:var(--ngm-sage-lt);}
+/* belt-and-braces: Request-the-Link reads secondary even where a gadget
+   hasn't been re-pasted with the -alt class yet (keyed on its href) */
+.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/Request-The-Link"]{background:#fff;border-color:var(--ngm-border);}
+.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/Request-The-Link"] .ngm-hub-zoom-tile-icon{background:var(--ngm-sage-lt);}
+.ngm-videoband-tiles a.ngm-hub-zoom-module[href="/Request-The-Link"]:hover{background:var(--ngm-sage-lt);border-color:#C1D3B2;}
 /* hover: no raise — the card deepens a shade and the arrow nudges right
    (the arrow nudge is the existing .ngm-hub-zoom-tile-go rule below) */
 .ngm-hub-zoom-module:hover{background:#CBDBBE;border-color:#B3C8A1;}
@@ -8938,8 +8943,11 @@ body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 48px !important; padd
    the text column's height — never dropping back to a short fixed panel —
    and the address sits directly under the heading (rows hug their content,
    no flexible gap). Applies wherever the two columns sit side by side
-   (601px and up); below that the section stacks and the photo gets a set height. */
-@media (min-width: 601px) {
+   (641px and up — matching the stack point); below that the section stacks
+   and the photo gets a set height. height:auto here with the absolutely
+   positioned img collapses the box to a sliver if it ever applies to the
+   stacked layout, so this must NEVER overlap the stacking breakpoint. */
+@media (min-width: 641px) {
   .ngm-loc-inner:has(.ngm-loc-head) { grid-template-rows: auto auto; align-items: start; row-gap: 6px; }
   .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-head { margin-bottom: 14px; }
   .ngm-loc-inner:has(.ngm-loc-head) .ngm-loc-map { align-self: stretch; height: auto; }
