@@ -17,6 +17,12 @@
 <style>
 #ngmf,#ngmf *,#ngmf *::before,#ngmf *::after{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans','Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased}
 #ngmf{background:#242424;color:#E9E4DA;position:relative;overflow:hidden}
+/* NO FLASH: the footer stays hidden until the lift script has moved it
+   to the end of <body> (a footer gadget pasted high in the template used
+   to paint at the top for a beat, then jump down). The lift script adds
+   .ngmf-placed once it's in position. */
+#ngmf{display:none}
+#ngmf.ngmf-placed{display:block}
 #ngmf::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 55% at 88% -8%,rgba(184,114,96,.16),transparent 62%);pointer-events:none}
 #ngmf .ngmf-inner{position:relative;max-width:1140px;margin:0 auto;padding:64px 40px 0}
 #ngmf .ngmf-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:44px;padding-bottom:48px}
@@ -169,7 +175,9 @@ body.memberContentView #ngmf .gi-member{display:block}
 (function(){
   function ngmfLift(){
     var f=document.getElementById('ngmf');
-    if(f&&document.body&&document.body.lastElementChild!==f){document.body.appendChild(f);}
+    if(!f||!document.body)return;
+    if(document.body.lastElementChild!==f){document.body.appendChild(f);}
+    f.classList.add('ngmf-placed');   /* reveal only once in position */
   }
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',ngmfLift);}else{ngmfLift();}
   window.addEventListener('load',ngmfLift);
