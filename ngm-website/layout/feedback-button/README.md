@@ -51,4 +51,4 @@ here, and the "Want to add something to the calendar?" CTA in
   plain fixed position if no footer is present.
 - `z-index` sits just below the header, so the open mobile menu covers it.
 - Self-contained on purpose (like `layout/header`, `layout/footer`,
-  `layout/wrapper-reset`) — do **not** move its styles into `global.css`.
+  the header/footer gadgets) — do **not** move its styles into `global.css`.
