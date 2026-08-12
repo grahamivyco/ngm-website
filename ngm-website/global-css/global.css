@@ -1385,7 +1385,7 @@ body .ngm-lcard-email {
 /* ── Join CTA (about page — rose-lt) ── */
 .ngm-about-cta {
   background: var(--ngm-rose-lt);
-  padding: 64px 48px;
+  padding: 64px var(--ngm-pad-x);
   text-align: center;
 }
 .ngm-about-cta-inner {
@@ -2190,7 +2190,7 @@ body .ngm-key-cta a:not(.ngm-btn):hover { border-color: var(--ngm-sage-dk); }
   .ngm-key-grid { grid-template-columns: 1fr; }
 }
 /* ── Final CTA ── */
-.ngm-cal-cta { background: var(--ngm-rose-lt); padding: 72px 48px; text-align: center; }
+.ngm-cal-cta { background: var(--ngm-rose-lt); padding: 72px var(--ngm-pad-x); text-align: center; }
 .ngm-cal-cta-inner { max-width: 520px; margin: 0 auto; }
 .ngm-cal-cta p { font-family: var(--ngm-sans); font-size: var(--ngm-text-body); color: var(--ngm-gray); line-height: 1.8; margin-bottom: 28px; }
 .ngm-cal-cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
@@ -2403,7 +2403,7 @@ body .WaPlaceHolderWide > div { padding-top: 0 !important; padding-bottom: 0 !im
   color: var(--ngm-gray) !important; word-break: break-all;
 }
 /* ── CTA ── */
-.ngm-mtg-cta { background: var(--ngm-rose-lt); padding: 80px 48px; text-align: center; }
+.ngm-mtg-cta { background: var(--ngm-rose-lt); padding: 80px var(--ngm-pad-x); text-align: center; }
 .ngm-mtg-cta-inner { max-width: 480px; margin: 0 auto; }
 .ngm-mtg-cta p { font-family: var(--ngm-sans); font-size: var(--ngm-text-body); color: var(--ngm-gray); line-height: 1.8; margin-bottom: 28px; }
 .ngm-mtg-cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
@@ -2702,7 +2702,7 @@ body .WaPlaceHolderWide > div { padding-top: 0 !important; padding-bottom: 0 !im
   line-height: 1.8; max-width: 620px; margin-top: 8px;
 }
 /* ── CTA ── */
-.ngm-ev-cta { background: var(--ngm-rose-lt); padding: 80px 48px; text-align: center; }
+.ngm-ev-cta { background: var(--ngm-rose-lt); padding: 80px var(--ngm-pad-x); text-align: center; }
 .ngm-ev-cta-inner { max-width: 520px; margin: 0 auto; }
 .ngm-ev-cta p { font-family: var(--ngm-sans); font-size: var(--ngm-text-body); color: var(--ngm-gray); line-height: 1.8; margin-bottom: 28px; }
 .ngm-ev-cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
@@ -3067,7 +3067,7 @@ body .WaPlaceHolderContent4 > div { padding-top: 0 !important; padding-bottom: 0
 .ngm-btn-outline, body a.ngm-btn-outline { background: transparent; color: var(--ngm-sage-dk) !important; border: 1.5px solid var(--ngm-sage-dk) !important; }
 .ngm-btn-outline:hover, body a.ngm-btn-outline:hover { background: var(--ngm-sage-dk) !important; color: #fff !important; }
 /* ── Hero ── */
-.ngm-join-hero { background: var(--ngm-cream); padding: 80px 48px 72px; border-bottom: 1px solid var(--ngm-border); }
+.ngm-join-hero { background: var(--ngm-cream); padding: 80px var(--ngm-pad-x) 72px; border-bottom: 1px solid var(--ngm-border); }
 .ngm-join-hero-inner { max-width: var(--ngm-maxw); margin: 0 auto; display: grid; grid-template-columns: 1.1fr .9fr; gap: 64px; align-items: center; }
 .ngm-join-hero-copy .ngm-eyebrow { margin-bottom: 14px; }
 .ngm-join-hero-copy .ngm-h1 { margin-bottom: 22px; }
@@ -3122,7 +3122,7 @@ body .WaPlaceHolderContent4 > div { padding-top: 0 !important; padding-bottom: 0
 .ngm-price-trust svg { flex-shrink: 0; }
 .ngm-price-note { font-family: var(--ngm-sans); font-size: var(--ngm-text-ui); color: var(--ngm-gray-lt); line-height: 1.6; margin-top: 18px; }
 /* ── CTA ── */
-.ngm-join-cta { background: var(--ngm-rose-lt); padding: 80px 48px; text-align: center; }
+.ngm-join-cta { background: var(--ngm-rose-lt); padding: 80px var(--ngm-pad-x); text-align: center; }
 .ngm-join-cta-inner { max-width: 520px; margin: 0 auto; }
 .ngm-join-cta p { font-family: var(--ngm-sans); font-size: var(--ngm-text-lead); color: var(--ngm-gray); line-height: 1.8; margin-bottom: 28px; }
 /* ── Responsive ── */
@@ -3263,7 +3263,7 @@ body .WaPlaceHolderContent3 > div, body .WaPlaceHolderContent4 > div { padding-t
 .ngm-crumb a { color: var(--ngm-sage-dk) !important; text-decoration: none !important; border-bottom: 1px solid rgba(62,85,56,.3); }
 .ngm-crumb a:hover { border-color: var(--ngm-sage-dk); }
 /* ── Hero ── */
-.ngm-si-hero { background: var(--ngm-cream); padding: 72px 48px 64px; border-bottom: 1px solid var(--ngm-border); }
+.ngm-si-hero { background: var(--ngm-cream); padding: 72px var(--ngm-pad-x) 64px; border-bottom: 1px solid var(--ngm-border); }
 .ngm-si-hero-inner { max-width: var(--ngm-maxw); margin: 0 auto; display: grid; grid-template-columns: 1.05fr .95fr; gap: 60px; align-items: center; }
 .ngm-si-hero-copy .ngm-eyebrow { margin-bottom: 12px; }
 .ngm-si-hero-copy .ngm-h1 { margin-bottom: 20px; }
@@ -3295,7 +3295,7 @@ body .WaPlaceHolderContent3 > div, body .WaPlaceHolderContent4 > div { padding-t
 /* ── plain-text email ── */
 .ngm-loc-email, body .ngm-loc-email { font-family: var(--ngm-sans) !important; font-size: inherit !important; color: var(--ngm-sage-dk) !important; font-weight: 500; }
 /* ── CTA ── */
-.ngm-si-cta { background: var(--ngm-rose-lt); padding: 76px 48px; text-align: center; }
+.ngm-si-cta { background: var(--ngm-rose-lt); padding: 76px var(--ngm-pad-x); text-align: center; }
 .ngm-si-cta-inner { max-width: 500px; margin: 0 auto; }
 .ngm-si-cta p { font-family: var(--ngm-sans); font-size: var(--ngm-text-lead); color: var(--ngm-gray); line-height: 1.8; margin-bottom: 28px; }
 .ngm-si-cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
@@ -4912,7 +4912,7 @@ body .mLayout { padding-bottom: 0 !important; margin-bottom: 0 !important; }
 .ngm-hub-white{background:#fff;}
 .ngm-hub-linen{background:var(--ngm-linen);}
 .ngm-hub-inner{max-width: var(--ngm-maxw);margin:0 auto;}
-.ngm-hub-hero{background:var(--ngm-cream);padding:70px 48px 60px;border-bottom:1px solid var(--ngm-border);}
+.ngm-hub-hero{background:var(--ngm-cream);padding:70px var(--ngm-pad-x) 60px;border-bottom:1px solid var(--ngm-border);}
 .ngm-hub-hero p{font-family:var(--ngm-sans);font-size:var(--ngm-text-body);color:var(--ngm-gray);line-height:1.8;max-width:560px;margin-bottom:28px;}
 .ngm-hub-account{display:flex;gap:14px;flex-wrap:wrap;}
 .ngm-hub-status,.ngm-hub-plink{display:inline-flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--ngm-border);border-radius:var(--ngm-radius);padding:14px 18px;text-decoration:none!important;color:var(--ngm-charcoal);font-family:var(--ngm-sans);transition:border-color .18s;}
@@ -9126,7 +9126,7 @@ body .ngm-wa-events .gadgetStyleBody { max-width: var(--ngm-maxw) !important; }
    • .ngm-cta — one rose CTA band, consolidating .ngm-join / .ngm-about-cta /
      .ngm-mtg-cta / .ngm-ev-cta / .ngm-si-cta.
 ══════════════════════════════════════════════════════════════════ */
-.ngm-phero { background: var(--ngm-cream); padding: 80px 48px 72px; border-bottom: 1px solid var(--ngm-border); }
+.ngm-phero { background: var(--ngm-cream); padding: 80px var(--ngm-pad-x) 72px; border-bottom: 1px solid var(--ngm-border); }
 .ngm-phero-inner { max-width: var(--ngm-maxw); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
 .ngm-phero-copy .ngm-eyebrow { margin-bottom: 14px; }
 .ngm-phero-copy .ngm-h1 { margin-bottom: 22px; }
@@ -9480,7 +9480,7 @@ a.ngm-gcard:hover { background: var(--ngm-sage-lt); border-color: #C1D3B2; }
 /* ── Shared hero band (cream, centred, like .ngm-cal-hero) ── */
 .ngm-vol-hero, .ngm-lib-hero, .ngm-dir-hero {
   background: var(--ngm-cream);
-  padding: 72px 48px 56px;
+  padding: 72px var(--ngm-pad-x) 56px;
   border-bottom: 1px solid var(--ngm-border);
   text-align: center;
 }
@@ -9629,4 +9629,27 @@ body.ngm-dir-page .WaPlaceHolderContent {
 }
 @media (max-width: 640px) {
   .ngm-vol-grid, .ngm-vol-pitch-grid, .ngm-lib-steps, .ngm-lib-terms { grid-template-columns: 1fr; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   UNIVERSAL SIDE PADDING — every full-width band (heroes, CTA bands)
+   uses the same --ngm-pad-x tokens as .ngm-sec, so no band is inset
+   more than its neighbours at any width. (The heroes used to hardcode
+   48px and keep it on tablet/phone while sections stepped down.)
+══════════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .ngm-phero, .ngm-join-hero, .ngm-si-hero, .ngm-hub-hero,
+  .ngm-vol-hero, .ngm-lib-hero, .ngm-dir-hero, .ngm-cal-hero,
+  .ngm-about-cta, .ngm-cal-cta, .ngm-mtg-cta, .ngm-ev-cta,
+  .ngm-join-cta, .ngm-si-cta, .ngm-cta {
+    padding-left: var(--ngm-pad-x-md); padding-right: var(--ngm-pad-x-md);
+  }
+}
+@media (max-width: 560px) {
+  .ngm-phero, .ngm-join-hero, .ngm-si-hero, .ngm-hub-hero,
+  .ngm-vol-hero, .ngm-lib-hero, .ngm-dir-hero, .ngm-cal-hero,
+  .ngm-about-cta, .ngm-cal-cta, .ngm-mtg-cta, .ngm-ev-cta,
+  .ngm-join-cta, .ngm-si-cta, .ngm-cta {
+    padding-left: var(--ngm-pad-x-sm); padding-right: var(--ngm-pad-x-sm);
+  }
 }
