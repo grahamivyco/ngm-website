@@ -1,6 +1,6 @@
 # Membership Application
 
-**WA page:** `/Application-Duplicate/` (WA system/join form; the join hero's CTA links here)
+**WA page:** `/application` (WA system/join form; the join hero's CTA links here)
 
 The form is skinned site-wide by `global-css/global.css` (the WA SYSTEM-PAGE FORMS
 section, plus the MEMBERSHIP APPLICATION / JOIN WIZARD block). `01-top.html` is an
