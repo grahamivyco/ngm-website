@@ -6630,8 +6630,11 @@ body .WaGadgetEventsStateDetails .boxContainer .d9, body .WaGadgetEventsStateDet
 body .WaGadgetEventsStateDetails .boxBodyContentContainer.fixedHeight {
   height: auto !important; max-height: none !important; overflow: visible !important;
 }
-/* description gets breathing room below the info box */
-body .WaGadgetEventsStateDetails .boxBodyContentOuterContainer { margin-top: 22px !important; }
+/* NO extra top margin here — in the two-column layout the description
+   column must start level with the info tile (the stacked ≤900px view
+   gets its breathing room from the media rule above), and the copy's
+   first element drops its own top margin for the same reason */
+body .WaGadgetEventsStateDetails .gadgetEventEditableArea > :first-child { margin-top: 0 !important; }
 /* time row: WA ships its label as a bare &nbsp; — paint a real "Time"
    title in front of it so the row reads like When and Location */
 body .WaGadgetEventsStateDetails li.eventInfoStartTime .eventInfoBoxLabel::before { content: "Time"; }
