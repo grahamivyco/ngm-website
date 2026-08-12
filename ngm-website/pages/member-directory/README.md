@@ -7,6 +7,14 @@ form's card-on-cream look; `body.ngm-dir-page` flag set by 01-top's
 script). The old closing "Your listing" band was removed — delete its
 bottom gadget in WA if still present.
 
+**Verified DOM (row dump, Aug 2026):** results render into
+`table#membersTable` (fixed renderer id — the theme's responsive rules
+ride it, so our overrides must too). One `tr.normal` per person:
+`td.memberDirectoryColumn1 > .memberValue > h5 > a` (name),
+`td.memberDirectoryColumn2` with two sibling `.memberValue` divs
+(city, state), `td.memberDirectoryColumn3` with email link + phone
+`.memberValue` divs.
+
 A custom page that **wraps** Wild Apricot's native **Member Directory** gadget. A
 short branded intro band sits above the gadget, and a compact "keep your listing
 current" band sits below it — the "sandwich" pattern. The searchable list of
