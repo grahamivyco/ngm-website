@@ -5965,6 +5965,7 @@ body .WaGadgetMemberPublicProfile .memberDirectoryDetailsHeaderContainer h2,
 body .WaGadgetMemberPublicProfile h2 {
   font-family: var(--ngm-serif) !important; font-weight: 400 !important; color: var(--ngm-charcoal) !important;
   font-size: var(--ngm-h2) !important;
+  text-transform: none !important; letter-spacing: normal !important;
   display: flex !important; align-items: center !important; gap: 16px !important; flex-wrap: wrap !important;
 }
 /* Back link above the name */
@@ -5990,6 +5991,9 @@ body .WaGadgetMemberPublicProfile .labeledTextContainer .fieldLabel,
 body .WaGadgetMemberPublicProfile .fieldLabel span {
   color: var(--ngm-sage-dk) !important; font-weight: 600 !important; font-size: var(--ngm-text-ui) !important;
 }
+/* labels read LEFT-aligned in their column (theme right-aligns them) —
+   same convention as the contact-profile form */
+body .WaGadgetMemberPublicProfile .fieldLabel { text-align: left !important; }
 body .WaGadgetMemberPublicProfile .fieldBody,
 body .WaGadgetMemberPublicProfile .fieldBody span,
 body .WaGadgetMemberPublicProfile .fieldBody .label {
@@ -6032,6 +6036,8 @@ body .WaGadgetEmailMember .captionContainer h4 {
 body .WaGadgetEmailMember .mandatoryFieldsTitle { color: var(--ngm-gray) !important; }
 body .WaGadgetEmailMember .mandatoryLabel,
 body .WaGadgetEmailMember .fieldLabel { color: var(--ngm-sage-dk) !important; font-weight: 600 !important; }
+/* labels read LEFT-aligned, matching the contact-profile form */
+body .WaGadgetEmailMember .fieldLabel { text-align: left !important; }
 body .WaGadgetEmailMember .mandatorySymbol { color: var(--ngm-rose-dk) !important; }
 /* inputs + textarea */
 body .WaGadgetEmailMember input.typeText,
