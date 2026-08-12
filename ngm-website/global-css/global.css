@@ -6950,6 +6950,66 @@ body .WaGadgetMemberDirectory .memberDirectoryOuterContainer th {
   border-bottom: 1px solid var(--ngm-border) !important;
 }
 
+/* ---- ROUND 2 (maintainer review, Aug 2026) — these come LAST in the
+   section so they win over the rules above. ---- */
+/* no Advanced-search link, no Show pagers (the search box reaches all
+   members; only the first 50 render per view) */
+body .WaGadgetMemberDirectory .advSearchContainerLink,
+body .WaGadgetMemberDirectory #idPagingData,
+body .WaGadgetMemberDirectory #idPagingData2 { display: none !important; }
+/* row separators: LIGHT hairline, and no zebra tint */
+body .WaGadgetMemberDirectory .memberDirectoryOuterContainer table {
+  border-collapse: separate !important; border-spacing: 0 !important; border: 0 !important;
+}
+body .WaGadgetMemberDirectory .memberDirectoryOuterContainer tr:not(:hover):not(.over) { background: transparent !important; }
+body .WaGadgetMemberDirectory td.memberDirectoryColumn1,
+body .WaGadgetMemberDirectory td.memberDirectoryColumn2,
+body .WaGadgetMemberDirectory td.memberDirectoryColumn3 { border-bottom: 1px solid var(--ngm-linen) !important; }
+/* hover = the homepage upcoming-meetings hover: pale-green fill with
+   rounded corners, smooth fade, no lift */
+body .WaGadgetMemberDirectory tr.normal td { transition: background-color .2s ease !important; }
+body .WaGadgetMemberDirectory tr.normal:hover,
+body .WaGadgetMemberDirectory tr.over { background: transparent !important; }
+body .WaGadgetMemberDirectory tr.normal:hover td,
+body .WaGadgetMemberDirectory tr.over td { background: var(--ngm-sage-lt) !important; }
+body .WaGadgetMemberDirectory tr.normal:hover td:first-child,
+body .WaGadgetMemberDirectory tr.over td:first-child {
+  border-top-left-radius: var(--ngm-radius) !important; border-bottom-left-radius: var(--ngm-radius) !important;
+}
+body .WaGadgetMemberDirectory tr.normal:hover td:last-child,
+body .WaGadgetMemberDirectory tr.over td:last-child {
+  border-top-right-radius: var(--ngm-radius) !important; border-bottom-right-radius: var(--ngm-radius) !important;
+}
+/* city + state on ONE line ("Maple Grove, Minnesota") — values render
+   inline; any <br> between them is dropped */
+body .WaGadgetMemberDirectory td.memberDirectoryColumn2 br { display: none !important; }
+body .WaGadgetMemberDirectory td.memberDirectoryColumn2 .memberValue { display: inline !important; }
+body .WaGadgetMemberDirectory td.memberDirectoryColumn2 .memberValue:not(:last-of-type)::after { content: ", "; }
+/* universal type: ONE size (text-md) for everything in the table —
+   name semibold, email medium, no bold runs */
+body .WaGadgetMemberDirectory td.memberDirectoryColumn1 h5 a { font-size: var(--ngm-text-md) !important; }
+body .WaGadgetMemberDirectory .memberValue,
+body .WaGadgetMemberDirectory .memberValue b,
+body .WaGadgetMemberDirectory .memberValue strong {
+  font-size: var(--ngm-text-md) !important; font-weight: 400 !important;
+}
+body .WaGadgetMemberDirectory .memberValue a { font-size: var(--ngm-text-md) !important; font-weight: 500 !important; }
+/* phones: one line per person — name · city, state — contact below; no
+   lines between the sections of a single person, one light line between
+   people */
+@media (max-width: 640px) {
+  body .WaGadgetMemberDirectory .memberDirectoryOuterContainer th { display: none !important; }
+  body .WaGadgetMemberDirectory tr.normal {
+    display: block !important; padding: 12px 4px !important;
+    border-bottom: 1px solid var(--ngm-linen) !important;
+  }
+  body .WaGadgetMemberDirectory tr.normal td {
+    display: inline !important; border: 0 !important; padding: 0 !important;
+  }
+  body .WaGadgetMemberDirectory td.memberDirectoryColumn2::before { content: "\00a0\00b7 "; color: var(--ngm-gray-lt); }
+  body .WaGadgetMemberDirectory td.memberDirectoryColumn3 { display: block !important; margin-top: 5px !important; }
+}
+
 /* ══════════════════════════════════════════════════════════════════
    MEMBERSHIP APPLICATION / JOIN WIZARD — remaining pieces
    (.WaGadgetMembershipApplication / .WaGadgetPublicWizard)
@@ -9060,8 +9120,8 @@ a.ngm-gcard:hover {
   font-family: var(--ngm-sans); font-size: var(--ngm-text-lead); color: var(--ngm-gray);
   line-height: 1.8; max-width: 640px; margin: 18px auto 0;
 }
-.ngm-dir-eyebrow-row { display: inline-flex; align-items: center; gap: 8px; }
-.ngm-dir-eyebrow-row svg { width: 15px; height: 15px; color: var(--ngm-sage-dk); flex-shrink: 0; }
+/* the directory hero flows straight into the cream page — no rule line */
+.ngm-dir-hero { border-bottom: 0; }
 /* hero CTA pair: Edit your profile (primary) + back to the hub (outline) */
 .ngm-dir-hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
 /* the whole content area behind the directory gadget turns cream (flag
