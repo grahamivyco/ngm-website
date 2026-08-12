@@ -76,6 +76,13 @@ Doing it in this order means the site is never half-styled:
 > script moves it directly **below** the native gadget, then reveals it (no
 > flash). The separate `01-top.html` / `03-bottom.html` files remain if you
 > prefer two gadgets.
+>
+> **Exception — the Login page stays TWO gadgets.** Its WA layout is a real
+> two-column split (green hero cell | form cell), so a single gadget above
+> the form cannot place the closing line inside the right cell. Paste
+> `dist/system-pages/login/01-top.html` in the LEFT cell, the native login
+> gadget in the right cell, and `03-bottom.html` under it in that same right
+> cell. (No `one-gadget.html` is generated for it.)
 
 | Page | Live URL | Type | Middle gadget |
 |------|----------|------|---------------|
@@ -114,7 +121,7 @@ see each page's README).
 | Page not found (404) | `page-not-found/01-top.html` | Full branded page |
 | Access denied (403) | `access-denied/01-top.html` | Full branded page — members-only message |
 | Authorization required | `authorization-required/01-top.html` | Banner above the native login form |
-| Login | `login/01-top.html` + `03-bottom.html` | Banner + below-form block; form skinned in Global CSS |
+| Login | `login/01-top.html` + `03-bottom.html` | TWO gadgets, two-column layout: hero in the left cell; native form + `03-bottom.html` in the right cell |
 | Change password | `change-password/01-top.html` | Banner above the native form |
 | Event details | `event-details/01-top.html` + `03-bottom.html` | Or `one-gadget.html` (single gadget above the native gadget) |
 | Event registration | — | BLOCKED: needs a live registration to dump (see its README) |

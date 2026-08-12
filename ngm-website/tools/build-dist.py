@@ -107,7 +107,23 @@ def main() -> int:
     }
     return after||any;
   }
+  function multiCol(el){
+    /* a WA row with more than one content cell = a real column layout
+       (e.g. the login page: hero cell | form cell). Climbing out of it
+       would drop the moved half outside the columns. */
+    var td=el.closest?el.closest('td.WaLayoutItem'):null;
+    if(!td||!td.parentNode) return null;
+    var cells=td.parentNode.querySelectorAll(':scope > td.WaLayoutItem');
+    return cells.length>1?td:null;
+  }
   function anchorFor(el){
+    var keep=multiCol(el);
+    if(keep){
+      /* stay in the cell: sit right after the gadget's own wrapper */
+      var g=el;
+      while(g.parentNode&&g.parentNode!==keep) g=g.parentNode;
+      return g;
+    }
     var a=el,p=a.parentNode;
     while(p&&p!==document.body){
       var c=cls(p), t=p.tagName;
@@ -141,10 +157,17 @@ def main() -> int:
 </script>
 """
     combined = 0
+    # Pages whose WA layout is a real multi-column split must stay TWO
+    # gadgets: the hero lives in one cell and the native gadget in another,
+    # so a single gadget above the form cannot place the bottom half in the
+    # right cell. (Login: green hero cell | form cell.)
+    NO_ONE_GADGET = {"login"}
     for base in ("pages", "system-pages"):
         for d in sorted((ROOT / base).iterdir()):
             top, bot = d / "01-top.html", d / "03-bottom.html"
             if not (top.is_file() and bot.is_file()):
+                continue
+            if d.name in NO_ONE_GADGET:
                 continue
             top_html = clean_html(top.read_text(encoding="utf-8")).strip()
             bot_html = clean_html(bot.read_text(encoding="utf-8")).strip()
