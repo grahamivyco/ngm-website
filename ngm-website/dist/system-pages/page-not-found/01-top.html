@@ -1,5 +1,5 @@
 <div class="ngm-sys">
-  <section class="ngm-sys-band">
+  <section class="ngm-sys-band ngm-sys-fill">
     <div class="ngm-sys-inner">
       <span class="ngm-sys-eyebrow">Error 404</span>
       <h1 class="ngm-sys-title">This page slipped a <em>stitch</em></h1>
@@ -11,3 +11,34 @@
     </div>
   </section>
 </div>
+<script>(function () {
+  var band = document.querySelector(".ngm-sys-fill");
+  if (!band) return;
+  function fit() {
+    var head = document.getElementById("ngm");
+    var foot = document.getElementById("ngmf");
+    var h = head ? head.getBoundingClientRect().height : 0;
+    var f = foot && foot.offsetParent !== null ? foot.getBoundingClientRect().height : 0;
+    band.style.setProperty("--ngm-sys-fill", Math.max(0, window.innerHeight - h - f) + "px");
+  }
+  fit();
+  window.addEventListener("resize", fit);
+  window.addEventListener("load", fit);
+  if (window.ResizeObserver) {
+    var ro = new ResizeObserver(fit);
+    var watch = function () {
+      var foot = document.getElementById("ngmf");
+      var head = document.getElementById("ngm");
+      if (foot) ro.observe(foot);
+      if (head) ro.observe(head);
+      return !!foot;
+    };
+
+    if (!watch()) {
+      var n = 0, t = setInterval(function () {
+        if (watch() || ++n > 30) clearInterval(t);
+      }, 100);
+    }
+  }
+})();
+</script>
