@@ -6267,16 +6267,23 @@ body .WaGadgetEmailMember .buttonsContainer input[type="submit"] {
   text-transform: none !important; letter-spacing: normal !important;
   line-height: 1 !important; height: auto !important;
 }
-/* Cancel LEFT edge, Send RIGHT edge (DOM order is Send, Cancel —
-   reversed row). The flex is applied to the container AND any inner
-   wrapper div, since WA nests the buttons one level down. */
+/* Cancel at the form's LEFT edge, Send at the RIGHT edge — written to
+   be robust to WA's wrapper nesting and DOM order: every wrapper level
+   becomes a plain full-width flex row, and the buttons are ordered
+   explicitly, with Send pushed right by an auto margin. */
 body .WaGadgetEmailMember .buttonsContainer,
 body .WaGadgetEmailMember .buttonsContainer div {
-  display: flex !important; flex-direction: row-reverse !important;
-  justify-content: space-between !important; align-items: center !important;
-  width: 100% !important; float: none !important; box-sizing: border-box !important;
+  display: flex !important; flex-direction: row !important;
+  align-items: center !important; width: 100% !important;
+  float: none !important; box-sizing: border-box !important;
 }
-body .WaGadgetEmailMember .buttonsContainer input[type="submit"] { margin-left: 0 !important; }
+body .WaGadgetEmailMember .buttonsContainer div { flex: 1 1 auto !important; }
+body .WaGadgetEmailMember .buttonsContainer input[type="submit"] {
+  order: 1 !important; margin-left: 0 !important; margin-right: auto !important;
+}
+body .WaGadgetEmailMember .buttonsContainer input.typeButton {
+  order: 2 !important; margin-left: auto !important;
+}
 /* the required asterisk reads AFTER the label ("Message subject *"),
    rose, matching the site's mandatory styling */
 body .WaGadgetEmailMember .fieldLabel {
