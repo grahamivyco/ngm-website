@@ -1,0 +1,61 @@
+<script>(function () {
+  var TYPES = [
+    ["daytime counted thread", "/daytime-counted-thread-&-needlepoint", "Daytime Counted Thread & Needlepoint"],
+    ["counted thread",         "/daytime-counted-thread-&-needlepoint", "Daytime Counted Thread & Needlepoint"],
+    ["daytime stitch-in",      "/daytime-stitch-in",      "the Daytime Stitch-In"],
+    ["evening stitch-in",      "/Evening-Stitch-In",      "the Evening Stitch-In"],
+    ["sunday tea",             "/Sunday-Tea-Stitch",      "Sunday Tea & Stitch"],
+    ["come & stitch",          "/Come-&-Stitch",          "Come & Stitch"],
+    ["come and stitch",        "/Come-&-Stitch",          "Come & Stitch"],
+    ["potpourri",              "/potpourri-stitchers",              "Potpourri Stitchers"],
+    ["japanese embroidery",    "/traditional-japanese-embroidery",    "Traditional Japanese Embroidery"],
+    ["march to the finish",    "/march-to-the-finish",    "March to the Finish"],
+    ["fall finish",            "/a-fall-finish",            "A Fall Finish"],
+    ["retreat",                "/annual-retreat-2026",                "the Annual Retreat"],
+    ["workshop",               "/workshops",              "Workshops"],
+    ["5th tuesday",            "/5th-tuesday-open-stitching",            "5th Tuesday Open Stitching"],
+    ["fifth tuesday",          "/5th-tuesday-open-stitching",            "5th Tuesday Open Stitching"]
+  ];
+  function inject() {
+    var gadget = document.querySelector(".WaGadgetEventsStateDetails");
+    if (!gadget || document.querySelector(".ngm-evd-btns")) return;
+
+    var area = gadget.querySelector(".gadgetEventEditableArea") ||
+               gadget.querySelector(".boxBodyContentContainer .inner") || gadget;
+
+    var img = area.querySelector("img");
+    if (img) {
+      var wrap = img.parentNode;
+      area.insertBefore(img, area.firstChild);
+      if (wrap && wrap !== area && !(wrap.textContent || "").replace(/\u00a0/g, " ").trim() && !wrap.querySelector("img")) {
+        wrap.parentNode.removeChild(wrap);
+      }
+    }
+    var row = document.createElement("div");
+    row.className = "ngm-evd-btns";
+    var cal = document.createElement("a");
+    cal.className = "ngm-btn ngm-btn-green ngm-btn-sm";
+    cal.href = "/calendar";
+    cal.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back to the full calendar';
+    row.appendChild(cal);
+    var h1 = gadget.querySelector("h1.pageTitle");
+    var title = (h1 ? h1.textContent : "").toLowerCase();
+    for (var i = 0; i < TYPES.length; i++) {
+      if (title.indexOf(TYPES[i][0]) > -1) {
+        var a = document.createElement("a");
+        a.className = "ngm-btn ngm-btn-outline ngm-btn-sm";
+        a.href = TYPES[i][1];
+        a.textContent = "More about " + TYPES[i][2];
+        row.appendChild(a);
+        break;
+      }
+    }
+    area.appendChild(row);
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", inject);
+  } else {
+    inject();
+  }
+})();
+</script>

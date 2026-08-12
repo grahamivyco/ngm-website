@@ -1,0 +1,98 @@
+<style>#ngm-ma,#ngm-ma *,#ngm-ma *::before,#ngm-ma *::after{box-sizing:border-box;margin:0;padding:0;font-family:'DM Sans','Helvetica Neue',Arial,sans-serif}
+#ngm-ma{
+  --ma-sage:#5C7A52; --ma-sage-dk:#3E5538; --ma-sage-lt:#EEF3EC;
+  --ma-rose:#B87260; --ma-rose-dk:#9A5C4A;
+  --ma-cream:#FAF7F2; --ma-linen:#F0EAE0; --ma-charcoal:#242424; --ma-gray:#5f5a50; --ma-border:#DDD5C8;
+  --ma-serif:'Cormorant Garamond','Georgia',serif;
+  position:relative; background:var(--ma-linen); overflow:hidden;
+}
+#ngm-ma::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 120% at 8% 0%,rgba(92,122,82,.10),transparent 60%);pointer-events:none}
+#ngm-ma .ma-inner{
+  position:relative; max-width:1140px; margin:0 auto; padding:30px 40px;
+  display:flex; align-items:center; gap:26px;
+}
+#ngm-ma .ma-ic{
+  flex:none; width:56px; height:56px; border-radius:16px; background:#fff;
+  border:1px solid var(--ma-border); display:flex; align-items:center; justify-content:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.05);
+}
+#ngm-ma .ma-ic svg{width:28px; height:28px; color:var(--ma-sage-dk)}
+#ngm-ma .ma-copy{flex:1 1 auto; min-width:0}
+#ngm-ma .ma-k{font-size:.68rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--ma-sage); margin-bottom:5px}
+#ngm-ma .ma-copy h3{font-family:var(--ma-serif); font-weight:500; font-size:1.65rem; line-height:1.1; color:var(--ma-charcoal); margin-bottom:4px}
+#ngm-ma .ma-copy h3 em{font-style:italic; color:var(--ma-rose)}
+#ngm-ma .ma-copy p{font-size:.9rem; line-height:1.55; color:var(--ma-gray); max-width:52ch}
+#ngm-ma .ma-cta{flex:none; display:flex; flex-direction:column; align-items:flex-end; gap:8px}
+#ngm-ma .ma-btn{
+  display:inline-flex; align-items:center; gap:9px; white-space:nowrap;
+  font-size:.9rem; font-weight:600; text-decoration:none; cursor:pointer;
+  padding:13px 24px; border-radius:100px; border:1.5px solid transparent; transition:background .18s,transform .18s,box-shadow .18s;
+}
+#ngm-ma .ma-btn svg{width:18px; height:18px}
+#ngm-ma .ma-btn-rose{background:var(--ma-rose); color:#fff}
+#ngm-ma .ma-btn-rose:hover{background:var(--ma-rose-dk); transform:translateY(-1px); box-shadow:0 6px 18px rgba(154,92,74,.28)}
+#ngm-ma .ma-btn-green{background:var(--ma-sage-dk); color:#fff}
+#ngm-ma .ma-btn-green:hover{background:var(--ma-sage); transform:translateY(-1px); box-shadow:0 6px 18px rgba(62,85,56,.25)}
+#ngm-ma .ma-sub{font-size:.78rem; color:var(--ma-gray)}
+#ngm-ma .ma-sub a{color:var(--ma-sage-dk); font-weight:600; text-decoration:none}
+#ngm-ma .ma-sub a:hover{text-decoration:underline}
+
+#ngm-ma .ma-member{display:none}
+#ngm-ma .ma-guest{display:flex}
+body.memberContentView #ngm-ma .ma-guest{display:none}
+body.memberContentView #ngm-ma .ma-member{display:flex}
+
+@media(max-width:760px){
+  #ngm-ma .ma-inner{flex-direction:column; align-items:flex-start; gap:18px; padding:26px 24px}
+  #ngm-ma .ma-cta{align-items:flex-start; width:100%}
+  #ngm-ma .ma-btn{width:100%; justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){#ngm-ma *{transition:none !important}}
+</style>
+
+<section id="ngm-ma" aria-label="Join us on Zoom">
+
+  <div class="ma-inner ma-guest">
+    <span class="ma-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span>
+    <div class="ma-copy">
+      <div class="ma-k">Visit on Zoom</div>
+      <h3>Stitch with us <em>online</em></h3>
+      <p>We keep the meeting link off public pages to keep meetings safe. Request it and we&rsquo;ll email it to you straight away &mdash; your first visit is always free.</p>
+    </div>
+    <div class="ma-cta">
+
+      <a class="ma-btn ma-btn-rose" href="/Request-The-Link">
+        Request the Zoom link
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <span class="ma-sub">Already a member? <a href="/log-in">Sign in for the link</a></span>
+    </div>
+  </div>
+
+  <div class="ma-inner ma-member">
+    <span class="ma-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span>
+    <div class="ma-copy">
+      <div class="ma-k">Members</div>
+      <h3>Your Zoom link is in the <em>Member Hub</em></h3>
+      <p>One link for every Guild meeting &mdash; daytime, evening, and weekend. The host opens the room five minutes early.</p>
+    </div>
+    <div class="ma-cta">
+
+      <a class="ma-btn ma-btn-green" href="/member-hub">
+        Go to the Member Hub
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>(function(){
+  function ngmMaApply(){
+    var el=document.getElementById('ngm-ma'); if(!el)return;
+    var isMember=document.body.classList.contains('memberContentView');
+    el.querySelectorAll('.ma-guest').forEach(function(n){n.style.display=isMember?'none':'flex';});
+    el.querySelectorAll('.ma-member').forEach(function(n){n.style.display=isMember?'flex':'none';});
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',ngmMaApply);}else{ngmMaApply();}
+}());
+</script>

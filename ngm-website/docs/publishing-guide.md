@@ -8,6 +8,12 @@ into a WA gadget or the CSS tab).
 > `global-css/current-live-backup.css` — an exact copy of what's live now. If anything
 > looks wrong mid-cutover, paste that back into the WA **CSS** tab to revert instantly.
 
+> **Paste from `dist/`.** Every paste file has a production-clean twin under
+> `ngm-website/dist/` (same relative path, comments stripped — no maintainer
+> notes go onto the live site). The commented originals stay the files you
+> EDIT; after any edit, regenerate with
+> `python3 ngm-website/tools/build-dist.py`. Never hand-edit `dist/`.
+
 ---
 
 ## The cutover order (do it in this sequence)

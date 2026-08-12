@@ -1,0 +1,48 @@
+<script>(function () {
+
+  if (document.body) { document.body.classList.add('ngm-calendar-page'); }
+  else { document.addEventListener('DOMContentLoaded', function () { document.body.classList.add('ngm-calendar-page'); }); }
+  function transform() {
+    var titles = document.querySelectorAll(
+      '.ngm-cal .sectionTitle, #idEventListCalendar .sectionTitle, .WaGadgetEventsStateCalendar .sectionTitle'
+    );
+    for (var i = 0; i < titles.length; i++) {
+      var t = titles[i].textContent;
+      var cleaned = t.replace(/^\s*(Month|Week|Year)\s*:\s*/i, '');
+      if (cleaned !== t) titles[i].textContent = cleaned;
+    }
+    var heads = document.querySelectorAll(
+      '.WaGadgetEventsStateCalendar td.EventListCalendarHeader, .ngm-cal td.EventListCalendarHeader'
+    );
+    for (var j = 0; j < heads.length; j++) {
+      var td = heads[j];
+      if (td.querySelector('.ngm-wd-f')) continue;      // already wrapped
+      var name = (td.textContent || '').trim();
+      if (!name) continue;
+      td.innerHTML =
+        '<span class="ngm-wd-f">' + name + '</span>' +
+        '<span class="ngm-wd-a">' + name.slice(0, 3) + '</span>' +
+        '<span class="ngm-wd-1">' + name.slice(0, 1) + '</span>';
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', transform);
+  } else {
+    transform();
+  }
+  try {
+    var mo = new MutationObserver(transform);
+    mo.observe(document.documentElement, { childList: true, subtree: true, characterData: true });
+    setTimeout(function () { mo.disconnect(); }, 8000);
+  } catch (e) {  }
+})();
+</script>
+<div class="ngm ngm-cal-hero">
+  <div class="ngm-cal-hero-inner">
+    <span class="ngm-eyebrow">Calendar</span>
+    <h1 class="ngm-h1">Everything in one <em>place</em></h1>
+    <p>Browse upcoming meetings, workshops, retreats, and special events. Click any event for full details and registration.</p>
+  </div>
+</div>
+<div class="ngm ngm-cal-body">
+  <div class="ngm-cal-body-inner">

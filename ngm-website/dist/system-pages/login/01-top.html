@@ -1,0 +1,30 @@
+<div class="ngm">
+  <section class="ngm-login-hero">
+    <div class="ngm-login-hero-inner">
+      <span class="ngm-lh-eyebrow">Log In</span>
+      <h1 class="ngm-lh-title">Welcome back, <br><em>stitchers</em></h1>
+      <p class="ngm-lh-sub">Sign in to your Needlework Guild account to register for monthly
+        meetings and events, browse the member directory, and open members-only
+        patterns and resources.</p>
+    </div>
+  </section>
+</div>
+
+<script>  document.body.classList.add('ngm-login-page');
+
+  (function () {
+    function ngmAuthPlaceholders() {
+      var g = document.querySelector('.WaGadgetAuthorizationRequired');
+      if (!g) return;
+      var e = g.querySelector('input[name="email"]');
+      if (e && !e.placeholder) e.placeholder = 'Email';
+      var p = g.querySelector('input[name="password"]');
+      if (p && !p.placeholder) p.placeholder = 'Password';
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', ngmAuthPlaceholders);
+    } else {
+      ngmAuthPlaceholders();
+    }
+  }());
+</script>

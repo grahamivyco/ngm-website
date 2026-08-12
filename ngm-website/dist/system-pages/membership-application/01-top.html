@@ -1,0 +1,75 @@
+<div class="ngm-sys">
+  <section class="ngm-sys-band">
+    <div class="ngm-sys-inner">
+      <span class="ngm-sys-eyebrow">Membership</span>
+      <h1 class="ngm-sys-title">Join the <em>Guild</em></h1>
+      <p class="ngm-sys-sub">Annual Guild Membership is $30 a year and runs June 1 through May 31. Fill in the short form below to apply — welcome to the Guild.</p>
+    </div>
+  </section>
+</div>
+<script>(function () {
+  function fixReviewStep() {
+    var gadget = document.querySelector('.WaGadgetMembershipApplication');
+    if (!gadget || !/StateReview/.test(gadget.className)) return;
+
+    var back = gadget.querySelector('input[id$="_prevTop"], input[id$="_prev"]');
+    var cancel = gadget.querySelector('input[id$="_cancelTop"], input[id$="_cancel"]');
+    var fields = gadget.querySelectorAll('.fieldContainer');
+    if ((back || cancel) && fields.length) {
+      var last = fields[fields.length - 1];
+      var actions = document.createElement('div');
+      actions.className = 'ngm-review-actions';
+      last.parentNode.appendChild(actions);
+      if (back) {
+        back.value = 'Edit';
+        var backRow = back.closest('.right') || back;
+        backRow.style.cssText += ';float:none;margin:0;width:auto;';
+        actions.appendChild(backRow);
+      }
+      if (cancel) {
+        var cancelRow = cancel.closest('.left') || cancel;
+        cancelRow.style.cssText += ';float:none;margin:0;width:auto;display:block;';
+        actions.appendChild(cancelRow);
+      }
+    }
+
+    var firstCard = gadget.querySelector('.payment-method-card');
+    if (firstCard && !document.getElementById('ngm-pay-head')) {
+      var head = document.createElement('div');
+      head.id = 'ngm-pay-head';
+      head.className = 'ngm-pay-head';
+      var eb = document.createElement('span');
+      eb.className = 'ngm-pay-eyebrow';
+      eb.textContent = 'Payment';
+      var t = document.createElement('span');
+      t.className = 'ngm-pay-title';
+      t.textContent = 'How would you like to pay?';
+      head.appendChild(eb); head.appendChild(t);
+      firstCard.parentNode.insertBefore(head, firstCard);
+    }
+
+    var cardH3 = gadget.querySelector('label[for="creditCardRadio"] h3');
+    if (cardH3) cardH3.textContent = 'Credit or debit card';
+    function appendDesc(btnSel, marker, text) {
+      var btn = gadget.querySelector(btnSel);
+      var card = btn && btn.closest('.payment-method-card');
+      var desc = card && card.querySelector('.payment-method-description');
+      if (desc && desc.textContent.indexOf(marker) === -1) {
+        var d = document.createElement('div');
+        d.textContent = text;
+        desc.appendChild(d);
+      }
+    }
+    appendDesc('input[id$="_btnPayWithCard"]', 'PayPal',
+      'Secure checkout through PayPal.');
+    appendDesc('input[id$="_btnInvoiceMe"]', 'invoice with payment',
+      "Prefer to pay by check? Choose this option and we'll email you an invoice with payment instructions.");
+  }
+  function run() { try { fixReviewStep(); } catch (e) {  } }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
+})();
+</script>

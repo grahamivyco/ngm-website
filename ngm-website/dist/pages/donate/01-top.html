@@ -1,0 +1,53 @@
+<div class="ngm">
+
+  <section class="ngm-sec ngm-sec-cream">
+    <div class="ngm-con">
+      <div class="ngm-mt-hero-grid">
+        <div>
+          <span class="ngm-eyebrow">Donate</span>
+          <h1 class="ngm-h1">Help keep needlework <em>thriving</em></h1>
+          <p class="ngm-lead">The Needlework Guild of Minnesota is a registered 501(c)(3) nonprofit, so your gift is tax-deductible as allowed by law. Donations fund our programs and guest instructors, sustain the members&rsquo; library, and support community outreach &mdash; all while keeping dues low so anyone can join.</p>
+        </div>
+        <div class="ngm-mt-photo" style="min-height:380px;padding:0;overflow:hidden;border:none"><img decoding="async" onload="this.classList.add('is-loaded')" class="ngm-fade" src="https://needleworkguildmn.org/resources/Pictures/Website%20Update%20-%20Photos/Retreat%20Photo%20Quilt%20NGM.jpeg" alt="Members and their needlework" loading="eager" style="width:100%;height:100%;object-fit:cover;border-radius:var(--ngm-radius-lg)"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ngm-give" class="ngm ngm-sec ngm-sec-white" style="padding-bottom:0;scroll-margin-top:100px">
+    <div class="ngm-con">
+      <div class="ngm-upcoming-head">
+        <span class="ngm-eyebrow">Give</span>
+        <h2 class="ngm-h2">Make your <em>gift</em></h2>
+        <p class="ngm-upcoming-intro">Use the secure donation form just below to give by card &mdash; a one-time gift or a recurring monthly donation. Every amount makes a difference.</p>
+      </div>
+    </div>
+  </section>
+</div>
+<script>(function () {
+  if (document.body) document.body.classList.add("ngm-donate-page");
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest ? e.target.closest('a[href="#ngm-give"]') : null;
+    if (!a) return;
+    var t = document.getElementById("ngm-give");
+    if (!t) return;
+    e.preventDefault();
+    t.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  var LABEL = "Donate securely";
+  function relabel() {
+    var btns = document.querySelectorAll('input.nextButton.button[id$="_next"]');
+    for (var i = 0; i < btns.length; i++) {
+      if (btns[i].value !== LABEL) btns[i].value = LABEL;
+    }
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", relabel);
+  } else {
+    relabel();
+  }
+  try {
+    new MutationObserver(relabel).observe(document.documentElement, { childList: true, subtree: true });
+  } catch (e) {  }
+})();
+</script>
