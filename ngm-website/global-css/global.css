@@ -3866,7 +3866,7 @@ body.ngm-login-page .WaGadgetLoginForm{ display:block; width:100%; box-sizing:bo
     /* border-box, or the padding stacks ON TOP of the min-height (content-box
        default) and the panel grows to ~full viewport instead of 90% */
     box-sizing:border-box !important;
-    min-height:calc(90vh - var(--ngm-head-h));
+    min-height:calc(74vh - var(--ngm-head-h));
     display:flex; flex-direction:column; justify-content:center;
   }
   /* centre the form card vertically in its equal-height cell too */
@@ -3876,7 +3876,7 @@ body.ngm-login-page .WaGadgetLoginForm{ display:block; width:100%; box-sizing:bo
     align-items:center !important;
     justify-content:center !important;
     /* less bottom padding so the "not a member?" join line sits closer to the card */
-    padding:48px clamp(24px,4vw,56px) 10px !important;
+    padding:32px clamp(24px,4vw,56px) 8px !important;
   }
   /* tighten the space directly above the join line (desktop only) */
   body.ngm-login-page .ngm-login-foot{ padding-top:0 !important; }
@@ -3889,7 +3889,7 @@ body.ngm-login-page .WaGadgetLoginForm{ display:block; width:100%; box-sizing:bo
      below the fold. (On table cells height acts as MIN-height, so nothing
      clips on short windows.) */
   body.ngm-login-page tr.WaLayoutRow:has(.ngm-login-hero) > td.WaLayoutItem{
-    height: calc(90vh - var(--ngm-head-h));
+    height: calc(74vh - var(--ngm-head-h));
   }
 }
 @media(max-width:980px){
