@@ -6210,9 +6210,36 @@ body .WaGadgetEmailMember textarea { min-height: 140px !important; }
 /* the "* Mandatory fields" note — hidden, like the contact profile */
 body .WaGadgetEmailMember .mandatoryFieldsTitle { display: none !important; }
 /* rhythm the flattening removed */
-body .WaGadgetEmailMember .memberDirectoryDetailsHeaderContainer { margin: 10px 0 18px !important; }
-body .WaGadgetEmailMember .captionContainer .fieldBody { margin-top: 14px !important; margin-bottom: 6px !important; }
 body .WaGadgetEmailMember .buttonsContainer { margin-top: 18px !important; }
+
+/* ---- layout pass (matches the public profile page, Aug 2026) ----
+   Eyebrow ABOVE the name, smaller name, tight top rhythm, the Back
+   link DELETED (Cancel is the way back), and both buttons sized to the
+   design system's .ngm-btn (12px 26px, --ngm-btn-size, weight 500). */
+body .WaGadgetEmailMember { padding-top: 24px !important; }
+body .WaGadgetEmailMember .pageTitleOuterContainer { display: none !important; }
+body .WaGadgetEmailMember .memberDirectoryDetailsHeaderContainer h2 {
+  font-size: var(--ngm-title-lg) !important; margin: 0 !important;
+}
+body .WaGadgetEmailMember .memberDirectoryDetailsHeaderContainer { margin: 0 0 8px !important; }
+body .WaGadgetEmailMember .memberDirectoryDetailsHeaderContainer h2::before {
+  content: "Send a message to";
+  display: block;
+  font-family: var(--ngm-sans); font-size: var(--ngm-eyebrow-size); font-weight: 500;
+  letter-spacing: var(--ngm-eyebrow-track); text-transform: uppercase;
+  color: var(--ngm-sage);
+  margin-bottom: 8px;
+}
+/* the old "Send message" caption block below the name (and its rule
+   line) — folded into the eyebrow above */
+body .WaGadgetEmailMember .captionOuterContainer { display: none !important; }
+/* buttons at design-system size */
+body .WaGadgetEmailMember input.typeButton,
+body .WaGadgetEmailMember .buttonsContainer input[type="button"],
+body .WaGadgetEmailMember .buttonsContainer input[type="submit"] {
+  font-size: var(--ngm-btn-size) !important; font-weight: 500 !important;
+  padding: 12px 26px !important; border-radius: 100px !important; border-width: 1.5px !important;
+}
 
 /* ══ Transaction grids on the Invoices & Donations tabs ══
    WA renders these into <table class="genericListTable"> inside
