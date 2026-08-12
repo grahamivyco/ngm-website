@@ -7079,9 +7079,11 @@ body .WaGadgetMemberDirectory .searchResult img { display: none !important; }
 /* a breath of space between the column-title bar and the first row, so
    the first row's hover fill clears the bar */
 body #membersTable tbody::before { content: ""; display: table-row; height: 10px; }
-/* phones: tighter entries; hover/tap = rounded sage over the WHOLE
-   entry; lines between entries fade around the hovered one */
-@media (max-width: 640px) {
+/* phones AND tablets (the theme stacks the table below ~900px — the
+   stacked entry gets the same treatment everywhere it appears):
+   tighter entries; hover/tap = rounded sage over the WHOLE entry;
+   lines between entries fade around the hovered one */
+@media (max-width: 900px) {
   body #membersTable tbody tr { padding: 10px 12px !important; }
   body #membersTable tbody tr:hover {
     background: var(--ngm-sage-lt) !important;
@@ -7097,7 +7099,7 @@ body #membersTable tbody::before { content: ""; display: table-row; height: 10px
    the renderer's fixed id, not a per-instance id_* — safe per
    docs/wa-notes.md.) One tr.normal per person; city/state and
    email/phone are sibling .memberValue divs. ---- */
-@media (max-width: 640px) {
+@media (max-width: 900px) {
   body #membersTable thead { display: none !important; }
   /* one entry per person, each thing stacked on its own line — name,
      then "City, State", then email, then phone — with a single
