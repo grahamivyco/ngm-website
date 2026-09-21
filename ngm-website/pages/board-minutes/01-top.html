@@ -5,9 +5,9 @@
      Member Hub is in the hero below.
 
      Each content gadget carrying the ngm-wa-minutes class becomes its
-     own card: the script at the bottom reads its heading and builds a
-     title button. Cards start OPEN — the title collapses one if a
-     member wants it out of the way, but nothing is hidden by default.
+     own card: the script at the bottom reads its heading and rebuilds
+     it as a styled title. Everything is visible — there is no
+     collapsing and nothing to click to reveal a list.
 
      Everything in THIS file is chrome. Don't put meeting dates here.
 ══════════════════════════════════════════════════════════════════ -->
@@ -28,9 +28,9 @@
   </div>
 </section>
 <script>
-/* ── MINUTES ACCORDION ──────────────────────────────────────────────
+/* ── MINUTES CARDS ──────────────────────────────────────────────────
    Turns every native content gadget carrying the ngm-wa-minutes class
-   into a collapsible card.
+   into a styled card. Nothing collapses; everything is visible.
 
    WHY THE TITLE IS REBUILT RATHER THAN STYLED: the old page's headings
    render bold sans however they are targeted in CSS — the content
@@ -42,9 +42,6 @@
 
    Idempotent — safe if WA runs it twice. */
 (function () {
-  var ICO = '<svg class="ngm-min-title-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6"/><path d="M9 17h4"/></svg>';
-  var CHV = '<svg class="ngm-min-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
-
   function text(el) {
     return ((el && el.textContent) || "").replace(/ /g, " ").replace(/\s+/g, " ").trim();
   }
@@ -88,12 +85,11 @@
     return n && !n.querySelector("li") ? n : null;
   }
 
-  /* One accordion section per heading+list PAIR, not per gadget.
-     One box per block is the intended arrangement, but a volunteer
-     will eventually type a second heading and list into an existing
-     box — and when that happened the second pair fell outside the
-     accordion and rendered raw. Handling every pair means the page
-     degrades sensibly instead. */
+  /* One section per heading+list PAIR, not per gadget. One box per
+     block is the intended arrangement, but a volunteer will eventually
+     type a second heading and list into an existing box — and when that
+     happened the second pair rendered raw. Handling every pair means
+     the page degrades sensibly instead. */
   function build() {
     var gadgets = document.querySelectorAll(".ngm-wa-minutes");
     Array.prototype.forEach.call(gadgets, function (g) {
@@ -102,7 +98,7 @@
       if (!lists.length) return;
 
       Array.prototype.forEach.call(lists, function (list, i) {
-        if (list.closest(".ngm-min-wrap")) return;      /* already built, or nested */
+        if (list.closest(".ngm-min-sec")) return;       /* already built, or nested */
         /* Done-ness is tracked per LIST, not per gadget: WA can render a
            gadget before its rows exist, and marking the gadget finished
            there left an empty card that never filled in. */
@@ -124,40 +120,19 @@
         var sec = document.createElement("div");
         sec.className = "ngm-min-sec";
 
-        /* OPEN BY DEFAULT. Collapsing every set put an extra click
-           between a member and the thing they came for, and the lists
-           are short. The toggle stays — it earns its keep once there
-           are several years on the page — but nothing starts hidden. */
-        var btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "ngm-min-title";
-        btn.setAttribute("aria-expanded", "true");
-        btn.innerHTML = ICO +
-          '<span class="ngm-min-title-txt"></span>' +
-          '<span class="ngm-min-count"></span>' + CHV;
-        btn.querySelector(".ngm-min-title-txt").textContent = label;
-        btn.querySelector(".ngm-min-count").textContent =
+        /* A heading, not a button. There is nothing to toggle — the list
+           below it is always visible. */
+        var head = document.createElement("h2");
+        head.className = "ngm-min-title";
+        head.innerHTML = '<span class="ngm-min-title-txt"></span>' +
+                         '<span class="ngm-min-count"></span>';
+        head.querySelector(".ngm-min-title-txt").textContent = label;
+        head.querySelector(".ngm-min-count").textContent =
           count + (count === 1 ? " meeting" : " meetings");
 
-        var wrap = document.createElement("div");
-        wrap.className = "ngm-min-wrap";
-        sec.classList.add("is-open");
-
         list.parentNode.insertBefore(sec, list);
-        sec.appendChild(btn);
-        sec.appendChild(wrap);
-        wrap.appendChild(list);
-
-        /* the list is hidden until asked for — keep that in the a11y tree */
-        var id = "ngm-min-p" + Math.random().toString(36).slice(2, 8);
-        wrap.id = id;
-        btn.setAttribute("aria-controls", id);
-
-        btn.addEventListener("click", function () {
-          var open = btn.getAttribute("aria-expanded") === "true";
-          btn.setAttribute("aria-expanded", open ? "false" : "true");
-          sec.classList.toggle("is-open", !open);
-        });
+        sec.appendChild(head);
+        sec.appendChild(list);
       });
     });
   }

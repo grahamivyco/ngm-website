@@ -15,9 +15,6 @@
   </div>
 </section>
 <script>(function () {
-  var ICO = '<svg class="ngm-min-title-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6"/><path d="M9 17h4"/></svg>';
-  var CHV = '<svg class="ngm-min-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
-
   function text(el) {
     return ((el && el.textContent) || "").replace(/ /g, " ").replace(/\s+/g, " ").trim();
   }
@@ -60,7 +57,7 @@
       if (!lists.length) return;
 
       Array.prototype.forEach.call(lists, function (list, i) {
-        if (list.closest(".ngm-min-wrap")) return;      
+        if (list.closest(".ngm-min-sec")) return;       
 
         var count = list.querySelectorAll("li").length;
         if (!count) return;                             
@@ -78,35 +75,17 @@
         var sec = document.createElement("div");
         sec.className = "ngm-min-sec";
 
-        var btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "ngm-min-title";
-        btn.setAttribute("aria-expanded", "true");
-        btn.innerHTML = ICO +
-          '<span class="ngm-min-title-txt"></span>' +
-          '<span class="ngm-min-count"></span>' + CHV;
-        btn.querySelector(".ngm-min-title-txt").textContent = label;
-        btn.querySelector(".ngm-min-count").textContent =
+        var head = document.createElement("h2");
+        head.className = "ngm-min-title";
+        head.innerHTML = '<span class="ngm-min-title-txt"></span>' +
+                         '<span class="ngm-min-count"></span>';
+        head.querySelector(".ngm-min-title-txt").textContent = label;
+        head.querySelector(".ngm-min-count").textContent =
           count + (count === 1 ? " meeting" : " meetings");
 
-        var wrap = document.createElement("div");
-        wrap.className = "ngm-min-wrap";
-        sec.classList.add("is-open");
-
         list.parentNode.insertBefore(sec, list);
-        sec.appendChild(btn);
-        sec.appendChild(wrap);
-        wrap.appendChild(list);
-
-        var id = "ngm-min-p" + Math.random().toString(36).slice(2, 8);
-        wrap.id = id;
-        btn.setAttribute("aria-controls", id);
-
-        btn.addEventListener("click", function () {
-          var open = btn.getAttribute("aria-expanded") === "true";
-          btn.setAttribute("aria-expanded", open ? "false" : "true");
-          sec.classList.toggle("is-open", !open);
-        });
+        sec.appendChild(head);
+        sec.appendChild(list);
       });
     });
   }

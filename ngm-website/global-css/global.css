@@ -9884,54 +9884,34 @@ body .ngm-wa-minutes .gadgetStyleBody {
 body .ngm-wa-minutes-src-empty { display: none !important; }
 body .ngm-wa-minutes p:empty { display: none !important; }
 
-/* ── Accordion title ── */
+/* ── Section title ──
+   A heading, not a control: nothing collapses, so there is no cursor,
+   no hover state and no chevron. The document icon that used to sit
+   here is gone too — the rows each carry one, where it does real work
+   marking a PDF link, and two of them read as clutter. */
 .ngm-min-title {
-  display: flex; align-items: center; gap: 13px;
-  width: 100%;
-  margin: 0; padding: 20px 26px;
-  background: transparent; border: 0; border-radius: 0;
-  text-align: left; cursor: pointer;
+  display: flex; align-items: baseline; gap: 13px;
+  margin: 0; padding: 22px 26px 14px;
   font-family: var(--ngm-serif); font-size: var(--ngm-title-card);
   font-weight: 400; color: var(--ngm-charcoal); line-height: 1.25;
-  transition: background-color .2s ease, color .2s ease;
+  text-transform: none; letter-spacing: normal;
 }
-.ngm-min-title:hover { background-color: var(--ngm-sage-lt); color: var(--ngm-sage-dk); }
-.ngm-min-title:focus-visible { outline: 2px solid var(--ngm-sage); outline-offset: -3px; }
-/* The Member Hub tile's document icon, sized down. */
-.ngm-min-title-ico { width: 20px; height: 20px; flex-shrink: 0; color: var(--ngm-sage-dk); }
 .ngm-min-title-txt { flex: 1; min-width: 0; }
-/* How many sets are inside — worth showing while the card is closed. */
+/* How many meetings are in this block — quicker than counting rows. */
 .ngm-min-count {
   flex-shrink: 0;
   font-family: var(--ngm-sans); font-size: var(--ngm-text-meta);
   font-weight: 400; color: var(--ngm-gray-lt);
 }
-.ngm-min-chev {
-  width: 17px; height: 17px; flex-shrink: 0; color: var(--ngm-sage-dk);
-  transition: transform .3s ease;
-}
-.ngm-min-sec.is-open .ngm-min-chev { transform: rotate(180deg); }
-
-/* ── Card body — the grid 0fr → 1fr reveal, same as the FAQ cards.
-   Cards start OPEN (the script sets .is-open as it builds them), so
-   this 0fr is the COLLAPSED state, not the initial one. ── */
-.ngm-min-wrap {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows .32s ease;
-}
-.ngm-min-sec.is-open .ngm-min-wrap { grid-template-rows: 1fr; }
-/* a box holding more than one block gets a rule between its sections */
+/* A box holding more than one block gets a rule between its sections. */
 .ngm-min-sec + .ngm-min-sec { border-top: 1px solid var(--ngm-border); }
-/* min-height:0 is required — grid items default to min-height:auto, which
-   blocks the collapse back to 0fr after the first open. */
+
 /* ⚠ Must out-specify `body .ngm-wa-minutes ul`, which sets the padding
-   SHORTHAND further down and would otherwise zero the bottom back to 0.
-   That is why an earlier 12px here did nothing at all and the last row
-   sat flush against the card's edge. */
-body .ngm-wa-minutes .ngm-min-wrap > ul,
-body .ngm-wa-minutes .ngm-min-wrap > ol {
-  overflow: hidden !important; min-height: 0 !important;
+   SHORTHAND just below and would otherwise zero the bottom back to 0.
+   That is why an earlier 12px did nothing at all and the last row sat
+   flush against the card's edge. */
+body .ngm-wa-minutes .ngm-min-sec > ul,
+body .ngm-wa-minutes .ngm-min-sec > ol {
   /* the card has no bottom padding of its own — this is what keeps the
      last row off its edge */
   padding: 0 12px 22px !important;
@@ -10026,7 +10006,7 @@ body .ngm-wa-minutes li:not(:has(a))::after {
 .ngm-min-head .ngm-lead { margin-bottom: 0; }
 @media (max-width: 900px) {
   body .ngm-wa-minutes { padding-left: var(--ngm-pad-x-md) !important; padding-right: var(--ngm-pad-x-md) !important; }
-  .ngm-min-title { padding: 18px 20px; }
+  .ngm-min-title { padding: 20px 20px 12px; }
   body .ngm-wa-minutes ul, body .ngm-wa-minutes ol { padding: 0 8px !important; }
 }
 @media (max-width: 640px) {
@@ -10039,7 +10019,6 @@ body .ngm-wa-minutes li:not(:has(a))::after {
   body .ngm-wa-minutes { padding-left: var(--ngm-pad-x-sm) !important; padding-right: var(--ngm-pad-x-sm) !important; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ngm-min-wrap, .ngm-min-chev, .ngm-min-title,
   body .ngm-wa-minutes li:has(a)::before { transition: none !important; }
 }
 

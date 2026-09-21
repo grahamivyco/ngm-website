@@ -167,7 +167,7 @@ so it holds regardless. Snippet to dump it:
   such claims. If any of it is true it can come back, once confirmed.
 - **"Ask the board"** — a rose CTA band pointing at the secretary.
 
-## The card title is BUILT, not styled
+## The section title is BUILT, not styled
 
 This bit matters. Two earlier attempts styled the editor's own heading
 in CSS and both lost — the live page kept rendering it bold sans:
@@ -273,3 +273,15 @@ the same approach the member directory uses for its cream page
 `.zonePlace.zoneContent`, `.WaPlaceHolderContent`), copied from the
 directory page. If a gap remains on the live page, one of those is
 wrong for this template — inspect and add the real one.
+
+## No accordion (Sep 2026)
+
+Sections were briefly collapsible. That put an extra click between a
+member and the thing they came for, and the lists are short, so the
+collapsing is gone entirely — no button, no chevron, no toggle. The
+title is a plain `<h2>` the script builds; every list is always visible.
+
+The document icon came off the title at the same time. The rows each
+carry one, where it does real work marking a PDF link; two of them read
+as clutter. Flipping that round — icon on the title, bare dates in the
+rows — is a small change if it ever reads better that way.

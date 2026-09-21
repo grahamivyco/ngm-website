@@ -11,10 +11,10 @@ happens inside the Wild Apricot admin site.
 
 The page is a stack of **boxes**. Each box is one set of minutes — "Board
 Meeting Minutes 2025", "Annual Meeting Minutes", and so on — and shows up as
-a card with a title, a document icon, and a count like *11 meetings*.
+a card with its own title and a count like *11 meetings*.
 
-Visitors click a title to fold the list open. That happens on its own; there
-is nothing for you to switch on.
+All of it is visible — there is nothing to click open, and nothing for you
+to switch on.
 
 Inside a box there are only two things: a **heading** and a **list of
 dates**. That's the whole format.
