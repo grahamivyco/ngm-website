@@ -35,52 +35,67 @@
     return null;
   }
 
+  function prevTitle(list) {
+    var n = list.previousElementSibling;
+    while (n && !text(n)) n = n.previousElementSibling;
+    return n && !n.querySelector("li") ? n : null;
+  }
+
   function build() {
     var gadgets = document.querySelectorAll(".ngm-wa-minutes");
     Array.prototype.forEach.call(gadgets, function (g) {
       if (g.getAttribute("data-min-done") === "1") return;
       var body = g.querySelector(".gadgetStyleBody") || g;
-      var list = body.querySelector("ul, ol");
-      if (!list) return;
+      var lists = body.querySelectorAll("ul, ol");
+      if (!lists.length) return;
       g.setAttribute("data-min-done", "1");
 
-      var src = findTitle(g, body, list);
-      var label = text(src) || "Minutes";
-      if (src) {
-        src.classList.add("ngm-min-src");
+      Array.prototype.forEach.call(lists, function (list, i) {
+        if (list.closest(".ngm-min-wrap")) return;      
+        var src = i === 0 ? findTitle(g, body, list) : prevTitle(list);
+        var label = text(src) || "Minutes";
+        if (src) {
+          src.classList.add("ngm-min-src");
 
-        var host = src.closest ? src.closest(".WaGadget") : null;
-        if (host && !host.classList.contains("ngm-wa-minutes") && !text(host)) {
-          host.classList.add("ngm-wa-minutes-src-empty");
+          var host = src.closest ? src.closest(".WaGadget") : null;
+          if (host && !host.classList.contains("ngm-wa-minutes") && !text(host)) {
+            host.classList.add("ngm-wa-minutes-src-empty");
+          }
         }
-      }
 
-      var count = list.querySelectorAll("li").length;
+        var count = list.querySelectorAll("li").length;
 
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "ngm-min-title";
-      btn.setAttribute("aria-expanded", "false");
-      btn.innerHTML = ICO +
-        '<span class="ngm-min-title-txt"></span>' +
-        '<span class="ngm-min-count"></span>' + CHV;
-      btn.querySelector(".ngm-min-title-txt").textContent = label;
-      btn.querySelector(".ngm-min-count").textContent = count + (count === 1 ? " meeting" : " meetings");
+        var sec = document.createElement("div");
+        sec.className = "ngm-min-sec";
 
-      var wrap = document.createElement("div");
-      wrap.className = "ngm-min-wrap";
-      list.parentNode.insertBefore(wrap, list);
-      wrap.appendChild(list);
-      body.insertBefore(btn, wrap);
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "ngm-min-title";
+        btn.setAttribute("aria-expanded", "false");
+        btn.innerHTML = ICO +
+          '<span class="ngm-min-title-txt"></span>' +
+          '<span class="ngm-min-count"></span>' + CHV;
+        btn.querySelector(".ngm-min-title-txt").textContent = label;
+        btn.querySelector(".ngm-min-count").textContent =
+          count + (count === 1 ? " meeting" : " meetings");
 
-      var id = "ngm-min-p" + Math.random().toString(36).slice(2, 8);
-      wrap.id = id;
-      btn.setAttribute("aria-controls", id);
+        var wrap = document.createElement("div");
+        wrap.className = "ngm-min-wrap";
 
-      btn.addEventListener("click", function () {
-        var open = btn.getAttribute("aria-expanded") === "true";
-        btn.setAttribute("aria-expanded", open ? "false" : "true");
-        g.classList.toggle("is-open", !open);
+        list.parentNode.insertBefore(sec, list);
+        sec.appendChild(btn);
+        sec.appendChild(wrap);
+        wrap.appendChild(list);
+
+        var id = "ngm-min-p" + Math.random().toString(36).slice(2, 8);
+        wrap.id = id;
+        btn.setAttribute("aria-controls", id);
+
+        btn.addEventListener("click", function () {
+          var open = btn.getAttribute("aria-expanded") === "true";
+          btn.setAttribute("aria-expanded", open ? "false" : "true");
+          sec.classList.toggle("is-open", !open);
+        });
       });
     });
   }

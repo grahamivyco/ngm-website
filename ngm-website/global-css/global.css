@@ -9897,7 +9897,7 @@ body .ngm-wa-minutes p:empty { display: none !important; }
   width: 17px; height: 17px; flex-shrink: 0; color: var(--ngm-sage-dk);
   transition: transform .3s ease;
 }
-.ngm-wa-minutes.is-open .ngm-min-chev { transform: rotate(180deg); }
+.ngm-min-sec.is-open .ngm-min-chev { transform: rotate(180deg); }
 
 /* ── Accordion body — the grid 0fr → 1fr reveal, same as the FAQ cards ── */
 .ngm-min-wrap {
@@ -9905,7 +9905,9 @@ body .ngm-wa-minutes p:empty { display: none !important; }
   grid-template-rows: 0fr;
   transition: grid-template-rows .32s ease;
 }
-.ngm-wa-minutes.is-open .ngm-min-wrap { grid-template-rows: 1fr; }
+.ngm-min-sec.is-open .ngm-min-wrap { grid-template-rows: 1fr; }
+/* a box holding more than one block gets a rule between its sections */
+.ngm-min-sec + .ngm-min-sec { border-top: 1px solid var(--ngm-border); }
 /* min-height:0 is required — grid items default to min-height:auto, which
    blocks the collapse back to 0fr after the first open. */
 .ngm-min-wrap > ul,
