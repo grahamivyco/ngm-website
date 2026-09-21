@@ -237,3 +237,39 @@ newsletters and minutes. This covers minutes only. The gadget styling is
 generic — any content gadget given the `ngm-wa-minutes` class gets the same
 document list, so a newsletter archive needs no new CSS. The WA Site pages
 list already shows a "Newsletter Archive" page to work from.
+
+## Two bugs found on the live page (Sep 2026)
+
+### Titles reading "Board Meeting Minutes 20250 meetings"
+
+WA renders a content gadget before its rows exist. The script built the
+card anyway, so it produced a title button reading "Board Meeting Minutes
+2025" + "0 meetings" — and marked the gadget finished, so it never filled
+in. Then the *next* gadget's title search walked backwards looking for a
+heading, landed on that card, and took its **button text**: title and
+count run together.
+
+Two guards:
+
+- `ours()` — the title search never reads from anything this script built
+  (`.ngm-min-sec`, `.ngm-min-title`, `.ngm-min-src`).
+- Done-ness is tracked **per list, not per gadget**, and a list with no
+  rows is skipped entirely so the MutationObserver retries once WA fills
+  it.
+
+Both reproduced against the pre-fix script and confirmed fixed, using a
+gadget whose list is populated 250ms late — the pre-fix run returns
+`"Board Meeting Minutes 2025Board Meeting Minutes 20250 meetings"`.
+
+### The band stopped short of the footer
+
+On a tall viewport with few cards the page ran out and the theme's own
+background showed below the linen. The script now flags
+`body.ngm-min-page` and the CSS paints WA's content wrappers linen —
+the same approach the member directory uses for its cream page
+(`body.ngm-dir-page`). The hero's cream band still paints over the top.
+
+⚠ That rule names WA's wrappers (`.mLayout`, `#idPageShadingContainer`,
+`.zonePlace.zoneContent`, `.WaPlaceHolderContent`), copied from the
+directory page. If a gap remains on the live page, one of those is
+wrong for this template — inspect and add the real one.
