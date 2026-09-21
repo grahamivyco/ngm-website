@@ -8092,6 +8092,13 @@ body.ngm-min-page .WaPlaceHolderContent {
   background: var(--ngm-linen) !important;
 }
 
+html.ngm-doc-js body :is(.ngm-wa-minutes, .ngm-wa-docs) .gadgetStyleBody {
+  visibility: hidden;
+}
+html.ngm-doc-js body :is(.ngm-wa-minutes, .ngm-wa-docs).ngm-doc-ready .gadgetStyleBody {
+  visibility: visible;
+}
+
 body :is(.ngm-wa-minutes, .ngm-wa-docs) {
   background: var(--ngm-linen) !important;
   border: none !important; box-shadow: none !important;
