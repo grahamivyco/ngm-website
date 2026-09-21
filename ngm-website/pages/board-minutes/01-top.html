@@ -109,6 +109,28 @@
     parent.appendChild(chip);
   }
 
+  /* Hide the editor's own heading once its text has been read, and
+     collapse the gadget it came from if that leaves it empty. */
+  function hideSource(src) {
+    if (!src) return;
+    src.classList.add("ngm-min-src");
+    var host = src.closest ? src.closest(".WaGadget") : null;
+    if (host && !host.classList.contains("ngm-wa-minutes") && !text(host)) {
+      host.classList.add("ngm-wa-minutes-src-empty");
+    }
+  }
+
+  function titleEl(label, count) {
+    var head = document.createElement("h2");
+    head.className = "ngm-min-title";
+    head.innerHTML = '<span class="ngm-min-title-txt"></span>' +
+                     '<span class="ngm-min-count"></span>';
+    head.querySelector(".ngm-min-title-txt").textContent = label;
+    head.querySelector(".ngm-min-count").textContent =
+      count ? count + (count === 1 ? " meeting" : " meetings") : "";
+    return head;
+  }
+
   function chipify(row) {
     if (row.getAttribute("data-min-chip") === "1") return;
     row.setAttribute("data-min-chip", "1");
@@ -155,7 +177,28 @@
     Array.prototype.forEach.call(gadgets, function (g) {
       var body = g.querySelector(".gadgetStyleBody") || g;
       var lists = body.querySelectorAll("ul, ol");
-      if (!lists.length) return;
+
+      /* A YEAR WITH NOTHING IN IT YET. The WA editor drops an empty
+         bullet, so a box put up as a placeholder ends up as a heading
+         and no list at all. Without this the heading rendered as raw
+         bold text on the linen — the opposite of the point. Only on a
+         settled pass, for the same reason empty lists are: early on,
+         "no list" is indistinguishable from "WA hasn't rendered it". */
+      if (!lists.length) {
+        if (!allowEmpty || body.querySelector(".ngm-min-sec")) return;
+        var only = findTitle(g, body, null);
+        if (!only || !text(only)) return;
+        hideSource(only);
+        var blank = document.createElement("div");
+        blank.className = "ngm-min-sec";
+        blank.appendChild(titleEl(text(only), 0));
+        var note = document.createElement("p");
+        note.className = "ngm-min-none";
+        note.textContent = "Nothing posted for this year yet.";
+        blank.appendChild(note);
+        body.appendChild(blank);
+        return;
+      }
 
       Array.prototype.forEach.call(lists, function (list, i) {
         if (list.closest(".ngm-min-sec")) return;       /* already built, or nested */
@@ -171,29 +214,12 @@
         if (!count && !allowEmpty) return;
         var src = i === 0 ? findTitle(g, body, list) : prevTitle(list);
         var label = text(src) || "Minutes";
-        if (src) {
-          src.classList.add("ngm-min-src");
-          /* When the heading was its own gadget, hiding it leaves that
-             gadget as an empty white strip across the linen band — so
-             collapse the whole wrapper once nothing is left in it. */
-          var host = src.closest ? src.closest(".WaGadget") : null;
-          if (host && !host.classList.contains("ngm-wa-minutes") && !text(host)) {
-            host.classList.add("ngm-wa-minutes-src-empty");
-          }
-        }
+        hideSource(src);
 
         var sec = document.createElement("div");
         sec.className = "ngm-min-sec";
-
-        /* A heading, not a button. There is nothing to toggle — the list
-           below it is always visible. */
-        var head = document.createElement("h2");
-        head.className = "ngm-min-title";
-        head.innerHTML = '<span class="ngm-min-title-txt"></span>' +
-                         '<span class="ngm-min-count"></span>';
-        head.querySelector(".ngm-min-title-txt").textContent = label;
-        head.querySelector(".ngm-min-count").textContent =
-          count ? count + (count === 1 ? " meeting" : " meetings") : "";
+        /* A heading, not a button — nothing collapses. */
+        var head = titleEl(label, count);
 
         list.parentNode.insertBefore(sec, list);
         sec.appendChild(head);

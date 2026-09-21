@@ -108,9 +108,10 @@ year is tidier.
 **The heading is just the year** — `2027`, nothing else. The kind of
 meeting goes on the individual rows, as above.
 
-A year where nothing has been posted yet is fine to put up: heading, empty
-list. The card will say "Nothing posted for this year yet", which tells
-members the year exists and the minutes are still coming.
+A year where nothing has been posted yet is fine to put up: give it its own
+box with just the year as the heading and nothing under it. The card will
+say "Nothing posted for this year yet", which tells members the year exists
+and the minutes are still coming.
 
 ## Please don't
 
@@ -119,7 +120,8 @@ members the year exists and the minutes are still coming.
   handled.
 - **Don't use two columns.** One list going down the page. Two columns look
   fine on a laptop and break on a phone.
-- **Don't retype the older entries.** They're fine as they are.
+- **Don't retype an entry to move it.** Retyping loses the link to its PDF.
+  Cut the line and paste it where you want it — the link comes with it.
 
 ## Something looks wrong?
 
