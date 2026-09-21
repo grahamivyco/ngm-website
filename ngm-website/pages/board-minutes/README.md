@@ -39,6 +39,10 @@ Full rules for how the gadget's content must be structured are in
 `02-wa-gadget.txt`. The short version: one heading per year, one bulleted
 list under it, one meeting per bullet, newest first, single column.
 
+**`docs/adding-minutes.md` is the handout version** — the same steps written
+for whoever posts the minutes, with no repo or code references in it. Send
+them that, not this file.
+
 ## The existing links carry over
 
 **Nothing needs harvesting.** The current page's list already holds all 21
