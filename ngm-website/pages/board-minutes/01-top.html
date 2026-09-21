@@ -1,25 +1,27 @@
 <!-- Canonical page markup — this is the file to edit and to paste into the WA Custom-HTML gadget. Styling lives in global-css/global.css (pasted into the WA CSS tab; must be live in WA first). There is no separate self-contained version. -->
 <!-- ══ SANDWICH ══════════════════════════════════════════════════════
-     This page is Custom HTML → native WA CONTENT gadget → Custom HTML.
-     The gadget in the middle holds the actual list of meetings, so the
+     This page is Custom HTML → native WA CONTENT gadget(s) → Custom HTML.
+     The gadgets in the middle hold the lists of meetings, so the
      secretary adds a set of minutes in the ordinary WA editor: type the
      date, select it, insert the link to the PDF. No HTML, no repo, no
      paste step. See 02-wa-gadget.txt.
+
+     Each gadget renders as its own white card, so one gadget per block
+     (Board 2025, Board 2024, Executive Board, Annual Meeting) is the
+     intended arrangement, not a workaround.
 
      Everything in THIS file is chrome. Don't put meeting dates here.
 ══════════════════════════════════════════════════════════════════ -->
 <div class="ngm ngm-min-hero">
   <div class="ngm-min-hero-inner">
-    <span class="ngm-eyebrow">Members only</span>
+    <span class="ngm-eyebrow">Meeting minutes</span>
     <h1 class="ngm-h1">Board <em>minutes</em></h1>
     <p class="ngm-lead">What the board discussed and decided, meeting by meeting. Open to current members.</p>
   </div>
 </div>
 
-<section class="ngm ngm-sec ngm-sec-white ngm-min-head">
+<section class="ngm ngm-sec ngm-sec-linen ngm-min-head">
   <div class="ngm-con">
-    <span class="ngm-eyebrow">The record</span>
-    <h2 class="ngm-h2">Minutes by <em>meeting</em></h2>
     <p class="ngm-lead">Newest first. Each set opens as a PDF.</p>
   </div>
 </section>
