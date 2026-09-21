@@ -1,100 +1,118 @@
-# Adding a set of board minutes
+# Adding a set of minutes
 
-For whoever posts the minutes. You don't need to know any code, and you
-don't need this repository. Everything happens inside the Wild Apricot
-admin site.
+For whoever posts the minutes. No code, and nothing to install. Everything
+happens inside the Wild Apricot admin site.
 
 **You'll need:** admin access to the website, and the minutes saved as a PDF.
 
 ---
 
-## 1. Put the PDF on the website
+## How the page is put together
 
-Go to **Website → Files** and upload the PDF.
+The page is a stack of **boxes**. Each box is one set of minutes — "Board
+Meeting Minutes 2025", "Annual Meeting Minutes", and so on — and shows up as
+a card with a title, a document icon, and a count like *11 meetings*.
 
-Name it so the files sort themselves, year first:
+Visitors click a title to fold the list open. That happens on its own; there
+is nothing for you to switch on.
+
+Inside a box there are only two things: a **heading** and a **list of
+dates**. That's the whole format.
+
+---
+
+## Adding one meeting to a year that's already there
+
+### 1. Put the PDF on the website
+
+**Website → Files**, upload the PDF. Name it year-first so the files sort
+themselves:
 
 ```
 NGM Board Minutes 2026-09-14.pdf
 ```
 
-Keep using the same pattern every month. It means the newest file is always
-at the bottom of the list, and you can find any meeting by eye.
+Use the same pattern every time. The newest file then always sits at the
+bottom of the list, and you can find any meeting by eye.
 
-## 2. Open the minutes page
+### 2. Open the page
 
 **Website → Site pages → Meeting Minutes**, then **Edit**.
 
-## 3. Add the date
+### 3. Type the date
 
-Find the list of dates for the right year.
+Find the box for the right year. Click at the start of the newest date in
+it, press **Enter** to make a new bullet above, and type the date.
 
-Click at the start of the newest date in that list, press **Enter** to make
-a new bullet above it, and type the date.
+**Newest goes on top.**
 
-**Newest goes on top.** The list runs down the page from most recent to
-oldest.
-
-## 4. Link the date to the PDF
+### 4. Link it
 
 Select the date you just typed, click the **link** button in the toolbar,
-and choose the PDF you uploaded in step 1.
+and pick the PDF from step 1.
 
-## 5. Save
+### 5. Save
 
-That's it. The date will show up as a row with a document icon, and clicking
-anywhere on the row opens the PDF.
+The date appears as a row with a document icon. Clicking anywhere along the
+row opens the PDF.
 
 ---
 
-## If the board met but the minutes aren't written up yet
+## The board met, but the minutes aren't written up yet
 
 Type the date and **don't link it**. Leave it as plain text.
 
-It'll show as a greyed-out row with a small **Not posted** label, so members
+It shows as a greyed-out row with a small **Not posted** label, so members
 can see the meeting happened and the minutes are coming.
 
-When the minutes are ready, come back, select the date, and add the link as
-in step 4. The "Not posted" label disappears on its own.
+When they're ready, come back, select the date and add the link. The label
+disappears on its own.
 
-## The first meeting of a new year
+## Starting a new year
 
-Each year has its own block, and often its own box on the page. Add a
-**heading** above the newest list naming what it is:
+Easiest way: **add a new box** above the others.
+
+1. Add a **Content** gadget — the one with the normal editing toolbar, not
+   Custom HTML.
+2. Type the heading, then the list of dates under it.
+3. Open the gadget's settings and put this in the **CSS class** field:
+
+   ```
+   ngm-wa-minutes
+   ```
+
+   Without it the box won't be styled and won't fold out.
+
+You can also just type a second heading and list inside an existing box.
+That works, and you get two fold-out sections in the one card. A box per
+year is tidier.
+
+**Name the heading properly.** It becomes the card's title, and the page
+carries more than one kind of minutes, so it has to say which:
 
 ```
 Board Meeting Minutes 2027
 ```
 
-Then a bulleted list under it, and add the date as usual.
-
-Keep the wording consistent with the blocks already there. The page carries
-more than one kind of minutes — board, executive board, annual meeting — so
-the heading has to say which. The line underneath it is added automatically.
-
-If you add a **new box** rather than typing into an existing one, it needs
-the CSS class set. See "Something looks wrong?" below for where that field
-is; the value is `ngm-wa-minutes`.
+Not just "2027".
 
 ## Please don't
 
-- **Don't put anything else in that box.** A heading and a list of dates,
-  nothing more. No intro text and no notes — the wording above and below
-  the list lives elsewhere on the page and is already handled.
+- **Don't put anything else in a box.** Headings and lists of dates only.
+  No intro text, no notes. The wording at the top of the page is already
+  handled.
 - **Don't use two columns.** One list going down the page. Two columns look
   fine on a laptop and break on a phone.
 - **Don't retype the older entries.** They're fine as they are.
 
 ## Something looks wrong?
 
-If the list suddenly loses its formatting (plain bullets, blue underlined
-links, no icons), the gadget's **CSS class** has probably been cleared.
-Select the box holding the list, open its settings, and check the CSS class
-field says:
+**A box shows plain bullets and blue underlined links, and won't fold open.**
+Its **CSS class** has been cleared. Select the box, open its settings, and
+check the field says `ngm-wa-minutes`.
 
-```
-ngm-wa-minutes
-```
+**A title shows as plain bold text above a card.** Same cause — that box, or
+the box its heading sits in, is missing the class.
 
-If anything else looks off, email the website team at
-admin@needleworkguildmn.org rather than trying to fix the layout by hand.
+Anything else, email the website team at admin@needleworkguildmn.org rather
+than trying to fix the layout by hand.

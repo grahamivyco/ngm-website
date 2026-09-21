@@ -1,14 +1,12 @@
 <!-- Canonical page markup — this is the file to edit and to paste into the WA Custom-HTML gadget. Styling lives in global-css/global.css (pasted into the WA CSS tab; must be live in WA first). There is no separate self-contained version. -->
-<!-- ══ SANDWICH ══════════════════════════════════════════════════════
-     This page is Custom HTML → native WA CONTENT gadget(s) → Custom HTML.
-     The gadgets in the middle hold the lists of meetings, so the
-     secretary adds a set of minutes in the ordinary WA editor: type the
-     date, select it, insert the link to the PDF. No HTML, no repo, no
-     paste step. See 02-wa-gadget.txt.
+<!-- ══ THIS IS THE ONLY CUSTOM-HTML GADGET ON THE PAGE ═══════════════
+     Structure: this gadget, then the native WA CONTENT gadgets holding
+     the lists. NOTHING sits underneath them — the way back to the
+     Member Hub is in the hero below.
 
-     Each gadget renders as its own white card, so one gadget per block
-     (Board 2025, Board 2024, Executive Board, Annual Meeting) is the
-     intended arrangement, not a workaround.
+     Each content gadget carrying the ngm-wa-minutes class becomes its
+     own accordion card: the script at the bottom reads its heading,
+     builds a title button, and collapses the list until it's clicked.
 
      Everything in THIS file is chrome. Don't put meeting dates here.
 ══════════════════════════════════════════════════════════════════ -->
@@ -17,11 +15,142 @@
     <span class="ngm-eyebrow">Meeting minutes</span>
     <h1 class="ngm-h1">Board <em>minutes</em></h1>
     <p class="ngm-lead">What the board discussed and decided, meeting by meeting. Open to current members.</p>
+    <div class="ngm-min-hero-back">
+      <a class="ngm-btn ngm-btn-outline" href="/member-hub">Back to the Member Hub</a>
+    </div>
   </div>
 </div>
 
 <section class="ngm ngm-sec ngm-sec-linen ngm-min-head">
   <div class="ngm-con">
-    <p class="ngm-lead">Newest first. Each set opens as a PDF.</p>
+    <p class="ngm-lead">Choose a set to see the meetings in it. Each one opens as a PDF.</p>
   </div>
 </section>
+<script>
+/* ── MINUTES ACCORDION ──────────────────────────────────────────────
+   Turns every native content gadget carrying the ngm-wa-minutes class
+   into a collapsible card.
+
+   WHY THE TITLE IS REBUILT RATHER THAN STYLED: the old page's headings
+   render bold sans however they are targeted in CSS — the content
+   carries inline font markup that outranks a rule aimed at the heading,
+   and on some blocks the heading sits in a gadget of its own, where a
+   rule scoped to .ngm-wa-minutes never reaches it at all. So this reads
+   the heading's TEXT, hides the original, and builds its own button.
+   Nothing downstream has to guess at the editor's markup.
+
+   Idempotent — safe if WA runs it twice. */
+(function () {
+  var ICO = '<svg class="ngm-min-title-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6"/><path d="M9 17h4"/></svg>';
+  var CHV = '<svg class="ngm-min-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+
+  function text(el) {
+    return ((el && el.textContent) || "").replace(/ /g, " ").replace(/\s+/g, " ").trim();
+  }
+
+  /* The heading for this gadget: the first thing with text before the
+     list, or — when the heading is its own gadget — the nearest block
+     above that has text and no list of its own. */
+  function findTitle(gadget, body, list) {
+    for (var n = body.firstElementChild; n && n !== list; n = n.nextElementSibling) {
+      if (text(n)) return n;
+    }
+    var prev = gadget.previousElementSibling, hops = 0;
+    while (prev && hops++ < 3) {
+      if (prev.querySelector && prev.querySelector("li")) break;   /* another block's list */
+      if (text(prev) && text(prev).length < 120) return prev;
+      prev = prev.previousElementSibling;
+    }
+    return null;
+  }
+
+  /* For the second and later pairs in one box, the heading is just the
+     block immediately above the list. */
+  function prevTitle(list) {
+    var n = list.previousElementSibling;
+    while (n && !text(n)) n = n.previousElementSibling;
+    return n && !n.querySelector("li") ? n : null;
+  }
+
+  /* One accordion section per heading+list PAIR, not per gadget.
+     One box per block is the intended arrangement, but a volunteer
+     will eventually type a second heading and list into an existing
+     box — and when that happened the second pair fell outside the
+     accordion and rendered raw. Handling every pair means the page
+     degrades sensibly instead. */
+  function build() {
+    var gadgets = document.querySelectorAll(".ngm-wa-minutes");
+    Array.prototype.forEach.call(gadgets, function (g) {
+      if (g.getAttribute("data-min-done") === "1") return;
+      var body = g.querySelector(".gadgetStyleBody") || g;
+      var lists = body.querySelectorAll("ul, ol");
+      if (!lists.length) return;
+      g.setAttribute("data-min-done", "1");
+
+      Array.prototype.forEach.call(lists, function (list, i) {
+        if (list.closest(".ngm-min-wrap")) return;      /* a nested list */
+        var src = i === 0 ? findTitle(g, body, list) : prevTitle(list);
+        var label = text(src) || "Minutes";
+        if (src) {
+          src.classList.add("ngm-min-src");
+          /* When the heading was its own gadget, hiding it leaves that
+             gadget as an empty white strip across the linen band — so
+             collapse the whole wrapper once nothing is left in it. */
+          var host = src.closest ? src.closest(".WaGadget") : null;
+          if (host && !host.classList.contains("ngm-wa-minutes") && !text(host)) {
+            host.classList.add("ngm-wa-minutes-src-empty");
+          }
+        }
+
+        var count = list.querySelectorAll("li").length;
+
+        var sec = document.createElement("div");
+        sec.className = "ngm-min-sec";
+
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "ngm-min-title";
+        btn.setAttribute("aria-expanded", "false");
+        btn.innerHTML = ICO +
+          '<span class="ngm-min-title-txt"></span>' +
+          '<span class="ngm-min-count"></span>' + CHV;
+        btn.querySelector(".ngm-min-title-txt").textContent = label;
+        btn.querySelector(".ngm-min-count").textContent =
+          count + (count === 1 ? " meeting" : " meetings");
+
+        var wrap = document.createElement("div");
+        wrap.className = "ngm-min-wrap";
+
+        list.parentNode.insertBefore(sec, list);
+        sec.appendChild(btn);
+        sec.appendChild(wrap);
+        wrap.appendChild(list);
+
+        /* the list is hidden until asked for — keep that in the a11y tree */
+        var id = "ngm-min-p" + Math.random().toString(36).slice(2, 8);
+        wrap.id = id;
+        btn.setAttribute("aria-controls", id);
+
+        btn.addEventListener("click", function () {
+          var open = btn.getAttribute("aria-expanded") === "true";
+          btn.setAttribute("aria-expanded", open ? "false" : "true");
+          sec.classList.toggle("is-open", !open);
+        });
+      });
+    });
+  }
+
+  function init() {
+    build();
+    /* WA can render gadgets late; catch them if it does */
+    if (window.MutationObserver) {
+      var mo = new MutationObserver(function () { build(); });
+      mo.observe(document.body, { childList: true, subtree: true });
+      setTimeout(function () { mo.disconnect(); }, 8000);
+    }
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else { init(); }
+})();
+</script>

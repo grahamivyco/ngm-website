@@ -9,10 +9,16 @@ holds the list; a second minutes page means two things to keep current.
 ## Structure: sandwich
 
 ```
-01-top.html       Custom HTML — hero + one intro line
+01-top.html       Custom HTML — hero (with the way back) + intro line
+                  + the accordion script
 02-wa-gadget.txt  native WA CONTENT gadget(s) — one per block
-03-bottom.html    Custom HTML — back-to-Member-Hub CTA
 ```
+
+**There is no `03-bottom`.** Nothing sits under the cards; the Back to
+the Member Hub button is in the hero.
+
+**Live slug: `/meeting-minutes`** (not `/board-minutes` — the Member Hub
+tile points there).
 
 The list lives in the **native gadget**, not in this repo. That is the whole
 point: adding a set of minutes is a monthly job for the secretary, and it
@@ -80,13 +86,11 @@ with the secretary before this goes live.
 4. Put the existing list into a **Content** gadget below it and set its
    **CSS class** to `ngm-wa-minutes` — see `02-wa-gadget.txt`. Reshape the
    content to one heading + one list per year, single column.
-5. Paste `dist/pages/board-minutes/03-bottom.html` into a second Custom HTML
-   gadget below that.
-6. All three gadgets go in the **same layout row**, row background
-   transparent or white so the band runs continuously.
-7. Consider a friendly URL (`/board-minutes`) — the Member Hub tile in
-   `pages/member-hub/01-top.html` already points there, so either set that
-   slug or change the tile.
+5. Nothing goes below the cards — delete any old bottom gadget.
+6. All gadgets go in the **same layout row**, row background
+   transparent so the linen band runs continuously.
+7. The live slug is **`/meeting-minutes`** and the Member Hub tile now
+   points there.
 
 ## How the styling works
 
@@ -149,34 +153,59 @@ so it holds regardless. Snippet to dump it:
 
 ## Sections
 
-1. **Hero** (`01-top`) — cream band, "Meeting minutes" eyebrow, the title,
-   one line of copy.
+1. **Hero** (`01-top`) — cream band, "Meeting minutes" eyebrow, the
+   title, one line of copy, and the Back to the Member Hub button.
 2. **Intro line** (`01-top`) — linen band, opens the list.
-3. **The cards** — one white card per content gadget, floating on the linen.
-4. **CTA** (`03-bottom`) — one line and a Back-to-the-Member-Hub button.
+3. **The cards** — one white accordion card per content gadget, on linen.
 
 ### Two sections were removed (Sep 2026)
 
 - **"About these minutes"** — four tiles covering draft status, older
-  minutes being in the library cabinets, how corrections are handled, and
-  not forwarding the files. **None of it was sourced.** It was written from
-  a guess at how the Guild works; the old page carried no such claims. If
-  any of it is true, it can come back — but only once someone confirms it.
-- **"Ask the board"** — a rose CTA band pointing at the secretary. Removed
-  at the maintainer's request.
+  minutes being in the library cabinets, how corrections are handled,
+  and not forwarding the files. **None of it was sourced.** It was
+  written from a guess at how the Guild works; the old page carried no
+  such claims. If any of it is true it can come back, once confirmed.
+- **"Ask the board"** — a rose CTA band pointing at the secretary.
 
-## The row treatment mirrors the events gadget
+## The card title is BUILT, not styled
 
-Deliberately, so the two lists read as one system: the same
-`--ngm-linen-dk` hairline, the same `--ngm-radius` so the hover fill has
-soft corners, the same `.2s` `background-color` transition to
-`--ngm-sage-lt`, the same serif row title going sage on hover, and no rule
-under the last row. Each gadget is a white `--ngm-radius-lg` card with
-`--ngm-sh`, on a linen band — the same card-on-linen arrangement the
-homepage events block uses.
+This bit matters. Two earlier attempts styled the editor's own heading
+in CSS and both lost — the live page kept rendering it bold sans:
 
-Rows are one line each, so a card of eleven meetings is about a third
-shorter than the previous treatment (53px per row, down from 77px).
+- the old content carries inline font markup (`<font face="Arial">`,
+  `<span style="font-family:…">`) that outranks a rule aimed at the
+  heading element, and
+- on some blocks the heading sits in a **gadget of its own**, where a
+  rule scoped to `.ngm-wa-minutes` never reaches it at all.
+
+So the script in `01-top.html` reads the heading's **text**, hides the
+original (`.ngm-min-src`), and builds its own `.ngm-min-title` button.
+Everything downstream styles classes we control. **Don't go back to
+styling the editor's heading.**
+
+When the heading was its own gadget, that gadget is left empty and would
+show as a white strip across the linen band, so the script collapses it
+too (`.ngm-wa-minutes-src-empty`).
+
+Verified by rendering all three shapes: a real `<h2>`, a
+`<p><strong><span style="font-family:Arial">`, and a heading in a
+separate gadget. All three come out Cormorant.
+
+## Rows
+
+Mirrors the events gadget, with two changes the maintainer asked for:
+
+- **The hairlines stay straight.** The row carries the line and *no*
+  radius; the rounded hover fill is a separate layer underneath
+  (`li:has(a)::before`). A radius on the row itself bows the line up at
+  both ends, which is what the events gadget does.
+- **Hovering a row hides the lines above and below it**
+  (`li:hover` and `li:has(+ li:hover)` drop their border colour), so the
+  rounded fill sits clean with nothing touching it.
+
+Serif date, charcoal → sage on hover, one line per meeting. Unlinked
+bullets are caught with `li:not(:has(a))` and get the muted treatment
+plus the "Not posted" chip.
 
 ## The meeting pattern (from the old page)
 
