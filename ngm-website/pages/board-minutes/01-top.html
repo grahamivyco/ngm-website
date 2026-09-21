@@ -48,16 +48,28 @@
     return ((el && el.textContent) || "").replace(/ /g, " ").replace(/\s+/g, " ").trim();
   }
 
+  /* Never read a title out of UI this script built. Without this, the
+     backward walk below could land on an already-built card and take
+     its BUTTON text — title plus count, run together — which is how a
+     card came out reading "Board Meeting Minutes 20250 meetings". */
+  function ours(el) {
+    return !!(el && (el.classList.contains("ngm-min-sec") ||
+                     el.classList.contains("ngm-min-title") ||
+                     el.classList.contains("ngm-min-src") ||
+                     (el.querySelector && el.querySelector(".ngm-min-title, .ngm-min-sec"))));
+  }
+
   /* The heading for this gadget: the first thing with text before the
      list, or — when the heading is its own gadget — the nearest block
      above that has text and no list of its own. */
   function findTitle(gadget, body, list) {
     for (var n = body.firstElementChild; n && n !== list; n = n.nextElementSibling) {
-      if (text(n)) return n;
+      if (!ours(n) && text(n)) return n;
     }
     var prev = gadget.previousElementSibling, hops = 0;
     while (prev && hops++ < 3) {
       if (prev.querySelector && prev.querySelector("li")) break;   /* another block's list */
+      if (ours(prev)) break;                                       /* our own card — stop */
       if (text(prev) && text(prev).length < 120) return prev;
       prev = prev.previousElementSibling;
     }
@@ -68,7 +80,10 @@
      block immediately above the list. */
   function prevTitle(list) {
     var n = list.previousElementSibling;
-    while (n && !text(n)) n = n.previousElementSibling;
+    while (n && (ours(n) || !text(n))) {
+      if (ours(n)) return null;
+      n = n.previousElementSibling;
+    }
     return n && !n.querySelector("li") ? n : null;
   }
 
@@ -81,14 +96,17 @@
   function build() {
     var gadgets = document.querySelectorAll(".ngm-wa-minutes");
     Array.prototype.forEach.call(gadgets, function (g) {
-      if (g.getAttribute("data-min-done") === "1") return;
       var body = g.querySelector(".gadgetStyleBody") || g;
       var lists = body.querySelectorAll("ul, ol");
       if (!lists.length) return;
-      g.setAttribute("data-min-done", "1");
 
       Array.prototype.forEach.call(lists, function (list, i) {
-        if (list.closest(".ngm-min-wrap")) return;      /* a nested list */
+        if (list.closest(".ngm-min-wrap")) return;      /* already built, or nested */
+        /* Done-ness is tracked per LIST, not per gadget: WA can render a
+           gadget before its rows exist, and marking the gadget finished
+           there left an empty card that never filled in. */
+        var count = list.querySelectorAll("li").length;
+        if (!count) return;                             /* not rendered yet — retry on the next mutation */
         var src = i === 0 ? findTitle(g, body, list) : prevTitle(list);
         var label = text(src) || "Minutes";
         if (src) {
@@ -101,8 +119,6 @@
             host.classList.add("ngm-wa-minutes-src-empty");
           }
         }
-
-        var count = list.querySelectorAll("li").length;
 
         var sec = document.createElement("div");
         sec.className = "ngm-min-sec";
@@ -141,6 +157,12 @@
   }
 
   function init() {
+    /* The cards sit on a linen band, but on a tall viewport with little
+       content the page ran out before the footer and the theme's own
+       background showed underneath. Flag the body so the CSS can paint
+       WA's content wrappers linen too — same approach the member
+       directory uses for its cream page. */
+    if (document.body) document.body.classList.add("ngm-min-page");
     build();
     /* WA can render gadgets late; catch them if it does */
     if (window.MutationObserver) {

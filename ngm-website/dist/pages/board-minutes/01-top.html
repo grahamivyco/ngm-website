@@ -22,13 +22,21 @@
     return ((el && el.textContent) || "").replace(/ /g, " ").replace(/\s+/g, " ").trim();
   }
 
+  function ours(el) {
+    return !!(el && (el.classList.contains("ngm-min-sec") ||
+                     el.classList.contains("ngm-min-title") ||
+                     el.classList.contains("ngm-min-src") ||
+                     (el.querySelector && el.querySelector(".ngm-min-title, .ngm-min-sec"))));
+  }
+
   function findTitle(gadget, body, list) {
     for (var n = body.firstElementChild; n && n !== list; n = n.nextElementSibling) {
-      if (text(n)) return n;
+      if (!ours(n) && text(n)) return n;
     }
     var prev = gadget.previousElementSibling, hops = 0;
     while (prev && hops++ < 3) {
       if (prev.querySelector && prev.querySelector("li")) break;   
+      if (ours(prev)) break;                                       
       if (text(prev) && text(prev).length < 120) return prev;
       prev = prev.previousElementSibling;
     }
@@ -37,21 +45,25 @@
 
   function prevTitle(list) {
     var n = list.previousElementSibling;
-    while (n && !text(n)) n = n.previousElementSibling;
+    while (n && (ours(n) || !text(n))) {
+      if (ours(n)) return null;
+      n = n.previousElementSibling;
+    }
     return n && !n.querySelector("li") ? n : null;
   }
 
   function build() {
     var gadgets = document.querySelectorAll(".ngm-wa-minutes");
     Array.prototype.forEach.call(gadgets, function (g) {
-      if (g.getAttribute("data-min-done") === "1") return;
       var body = g.querySelector(".gadgetStyleBody") || g;
       var lists = body.querySelectorAll("ul, ol");
       if (!lists.length) return;
-      g.setAttribute("data-min-done", "1");
 
       Array.prototype.forEach.call(lists, function (list, i) {
         if (list.closest(".ngm-min-wrap")) return;      
+
+        var count = list.querySelectorAll("li").length;
+        if (!count) return;                             
         var src = i === 0 ? findTitle(g, body, list) : prevTitle(list);
         var label = text(src) || "Minutes";
         if (src) {
@@ -62,8 +74,6 @@
             host.classList.add("ngm-wa-minutes-src-empty");
           }
         }
-
-        var count = list.querySelectorAll("li").length;
 
         var sec = document.createElement("div");
         sec.className = "ngm-min-sec";
@@ -101,6 +111,8 @@
   }
 
   function init() {
+
+    if (document.body) document.body.classList.add("ngm-min-page");
     build();
 
     if (window.MutationObserver) {

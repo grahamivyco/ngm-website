@@ -9836,6 +9836,19 @@ body.ngm-dir-page .WaPlaceHolderContent {
    below styles classes we control, so there is nothing left to guess
    at. Don't go back to styling the editor's heading.
 ══════════════════════════════════════════════════════════════════ */
+/* The whole content area goes linen, not just the gadget bands. On a
+   tall viewport with only a few cards the page ran out before the
+   footer and the theme's own background showed underneath. The script
+   flags <body>; this paints WA's content wrappers to match — the same
+   approach the member directory uses for its cream page. The hero's
+   own cream band still paints over the top of it. */
+body.ngm-min-page,
+body.ngm-min-page .mLayout,
+body.ngm-min-page #idPageShadingContainer,
+body.ngm-min-page .zonePlace.zoneContent,
+body.ngm-min-page .WaPlaceHolderContent {
+  background: var(--ngm-linen) !important;
+}
 /* Linen band the cards float on. */
 body .ngm-wa-minutes {
   background: var(--ngm-linen) !important;

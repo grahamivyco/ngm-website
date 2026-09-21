@@ -8084,6 +8084,14 @@ body.ngm-dir-page .WaPlaceHolderContent {
   line-height: 1.8; margin-bottom: 28px;
 }
 
+body.ngm-min-page,
+body.ngm-min-page .mLayout,
+body.ngm-min-page #idPageShadingContainer,
+body.ngm-min-page .zonePlace.zoneContent,
+body.ngm-min-page .WaPlaceHolderContent {
+  background: var(--ngm-linen) !important;
+}
+
 body .ngm-wa-minutes {
   background: var(--ngm-linen) !important;
   border: none !important; box-shadow: none !important;
