@@ -43,10 +43,10 @@ bottom of the list, and you can find any meeting by eye.
 
 ### 3. Type the date
 
-Find the box for the right year. Click at the start of the newest date in
-it, press **Enter** to make a new bullet above, and type the date.
+Find the box for the right year, add a bullet, and type the date.
 
-**Newest goes on top.**
+**Put it wherever's convenient.** The page sorts each year's dates newest
+first on its own, so a date typed in the wrong place still lands right.
 
 ### 4. If it wasn't an ordinary board meeting, say so
 
@@ -89,11 +89,14 @@ disappears on its own.
 ## Starting a new year
 
 **One box per year.** When January comes round, 2027 gets a box of its own
-above 2026 — don't add it inside an existing box.
+— don't add it inside an existing box.
+
+Where you put the box doesn't matter. The page orders the years newest
+first by itself.
 
 1. **Website → Site pages → Meeting Minutes**, then **Edit**.
-2. Add a **Content** gadget, above the others. That's the one with the
-   normal editing toolbar — *not* Custom HTML.
+2. Add a **Content** gadget. That's the one with the normal editing
+   toolbar — *not* Custom HTML.
 3. Type the year on its own line: `2027`. Just the year, nothing else.
 4. Under it, start a bulleted list and add the dates as usual.
 5. **Set the CSS class.** Select the gadget, open its settings, and put
@@ -127,6 +130,10 @@ Add the dates to it as they arrive.
   fine on a laptop and break on a phone.
 - **Don't retype an entry to move it.** Retyping loses the link to its PDF.
   Cut the line and paste it where you want it — the link comes with it.
+  (Usually you don't need to move anything: dates sort themselves.)
+- **Don't leave an emptied box on the page.** If you move everything out of
+  one, delete the box. An empty box with no heading shows up as a stray
+  blank card.
 
 ## Something looks wrong?
 

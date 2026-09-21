@@ -74,6 +74,64 @@
     return (host && host.getAttribute("data-doc-noun")) || "meeting";
   }
 
+  var MONTHS = ("january february march april may june july august " +
+                "september october november december").split(" ");
+
+  function rowDate(t) {
+    var m = /(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})/.exec(t);          
+    if (!m) {
+      m = /([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{4})/.exec(t);          
+      if (!m) return null;
+      m = [m[0], m[2], m[1], m[3]];
+    }
+    var mi = MONTHS.indexOf(String(m[2]).toLowerCase());
+    if (mi < 0) return null;
+    return (+m[3]) * 10000 + (mi + 1) * 100 + (+m[1]);
+  }
+
+  function sortRows(list) {
+    var rows = Array.prototype.slice.call(list.children);
+    if (rows.length < 2) return;
+    var keyed = [], i;
+    for (i = 0; i < rows.length; i++) {
+      var d = rowDate(text(rows[i]));
+      if (d === null) return;
+      keyed.push({ el: rows[i], d: d });
+    }
+    keyed.sort(function (a, b) { return b.d - a.d; });
+    keyed.forEach(function (k) { list.appendChild(k.el); });
+  }
+
+  function sortCards() {
+    var gadgets = Array.prototype.slice.call(
+      document.querySelectorAll(".ngm-wa-minutes, .ngm-wa-docs"));
+    var buckets = [];
+    gadgets.forEach(function (g) {
+      var t = g.querySelector(".ngm-min-title-txt");
+      var y = t && /(\d{4})/.exec(t.textContent);
+      if (!y || !g.parentNode) return;
+      var bucket = null;
+      buckets.forEach(function (b) { if (b.parent === g.parentNode) bucket = b; });
+      if (!bucket) { bucket = { parent: g.parentNode, items: [] }; buckets.push(bucket); }
+      bucket.items.push({ el: g, year: +y[1] });
+    });
+    buckets.forEach(function (b) {
+      if (b.items.length < 2) return;
+      var kids = Array.prototype.slice.call(b.parent.children);
+      var first = null;
+      b.items.forEach(function (it) {
+        var i = kids.indexOf(it.el);
+        if (first === null || i < first) first = i;
+      });
+      var sorted = b.items.slice().sort(function (x, y2) { return y2.year - x.year; });
+      if (sorted.every(function (it, i) { return it === b.items[i]; })) return;
+      var marker = document.createComment("ngm-doc-order");
+      b.parent.insertBefore(marker, kids[first]);
+      sorted.forEach(function (it) { b.parent.insertBefore(it.el, marker); });
+      b.parent.removeChild(marker);
+    });
+  }
+
   function titleEl(label, count) {
     var head = document.createElement("h2");
     head.className = "ngm-min-title";
@@ -120,6 +178,11 @@
   }
 
   function build(allowEmpty) {
+    buildSections(allowEmpty);
+    sortCards();
+  }
+
+  function buildSections(allowEmpty) {
     var gadgets = document.querySelectorAll(".ngm-wa-minutes, .ngm-wa-docs");
     Array.prototype.forEach.call(gadgets, function (g) {
       var body = g.querySelector(".gadgetStyleBody") || g;
@@ -147,6 +210,8 @@
         var count = list.querySelectorAll("li").length;
         if (!count && !allowEmpty) return;
         var src = i === 0 ? findTitle(g, body, list) : prevTitle(list);
+
+        if (!count && !src) return;
         var label = text(src) || "Minutes";
         hideSource(src);
 
@@ -165,6 +230,8 @@
           none.textContent = "Nothing posted for this year yet.";
           sec.appendChild(none);
         }
+
+        sortRows(list);
 
         Array.prototype.forEach.call(list.querySelectorAll("li"), function (row) {
           chipify(row);

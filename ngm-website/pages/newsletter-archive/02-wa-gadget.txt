@@ -19,7 +19,8 @@ PDF URLs — the existing links come across as they are and the CSS
 restyles them.
 
 Setup in WA:
-1. ONE GADGET PER YEAR, newest year at the top.
+1. ONE GADGET PER YEAR. The order you put them in does not
+   matter — the script sorts the cards by year, newest first.
 2. Select each one → gadget settings → "CSS class" field → enter:
        ngm-wa-docs
    (This connects it to the "DOCUMENT LIST" section of global.css.
@@ -30,7 +31,8 @@ Setup in WA:
 How the content must be structured (the styling depends on it):
   • Each box starts with a HEADING that is just the YEAR — "2025".
     It becomes the card's title.
-  • Under it, ONE bulleted list. One issue per bullet, newest first.
+  • Under it, ONE bulleted list. One issue per bullet, newest first (though
+    rows that parse as dates are sorted for you).
   • A bullet is either a LINK (the issue, linked to its PDF) or PLAIN
     TEXT (an issue that hasn't been uploaded yet). Plain-text bullets
     are styled automatically as a muted "Not posted" row.
@@ -52,3 +54,10 @@ Same component, shared with the board minutes page. The minutes
 gadgets were set up first and carry ngm-wa-minutes; the CSS accepts
 both so nobody has to go and edit them. Use ngm-wa-docs on anything
 new.
+
+DELETE AN EMPTIED GADGET
+------------------------
+If you move everything out of a gadget, delete the gadget. One
+left behind with no heading and no rows used to render as a stray
+blank card in the middle of the issues; it is skipped now, but an
+empty gadget is still clutter in the editor.

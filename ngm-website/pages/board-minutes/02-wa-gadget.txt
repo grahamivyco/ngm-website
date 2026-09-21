@@ -53,6 +53,7 @@ six. Order the gadgets top to bottom in the order you want them read.
 
 How the content must be structured (the CSS depends on it):
   • ONE BOX PER YEAR, heading = the year and nothing else ("2025").
+    Gadget order does not matter; the cards sort by year.
     Board, executive board and annual meetings all go in the year they
     happened, newest first. Don't give a kind of meeting its own box.
   • Say the KIND after a dash on the row itself, and only where it is
@@ -77,7 +78,8 @@ How the content must be structured (the CSS depends on it):
     SEPARATE gadget just above the list — the script reads its text
     either way, hides the original, and rebuilds it. Newest first.
   • Under each heading, ONE bulleted list. One meeting per bullet,
-    newest first.
+    newest first (though
+    rows that parse as dates are sorted for you).
   • A bullet is either a LINK (the date, linked to the PDF) or PLAIN
     TEXT (the board met, minutes not up yet). Plain-text bullets are
     styled automatically as a muted "Not posted" row — nothing extra
@@ -100,3 +102,10 @@ arrangement — each block is one card the reader can open.
 
 Nothing extra to set up: the script in 01-top.html builds the title
 button and the collapse from whatever the gadget already contains.
+
+DELETE AN EMPTIED GADGET
+------------------------
+If you move everything out of a gadget, delete the gadget. One
+left behind with no heading and no rows used to render as a stray
+blank card in the middle of the minutes; it is skipped now, but an
+empty gadget is still clutter in the editor.
