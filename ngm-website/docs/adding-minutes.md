@@ -45,6 +45,10 @@ and choose the PDF you uploaded in step 1.
 That's it. The date will show up as a row with a document icon, and clicking
 anywhere on the row opens the PDF.
 
+Each box on the page is a **fold-out section**: visitors see its title and
+how many meetings are in it, and click to open it. That happens on its own —
+there is nothing to set up.
+
 ---
 
 ## If the board met but the minutes aren't written up yet

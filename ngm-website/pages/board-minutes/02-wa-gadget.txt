@@ -52,11 +52,13 @@ from the headings, so it looks the same whether it is one gadget or
 six. Order the gadgets top to bottom in the order you want them read.
 
 How the content must be structured (the CSS depends on it):
-  • Each block starts with a HEADING (any level). Its text is up to
-    you — with more than one kind of minutes on the page the heading
-    has to say which, so "Board Meeting Minutes 2024" and "Annual
-    Meeting Minutes" are right. Keep it short; the rule line under it
-    is added automatically. Newest first.
+  • Each block starts with a HEADING. Its text is up to you — with
+    more than one kind of minutes on the page it has to say which, so
+    "Board Meeting Minutes 2024" and "Annual Meeting Minutes" are
+    right. Keep it short: it becomes the card's title.
+    The heading can be a real heading, bold text, or even sit in a
+    SEPARATE gadget just above the list — the script reads its text
+    either way, hides the original, and rebuilds it. Newest first.
   • Under each heading, ONE bulleted list. One meeting per bullet,
     newest first.
   • A bullet is either a LINK (the date, linked to the PDF) or PLAIN
@@ -71,3 +73,13 @@ How the content must be structured (the CSS depends on it):
 Nothing else goes in this gadget — no headings like "Board Meeting
 Minutes 2025" (the year alone is the heading), no intro copy (that's
 in 01-top.html), no notes (those are in 03-bottom.html).
+
+EACH CARD IS AN ACCORDION
+-------------------------
+Every gadget with this class renders as a white card with a clickable
+title showing how many meetings are inside. The list is collapsed until
+someone clicks it. That is why one gadget per block is the right
+arrangement — each block is one card the reader can open.
+
+Nothing extra to set up: the script in 01-top.html builds the title
+button and the collapse from whatever the gadget already contains.

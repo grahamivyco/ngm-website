@@ -9818,39 +9818,37 @@ body.ngm-dir-page .WaPlaceHolderContent {
 /* ══════════════════════════════════════════════════════════════════
    BOARD MINUTES  (/board-minutes, members-only)
 
-   SANDWICH: Custom HTML (hero + heading) → native WA CONTENT gadget(s)
-   (the lists) → Custom HTML (CTA). The lists live in the gadgets so the
-   secretary adds a meeting in the ordinary WA editor — see
-   pages/board-minutes/.
+   SANDWICH: Custom HTML (hero) → native WA CONTENT gadget(s). Nothing
+   below them. The lists live in the gadgets so the secretary adds a
+   meeting in the ordinary WA editor — see pages/board-minutes/.
 
-   ONE GADGET PER BLOCK. The live page keeps each year AND each kind of
-   minutes in its own content gadget (Board 2025, Board 2024, Executive
-   Board 2025, Annual Meeting). Every one of them carries the
-   ngm-wa-minutes class and renders as ITS OWN WHITE CARD on the linen
-   band, which is what makes the arrangement read as deliberate rather
-   than as one long undifferentiated list. The gap between cards is the
-   gadget's own bottom padding, so it is correct however many there are.
+   ONE GADGET PER BLOCK, EACH AN ACCORDION CARD. Every gadget carrying
+   the ngm-wa-minutes class becomes its own white card with a clickable
+   title; the list inside is collapsed until the title is clicked.
 
-   These rules style the EDITOR'S OWN OUTPUT — a heading and a plain
-   <ul> of <li>, each holding a link (minutes posted) or bare text (the
-   board met, nothing up yet). The editor writes no classes, so the hook
-   is the gadget's own CSS class, set in WA gadget settings. Same trick
-   .ngm-wa-events uses, and the reason no per-instance id_* is needed.
-
-   The row treatment deliberately MIRRORS .ngm-wa-events: same
-   --ngm-linen-dk hairline, same --ngm-radius so the hover fill has soft
-   corners, same .2s background-color transition to --ngm-sage-lt, same
-   serif row title going sage on hover, no rule under the last row.
+   ⚠ THE TITLE IS BUILT BY THE SCRIPT, NOT STYLED IN PLACE.
+   Two earlier attempts styled the editor's own heading and both lost:
+   the live page kept rendering it bold sans, because the old content
+   carries inline font markup (or the heading sits in a gadget of its
+   own) that outranks — or never meets — a rule aimed at h1–h4. So the
+   script in 01-top.html now READS the heading's text, hides the
+   original, and builds a .ngm-min-title button of its own. Everything
+   below styles classes we control, so there is nothing left to guess
+   at. Don't go back to styling the editor's heading.
 ══════════════════════════════════════════════════════════════════ */
-/* Linen band the cards float on — continuous with 01-top's heading
-   block above it, which is linen too. */
+/* Linen band the cards float on. */
 body .ngm-wa-minutes {
   background: var(--ngm-linen) !important;
   border: none !important; box-shadow: none !important;
   margin: 0 !important;
-  padding: 0 var(--ngm-pad-x) 18px !important;   /* 18px = the gap between cards */
+  padding: 0 var(--ngm-pad-x) 14px !important;   /* 14px = the gap between cards */
 }
-/* Each gadget is one white card. */
+/* The last gadget needs air before the footer. It can't be :last-of-type
+   (separate WA wrappers), so every card pays a little and the extra sits
+   on the band itself via the page's own bottom spacing. */
+body .ngm-wa-minutes:last-of-type { padding-bottom: 76px !important; }
+/* Each gadget is one card. overflow:hidden clips the list during the
+   accordion's collapse so nothing spills past the rounded corners. */
 body .ngm-wa-minutes .gadgetStyleBody {
   background: #fff !important;
   border: 1px solid var(--ngm-border) !important;
@@ -9858,99 +9856,136 @@ body .ngm-wa-minutes .gadgetStyleBody {
   box-shadow: var(--ngm-sh) !important;
   max-width: var(--ngm-maxw) !important;
   margin: 0 auto !important;
-  padding: 6px 28px 10px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
 }
+/* The editor's own heading, hidden by the script once its text has been
+   read and rebuilt as a .ngm-min-title button.
+   NOT scoped to .ngm-wa-minutes: when a block's heading sits in a gadget
+   of its own, that gadget has no class of ours to hang the rule on, and
+   the raw bold text stayed visible above the card. Only the script ever
+   applies .ngm-min-src, so an unscoped rule is safe. */
+.ngm-min-src { display: none !important; }
+/* the now-empty wrapper the heading came from must not leave a white
+   strip across the linen band */
+body .ngm-wa-minutes-src-empty { display: none !important; }
+body .ngm-wa-minutes p:empty { display: none !important; }
 
-/* ── Card title (the year / kind of minutes) ──
-   VERIFIED-DOM CAVEAT: the live page renders these bold sans, not
-   serif, which means they are NOT plain h1–h4 — the old content
-   carries either bold paragraphs or inline font markup that outranks a
-   rule set on the heading itself. So this targets both shapes AND
-   their descendants, and forces the family down the tree. If it is
-   still wrong on the live page, run the snippet in the page README and
-   the selector can be narrowed to what is actually there. */
-body .ngm-wa-minutes h1,
-body .ngm-wa-minutes h2,
-body .ngm-wa-minutes h3,
-body .ngm-wa-minutes h4,
-body .ngm-wa-minutes p:has(> strong:only-child),
-body .ngm-wa-minutes p:has(> b:only-child) {
-  font-family: var(--ngm-serif) !important;
-  font-size: var(--ngm-title-lg) !important;
-  font-weight: 400 !important;
-  color: var(--ngm-charcoal) !important;
-  line-height: 1.15 !important;
-  text-transform: none !important; letter-spacing: normal !important;
-  margin: 16px 0 0 !important;
-  padding: 0 0 12px !important;
-  border-bottom: 1px solid var(--ngm-linen-dk) !important;
+/* ── Accordion title ── */
+.ngm-min-title {
+  display: flex; align-items: center; gap: 13px;
+  width: 100%;
+  margin: 0; padding: 20px 26px;
+  background: transparent; border: 0; border-radius: 0;
+  text-align: left; cursor: pointer;
+  font-family: var(--ngm-serif); font-size: var(--ngm-title-card);
+  font-weight: 400; color: var(--ngm-charcoal); line-height: 1.25;
+  transition: background-color .2s ease, color .2s ease;
 }
-/* Inline font/size/weight the old editor left inside the heading. */
-body .ngm-wa-minutes h1 *, body .ngm-wa-minutes h2 *,
-body .ngm-wa-minutes h3 *, body .ngm-wa-minutes h4 *,
-body .ngm-wa-minutes p:has(> strong:only-child) *,
-body .ngm-wa-minutes p:has(> b:only-child) * {
-  font-family: inherit !important;
-  font-size: inherit !important;
-  font-weight: inherit !important;
-  color: inherit !important;
+.ngm-min-title:hover { background-color: var(--ngm-sage-lt); color: var(--ngm-sage-dk); }
+.ngm-min-title:focus-visible { outline: 2px solid var(--ngm-sage); outline-offset: -3px; }
+/* The Member Hub tile's document icon, sized down. */
+.ngm-min-title-ico { width: 20px; height: 20px; flex-shrink: 0; color: var(--ngm-sage-dk); }
+.ngm-min-title-txt { flex: 1; min-width: 0; }
+/* How many sets are inside — worth showing while the card is closed. */
+.ngm-min-count {
+  flex-shrink: 0;
+  font-family: var(--ngm-sans); font-size: var(--ngm-text-meta);
+  font-weight: 400; color: var(--ngm-gray-lt);
+}
+.ngm-min-chev {
+  width: 17px; height: 17px; flex-shrink: 0; color: var(--ngm-sage-dk);
+  transition: transform .3s ease;
+}
+.ngm-wa-minutes.is-open .ngm-min-chev { transform: rotate(180deg); }
+
+/* ── Accordion body — the grid 0fr → 1fr reveal, same as the FAQ cards ── */
+.ngm-min-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .32s ease;
+}
+.ngm-wa-minutes.is-open .ngm-min-wrap { grid-template-rows: 1fr; }
+/* min-height:0 is required — grid items default to min-height:auto, which
+   blocks the collapse back to 0fr after the first open. */
+.ngm-min-wrap > ul,
+.ngm-min-wrap > ol {
+  overflow: hidden !important; min-height: 0 !important;
+  padding-bottom: 12px !important;
 }
 
 /* ── The list ── */
 body .ngm-wa-minutes ul,
 body .ngm-wa-minutes ol {
   list-style: none !important;
-  margin: 0 !important; padding: 0 !important;
+  margin: 0 !important; padding: 0 12px !important;
 }
+/* The hairline lives on the ROW and stays perfectly straight: no radius
+   on this element at all. The rounded hover fill is a separate layer
+   underneath (::before), which is what lets the two coexist — a radius
+   here would bow the line up at both ends. */
 body .ngm-wa-minutes li {
   list-style: none !important;
-  display: flex !important; align-items: center !important; gap: 11px !important;
-  margin: 0 !important; padding: 0 14px !important;
+  position: relative !important;
+  display: block !important;
+  margin: 0 !important; padding: 0 !important;
   border-bottom: 1px solid var(--ngm-linen-dk) !important;
-  border-radius: var(--ngm-radius) !important;
-  transition: background-color .2s ease !important;
+  border-radius: 0 !important;
   font-family: var(--ngm-sans) !important;
 }
 body .ngm-wa-minutes li:last-child { border-bottom: none !important; }
-body .ngm-wa-minutes li:hover { background-color: var(--ngm-sage-lt) !important; }
+/* Hovering a row drops its own hairline AND the one above it, so the
+   rounded fill sits clean with no line touching it. */
+body .ngm-wa-minutes li:hover,
+body .ngm-wa-minutes li:has(+ li:hover) { border-bottom-color: transparent !important; }
+/* The fill layer. */
+body .ngm-wa-minutes li:has(a)::before {
+  content: "" !important;
+  position: absolute; inset: 0; z-index: 0;
+  border-radius: var(--ngm-radius);
+  background-color: transparent;
+  transition: background-color .2s ease;
+}
+body .ngm-wa-minutes li:has(a):hover::before { background-color: var(--ngm-sage-lt); }
+/* The row itself. Serif date, charcoal → sage on hover, one line. */
+body .ngm-wa-minutes li > a {
+  position: relative; z-index: 1;
+  display: flex !important; align-items: center !important; gap: 11px !important;
+  padding: 14px !important;
+  font-family: var(--ngm-serif) !important;
+  font-size: var(--ngm-title-tile) !important;
+  font-weight: 400 !important; font-style: normal !important;
+  color: var(--ngm-charcoal) !important;
+  text-decoration: none !important; border: 0 !important;
+}
+body .ngm-wa-minutes li:hover > a,
+body .ngm-wa-minutes li > a:hover { color: var(--ngm-sage-dk) !important; }
+body .ngm-wa-minutes li > a:focus-visible { outline: 2px solid var(--ngm-sage); outline-offset: -2px; }
 /* Document glyph, masked so it takes the sage colour — the same
    technique as the events gadget's calendar icon. */
-body .ngm-wa-minutes li::before {
+body .ngm-wa-minutes li > a::before {
   content: "" !important;
-  flex-shrink: 0;
-  width: 14px; height: 14px;
+  flex-shrink: 0; width: 14px; height: 14px;
   background-color: var(--ngm-sage) !important;
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpath d='M14 2v6h6'/%3E%3C/svg%3E") center / contain no-repeat;
           mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpath d='M14 2v6h6'/%3E%3C/svg%3E") center / contain no-repeat;
 }
-/* The date reads like an event title: serif, charcoal, sage on hover.
-   One line per meeting, so the rows stay short. */
-body .ngm-wa-minutes li a {
-  flex: 1; min-width: 0;
-  display: block !important;
-  padding: 15px 0 !important;
-  font-family: var(--ngm-serif) !important;
-  font-size: var(--ngm-title-tile) !important;
-  font-weight: 400 !important;
-  font-style: normal !important;
-  color: var(--ngm-charcoal) !important;
-  text-decoration: none !important;
-  border: 0 !important;
-}
-body .ngm-wa-minutes li:hover a,
-body .ngm-wa-minutes li a:hover { color: var(--ngm-sage-dk) !important; }
-body .ngm-wa-minutes li a:focus-visible { outline: 2px solid var(--ngm-sage); outline-offset: -2px; }
 
-/* ── A meeting with no minutes posted yet ──
-   The editor just leaves the bullet as plain text. */
+/* ── A meeting with no minutes posted yet ── */
 body .ngm-wa-minutes li:not(:has(a)) {
-  padding: 15px 14px !important;
+  display: flex !important; align-items: center !important; gap: 11px !important;
+  padding: 14px !important;
   font-family: var(--ngm-serif) !important;
   font-size: var(--ngm-title-tile) !important;
   color: var(--ngm-gray-lt) !important;
 }
-body .ngm-wa-minutes li:not(:has(a)):hover { background-color: transparent !important; }
-body .ngm-wa-minutes li:not(:has(a))::before { background-color: var(--ngm-gray-lt) !important; }
+body .ngm-wa-minutes li:not(:has(a))::before {
+  content: "" !important;
+  flex-shrink: 0; width: 14px; height: 14px;
+  background-color: var(--ngm-gray-lt) !important;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpath d='M14 2v6h6'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpath d='M14 2v6h6'/%3E%3C/svg%3E") center / contain no-repeat;
+}
 body .ngm-wa-minutes li:not(:has(a))::after {
   content: "Not posted" !important;
   flex-shrink: 0; margin-left: auto;
@@ -9960,43 +9995,29 @@ body .ngm-wa-minutes li:not(:has(a))::after {
   color: var(--ngm-gray) !important; background: var(--ngm-linen);
   border-radius: 100px; padding: 3px 10px; line-height: 1.4;
 }
-/* Editor artefacts: empty paragraphs left between blocks. */
-body .ngm-wa-minutes p:empty { display: none !important; }
 
-/* ── 01-top / 03-bottom ── */
-/* Heading block above the cards — linen, closing tight onto them. */
-.ngm-min-head { padding-bottom: 26px; }
+/* ── 01-top ── */
+/* Hero carries the way back now; nothing sits under the cards. */
+.ngm-min-hero-back { margin-top: 26px; }
+.ngm-min-head { padding-bottom: 22px; }
 .ngm-min-head .ngm-lead { margin-bottom: 0; }
-/* Closing CTA — back to the Member Hub. Slim: one line and a button. */
-.ngm-min-cta {
-  background: var(--ngm-linen);
-  padding: 0 var(--ngm-pad-x) 76px;
-  text-align: center;
-}
-.ngm-min-cta-inner {
-  max-width: var(--ngm-maxw); margin: 0 auto;
-  padding-top: 40px;
-  border-top: 1px solid var(--ngm-linen-dk);
-}
-.ngm-min-cta p {
-  font-family: var(--ngm-sans); font-size: var(--ngm-text-body); color: var(--ngm-gray);
-  line-height: 1.7; margin-bottom: 20px;
-}
 @media (max-width: 900px) {
   body .ngm-wa-minutes { padding-left: var(--ngm-pad-x-md) !important; padding-right: var(--ngm-pad-x-md) !important; }
-  body .ngm-wa-minutes .gadgetStyleBody { padding-left: 20px !important; padding-right: 20px !important; }
+  .ngm-min-title { padding: 18px 20px; }
+  body .ngm-wa-minutes ul, body .ngm-wa-minutes ol { padding: 0 8px !important; }
 }
 @media (max-width: 640px) {
   body .ngm-wa-minutes,
   body .ngm-wa-minutes li,
-  body .ngm-wa-minutes li a { text-align: left !important; }
+  body .ngm-wa-minutes li > a { text-align: left !important; }
+  .ngm-min-count { display: none; }
 }
 @media (max-width: 560px) {
   body .ngm-wa-minutes { padding-left: var(--ngm-pad-x-sm) !important; padding-right: var(--ngm-pad-x-sm) !important; }
-  body .ngm-wa-minutes li::after { margin-left: 9px !important; }
 }
 @media (prefers-reduced-motion: reduce) {
-  body .ngm-wa-minutes li { transition: none !important; }
+  .ngm-min-wrap, .ngm-min-chev, .ngm-min-title,
+  body .ngm-wa-minutes li:has(a)::before { transition: none !important; }
 }
 
 /* ── Responsive ── */
