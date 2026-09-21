@@ -1,4 +1,92 @@
 <!-- Canonical page markup — this is the file to edit and to paste into the WA Custom-HTML gadget. Styling lives in global-css/global.css (pasted into the WA CSS tab; must be live in WA first). There is no separate self-contained version. -->
+<!-- ══ ADVERTISERS — logo strip ═════════════════════════════════════
+     Sits directly below the native "Upcoming events" gadget (this file is
+     the gadget pasted right under it). Static row: every advertiser is
+     visible at once — no carousel, no script, nothing moving under the
+     cursor.
+
+     ▸ LOGO FILES — upload the PNGs via WA → Website → Files, then FIND &
+       REPLACE every  LOGO_BASE/  in the src= lines below with the folder
+       they landed in, e.g.  /resources/Pictures/advertisers/
+       — nine of them: a charcoal + a colour file for each advertiser, and
+       one charcoal-only for Print & Frame.
+       Charcoal file = the resting state.  Colour file = hover/focus.
+
+     ▸ ADD AN ADVERTISER — copy one <li> block, change the four things
+       marked in its comment (name, two filenames, link), and drop it in
+       alphabetical order. The row re-centres itself.
+
+     ▸ REMOVE AN ADVERTISER — delete its whole <li> block, comment and all.
+       Nothing else on the page refers to it, and the row re-centres.
+
+     Styling lives in global-css/global.css (".ngm-advertisers" section).
+══════════════════════════════════════════════════════════════════ -->
+<section class="ngm ngm-sec ngm-sec-cream ngm-advertisers" id="ngm-ads">
+  <div class="ngm-con">
+    <span class="ngm-eyebrow ngm-adv-label">Our advertisers</span>
+    <ul class="ngm-adv-row" role="list">
+
+      <!-- ▼ NATIONAL ACADEMY OF NEEDLEARTS — PAID FOR 3 MONTHS FROM
+           SEPT 2026 (term ends Dec 2026). Delete this whole <li> block
+           when the term ends. -->
+      <li class="ngm-adv-item">
+        <a class="ngm-adv-link" href="https://needleart.org/" target="_blank" rel="noopener sponsored">
+          <img class="ngm-adv-logo" alt="National Academy of Needlearts" loading="lazy" decoding="async"
+               src="LOGO_BASE/NAN-charcoal.png">
+          <img class="ngm-adv-logo ngm-adv-logo-color" alt="" aria-hidden="true" loading="lazy" decoding="async"
+               src="LOGO_BASE/NAN-logo-transparent.png">
+        </a>
+      </li>
+      <!-- ▲ END NATIONAL ACADEMY OF NEEDLEARTS -->
+
+      <!-- ▼ NEEDLE BLING DESIGNS (formerly Black Cat Stitchery) -->
+      <li class="ngm-adv-item">
+        <a class="ngm-adv-link" href="https://needleblingdesigns.com" target="_blank" rel="noopener sponsored">
+          <img class="ngm-adv-logo" alt="Needle Bling Designs" loading="lazy" decoding="async"
+               src="LOGO_BASE/Needle-Bling-Designs-charcoal.png">
+          <img class="ngm-adv-logo ngm-adv-logo-color" alt="" aria-hidden="true" loading="lazy" decoding="async"
+               src="LOGO_BASE/Needle-Bling-Designs-logo-transparent.png">
+        </a>
+      </li>
+      <!-- ▲ END NEEDLE BLING DESIGNS -->
+
+      <!-- ▼ PRINT & FRAME — no usable colour file (the original is white
+           lettering, invisible on cream), so this one keeps the charcoal
+           logo for both states and only brightens on hover. The
+           ngm-adv-mono class is what turns the swap off. -->
+      <li class="ngm-adv-item">
+        <a class="ngm-adv-link ngm-adv-mono" href="https://printandframeco.com" target="_blank" rel="noopener sponsored">
+          <img class="ngm-adv-logo" alt="Print &amp; Frame" loading="lazy" decoding="async"
+               src="LOGO_BASE/Print-and-Frame-charcoal.png">
+        </a>
+      </li>
+      <!-- ▲ END PRINT & FRAME -->
+
+      <!-- ▼ SEED STITCH STUDIO -->
+      <li class="ngm-adv-item">
+        <a class="ngm-adv-link" href="https://www.seedstitchstudio.com" target="_blank" rel="noopener sponsored">
+          <img class="ngm-adv-logo" alt="Seed Stitch Studio" loading="lazy" decoding="async"
+               src="LOGO_BASE/Seed-Stitch-Studio-charcoal.png">
+          <img class="ngm-adv-logo ngm-adv-logo-color" alt="" aria-hidden="true" loading="lazy" decoding="async"
+               src="LOGO_BASE/Seed-Stitch-Studio-logo-transparent.png">
+        </a>
+      </li>
+      <!-- ▲ END SEED STITCH STUDIO -->
+
+      <!-- ▼ WELCOME STITCHERY -->
+      <li class="ngm-adv-item">
+        <a class="ngm-adv-link" href="https://www.welcomestitchery.com" target="_blank" rel="noopener sponsored">
+          <img class="ngm-adv-logo" alt="Welcome Stitchery" loading="lazy" decoding="async"
+               src="LOGO_BASE/Welcome-Stitchery-charcoal.png">
+          <img class="ngm-adv-logo ngm-adv-logo-color" alt="" aria-hidden="true" loading="lazy" decoding="async"
+               src="LOGO_BASE/Welcome-Stitchery-logo-transparent.png">
+        </a>
+      </li>
+      <!-- ▲ END WELCOME STITCHERY -->
+
+    </ul>
+  </div>
+</section>
 <section class="ngm ngm-sec ngm-sec-white">
   <div class="ngm-con">
     <div class="ngm-about-inner">
@@ -283,80 +371,6 @@
   }
 })();
 </script>
-<!-- ══ ADVERTISERS ══════════════════════════════════════════════════
-     Paying advertisers, each logo linking out to their site (Kym, Sep 3).
-     Kym first asked for a rotating banner; this is a static row instead —
-     every advertiser is visible at once rather than 1-in-5 of the time, it
-     needs no script, and it doesn't move under anyone's cursor. Say the
-     word and it can rotate.
-
-     LOGO FILES: upload Kym's logo files via WA → Website → Files into
-     Pictures/Advertisers/, then make each src below match the uploaded
-     filename exactly (spaces become %20). Until a file is there, the card
-     falls back to the advertiser's name as text, so a missing or misnamed
-     logo degrades quietly instead of showing a broken image.
-
-     REMOVING AN ADVERTISER: delete that one <li>. National Academy of
-     Needlearts is paid through three months only — its <li> is fenced off
-     below so it can be deleted without touching the others.
-══════════════════════════════════════════════════════════════════ -->
-<section class="ngm ngm-sec ngm-sec-linen" id="ngm-ads">
-  <div class="ngm-con">
-    <div class="ngm-ads-head">
-      <span class="ngm-eyebrow">Our advertisers</span>
-      <h2 class="ngm-h2">The shops who <em>support us</em></h2>
-      <p class="ngm-ads-intro">Our advertisers help keep the Guild running. Please give them a look.</p>
-    </div>
-    <ul class="ngm-ads-row" role="list">
-      <li>
-        <a class="ngm-ad" href="https://www.seedstitchstudio.com" target="_blank" rel="noopener">
-          <img class="ngm-ad-logo" loading="lazy" decoding="async" alt="Seed Stitch Studio"
-            src="https://needleworkguildmn.org/resources/Pictures/Advertisers/Seed%20Stitch%20Studio.png"
-            onerror="this.style.display='none';this.parentNode.classList.add('is-text')">
-          <span class="ngm-ad-name">Seed Stitch Studio</span>
-        </a>
-      </li>
-      <li>
-        <a class="ngm-ad" href="https://www.welcomestitchery.com" target="_blank" rel="noopener">
-          <img class="ngm-ad-logo" loading="lazy" decoding="async" alt="Welcome Stitchery"
-            src="https://needleworkguildmn.org/resources/Pictures/Advertisers/Welcome%20Stitchery.png"
-            onerror="this.style.display='none';this.parentNode.classList.add('is-text')">
-          <span class="ngm-ad-name">Welcome Stitchery</span>
-        </a>
-      </li>
-      <li>
-        <a class="ngm-ad" href="https://printandframeco.com" target="_blank" rel="noopener">
-          <img class="ngm-ad-logo" loading="lazy" decoding="async" alt="Print &amp; Frame"
-            src="https://needleworkguildmn.org/resources/Pictures/Advertisers/Print%20and%20Frame.png"
-            onerror="this.style.display='none';this.parentNode.classList.add('is-text')">
-          <span class="ngm-ad-name">Print &amp; Frame</span>
-        </a>
-      </li>
-      <li>
-        <!-- formerly Black Cat Stitchery -->
-        <a class="ngm-ad" href="https://needleblingdesigns.com" target="_blank" rel="noopener">
-          <img class="ngm-ad-logo" loading="lazy" decoding="async" alt="Needle Bling Designs"
-            src="https://needleworkguildmn.org/resources/Pictures/Advertisers/Needle%20Bling%20Designs.png"
-            onerror="this.style.display='none';this.parentNode.classList.add('is-text')">
-          <span class="ngm-ad-name">Needle Bling Designs</span>
-        </a>
-      </li>
-      <!-- ▼▼ NAN — PAID THROUGH THREE MONTHS ONLY. To remove the National
-           Academy of Needlearts, delete everything between these two
-           markers (this comment, the <li>, and the closing marker). Nothing
-           else on the page refers to it. ▼▼ -->
-      <li>
-        <a class="ngm-ad" href="https://needleart.org/" target="_blank" rel="noopener">
-          <img class="ngm-ad-logo" loading="lazy" decoding="async" alt="National Academy of Needlearts"
-            src="https://needleworkguildmn.org/resources/Pictures/Advertisers/National%20Academy%20of%20Needlearts.png"
-            onerror="this.style.display='none';this.parentNode.classList.add('is-text')">
-          <span class="ngm-ad-name">National Academy of Needlearts</span>
-        </a>
-      </li>
-      <!-- ▲▲ END NAN ▲▲ -->
-    </ul>
-  </div>
-</section>
 <section class="ngm ngm-join">
   <div class="ngm-join-inner">
     <span class="ngm-eyebrow">Join</span>
