@@ -1,0 +1,42 @@
+NATIVE WA GADGET — "Content" (the list of meetings)
+====================================================
+This is NOT pasteable HTML. It is a native Wild Apricot content
+gadget that must be added in the WA editor, sitting BETWEEN
+01-top.html and 03-bottom.html, in the SAME layout row.
+
+This gadget is the whole point of the sandwich. It holds the list of
+meetings, so the secretary can add one WITHOUT touching HTML or this
+repo: open the page in WA, type the date, select it, insert the link
+to the PDF. Nothing here to rebuild, nothing to keep in sync.
+
+Setup in WA:
+1. The list already exists on the current "Meeting Minutes" page
+   (pageId 18146). KEEP IT. Don't retype it and don't go hunting for
+   the PDF URLs — the existing links come across as they are, and the
+   CSS restyles them. That is the whole reason to do it this way.
+2. Add gadget → "Content" (rich text), and move the existing list
+   into it if it isn't already in one.
+3. Select it → gadget settings → "CSS class" field → enter:
+       ngm-wa-minutes
+   (This connects it to the "BOARD MINUTES" section of global.css.)
+4. Set the layout ROW background to transparent or white, so the
+   white band runs continuously from 01-top through to 03-bottom.
+
+How the content must be structured (the CSS depends on it):
+  • Each YEAR is a HEADING (any level) whose text contains the year,
+    e.g. "2026". Plain "2026" is enough — the styling adds the rule
+    line. Newest year first.
+  • Under each heading, ONE bulleted list. One meeting per bullet,
+    newest first.
+  • A bullet is either a LINK (the date, linked to the PDF) or PLAIN
+    TEXT (the board met, minutes not up yet). Plain-text bullets are
+    styled automatically as a muted "Not posted" row — nothing extra
+    to do.
+  • ONE column, not two. The old page used two side-by-side columns;
+    a single column stacks properly on a phone.
+  • Write dates however reads best ("13 January 2025" or
+    "January 13, 2025"). The styling doesn't parse them.
+
+Nothing else goes in this gadget — no headings like "Board Meeting
+Minutes 2025" (the year alone is the heading), no intro copy (that's
+in 01-top.html), no notes (those are in 03-bottom.html).

@@ -3,9 +3,51 @@
 Replaces the existing WA page **"Meeting Minutes"** (`pageId 18146`), which
 lists 2025 and 2024 as two plain bulleted columns of links.
 
-**Update that page — don't make a new one.** It already exists, it's already
-linked from wherever people reach it today, and a second minutes page means
-two things to keep current.
+**Update that page — don't make a new one.** It already exists and already
+holds the list; a second minutes page means two things to keep current.
+
+## Structure: sandwich
+
+```
+01-top.html       Custom HTML — hero + "Minutes by meeting" heading
+02-wa-gadget.txt  native WA CONTENT gadget — the list of meetings
+03-bottom.html    Custom HTML — "About these minutes" tiles + CTA
+```
+
+The list lives in the **native gadget**, not in this repo. That is the whole
+point: adding a set of minutes is a monthly job for the secretary, and it
+should not require editing HTML, rebuilding `dist/`, or pasting a gadget.
+
+## Adding a set of minutes
+
+1. Upload the PDF via **WA → Website → Files**.
+2. Open the page in WA and edit the **content gadget**.
+3. Type the date at the top of the right year's list, select it, insert the
+   link to the PDF. Save.
+
+That's it. No HTML, no repo, no paste step, nothing to keep in sync.
+
+**A meeting whose minutes aren't written up yet:** type the date and leave
+it unlinked. It styles itself as a muted row with a "Not posted" chip. The
+old page did this too, but as a bare bullet among ten links, which just
+reads as a broken link.
+
+**A new year:** add a heading containing the year (any heading level, the
+year alone is enough) above the others, then a fresh list under it.
+
+Full rules for how the gadget's content must be structured are in
+`02-wa-gadget.txt`. The short version: one heading per year, one bulleted
+list under it, one meeting per bullet, newest first, single column.
+
+## The existing links carry over
+
+**Nothing needs harvesting.** The current page's list already holds all 21
+PDF links. Move that content into the content gadget as-is and the CSS
+restyles it — the hrefs come along untouched.
+
+This is the main practical reason to do it as a sandwich rather than as
+Custom HTML: the PDF URLs never have to be read off the old page, retyped,
+or kept anywhere in this repo.
 
 ## ⚠ Check the restriction first
 
@@ -13,7 +55,7 @@ In the WA **Site pages** list, "Meeting Minutes" sits under *Pages not in
 menu* and shows **no padlock**. Member Hub shows one. If that's accurate, the
 board minutes are reachable by anyone with the URL right now.
 
-This page says the files are for current members. Before pasting it, either
+This page tells members not to forward the files. Before pasting it, either
 restrict the page to members or take that line out. Don't ship the claim
 without the restriction.
 
@@ -21,165 +63,95 @@ without the restriction.
 
 ## ⚠ Nothing has been posted since November 2025
 
-The list ends at 11 November 2025, and 11 November 2025 has no link. It is
-now September 2026, so roughly ten months of minutes are missing — nine or
-ten meetings, on the monthly pattern below. Worth raising with the secretary
-before this goes live; the page will show a "Nothing posted for 2026 yet"
-block until they arrive.
-
-## Getting the real links
-
-The dates are already in `01-top.html`. The **PDF URLs are not** — they exist
-only as hrefs on the old page, and every row currently reads
-`MINUTES_URL_NEEDED` (deliberately not a URL, so an early paste fails loudly
-rather than looking fine and going nowhere).
-
-Don't re-type 21 URLs. Open the old page, open the browser console
-(F12 → Console), paste this, and copy what it prints:
-
-```js
-(function () {
-  var out = [], year = "";
-  var ICON = '<svg class="ngm-min-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6"/><path d="M9 17h4"/></svg>';
-  var ARROW = '<svg class="ngm-min-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
-  var MONTHS = "January February March April May June July August September October November December".split(" ");
-  function parse(t) {                                   // -> {label, sort} or null
-    var m = /([A-Z][a-z]+)\s+(\d{1,2}),?\s+(\d{4})/.exec(t);
-    if (!m) return null;
-    var mi = MONTHS.indexOf(m[1]);
-    if (mi < 0) return null;
-    return { label: (+m[2]) + " " + m[1] + " " + m[3],
-             sort: +m[3] * 10000 + (mi + 1) * 100 + (+m[2]) };
-  }
-  document.querySelectorAll("h1,h2,h3,h4,li").forEach(function (el) {
-    if (/^H[1-4]$/.test(el.tagName)) {
-      var y = /(20\d\d)/.exec(el.textContent); if (y) year = y[1];
-      return;
-    }
-    if (el.querySelector("li")) return;                 // skip nested wrappers
-    var txt = el.textContent.replace(/\s+/g, " ").trim();
-    if (!/(20\d\d)/.test(txt)) return;                  // not a dated row
-    var d = parse(txt);
-    if (!d) return;                                     // not a dated row
-    var a = el.querySelector("a[href]");
-    out.push({ year: year || String(txt.match(/(20\d\d)/)[1]),
-               date: d.label, sort: d.sort, href: a ? a.href : null });
-  });
-  var years = {};
-  out.forEach(function (r) { (years[r.year] = years[r.year] || []).push(r); });
-  var html = Object.keys(years).sort().reverse().map(function (y) {
-    // newest meeting first — the old page lists them oldest first
-    years[y].sort(function (a, b) { return b.sort - a.sort; });
-    var rows = years[y].map(function (r) {
-      if (!r.href) return '      <li class="ngm-min-row">\n' +
-        '        <span class="ngm-min-link ngm-min-link-none">\n          ' + ICON + '\n' +
-        '          <span class="ngm-min-main">\n' +
-        '            <span class="ngm-min-date">' + r.date + '<span class="ngm-min-tag">Not posted</span></span>\n' +
-        '            <span class="ngm-min-meta">The board met. The minutes aren&rsquo;t up yet.</span>\n' +
-        '          </span>\n        </span>\n      </li>';
-      return '      <li class="ngm-min-row">\n' +
-        '        <a class="ngm-min-link" href="' + r.href + '" target="_blank" rel="noopener">\n          ' + ICON + '\n' +
-        '          <span class="ngm-min-main">\n' +
-        '            <span class="ngm-min-date">' + r.date + '</span>\n' +
-        '            <span class="ngm-min-meta">PDF</span>\n' +
-        '          </span>\n          ' + ARROW + '\n        </a>\n      </li>';
-    }).join("\n");
-    return '    <h3 class="ngm-min-year">' + y + '</h3>\n    <ul class="ngm-min-list" role="list">\n' + rows + '\n    </ul>';
-  }).join("\n\n");
-  console.log(html);
-  return html;
-})();
-```
-
-It prints finished `<h3>` + `<ul>` blocks, hrefs and all. Paste them over the
-placeholder blocks in `01-top.html`, rebuild `dist/`, and the page is done.
-
-Sanity-check the output before trusting it: 22 rows, 21 of them links, and
-11 November 2025 as the one "Not posted" row.
-
-## How people add minutes from here
-
-This matters more than it looks — it's a monthly job for the secretary, not
-a developer task. Three routes, worst to best:
-
-### 1. As built: edit the HTML (works now, heavy)
-
-Edit `01-top.html` here, run `python3 ngm-website/tools/build-dist.py`, paste
-`dist/pages/board-minutes/01-top.html` into the gadget. Duplicate the nearest
-`<li class="ngm-min-row">`, move it to the top of its year, set the href, the
-date and the meta line.
-
-Fine for whoever maintains this repo. Too much to ask of a volunteer
-secretary every month, and the likely outcome is route 2 by accident.
-
-### 2. Edit the gadget directly in WA (what will actually happen)
-
-Someone opens the Custom HTML gadget in WA and edits the markup there. It
-works, and **the repo silently goes stale** — the next person to paste from
-`dist/` wipes out every row added that way.
-
-If this route gets used, mirror the change back into `01-top.html` the same
-day. Treat a drifted gadget as a bug.
-
-### 3. Sandwich it, so the list is a normal WA content gadget (recommended)
-
-Split the page the way the rest of this repo already does
-(`docs/wa-notes.md`, "Gadget architecture"):
-
-```
-01-top.html      Custom HTML — hero + "Minutes by meeting" heading
-02-wa-gadget     native WA content gadget — JUST the list of dates + links
-03-bottom.html   Custom HTML — "About these minutes" tiles + CTA
-```
-
-The secretary then adds a meeting the way they add anything else in WA:
-open the editor, type the date, insert the link to the PDF. No HTML, no
-repo, no paste step, nothing to keep in sync. The chrome stays here.
-
-**What it needs first:** `global.css` rules that style the content gadget's
-own `<ul>/<li>/<a>` output to match `.ngm-min-*`. Per the repo-root
-`CLAUDE.md`, those selectors must be written against the **verified** DOM,
-not guessed. Run this on the page once the gadget exists and paste the
-output back:
-
-```js
-(function () {
-  var g = document.querySelector('[class*="WaGadgetContent"], [class*="WaGadgetCustomHTML"]');
-  var lists = document.querySelectorAll("ul, ol");
-  console.log("gadget:", g && g.className);
-  lists.forEach(function (ul, i) {
-    console.log(i, ul.className || "(no class)", "| parent:", ul.parentElement.className,
-                "| items:", ul.children.length, "| first:", ul.textContent.trim().slice(0, 40));
-  });
-})();
-```
-
-Route 3 is the one to aim for. Routes 1 and 2 both end with the repo and the
-live page disagreeing.
+The list ends at 11 November 2025, and that date has no link. It is now
+September 2026, so roughly ten months of minutes are missing. Worth raising
+with the secretary before this goes live.
 
 ## Wild Apricot setup
 
 1. Open the existing **Meeting Minutes** page (`pageId 18146`).
-2. **Restrict it to members** (see the warning above).
-3. Paste `dist/pages/board-minutes/01-top.html` into a Custom HTML gadget,
-   replacing the old bulleted-column content. `global.css` must already be
-   live in the CSS tab.
-4. Consider giving it a friendly URL (`/board-minutes`) and adding it to the
-   Member Hub tile — the tile in `pages/member-hub/01-top.html` already
-   points at `/board-minutes`, so either set that slug or change the tile.
+2. **Restrict it to members** (see above).
+3. Paste `dist/pages/board-minutes/01-top.html` into a Custom HTML gadget
+   at the top. `global.css` must already be live in the CSS tab.
+4. Put the existing list into a **Content** gadget below it and set its
+   **CSS class** to `ngm-wa-minutes` — see `02-wa-gadget.txt`. Reshape the
+   content to one heading + one list per year, single column.
+5. Paste `dist/pages/board-minutes/03-bottom.html` into a second Custom HTML
+   gadget below that.
+6. All three gadgets go in the **same layout row**, row background
+   transparent or white so the band runs continuously.
+7. Consider a friendly URL (`/board-minutes`) — the Member Hub tile in
+   `pages/member-hub/01-top.html` already points there, so either set that
+   slug or change the tile.
+
+## How the styling works
+
+`global.css`, section "BOARD MINUTES".
+
+The WA content editor writes **no classes** — just a heading per year and a
+plain `<ul>` of `<li>`, each holding a link or bare text. So the rules style
+that raw output directly, hooked on the gadget's own CSS class
+(`ngm-wa-minutes`, set in gadget settings). Same trick `.ngm-wa-events` uses,
+and the reason no unstable per-instance `id_*` selector is needed.
+
+- Year headings: `h1`–`h4` inside the gadget get the serif treatment and the
+  rule line. Only the year is typed.
+- Rows: each `li` is a flex row with a hairline. The file icon is painted as
+  `li::before` — the editor can't insert one and shouldn't have to.
+- The link fills the row, so the hit area is the full width, not just the
+  date's. Arrow appears on hover/focus via `a::after`.
+- Unlinked bullets are caught with `li:not(:has(a))` and get the muted
+  treatment plus the "Not posted" chip. `:has()` is already used elsewhere
+  in this file.
+- `body` prefix + `!important` on font properties throughout: WA's theme
+  re-fonts and bolds anchors inside its own gadgets.
+
+The hero, tiles and CTA ride the existing shared rules — `.ngm-min-*` was
+added to the `.ngm-lib-hero` / `.ngm-lib-cta` / `.ngm-lib-term` selector
+groups rather than redefining them.
+
+**Tradeoff accepted:** the Custom-HTML version had a second "PDF · approved
+7 October" meta line per row. The editor can't produce that without the
+secretary typing markup, so it's gone. The date, icon and chip carry the
+row.
+
+**Verified by rendering,** not by reading the CSS — a simulated content
+gadget (headings + bare `<ul><li><a>`, no classes) rendered in Chromium at
+1200px and 390px: rows style correctly, unlinked bullets become "Not posted"
+rows, hover fill spans the whole row, list stays left-aligned on a phone,
+no horizontal overflow.
+
+⚠ Re-verify the gadget's own wrapper classes against the live DOM once it
+exists, per the repo-root `CLAUDE.md`. `.gadgetStyleBody` is assumed from
+the events gadget; if the content gadget wraps differently, that one rule
+needs adjusting. Everything else keys off `ngm-wa-minutes` and plain tags,
+so it holds regardless. Snippet to dump it:
+
+```js
+(function () {
+  var g = document.querySelector(".ngm-wa-minutes");
+  if (!g) return console.log("gadget not found — is the CSS class set?");
+  console.log("gadget classes:", g.className);
+  console.log("children:", [...g.children].map(function (c) {
+    return c.tagName + "." + (c.className || "(none)");
+  }).join("  |  "));
+  console.log("headings:", [...g.querySelectorAll("h1,h2,h3,h4")].map(function (h) {
+    return h.tagName + ":" + h.textContent.trim();
+  }).join("  "));
+  var li = g.querySelector("li");
+  console.log("first row:", li && li.outerHTML.slice(0, 200));
+})();
+```
 
 ## Sections
 
-1. **Hero** — cream band, "Members only" eyebrow, one line of copy.
-2. **Minutes by meeting** (white) — year headings and the document rows.
-   Each row is one wide link: file icon, date (+ optional chip), a meta
-   line, and an arrow that appears on hover/focus. A meeting with no file
-   uses `.ngm-min-link-none` — a `<span>`, not an `<a>`, so there is
-   nothing to click.
-3. **About these minutes** (linen) — four tiles: drafts can change, older
-   minutes are in the library cabinets, how to report an error, and a note
-   that the files are for members.
-4. **Closing CTA** (rose) — email the secretary, back to the Member Hub.
+1. **Hero** (`01-top`) — cream band, "Members only" eyebrow, one line.
+2. **Minutes by meeting** heading (`01-top`), then the list (gadget).
+3. **About these minutes** (`03-bottom`, linen) — four tiles: drafts can
+   change, older minutes are in the library cabinets, how to report an
+   error, and a note that the files are for members.
+4. **Closing CTA** (`03-bottom`, rose) — email the secretary, back to the
+   Member Hub.
 
 ## The meeting pattern (from the old page)
 
@@ -191,37 +163,23 @@ December meeting** in either year. Useful for spotting a gap.
 - **2024** — 8 Jan, 12 Feb, 11 Mar, 8 Apr, 13 May, 10 Jun, 8 Jul, 12 Aug,
   9 Sep, 14 Oct, 18 Nov
 
-## Styling
-
-`global.css`, section "BOARD MINUTES". The hero, CTA band and tiles ride the
-existing shared rules (`.ngm-lib-hero` / `.ngm-lib-cta` / `.ngm-lib-term`
-groups) rather than redefining them — `.ngm-min-*` was added to those
-selector lists. The only new component is the document list
-(`.ngm-min-year`, `.ngm-min-list`, `.ngm-min-link` and friends). The list is
-exempted from the site-wide 640px phone-centring rule, because a centred
-file list stops lining up row to row.
-
-Rendered and checked locally at 1200px and 430px: no horizontal overflow,
-77px row hit targets, hover fill and focus ring both working.
-
 ## Confirm before go-live
 
-- **The members-only restriction** (see the warning at the top).
-- **The "Draft" idea.** The page assumes minutes can be posted before the
-  board approves them. If the Guild only ever posts approved minutes, drop
-  the Draft chip from the docs and the first "About these minutes" tile.
-  The old page had no such concept.
+- **The members-only restriction** (see the warning above).
+- **The "Draft" idea.** The first "About these minutes" tile says a set can
+  be posted before the board approves it. If the Guild only ever posts
+  approved minutes, drop that tile. The old page had no such concept.
 - **`secretary@needleworkguildmn.org`** is right for corrections (currently
   Karen Hesse, per the Member Hub roster).
 - **Whether older minutes are in the library cabinets.** The "Older minutes"
   tile says so, based on the Lending Library page's note about archived
   materials. Worth a check with a librarian.
-- **Pre-2024 minutes** — the old page only goes back to 2024. If earlier
-  years exist somewhere, they can be added as more year blocks.
+- **Pre-2024 minutes** — the old page only goes back to 2024.
 
 ## Related
 
 Kym asked for a Member Hub documents timeline covering job descriptions,
-newsletters and minutes. This covers minutes only. The document list is
-generic, so a newsletter archive can reuse `.ngm-min-*` as-is — and the WA
-Site pages list already shows a "Newsletter Archive" page to work from.
+newsletters and minutes. This covers minutes only. The gadget styling is
+generic — any content gadget given the `ngm-wa-minutes` class gets the same
+document list, so a newsletter archive needs no new CSS. The WA Site pages
+list already shows a "Newsletter Archive" page to work from.

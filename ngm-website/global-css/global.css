@@ -9817,82 +9817,138 @@ body.ngm-dir-page .WaPlaceHolderContent {
 
 /* ══════════════════════════════════════════════════════════════════
    BOARD MINUTES  (/board-minutes, members-only)
-   Hero, CTA and the "About these minutes" tiles all ride the shared
-   rules above (.ngm-lib-hero / .ngm-lib-cta / .ngm-lib-term groups).
-   The only genuinely new component is the document list: a year
-   heading plus rows that are each one big link to a PDF.
+
+   SANDWICH: Custom HTML (hero + heading) → native WA CONTENT gadget
+   (the list of meetings) → Custom HTML (tiles + CTA). The list lives
+   in the gadget so the secretary can add a meeting in the ordinary WA
+   editor instead of editing markup — see pages/board-minutes/.
+
+   So these rules style the EDITOR'S OWN OUTPUT: a heading per year and
+   a plain <ul> of <li>, each holding either a link (minutes posted) or
+   bare text (the board met, nothing up yet). Nothing here depends on
+   classes inside the gadget, because the editor doesn't write any.
+   The hook is the gadget's own CSS class, set in WA gadget settings —
+   the same trick .ngm-wa-events uses, and the reason no per-instance
+   id_* selector is needed.
+
+   The `body` prefix and !important on the font properties are required:
+   WA's theme re-fonts and bolds anchors inside its own gadgets.
+   The hero, tiles and CTA below ride the shared .ngm-lib-* rules.
 ══════════════════════════════════════════════════════════════════ */
-/* Year heading — a quiet divider above each year's rows, not a
-   section title, so it sits a step below .ngm-h2. */
-.ngm-min-year {
-  font-family: var(--ngm-serif); font-size: var(--ngm-title-md); font-weight: 400;
-  color: var(--ngm-charcoal); line-height: 1.2;
-  margin: 40px 0 0; padding-bottom: 10px;
-  border-bottom: 1px solid var(--ngm-border);
+/* Gadget band — white, continuous with 01-top's heading block above it
+   and the tiles below, with the same content column as .ngm-con. */
+body .ngm-wa-minutes {
+  background: #fff !important;
+  border: none !important; box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 var(--ngm-pad-x) 72px !important;
 }
-.ngm-min-list { list-style: none; margin: 0; padding: 0; }
-/* The hairline lives on the ROW, not the link. The link carries the
-   radius for its hover fill, and a radius on a border-bottom-only box
-   bows the line up at both ends — which read as a stray outline around
-   every resting row. Separating the two keeps the rule straight and
-   full-width while the hover pill still has soft corners. */
-.ngm-min-row { margin: 0; padding: 0; border-bottom: 1px solid var(--ngm-border); }
-/* The whole row is the link, so the hit area is the full width rather
-   than just the date. */
-.ngm-min-link {
-  display: flex; align-items: center; gap: 14px;
-  padding: 16px 14px;
-  text-decoration: none;
-  border-radius: var(--ngm-radius);
-  transition: background .16s ease;
+body .ngm-wa-minutes .gadgetStyleBody {
+  background: transparent !important;
+  border: none !important; box-shadow: none !important;
+  max-width: var(--ngm-maxw) !important;
+  margin: 0 auto !important; padding: 0 !important;
 }
-.ngm-min-link:hover { background: var(--ngm-sage-lt); }
-.ngm-min-link:focus-visible { outline: 2px solid var(--ngm-sage); outline-offset: -2px; }
-/* A meeting whose minutes aren't posted yet. The old page handled this by
-   leaving the date as bare text next to ten links, which just reads as a
-   broken link. Here it's a real row — same date, muted, a "Not posted"
-   chip, no hover and no pointer, so it's visibly not clickable. */
-.ngm-min-link-none { cursor: default; }
-.ngm-min-link-none:hover { background: transparent; }
-.ngm-min-link-none .ngm-min-date { color: var(--ngm-gray); font-weight: 400; }
-.ngm-min-link-none .ngm-min-ico { color: var(--ngm-gray-lt); }
-.ngm-min-ico { width: 22px; height: 22px; flex-shrink: 0; color: var(--ngm-sage-dk); }
-/* min-width:0 lets a long date wrap instead of pushing the arrow out */
-.ngm-min-main { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
-.ngm-min-date {
-  display: flex; align-items: center; flex-wrap: wrap; gap: 9px;
-  font-family: var(--ngm-sans); font-size: var(--ngm-text-body); font-weight: 500;
-  color: var(--ngm-charcoal); line-height: 1.35;
+/* 01-top's heading block closes tight so the list reads as part of it */
+.ngm-min-head { padding-bottom: 8px; }
+
+/* ── Year headings ──
+   Whatever level the editor used. Only the year is typed; the rule
+   line underneath is added here. */
+body .ngm-wa-minutes h1,
+body .ngm-wa-minutes h2,
+body .ngm-wa-minutes h3,
+body .ngm-wa-minutes h4 {
+  font-family: var(--ngm-serif) !important;
+  font-size: var(--ngm-title-md) !important;
+  font-weight: 400 !important;
+  color: var(--ngm-charcoal) !important;
+  line-height: 1.2 !important;
+  text-transform: none !important; letter-spacing: normal !important;
+  margin: 40px 0 0 !important;
+  padding: 0 0 10px !important;
+  border-bottom: 1px solid var(--ngm-border) !important;
 }
-.ngm-min-meta {
-  font-family: var(--ngm-sans); font-size: var(--ngm-text-meta);
-  color: var(--ngm-gray); line-height: 1.45;
+body .ngm-wa-minutes > :first-child,
+body .ngm-wa-minutes .gadgetStyleBody > :first-child { margin-top: 0 !important; }
+
+/* ── The list ── */
+body .ngm-wa-minutes ul,
+body .ngm-wa-minutes ol {
+  list-style: none !important;
+  margin: 0 !important; padding: 0 !important;
 }
-/* "Draft" chip — linen rather than a warning colour: an unapproved set
-   is normal, not a problem. */
-.ngm-min-tag {
-  display: inline-block; flex-shrink: 0;
-  font-family: var(--ngm-sans); font-size: var(--ngm-tag-size); font-weight: 600;
-  text-transform: uppercase; letter-spacing: .08em;
+/* Each bullet is a row. The hairline sits on the row and the row takes
+   NO radius — a radius on a border-bottom-only box bows the line up at
+   both ends, which reads as a stray outline around every row. */
+body .ngm-wa-minutes li {
+  list-style: none !important;
+  display: flex !important; align-items: center !important;
+  margin: 0 !important; padding: 0 !important;
+  border-bottom: 1px solid var(--ngm-border) !important;
+  font-family: var(--ngm-sans) !important;
+  font-size: var(--ngm-text-body) !important;
+  color: var(--ngm-charcoal) !important;
+  line-height: 1.4 !important;
+}
+/* File icon, painted rather than typed — the editor can't insert one
+   and shouldn't have to. */
+body .ngm-wa-minutes li::before {
+  content: "" !important;
+  flex-shrink: 0;
+  width: 22px; height: 22px; margin: 0 14px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233E5538' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpath d='M14 2v6h6'/%3E%3Cpath d='M9 13h6'/%3E%3Cpath d='M9 17h4'/%3E%3C/svg%3E") center / 22px 22px no-repeat;
+}
+/* The link fills the rest of the row, so the hit area is the whole row
+   rather than just the date's width. */
+body .ngm-wa-minutes li a {
+  flex: 1; min-width: 0;
+  display: block !important;
+  padding: 18px 14px 18px 0 !important;
+  font-family: var(--ngm-sans) !important;
+  font-size: var(--ngm-text-body) !important;
+  font-weight: 500 !important;
+  color: var(--ngm-charcoal) !important;
+  text-decoration: none !important;
+  border: 0 !important;
+}
+body .ngm-wa-minutes li:has(a):hover { background: var(--ngm-sage-lt) !important; }
+body .ngm-wa-minutes li a:focus-visible { outline: 2px solid var(--ngm-sage); outline-offset: -2px; }
+/* Arrow after the date, on hover/focus only. */
+body .ngm-wa-minutes li a::after {
+  content: "" !important;
+  display: inline-block;
+  width: 15px; height: 15px; margin-left: 10px; vertical-align: -2px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233E5538' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M12 5l7 7-7 7'/%3E%3C/svg%3E") center / 15px 15px no-repeat;
+  opacity: 0; transition: opacity .16s ease;
+}
+body .ngm-wa-minutes li:hover a::after,
+body .ngm-wa-minutes li a:focus-visible::after { opacity: 1; }
+
+/* ── A meeting with no minutes posted yet ──
+   The editor just leaves the bullet as plain text. On the old page
+   that read as a broken link sitting among ten working ones; here it
+   becomes a deliberate muted row with a "Not posted" chip, and the
+   secretary does nothing extra to get it. */
+body .ngm-wa-minutes li:not(:has(a)) {
+  color: var(--ngm-gray) !important;
+  padding: 18px 14px 18px 0 !important;
+}
+body .ngm-wa-minutes li:not(:has(a))::before { opacity: .45; }
+body .ngm-wa-minutes li:not(:has(a))::after {
+  content: "Not posted" !important;
+  flex-shrink: 0; margin-left: 9px;
+  font-family: var(--ngm-sans) !important;
+  font-size: var(--ngm-tag-size) !important;
+  font-weight: 600; text-transform: uppercase; letter-spacing: .08em;
   color: var(--ngm-gray); background: var(--ngm-linen);
   border-radius: 100px; padding: 3px 9px; line-height: 1.4;
 }
-.ngm-min-arrow {
-  width: 15px; height: 15px; flex-shrink: 0;
-  color: var(--ngm-sage-dk); opacity: 0;
-  transform: translateX(-4px);
-  transition: opacity .16s ease, transform .16s ease;
-}
-.ngm-min-link:hover .ngm-min-arrow,
-.ngm-min-link:focus-visible .ngm-min-arrow { opacity: 1; transform: none; }
-/* Empty state — shown until the first set of minutes is posted. */
-.ngm-min-empty {
-  font-family: var(--ngm-sans); font-size: var(--ngm-text-body);
-  color: var(--ngm-gray); line-height: 1.7;
-  background: var(--ngm-cream); border: 1px dashed var(--ngm-border);
-  border-radius: var(--ngm-radius); padding: 22px 24px;
-  margin-top: 28px;
-}
+/* Editor artefacts: an empty paragraph between lists, and the theme's
+   bullet indent on the wrapper. */
+body .ngm-wa-minutes p:empty { display: none !important; }
+
+/* ── The rest of the page ── */
 /* "About these minutes" tiles — same grid as .ngm-lib-terms. */
 .ngm-min-terms {
   display: grid; grid-template-columns: 1fr 1fr;
@@ -9911,22 +9967,26 @@ body.ngm-dir-page .WaPlaceHolderContent {
   line-height: 1.8; margin-bottom: 28px;
 }
 .ngm-min-cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-/* PHONES: the document list stays LEFT-aligned. The site-wide 640px rule
-   centres everything inside .ngm-con, which reads well for prose and cards
-   but turns a file list ragged — each date and its meta line centre
-   independently, so nothing lines up with the row above. Same kind of
-   exemption forms and the upcoming-events chips already get. The
-   "About these minutes" tiles are NOT exempted; they centre like every
-   other tile on the site. */
+/* PHONES: the gadget keeps its own side padding in step with .ngm-sec,
+   and the list stays LEFT-aligned. The site-wide 640px rule centres
+   page content, which reads well for prose and tiles but turns a file
+   list ragged — each date centres independently of the row above. The
+   gadget sits outside .ngm so it isn't caught by that rule, but the
+   text-align is restated here so a future change to it can't drag the
+   list along. */
+@media (max-width: 900px) {
+  body .ngm-wa-minutes { padding-left: var(--ngm-pad-x-md) !important; padding-right: var(--ngm-pad-x-md) !important; }
+}
 @media (max-width: 640px) {
-  .ngm .ngm-con .ngm-min-year,
-  .ngm .ngm-con .ngm-min-list,
-  .ngm .ngm-con .ngm-min-meta { text-align: left; }
-  .ngm-min-main { align-items: flex-start; }
+  body .ngm-wa-minutes,
+  body .ngm-wa-minutes li,
+  body .ngm-wa-minutes li a { text-align: left !important; }
+}
+@media (max-width: 560px) {
+  body .ngm-wa-minutes { padding-left: var(--ngm-pad-x-sm) !important; padding-right: var(--ngm-pad-x-sm) !important; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ngm-min-link, .ngm-min-arrow { transition: none; }
-  .ngm-min-arrow { opacity: 1; transform: none; }
+  body .ngm-wa-minutes li a::after { transition: none; opacity: 1; }
 }
 
 /* ── Responsive ── */
