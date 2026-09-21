@@ -10040,6 +10040,10 @@ body :is(.ngm-wa-minutes, .ngm-wa-docs) li:not(:has(a))::after {
 .ngm-min-hero-back { margin-top: 26px; }
 .ngm-min-head { padding-bottom: 22px; }
 .ngm-min-head .ngm-lead { margin-bottom: 0; }
+/* The minutes page labels its list; the newsletter archive doesn't need
+   to, its hero already says what the page is. Tightened because the
+   line below it is the heading's own subtitle, not a separate block. */
+.ngm-min-head .ngm-h2 { margin-bottom: 8px; }
 @media (max-width: 900px) {
   body :is(.ngm-wa-minutes, .ngm-wa-docs) { padding-left: var(--ngm-pad-x-md) !important; padding-right: var(--ngm-pad-x-md) !important; }
   .ngm-min-title { padding: 20px 20px 12px; }
