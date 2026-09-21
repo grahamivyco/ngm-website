@@ -88,30 +88,35 @@ disappears on its own.
 
 ## Starting a new year
 
-Easiest way: **add a new box** above the others.
+**One box per year.** When January comes round, 2027 gets a box of its own
+above 2026 — don't add it inside an existing box.
 
-1. Add a **Content** gadget — the one with the normal editing toolbar, not
-   Custom HTML.
-2. Type the year as the heading, then the list of dates under it.
-3. Open the gadget's settings and put this in the **CSS class** field:
+1. **Website → Site pages → Meeting Minutes**, then **Edit**.
+2. Add a **Content** gadget, above the others. That's the one with the
+   normal editing toolbar — *not* Custom HTML.
+3. Type the year on its own line: `2027`. Just the year, nothing else.
+4. Under it, start a bulleted list and add the dates as usual.
+5. **Set the CSS class.** Select the gadget, open its settings, and put
+   this in the **CSS class** field:
 
    ```
    ngm-wa-minutes
    ```
 
-   Without it the box won't be styled and won't fold out.
+6. Save.
 
-You can also just type a second heading and list inside an existing box.
-That works, and you get two fold-out sections in the one card. A box per
-year is tidier.
+**Step 5 is the one people forget.** Without it the box gets no styling at
+all — plain bullets and blue underlined links, sitting apart from the rest
+of the page. If a box ever looks like that, that field is what to check.
 
-**The heading is just the year** — `2027`, nothing else. The kind of
-meeting goes on the individual rows, as above.
+### Putting a year up before there's anything in it
 
-A year where nothing has been posted yet is fine to put up: give it its own
-box with just the year as the heading and nothing under it. The card will
-say "Nothing posted for this year yet", which tells members the year exists
-and the minutes are still coming.
+Fine, and useful — it tells members the year exists and the minutes are
+coming. Do the same as above, but stop after step 3: **just the year as the
+heading, nothing under it.** The card will say "Nothing posted for this year
+yet."
+
+Add the dates to it as they arrive.
 
 ## Please don't
 
