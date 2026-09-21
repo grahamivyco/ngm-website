@@ -14,8 +14,8 @@
 <div class="ngm ngm-min-hero">
   <div class="ngm-min-hero-inner">
     <span class="ngm-eyebrow">Meeting minutes</span>
-    <h1 class="ngm-h1">Board <em>minutes</em></h1>
-    <p class="ngm-lead">What the board discussed and decided, meeting by meeting. Open to current members.</p>
+    <h1 class="ngm-h1">Board &amp; annual <em>meeting minutes</em></h1>
+    <p class="ngm-lead">What the board discussed and decided, meeting by meeting &mdash; board, executive board and the annual meeting, grouped by year. Open to current members.</p>
     <div class="ngm-min-hero-back">
       <a class="ngm-btn ngm-btn-outline" href="/member-hub">Back to the Member Hub</a>
     </div>
@@ -85,12 +85,34 @@
     return n && !n.querySelector("li") ? n : null;
   }
 
+  /* A row may name what kind of meeting it was, after a dash:
+       "7 April 2025 — Executive Board"
+     Sections are grouped by YEAR now, so the heading no longer carries
+     that. Without this the type would simply be lost. The editor types
+     plain text; this turns the tail into a chip. Ordinary board
+     meetings need no suffix — they are the default. */
+  var SEP = /\s*[\u2014\u2013\u00b7]\s*|\s+-\s+/;
+  function chipify(row, holder) {
+    if (row.getAttribute("data-min-chip") === "1") return;
+    row.setAttribute("data-min-chip", "1");
+    var raw = text(holder);
+    var bits = raw.split(SEP);
+    if (bits.length < 2) return;
+    var tail = bits.slice(1).join(" ").trim();
+    if (!tail || tail.length > 40) return;              /* not a type label */
+    holder.textContent = bits[0].trim();
+    var chip = document.createElement("span");
+    chip.className = "ngm-min-kind";
+    chip.textContent = tail;
+    holder.appendChild(chip);
+  }
+
   /* One section per heading+list PAIR, not per gadget. One box per
      block is the intended arrangement, but a volunteer will eventually
      type a second heading and list into an existing box — and when that
      happened the second pair rendered raw. Handling every pair means
      the page degrades sensibly instead. */
-  function build() {
+  function build(allowEmpty) {
     var gadgets = document.querySelectorAll(".ngm-wa-minutes");
     Array.prototype.forEach.call(gadgets, function (g) {
       var body = g.querySelector(".gadgetStyleBody") || g;
@@ -101,9 +123,14 @@
         if (list.closest(".ngm-min-sec")) return;       /* already built, or nested */
         /* Done-ness is tracked per LIST, not per gadget: WA can render a
            gadget before its rows exist, and marking the gadget finished
-           there left an empty card that never filled in. */
+           there left an empty card that never filled in.
+           An empty list is therefore AMBIGUOUS — a year with nothing
+           posted yet, or one WA hasn't filled in. So it's skipped on the
+           early passes and only built once things have settled
+           (allowEmpty), which keeps a genuinely empty year visible
+           without reintroducing that bug. */
         var count = list.querySelectorAll("li").length;
-        if (!count) return;                             /* not rendered yet — retry on the next mutation */
+        if (!count && !allowEmpty) return;
         var src = i === 0 ? findTitle(g, body, list) : prevTitle(list);
         var label = text(src) || "Minutes";
         if (src) {
@@ -128,11 +155,23 @@
                          '<span class="ngm-min-count"></span>';
         head.querySelector(".ngm-min-title-txt").textContent = label;
         head.querySelector(".ngm-min-count").textContent =
-          count + (count === 1 ? " meeting" : " meetings");
+          count ? count + (count === 1 ? " meeting" : " meetings") : "";
 
         list.parentNode.insertBefore(sec, list);
         sec.appendChild(head);
         sec.appendChild(list);
+
+        if (!count) {
+          var none = document.createElement("p");
+          none.className = "ngm-min-none";
+          none.textContent = "Nothing posted for this year yet.";
+          sec.appendChild(none);
+        }
+
+        /* pull any "— Executive Board" tail out into a chip */
+        Array.prototype.forEach.call(list.querySelectorAll("li"), function (row) {
+          chipify(row, row.querySelector("a") || row);
+        });
       });
     });
   }
@@ -144,13 +183,15 @@
        WA's content wrappers linen too — same approach the member
        directory uses for its cream page. */
     if (document.body) document.body.classList.add("ngm-min-page");
-    build();
+    build(false);
     /* WA can render gadgets late; catch them if it does */
     if (window.MutationObserver) {
-      var mo = new MutationObserver(function () { build(); });
+      var mo = new MutationObserver(function () { build(false); });
       mo.observe(document.body, { childList: true, subtree: true });
-      setTimeout(function () { mo.disconnect(); }, 8000);
+      setTimeout(function () { mo.disconnect(); build(true); }, 8000);
     }
+    /* once rendering has settled, show any year that really is empty */
+    setTimeout(function () { build(true); }, 2000);
   }
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);

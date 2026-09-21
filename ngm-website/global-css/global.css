@@ -9905,6 +9905,29 @@ body .ngm-wa-minutes p:empty { display: none !important; }
 }
 /* A box holding more than one block gets a rule between its sections. */
 .ngm-min-sec + .ngm-min-sec { border-top: 1px solid var(--ngm-border); }
+/* A year with nothing posted yet — worth showing rather than hiding, so
+   people know the year exists and the minutes are still coming. */
+.ngm-min-none {
+  font-family: var(--ngm-sans); font-size: var(--ngm-text-md);
+  color: var(--ngm-gray-lt); line-height: 1.6;
+  margin: 0; padding: 0 26px 24px;
+}
+/* ── Meeting-kind chip ──
+   Sections group by YEAR, so the heading no longer says whether a
+   meeting was the Executive Board or the Annual Meeting. The editor
+   types it after a dash and the script lifts it out to here, which
+   keeps that information without giving each kind its own section. */
+.ngm-min-kind {
+  flex-shrink: 0; margin-left: 10px;
+  font-family: var(--ngm-sans); font-size: var(--ngm-tag-size);
+  font-weight: 500; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--ngm-sage-dk); background: var(--ngm-sage-lt);
+  border-radius: 100px; padding: 3px 10px; line-height: 1.4;
+  white-space: nowrap;
+}
+body .ngm-wa-minutes li:not(:has(a)) .ngm-min-kind {
+  color: var(--ngm-gray); background: var(--ngm-linen);
+}
 
 /* ⚠ Must out-specify `body .ngm-wa-minutes ul`, which sets the padding
    SHORTHAND just below and would otherwise zero the bottom back to 0.

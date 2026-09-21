@@ -9,9 +9,11 @@ happens inside the Wild Apricot admin site.
 
 ## How the page is put together
 
-The page is a stack of **boxes**. Each box is one set of minutes — "Board
-Meeting Minutes 2025", "Annual Meeting Minutes", and so on — and shows up as
-a card with its own title and a count like *11 meetings*.
+The page is a stack of **boxes, one per year**. Each shows up as a card
+titled with the year and a count like *11 meetings*.
+
+Board, executive board and annual meetings all go in the year they happened.
+There is no separate box per kind of meeting.
 
 All of it is visible — there is nothing to click open, and nothing for you
 to switch on.
@@ -46,12 +48,24 @@ it, press **Enter** to make a new bullet above, and type the date.
 
 **Newest goes on top.**
 
-### 4. Link it
+### 4. Say what kind of meeting it was — only if it wasn't an ordinary one
 
-Select the date you just typed, click the **link** button in the toolbar,
-and pick the PDF from step 1.
+Ordinary board meetings need nothing. For the others, add a dash and the
+kind, on the same line:
 
-### 5. Save
+```
+7 April 2025 — Executive Board
+5 April 2025 — Annual Meeting
+```
+
+That turns into a small label beside the date.
+
+### 5. Link it
+
+Select **the date** you typed, click the **link** button in the toolbar, and
+pick the PDF from step 1.
+
+### 6. Save
 
 The date appears as a row with a document icon. Clicking anywhere along the
 row opens the PDF.
@@ -74,7 +88,7 @@ Easiest way: **add a new box** above the others.
 
 1. Add a **Content** gadget — the one with the normal editing toolbar, not
    Custom HTML.
-2. Type the heading, then the list of dates under it.
+2. Type the year as the heading, then the list of dates under it.
 3. Open the gadget's settings and put this in the **CSS class** field:
 
    ```
@@ -87,14 +101,12 @@ You can also just type a second heading and list inside an existing box.
 That works, and you get two fold-out sections in the one card. A box per
 year is tidier.
 
-**Name the heading properly.** It becomes the card's title, and the page
-carries more than one kind of minutes, so it has to say which:
+**The heading is just the year** — `2027`, nothing else. The kind of
+meeting goes on the individual rows, as above.
 
-```
-Board Meeting Minutes 2027
-```
-
-Not just "2027".
+A year where nothing has been posted yet is fine to put up: heading, empty
+list. The card will say "Nothing posted for this year yet", which tells
+members the year exists and the minutes are still coming.
 
 ## Please don't
 
