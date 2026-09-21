@@ -9901,42 +9901,72 @@ body :is(.ngm-wa-minutes, .ngm-wa-docs) p:empty { display: none !important; }
    A heading, not a control: nothing collapses, so there is no cursor,
    no hover state and no chevron. The document icon that used to sit
    here is gone too — the rows each carry one, where it does real work
-   marking a PDF link, and two of them read as clutter. */
+   marking a PDF link, and two of them read as clutter.
+
+   ⚠ BODY-PREFIXED, WITH !important ON THE FONT PROPERTIES. The script
+   injects this heading INSIDE a native WA gadget, so WA's theme rules
+   for headings apply to it — and a plain `.ngm-min-title` (0,1,0) lost
+   to them, which is why the year sometimes came through in the theme's
+   own bold sans. This is the rule the repo-root CLAUDE.md states for
+   anything targeting a native gadget; it was missed here because the
+   element is ours even though the gadget around it is not. ── */
+body :is(.ngm-wa-minutes, .ngm-wa-docs) .ngm-min-title,
 .ngm-min-title {
-  display: flex; align-items: baseline; gap: 13px;
-  margin: 0; padding: 22px 26px 14px;
-  font-family: var(--ngm-serif); font-size: var(--ngm-title-card);
-  font-weight: 400; color: var(--ngm-charcoal); line-height: 1.25;
-  text-transform: none; letter-spacing: normal;
+  display: flex !important; align-items: baseline !important; gap: 13px !important;
+  margin: 0 !important; padding: 22px 26px 14px !important;
+  font-family: var(--ngm-serif) !important;
+  font-size: var(--ngm-title-card) !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  color: var(--ngm-charcoal) !important;
+  line-height: 1.25 !important;
+  text-transform: none !important; letter-spacing: normal !important;
+  border: 0 !important; background: transparent !important;
 }
-.ngm-min-title-txt { flex: 1; min-width: 0; }
+/* the inner spans inherit, so nothing the theme sets on them wins */
+body :is(.ngm-wa-minutes, .ngm-wa-docs) .ngm-min-title-txt,
+.ngm-min-title-txt {
+  flex: 1 !important; min-width: 0 !important;
+  font-family: inherit !important; font-size: inherit !important;
+  font-weight: inherit !important; color: inherit !important;
+}
 /* How many meetings are in this block — quicker than counting rows. */
+body :is(.ngm-wa-minutes, .ngm-wa-docs) .ngm-min-count,
 .ngm-min-count {
-  flex-shrink: 0;
-  font-family: var(--ngm-sans); font-size: var(--ngm-text-meta);
-  font-weight: 400; color: var(--ngm-gray-lt);
+  flex-shrink: 0 !important;
+  font-family: var(--ngm-sans) !important;
+  font-size: var(--ngm-text-meta) !important;
+  font-weight: 400 !important;
+  color: var(--ngm-gray-lt) !important;
 }
 /* A box holding more than one block gets a rule between its sections. */
 .ngm-min-sec + .ngm-min-sec { border-top: 1px solid var(--ngm-border); }
 /* A year with nothing posted yet — worth showing rather than hiding, so
    people know the year exists and the minutes are still coming. */
+body :is(.ngm-wa-minutes, .ngm-wa-docs) .ngm-min-none,
 .ngm-min-none {
-  font-family: var(--ngm-sans); font-size: var(--ngm-text-md);
-  color: var(--ngm-gray-lt); line-height: 1.6;
-  margin: 0; padding: 0 26px 24px;
+  font-family: var(--ngm-sans) !important;
+  font-size: var(--ngm-text-md) !important;
+  font-weight: 400 !important;
+  color: var(--ngm-gray-lt) !important;
+  line-height: 1.6 !important;
+  margin: 0 !important; padding: 0 26px 24px !important;
 }
 /* ── Meeting-kind chip ──
    Sections group by YEAR, so the heading no longer says whether a
    meeting was the Executive Board or the Annual Meeting. The editor
    types it after a dash and the script lifts it out to here, which
    keeps that information without giving each kind its own section. */
+body :is(.ngm-wa-minutes, .ngm-wa-docs) .ngm-min-kind,
 .ngm-min-kind {
-  flex-shrink: 0; margin-left: 10px;
-  font-family: var(--ngm-sans); font-size: var(--ngm-tag-size);
-  font-weight: 500; text-transform: uppercase; letter-spacing: .06em;
-  color: var(--ngm-sage-dk); background: var(--ngm-sage-lt);
-  border-radius: 100px; padding: 3px 10px; line-height: 1.4;
-  white-space: nowrap;
+  flex-shrink: 0 !important; margin-left: 10px !important;
+  font-family: var(--ngm-sans) !important;
+  font-size: var(--ngm-tag-size) !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important; letter-spacing: .06em !important;
+  color: var(--ngm-sage-dk) !important; background: var(--ngm-sage-lt) !important;
+  border-radius: 100px !important; padding: 3px 10px !important;
+  line-height: 1.4 !important; white-space: nowrap !important;
 }
 body :is(.ngm-wa-minutes, .ngm-wa-docs) li:not(:has(a)) .ngm-min-kind {
   color: var(--ngm-gray); background: var(--ngm-linen);
@@ -10046,7 +10076,8 @@ body :is(.ngm-wa-minutes, .ngm-wa-docs) li:not(:has(a))::after {
 .ngm-min-head .ngm-h2 { margin-bottom: 8px; }
 @media (max-width: 900px) {
   body :is(.ngm-wa-minutes, .ngm-wa-docs) { padding-left: var(--ngm-pad-x-md) !important; padding-right: var(--ngm-pad-x-md) !important; }
-  .ngm-min-title { padding: 20px 20px 12px; }
+  body :is(.ngm-wa-minutes, .ngm-wa-docs) .ngm-min-title,
+  .ngm-min-title { padding: 20px 20px 12px !important; }
   body :is(.ngm-wa-minutes, .ngm-wa-docs) ul, body :is(.ngm-wa-minutes, .ngm-wa-docs) ol { padding: 0 8px !important; }
 }
 @media (max-width: 640px) {
