@@ -8092,16 +8092,16 @@ body.ngm-min-page .WaPlaceHolderContent {
   background: var(--ngm-linen) !important;
 }
 
-body .ngm-wa-minutes {
+body :is(.ngm-wa-minutes, .ngm-wa-docs) {
   background: var(--ngm-linen) !important;
   border: none !important; box-shadow: none !important;
   margin: 0 !important;
   padding: 0 var(--ngm-pad-x) 14px !important;   
 }
 
-body .ngm-wa-minutes:last-of-type { padding-bottom: 76px !important; }
+body :is(.ngm-wa-minutes, .ngm-wa-docs):last-of-type { padding-bottom: 76px !important; }
 
-body .ngm-wa-minutes .gadgetStyleBody {
+body :is(.ngm-wa-minutes, .ngm-wa-docs) .gadgetStyleBody {
   background: #fff !important;
   border: 1px solid var(--ngm-border) !important;
   border-radius: var(--ngm-radius-lg) !important;
@@ -8115,7 +8115,7 @@ body .ngm-wa-minutes .gadgetStyleBody {
 .ngm-min-src { display: none !important; }
 
 body .ngm-wa-minutes-src-empty { display: none !important; }
-body .ngm-wa-minutes p:empty { display: none !important; }
+body :is(.ngm-wa-minutes, .ngm-wa-docs) p:empty { display: none !important; }
 
 .ngm-min-title {
   display: flex; align-items: baseline; gap: 13px;
@@ -8148,23 +8148,23 @@ body .ngm-wa-minutes p:empty { display: none !important; }
   border-radius: 100px; padding: 3px 10px; line-height: 1.4;
   white-space: nowrap;
 }
-body .ngm-wa-minutes li:not(:has(a)) .ngm-min-kind {
+body :is(.ngm-wa-minutes, .ngm-wa-docs) li:not(:has(a)) .ngm-min-kind {
   color: var(--ngm-gray); background: var(--ngm-linen);
 }
 
-body .ngm-wa-minutes .ngm-min-sec > ul,
-body .ngm-wa-minutes .ngm-min-sec > ol {
+body :is(.ngm-wa-minutes, .ngm-wa-docs) .ngm-min-sec > ul,
+body :is(.ngm-wa-minutes, .ngm-wa-docs) .ngm-min-sec > ol {
 
   padding: 0 12px 22px !important;
 }
 
-body .ngm-wa-minutes ul,
-body .ngm-wa-minutes ol {
+body :is(.ngm-wa-minutes, .ngm-wa-docs) ul,
+body :is(.ngm-wa-minutes, .ngm-wa-docs) ol {
   list-style: none !important;
   margin: 0 !important; padding: 0 12px !important;
 }
 
-body .ngm-wa-minutes li {
+body :is(.ngm-wa-minutes, .ngm-wa-docs) li {
   list-style: none !important;
   position: relative !important;
   display: block !important;
@@ -8173,21 +8173,21 @@ body .ngm-wa-minutes li {
   border-radius: 0 !important;
   font-family: var(--ngm-sans) !important;
 }
-body .ngm-wa-minutes li:last-child { border-bottom: none !important; }
+body :is(.ngm-wa-minutes, .ngm-wa-docs) li:last-child { border-bottom: none !important; }
 
-body .ngm-wa-minutes li:hover,
-body .ngm-wa-minutes li:has(+ li:hover) { border-bottom-color: transparent !important; }
+body :is(.ngm-wa-minutes, .ngm-wa-docs) li:hover,
+body :is(.ngm-wa-minutes, .ngm-wa-docs) li:has(+ li:hover) { border-bottom-color: transparent !important; }
 
-body .ngm-wa-minutes li:has(a)::before {
+body :is(.ngm-wa-minutes, .ngm-wa-docs) li:has(a)::before {
   content: "" !important;
   position: absolute; inset: 0; z-index: 0;
   border-radius: var(--ngm-radius);
   background-color: transparent;
   transition: background-color .2s ease;
 }
-body .ngm-wa-minutes li:has(a):hover::before { background-color: var(--ngm-sage-lt); }
+body :is(.ngm-wa-minutes, .ngm-wa-docs) li:has(a):hover::before { background-color: var(--ngm-sage-lt); }
 
-body .ngm-wa-minutes li > a {
+body :is(.ngm-wa-minutes, .ngm-wa-docs) li > a {
   position: relative; z-index: 1;
   display: flex !important; align-items: center !important; gap: 11px !important;
   padding: 14px !important;
@@ -8197,11 +8197,11 @@ body .ngm-wa-minutes li > a {
   color: var(--ngm-charcoal) !important;
   text-decoration: none !important; border: 0 !important;
 }
-body .ngm-wa-minutes li:hover > a,
-body .ngm-wa-minutes li > a:hover { color: var(--ngm-sage-dk) !important; }
-body .ngm-wa-minutes li > a:focus-visible { outline: 2px solid var(--ngm-sage); outline-offset: -2px; }
+body :is(.ngm-wa-minutes, .ngm-wa-docs) li:hover > a,
+body :is(.ngm-wa-minutes, .ngm-wa-docs) li > a:hover { color: var(--ngm-sage-dk) !important; }
+body :is(.ngm-wa-minutes, .ngm-wa-docs) li > a:focus-visible { outline: 2px solid var(--ngm-sage); outline-offset: -2px; }
 
-body .ngm-wa-minutes li > a::before {
+body :is(.ngm-wa-minutes, .ngm-wa-docs) li > a::before {
   content: "" !important;
   flex-shrink: 0; width: 14px; height: 14px;
   background-color: var(--ngm-sage) !important;
@@ -8209,21 +8209,21 @@ body .ngm-wa-minutes li > a::before {
           mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpath d='M14 2v6h6'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
-body .ngm-wa-minutes li:not(:has(a)) {
+body :is(.ngm-wa-minutes, .ngm-wa-docs) li:not(:has(a)) {
   display: flex !important; align-items: center !important; gap: 11px !important;
   padding: 14px !important;
   font-family: var(--ngm-serif) !important;
   font-size: var(--ngm-title-tile) !important;
   color: var(--ngm-gray-lt) !important;
 }
-body .ngm-wa-minutes li:not(:has(a))::before {
+body :is(.ngm-wa-minutes, .ngm-wa-docs) li:not(:has(a))::before {
   content: "" !important;
   flex-shrink: 0; width: 14px; height: 14px;
   background-color: var(--ngm-gray-lt) !important;
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpath d='M14 2v6h6'/%3E%3C/svg%3E") center / contain no-repeat;
           mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpath d='M14 2v6h6'/%3E%3C/svg%3E") center / contain no-repeat;
 }
-body .ngm-wa-minutes li:not(:has(a))::after {
+body :is(.ngm-wa-minutes, .ngm-wa-docs) li:not(:has(a))::after {
   content: "Not posted" !important;
   flex-shrink: 0; margin-left: auto;
   font-family: var(--ngm-sans) !important;
@@ -8237,21 +8237,21 @@ body .ngm-wa-minutes li:not(:has(a))::after {
 .ngm-min-head { padding-bottom: 22px; }
 .ngm-min-head .ngm-lead { margin-bottom: 0; }
 @media (max-width: 900px) {
-  body .ngm-wa-minutes { padding-left: var(--ngm-pad-x-md) !important; padding-right: var(--ngm-pad-x-md) !important; }
+  body :is(.ngm-wa-minutes, .ngm-wa-docs) { padding-left: var(--ngm-pad-x-md) !important; padding-right: var(--ngm-pad-x-md) !important; }
   .ngm-min-title { padding: 20px 20px 12px; }
-  body .ngm-wa-minutes ul, body .ngm-wa-minutes ol { padding: 0 8px !important; }
+  body :is(.ngm-wa-minutes, .ngm-wa-docs) ul, body :is(.ngm-wa-minutes, .ngm-wa-docs) ol { padding: 0 8px !important; }
 }
 @media (max-width: 640px) {
-  body .ngm-wa-minutes,
-  body .ngm-wa-minutes li,
-  body .ngm-wa-minutes li > a { text-align: left !important; }
+  body :is(.ngm-wa-minutes, .ngm-wa-docs),
+  body :is(.ngm-wa-minutes, .ngm-wa-docs) li,
+  body :is(.ngm-wa-minutes, .ngm-wa-docs) li > a { text-align: left !important; }
   .ngm-min-count { display: none; }
 }
 @media (max-width: 560px) {
-  body .ngm-wa-minutes { padding-left: var(--ngm-pad-x-sm) !important; padding-right: var(--ngm-pad-x-sm) !important; }
+  body :is(.ngm-wa-minutes, .ngm-wa-docs) { padding-left: var(--ngm-pad-x-sm) !important; padding-right: var(--ngm-pad-x-sm) !important; }
 }
 @media (prefers-reduced-motion: reduce) {
-  body .ngm-wa-minutes li:has(a)::before { transition: none !important; }
+  body :is(.ngm-wa-minutes, .ngm-wa-docs) li:has(a)::before { transition: none !important; }
 }
 
 @media (max-width: 980px) {

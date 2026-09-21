@@ -1,0 +1,54 @@
+NATIVE WA GADGET — "Content" (one per year of issues)
+======================================================
+This is NOT pasteable HTML. These are native Wild Apricot content
+gadgets added in the WA editor, sitting BELOW 01-top.html in the SAME
+layout row. Nothing goes underneath them.
+
+WHICH GADGET
+------------
+The RICH-TEXT gadget, named "Content" in the gadget list. Two ways to
+be sure you have the right one once it's on the page:
+  • Content     → a WYSIWYG toolbar (bold, lists, a link button).
+                  THIS ONE. It's what lets a volunteer add an issue
+                  without touching markup.
+  • Custom HTML → a raw HTML box. That is what 01-top.html goes into.
+
+If the site already has a Newsletter Archive page with the issues on
+it, KEEP that content. Don't retype it and don't go hunting for the
+PDF URLs — the existing links come across as they are and the CSS
+restyles them.
+
+Setup in WA:
+1. ONE GADGET PER YEAR, newest year at the top.
+2. Select each one → gadget settings → "CSS class" field → enter:
+       ngm-wa-docs
+   (This connects it to the "DOCUMENT LIST" section of global.css.
+   Without it the box stays WA-default: plain bullets, blue links.)
+3. Set the layout ROW background to transparent, so the linen band
+   from 01-top runs continuously behind the cards.
+
+How the content must be structured (the styling depends on it):
+  • Each box starts with a HEADING that is just the YEAR — "2025".
+    It becomes the card's title.
+  • Under it, ONE bulleted list. One issue per bullet, newest first.
+  • A bullet is either a LINK (the issue, linked to its PDF) or PLAIN
+    TEXT (an issue that hasn't been uploaded yet). Plain-text bullets
+    are styled automatically as a muted "Not posted" row.
+  • Name each issue however the Guild refers to it — "Spring 2025",
+    "March 2025", "Issue 112". The styling doesn't parse it.
+  • ONE column, not two. Two columns break on a phone.
+  • A year with nothing in it yet: its own gadget, heading only,
+    nothing under it. The card reads "Nothing posted for this year
+    yet."
+  • NEVER RETYPE a row to move it — retyping loses its link. Cut and
+    paste the line instead; the link travels with it.
+
+Nothing else goes in these gadgets — no intro copy (that's in
+01-top.html), no notes.
+
+WHY ngm-wa-docs AND NOT ngm-wa-minutes
+--------------------------------------
+Same component, shared with the board minutes page. The minutes
+gadgets were set up first and carry ngm-wa-minutes; the CSS accepts
+both so nobody has to go and edit them. Use ngm-wa-docs on anything
+new.
