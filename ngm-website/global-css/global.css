@@ -9274,53 +9274,86 @@ body .ngm-wa-events .gadgetStyleBody { max-width: var(--ngm-maxw) !important; }
 @media (prefers-reduced-motion: reduce) { .ngm-phero-photo::after { animation: none; } }
 @media (max-width: 820px) { .ngm-phero-inner { grid-template-columns: 1fr; gap: 32px; } .ngm-phero-photo { height: 300px; } }
 
-/* ── .ngm-ads — advertiser logo row (homepage) ──
-   Paying advertisers, each logo a link out. Logos arrive in whatever shape
-   and format the advertiser has, so every card is the same size and the
-   logo is contained inside it: nothing crops, nothing stretches, and one
-   tall logo can't set the height of the row. A logo that fails to load
-   (not uploaded yet, filename mismatch) hides itself and the card falls
-   back to the advertiser's name — see the markup's onerror. */
-.ngm-ads-head { text-align: center; margin-bottom: 32px; }
-.ngm-ads-head .ngm-h2 { margin-bottom: 10px; }
-.ngm-ads-intro {
-  font-family: var(--ngm-sans);
-  font-size: var(--ngm-text-body);
+/* ── .ngm-advertisers — advertiser logo strip (homepage) ──
+   Sits directly under the native "Upcoming events" gadget. A static row:
+   every advertiser shows at once, no carousel and no JS.
+
+   TWO STACKED IMAGES do the colour swap. The charcoal (#2F2F2F on
+   transparent) file is the resting layer at 70% opacity; the full-colour
+   file is stacked on top at 0 opacity and fades in on hover AND on
+   keyboard focus. Doing it with two <img> layers rather than a background
+   means the resting logo keeps real alt text, and both files are already
+   in cache when the swap happens, so there is no flash on first hover.
+
+   SIZING BY VISUAL WEIGHT, not by box. The source PNGs are small (Needle
+   Bling is 200px wide, Seed Stitch 209px), so nothing here ever scales one
+   UP: width/height stay `auto` and only max-height/max-width pull an
+   oversized logo down. A logo smaller than the cap simply renders at its
+   own size, which is sharper than a blurry upscale. max-width keeps the
+   very wide Print & Frame lockup from eating the row.
+
+   THE ROW IS FLEX-WRAP + justify-content:center on purpose: delete an <li>
+   and the remaining logos re-centre themselves with no other edit. On
+   phones the items take half the row, so five logos become 2 + 2 + 1 with
+   the odd one centred.
+
+   Every selector is scoped under .ngm-advertisers so none of it can reach
+   WA's own theme markup. */
+.ngm-advertisers { padding-top: 44px; padding-bottom: 44px; }
+.ngm-advertisers .ngm-adv-label {
+  text-align: center;
   color: var(--ngm-gray);
-  line-height: 1.7;
-  max-width: 520px;
-  margin: 0 auto;
+  margin-bottom: 26px;
 }
-.ngm-ads-row {
+.ngm-advertisers .ngm-adv-row {
   list-style: none; margin: 0; padding: 0;
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--ngm-gap);
+  display: flex; flex-wrap: wrap;
+  align-items: center; justify-content: center;
+  gap: 28px 44px;
 }
-@media (min-width: 720px) { .ngm-ads-row { grid-template-columns: repeat(3, 1fr); } }
-@media (min-width: 1000px) { .ngm-ads-row { grid-template-columns: repeat(5, 1fr); } }
-.ngm-ad {
+.ngm-advertisers .ngm-adv-item { flex: 0 0 auto; }
+.ngm-advertisers .ngm-adv-link {
+  position: relative;
   display: flex; align-items: center; justify-content: center;
-  height: 112px; padding: 18px;
-  background: #fff;
-  border: 1px solid var(--ngm-border);
-  border-radius: var(--ngm-radius);
+  min-height: 64px;
+  border-radius: 8px;
   text-decoration: none;
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
-.ngm-ad:hover {
-  transform: translateY(var(--ngm-lift));
-  box-shadow: var(--ngm-sh);
-  border-color: var(--ngm-sage-lt);
+.ngm-advertisers .ngm-adv-logo {
+  display: block;
+  width: auto; height: auto;          /* never upscale a low-res source */
+  max-height: 60px; max-width: 180px;
+  object-fit: contain;
+  opacity: .7;
+  transition: opacity .22s ease;
 }
-.ngm-ad:focus-visible { outline: 2px solid var(--ngm-sage); outline-offset: 3px; }
-.ngm-ad-logo { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; }
-/* name label: the fallback when the logo file isn't there yet */
-.ngm-ad .ngm-ad-name { display: none; }
-.ngm-ad.is-text .ngm-ad-name {
-  display: block; text-align: center;
-  font-family: var(--ngm-sans); font-size: var(--ngm-copy); font-weight: 500;
-  color: var(--ngm-sage-dk); line-height: 1.4;
+/* the colour layer rides on top of the charcoal one, centred in the box */
+.ngm-advertisers .ngm-adv-logo-color {
+  position: absolute; inset: 0; margin: auto;
+  opacity: 0;
+  pointer-events: none;
 }
-@media (prefers-reduced-motion: reduce) { .ngm-ad, .ngm-ad:hover { transition: none; transform: none; } }
+.ngm-advertisers .ngm-adv-link:hover .ngm-adv-logo,
+.ngm-advertisers .ngm-adv-link:focus-visible .ngm-adv-logo { opacity: 0; }
+.ngm-advertisers .ngm-adv-link:hover .ngm-adv-logo-color,
+.ngm-advertisers .ngm-adv-link:focus-visible .ngm-adv-logo-color { opacity: 1; }
+/* Print & Frame has no usable colour file — one charcoal layer that just
+   comes up to full strength instead of swapping. */
+.ngm-advertisers .ngm-adv-mono:hover .ngm-adv-logo,
+.ngm-advertisers .ngm-adv-mono:focus-visible .ngm-adv-logo { opacity: 1; }
+.ngm-advertisers .ngm-adv-link:focus-visible {
+  outline: 2px solid var(--ngm-sage);
+  outline-offset: 6px;
+}
+@media (max-width: 640px) {
+  .ngm-advertisers .ngm-adv-row { gap: 26px 24px; }
+  /* half the row each → 2 + 2 + 1, the odd logo centred by justify-content */
+  .ngm-advertisers .ngm-adv-item { flex: 0 0 calc(50% - 12px); }
+  .ngm-advertisers .ngm-adv-logo { max-height: 52px; max-width: 150px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ngm-advertisers .ngm-adv-logo { transition: none; }
+}
 
 /* ── .ngm-events-open — the Events page opener ──
    The Events page no longer leads with a .ngm-phero; it opens straight on

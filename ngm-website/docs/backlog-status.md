@@ -98,34 +98,59 @@ past tense, and Jane's photo album leads the page.
 and the hero button). Do not paste this page into WA until Jane's Google
 Photos link has replaced both — it is a broken link until then.
 
-### Advertiser logos on the homepage (Kym, Sep 3 + Sep 10 + Sep 20)
-A five-card advertiser row sits above the Join band on the homepage, each
-logo linking out. Markup in `pages/homepage/03-bottom.html`, styling under
-`.ngm-ads` in `global.css`.
+### Advertiser logos on the homepage (Kym, Sep 3 + Sep 10 + Sep 20 + Sep 21)
+A five-logo strip sits **directly below the Upcoming events gadget** on the
+homepage — it is the first section of `pages/homepage/03-bottom.html`,
+styled under `.ngm-advertisers` in `global.css`. (It used to be a row of
+bordered white cards above the Join band; Sep 21 replaced it with a plain
+logo strip and moved it up under the events list.)
 
-Built as a **static row, not a rotating banner**. Kym asked for rotation
-first; a static row shows every advertiser at once instead of one in five at
-a time, needs no script, and doesn't move under a cursor. Easy to change if
-she'd rather have rotation — say so.
+Built as a **static strip, not a rotating banner**. Kym asked for rotation
+first; a static strip shows every advertiser at once instead of one in five
+at a time, needs no script, and doesn't move under a cursor. Easy to change
+if she'd rather have rotation — say so.
+
+**How the strip behaves**
+
+- Resting state is the single-colour charcoal logo at 70% opacity, so five
+  mismatched logos read as one quiet row rather than five competing marks.
+- Hover **and keyboard focus** cross-fade to the advertiser's full-colour
+  logo at 100%. Two stacked `<img>` layers, pure CSS, no JS. Muted under
+  `prefers-reduced-motion`.
+- Nothing is ever scaled UP: the source PNGs are small (Needle Bling is
+  200px wide, Seed Stitch 209px), so `width`/`height` stay `auto` and only
+  `max-height: 60px` / `max-width: 180px` pull an oversized logo down.
+- The row is `flex-wrap` + `justify-content: center`, so deleting one `<li>`
+  re-centres the rest with no other edit. Phones get two columns with the
+  odd logo centred.
+- Links carry `target="_blank" rel="noopener sponsored"`; alt text is the
+  business name.
 
 **Answering Kym's two questions:**
 
-1. *Will the logo files work?* Can't be confirmed from here — this session
-   can't reach the file manager. What's been done instead is to make a
-   wrong answer harmless: each card falls back to the advertiser's name as
-   text if its logo doesn't load, so a file that isn't uploaded yet, or is
-   named differently, degrades quietly rather than showing a broken image.
-   ⚠ Upload the files to **Pictures/Advertisers/** via WA → Website →
-   Files, then make each `src` match the uploaded filename exactly (spaces
-   become `%20`). The five expected names are in the markup.
-2. *How does NAN get removed after three months?* Its `<li>` is fenced
-   between two `▼▼ NAN` / `▲▲ END NAN` comment markers in
+1. *Will the logo files work?* Upload them to WA → Website → Files, then do
+   ONE find-and-replace in the markup: every `LOGO_BASE/` becomes the folder
+   they landed in (e.g. `/resources/Pictures/advertisers/`). The filenames
+   in the markup match the files Kym supplied. Print & Frame has no usable
+   colour version (the original is white lettering, invisible on cream), so
+   it uses the charcoal file for both states and only brightens on hover —
+   that's the `ngm-adv-mono` class on its link.
+2. *How does NAN get removed after three months?* National Academy of
+   Needlearts is **paid for three months from Sept 2026 — term ends Dec
+   2026**. Its `<li>` is fenced between `▼ NATIONAL ACADEMY OF NEEDLEARTS`
+   and `▲ END NATIONAL ACADEMY OF NEEDLEARTS` comments in
    `pages/homepage/03-bottom.html`. Delete everything between them, rebuild
-   `dist/`, re-paste that one gadget. Nothing else on the page refers to
-   NAN, and the row re-flows to four cards on its own.
+   `dist/`, re-paste that one gadget. Nothing else refers to NAN and the
+   strip re-centres itself.
 
-Links wired: Seed Stitch Studio · Welcome Stitchery · Print & Frame · Needle
-Bling Designs (formerly Black Cat Stitchery) · National Academy of Needlearts.
+Links wired, alphabetical: National Academy of Needlearts · Needle Bling
+Designs (formerly Black Cat Stitchery) · Print & Frame · Seed Stitch Studio
+· Welcome Stitchery.
+
+**Previewing it locally** — `previews/advertisers-strip.html` renders the
+real markup and the real `global.css` at desktop and 375px widths. It reads
+the source files over HTTP, so serve the folder first:
+`cd ngm-website && python3 -m http.server 8000`.
 
 ---
 
