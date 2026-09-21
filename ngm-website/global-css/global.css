@@ -9862,6 +9862,24 @@ body.ngm-min-page .zonePlace.zoneContent,
 body.ngm-min-page .WaPlaceHolderContent {
   background: var(--ngm-linen) !important;
 }
+/* ── No flash of the editor's own heading ──
+   The script replaces the heading the WA editor wrote. Until it runs,
+   that raw heading paints in the theme's font and then visibly swaps.
+   An inline script at the top of 01-top.html sets .ngm-doc-js on <html>
+   DURING PARSING — before these gadgets are parsed — so a card is held
+   back until its content is ours.
+
+   Keyed on that class, so a page without the script, or with JS off,
+   shows its content rather than nothing. 01-top also clears the class
+   after three seconds, so a script that throws can't leave the page
+   blank. visibility rather than display: the space stays reserved, so
+   nothing below it jumps. */
+html.ngm-doc-js body :is(.ngm-wa-minutes, .ngm-wa-docs) .gadgetStyleBody {
+  visibility: hidden;
+}
+html.ngm-doc-js body :is(.ngm-wa-minutes, .ngm-wa-docs).ngm-doc-ready .gadgetStyleBody {
+  visibility: visible;
+}
 /* Linen band the cards float on. */
 body :is(.ngm-wa-minutes, .ngm-wa-docs) {
   background: var(--ngm-linen) !important;
