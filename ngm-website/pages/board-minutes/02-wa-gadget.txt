@@ -1,0 +1,59 @@
+NATIVE WA GADGET — "Content" (the list of meetings)
+====================================================
+This is NOT pasteable HTML. It is a native Wild Apricot content
+gadget that must be added in the WA editor, sitting BETWEEN
+01-top.html and 03-bottom.html, in the SAME layout row.
+
+This gadget is the whole point of the sandwich. It holds the list of
+meetings, so the secretary can add one WITHOUT touching HTML or this
+repo: open the page in WA, type the date, select it, insert the link
+to the PDF. Nothing here to rebuild, nothing to keep in sync.
+
+WHICH GADGET
+------------
+You may not need to add one at all. The list on the current "Meeting
+Minutes" page (pageId 18146) was typed in the WA editor, so it is
+almost certainly ALREADY in a rich-text gadget. If it is, don't add
+anything — just select that gadget and set its CSS class (step 2).
+
+If you do need to add one, it is the RICH-TEXT gadget — named
+"Content" in the gadget list. Two ways to be sure you have the right
+one once it's on the page:
+  • Content     → a WYSIWYG toolbar (bold, lists, a link button).
+                  THIS ONE. It's what lets the secretary add a
+                  meeting without touching markup.
+  • Custom HTML → a raw HTML box. This is what 01-top.html and
+                  03-bottom.html go into. Using it for the list
+                  would work, but it defeats the whole point.
+
+Setup in WA:
+1. The list already exists on that page. KEEP IT. Don't retype it and
+   don't go hunting for the PDF URLs — the existing links come across
+   as they are, and the CSS restyles them. That is the whole reason to
+   do it this way. If the list isn't already in a rich-text gadget,
+   add a "Content" gadget and move it in.
+2. Select the gadget → gadget settings → "CSS class" field → enter:
+       ngm-wa-minutes
+   (This connects it to the "BOARD MINUTES" section of global.css.
+   Without it the list stays WA-default and nothing below applies.)
+3. Set the layout ROW background to transparent or white, so the
+   white band runs continuously from 01-top through to 03-bottom.
+
+How the content must be structured (the CSS depends on it):
+  • Each YEAR is a HEADING (any level) whose text contains the year,
+    e.g. "2026". Plain "2026" is enough — the styling adds the rule
+    line. Newest year first.
+  • Under each heading, ONE bulleted list. One meeting per bullet,
+    newest first.
+  • A bullet is either a LINK (the date, linked to the PDF) or PLAIN
+    TEXT (the board met, minutes not up yet). Plain-text bullets are
+    styled automatically as a muted "Not posted" row — nothing extra
+    to do.
+  • ONE column, not two. The old page used two side-by-side columns;
+    a single column stacks properly on a phone.
+  • Write dates however reads best ("13 January 2025" or
+    "January 13, 2025"). The styling doesn't parse them.
+
+Nothing else goes in this gadget — no headings like "Board Meeting
+Minutes 2025" (the year alone is the heading), no intro copy (that's
+in 01-top.html), no notes (those are in 03-bottom.html).
