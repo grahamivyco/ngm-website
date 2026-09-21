@@ -48,22 +48,26 @@ it, press **Enter** to make a new bullet above, and type the date.
 
 **Newest goes on top.**
 
-### 4. Say what kind of meeting it was — only if it wasn't an ordinary one
+### 4. If it wasn't an ordinary board meeting, say so
 
-Ordinary board meetings need nothing. For the others, add a dash and the
-kind, on the same line:
+Ordinary board meetings need nothing — they're most of the list.
+
+For the others, type a dash and the kind on the same line:
 
 ```
 7 April 2025 — Executive Board
 5 April 2025 — Annual Meeting
 ```
 
-That turns into a small label beside the date.
+Any dash works, and so does a middle dot. The wording after it is up to
+you; keep it short. It turns into a small label beside the date.
 
 ### 5. Link it
 
-Select **the date** you typed, click the **link** button in the toolbar, and
-pick the PDF from step 1.
+Click the **link** button in the toolbar and pick the PDF from step 1.
+
+**Select whatever's easiest** — just the date, or the whole line including
+the label. Both come out the same. You don't have to be careful about it.
 
 ### 6. Save
 

@@ -50,19 +50,46 @@
   }
 
   var SEP = /\s*[\u2014\u2013\u00b7]\s*|\s+-\s+/;
-  function chipify(row, holder) {
-    if (row.getAttribute("data-min-chip") === "1") return;
-    row.setAttribute("data-min-chip", "1");
-    var raw = text(holder);
-    var bits = raw.split(SEP);
-    if (bits.length < 2) return;
-    var tail = bits.slice(1).join(" ").trim();
-    if (!tail || tail.length > 40) return;              
-    holder.textContent = bits[0].trim();
+  var LEAD_SEP = /^\s*(?:[\u2014\u2013\u00b7]|-)\s*/;
+
+  function addChip(parent, label) {
     var chip = document.createElement("span");
     chip.className = "ngm-min-kind";
-    chip.textContent = tail;
-    holder.appendChild(chip);
+    chip.textContent = label;
+    parent.appendChild(chip);
+  }
+
+  function chipify(row) {
+    if (row.getAttribute("data-min-chip") === "1") return;
+    row.setAttribute("data-min-chip", "1");
+    var a = row.querySelector("a");
+
+    if (a && SEP.test(text(a))) {
+      var bits = text(a).split(SEP);
+      var tail = bits.slice(1).join(" ").trim();
+      if (!tail || tail.length > 40) return;
+      a.textContent = bits[0].trim();
+      addChip(a, tail);
+      return;
+    }
+
+    if (a) {
+      var trailing = "", n = a.nextSibling, spent = [];
+      while (n) { trailing += n.textContent || ""; spent.push(n); n = n.nextSibling; }
+      trailing = trailing.replace(LEAD_SEP, "").replace(/\s+/g, " ").trim();
+      if (!trailing || trailing.length > 40) return;
+      spent.forEach(function (node) { node.parentNode.removeChild(node); });
+      addChip(row, trailing);
+      return;
+    }
+
+    var raw = text(row);
+    if (!SEP.test(raw)) return;
+    var parts = raw.split(SEP);
+    var label = parts.slice(1).join(" ").trim();
+    if (!label || label.length > 40) return;
+    row.textContent = parts[0].trim();
+    addChip(row, label);
   }
 
   function build(allowEmpty) {
@@ -111,7 +138,7 @@
         }
 
         Array.prototype.forEach.call(list.querySelectorAll("li"), function (row) {
-          chipify(row, row.querySelector("a") || row);
+          chipify(row);
         });
       });
     });

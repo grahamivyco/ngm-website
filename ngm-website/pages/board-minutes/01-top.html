@@ -86,25 +86,63 @@
   }
 
   /* A row may name what kind of meeting it was, after a dash:
-       "7 April 2025 — Executive Board"
-     Sections are grouped by YEAR now, so the heading no longer carries
-     that. Without this the type would simply be lost. The editor types
-     plain text; this turns the tail into a chip. Ordinary board
-     meetings need no suffix — they are the default. */
+       7 April 2025 — Executive Board
+     Sections group by YEAR now, so the heading no longer carries that;
+     without this the kind would simply be lost. The editor types plain
+     text and this lifts the tail into a chip.
+
+     ⚠ IT MUST NOT MATTER WHERE THE LINK ENDS. Whoever types these
+     selects some text and links it, and which text they select is not
+     something a how-to can reliably control. Both happen:
+       <a>7 April 2025 — Executive Board</a>     whole line linked
+       <a>7 April 2025</a> — Executive Board     only the date linked
+     An earlier version only handled the first and silently left the
+     second as a raw dash. Both are handled below, so the instruction
+     can stay "type a dash and the kind" with nothing about selecting. */
   var SEP = /\s*[\u2014\u2013\u00b7]\s*|\s+-\s+/;
-  function chipify(row, holder) {
-    if (row.getAttribute("data-min-chip") === "1") return;
-    row.setAttribute("data-min-chip", "1");
-    var raw = text(holder);
-    var bits = raw.split(SEP);
-    if (bits.length < 2) return;
-    var tail = bits.slice(1).join(" ").trim();
-    if (!tail || tail.length > 40) return;              /* not a type label */
-    holder.textContent = bits[0].trim();
+  var LEAD_SEP = /^\s*(?:[\u2014\u2013\u00b7]|-)\s*/;
+
+  function addChip(parent, label) {
     var chip = document.createElement("span");
     chip.className = "ngm-min-kind";
-    chip.textContent = tail;
-    holder.appendChild(chip);
+    chip.textContent = label;
+    parent.appendChild(chip);
+  }
+
+  function chipify(row) {
+    if (row.getAttribute("data-min-chip") === "1") return;
+    row.setAttribute("data-min-chip", "1");
+    var a = row.querySelector("a");
+
+    /* the label sits INSIDE the link */
+    if (a && SEP.test(text(a))) {
+      var bits = text(a).split(SEP);
+      var tail = bits.slice(1).join(" ").trim();
+      if (!tail || tail.length > 40) return;
+      a.textContent = bits[0].trim();
+      addChip(a, tail);
+      return;
+    }
+
+    /* the label TRAILS the link as bare text */
+    if (a) {
+      var trailing = "", n = a.nextSibling, spent = [];
+      while (n) { trailing += n.textContent || ""; spent.push(n); n = n.nextSibling; }
+      trailing = trailing.replace(LEAD_SEP, "").replace(/\s+/g, " ").trim();
+      if (!trailing || trailing.length > 40) return;
+      spent.forEach(function (node) { node.parentNode.removeChild(node); });
+      addChip(row, trailing);
+      return;
+    }
+
+    /* no link at all — the row is plain text (minutes not posted yet) */
+    var raw = text(row);
+    if (!SEP.test(raw)) return;
+    var parts = raw.split(SEP);
+    var label = parts.slice(1).join(" ").trim();
+    if (!label || label.length > 40) return;
+    row.textContent = parts[0].trim();
+    addChip(row, label);
   }
 
   /* One section per heading+list PAIR, not per gadget. One box per
@@ -170,7 +208,7 @@
 
         /* pull any "— Executive Board" tail out into a chip */
         Array.prototype.forEach.call(list.querySelectorAll("li"), function (row) {
-          chipify(row, row.querySelector("a") || row);
+          chipify(row);
         });
       });
     });
