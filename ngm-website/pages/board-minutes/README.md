@@ -285,3 +285,20 @@ The document icon came off the title at the same time. The rows each
 carry one, where it does real work marking a PDF link; two of them read
 as clutter. Flipping that round — icon on the title, bare dates in the
 rows — is a small change if it ever reads better that way.
+
+## The generated classes need the gadget treatment too
+
+The script injects its heading INSIDE a native WA gadget, so WA's theme
+rules for headings apply to it. A plain `.ngm-min-title` (0,1,0) lost to
+them and the year came through in the theme's own bold sans — "sometimes",
+because it depends which theme rules match.
+
+`.ngm-min-title`, `-txt`, `-count`, `-none` and `-kind` are therefore
+`body`-prefixed with `!important` on every font property, exactly as the
+repo-root `CLAUDE.md` requires for anything targeting a native gadget. It
+was missed because the ELEMENT is ours even though the gadget around it
+is not — worth remembering for anything else this script builds.
+
+Verified against a simulated theme that sets Arial/Verdana, weight 700 and
+uppercase on gadget headings and spans. Pre-fix it rendered
+`Verdana 20px w700 uppercase`; now `Cormorant Garamond 24px w400 none`.
