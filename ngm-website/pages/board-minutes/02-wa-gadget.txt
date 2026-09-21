@@ -66,8 +66,13 @@ How the content must be structured (the CSS depends on it):
     the date — the script handles both, so nobody has to be careful
     about what they select. Em dash, en dash, hyphen and middot all
     work.
-  • A year with nothing posted yet: heading, empty list. The card
-    shows "Nothing posted for this year yet."
+  • A year with nothing posted yet gets its OWN gadget: heading and
+    nothing else. The editor drops an empty bullet, so "heading and no
+    list at all" is what you actually end up with, and that is handled
+    — the card shows "Nothing posted for this year yet."
+  • NEVER RETYPE an existing row. Retyping loses its link. Cut the row
+    from its old gadget and paste it into the year's gadget; the link
+    travels with it. Then add the " — Executive Board" tail.
     The heading can be a real heading, bold text, or even sit in a
     SEPARATE gadget just above the list — the script reads its text
     either way, hides the original, and rebuilds it. Newest first.

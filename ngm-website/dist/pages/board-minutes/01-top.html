@@ -59,6 +59,26 @@
     parent.appendChild(chip);
   }
 
+  function hideSource(src) {
+    if (!src) return;
+    src.classList.add("ngm-min-src");
+    var host = src.closest ? src.closest(".WaGadget") : null;
+    if (host && !host.classList.contains("ngm-wa-minutes") && !text(host)) {
+      host.classList.add("ngm-wa-minutes-src-empty");
+    }
+  }
+
+  function titleEl(label, count) {
+    var head = document.createElement("h2");
+    head.className = "ngm-min-title";
+    head.innerHTML = '<span class="ngm-min-title-txt"></span>' +
+                     '<span class="ngm-min-count"></span>';
+    head.querySelector(".ngm-min-title-txt").textContent = label;
+    head.querySelector(".ngm-min-count").textContent =
+      count ? count + (count === 1 ? " meeting" : " meetings") : "";
+    return head;
+  }
+
   function chipify(row) {
     if (row.getAttribute("data-min-chip") === "1") return;
     row.setAttribute("data-min-chip", "1");
@@ -97,7 +117,22 @@
     Array.prototype.forEach.call(gadgets, function (g) {
       var body = g.querySelector(".gadgetStyleBody") || g;
       var lists = body.querySelectorAll("ul, ol");
-      if (!lists.length) return;
+
+      if (!lists.length) {
+        if (!allowEmpty || body.querySelector(".ngm-min-sec")) return;
+        var only = findTitle(g, body, null);
+        if (!only || !text(only)) return;
+        hideSource(only);
+        var blank = document.createElement("div");
+        blank.className = "ngm-min-sec";
+        blank.appendChild(titleEl(text(only), 0));
+        var note = document.createElement("p");
+        note.className = "ngm-min-none";
+        note.textContent = "Nothing posted for this year yet.";
+        blank.appendChild(note);
+        body.appendChild(blank);
+        return;
+      }
 
       Array.prototype.forEach.call(lists, function (list, i) {
         if (list.closest(".ngm-min-sec")) return;       
@@ -106,25 +141,12 @@
         if (!count && !allowEmpty) return;
         var src = i === 0 ? findTitle(g, body, list) : prevTitle(list);
         var label = text(src) || "Minutes";
-        if (src) {
-          src.classList.add("ngm-min-src");
-
-          var host = src.closest ? src.closest(".WaGadget") : null;
-          if (host && !host.classList.contains("ngm-wa-minutes") && !text(host)) {
-            host.classList.add("ngm-wa-minutes-src-empty");
-          }
-        }
+        hideSource(src);
 
         var sec = document.createElement("div");
         sec.className = "ngm-min-sec";
 
-        var head = document.createElement("h2");
-        head.className = "ngm-min-title";
-        head.innerHTML = '<span class="ngm-min-title-txt"></span>' +
-                         '<span class="ngm-min-count"></span>';
-        head.querySelector(".ngm-min-title-txt").textContent = label;
-        head.querySelector(".ngm-min-count").textContent =
-          count ? count + (count === 1 ? " meeting" : " meetings") : "";
+        var head = titleEl(label, count);
 
         list.parentNode.insertBefore(sec, list);
         sec.appendChild(head);
