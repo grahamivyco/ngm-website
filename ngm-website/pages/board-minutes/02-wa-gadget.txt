@@ -52,10 +52,18 @@ from the headings, so it looks the same whether it is one gadget or
 six. Order the gadgets top to bottom in the order you want them read.
 
 How the content must be structured (the CSS depends on it):
-  • Each block starts with a HEADING. Its text is up to you — with
-    more than one kind of minutes on the page it has to say which, so
-    "Board Meeting Minutes 2024" and "Annual Meeting Minutes" are
-    right. Keep it short: it becomes the card's title.
+  • ONE BOX PER YEAR, heading = the year and nothing else ("2025").
+    Board, executive board and annual meetings all go in the year they
+    happened, newest first. Don't give a kind of meeting its own box.
+  • Say the KIND after a dash on the row itself, and only where it is
+    not an ordinary board meeting:
+        7 April 2025 — Executive Board
+        5 April 2025 — Annual Meeting
+    That tail becomes a small chip. Ordinary board meetings need no
+    suffix. Without it, merging the kinds into one list would lose
+    which is which.
+  • A year with nothing posted yet: heading, empty list. The card
+    shows "Nothing posted for this year yet."
     The heading can be a real heading, bold text, or even sit in a
     SEPARATE gadget just above the list — the script reads its text
     either way, hides the original, and rebuilds it. Newest first.
