@@ -20,14 +20,15 @@ around what members come to DO, not around telling a story:
      "Change password" text link (`.ngm-hub-qa-sublink`) →
      `/Sys/Password/Change`.
    - Cards stack (primary first) under 860px.
-2. **Member resources** (white) — ONE live tile (Member directory →
-   `/member-directory` — the live WA slug) plus a single dashed "Coming soon" tile
+2. **Member resources** (white) — TWO live tiles (Member directory →
+   `/member-directory`, the live WA slug; Board minutes → `/board-minutes`)
+   plus a single dashed "Coming soon" tile
    (`.ngm-hub-rtile-soon`, not a link) listing everything still being
    prepared: newsletter archive, lending library, meeting handouts,
-   bylaws & policies, board minutes, financial reports & forms, and
+   bylaws & policies, financial reports & forms, and
    volunteer positions. When one goes live, give it back its own tile
    (old per-group markup is in git history, pre-#214) and remove it from
-   the coming-soon list.
+   the coming-soon list — board minutes came off it that way.
 3. **Guild leadership** (cream) — person cards, NAME first, role second,
    email quiet/small, in THREE side-by-side columns (`.ngm-hub-teams`,
    stacking under 900px): *Guild Support* (President, VP, Secretary,
@@ -47,7 +48,15 @@ Styling: global.css `.ngm-hub-*` (dashboard additions: `.ngm-hub-qgrid`,
 ## SET URLs still to fill (search `SET URL` in 01-top.html)
 - Newsletter archive, Meeting handouts, Bylaws & policies (currently
   `/resources` fallback).
-- Board minutes, Financial reports, Financial forms (Google Drive links).
+- Financial reports, Financial forms (Google Drive links).
+- Board minutes now has its own page (`pages/board-minutes/`), hosting the
+  PDFs on the WA file manager rather than Drive. A members-only WA page
+  does not protect a Drive link — its sharing setting does — so prefer WA
+  file-manager hosting for the financial documents too.
+
+Note: `lending library` is still in the coming-soon list even though
+`pages/lending-library/` exists here. Confirm whether that page is live in
+WA; if it is, give it a tile too.
 
 ## Parked idea — "alive" meeting card
 Making the featured Zoom card show the actual next meeting ("Evening

@@ -9066,7 +9066,7 @@ body .ngm-wa-events.WaGadgetUpcomingEvents { padding-left: 48px !important; padd
   /* Every CTA button group stacks and centers (buttons are already sized
      by the earlier mobile block: thicker, primary wider than secondary). */
   .ngm-si-cta-btns, .ngm-mt-hero-btns, .ngm-si-hero-btns, .ngm-hero-btns,
-  .ngm-join-btns, .ngm-vol-cta-btns, .ngm-mtg-hero-btns, .ngm-mtg-cta-btns,
+  .ngm-join-btns, .ngm-vol-cta-btns, .ngm-min-cta-btns, .ngm-mtg-hero-btns, .ngm-mtg-cta-btns,
   .ngm-join-hero-btns, .ngm-ev-cta-btns, .ngm-dir-hero-btns,
   .ngm-about-cta-btns, .ngm-cal-hero-btns, .ngm-cal-cta-btns {
     display: flex !important;
@@ -9674,14 +9674,15 @@ a.ngm-gcard:hover { background: var(--ngm-sage-lt); border-color: #C1D3B2; }
    ══════════════════════════════════════════════════════════════════ */
 
 /* ── Shared hero band (cream, centred, like .ngm-cal-hero) ── */
-.ngm-vol-hero, .ngm-lib-hero, .ngm-dir-hero {
+.ngm-vol-hero, .ngm-lib-hero, .ngm-dir-hero, .ngm-min-hero {
   background: var(--ngm-cream);
   padding: 72px var(--ngm-pad-x) 56px;
   border-bottom: 1px solid var(--ngm-border);
   text-align: center;
 }
-.ngm-vol-hero-inner, .ngm-lib-hero-inner, .ngm-dir-hero-inner { max-width: 760px; margin: 0 auto; }
-.ngm-vol-hero-inner > p, .ngm-lib-hero-inner > p, .ngm-dir-hero-inner > p.ngm-lead {
+.ngm-vol-hero-inner, .ngm-lib-hero-inner, .ngm-dir-hero-inner, .ngm-min-hero-inner { max-width: 760px; margin: 0 auto; }
+.ngm-vol-hero-inner > p, .ngm-lib-hero-inner > p, .ngm-dir-hero-inner > p.ngm-lead,
+.ngm-min-hero-inner > p.ngm-lead {
   font-family: var(--ngm-sans); font-size: var(--ngm-text-lead); color: var(--ngm-gray);
   line-height: 1.8; max-width: 640px; margin: 18px auto 0;
 }
@@ -9773,11 +9774,11 @@ body.ngm-dir-page .WaPlaceHolderContent {
   background: var(--ngm-sage-dk); color: #fff; border-radius: 50%;
   font-family: var(--ngm-sans); font-size: var(--ngm-text-md); font-weight: 600;
 }
-.ngm-lib-step h3, .ngm-lib-term h3, .ngm-lib-note h3 {
+.ngm-lib-step h3, .ngm-lib-term h3, .ngm-lib-note h3, .ngm-min-term h3 {
   font-family: var(--ngm-serif); font-size: var(--ngm-title-tile); font-weight: 400;
   color: var(--ngm-charcoal); margin: 0 0 5px; line-height: 1.2;
 }
-.ngm-lib-step p, .ngm-lib-term p, .ngm-lib-note p {
+.ngm-lib-step p, .ngm-lib-term p, .ngm-lib-note p, .ngm-min-term p {
   font-family: var(--ngm-sans); font-size: var(--ngm-copy); color: var(--ngm-gray);
   line-height: 1.65; margin: 0;
 }
@@ -9792,7 +9793,7 @@ body.ngm-dir-page .WaPlaceHolderContent {
   background: #fff; border: 1px solid var(--ngm-border);
   border-radius: var(--ngm-radius); padding: var(--ngm-tile-pad);
 }
-.ngm-lib-term > svg, .ngm-lib-note > svg {
+.ngm-lib-term > svg, .ngm-lib-note > svg, .ngm-min-term > svg {
   width: 24px; height: 24px; flex-shrink: 0; color: var(--ngm-sage-dk); margin-top: 2px;
 }
 .ngm-lib-note {
@@ -9814,17 +9815,132 @@ body.ngm-dir-page .WaPlaceHolderContent {
 /* (the directory's closing "keep your listing current" band was removed —
    the hero CTAs carry the profile/hub links now) */
 
+/* ══════════════════════════════════════════════════════════════════
+   BOARD MINUTES  (/board-minutes, members-only)
+   Hero, CTA and the "About these minutes" tiles all ride the shared
+   rules above (.ngm-lib-hero / .ngm-lib-cta / .ngm-lib-term groups).
+   The only genuinely new component is the document list: a year
+   heading plus rows that are each one big link to a PDF.
+══════════════════════════════════════════════════════════════════ */
+/* Year heading — a quiet divider above each year's rows, not a
+   section title, so it sits a step below .ngm-h2. */
+.ngm-min-year {
+  font-family: var(--ngm-serif); font-size: var(--ngm-title-md); font-weight: 400;
+  color: var(--ngm-charcoal); line-height: 1.2;
+  margin: 40px 0 0; padding-bottom: 10px;
+  border-bottom: 1px solid var(--ngm-border);
+}
+.ngm-min-list { list-style: none; margin: 0; padding: 0; }
+/* The hairline lives on the ROW, not the link. The link carries the
+   radius for its hover fill, and a radius on a border-bottom-only box
+   bows the line up at both ends — which read as a stray outline around
+   every resting row. Separating the two keeps the rule straight and
+   full-width while the hover pill still has soft corners. */
+.ngm-min-row { margin: 0; padding: 0; border-bottom: 1px solid var(--ngm-border); }
+/* The whole row is the link, so the hit area is the full width rather
+   than just the date. */
+.ngm-min-link {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 14px;
+  text-decoration: none;
+  border-radius: var(--ngm-radius);
+  transition: background .16s ease;
+}
+.ngm-min-link:hover { background: var(--ngm-sage-lt); }
+.ngm-min-link:focus-visible { outline: 2px solid var(--ngm-sage); outline-offset: -2px; }
+/* A meeting whose minutes aren't posted yet. The old page handled this by
+   leaving the date as bare text next to ten links, which just reads as a
+   broken link. Here it's a real row — same date, muted, a "Not posted"
+   chip, no hover and no pointer, so it's visibly not clickable. */
+.ngm-min-link-none { cursor: default; }
+.ngm-min-link-none:hover { background: transparent; }
+.ngm-min-link-none .ngm-min-date { color: var(--ngm-gray); font-weight: 400; }
+.ngm-min-link-none .ngm-min-ico { color: var(--ngm-gray-lt); }
+.ngm-min-ico { width: 22px; height: 22px; flex-shrink: 0; color: var(--ngm-sage-dk); }
+/* min-width:0 lets a long date wrap instead of pushing the arrow out */
+.ngm-min-main { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
+.ngm-min-date {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 9px;
+  font-family: var(--ngm-sans); font-size: var(--ngm-text-body); font-weight: 500;
+  color: var(--ngm-charcoal); line-height: 1.35;
+}
+.ngm-min-meta {
+  font-family: var(--ngm-sans); font-size: var(--ngm-text-meta);
+  color: var(--ngm-gray); line-height: 1.45;
+}
+/* "Draft" chip — linen rather than a warning colour: an unapproved set
+   is normal, not a problem. */
+.ngm-min-tag {
+  display: inline-block; flex-shrink: 0;
+  font-family: var(--ngm-sans); font-size: var(--ngm-tag-size); font-weight: 600;
+  text-transform: uppercase; letter-spacing: .08em;
+  color: var(--ngm-gray); background: var(--ngm-linen);
+  border-radius: 100px; padding: 3px 9px; line-height: 1.4;
+}
+.ngm-min-arrow {
+  width: 15px; height: 15px; flex-shrink: 0;
+  color: var(--ngm-sage-dk); opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity .16s ease, transform .16s ease;
+}
+.ngm-min-link:hover .ngm-min-arrow,
+.ngm-min-link:focus-visible .ngm-min-arrow { opacity: 1; transform: none; }
+/* Empty state — shown until the first set of minutes is posted. */
+.ngm-min-empty {
+  font-family: var(--ngm-sans); font-size: var(--ngm-text-body);
+  color: var(--ngm-gray); line-height: 1.7;
+  background: var(--ngm-cream); border: 1px dashed var(--ngm-border);
+  border-radius: var(--ngm-radius); padding: 22px 24px;
+  margin-top: 28px;
+}
+/* "About these minutes" tiles — same grid as .ngm-lib-terms. */
+.ngm-min-terms {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: var(--ngm-gap); margin-top: 32px;
+}
+.ngm-min-term {
+  display: flex; align-items: flex-start; gap: 16px;
+  background: #fff; border: 1px solid var(--ngm-border);
+  border-radius: var(--ngm-radius); padding: var(--ngm-tile-pad);
+}
+/* Closing CTA — the .ngm-lib-cta rose band with a button pair. */
+.ngm-min-cta { background: var(--ngm-rose-lt); padding: 76px var(--ngm-pad-x); text-align: center; }
+.ngm-min-cta-inner { max-width: 560px; margin: 0 auto; }
+.ngm-min-cta p {
+  font-family: var(--ngm-sans); font-size: var(--ngm-text-lead); color: var(--ngm-gray);
+  line-height: 1.8; margin-bottom: 28px;
+}
+.ngm-min-cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+/* PHONES: the document list stays LEFT-aligned. The site-wide 640px rule
+   centres everything inside .ngm-con, which reads well for prose and cards
+   but turns a file list ragged — each date and its meta line centre
+   independently, so nothing lines up with the row above. Same kind of
+   exemption forms and the upcoming-events chips already get. The
+   "About these minutes" tiles are NOT exempted; they centre like every
+   other tile on the site. */
+@media (max-width: 640px) {
+  .ngm .ngm-con .ngm-min-year,
+  .ngm .ngm-con .ngm-min-list,
+  .ngm .ngm-con .ngm-min-meta { text-align: left; }
+  .ngm-min-main { align-items: flex-start; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ngm-min-link, .ngm-min-arrow { transition: none; }
+  .ngm-min-arrow { opacity: 1; transform: none; }
+}
+
 /* ── Responsive ── */
 @media (max-width: 980px) {
   .ngm-vol-grid { grid-template-columns: 1fr 1fr; }
   .ngm-vol-pitch-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 900px) {
-  .ngm-vol-hero, .ngm-lib-hero, .ngm-dir-hero { padding: 52px 28px 44px; }
-  .ngm-vol-cta, .ngm-lib-cta { padding: 60px 28px; }
+  .ngm-vol-hero, .ngm-lib-hero, .ngm-dir-hero, .ngm-min-hero { padding: 52px 28px 44px; }
+  .ngm-vol-cta, .ngm-lib-cta, .ngm-min-cta { padding: 60px 28px; }
 }
 @media (max-width: 640px) {
-  .ngm-vol-grid, .ngm-vol-pitch-grid, .ngm-lib-steps, .ngm-lib-terms { grid-template-columns: 1fr; }
+  .ngm-vol-grid, .ngm-vol-pitch-grid, .ngm-lib-steps, .ngm-lib-terms,
+  .ngm-min-terms { grid-template-columns: 1fr; }
 }
 
 /* ══════════════════════════════════════════════════════════════════
@@ -9835,19 +9951,19 @@ body.ngm-dir-page .WaPlaceHolderContent {
 ══════════════════════════════════════════════════════════════════ */
 @media (max-width: 900px) {
   .ngm-phero, .ngm-join-hero, .ngm-si-hero, .ngm-hub-hero,
-  .ngm-vol-hero, .ngm-lib-hero, .ngm-dir-hero, .ngm-cal-hero,
+  .ngm-vol-hero, .ngm-lib-hero, .ngm-dir-hero, .ngm-cal-hero, .ngm-min-hero,
   .ngm-about-cta, .ngm-cal-cta, .ngm-mtg-cta, .ngm-ev-cta,
   .ngm-join-cta, .ngm-si-cta, .ngm-cta,
-  .ngm-vol-cta, .ngm-lib-cta, .ngm-sys-band {
+  .ngm-vol-cta, .ngm-lib-cta, .ngm-min-cta, .ngm-sys-band {
     padding-left: var(--ngm-pad-x-md); padding-right: var(--ngm-pad-x-md);
   }
 }
 @media (max-width: 560px) {
   .ngm-phero, .ngm-join-hero, .ngm-si-hero, .ngm-hub-hero,
-  .ngm-vol-hero, .ngm-lib-hero, .ngm-dir-hero, .ngm-cal-hero,
+  .ngm-vol-hero, .ngm-lib-hero, .ngm-dir-hero, .ngm-cal-hero, .ngm-min-hero,
   .ngm-about-cta, .ngm-cal-cta, .ngm-mtg-cta, .ngm-ev-cta,
   .ngm-join-cta, .ngm-si-cta, .ngm-cta,
-  .ngm-vol-cta, .ngm-lib-cta, .ngm-sys-band {
+  .ngm-vol-cta, .ngm-lib-cta, .ngm-min-cta, .ngm-sys-band {
     padding-left: var(--ngm-pad-x-sm); padding-right: var(--ngm-pad-x-sm);
   }
 }

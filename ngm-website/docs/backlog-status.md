@@ -232,6 +232,11 @@ ETA; the training answer is under "Showing Jody how to edit the top menu".
 - **Kym** — Member Hub documents timeline (job descriptions, newsletters,
   minutes); Creativity Committee interactive idea list; training on editing
   static pages; project finish timeline.
+  *Minutes are now built* — see `pages/board-minutes/`. Two things surfaced
+  that need her or the secretary: the existing Meeting Minutes page shows
+  **no members-only padlock** in WA, and **nothing has been posted since
+  November 2025**. Newsletters and job descriptions can reuse the same
+  document-list component.
 - **Jody** — should 5th Tuesday Open Stitching get its own event category
   (Aug 27; see the note above — decide before the Meetings page is pasted);
   her Retreat 2027 question, so she can publish the page.
