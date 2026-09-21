@@ -9836,12 +9836,21 @@ body.ngm-dir-page .WaPlaceHolderContent {
    The hero, tiles and CTA below ride the shared .ngm-lib-* rules.
 ══════════════════════════════════════════════════════════════════ */
 /* Gadget band — white, continuous with 01-top's heading block above it
-   and the tiles below, with the same content column as .ngm-con. */
+   and the tiles below, with the same content column as .ngm-con.
+
+   ONE GADGET OR MANY. The live page keeps each year (and each kind of
+   minutes) in its OWN content gadget, so put the ngm-wa-minutes class
+   on every one of them and they stack into a single continuous list.
+   That's why there's no vertical padding here and why the first
+   heading in a gadget keeps its top margin: spacing between years has
+   to come from the HEADING, which is present in either arrangement.
+   Padding on the band, or a zeroed first-child margin, would space
+   things correctly with one gadget and wrongly with six. */
 body .ngm-wa-minutes {
   background: #fff !important;
   border: none !important; box-shadow: none !important;
   margin: 0 !important;
-  padding: 0 var(--ngm-pad-x) 72px !important;
+  padding: 0 var(--ngm-pad-x) !important;
 }
 body .ngm-wa-minutes .gadgetStyleBody {
   background: transparent !important;
@@ -9849,8 +9858,10 @@ body .ngm-wa-minutes .gadgetStyleBody {
   max-width: var(--ngm-maxw) !important;
   margin: 0 auto !important; padding: 0 !important;
 }
-/* 01-top's heading block closes tight so the list reads as part of it */
-.ngm-min-head { padding-bottom: 8px; }
+/* 01-top's heading block closes tight — the first year heading's own top
+   margin supplies the gap, so the intro and the list read as one block
+   whether the list is one gadget or six. */
+.ngm-min-head { padding-bottom: 0; }
 
 /* ── Year headings ──
    Whatever level the editor used. Only the year is typed; the rule
@@ -9869,8 +9880,6 @@ body .ngm-wa-minutes h4 {
   padding: 0 0 10px !important;
   border-bottom: 1px solid var(--ngm-border) !important;
 }
-body .ngm-wa-minutes > :first-child,
-body .ngm-wa-minutes .gadgetStyleBody > :first-child { margin-top: 0 !important; }
 
 /* ── The list ── */
 body .ngm-wa-minutes ul,
@@ -9944,9 +9953,16 @@ body .ngm-wa-minutes li:not(:has(a))::after {
   color: var(--ngm-gray); background: var(--ngm-linen);
   border-radius: 100px; padding: 3px 9px; line-height: 1.4;
 }
-/* Editor artefacts: an empty paragraph between lists, and the theme's
-   bullet indent on the wrapper. */
+/* Editor artefacts: empty paragraphs the editor leaves between blocks.
+   With one gadget per year these are the main source of stray gaps. */
 body .ngm-wa-minutes p:empty { display: none !important; }
+/* Air after the LAST gadget, before the linen band.
+   It can't live on the gadget: with one gadget per block it would repeat
+   after every year, and :last-of-type can't reach across separate WA
+   wrappers to find the final one. So 03-bottom's own section carries it,
+   as a white top border — full-bleed, no positioning, and correct whether
+   the list above it is one gadget or six. */
+.ngm-min-notes { border-top: 44px solid #fff; }
 
 /* ── The rest of the page ── */
 /* "About these minutes" tiles — same grid as .ngm-lib-terms. */

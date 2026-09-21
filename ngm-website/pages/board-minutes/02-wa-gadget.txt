@@ -39,10 +39,24 @@ Setup in WA:
 3. Set the layout ROW background to transparent or white, so the
    white band runs continuously from 01-top through to 03-bottom.
 
+ONE GADGET OR SEVERAL
+---------------------
+The live page keeps each year AND each kind of minutes in its own
+content gadget — Board Meeting Minutes 2025, Board Meeting Minutes
+2024, Executive Board Meeting Minutes 2025, Annual Meeting Minutes,
+and so on. That is fine and nothing needs merging.
+
+Put the ngm-wa-minutes CSS class on EVERY one of those gadgets. They
+stack into one continuous list, and the spacing between blocks comes
+from the headings, so it looks the same whether it is one gadget or
+six. Order the gadgets top to bottom in the order you want them read.
+
 How the content must be structured (the CSS depends on it):
-  • Each YEAR is a HEADING (any level) whose text contains the year,
-    e.g. "2026". Plain "2026" is enough — the styling adds the rule
-    line. Newest year first.
+  • Each block starts with a HEADING (any level). Its text is up to
+    you — with more than one kind of minutes on the page the heading
+    has to say which, so "Board Meeting Minutes 2024" and "Annual
+    Meeting Minutes" are right. Keep it short; the rule line under it
+    is added automatically. Newest first.
   • Under each heading, ONE bulleted list. One meeting per bullet,
     newest first.
   • A bullet is either a LINK (the date, linked to the PDF) or PLAIN

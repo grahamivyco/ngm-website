@@ -59,22 +59,28 @@ in step 4. The "Not posted" label disappears on its own.
 
 ## The first meeting of a new year
 
-Add a **heading** above the newest list, with just the year in it:
+Each year has its own block, and often its own box on the page. Add a
+**heading** above the newest list naming what it is:
 
 ```
-2027
+Board Meeting Minutes 2027
 ```
 
-Nothing else. Not "Board Meeting Minutes 2027", just the year. The line
-underneath it is added automatically.
+Then a bulleted list under it, and add the date as usual.
 
-Then start a new bulleted list under that heading and add the date as usual.
+Keep the wording consistent with the blocks already there. The page carries
+more than one kind of minutes — board, executive board, annual meeting — so
+the heading has to say which. The line underneath it is added automatically.
+
+If you add a **new box** rather than typing into an existing one, it needs
+the CSS class set. See "Something looks wrong?" below for where that field
+is; the value is `ngm-wa-minutes`.
 
 ## Please don't
 
-- **Don't put anything else in that box.** No intro text, no notes, no
-  explanatory headings. The wording above and below the list lives
-  elsewhere on the page and is already handled.
+- **Don't put anything else in that box.** A heading and a list of dates,
+  nothing more. No intro text and no notes — the wording above and below
+  the list lives elsewhere on the page and is already handled.
 - **Don't use two columns.** One list going down the page. Two columns look
   fine on a laptop and break on a phone.
 - **Don't retype the older entries.** They're fine as they are.

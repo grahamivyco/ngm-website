@@ -8088,7 +8088,7 @@ body .ngm-wa-minutes {
   background: #fff !important;
   border: none !important; box-shadow: none !important;
   margin: 0 !important;
-  padding: 0 var(--ngm-pad-x) 72px !important;
+  padding: 0 var(--ngm-pad-x) !important;
 }
 body .ngm-wa-minutes .gadgetStyleBody {
   background: transparent !important;
@@ -8097,7 +8097,7 @@ body .ngm-wa-minutes .gadgetStyleBody {
   margin: 0 auto !important; padding: 0 !important;
 }
 
-.ngm-min-head { padding-bottom: 8px; }
+.ngm-min-head { padding-bottom: 0; }
 
 body .ngm-wa-minutes h1,
 body .ngm-wa-minutes h2,
@@ -8113,8 +8113,6 @@ body .ngm-wa-minutes h4 {
   padding: 0 0 10px !important;
   border-bottom: 1px solid var(--ngm-border) !important;
 }
-body .ngm-wa-minutes > :first-child,
-body .ngm-wa-minutes .gadgetStyleBody > :first-child { margin-top: 0 !important; }
 
 body .ngm-wa-minutes ul,
 body .ngm-wa-minutes ol {
@@ -8180,6 +8178,8 @@ body .ngm-wa-minutes li:not(:has(a))::after {
 }
 
 body .ngm-wa-minutes p:empty { display: none !important; }
+
+.ngm-min-notes { border-top: 44px solid #fff; }
 
 .ngm-min-terms {
   display: grid; grid-template-columns: 1fr 1fr;
