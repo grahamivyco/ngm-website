@@ -9,9 +9,9 @@ holds the list; a second minutes page means two things to keep current.
 ## Structure: sandwich
 
 ```
-01-top.html       Custom HTML — hero + "Minutes by meeting" heading
-02-wa-gadget.txt  native WA CONTENT gadget — the list of meetings
-03-bottom.html    Custom HTML — "About these minutes" tiles + CTA
+01-top.html       Custom HTML — hero + one intro line
+02-wa-gadget.txt  native WA CONTENT gadget(s) — one per block
+03-bottom.html    Custom HTML — back-to-Member-Hub CTA
 ```
 
 The list lives in the **native gadget**, not in this repo. That is the whole
@@ -149,13 +149,34 @@ so it holds regardless. Snippet to dump it:
 
 ## Sections
 
-1. **Hero** (`01-top`) — cream band, "Members only" eyebrow, one line.
-2. **Minutes by meeting** heading (`01-top`), then the list (gadget).
-3. **About these minutes** (`03-bottom`, linen) — four tiles: drafts can
-   change, older minutes are in the library cabinets, how to report an
-   error, and a note that the files are for members.
-4. **Closing CTA** (`03-bottom`, rose) — email the secretary, back to the
-   Member Hub.
+1. **Hero** (`01-top`) — cream band, "Meeting minutes" eyebrow, the title,
+   one line of copy.
+2. **Intro line** (`01-top`) — linen band, opens the list.
+3. **The cards** — one white card per content gadget, floating on the linen.
+4. **CTA** (`03-bottom`) — one line and a Back-to-the-Member-Hub button.
+
+### Two sections were removed (Sep 2026)
+
+- **"About these minutes"** — four tiles covering draft status, older
+  minutes being in the library cabinets, how corrections are handled, and
+  not forwarding the files. **None of it was sourced.** It was written from
+  a guess at how the Guild works; the old page carried no such claims. If
+  any of it is true, it can come back — but only once someone confirms it.
+- **"Ask the board"** — a rose CTA band pointing at the secretary. Removed
+  at the maintainer's request.
+
+## The row treatment mirrors the events gadget
+
+Deliberately, so the two lists read as one system: the same
+`--ngm-linen-dk` hairline, the same `--ngm-radius` so the hover fill has
+soft corners, the same `.2s` `background-color` transition to
+`--ngm-sage-lt`, the same serif row title going sage on hover, and no rule
+under the last row. Each gadget is a white `--ngm-radius-lg` card with
+`--ngm-sh`, on a linen band — the same card-on-linen arrangement the
+homepage events block uses.
+
+Rows are one line each, so a card of eleven meetings is about a third
+shorter than the previous treatment (53px per row, down from 77px).
 
 ## The meeting pattern (from the old page)
 
