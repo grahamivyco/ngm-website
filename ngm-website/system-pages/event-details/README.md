@@ -52,3 +52,31 @@ see `../event-registration/README.md`) → `boxBodyContentContainer.fixedHeight`
 (height unclamped) whose `.inner.gadgetEventEditableArea` holds the
 description with legacy `<font face="Lato">` tags (overridden directly —
 a font tag's face attribute beats inherited fonts).
+
+## Author formatting must survive (Sep 2026 fix)
+
+Kym reported that centered top images and red registration text saved fine
+in Admin but rendered plain on the live site (Aug 24, Sep 10). Both were
+this skin overriding the editor, not WA losing the edit:
+
+- **Centering.** `global.css` set `margin: 6px 0 18px !important` on
+  description images. The shorthand also set the *side* margins, and auto
+  side margins are how the editor centers a photo — so every centered image
+  came out flush left. Only the vertical margin is forced now, and a
+  companion rule re-centers the two shapes the editor writes
+  (`text-align:center` on the wrapper, or `margin-left:auto` on the image).
+  The script above made it worse by lifting the `<img>` out of its centered
+  wrapper and deleting the wrapper; it now hoists the wrapper itself.
+- **Colour.** `color: var(--ngm-charcoal) !important` on `font`/`p`, and
+  `var(--ngm-sage-dk) !important` on `strong`, outrank both a `<font color>`
+  attribute (specificity 0) and a non-important inline `style`, so red text
+  was repainted. Colour is now a separate rule that skips any element the
+  editor coloured, and `font[color] strong` inherits instead of repainting.
+
+**The rule for anything added here:** never force `color` or a margin
+shorthand onto `.gadgetEventEditableArea` content with `!important`. That
+content is written by board members in the WA editor, and an `!important`
+in this file silently overrules them with no error anywhere.
+
+Both fixes are in `global-css/global.css`, section "EVENT — SINGLE EVENT
+DETAIL PAGE", and go live only when the CSS tab is re-pasted.

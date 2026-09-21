@@ -1,6 +1,16 @@
-# Retreat  (`/annual-retreat-2026`)
+# Retreat 2026  (`/annual-retreat-2026`)
 
 Single Custom-HTML gadget (`01-top.html`).
+
+> **This is now the record of a past event.** Retreat 2026 ran 12–15 August
+> 2026. The invitation PDF and the registration framing were removed
+> (Kym, Aug 24) and the page is led by Jane's photo album instead. The
+> upcoming retreat is `/annual-retreat-2027`, which the header, footer,
+> homepage and Events page now point at.
+>
+> ⚠ **Before pasting into WA:** the album URL is still the placeholder
+> `REPLACE_WITH_GOOGLE_PHOTOS_ALBUM_URL`, in **two** places (the gallery
+> band and the hero button). Paste Jane's Google Photos link over both.
 
 ## Content rule (Aug 2026)
 
@@ -19,8 +29,9 @@ Everything else — class projects and kit fees, per-class registration
 deadlines, cancellation terms, the hotel group rate — lives in the two
 linked sources and must NOT be duplicated here:
 
-- **Invitation PDF:** `/resources/NGM%20Retreat%202026%20Invitation.pdf`
-- **Classes & schedule:** https://retreat2026.jane-t.online
+- **Classes & schedule (still live, now an archive):** https://retreat2026.jane-t.online
+- The invitation PDF (`/resources/NGM%20Retreat%202026%20Invitation.pdf`) is
+  no longer linked from this page.
 
 The earlier version of this page listed kit fees, deadlines, cancellation
 rules and a group rate that were out of date. Add detail back only when the
@@ -28,9 +39,10 @@ Guild confirms it.
 
 ## Sections
 
-1. Hero — eyebrow, "Retreat 2026", registration-open note with the
-   deadline caution, buttons to the invitation and the schedule site.
-2. Location — standard Visit block with the venue address (directions link).
-3. Good to know — three detail tiles: fee/meals, meeting rooms, parking.
-4. 2026 faculty — teacher names as tags, then the link to class details.
-5. Closing CTA — invitation + schedule links.
+1. Photo-gallery band — the whole band links to Jane's Google Photos album.
+2. Hero — eyebrow, "Retreat 2026", August 2026 badge, buttons to the album
+   and to Retreat 2027.
+3. Location — standard Visit block with the venue address (directions link).
+4. Good to know — three detail tiles: fee/meals, meeting rooms, parking.
+5. 2026 faculty — teacher names as tags, then the link to class details.
+6. Closing CTA — Retreat 2027 + Join.
