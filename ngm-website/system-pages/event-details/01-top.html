@@ -25,7 +25,7 @@
     ["japanese embroidery",    "/traditional-japanese-embroidery",    "Traditional Japanese Embroidery"],
     ["march to the finish",    "/march-to-the-finish",    "March to the Finish"],
     ["fall finish",            "/a-fall-finish",            "A Fall Finish"],
-    ["retreat",                "/annual-retreat-2026",                "the Annual Retreat"],
+    ["retreat",                "/annual-retreat-2027",                "the Annual Retreat"],
     ["workshop",               "/workshops",              "Workshops"],
     ["5th tuesday",            "/5th-tuesday-open-stitching",            "5th Tuesday Open Stitching"],
     ["fifth tuesday",          "/5th-tuesday-open-stitching",            "5th Tuesday Open Stitching"]
@@ -38,14 +38,24 @@
     var area = gadget.querySelector(".gadgetEventEditableArea") ||
                gadget.querySelector(".boxBodyContentContainer .inner") || gadget;
     /* PHOTO FIRST — when the description embeds a photo, it leads the
-       copy; events without one just start with text (no reserved slot). */
+       copy; events without one just start with text (no reserved slot).
+       Move the photo's OWN BLOCK, not the bare <img>: the editor centers
+       a photo by centering the block around it (<p style="text-align:
+       center"><img></p>), so lifting the image out of that block and
+       then deleting the block — which is what this used to do — threw
+       the centering away every time. Walk up to the outermost wrapper
+       that holds this image and no text, and hoist that instead. An
+       image sitting inline inside a text paragraph has no such wrapper,
+       so it moves on its own exactly as before. */
     var img = area.querySelector("img");
     if (img) {
-      var wrap = img.parentNode;
-      area.insertBefore(img, area.firstChild);
-      if (wrap && wrap !== area && !(wrap.textContent || "").replace(/\u00a0/g, " ").trim() && !wrap.querySelector("img")) {
-        wrap.parentNode.removeChild(wrap);
+      var block = img;
+      while (block.parentNode && block.parentNode !== area &&
+             !(block.parentNode.textContent || "").replace(/\u00a0/g, " ").trim() &&
+             block.parentNode.querySelectorAll("img").length === 1) {
+        block = block.parentNode;
       }
+      if (block !== area.firstChild) area.insertBefore(block, area.firstChild);
     }
     var row = document.createElement("div");
     row.className = "ngm-evd-btns";
