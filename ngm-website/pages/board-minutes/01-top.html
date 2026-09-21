@@ -5,8 +5,9 @@
      Member Hub is in the hero below.
 
      Each content gadget carrying the ngm-wa-minutes class becomes its
-     own accordion card: the script at the bottom reads its heading,
-     builds a title button, and collapses the list until it's clicked.
+     own card: the script at the bottom reads its heading and builds a
+     title button. Cards start OPEN — the title collapses one if a
+     member wants it out of the way, but nothing is hidden by default.
 
      Everything in THIS file is chrome. Don't put meeting dates here.
 ══════════════════════════════════════════════════════════════════ -->
@@ -23,7 +24,7 @@
 
 <section class="ngm ngm-sec ngm-sec-linen ngm-min-head">
   <div class="ngm-con">
-    <p class="ngm-lead">Choose a set to see the meetings in it. Each one opens as a PDF.</p>
+    <p class="ngm-lead">Newest first. Each meeting opens as a PDF.</p>
   </div>
 </section>
 <script>
@@ -123,10 +124,14 @@
         var sec = document.createElement("div");
         sec.className = "ngm-min-sec";
 
+        /* OPEN BY DEFAULT. Collapsing every set put an extra click
+           between a member and the thing they came for, and the lists
+           are short. The toggle stays — it earns its keep once there
+           are several years on the page — but nothing starts hidden. */
         var btn = document.createElement("button");
         btn.type = "button";
         btn.className = "ngm-min-title";
-        btn.setAttribute("aria-expanded", "false");
+        btn.setAttribute("aria-expanded", "true");
         btn.innerHTML = ICO +
           '<span class="ngm-min-title-txt"></span>' +
           '<span class="ngm-min-count"></span>' + CHV;
@@ -136,6 +141,7 @@
 
         var wrap = document.createElement("div");
         wrap.className = "ngm-min-wrap";
+        sec.classList.add("is-open");
 
         list.parentNode.insertBefore(sec, list);
         sec.appendChild(btn);
