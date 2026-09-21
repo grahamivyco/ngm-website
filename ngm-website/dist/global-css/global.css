@@ -8153,10 +8153,11 @@ body .ngm-wa-minutes p:empty { display: none !important; }
 
 .ngm-min-sec + .ngm-min-sec { border-top: 1px solid var(--ngm-border); }
 
-.ngm-min-wrap > ul,
-.ngm-min-wrap > ol {
+body .ngm-wa-minutes .ngm-min-wrap > ul,
+body .ngm-wa-minutes .ngm-min-wrap > ol {
   overflow: hidden !important; min-height: 0 !important;
-  padding-bottom: 12px !important;
+
+  padding: 0 12px 22px !important;
 }
 
 body .ngm-wa-minutes ul,
