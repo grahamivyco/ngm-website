@@ -64,12 +64,12 @@ trigger opens a `.loginPanel`.
   `<link rel="icon">` tag. That lands in the server-rendered `<head>`, so the icon
   is in the initial HTML — shows in the browser tab/bookmarks with no flash.
 - Live files (Sep 2026) are in **Website → Files → Pictures → Favicon**:
-  `favicon.ico`, `favicon.svg`, `favicon-96x96.png`. Raw Headers:
+  `favicon.ico`, `favicon.svg`, `favicon-96x96.png`, `favicon-180.png`. Raw Headers:
   ```html
   <link rel="icon" href="/resources/Pictures/Favicon/favicon.ico" sizes="any">
   <link rel="icon" href="/resources/Pictures/Favicon/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/resources/Pictures/Favicon/favicon-96x96.png" type="image/png" sizes="96x96">
-  <link rel="apple-touch-icon" href="/resources/Pictures/Favicon/favicon-96x96.png">
+  <link rel="apple-touch-icon" href="/resources/Pictures/Favicon/favicon-180.png">
   ```
   The first attempt pointed at `/Resources/Pictures/favicon.ico` (no
   subfolder) and every icon 404'd. If the icon vanishes, check each href
