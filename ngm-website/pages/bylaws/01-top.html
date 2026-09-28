@@ -1,0 +1,402 @@
+<!-- Canonical page markup — this is the file to edit and to paste into the WA Custom-HTML gadget. Styling lives in global-css/global.css (pasted into the WA CSS tab; must be live in WA first). There is no separate self-contained version. -->
+<script>/* Sets a flag during parsing, BEFORE the content gadgets below are
+   parsed, so global.css can hold their cards back until the script has
+   replaced the editor's heading. Without it the raw heading paints in
+   the theme's font first and visibly swaps. Keyed on a class so a page
+   with JS off still shows its content. */
+document.documentElement.className += " ngm-doc-js";</script>
+<!-- ══ THIS IS THE ONLY CUSTOM-HTML GADGET ON THE PAGE ═══════════════
+     Structure: this gadget, then the native WA CONTENT gadgets holding
+     the documents — ONE PER GROUP. Nothing sits underneath them; the way
+     back to the Member Hub is in the hero below.
+
+     Same shape as the board minutes page, and the same styling: give
+     each content gadget the CSS class  ngm-wa-docs  and the script at
+     the bottom turns it into a card. See 02-wa-gadget.txt.
+
+     Everything in THIS file is chrome. Don't put document links here.
+══════════════════════════════════════════════════════════════════ -->
+<div class="ngm ngm-min-hero">
+  <div class="ngm-min-hero-inner">
+    <span class="ngm-eyebrow">Governance</span>
+    <h1 class="ngm-h1">Bylaws &amp; <em>policies</em></h1>
+    <p class="ngm-lead">The Guild&rsquo;s bylaws, organizational chart, policies and liability waivers.</p>
+    <div class="ngm-min-hero-back">
+      <a class="ngm-btn ngm-btn-outline" href="/member-hub">Back to the Member Hub</a>
+    </div>
+  </div>
+</div>
+
+<section class="ngm ngm-sec ngm-sec-linen ngm-min-head" data-doc-noun="document">
+  <div class="ngm-con">
+    <p class="ngm-lead">Each document opens as a PDF.</p>
+  </div>
+</section>
+<script>
+/* ── DOCUMENT-LIST CARDS ────────────────────────────────────────────
+   Turns every native content gadget carrying ngm-wa-docs (or the older
+   ngm-wa-minutes) into a styled card. Nothing collapses.
+
+   ⚠ THIS SCRIPT IS SHARED, VERBATIM, WITH
+   pages/board-minutes/01-top.html and pages/newsletter-archive/01-top.html.
+   If you change it here, change it there and re-paste all three gadgets. The repo already duplicates the
+   event-tagging script across pages the same way — a WA Custom-HTML
+   gadget has nowhere shared to put one.
+
+   WHY THE TITLE IS REBUILT RATHER THAN STYLED: the old page's headings
+   render bold sans however they are targeted in CSS — the content
+   carries inline font markup that outranks a rule aimed at the heading,
+   and on some blocks the heading sits in a gadget of its own, where a
+   rule scoped to .ngm-wa-minutes never reaches it at all. So this reads
+   the heading's TEXT, hides the original, and builds its own button.
+   Nothing downstream has to guess at the editor's markup.
+
+   Idempotent — safe if WA runs it twice. */
+(function () {
+  function text(el) {
+    return ((el && el.textContent) || "").replace(/ /g, " ").replace(/\s+/g, " ").trim();
+  }
+
+  /* Never read a title out of UI this script built. Without this, the
+     backward walk below could land on an already-built card and take
+     its BUTTON text — title plus count, run together — which is how a
+     card came out reading "Board Meeting Minutes 20250 meetings". */
+  function ours(el) {
+    return !!(el && (el.classList.contains("ngm-min-sec") ||
+                     el.classList.contains("ngm-min-title") ||
+                     el.classList.contains("ngm-min-src") ||
+                     (el.querySelector && el.querySelector(".ngm-min-title, .ngm-min-sec"))));
+  }
+
+  /* The heading for this gadget: the first thing with text before the
+     list, or — when the heading is its own gadget — the nearest block
+     above that has text and no list of its own. */
+  function findTitle(gadget, body, list) {
+    for (var n = body.firstElementChild; n && n !== list; n = n.nextElementSibling) {
+      if (!ours(n) && text(n)) return n;
+    }
+    var prev = gadget.previousElementSibling, hops = 0;
+    while (prev && hops++ < 3) {
+      if (prev.querySelector && prev.querySelector("li")) break;   /* another block's list */
+      if (ours(prev)) break;                                       /* our own card — stop */
+      if (text(prev) && text(prev).length < 120) return prev;
+      prev = prev.previousElementSibling;
+    }
+    return null;
+  }
+
+  /* For the second and later pairs in one box, the heading is just the
+     block immediately above the list. */
+  function prevTitle(list) {
+    var n = list.previousElementSibling;
+    while (n && (ours(n) || !text(n))) {
+      if (ours(n)) return null;
+      n = n.previousElementSibling;
+    }
+    return n && !n.querySelector("li") ? n : null;
+  }
+
+  /* A row may name what kind of meeting it was, after a dash:
+       7 April 2025 — Executive Board
+     Sections group by YEAR now, so the heading no longer carries that;
+     without this the kind would simply be lost. The editor types plain
+     text and this lifts the tail into a chip.
+
+     ⚠ IT MUST NOT MATTER WHERE THE LINK ENDS. Whoever types these
+     selects some text and links it, and which text they select is not
+     something a how-to can reliably control. Both happen:
+       <a>7 April 2025 — Executive Board</a>     whole line linked
+       <a>7 April 2025</a> — Executive Board     only the date linked
+     An earlier version only handled the first and silently left the
+     second as a raw dash. Both are handled below, so the instruction
+     can stay "type a dash and the kind" with nothing about selecting. */
+  var SEP = /\s*[\u2014\u2013\u00b7]\s*|\s+-\s+/;
+  var LEAD_SEP = /^\s*(?:[\u2014\u2013\u00b7]|-)\s*/;
+
+  function addChip(parent, label) {
+    var chip = document.createElement("span");
+    chip.className = "ngm-min-kind";
+    chip.textContent = label;
+    parent.appendChild(chip);
+  }
+
+  /* Hide the editor's own heading once its text has been read, and
+     collapse the gadget it came from if that leaves it empty. */
+  function hideSource(src) {
+    if (!src) return;
+    src.classList.add("ngm-min-src");
+    var host = src.closest ? src.closest(".WaGadget") : null;
+    if (host && !host.classList.contains("ngm-wa-minutes") &&
+        !host.classList.contains("ngm-wa-docs") && !text(host)) {
+      host.classList.add("ngm-wa-minutes-src-empty");
+    }
+  }
+
+  /* What one row IS. The minutes page counts meetings, the newsletter
+     archive counts issues — same script, so the page says which via a
+     data-doc-noun attribute in its own markup. Defaults to "meeting"
+     so an older paste of the minutes gadget keeps working. */
+  function noun() {
+    var host = document.querySelector("[data-doc-noun]");
+    return (host && host.getAttribute("data-doc-noun")) || "meeting";
+  }
+
+  /* ── Ordering ──────────────────────────────────────────────────────
+     Cards come out in whatever order the gadgets happen to sit in the
+     WA editor, which is not something to rely on: adding 2027 puts it
+     wherever the gadget landed. Both the cards and the rows inside
+     them are sorted here instead, newest first, so the page is right
+     however the boxes were arranged. */
+  var MONTHS = ("january february march april may june july august " +
+                "september october november december").split(" ");
+
+  function rowDate(t) {
+    var m = /(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})/.exec(t);          /* 11 November 2025 */
+    if (!m) {
+      m = /([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{4})/.exec(t);          /* November 11, 2025 */
+      if (!m) return null;
+      m = [m[0], m[2], m[1], m[3]];
+    }
+    var mi = MONTHS.indexOf(String(m[2]).toLowerCase());
+    if (mi < 0) return null;
+    return (+m[3]) * 10000 + (mi + 1) * 100 + (+m[1]);
+  }
+
+  /* Only reorder when EVERY row parses as a date. The newsletter
+     archive lists things like "Spring 2025", and a half-understood
+     sort would shuffle those into nonsense. */
+  function sortRows(list) {
+    var rows = Array.prototype.slice.call(list.children);
+    if (rows.length < 2) return;
+    var keyed = [], i;
+    for (i = 0; i < rows.length; i++) {
+      var d = rowDate(text(rows[i]));
+      if (d === null) return;
+      keyed.push({ el: rows[i], d: d });
+    }
+    keyed.sort(function (a, b) { return b.d - a.d; });
+    keyed.forEach(function (k) { list.appendChild(k.el); });
+  }
+
+  /* Cards, by the year in their title. Each gadget IS a card, so this
+     reorders the gadgets themselves among their shared parent. A
+     comment node holds the first slot so the set lands contiguously
+     where it already was, rather than jumping up the page. */
+  function sortCards() {
+    var gadgets = Array.prototype.slice.call(
+      document.querySelectorAll(".ngm-wa-minutes, .ngm-wa-docs"));
+    var buckets = [];
+    gadgets.forEach(function (g) {
+      var t = g.querySelector(".ngm-min-title-txt");
+      var y = t && /(\d{4})/.exec(t.textContent);
+      if (!y || !g.parentNode) return;
+      var bucket = null;
+      buckets.forEach(function (b) { if (b.parent === g.parentNode) bucket = b; });
+      if (!bucket) { bucket = { parent: g.parentNode, items: [] }; buckets.push(bucket); }
+      bucket.items.push({ el: g, year: +y[1] });
+    });
+    buckets.forEach(function (b) {
+      if (b.items.length < 2) return;
+      var kids = Array.prototype.slice.call(b.parent.children);
+      var first = null;
+      b.items.forEach(function (it) {
+        var i = kids.indexOf(it.el);
+        if (first === null || i < first) first = i;
+      });
+      var sorted = b.items.slice().sort(function (x, y2) { return y2.year - x.year; });
+      if (sorted.every(function (it, i) { return it === b.items[i]; })) return;
+      var marker = document.createComment("ngm-doc-order");
+      b.parent.insertBefore(marker, kids[first]);
+      sorted.forEach(function (it) { b.parent.insertBefore(it.el, marker); });
+      b.parent.removeChild(marker);
+    });
+  }
+
+  /* Reveal a card once its content is ours. Paired with the .ngm-doc-js
+     guard at the top of the file. */
+  function reveal() {
+    var gs = document.querySelectorAll(".ngm-wa-minutes, .ngm-wa-docs");
+    Array.prototype.forEach.call(gs, function (g) { g.classList.add("ngm-doc-ready"); });
+  }
+
+  /* Sections are built immediately, empty ones included, so nothing waits
+     on a timer to appear. A year WA hasn't filled in yet is therefore
+     built empty and corrected here the moment its rows show up — which
+     is what the old two-second settle pass was really for, done by
+     watching rather than by guessing how long WA takes. */
+  function refreshSections() {
+    var secs = document.querySelectorAll(".ngm-min-sec");
+    Array.prototype.forEach.call(secs, function (sec) {
+      var list = sec.querySelector("ul, ol");
+      if (!list) return;
+      var count = list.querySelectorAll("li").length;
+      if (!count) return;
+      var note = sec.querySelector(".ngm-min-none");
+      var cnt = sec.querySelector(".ngm-min-count");
+      var shown = cnt ? (parseInt(cnt.textContent, 10) || 0) : 0;
+      if (count === shown && !note) return;
+      if (note) note.parentNode.removeChild(note);
+      if (cnt) cnt.textContent = count + " " + noun() + (count === 1 ? "" : "s");
+      sortRows(list);
+      Array.prototype.forEach.call(list.querySelectorAll("li"), function (row) { chipify(row); });
+    });
+  }
+
+  function titleEl(label, count) {
+    var head = document.createElement("h2");
+    head.className = "ngm-min-title";
+    head.innerHTML = '<span class="ngm-min-title-txt"></span>' +
+                     '<span class="ngm-min-count"></span>';
+    head.querySelector(".ngm-min-title-txt").textContent = label;
+    var word = noun();
+    head.querySelector(".ngm-min-count").textContent =
+      count ? count + " " + word + (count === 1 ? "" : "s") : "";
+    return head;
+  }
+
+  function chipify(row) {
+    if (row.getAttribute("data-min-chip") === "1") return;
+    row.setAttribute("data-min-chip", "1");
+    var a = row.querySelector("a");
+
+    /* the label sits INSIDE the link */
+    if (a && SEP.test(text(a))) {
+      var bits = text(a).split(SEP);
+      var tail = bits.slice(1).join(" ").trim();
+      if (!tail || tail.length > 40) return;
+      a.textContent = bits[0].trim();
+      addChip(a, tail);
+      return;
+    }
+
+    /* the label TRAILS the link as bare text */
+    if (a) {
+      var trailing = "", n = a.nextSibling, spent = [];
+      while (n) { trailing += n.textContent || ""; spent.push(n); n = n.nextSibling; }
+      trailing = trailing.replace(LEAD_SEP, "").replace(/\s+/g, " ").trim();
+      if (!trailing || trailing.length > 40) return;
+      spent.forEach(function (node) { node.parentNode.removeChild(node); });
+      addChip(row, trailing);
+      return;
+    }
+
+    /* no link at all — the row is plain text (minutes not posted yet) */
+    var raw = text(row);
+    if (!SEP.test(raw)) return;
+    var parts = raw.split(SEP);
+    var label = parts.slice(1).join(" ").trim();
+    if (!label || label.length > 40) return;
+    row.textContent = parts[0].trim();
+    addChip(row, label);
+  }
+
+  /* One section per heading+list PAIR, not per gadget. One box per
+     block is the intended arrangement, but a volunteer will eventually
+     type a second heading and list into an existing box — and when that
+     happened the second pair rendered raw. Handling every pair means
+     the page degrades sensibly instead. */
+  function build() {
+    buildSections();
+    refreshSections();
+    sortCards();
+    reveal();
+  }
+
+  function buildSections() {
+    var gadgets = document.querySelectorAll(".ngm-wa-minutes, .ngm-wa-docs");
+    Array.prototype.forEach.call(gadgets, function (g) {
+      var body = g.querySelector(".gadgetStyleBody") || g;
+      var lists = body.querySelectorAll("ul, ol");
+
+      /* A YEAR WITH NOTHING IN IT YET. The WA editor drops an empty
+         bullet, so a box put up as a placeholder ends up as a heading
+         and no list at all. Without this the heading rendered as raw
+         bold text on the linen — the opposite of the point. Only on a
+         settled pass, for the same reason empty lists are: early on,
+         "no list" is indistinguishable from "WA hasn't rendered it". */
+      if (!lists.length) {
+        if (body.querySelector(".ngm-min-sec")) return;
+        var only = findTitle(g, body, null);
+        if (!only || !text(only)) return;
+        hideSource(only);
+        var blank = document.createElement("div");
+        blank.className = "ngm-min-sec";
+        blank.appendChild(titleEl(text(only), 0));
+        var note = document.createElement("p");
+        note.className = "ngm-min-none";
+        note.textContent = "Nothing posted for this year yet.";
+        blank.appendChild(note);
+        body.appendChild(blank);
+        return;
+      }
+
+      Array.prototype.forEach.call(lists, function (list, i) {
+        if (list.closest(".ngm-min-sec")) return;       /* already built, or nested */
+        /* Done-ness is tracked per LIST, not per gadget: WA can render a
+           gadget before its rows exist, and marking the gadget finished
+           there left an empty card that never filled in.
+           An empty list is AMBIGUOUS — a year with nothing posted yet,
+           or one WA hasn't filled in — so it is built empty now and
+           corrected by refreshSections() when the rows arrive. Waiting
+           on a timer instead meant a card appearing two seconds late. */
+        var count = list.querySelectorAll("li").length;
+        var src = i === 0 ? findTitle(g, body, list) : prevTitle(list);
+        /* An empty list with no heading of its own is a leftover — an
+           emptied gadget someone hasn't deleted yet. Building it
+           produced a ghost card titled "Minutes" sitting between the
+           real years. There is nothing to show, so show nothing. */
+        if (!count && !src) return;
+        var label = text(src) || "Minutes";
+        hideSource(src);
+
+        var sec = document.createElement("div");
+        sec.className = "ngm-min-sec";
+        /* A heading, not a button — nothing collapses. */
+        var head = titleEl(label, count);
+
+        list.parentNode.insertBefore(sec, list);
+        sec.appendChild(head);
+        sec.appendChild(list);
+
+        if (!count) {
+          var none = document.createElement("p");
+          none.className = "ngm-min-none";
+          none.textContent = "Nothing posted for this year yet.";
+          sec.appendChild(none);
+        }
+
+        sortRows(list);
+
+        /* pull any "— Executive Board" tail out into a chip */
+        Array.prototype.forEach.call(list.querySelectorAll("li"), function (row) {
+          chipify(row);
+        });
+      });
+    });
+  }
+
+  function init() {
+    /* The cards sit on a linen band, but on a tall viewport with little
+       content the page ran out before the footer and the theme's own
+       background showed underneath. Flag the body so the CSS can paint
+       WA's content wrappers linen too — same approach the member
+       directory uses for its cream page. */
+    if (document.body) document.body.classList.add("ngm-min-page");
+    build();
+    /* WA can render gadgets late; catch them if it does */
+    if (window.MutationObserver) {
+      var mo = new MutationObserver(function () { build(); });
+      mo.observe(document.body, { childList: true, subtree: true });
+      setTimeout(function () { mo.disconnect(); }, 8000);
+    }
+    /* Failsafe: if anything above threw, never leave the cards hidden. */
+    setTimeout(function () {
+      document.documentElement.className =
+        document.documentElement.className.replace(/\s*ngm-doc-js\b/, "");
+    }, 3000);
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else { init(); }
+})();
+</script>

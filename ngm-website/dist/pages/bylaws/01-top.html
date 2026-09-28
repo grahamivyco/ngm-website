@@ -1,0 +1,289 @@
+<script>document.documentElement.className += " ngm-doc-js";</script>
+
+<div class="ngm ngm-min-hero">
+  <div class="ngm-min-hero-inner">
+    <span class="ngm-eyebrow">Governance</span>
+    <h1 class="ngm-h1">Bylaws &amp; <em>policies</em></h1>
+    <p class="ngm-lead">The Guild&rsquo;s bylaws, organizational chart, policies and liability waivers.</p>
+    <div class="ngm-min-hero-back">
+      <a class="ngm-btn ngm-btn-outline" href="/member-hub">Back to the Member Hub</a>
+    </div>
+  </div>
+</div>
+
+<section class="ngm ngm-sec ngm-sec-linen ngm-min-head" data-doc-noun="document">
+  <div class="ngm-con">
+    <p class="ngm-lead">Each document opens as a PDF.</p>
+  </div>
+</section>
+<script>(function () {
+  function text(el) {
+    return ((el && el.textContent) || "").replace(/ /g, " ").replace(/\s+/g, " ").trim();
+  }
+
+  function ours(el) {
+    return !!(el && (el.classList.contains("ngm-min-sec") ||
+                     el.classList.contains("ngm-min-title") ||
+                     el.classList.contains("ngm-min-src") ||
+                     (el.querySelector && el.querySelector(".ngm-min-title, .ngm-min-sec"))));
+  }
+
+  function findTitle(gadget, body, list) {
+    for (var n = body.firstElementChild; n && n !== list; n = n.nextElementSibling) {
+      if (!ours(n) && text(n)) return n;
+    }
+    var prev = gadget.previousElementSibling, hops = 0;
+    while (prev && hops++ < 3) {
+      if (prev.querySelector && prev.querySelector("li")) break;   
+      if (ours(prev)) break;                                       
+      if (text(prev) && text(prev).length < 120) return prev;
+      prev = prev.previousElementSibling;
+    }
+    return null;
+  }
+
+  function prevTitle(list) {
+    var n = list.previousElementSibling;
+    while (n && (ours(n) || !text(n))) {
+      if (ours(n)) return null;
+      n = n.previousElementSibling;
+    }
+    return n && !n.querySelector("li") ? n : null;
+  }
+
+  var SEP = /\s*[\u2014\u2013\u00b7]\s*|\s+-\s+/;
+  var LEAD_SEP = /^\s*(?:[\u2014\u2013\u00b7]|-)\s*/;
+
+  function addChip(parent, label) {
+    var chip = document.createElement("span");
+    chip.className = "ngm-min-kind";
+    chip.textContent = label;
+    parent.appendChild(chip);
+  }
+
+  function hideSource(src) {
+    if (!src) return;
+    src.classList.add("ngm-min-src");
+    var host = src.closest ? src.closest(".WaGadget") : null;
+    if (host && !host.classList.contains("ngm-wa-minutes") &&
+        !host.classList.contains("ngm-wa-docs") && !text(host)) {
+      host.classList.add("ngm-wa-minutes-src-empty");
+    }
+  }
+
+  function noun() {
+    var host = document.querySelector("[data-doc-noun]");
+    return (host && host.getAttribute("data-doc-noun")) || "meeting";
+  }
+
+  var MONTHS = ("january february march april may june july august " +
+                "september october november december").split(" ");
+
+  function rowDate(t) {
+    var m = /(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})/.exec(t);          
+    if (!m) {
+      m = /([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{4})/.exec(t);          
+      if (!m) return null;
+      m = [m[0], m[2], m[1], m[3]];
+    }
+    var mi = MONTHS.indexOf(String(m[2]).toLowerCase());
+    if (mi < 0) return null;
+    return (+m[3]) * 10000 + (mi + 1) * 100 + (+m[1]);
+  }
+
+  function sortRows(list) {
+    var rows = Array.prototype.slice.call(list.children);
+    if (rows.length < 2) return;
+    var keyed = [], i;
+    for (i = 0; i < rows.length; i++) {
+      var d = rowDate(text(rows[i]));
+      if (d === null) return;
+      keyed.push({ el: rows[i], d: d });
+    }
+    keyed.sort(function (a, b) { return b.d - a.d; });
+    keyed.forEach(function (k) { list.appendChild(k.el); });
+  }
+
+  function sortCards() {
+    var gadgets = Array.prototype.slice.call(
+      document.querySelectorAll(".ngm-wa-minutes, .ngm-wa-docs"));
+    var buckets = [];
+    gadgets.forEach(function (g) {
+      var t = g.querySelector(".ngm-min-title-txt");
+      var y = t && /(\d{4})/.exec(t.textContent);
+      if (!y || !g.parentNode) return;
+      var bucket = null;
+      buckets.forEach(function (b) { if (b.parent === g.parentNode) bucket = b; });
+      if (!bucket) { bucket = { parent: g.parentNode, items: [] }; buckets.push(bucket); }
+      bucket.items.push({ el: g, year: +y[1] });
+    });
+    buckets.forEach(function (b) {
+      if (b.items.length < 2) return;
+      var kids = Array.prototype.slice.call(b.parent.children);
+      var first = null;
+      b.items.forEach(function (it) {
+        var i = kids.indexOf(it.el);
+        if (first === null || i < first) first = i;
+      });
+      var sorted = b.items.slice().sort(function (x, y2) { return y2.year - x.year; });
+      if (sorted.every(function (it, i) { return it === b.items[i]; })) return;
+      var marker = document.createComment("ngm-doc-order");
+      b.parent.insertBefore(marker, kids[first]);
+      sorted.forEach(function (it) { b.parent.insertBefore(it.el, marker); });
+      b.parent.removeChild(marker);
+    });
+  }
+
+  function reveal() {
+    var gs = document.querySelectorAll(".ngm-wa-minutes, .ngm-wa-docs");
+    Array.prototype.forEach.call(gs, function (g) { g.classList.add("ngm-doc-ready"); });
+  }
+
+  function refreshSections() {
+    var secs = document.querySelectorAll(".ngm-min-sec");
+    Array.prototype.forEach.call(secs, function (sec) {
+      var list = sec.querySelector("ul, ol");
+      if (!list) return;
+      var count = list.querySelectorAll("li").length;
+      if (!count) return;
+      var note = sec.querySelector(".ngm-min-none");
+      var cnt = sec.querySelector(".ngm-min-count");
+      var shown = cnt ? (parseInt(cnt.textContent, 10) || 0) : 0;
+      if (count === shown && !note) return;
+      if (note) note.parentNode.removeChild(note);
+      if (cnt) cnt.textContent = count + " " + noun() + (count === 1 ? "" : "s");
+      sortRows(list);
+      Array.prototype.forEach.call(list.querySelectorAll("li"), function (row) { chipify(row); });
+    });
+  }
+
+  function titleEl(label, count) {
+    var head = document.createElement("h2");
+    head.className = "ngm-min-title";
+    head.innerHTML = '<span class="ngm-min-title-txt"></span>' +
+                     '<span class="ngm-min-count"></span>';
+    head.querySelector(".ngm-min-title-txt").textContent = label;
+    var word = noun();
+    head.querySelector(".ngm-min-count").textContent =
+      count ? count + " " + word + (count === 1 ? "" : "s") : "";
+    return head;
+  }
+
+  function chipify(row) {
+    if (row.getAttribute("data-min-chip") === "1") return;
+    row.setAttribute("data-min-chip", "1");
+    var a = row.querySelector("a");
+
+    if (a && SEP.test(text(a))) {
+      var bits = text(a).split(SEP);
+      var tail = bits.slice(1).join(" ").trim();
+      if (!tail || tail.length > 40) return;
+      a.textContent = bits[0].trim();
+      addChip(a, tail);
+      return;
+    }
+
+    if (a) {
+      var trailing = "", n = a.nextSibling, spent = [];
+      while (n) { trailing += n.textContent || ""; spent.push(n); n = n.nextSibling; }
+      trailing = trailing.replace(LEAD_SEP, "").replace(/\s+/g, " ").trim();
+      if (!trailing || trailing.length > 40) return;
+      spent.forEach(function (node) { node.parentNode.removeChild(node); });
+      addChip(row, trailing);
+      return;
+    }
+
+    var raw = text(row);
+    if (!SEP.test(raw)) return;
+    var parts = raw.split(SEP);
+    var label = parts.slice(1).join(" ").trim();
+    if (!label || label.length > 40) return;
+    row.textContent = parts[0].trim();
+    addChip(row, label);
+  }
+
+  function build() {
+    buildSections();
+    refreshSections();
+    sortCards();
+    reveal();
+  }
+
+  function buildSections() {
+    var gadgets = document.querySelectorAll(".ngm-wa-minutes, .ngm-wa-docs");
+    Array.prototype.forEach.call(gadgets, function (g) {
+      var body = g.querySelector(".gadgetStyleBody") || g;
+      var lists = body.querySelectorAll("ul, ol");
+
+      if (!lists.length) {
+        if (body.querySelector(".ngm-min-sec")) return;
+        var only = findTitle(g, body, null);
+        if (!only || !text(only)) return;
+        hideSource(only);
+        var blank = document.createElement("div");
+        blank.className = "ngm-min-sec";
+        blank.appendChild(titleEl(text(only), 0));
+        var note = document.createElement("p");
+        note.className = "ngm-min-none";
+        note.textContent = "Nothing posted for this year yet.";
+        blank.appendChild(note);
+        body.appendChild(blank);
+        return;
+      }
+
+      Array.prototype.forEach.call(lists, function (list, i) {
+        if (list.closest(".ngm-min-sec")) return;       
+
+        var count = list.querySelectorAll("li").length;
+        var src = i === 0 ? findTitle(g, body, list) : prevTitle(list);
+
+        if (!count && !src) return;
+        var label = text(src) || "Minutes";
+        hideSource(src);
+
+        var sec = document.createElement("div");
+        sec.className = "ngm-min-sec";
+
+        var head = titleEl(label, count);
+
+        list.parentNode.insertBefore(sec, list);
+        sec.appendChild(head);
+        sec.appendChild(list);
+
+        if (!count) {
+          var none = document.createElement("p");
+          none.className = "ngm-min-none";
+          none.textContent = "Nothing posted for this year yet.";
+          sec.appendChild(none);
+        }
+
+        sortRows(list);
+
+        Array.prototype.forEach.call(list.querySelectorAll("li"), function (row) {
+          chipify(row);
+        });
+      });
+    });
+  }
+
+  function init() {
+
+    if (document.body) document.body.classList.add("ngm-min-page");
+    build();
+
+    if (window.MutationObserver) {
+      var mo = new MutationObserver(function () { build(); });
+      mo.observe(document.body, { childList: true, subtree: true });
+      setTimeout(function () { mo.disconnect(); }, 8000);
+    }
+
+    setTimeout(function () {
+      document.documentElement.className =
+        document.documentElement.className.replace(/\s*ngm-doc-js\b/, "");
+    }, 3000);
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else { init(); }
+})();
+</script>
