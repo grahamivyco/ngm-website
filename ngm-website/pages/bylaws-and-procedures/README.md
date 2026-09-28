@@ -4,7 +4,7 @@ Members' page listing the Guild's governing PDFs: bylaws, org chart,
 policies, waivers. Same component as the board minutes page. See
 `pages/board-minutes/` for how the list styling works.
 
-**Slug: `/bylaws`.** The Member Hub tile points there.
+**Slug: `/bylaws-and-procedures`.** The Member Hub tile points there.
 
 ## Structure
 
@@ -19,9 +19,9 @@ No `03-bottom`. Nothing sits under the cards.
 
 ## Wild Apricot setup
 
-1. Create a page with slug `/bylaws`, restricted to members like the
+1. Open the page with slug `/bylaws-and-procedures`, restricted to members like the
    rest of the Member Hub.
-2. Paste `dist/pages/bylaws/01-top.html` into a Custom HTML gadget at the
+2. Paste `dist/pages/bylaws-and-procedures/01-top.html` into a Custom HTML gadget at the
    top. `global.css` must already be live in the CSS tab.
 3. Add three **Content** gadgets below it, CSS class `ngm-wa-docs`, and
    paste each block from `02-wa-gadget.txt` via the editor's source view.
