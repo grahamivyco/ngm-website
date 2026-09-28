@@ -61,3 +61,108 @@ If you move everything out of a gadget, delete the gadget. One
 left behind with no heading and no rows used to render as a stray
 blank card in the middle of the issues; it is skipped now, but an
 empty gadget is still clutter in the editor.
+
+CLEANED CONTENT — one block per box (Sept 2026)
+----------------------------------------------
+The old page's issues, with its inline fonts, nested lists and
+"The Needle's Eye –" prefixes stripped. Every href is unchanged.
+Paste each block into its own Content gadget via the Source view.
+2021 is missing: it was not in what was copied from the old page.
+
+── Box 1: 2026 ──
+<h3>2026</h3>
+<ul>
+  <li><a href="/resources/Documents/Needles%20Eye%20ENews%20-%20July%202026.pdf" target="_blank">July 2026</a></li>
+  <li><a href="/resources/Documents/Needles%20Eye%20ENews%20-%20June%202026.pdf" target="_blank">June 2026</a></li>
+  <li><a href="/resources/Documents/Needles%20Eye%20ENews%20-%20May%202026.pdf" target="_blank">May 2026</a></li>
+  <li><a href="/resources/Documents/Needles%20Eye%20ENews%20-%20April%202026.pdf" target="_blank">April 2026</a></li>
+  <li><a href="/resources/Documents/Needles%20Eye%20ENews%20-%20March%202026.pdf" target="_blank">March 2026</a></li>
+  <li><a href="/resources/Documents/Needle%20Eye%20Monthly%20Newsletter%20for%20NGM_%20February%202026.pdf" target="_blank">February 2026</a></li>
+  <li><a href="/resources/Documents/Needlework%20Guild%20of%20Minnesota%20-%20January%202026%20newsletter.pdf" target="_blank">January 2026</a></li>
+</ul>
+
+── Box 2: 2025 ──
+<h3>2025</h3>
+<ul>
+  <li>Dec 2025/Jan 2026</li>
+  <li><a href="/resources/Documents/NGMAugSept2025.pdf" target="_blank">Aug/Sept 2025</a></li>
+  <li><a href="/resources/Documents/NGMJunJul2025.pdf" target="_blank">June/July 2025</a></li>
+  <li><a href="/resources/Documents/NGMAprMay2025.pdf" target="_blank">April/May 2025</a></li>
+  <li><a href="/resources/Documents/NGMFebMarch2025.pdf" target="_blank">Feb/Mar 2025</a></li>
+</ul>
+
+── Box 3: 2024 ──
+<h3>2024</h3>
+<ul>
+  <li><a href="/resources/Documents/NGMDec2024Jan2025.pdf" target="_blank">Dec 2024/Jan 2025</a></li>
+  <li><a href="/resources/Documents/NGMAugSept2024.pdf" target="_blank">Aug/Sept 2024</a></li>
+  <li><a href="/resources/Documents/NGMJuneJuly2024.pdf" target="_blank">June/July 2024</a></li>
+  <li><a href="/resources/Documents/NGMAprlMay2024.pdf" target="_blank">April/May 2024</a></li>
+  <li><a href="/resources/Documents/NGMFebMarch2024.pdf" target="_blank">Feb/Mar 2024</a></li>
+</ul>
+
+── Box 4: 2023 ──
+<h3>2023</h3>
+<ul>
+  <li><a href="/resources/Documents/NGMDec2023Jan2024.pdf" target="_blank">Dec 2023/Jan 2024</a></li>
+  <li><a href="/resources/NGMOctNov2023.pdf" target="_blank">Oct/Nov 2023</a></li>
+  <li><a href="/resources/NGMAugSept2023.pdf" target="_blank">Aug/Sept 2023</a></li>
+  <li><a href="/resources/Documents/NGMJuneJuly2023.pdf" target="_blank">June/July 2023</a></li>
+  <li><a href="/resources/Documents/NGMAprMay2023.pdf" target="_blank">April/May 2023</a></li>
+  <li><a href="/resources/Documents/NGMFebMar2023.pdf" target="_blank">Feb/Mar 2023</a></li>
+</ul>
+
+── Box 5: 2022 ──
+<h3>2022</h3>
+<ul>
+  <li><a href="/resources/Documents/NGMDec2022Jan2023.pdf" target="_blank">Dec 2022/Jan 2023</a></li>
+  <li><a href="/resources/Documents/NGMOctNov2022.pdf" target="_blank">Oct/Nov 2022</a></li>
+  <li><a href="/resources/Documents/NGMAugSept2022.pdf" target="_blank">Aug/Sept 2022</a></li>
+  <li><a href="/resources/Documents/NGMJuneJuly2022.pdf" target="_blank">June/July 2022</a></li>
+  <li><a href="/resources/Documents/NGMAprMay2022.pdf" target="_blank">April/May 2022</a></li>
+  <li><a href="/resources/Documents/NGMFeb2022Mar2022.pdf" target="_blank">Feb/Mar 2022</a></li>
+</ul>
+
+── Box 6: 2020 ──
+<h3>2020</h3>
+<ul>
+  <li><a href="/resources/Documents/NGMDec2020Jan2021.pdf" target="_blank">Dec 2020/Jan 2021</a></li>
+  <li><a href="/resources/Documents/NGMOctNov2020.pdf" target="_blank">Oct/Nov 2020</a></li>
+  <li><a href="/resources/Documents/NGMAugSept2020.pdf" target="_blank">Aug/Sept 2020</a></li>
+  <li><a href="/resources/Documents/NGMJunJul2020.pdf" target="_blank">June/July 2020</a></li>
+  <li><a href="/resources/Documents/NGMAprMay2020.pdf" target="_blank">April/May 2020</a></li>
+  <li><a href="/resources/Documents/NGMFebMar20.pdf" target="_blank">Feb/Mar 2020</a></li>
+</ul>
+
+── Box 7: 2019 ──
+<h3>2019</h3>
+<ul>
+  <li><a href="/resources/Documents/NGMDec2019Jan2020.pdf" target="_blank">Dec 2019/Jan 2020</a></li>
+  <li><a href="/resources/Documents/NGMOctNov2019.pdf" target="_blank">Oct/Nov 2019</a></li>
+  <li><a href="/resources/Documents/NGMAugSept2019.pdf" target="_blank">Aug/Sept 2019</a></li>
+  <li><a href="/resources/Documents/NGM-Needles-Eye-Jun-2019-July-2019.pdf" target="_blank">June/July 2019</a></li>
+  <li><a href="/resources/Documents/NGMAprMay19.pdf" target="_blank">April/May 2019</a></li>
+  <li><a href="/resources/Documents/NGM-Needles-Eye-Feb-2019-Mar-2019.pdf" target="_blank">Feb/Mar 2019</a></li>
+</ul>
+
+── Box 8: 2018 ──
+<h3>2018</h3>
+<ul>
+  <li><a href="/resources/Documents/Needles-Eye-Dec-2018-Jan-2019.pdf" target="_blank">Dec 2018/Jan 2019</a></li>
+  <li><a href="/resources/Documents/NGMOctNov2018.pdf" target="_blank">Oct/Nov 2018</a></li>
+  <li><a href="/resources/Documents/NGMAugSept2018.pdf" target="_blank">Aug/Sept 2018</a></li>
+  <li><a href="/resources/Documents/NGMJunJuly2018.pdf" target="_blank">June/July 2018</a></li>
+  <li><a href="/resources/Documents/NGMApril_May%202018.pdf" target="_blank">April/May 2018</a></li>
+  <li><a href="/resources/Documents/NGMFebMar2018.pdf" target="_blank">Feb/Mar 2018</a></li>
+</ul>
+
+── Box 9: 2017 ──
+<h3>2017</h3>
+<ul>
+  <li><a href="/resources/Documents/NGMDec2017Jan2018.pdf" target="_blank">Dec 2017/Jan 2018</a></li>
+  <li><a href="/resources/Documents/NGMOctNov2017.pdf" target="_blank">Oct/Nov 2017</a></li>
+  <li><a href="/resources/Documents/NGMAugSept2017.pdf" target="_blank">Aug/Sept 2017</a></li>
+  <li><a href="/resources/Documents/NGMJunJul2017.pdf" target="_blank">June/July 2017</a></li>
+  <li><a href="/resources/Documents/NGMAprMay2017.pdf" target="_blank">April/May 2017</a></li>
+  <li><a href="/resources/Documents/NGMFebMar2017.pdf" target="_blank">Feb/Mar 2017</a></li>
+</ul>
