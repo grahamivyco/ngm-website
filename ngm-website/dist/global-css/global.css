@@ -3965,6 +3965,71 @@ body.ngm-login-page .WaGadgetLoginForm .loginPanel::after { display: none !impor
 .ngm-mt-teacher li span { color:var(--ngm-sage-dk); white-space:nowrap; font-weight:500; }
 @media(max-width:760px){ .ngm-mt-teachers { grid-template-columns:1fr; } }
 
+.ngm-rt-hero-note { font-family:var(--ngm-sans); font-size:var(--ngm-text-meta); color:var(--ngm-gray); margin:14px 0 0; }
+.ngm-rt-quips { list-style:none; margin:0 0 22px; padding:0; max-width:560px; }
+.ngm-rt-quips li {
+  font-family:var(--ngm-sans); font-size:var(--ngm-text-body); color:var(--ngm-gray);
+  line-height:1.6; padding-left:24px; position:relative; margin-bottom:8px;
+}
+.ngm-rt-quips li::before {
+  content:""; position:absolute; left:0; top:.55em; width:12px; height:2px;
+  background:var(--ngm-rose); border-radius:2px;
+}
+.ngm-rt-teacher { display:grid; grid-template-columns:.8fr 1.2fr; gap:56px; align-items:start; }
+.ngm-rt-teacher .ngm-h2 { margin-bottom:10px; }
+.ngm-rt-teacher-photo { height:460px; min-height:0; }
+.ngm-rt-teacher-photo > img { width:100%; height:100%; object-fit:cover; }
+.ngm-rt-classes { display:grid; grid-template-columns:repeat(2,1fr); gap:22px; margin-top:48px; align-items:start; }
+.ngm-rt-classes-3 { grid-template-columns:repeat(3,1fr); }
+.ngm-rt-class {
+  background:#fff; border:1px solid var(--ngm-border); border-radius:var(--ngm-radius-lg);
+  overflow:hidden; display:flex; flex-direction:column;
+}
+.ngm-sec-white .ngm-rt-class { background:var(--ngm-cream); }
+.ngm-rt-class-imgs { display:grid; gap:2px; background:var(--ngm-linen); }
+.ngm-rt-class-imgs img { display:block; width:100%; height:auto; }
+.ngm-rt-class-body { padding:var(--ngm-card-pad); }
+.ngm-rt-class-body .ngm-mt-tags { margin:0 0 14px; }
+.ngm-rt-class-body .ngm-mt-tags li { font-size:var(--ngm-tag-size); letter-spacing:.06em; text-transform:uppercase; padding:5px 12px; }
+.ngm-rt-class h3 {
+  font-family:var(--ngm-serif); font-size:var(--ngm-title-card); font-weight:400;
+  color:var(--ngm-charcoal); text-transform:none; line-height:1.2; margin:0 0 4px;
+}
+.ngm-rt-class-sub { font-family:var(--ngm-sans); font-size:var(--ngm-text-ui); font-style:italic; color:var(--ngm-rose-dk); margin:0 0 12px; }
+.ngm-rt-class-body p:not(.ngm-rt-class-sub) { font-family:var(--ngm-sans); font-size:var(--ngm-copy); color:var(--ngm-gray); line-height:1.7; margin:12px 0 0; }
+.ngm-rt-class-wide { grid-column:1 / -1; display:grid; grid-template-columns:.8fr 1.2fr; }
+
+.ngm-rt-class-wide .ngm-rt-class-imgs { align-content:start; gap:12px; padding:12px; }
+.ngm-rt-class-wide .ngm-rt-class-imgs img { max-height:420px; object-fit:contain; border-radius:var(--ngm-radius); }
+
+.ngm-rt-sched-wrap { margin-top:36px; overflow-x:auto; -webkit-overflow-scrolling:touch; border:1px solid var(--ngm-border); border-radius:var(--ngm-radius-lg); background:#fff; }
+.ngm-rt-sched { width:100%; min-width:640px; border-collapse:collapse; }
+.ngm-rt-sched th, .ngm-rt-sched td {
+  font-family:var(--ngm-sans); font-size:var(--ngm-copy); text-align:left;
+  padding:16px 20px; border-bottom:1px solid var(--ngm-border); vertical-align:top;
+}
+.ngm-rt-sched tbody tr:last-child th, .ngm-rt-sched tbody tr:last-child td { border-bottom:none; }
+.ngm-rt-sched thead th {
+  font-size:var(--ngm-eyebrow-size); font-weight:500; letter-spacing:var(--ngm-eyebrow-track);
+  text-transform:uppercase; color:var(--ngm-sage-dk); background:var(--ngm-sage-lt);
+}
+.ngm-rt-sched tbody th { font-weight:500; color:var(--ngm-charcoal); }
+.ngm-rt-sched tbody th span { display:block; font-size:var(--ngm-text-meta); font-weight:400; color:var(--ngm-gray); margin-top:2px; }
+.ngm-rt-sched td { color:var(--ngm-sage-dk); }
+.ngm-rt-sched td.ngm-rt-sched-off { color:var(--ngm-gray-lt); }
+@media(max-width:900px){
+  .ngm-rt-teacher { grid-template-columns:1fr; gap:32px; }
+  .ngm-rt-teacher-photo { height:340px; }
+  .ngm-rt-classes-3 { grid-template-columns:repeat(2,1fr); }
+  .ngm-rt-class-wide { grid-template-columns:1fr; }
+}
+@media(max-width:640px){
+  .ngm-rt-classes, .ngm-rt-classes-3 { grid-template-columns:1fr; margin-top:36px; }
+  .ngm-rt-quips { text-align:left; margin-left:auto; margin-right:auto; }
+  .ngm-rt-hero-note { text-align:center; }
+  .ngm-rt-teacher-photo { height:280px; }
+}
+
 body .WaGadgetMembershipApplication *,
 body [class*="WaGadgetMembership"] *,
 body .WaGadgetPublicWizard * {
