@@ -8,10 +8,8 @@ of how the list styling works.
 *Pages not in menu* in WA → Site pages). Update that one; don't make a
 second. Its existing issue links come across as they are.
 
-⚠ **Slug not confirmed.** The Member Hub tile points at
-`/newsletter-archive`. This session can't reach the live site, so check the
-real slug in WA and fix whichever end is wrong. The minutes page had the
-same problem and turned out to be `/meeting-minutes`, not `/board-minutes`.
+**Live slug: `/newsletter`** (the folder name differs). The Member Hub
+tile points there.
 
 ## Structure
 
