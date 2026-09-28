@@ -1,0 +1,54 @@
+NATIVE WA GADGET — "Content" (one per group of documents)
+=========================================================
+This is NOT pasteable into a Custom HTML gadget. These are native Wild
+Apricot CONTENT gadgets added in the WA editor, sitting BELOW
+01-top.html in the SAME layout row. Nothing goes underneath them.
+
+WHICH GADGET
+------------
+The RICH-TEXT gadget, named "Content" in the gadget list (the one with
+a WYSIWYG toolbar). Custom HTML is what 01-top.html goes into.
+
+Setup in WA:
+1. THREE CONTENT GADGETS, in this order (these groups have no year, so
+   the cards stay in the order the gadgets sit in):
+     Governing documents · Policies · Waivers
+2. Select each one → gadget settings → "CSS class" field → enter:
+       ngm-wa-docs
+3. Set the layout ROW background to transparent, so the linen band
+   from 01-top runs continuously behind the cards.
+
+CONTENT — paste each block via the editor's Source / HTML view
+---------------------------------------------------------------
+Anything after a dash becomes a small chip on the right of the row.
+
+── Gadget 1 ──
+<h3>Governing documents</h3>
+<ul>
+  <li><a href="/resources/Documents/Amended%20and%20Restated%20Bylaws%202022.pdf" target="_blank">Amended and Restated Bylaws — 2022</a></li>
+  <li><a href="/resources/Documents/NGM%20Updated%20Organizational%20Chart%20Nov%202022.pdf" target="_blank">Organizational chart — Nov 2022</a></li>
+</ul>
+
+── Gadget 2 ──
+<h3>Policies</h3>
+<ul>
+  <li><a href="/resources/Documents/NGM%20Treasury%20Policies%20Updated%209-8-25.pdf" target="_blank">Treasury policies — Sept 2025</a></li>
+  <li><a href="/resources/Documents/NGM%20Policies%20-%20October%202021.pdf" target="_blank">NGM policies — Oct 2021</a></li>
+</ul>
+
+── Gadget 3 ──
+<h3>Waivers</h3>
+<ul>
+  <li><a href="/resources/Documents/NGM%20Liability%20Waiver.pdf" target="_blank">NGM liability waiver</a></li>
+  <li><a href="/resources/Documents/MVUUF%20Release%20of%20Liability.pdf" target="_blank">MVUUF release of liability</a></li>
+</ul>
+
+UPDATING A DOCUMENT
+-------------------
+1. Upload the new PDF via WA → Website → Files.
+2. Edit the gadget, select the row's name, re-point the link to the
+   new file. Update the date after the dash.
+Don't retype a row to move it (retyping loses the link). Cut and paste.
+
+Nothing else goes in these gadgets — no intro copy (that's in
+01-top.html), no notes.
