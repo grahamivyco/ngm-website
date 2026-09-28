@@ -6,7 +6,7 @@ the site-wide page template so it appears on every page.
 
 **Favicon:** set **natively in Wild Apricot**, not in this gadget. In WA admin:
 **Settings → Site → Meta-tags → Raw Headers**, and add a `<link rel="icon">`
-pointing at the uploaded icon. Upload `brand/favicon.ico` via **Website → Files**
+pointing at the uploaded icon. Files live in **Website → Files → Pictures → Favicon**; exact tags in `docs/wa-notes.md`. Source icons: `brand/`
 (Pictures folder). Doing it here is the official way — it puts the icon in the
 server-rendered `<head>`, so it shows in the browser tab/bookmarks with no flash.
 (An earlier version injected the favicon from this gadget's JS; that loaded too
