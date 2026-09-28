@@ -29,9 +29,8 @@ No `03-bottom`. Nothing sits under the cards.
 2. Open the page in WA and edit the year's content gadget.
 3. Type the issue name at the top of the list, select it, insert the link.
 
-`docs/adding-minutes.md` is the handout for the minutes page and the steps
-are identical bar the wording. Worth forking it into its own handout if a
-different person looks after newsletters.
+`docs/adding-newsletters.md` is the handout for whoever posts the
+newsletter: plain editor steps, no HTML.
 
 ## ⚠ The script is duplicated
 
