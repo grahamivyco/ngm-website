@@ -63,8 +63,17 @@ trigger opens a `.loginPanel`.
 - Set it the **native** way: **Settings → Site → Meta-tags → Raw Headers**, add a
   `<link rel="icon">` tag. That lands in the server-rendered `<head>`, so the icon
   is in the initial HTML — shows in the browser tab/bookmarks with no flash.
-- Upload the icon under **Website → Files** (Pictures folder); reference it as
-  `/Resources/Pictures/<filename>`. Use `brand/favicon.ico` (16/32/48/64 px).
+- Live files (Sep 2026) are in **Website → Files → Pictures → Favicon**:
+  `favicon.ico`, `favicon.svg`, `favicon-96x96.png`. Raw Headers:
+  ```html
+  <link rel="icon" href="/resources/Pictures/Favicon/favicon.ico" sizes="any">
+  <link rel="icon" href="/resources/Pictures/Favicon/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/resources/Pictures/Favicon/favicon-96x96.png" type="image/png" sizes="96x96">
+  <link rel="apple-touch-icon" href="/resources/Pictures/Favicon/favicon-96x96.png">
+  ```
+  The first attempt pointed at `/Resources/Pictures/favicon.ico` (no
+  subfolder) and every icon 404'd. If the icon vanishes, check each href
+  loads before anything else.
 - Do **not** inject it from a Custom HTML gadget — it loads after WA's default
   icon (visible flash) and never reaches the browser tab.
 
