@@ -10,9 +10,10 @@ The RICH-TEXT gadget, named "Content" in the gadget list (the one with
 a WYSIWYG toolbar). Custom HTML is what 01-top.html goes into.
 
 Setup in WA:
-1. THREE CONTENT GADGETS, in this order (these groups have no year, so
-   the cards stay in the order the gadgets sit in):
-     Governing documents · Policies · Waivers
+1. ONE CONTENT GADGET holding all three groups is simplest: paste the
+   three blocks below into it, one after another. They render as one
+   card with three headed sections. (Three separate gadgets also work
+   and give three cards, in the order the gadgets sit.)
 2. Select each one → gadget settings → "CSS class" field → enter:
        ngm-wa-docs
 3. Set the layout ROW background to transparent, so the linen band
@@ -22,21 +23,21 @@ CONTENT — paste each block via the editor's Source / HTML view
 ---------------------------------------------------------------
 Anything after a dash becomes a small chip on the right of the row.
 
-── Gadget 1 ──
+── Block 1 ──
 <h3>Governing documents</h3>
 <ul>
   <li><a href="/resources/Documents/Amended%20and%20Restated%20Bylaws%202022.pdf" target="_blank">Amended and Restated Bylaws — 2022</a></li>
   <li><a href="/resources/Documents/NGM%20Updated%20Organizational%20Chart%20Nov%202022.pdf" target="_blank">Organizational chart — Nov 2022</a></li>
 </ul>
 
-── Gadget 2 ──
+── Block 2 ──
 <h3>Policies</h3>
 <ul>
   <li><a href="/resources/Documents/NGM%20Treasury%20Policies%20Updated%209-8-25.pdf" target="_blank">Treasury policies — Sept 2025</a></li>
   <li><a href="/resources/Documents/NGM%20Policies%20-%20October%202021.pdf" target="_blank">NGM policies — Oct 2021</a></li>
 </ul>
 
-── Gadget 3 ──
+── Block 3 ──
 <h3>Waivers</h3>
 <ul>
   <li><a href="/resources/Documents/NGM%20Liability%20Waiver.pdf" target="_blank">NGM liability waiver</a></li>
