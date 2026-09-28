@@ -28,6 +28,11 @@ No `03-bottom`. Nothing sits under the cards.
    view.
 4. All gadgets in the same layout row, row background transparent.
 
+## Updating it
+
+`docs/updating-bylaws.md` is the handout for whoever maintains the page:
+plain editor steps, no HTML. The HTML paste is a one-time setup.
+
 ## Notes
 
 - Group cards have no year in their title, so the script doesn't
