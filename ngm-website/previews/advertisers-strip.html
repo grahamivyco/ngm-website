@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<!-- ══════════════════════════════════════════════════════════════════
+     LOCAL PREVIEW — advertiser logo strip
+     ──────────────────────────────────────────────────────────────────
+     Not a paste file. It renders the real thing: it LOADS
+     ../global-css/global.css and pulls the #ngm-ads markup straight out of
+     ../pages/homepage/03-bottom.html, so it can never drift from what
+     ships. Editing either source and reloading is the whole loop.
+
+     RUN IT (fetch needs a server — file:// will not work):
+         cd ngm-website
+         python3 -m http.server 8000
+         open http://localhost:8000/previews/advertisers-strip.html
+
+     The 375px pane is a real iframe, so the phone media queries actually
+     fire — a 375px-wide <div> would keep rendering the desktop rules.
+
+     LOGO_BASE: type the folder the PNGs live in at the top of the page
+     (it is remembered in localStorage). Until the files are uploaded, any
+     logo that 404s falls back to a drawn placeholder at the right size, so
+     the layout is still readable.
+══════════════════════════════════════════════════════════════════ -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NGM — advertiser strip preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../global-css/global.css">
+<style>
+  /* preview chrome only — none of this ships */
+  body { background: #FAF7F2; margin: 0; font-family: "DM Sans", system-ui, sans-serif; }
+  .pv-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+            padding: 12px 20px; background: #242424; color: #fff; font-size: .8rem; }
+  .pv-bar label { opacity: .7; }
+  .pv-bar input { flex: 1 1 320px; padding: 6px 10px; border: 0; border-radius: 6px;
+                  font: inherit; font-family: ui-monospace, monospace; }
+  .pv-bar .pv-note { opacity: .55; flex-basis: 100%; }
+  .pv-head { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
+             color: #9A9A9A; padding: 28px 20px 8px; }
+  .pv-desktop { border-top: 1px solid #DDD5C8; border-bottom: 1px solid #DDD5C8; }
+  .pv-phone { width: 375px; max-width: calc(100% - 40px); height: 560px; border: 1px solid #DDD5C8; border-radius: 12px;
+              margin: 0 20px 48px; background: #FAF7F2; }
+  .pv-err { margin: 40px 20px; padding: 20px; border: 1px solid #B87260;
+            border-radius: 12px; color: #9A5C4A; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="pv-bar">
+  <label for="pv-base">LOGO_BASE</label>
+  <input id="pv-base" value="/resources/Pictures/advertisers" spellcheck="false">
+  <span class="pv-note">Whatever you type here replaces <code>LOGO_BASE</code> in the markup. Missing files fall back to a drawn placeholder.</span>
+</div>
+
+<div class="pv-head">Desktop — one centred row</div>
+<div class="pv-desktop" id="pv-desktop"></div>
+
+<div class="pv-head">375px — wraps to two columns, odd logo centred</div>
+<iframe class="pv-phone" id="pv-phone" title="375px preview"></iframe>
+
+<script>
+(function () {
+  var SRC = "../pages/homepage/03-bottom.html";
+  var CSS = new URL("../global-css/global.css", location.href).href;
+  var FONTS = "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=DM+Sans:wght@400;500;700&display=swap";
+  var input = document.getElementById("pv-base");
+  var markup = null;
+
+  try { input.value = localStorage.getItem("ngm-logo-base") || input.value; } catch (e) {}
+
+  /* Stand-in for a logo that has not been uploaded yet: the business name
+     drawn at roughly the real cap size, charcoal for the resting layer and
+     sage for the colour layer, so both states are still legible here. */
+  function placeholder(name, colour) {
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="180" height="56">' +
+      '<rect width="180" height="56" rx="6" fill="none" stroke="' + colour + '" stroke-opacity=".3" stroke-dasharray="4 3"/>' +
+      '<text x="90" y="31" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="11" fill="' + colour + '">' +
+      name.replace(/&/g, "&amp;").replace(/</g, "&lt;") + "</text></svg>";
+    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  }
+
+  function resolve(html, base) {
+    base = (base || "").replace(/\/+$/, "");
+    return html.replace(/LOGO_BASE/g, base);
+  }
+
+  /* Attach the placeholder fallback after the markup is in a document. */
+  function wireFallbacks(doc) {
+    var imgs = doc.querySelectorAll(".ngm-adv-logo");
+    for (var i = 0; i < imgs.length; i++) {
+      (function (img) {
+        var colour = img.classList.contains("ngm-adv-logo-color") ? "#5C7A52" : "#2F2F2F";
+        var name = img.getAttribute("alt") ||
+                   (img.closest("li").querySelector("[alt]") || {}).alt || "Advertiser";
+        img.addEventListener("error", function () {
+          if (img.dataset.fallback) return;
+          img.dataset.fallback = "1";
+          img.src = placeholder(name, colour);
+        });
+        if (img.complete && img.naturalWidth === 0) {
+          img.dispatchEvent(new Event("error"));
+        }
+      })(imgs[i]);
+    }
+  }
+
+  function render() {
+    if (!markup) return;
+    var base = input.value;
+    try { localStorage.setItem("ngm-logo-base", base); } catch (e) {}
+    var html = resolve(markup, base);
+
+    var desktop = document.getElementById("pv-desktop");
+    desktop.innerHTML = html;
+    wireFallbacks(desktop);
+
+    var frame = document.getElementById("pv-phone");
+    frame.srcdoc =
+      '<!DOCTYPE html><html><head><meta charset="utf-8">' +
+      '<meta name="viewport" content="width=device-width, initial-scale=1">' +
+      '<link rel="stylesheet" href="' + FONTS + '">' +
+      '<link rel="stylesheet" href="' + CSS + '">' +
+      '<style>body{margin:0;background:#FAF7F2}</style></head><body>' + html +
+      '<' + 'script>' + wireFallbacks.toString() + placeholder.toString() +
+      'wireFallbacks(document);<' + '/script></body></html>';
+  }
+
+  function fail(msg) {
+    document.getElementById("pv-desktop").innerHTML =
+      '<div class="pv-err"><strong>Could not load the markup.</strong><br>' + msg +
+      '<br><br>This page reads the real source files over HTTP, so it needs a server:' +
+      '<br><code>cd ngm-website &amp;&amp; python3 -m http.server 8000</code>' +
+      '<br>then open <code>http://localhost:8000/previews/advertisers-strip.html</code></div>';
+  }
+
+  fetch(SRC)
+    .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
+    .then(function (text) {
+      var doc = new DOMParser().parseFromString(text, "text/html");
+      var sec = doc.getElementById("ngm-ads");
+      if (!sec) throw new Error("No #ngm-ads section in " + SRC);
+      markup = sec.outerHTML;
+      render();
+    })
+    .catch(function (e) { fail(e.message); });
+
+  input.addEventListener("input", render);
+})();
+</script>
+</body>
+</html>
